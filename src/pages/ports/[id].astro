@@ -40,6 +40,28 @@ const sun = sunTimes(today, port.lat, port.lon, tzOffset);
 const moonT = moonTimes(today, port.lat, port.lon, tzOffset);
 const solunar = solunarPeriods(moonT.moonrise, moonT.moonset, moonT.lunarTransit, moon.phase, today);
 
+// 7-day forecast
+const weekDays = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const forecast = Array.from({ length: 7 }, (_, i) => {
+  const d = new Date(today);
+  d.setDate(d.getDate() + i);
+  const curve = generateTideCurve(constituents, d, tzOffset);
+  const ex = findExtremes(curve);
+  const highs = ex.filter(e => e.type === 'high').sort((a, b) => b.height - a.height);
+  const lows = ex.filter(e => e.type === 'low').sort((a, b) => a.height - b.height);
+  const dailyRange = highs.length > 0 && lows.length > 0 ? (highs[0].height - lows[0].height).toFixed(0) : '—';
+  const m = moonPhase(d);
+  return {
+    date: d,
+    label: i === 0 ? 'اليوم' : weekDays[d.getDay()],
+    dateStr: d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }),
+    highs: highs.slice(0, 2),
+    lows: lows.slice(0, 2),
+    range: dailyRange,
+    moon: m,
+  };
+});
+
 const CHART_W = 720; const CHART_H = 220;
 const PAD_L = 45; const PAD_R = 15; const PAD_T = 15; const PAD_B = 30;
 const plotW = CHART_W - PAD_L - PAD_R;
@@ -198,6 +220,55 @@ const title = `${port.name_ar} — مواقيت المد والجزر`;
               الفترات الكبرى: ±1 ساعة حول عبور القمر. الفترات الصغرى: ±30 دقيقة حول شروق/غروب القمر. التوقيت تقديري.
             </p>
           </div>
+        </div>
+      </section>
+
+      <!-- 7-day forecast -->
+      <section class="mb-8">
+        <h2 class="text-sm font-semibold text-[var(--text-primary)] mb-3">توقعات ٧ أيام</h2>
+        <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]">
+          <table class="w-full text-xs">
+            <thead>
+              <tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]">
+                <th class="text-right px-3 py-2 font-medium">اليوم</th>
+                <th class="text-center px-2 py-2 font-medium w-6">🌙</th>
+                <th class="text-center px-2 py-2 font-medium">المدى</th>
+                <th class="text-right px-3 py-2 font-medium" colspan="2">المد المرتفع</th>
+                <th class="text-right px-3 py-2 font-medium" colspan="2">المد المنخفض</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--border-subtle)]">
+              {forecast.map((day, i) => (
+                <tr class={`${i === 0 ? 'bg-teal-50/50' : ''} hover:bg-[var(--surface-elevated)] transition-colors`}>
+                  <td class="px-3 py-2.5">
+                    <div class="font-medium text-[var(--text-primary)]">{day.label}</div>
+                    <div class="text-[10px] text-[var(--text-dim)] latin">{day.dateStr}</div>
+                  </td>
+                  <td class="text-center px-2 py-2.5 text-sm">{day.moon.emoji}</td>
+                  <td class="text-center px-2 py-2.5">
+                    <span class="font-medium text-[var(--text-primary)] latin">{day.range}</span>
+                    <span class="text-[10px] text-[var(--text-dim)]"> سم</span>
+                  </td>
+                  <td class="px-2 py-2.5" colspan="2">
+                    {day.highs.length > 0 ? day.highs.map(h => (
+                      <div class="flex items-center gap-1.5">
+                        <span class="text-[var(--accent)] font-medium latin w-10 text-right">{formatTime(h.time, tzOffset)}</span>
+                        <span class="text-[var(--text-dim)] latin">{h.height.toFixed(0)} سم</span>
+                      </div>
+                    )) : <span class="text-[var(--text-dim)]">—</span>}
+                  </td>
+                  <td class="px-2 py-2.5" colspan="2">
+                    {day.lows.length > 0 ? day.lows.map(l => (
+                      <div class="flex items-center gap-1.5">
+                        <span class="text-red-500 font-medium latin w-10 text-right">{formatTime(l.time, tzOffset)}</span>
+                        <span class="text-[var(--text-dim)] latin">{l.height.toFixed(0)} سم</span>
+                      </div>
+                    )) : <span class="text-[var(--text-dim)]">—</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 
