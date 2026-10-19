@@ -45,6 +45,12 @@ const moon = moonPhase(new Date());
 const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number; lon: number }) => ({
   id: p.id, name: p.name_ar, lat: p.lat, lon: p.lon
 }));
+
+// Full port list for the search dropdown (client-side)
+const searchPorts = placesIndex.map((p: { id: string; name_ar: string; name_en: string; country: string }) => ({
+  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryNames[p.country] || p.country
+}));
+const searchPortsJSON = JSON.stringify(searchPorts);
 ---
 
 <BaseLayout
@@ -77,24 +83,24 @@ const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number;
         </div>
 
         <!-- Search -->
-        <div class="mt-6 max-w-md">
+        <div class="mt-6 max-w-md relative">
           <label for="port-search" class="sr-only">ابحث عن ميناء</label>
-          <div class="relative">
-            <input
-              type="search"
-              id="port-search"
-              placeholder="ابحث عن ميناء... دبي، جدة، الإسكندرية..."
-              autocomplete="off"
-              aria-controls="ports-list"
-              class="w-full px-5 py-3.5 text-sm rounded-xl
-                     bg-white border border-[var(--border-standard)]
-                     text-[var(--text-primary)]
-                     placeholder:text-[var(--text-dim)]
-                     focus:outline-none focus:border-[var(--accent)] focus:ring-3 focus:ring-teal-100
-                     shadow-sm transition-all"
-            />
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-dim)] text-sm" aria-hidden="true">🔍</span>
-          </div>
+          <input
+            type="search"
+            id="port-search"
+            placeholder="ابحث عن ميناء... دبي، جدة، الإسكندرية..."
+            autocomplete="off"
+            aria-controls="search-results"
+            aria-expanded="false"
+            class="w-full px-5 py-3.5 text-sm rounded-xl
+                   bg-white border border-[var(--border-standard)]
+                   text-[var(--text-primary)]
+                   placeholder:text-[var(--text-dim)]
+                   focus:outline-none focus:border-[var(--accent)] focus:ring-3 focus:ring-teal-100
+                   shadow-sm transition-all"
+          />
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-dim)] text-sm" aria-hidden="true">🔍</span>
+          <div id="search-results" class="absolute z-20 top-full mt-1 w-full hidden rounded-xl bg-white border border-[var(--border-subtle)] shadow-lg max-h-80 overflow-y-auto"></div>
         </div>
 
         <!-- Moon widget -->
@@ -108,34 +114,7 @@ const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number;
 
     <main id="main" class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
 
-      <!-- All ports (search results) — moved up so search is useful on mobile -->
-      <section class="mb-12">
-        <div class="flex items-center gap-2 mb-4">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">جميع الموانئ</h2>
-          <span class="text-xs text-[var(--text-dim)]">{placesIndex.length}</span>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <div id="ports-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
-          {placesIndex.map((port: { id: string; name_ar: string; name_en: string; country: string }) => (
-            <a
-              href={`${BASE}ports/${port.id}`}
-              data-search={port.name_ar + ' ' + port.name_en + ' ' + (countryNames[port.country] || '')}
-              class="flex items-center gap-3 px-3 py-2 rounded-lg
-                     hover:bg-white hover:shadow-sm
-                     border border-transparent hover:border-[var(--border-subtle)]
-                     transition-all duration-150
-                     text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-            >
-              <span class="text-[var(--accent)] text-xs">⚓</span>
-              <span class="text-sm truncate">{port.name_ar}</span>
-              <span class="text-[10px] text-[var(--text-dim)] latin ml-auto truncate hidden sm:inline">{port.name_en}</span>
-            </a>
-          ))}
-        </div>
-        <div id="no-results" class="hidden text-center py-16 text-[var(--text-dim)] text-sm">لا توجد نتائج</div>
-      </section>
-
-      <!-- Ports overview map -->
+      <!-- Ports overview map — back up top -->
       <section class="mb-12" aria-label="خريطة الموانئ">
         <div class="flex items-center gap-2 mb-5">
           <h2 class="text-base font-semibold text-[var(--text-primary)]">خريطة الموانئ</h2>
@@ -143,6 +122,37 @@ const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number;
         </div>
         <div id="ports-map" class="port-map w-full border border-[var(--border-subtle)]" style="height:360px"></div>
         <p class="text-[10px] text-[var(--text-dim)] mt-1.5 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
+      </section>
+
+      <!-- Fishing conclusion — prominent -->
+      <section class="mb-12">
+        <div class="flex items-center gap-2 mb-5">
+          <h2 class="text-base font-semibold text-[var(--text-primary)]">🎣 توقعات الصيد</h2>
+          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
+        </div>
+        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-5 text-sm leading-relaxed" style="box-shadow:var(--shadow-sm)">
+          <p class="text-[var(--text-secondary)] mb-4">
+            يعتمد تقييم جودة الصيد (🐟 من ١ إلى ٥) على عاملين رئيسيين يؤثران على نشاط الأسماك:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div class="p-3 rounded-lg bg-[var(--surface-elevated)]">
+              <div class="font-semibold text-[var(--text-primary)] mb-1">🌙 طور القمر</div>
+              <p class="text-[var(--text-dim)]">يكون الصيد في أفضل حالاته عند اكتمال القمر (بدر) أو ميلاده (محاق)، حيث تكون قوى الجذب في أقصاها ويتحرك الماء بقوة أكبر، مما يحفز الأسماك على التغذي.</p>
+            </div>
+            <div class="p-3 rounded-lg bg-[var(--surface-elevated)]">
+              <div class="font-semibold text-[var(--text-primary)] mb-1">📏 مدى المد والجزر</div>
+              <p class="text-[var(--text-dim)]">كلما زاد الفرق بين أعلى مد وأدنى جزر في اليوم، زادت حركة المياه وجرفت معها الغذاء، مما ينشط الأسماك.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3 text-xs items-center">
+            <span class="text-[var(--text-dim)]">المقياس:</span>
+            <span style="color:#16a34a">🐟🐟🐟🐟🐟 ممتاز</span>
+            <span style="color:#0d9488">🐟🐟🐟🐟 جيد</span>
+            <span style="color:#f59e0b">🐟🐟🐟 متوسط</span>
+            <span style="color:#f97316">🐟🐟 دون المتوسط</span>
+            <span style="color:#ef4444">🐟 ضعيف</span>
+          </div>
+        </div>
       </section>
 
       <!-- Featured ports -->
@@ -215,34 +225,28 @@ const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number;
         </div>
       </section>
 
-      <!-- Fishing methodology -->
+      <!-- All ports — full list -->
       <section class="mb-12">
-        <div class="flex items-center gap-2 mb-5">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">🎣 عن توقعات الصيد</h2>
+        <div class="flex items-center gap-2 mb-4">
+          <h2 class="text-base font-semibold text-[var(--text-primary)]">جميع الموانئ</h2>
+          <span class="text-xs text-[var(--text-dim)]">{placesIndex.length}</span>
           <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
         </div>
-        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-5 text-sm leading-relaxed">
-          <p class="text-[var(--text-secondary)] mb-4">
-            يعتمد تقييم جودة الصيد (🐟 من ١ إلى ٥) على عاملين رئيسيين يؤثران على نشاط الأسماك:
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-            <div class="p-3 rounded-lg bg-[var(--surface-elevated)]">
-              <div class="font-semibold text-[var(--text-primary)] mb-1">🌙 طور القمر</div>
-              <p class="text-[var(--text-dim)]">يكون الصيد في أفضل حالاته عند اكتمال القمر (بدر) أو ميلاده (محاق)، حيث تكون قوى الجذب في أقصاها ويتحرك الماء بقوة أكبر، مما يحفز الأسماك على التغذي. يمنح القمر حتى ٣ نقاط من التقييم.</p>
-            </div>
-            <div class="p-3 rounded-lg bg-[var(--surface-elevated)]">
-              <div class="font-semibold text-[var(--text-primary)] mb-1">📏 مدى المد والجزر</div>
-              <p class="text-[var(--text-dim)]">كلما زاد الفرق بين أعلى مد وأدنى جزر في اليوم، زادت حركة المياه وجرفت معها الغذاء، مما ينشط الأسماك. يمنح المدى حتى نقطتين إضافيتين.</p>
-            </div>
-          </div>
-          <div class="mt-4 flex flex-wrap gap-3 text-xs items-center">
-            <span class="text-[var(--text-dim)]">المقياس:</span>
-            <span style="color:#16a34a">🐟🐟🐟🐟🐟 ممتاز</span>
-            <span style="color:#0d9488">🐟🐟🐟🐟 جيد</span>
-            <span style="color:#f59e0b">🐟🐟🐟 متوسط</span>
-            <span style="color:#f97316">🐟🐟 أقل من المتوسط</span>
-            <span style="color:#ef4444">🐟 ضعيف</span>
-          </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
+          {placesIndex.map((port: { id: string; name_ar: string; name_en: string; country: string }) => (
+            <a
+              href={`${BASE}ports/${port.id}`}
+              class="flex items-center gap-3 px-3 py-2 rounded-lg
+                     hover:bg-white hover:shadow-sm
+                     border border-transparent hover:border-[var(--border-subtle)]
+                     transition-all duration-150
+                     text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+            >
+              <span class="text-[var(--accent)] text-xs">⚓</span>
+              <span class="text-sm truncate">{port.name_ar}</span>
+              <span class="text-[10px] text-[var(--text-dim)] latin ml-auto truncate hidden sm:inline">{port.name_en}</span>
+            </a>
+          ))}
         </div>
       </section>
     </main>
@@ -292,19 +296,47 @@ const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number;
   })();
 </script>
 
-<script>
-  const search = document.getElementById('port-search') as HTMLInputElement | null;
-  const list = document.getElementById('ports-list');
-  const noResults = document.getElementById('no-results');
-  search?.addEventListener('input', () => {
-    const q = search.value.toLowerCase();
-    let visible = 0;
-    list?.querySelectorAll<HTMLAnchorElement>('a').forEach(el => {
-      const text = (el.dataset.search || '').toLowerCase();
-      const match = !q || text.includes(q);
-      (el as HTMLElement).style.display = match ? '' : 'none';
-      if (match) visible++;
-    });
-    noResults?.classList.toggle('hidden', visible > 0 || !q);
+<script type="application/json" id="search-data" set:html={searchPortsJSON}></script>
+<script is:inline define:vars={{ base: BASE }}>
+  var portsData = [];
+  var searchEl = document.getElementById('port-search');
+  var dropdown = document.getElementById('search-results');
+
+  try {
+    var raw = document.getElementById('search-data');
+    if (raw) portsData = JSON.parse(raw.textContent || '[]');
+  } catch(e) {}
+
+  searchEl?.addEventListener('input', function () {
+    var q = this.value.trim().toLowerCase();
+    if (!dropdown) return;
+    dropdown.innerHTML = '';
+    if (!q || !portsData.length) { dropdown.classList.add('hidden'); this.setAttribute('aria-expanded','false'); return; }
+    var matches = [];
+    for (var i=0; i<portsData.length; i++) {
+      var p = portsData[i];
+      var txt = (p.name_ar + ' ' + p.name_en + ' ' + p.countryName).toLowerCase();
+      if (txt.indexOf(q) !== -1) matches.push(p);
+    }
+    if (!matches.length) {
+      dropdown.innerHTML = '<div class="px-4 py-3 text-xs text-[var(--text-dim)]">لا توجد نتائج</div>';
+    } else {
+      var html = '';
+      for (var j=0; j<Math.min(matches.length, 8); j++) {
+        var m = matches[j];
+        html += '<a href="' + base + 'ports/' + m.id + '" class="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface-elevated)] transition-colors text-sm"><span class="text-[var(--accent)] text-xs">⚓</span><span>' + m.name_ar + '</span><span class="text-[10px] text-[var(--text-dim)] latin ml-auto">' + m.name_en + '</span><span class="text-[10px] text-[var(--text-dim)]">' + m.countryName + '</span></a>';
+      }
+      if (matches.length > 8) html += '<div class="px-4 py-2 text-[10px] text-[var(--text-dim)]">و ' + (matches.length - 8) + ' ميناء آخر...</div>';
+      dropdown.innerHTML = html;
+    }
+    dropdown.classList.remove('hidden');
+    this.setAttribute('aria-expanded','true');
+  });
+
+  searchEl?.addEventListener('blur', function () {
+    setTimeout(function () { if (dropdown) dropdown.classList.add('hidden'); if (searchEl) searchEl.setAttribute('aria-expanded','false'); }, 200);
+  });
+  searchEl?.addEventListener('focus', function () {
+    if (dropdown && dropdown.children.length) { dropdown.classList.remove('hidden'); this.setAttribute('aria-expanded','true'); }
   });
 </script>
