@@ -1,0 +1,22 @@
+---
+// Five fish icons: `rating` filled in `color`, the rest outlined in grey.
+export interface Props {
+  rating: number;
+  color: string;
+  size?: number;
+  label?: string;
+}
+const { rating, color, size = 14, label } = Astro.props;
+---
+
+<span class="inline-flex items-center gap-px" role="img" aria-label={label ?? `تقييم الصيد ${rating} من 5`}>
+  {[1, 2, 3, 4, 5].map(i => (
+    <svg viewBox="0 0 20 14" width={size} height={size * 0.7} aria-hidden="true">
+      <path d="M1 7c2.6-4 7.6-5 12-2.2L17.5 2v10L13 9.2C8.6 12 3.6 11 1 7z"
+        fill={i <= rating ? color : 'none'}
+        stroke={i <= rating ? color : '#cbd5e1'}
+        stroke-width="1.3" stroke-linejoin="round" />
+      {i <= rating && <circle cx="5" cy="6.2" r="1" fill="#fff" />}
+    </svg>
+  ))}
+</span>

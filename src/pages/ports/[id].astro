@@ -3,11 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import placesIndex from '../../data/places/places_index.json';
 import {
   generateTideCurve, dayExtremes, formatTime,
-  classifyTide, getTimezoneOffset
+  classifyTide, classifySpringNeap, getTimezoneOffset
 } from '../../lib/tides';
 import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
 import { calculatePrayerTimes, gregorianToHijri } from '../../lib/prayer';
 import { countryName, formatCoords } from '../../lib/countries';
+import FishRating from '../../components/FishRating.astro';
 
 export function getStaticPaths() {
   return placesIndex.map((p: { id: string }) => ({ params: { id: p.id } }));
@@ -115,216 +116,331 @@ const forecastWithFish = forecast.map(d => {
 
 // Best fishing days this month for the conclusion
 const bestDays = monthDays.filter(d => d.fishRating >= 4).slice(0, 6);
-const worstDays = monthDays.filter(d => d.fishRating <= 2).slice(0, 3);
+
+// Today at a glance
+const todayFish = forecastWithFish[0];
+const springNeap = classifySpringNeap(moon.age);
+const nextHigh = extremes.find(e => e.type === 'high' && e.time > today) || extremes.find(e => e.type === 'high');
+const nextLow = extremes.find(e => e.type === 'low' && e.time > today) || extremes.find(e => e.type === 'low');
+const todayRange = todayFish.range;
+const localDateStr = new Date(today.getTime() + tzOffset * 60000).toISOString().slice(0, 10);
+const prayerLabels: Record<string, string> = { fajr: 'الفجر', sunrise: 'الشروق', dhuhr: 'الظهر', asr: 'العصر', maghrib: 'المغرب', isha: 'العشاء' };
 
 // Today's chart
-const CHART_W=720,CHART_H=200,PAD_L=40,PAD_R=10,PAD_T=10,PAD_B=22,plotW=CHART_W-PAD_L-PAD_R,plotH=CHART_H-PAD_T-PAD_B;
-const heights=curve.map((p: { height: number }) => p.height),hMin=Math.min(...heights),hMax=Math.max(...heights),hRange=hMax-hMin||1;
-const yScale=(h:number)=>PAD_T+plotH-((h-hMin)/hRange)*plotH,xScale=(i:number)=>PAD_L+(i/(curve.length-1))*plotW,xHours=(h:number)=>PAD_L+(h/24)*plotW;
-const pathD=curve.map((p: { height: number },i: number)=>`${i===0?'M':'L'}${xScale(i).toFixed(1)},${yScale(p.height).toFixed(1)}`).join(' ');
+const CHART_W = 760, CHART_H = 280, PAD_L = 44, PAD_R = 14, PAD_T = 30, PAD_B = 30;
+const plotW = CHART_W - PAD_L - PAD_R, plotH = CHART_H - PAD_T - PAD_B;
+const heights = curve.map((p: { height: number }) => p.height);
+const hMin = Math.min(...heights), hMax = Math.max(...heights), hRange = hMax - hMin || 1;
+const yScale = (h: number) => PAD_T + plotH - ((h - hMin) / hRange) * plotH;
+const xHours = (h: number) => PAD_L + (h / 24) * plotW;
+const pathD = curve.map((p: { height: number; hours: number }, i: number) => `${i === 0 ? 'M' : 'L'}${xHours(p.hours).toFixed(1)},${yScale(p.height).toFixed(1)}`).join(' ');
+const yTicks = [0, 1 / 3, 2 / 3, 1].map(f => hMin + hRange * f);
 
-const title=`${port.name_ar} — مواقيت المد والجزر`;
-const pageUrl=new URL(`${BASE}ports/${port.id}`, Astro.site).href;
-const monthNames=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+// Monthly calendar grid — week starts Saturday; the RTL grid flows right to left
+const firstWeekday = new Date(year, month, 1).getDay();
+const leadingBlanks = (firstWeekday + 1) % 7;
+const calWeekdays = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+
+const title = `${port.name_ar} — مواقيت المد والجزر`;
+const pageUrl = new URL(`${BASE}ports/${port.id}`, Astro.site).href;
+const monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
 ---
 
-<BaseLayout title={title} description={`مواقيت المد والجزر لـ${port.name_ar}`}>
-  <div class="page-head">
-    <div class="max-w-4xl mx-auto px-4 py-6">
-      <nav class="breadcrumb" aria-label="مسار التنقل">
+<BaseLayout title={title} description={`مواقيت المد والجزر وأوقات الصيد وأطوار القمر في ${port.name_ar}، ${countryName(port.country)} — توقعات ٧ أيام`}>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="max-w-6xl mx-auto px-4 pt-8 pb-20 sm:pb-24">
+      <nav class="breadcrumb breadcrumb-light" aria-label="مسار التنقل">
         <a href={BASE}>الرئيسية</a><span class="sep">/</span>
         <a href={`${BASE}country/${port.country}`}>{countryName(port.country)}</a><span class="sep">/</span>
         <span aria-current="page">{port.name_ar}</span>
       </nav>
-      <div class="mt-3 flex flex-wrap items-end gap-x-4 gap-y-2">
+
+      <div class="mt-4 flex flex-wrap items-end gap-x-6 gap-y-3">
         <div>
-          <h1 class="text-3xl font-bold display leading-tight">{port.name_ar} <span class="text-base font-normal text-[var(--text-muted)] latin" lang="en">{port.name_en}</span></h1>
-          <p class="text-xs text-[var(--text-muted)] mt-1.5">
-            <span class="latin" lang="en">{formatCoords(port.lat, port.lon)}</span>
-            <span class="mx-1">·</span><span class="latin">{port.timezone}</span>
+          <h1 class="text-4xl sm:text-5xl font-bold display leading-tight">{port.name_ar}</h1>
+          <p class="mt-2 text-sm text-slate-300">
+            <span class="latin" lang="en">{port.name_en}</span>
+            <span class="mx-1.5 opacity-50">·</span>{countryName(port.country)}
+            <span class="mx-1.5 opacity-50">·</span><span class="latin" lang="en">{formatCoords(port.lat, port.lon)}</span>
           </p>
         </div>
-        <div class="ms-auto flex items-center gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded-full bg-white border border-[var(--border-subtle)]">{moon.emoji} {moon.phaseNameAr}</span>
-          <span class="px-2.5 py-1 rounded-full bg-white border border-[var(--border-subtle)]">📅 {hijri.day} {hijri.monthAr} {hijri.year} هـ</span>
+        <div class="ms-auto flex flex-wrap items-center gap-2 text-xs">
+          <span class="hero-chip">📅 {hijri.day} {hijri.monthAr} {hijri.year} هـ</span>
+          <span class="hero-chip">{moon.emoji} {moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
+          <span class="hero-chip">🌊 {tideClass.typeAr}</span>
         </div>
       </div>
+
+      <!-- Today at a glance -->
+      <dl class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="hero-stat">
+          <dt class="text-xs text-slate-400">▲ المد القادم</dt>
+          <dd class="mt-1 text-3xl font-bold latin text-teal-300">{nextHigh ? formatTime(nextHigh.time, tzOffset) : '—'}</dd>
+          <dd class="text-xs text-slate-400">{nextHigh && <><span class="latin">{nextHigh.height.toFixed(0)}</span> سم</>}</dd>
+        </div>
+        <div class="hero-stat">
+          <dt class="text-xs text-slate-400">▼ الجزر القادم</dt>
+          <dd class="mt-1 text-3xl font-bold latin text-rose-300">{nextLow ? formatTime(nextLow.time, tzOffset) : '—'}</dd>
+          <dd class="text-xs text-slate-400">{nextLow && <><span class="latin">{nextLow.height.toFixed(0)}</span> سم</>}</dd>
+        </div>
+        <div class="hero-stat">
+          <dt class="text-xs text-slate-400">مدى اليوم</dt>
+          <dd class="mt-1 text-3xl font-bold"><span class="latin">{todayRange}</span> <span class="text-base font-normal text-slate-300">سم</span></dd>
+          <dd class="text-xs text-slate-400">{springNeap.conditionAr}</dd>
+        </div>
+        <div class="hero-stat">
+          <dt class="text-xs text-slate-400">تقييم الصيد اليوم</dt>
+          <dd class="mt-2"><span class="fish-on-dark"><FishRating rating={todayFish.fishRating} color={todayFish.fishColor} size={20} /></span></dd>
+          <dd class="mt-1 text-sm font-semibold" style={`color:${todayFish.fishColor}`}>{todayFish.fishLabel}</dd>
+        </div>
+      </dl>
     </div>
-  </div>
-  <div class="flex flex-col">
+    <svg class="hero-waves" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 40c120-20 240-30 360-18s240 40 360 36 240-34 360-38 240 18 360 26v26H0z" fill="currentColor" />
+    </svg>
+  </section>
 
-    <main id="main" class="flex-1 max-w-4xl mx-auto px-4 py-6 w-full">
+  <main id="main" class="max-w-6xl mx-auto px-4 w-full mt-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 
-      <!-- Location map -->
-      <section class="mb-5" aria-label="موقع الميناء على الخريطة">
-        <div id="map" class="port-map w-full border border-[var(--border-subtle)]" data-lat={port.lat} data-lon={port.lon} data-name={port.name_ar}></div>
-        <p class="text-[10px] text-[var(--text-dim)] mt-1.5 text-center">خريطة الموقع · بيانات &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
-      </section>
+      <!-- Main column -->
+      <div class="lg:col-span-2 space-y-6 min-w-0">
 
-      <!-- Today's tide chart -->
-      <section class="mb-5"><div class="flex items-center gap-2 mb-2">
-        <h2 class="text-sm font-semibold">منحنى المد والجزر — اليوم</h2>
-        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--accent-muted)] text-[var(--accent)]">{tideClass.typeAr}</span>
-        <div class="flex-1"></div><span class="text-[10px] text-[var(--text-dim)] latin">{today.toLocaleDateString('en-GB')}</span>
-      </div>
-      <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 overflow-x-auto" style="box-shadow:var(--shadow-sm)"><div class="chart-ltr">
-        <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img" aria-label={`منحنى المد والجزر لـ${port.name_ar}`}>
-          {[0,.25,.5,.75,1].map(f=>{const y=PAD_T+plotH*(1-f);return(<><line x1={PAD_L} y1={y} x2={CHART_W-PAD_R} y2={y} stroke="#e8ecf0" stroke-width=".5"/><text x={PAD_L-4} y={y+4} text-anchor="end" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{(hMin+hRange*f).toFixed(0)}</text></>);})}
-          {[0,3,6,9,12,15,18,21,24].map((h: number)=><text x={xHours(h)} y={CHART_H-4} text-anchor="middle" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>)}
-          <line x1={PAD_L} y1={yScale(0)} x2={CHART_W-PAD_R} y2={yScale(0)} stroke="#cbd5e1" stroke-width=".5" stroke-dasharray="4,3"/>
-          <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2" stroke-linejoin="round"/>
-          <path d={`${pathD} L${xScale(curve.length-1).toFixed(1)},${CHART_H-PAD_B} L${xScale(0).toFixed(1)},${CHART_H-PAD_B} Z`} fill="rgba(13,148,136,0.06)"/>
-          {extremes.slice(0,4).map((ex: { type: string, hours: number, height: number, time: Date })=>{const cx=xHours(ex.hours).toFixed(1),cy=yScale(ex.height).toFixed(1);return(<><circle cx={cx} cy={cy} r="3.5" fill={ex.type==='high'?'#0d9488':'#ef4444'} stroke="white" stroke-width="1.5"/><text x={cx} y={parseFloat(cy)+(ex.type==='high'?-9:14)} text-anchor="middle" font-size="8" fill="#64748b" font-family="Inter,sans-serif">{formatTime(ex.time,tzOffset)}</text></>);})}
-        </svg>
-      </div></div></section>
-
-      <!-- Quick stats -->
-      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-5 text-center">
-        {extremes.slice(0,4).map((ex: { type: string, time: Date, height: number })=><div class={`p-2 rounded-lg border text-xs ${ex.type==='high'?'bg-teal-50 border-teal-200':'bg-red-50 border-red-100'}`}><div class={`${ex.type==='high'?'text-teal-700':'text-red-600'} font-medium`}>{ex.type==='high'?'مد':'جزر'}</div><div class="font-bold latin">{formatTime(ex.time,tzOffset)}</div><div class="text-[10px] text-[var(--text-dim)] latin">{ex.height.toFixed(0)} سم</div></div>)}
-        <div class="p-2 rounded-lg border border-[var(--border-subtle)] text-xs"><div class="text-[var(--text-dim)]">🌙</div><div class="font-bold">{Math.round(moon.illumination*100)}%</div><div class="text-[10px] text-[var(--text-dim)]">{moon.phaseNameAr}</div></div>
-        <div class="p-2 rounded-lg border border-[var(--border-subtle)] text-xs"><div class="text-[var(--text-dim)]">🎣</div><div class="font-bold">{solunar.ratingAr}</div><div class="text-[10px] text-[var(--text-dim)]">الصيد</div></div>
-      </div>
-
-      <!-- Sun/Moon + Solunar -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3"><h3 class="text-xs font-semibold text-[var(--text-muted)] mb-2">☀️🌙 الشمس والقمر</h3>
-          <div class="grid grid-cols-2 gap-1.5 text-[11px]">
-            <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">الشروق</span><span class="font-medium latin">{sun.sunrise||'—'}</span></div>
-            <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">الغروب</span><span class="font-medium latin">{sun.sunset||'—'}</span></div>
-            <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">شروق القمر</span><span class="font-medium latin">{moonT.moonrise||'—'}</span></div>
-            <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">غروب القمر</span><span class="font-medium latin">{moonT.moonset||'—'}</span></div>
-          </div></div>
-        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3"><h3 class="text-xs font-semibold text-[var(--text-muted)] mb-2">🎣 أوقات الصيد</h3>
-          {solunar.periods.slice(0,4).map((p: { type: string, typeAr: string, quality: string, start: string, end: string })=><div class={`flex items-center gap-2 p-1.5 rounded text-[11px] ${p.type==='major'?'bg-teal-50':''}`}><span class={`w-1.5 h-1.5 rounded-full shrink-0 ${p.quality==='excellent'?'bg-green-500':p.quality==='good'?'bg-teal-500':'bg-amber-400'}`}></span><span class="font-medium">{p.typeAr}</span><span class="text-[var(--text-dim)] latin ml-auto">{p.start} — {p.end}</span></div>)}
-          {solunar.periods.length===0&&<p class="text-[11px] text-[var(--text-dim)]">لا توجد بيانات</p>}
-        </div>
-      </div>
-
-
-      <!-- Prayer + Hijri -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3"><h3 class="text-xs font-semibold text-[var(--text-muted)] mb-2">🕌 أوقات الصلاة</h3>
-          <div class="grid grid-cols-3 gap-1 text-[11px]">
-            {Object.entries(prayers).map(([name,time])=>{const labels:Record<string,string>={fajr:'الفجر',sunrise:'الشروق',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'};return<div class="p-1.5 rounded bg-[var(--surface-elevated)] text-center"><div class="text-[10px] text-[var(--text-dim)]">{labels[name]}</div><div class="font-medium latin">{time}</div></div>;})}
-          </div></div>
-        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 flex items-center justify-center gap-4"><div class="text-3xl">📅</div><div class="text-center"><div class="text-lg font-bold">{hijri.day} {hijri.monthAr} {hijri.year} هـ</div><div class="text-[10px] text-[var(--text-dim)] mt-1">تقديري — قد يختلف بيوم</div></div></div>
-      </div>
-
-      <!-- 7-day forecast — main feature for fishermen -->
-      <section class="mb-5">
-        <h2 class="text-sm font-semibold mb-2">📊 توقعات ٧ أيام للمد والجزر</h2>
-        <p class="text-[10px] text-[var(--text-dim)] mb-2">جميع الأوقات محلية. المد = ارتفاع الماء، الجزر = انخفاضه.</p>
-        <div class="space-y-3">
-          {forecastWithFish.map((day, i) => (
-            <div id={`day-${i}`} class={`rounded-xl bg-white border p-3 ${day.isToday?'border-[var(--accent-border)]':'border-[var(--border-subtle)]'}`} style={day.isToday?'box-shadow:var(--shadow-md)':''}>
-              <div class="flex items-center gap-3 mb-2">
-                <span class="text-lg">{day.moon.emoji}</span>
-                <div>
-                  <div class="text-sm font-semibold">{day.label} <span class="text-[10px] text-[var(--text-dim)] font-normal">{day.moon.phaseNameAr}</span></div>
-                  <div class="text-[10px] text-[var(--text-dim)] latin">{day.dateStr} · {day.moonPct}%</div>
-                </div>
-                <div class="mr-auto text-right">
-                  <div class="text-xs"><span style={`color:${day.fishColor}`}>{day.fullFish}</span><span class="opacity-20">{day.emptyFish}</span></div>
-                  <div class="text-[9px] font-medium" style={`color:${day.fishColor}`}>{day.fishLabel}</div>
-                  <div class="text-[10px] text-[var(--text-dim)] latin">المدى {day.range} سم</div>
-                </div>
+        <!-- Today's tide chart -->
+        <section class="card p-5" aria-labelledby="chart-title">
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 id="chart-title" class="text-lg font-semibold display">منحنى المد والجزر اليوم</h2>
+            <span class="text-xs text-[var(--text-muted)] latin">{today.toLocaleDateString('en-GB', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' })}</span>
+            <span class="ms-auto text-xs text-[var(--text-muted)]">بالتوقيت المحلي · الارتفاع بالسنتيمتر</span>
+          </div>
+          <div class="chart-ltr mt-3">
+            <svg id="tide-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img"
+                 aria-label={`منحنى المد والجزر لـ${port.name_ar} اليوم`}
+                 data-tz={tzOffset} data-date={localDateStr} data-padl={PAD_L} data-plotw={plotW}>
+              <defs>
+                <linearGradient id="tideFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#14b8a6" stop-opacity="0.28" />
+                  <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.02" />
+                </linearGradient>
+              </defs>
+              {yTicks.map(v => (
+                <>
+                  <line x1={PAD_L} y1={yScale(v)} x2={CHART_W - PAD_R} y2={yScale(v)} stroke="#e8ecf0" stroke-width="1" />
+                  <text x={PAD_L - 8} y={yScale(v) + 4} text-anchor="end" font-size="11" fill="#94a3b8" font-family="Inter,sans-serif">{v.toFixed(0)}</text>
+                </>
+              ))}
+              {[0, 3, 6, 9, 12, 15, 18, 21, 24].map(h => (
+                <text x={xHours(h)} y={CHART_H - 8} text-anchor="middle" font-size="11" fill="#94a3b8" font-family="Inter,sans-serif">{String(h).padStart(2, '0')}:00</text>
+              ))}
+              <path d={`${pathD} L${xHours(24).toFixed(1)},${PAD_T + plotH} L${xHours(0).toFixed(1)},${PAD_T + plotH} Z`} fill="url(#tideFill)" />
+              <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round" />
+              <g id="now-marker" style="display:none">
+                <line y1={PAD_T - 6} y2={PAD_T + plotH} stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 3" />
+                <text y={PAD_T - 10} text-anchor="middle" font-size="11" font-weight="600" fill="#d97706" font-family="Noto Naskh Arabic,serif">الآن</text>
+              </g>
+              {extremes.map(ex => {
+                const cx = xHours(ex.hours), cy = yScale(ex.height), hi = ex.type === 'high';
+                return (
+                  <>
+                    <circle cx={cx} cy={cy} r="5" fill={hi ? '#0d9488' : '#e11d48'} stroke="#fff" stroke-width="2" />
+                    <text x={cx} y={hi ? cy - 12 : cy + 20} text-anchor="middle" font-size="12" font-weight="600" fill={hi ? '#0f766e' : '#be123c'} font-family="Inter,sans-serif">{formatTime(ex.time, tzOffset)}</text>
+                  </>
+                );
+              })}
+            </svg>
+          </div>
+          <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {extremes.map(ex => (
+              <div class={`rounded-xl px-3 py-2.5 ${ex.type === 'high' ? 'bg-teal-50' : 'bg-rose-50'}`}>
+                <div class={`text-xs font-medium ${ex.type === 'high' ? 'text-teal-700' : 'text-rose-700'}`}>{ex.type === 'high' ? '▲ مد عالٍ' : '▼ جزر منخفض'}</div>
+                <div class="text-xl font-bold latin mt-0.5">{formatTime(ex.time, tzOffset)}</div>
+                <div class="text-xs text-[var(--text-muted)]"><span class="latin">{ex.height.toFixed(0)}</span> سم</div>
               </div>
-              <div class="text-[10px] mb-2 px-2 py-1 rounded" style={`background:${day.fishColor}14;color:${day.fishColor}`}>{day.fishAdvice}</div>
-              <div class="grid grid-cols-2 gap-2 text-[11px]">
-                <div>
-                  <div class="text-teal-700 font-medium text-[10px] mb-1">🔼 مد (ارتفاع)</div>
-                  {day.highs.length > 0 ? day.highs.map((h: { time: Date, height: number })=><div class="flex justify-between py-0.5 px-1.5 rounded bg-teal-50/70 mb-0.5"><span class="latin font-medium">{formatTime(h.time,tzOffset)}</span><span class="latin text-[var(--text-dim)]">{h.height.toFixed(0)} سم</span></div>) : <div class="text-[var(--text-dim)] text-[10px]">—</div>}
+            ))}
+          </div>
+        </section>
+
+        <!-- 7-day forecast -->
+        <section class="card overflow-hidden" aria-labelledby="week-title">
+          <div class="px-5 pt-5 pb-3 flex flex-wrap items-baseline gap-x-3">
+            <h2 id="week-title" class="text-lg font-semibold display">توقعات ٧ أيام</h2>
+            <span class="text-xs text-[var(--text-muted)]">المد والجزر وتقييم الصيد</span>
+          </div>
+          <ul class="divide-y divide-[var(--border-subtle)]">
+            {forecastWithFish.map(day => (
+              <li class={`week-row px-5 py-4 ${day.isToday ? 'bg-teal-50/50' : ''}`}>
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl" aria-hidden="true">{day.moon.emoji}</span>
+                  <div>
+                    <div class="font-semibold">{day.label}</div>
+                    <div class="text-xs text-[var(--text-muted)] latin">{day.dateStr}</div>
+                  </div>
                 </div>
-                <div>
-                  <div class="text-red-600 font-medium text-[10px] mb-1">🔽 جزر (انخفاض)</div>
-                  {day.lows.length > 0 ? day.lows.map((l: { time: Date, height: number })=><div class="flex justify-between py-0.5 px-1.5 rounded bg-red-50/70 mb-0.5"><span class="latin font-medium">{formatTime(l.time,tzOffset)}</span><span class="latin text-[var(--text-dim)]">{l.height.toFixed(0)} سم</span></div>) : <div class="text-[var(--text-dim)] text-[10px]">—</div>}
+                <div class="week-fish">
+                  <FishRating rating={day.fishRating} color={day.fishColor} />
+                  <div class="text-xs font-medium mt-0.5" style={`color:${day.fishColor}`}>{day.fishLabel}</div>
+                  <div class="text-[11px] text-[var(--text-muted)]">المدى <span class="latin">{day.range}</span> سم</div>
                 </div>
+                <div class="text-sm">
+                  <div class="text-[11px] text-teal-700 font-medium mb-1">▲ مد</div>
+                  <div class="flex flex-wrap gap-x-3 gap-y-0.5">
+                    {[...day.highs].sort((a, b) => a.time.getTime() - b.time.getTime()).map(h => <span class="latin font-semibold">{formatTime(h.time, tzOffset)} <span class="font-normal text-[var(--text-muted)] text-xs">{h.height.toFixed(0)}</span></span>)}
+                  </div>
+                </div>
+                <div class="text-sm">
+                  <div class="text-[11px] text-rose-700 font-medium mb-1">▼ جزر</div>
+                  <div class="flex flex-wrap gap-x-3 gap-y-0.5">
+                    {[...day.lows].sort((a, b) => a.time.getTime() - b.time.getTime()).map(l => <span class="latin font-semibold">{formatTime(l.time, tzOffset)} <span class="font-normal text-[var(--text-muted)] text-xs">{l.height.toFixed(0)}</span></span>)}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Monthly calendar + fishing summary -->
+        <section class="card p-5" aria-labelledby="cal-title">
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 id="cal-title" class="text-lg font-semibold display">تقويم الصيد — {monthNames[month]} <span class="latin">{year}</span></h2>
+            <span class="text-xs text-[var(--text-muted)]">طور القمر وتقييم كل يوم</span>
+          </div>
+          <div class="mt-4 grid grid-cols-7 gap-1 sm:gap-1.5 text-center">
+            {calWeekdays.map(w => <div class="text-[10px] sm:text-xs text-[var(--text-muted)] pb-1">{w}</div>)}
+            {Array.from({ length: leadingBlanks }).map(() => <div></div>)}
+            {monthDays.map(d => (
+              <div class={`cal-cell ${d.isToday ? 'cal-today' : ''}`} style={`--rating:${d.fishColor}`} title={`${d.day} ${monthNames[month]} — ${d.fishLabel}`}>
+                <div class="text-xs sm:text-sm font-semibold latin">{d.day}</div>
+                <div class="text-sm sm:text-base leading-none my-0.5" aria-hidden="true">{d.moon.emoji}</div>
+                <div class="hidden sm:block"><FishRating rating={d.fishRating} color={d.fishColor} size={8} /></div>
+                <div class="sm:hidden h-1.5 rounded-full mx-1" style={`background:${d.fishColor};opacity:${0.25 + d.fishRating * 0.15}`}></div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
 
-      <!-- Share -->
-      <div class="no-print flex flex-wrap items-center gap-2 mb-5 text-xs">
-        <button onclick="window.print()" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors">🖨️ طباعة</button>
-        <a href={`https://wa.me/?text=${encodeURIComponent(`مواقيت المد والجزر — ${port.name_ar}`)}%20${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors">💬 واتساب</a>
-        <a href={`${BASE}methodology`} class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors mr-auto">📖 كيف تعمل الحسابات؟</a>
-      </div>
-
-
-      <!-- Monthly calendar -->
-      <section class="mb-5"><h2 class="text-sm font-semibold mb-2">📅 تقويم {monthNames[month]} {year}</h2>
-        <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]"><table class="w-full text-[10px]">
-          <thead><tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><th class="p-1">السبت</th><th class="p-1">الجمعة</th><th class="p-1">الخميس</th><th class="p-1">الأربعاء</th><th class="p-1">الثلاثاء</th><th class="p-1">الإثنين</th><th class="p-1">الأحد</th></tr></thead>
-          <tbody>{(()=>{const fd=new Date(year,month,1).getDay();const off=(6-fd)%7;const wks:number[][]=[];let wk:number[]=Array(off).fill(0);for(let d=1;d<=daysInMonth;d++){wk.push(d);if(wk.length===7||d===daysInMonth){while(wk.length<7)wk.push(0);wks.push(wk);wk=[]}}return wks.map(w=><tr class="divide-x divide-[var(--border-subtle)] border-t border-[var(--border-subtle)]">{w.map(day=>{if(day===0)return<td class="p-1.5 text-center"></td>;const d=monthDays[day-1];return<td class={`p-1.5 text-center ${d.isToday?'bg-teal-50 ring-1 ring-teal-300 ring-inset':''}`} data-day={day} data-rating={d.fishRating} data-fullfish={d.fullFish} data-color={d.fishColor} data-label={d.fishLabel}><div class={`font-medium ${d.isToday?'text-[var(--accent)]':'text-[var(--text-primary)]'}`}>{day}</div><div class="text-[9px]">{d.moon.emoji}</div><div class="text-[7px] leading-tight"><span style={`color:${d.fishColor}`}>{d.fullFish}</span><span class="opacity-15">{d.emptyFish}</span></div></td>})}</tr>)})()}</tbody>
-        </table></div>
-      </section>
-
-      <!-- Fishing conclusion -->
-      <section class="mb-5">
-        <h2 class="text-sm font-semibold mb-2">🎣 خلاصة الصيد لهذا الشهر</h2>
-        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-4" style="box-shadow:var(--shadow-sm)">
-          <div id="fish-conclusion"><p class="text-xs text-[var(--text-dim)]">تحميل...</p></div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]" id="fish-tips">
-            <div class="p-2.5 rounded-lg bg-[var(--surface-elevated)]">
-              <div class="font-semibold text-[var(--text-primary)] mb-1">📖 التفسير</div>
-              <p class="text-[var(--text-dim)] leading-relaxed">أفضل الصيد عند اكتمال القمر (بدر) وميلاده (محاق) — قوى الجذب ترفع المد وتحرّك الماء، فتنشط الأسماك على التغذي. الأيام البعيدة عن هذه الفترات يكون الصيد فيها أضعف.</p>
-            </div>
-            <div class="p-2.5 rounded-lg bg-[var(--surface-elevated)]">
-              <div class="font-semibold text-[var(--text-primary)] mb-1">🎯 القاعدة العملية</div>
-              <p class="text-[var(--text-dim)] leading-relaxed">انطلق قبل ساعتين من ذروة المد أو بعدها مباشرة. أثناء الجزر المنخفض تتركز الأسماك في القنوات العميقة.</p>
+          <div class="mt-6 rounded-xl bg-[var(--surface-elevated)] p-4">
+            <h3 class="font-semibold text-sm">🎣 أفضل أيام الصيد في {monthNames[month]}</h3>
+            {bestDays.length > 0 ? (
+              <div class="mt-3 flex flex-wrap gap-2">
+                {bestDays.map(d => (
+                  <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white text-sm font-medium border" style={`border-color:${d.fishColor}55;color:${d.fishColor}`}>
+                    <span class="latin">{d.day}</span> {monthNames[month]}
+                    <FishRating rating={d.fishRating} color={d.fishColor} size={10} />
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p class="mt-2 text-sm text-[var(--text-muted)]">لا توجد أيام ممتازة هذا الشهر</p>
+            )}
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">📖 التفسير:</strong> أفضل الصيد قرب اكتمال القمر (بدر) وميلاده (محاق) — يرتفع المد وتتحرك المياه فتنشط الأسماك على التغذي.</p>
+              <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">🎯 القاعدة العملية:</strong> انطلق قبل ساعتين من ذروة المد أو بعدها مباشرة. أثناء الجزر تتركز الأسماك في القنوات العميقة.</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- Constituents -->
-      <details class="mb-5 group"><summary class="flex items-center gap-2 cursor-pointer text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors select-none"><span class="text-[10px] transition-transform group-open:rotate-90">&#9654;</span>المركبات التوافقية (17)</summary>
-        <div class="mt-2 overflow-x-auto rounded-lg border border-[var(--border-subtle)]"><table class="w-full text-xs"><thead class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><tr><th class="text-right px-3 py-1.5">المركبة</th><th class="text-right px-3 py-1.5 latin">السعة (سم)</th><th class="text-right px-3 py-1.5 latin">الطور (&deg;)</th></tr></thead><tbody class="divide-y divide-[var(--border-subtle)]">{Object.entries(constituents).map(([name,c]: [string, { amp: number, phase: number }])=><tr class="hover:bg-[var(--surface-elevated)]"><td class="px-3 py-1.5 font-medium latin">{name}</td><td class="px-3 py-1.5 text-[var(--text-secondary)] latin">{c.amp.toFixed(2)}</td><td class="px-3 py-1.5 text-[var(--text-secondary)] latin">{c.phase.toFixed(1)}</td></tr>)}</tbody></table></div>
-      </details>
-
-      <div class="border-t border-[var(--border-subtle)] pt-3 text-[10px] text-[var(--text-dim)] leading-relaxed">
-        <p>⚠️ تقديرات فلكية. <a href={`${BASE}disclaimer`} class="text-[var(--accent)] hover:underline">إخلاء المسؤولية</a>. المصدر: {port.source}</p>
+        </section>
       </div>
-    </main>
-  </div>
 
-  <!-- Fish conclusion — client-side, reads calendar data -->
+      <!-- Sidebar -->
+      <aside class="space-y-6 min-w-0">
+        <section class="card p-5" aria-labelledby="sun-title">
+          <h2 id="sun-title" class="font-semibold">☀️ الشمس والقمر</h2>
+          <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
+            <div class="info-tile"><dt>الشروق</dt><dd class="latin">{sun.sunrise || '—'}</dd></div>
+            <div class="info-tile"><dt>الغروب</dt><dd class="latin">{sun.sunset || '—'}</dd></div>
+            <div class="info-tile"><dt>شروق القمر</dt><dd class="latin">{moonT.moonrise || '—'}</dd></div>
+            <div class="info-tile"><dt>غروب القمر</dt><dd class="latin">{moonT.moonset || '—'}</dd></div>
+          </dl>
+          <div class="mt-3 flex items-center gap-3 rounded-xl bg-[var(--surface-elevated)] p-3">
+            <span class="text-3xl" aria-hidden="true">{moon.emoji}</span>
+            <div>
+              <div class="font-semibold text-sm">{moon.phaseNameAr}</div>
+              <div class="text-xs text-[var(--text-muted)]">الإضاءة <span class="latin">{Math.round(moon.illumination * 100)}%</span> · عمر القمر <span class="latin">{moon.age.toFixed(1)}</span> يوم</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card p-5" aria-labelledby="solunar-title">
+          <h2 id="solunar-title" class="font-semibold">🎣 أوقات الصيد (سولونار)</h2>
+          {solunar.periods.length > 0 ? (
+            <ul class="mt-3 space-y-2 text-sm">
+              {solunar.periods.map(p => (
+                <li class={`flex items-center gap-2 rounded-lg px-3 py-2 ${p.type === 'major' ? 'bg-teal-50' : 'bg-[var(--surface-elevated)]'}`}>
+                  <span class={`w-2 h-2 rounded-full shrink-0 ${p.quality === 'excellent' ? 'bg-green-500' : p.quality === 'good' ? 'bg-teal-500' : 'bg-amber-400'}`}></span>
+                  <span class="font-medium">{p.typeAr}</span>
+                  <span class="latin ms-auto text-[var(--text-secondary)]">{p.start} – {p.end}</span>
+                </li>
+              ))}
+            </ul>
+          ) : <p class="mt-3 text-sm text-[var(--text-muted)]">لا توجد بيانات</p>}
+          <p class="mt-3 text-xs text-[var(--text-muted)] leading-relaxed">الفترات الكبرى حول عبور القمر، والصغرى حول شروقه وغروبه.</p>
+        </section>
+
+        <section class="card p-5" aria-labelledby="prayer-title">
+          <h2 id="prayer-title" class="font-semibold">🕌 أوقات الصلاة</h2>
+          <dl class="mt-3 grid grid-cols-3 gap-2 text-sm">
+            {Object.entries(prayers).map(([name, time]) => (
+              <div class="info-tile text-center"><dt>{prayerLabels[name]}</dt><dd class="latin">{time}</dd></div>
+            ))}
+          </dl>
+          <p class="mt-3 text-xs text-[var(--text-muted)]">طريقة أم القرى · التاريخ الهجري تقديري وقد يختلف بيوم</p>
+        </section>
+
+        <section class="card p-3" aria-label="موقع الميناء على الخريطة">
+          <div id="map" class="port-map w-full" data-lat={port.lat} data-lon={port.lon} data-name={port.name_ar}></div>
+          <p class="text-[11px] text-[var(--text-dim)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
+        </section>
+
+        <section class="card p-5 no-print" aria-labelledby="share-title">
+          <h2 id="share-title" class="font-semibold">شارك الصفحة</h2>
+          <div class="mt-3 grid grid-cols-3 gap-2 text-sm">
+            <a href={`https://wa.me/?text=${encodeURIComponent(shareText)}%20${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener" class="share-btn">💬 واتساب</a>
+            <button type="button" class="share-btn" id="copy-link" data-url={pageUrl}>🔗 نسخ الرابط</button>
+            <button type="button" class="share-btn" onclick="window.print()">🖨️ طباعة</button>
+          </div>
+        </section>
+
+        <section class="card p-5 text-xs text-[var(--text-muted)] leading-relaxed">
+          <p>⚠️ تقديرات فلكية، لا تُستخدم للملاحة. الارتفاعات بالنسبة لمتوسط سطح البحر. <a href={`${BASE}disclaimer`} class="text-[var(--accent)] hover:underline">إخلاء المسؤولية</a> · <a href={`${BASE}methodology`} class="text-[var(--accent)] hover:underline">كيف تعمل الحسابات؟</a></p>
+          <p class="mt-2 latin" lang="en">{port.source}</p>
+          <details class="mt-3">
+            <summary class="cursor-pointer select-none hover:text-[var(--text-primary)]">المركبات التوافقية (<span class="latin">{Object.keys(constituents).length}</span>)</summary>
+            <table class="mt-2 w-full">
+              <thead><tr class="text-[var(--text-secondary)]"><th class="text-start py-1">المركبة</th><th class="text-start py-1">السعة (سم)</th><th class="text-start py-1">الطور (°)</th></tr></thead>
+              <tbody class="latin">
+                {Object.entries(constituents).map(([name, c]) => <tr class="border-t border-[var(--border-subtle)]"><td class="py-1 font-medium">{name}</td><td class="py-1">{c.amp.toFixed(2)}</td><td class="py-1">{c.phase.toFixed(1)}</td></tr>)}
+              </tbody>
+            </table>
+          </details>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <!-- "Now" marker on today's chart, in the port's local time; copy-link button -->
   <script is:inline>
     (function () {
-      var container = document.getElementById('fish-conclusion');
-      if (!container) return;
-      // Read all calendar cells with data attributes
-      var cells = document.querySelectorAll('td[data-day][data-rating]');
-      if (!cells.length) { container.innerHTML = '<p class="text-xs text-[var(--text-dim)]">لا توجد بيانات</p>'; return; }
-      var days = [];
-      cells.forEach(function (td) {
-        var day = parseInt(td.getAttribute('data-day'));
-        var rating = parseInt(td.getAttribute('data-rating'));
-        var fullfish = td.getAttribute('data-fullfish') || '';
-        var color = td.getAttribute('data-color') || '#0d9488';
-        if (day && rating) days.push({ day: day, rating: rating, fullfish: fullfish, color: color });
-      });
-      // Sort by rating descending, take top 6
-      days.sort(function (a, b) { return b.rating - a.rating; });
-      var top = days.filter(function (d) { return d.rating >= 4; }).slice(0, 6);
-      var now = new Date();
-      var monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-      var html = '';
-      if (top.length > 0) {
-        html += '<div class="text-xs font-semibold text-[var(--text-primary)] mb-2">✅ أفضل أيام الصيد في ' + monthNames[now.getMonth()] + '</div>';
-        html += '<div class="flex flex-wrap gap-2">';
-        top.forEach(function (d) {
-          html += '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium" style="background:' + d.color + '1a;color:' + d.color + ';border:1px solid ' + d.color + '40">';
-          html += monthNames[now.getMonth()] + ' ' + d.day + ' <span class="text-[10px]">' + d.fullfish + '</span>';
-          html += '</span>';
+      var svg = document.getElementById('tide-chart');
+      var g = document.getElementById('now-marker');
+      if (!svg || !g) return;
+      var tz = parseFloat(svg.dataset.tz), local = new Date(Date.now() + tz * 60000);
+      if (local.toISOString().slice(0, 10) !== svg.dataset.date) return;
+      var hours = local.getUTCHours() + local.getUTCMinutes() / 60;
+      var x = parseFloat(svg.dataset.padl) + hours / 24 * parseFloat(svg.dataset.plotw);
+      g.querySelector('line').setAttribute('x1', x);
+      g.querySelector('line').setAttribute('x2', x);
+      g.querySelector('text').setAttribute('x', x);
+      g.style.display = '';
+    })();
+    (function () {
+      var btn = document.getElementById('copy-link');
+      if (!btn || !navigator.clipboard) return;
+      btn.addEventListener('click', function () {
+        navigator.clipboard.writeText(btn.dataset.url).then(function () {
+          var old = btn.textContent; btn.textContent = '✓ تم النسخ';
+          setTimeout(function () { btn.textContent = old; }, 1800);
         });
-        html += '</div>';
-      } else {
-        html += '<p class="text-xs text-[var(--text-dim)]">لا توجد أيام ممتازة هذا الشهر</p>';
-      }
-      container.innerHTML = html;
+      });
     })();
   </script>
 
@@ -342,7 +458,7 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
           maxZoom: 18, attribution: '&copy; OpenStreetMap'
         }).addTo(map);
         L.circleMarker([lat, lon], {
-          radius: 8, color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.6, weight: 2
+          radius: 8, color: '#ffffff', fillColor: '#0d9488', fillOpacity: 0.95, weight: 2.5
         }).addTo(map).bindPopup(el.dataset.name);
         map.on('click', function () { map.scrollWheelZoom.enable(); });
         setTimeout(function () { map.invalidateSize(); }, 200);

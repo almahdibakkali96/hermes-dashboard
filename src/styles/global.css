@@ -67,6 +67,7 @@ body {
 .latin, .ltr {
   font-family: var(--font-latin);
   direction: ltr;
+  unicode-bidi: isolate;
   font-variant-numeric: tabular-nums;
 }
 
@@ -264,3 +265,48 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
 @media print {
   .site-header, .site-footer, .no-print { display: none !important; }
 }
+
+/* --- Port page --- */
+.breadcrumb-light { color: #94a3b8; }
+.breadcrumb-light a:hover { color: #5eead4; }
+.breadcrumb-light .sep { color: #475569; }
+.breadcrumb-light [aria-current] { color: #e2e8f0; }
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.3rem 0.75rem; border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+}
+.fish-on-dark svg path[fill="none"] { stroke: rgba(255, 255, 255, 0.3); }
+.info-tile { border-radius: var(--radius-lg); background: var(--surface-elevated); padding: 0.55rem 0.75rem; }
+.info-tile dt { font-size: 0.7rem; color: var(--text-muted); }
+.info-tile dd { font-size: 1rem; font-weight: 600; margin-top: 0.1rem; }
+.share-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.3rem;
+  padding: 0.55rem 0.5rem; border-radius: var(--radius-lg);
+  border: 1px solid var(--border-standard); color: var(--text-secondary);
+  font-size: 0.8rem; transition: background-color 0.15s ease, color 0.15s ease;
+}
+.share-btn:hover { background: var(--accent-muted); color: var(--accent); border-color: var(--accent-border); }
+.week-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "day fish" "high low";
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+.week-row > :nth-child(1) { grid-area: day; }
+.week-row > :nth-child(2) { grid-area: fish; text-align: end; }
+.week-row > :nth-child(3) { grid-area: high; }
+.week-row > :nth-child(4) { grid-area: low; }
+@media (min-width: 640px) {
+  .week-row { grid-template-columns: 9rem 1fr 1fr 8rem; grid-template-areas: "day high low fish"; }
+}
+.cal-cell {
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-bottom: 3px solid var(--rating);
+  padding: 0.35rem 0.1rem 0.4rem;
+}
+.cal-today { outline: 2px solid var(--accent); outline-offset: 1px; background: #f0fdfa; }
