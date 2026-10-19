@@ -62,15 +62,38 @@ const forecast = Array.from({ length: 7 }, (_, i) => {
   };
 });
 
-// Monthly calendar
+// Monthly calendar — with fish rating
 const year = today.getFullYear(), month = today.getMonth();
 const daysInMonth = new Date(year, month+1, 0).getDate();
-const monthDays = Array.from({length: daysInMonth}, (_,i) => {
+const monthDaysRaw = Array.from({length: daysInMonth}, (_,i) => {
   const d = new Date(year, month, i+1);
   const c = generateTideCurve(constituents, d, tzOffset);
   const ex = findExtremes(c);
   const hs = ex.filter((e: { type: string }) => e.type==='high'), ls = ex.filter((e: { type: string }) => e.type==='low');
-  return { day: i+1, range: hs.length&&ls.length?Math.max(...hs.map((h: { height: number }) => h.height))-Math.min(...ls.map((l: { height: number }) => l.height)):0, moon: moonPhase(d), isToday: i+1===today.getDate() };
+  const range = hs.length&&ls.length?Math.max(...hs.map((h: { height: number }) => h.height))-Math.min(...ls.map((l: { height: number }) => l.height)):0;
+  const m = moonPhase(d);
+  return { day: i+1, range, moon: m, isToday: i+1===today.getDate() };
+});
+
+// Fish rating: moon proximity to new/full (0-4) + tide range relative to month max (0-2)
+const maxMonthRange = Math.max(...monthDaysRaw.map(d => d.range), 1);
+const fishEmojis = ['', '🐟', '🐟🐟', '🐟🐟🐟', '🐟🐟🐟🐟', '🐟🐟🐟🐟🐟', '🐟🐟🐟🐟🐟🐟'];
+
+const monthDays = monthDaysRaw.map(d => {
+  // Moon score: how close to new or full moon (abs(cos(phase)))
+  const moonScore = Math.round(Math.abs(Math.cos(d.moon.phase)) * 4);
+  // Tide range score: normalized against month max
+  const tideScore = d.range / maxMonthRange >= 0.8 ? 2 : d.range / maxMonthRange >= 0.5 ? 1 : 0;
+  const fishRating = Math.max(1, Math.min(6, moonScore + tideScore)); // never 0
+  return { ...d, fishRating, fishStr: fishEmojis[fishRating] };
+});
+
+// Add fish rating to 7-day forecast
+const forecastWithFish = forecast.map(d => {
+  const moonScore = Math.round(Math.abs(Math.cos(d.moon.phase)) * 4);
+  const tideScore = parseFloat(String(d.range)) / maxMonthRange >= 0.8 ? 2 : parseFloat(String(d.range)) / maxMonthRange >= 0.5 ? 1 : 0;
+  const fishRating = Math.max(1, Math.min(6, moonScore + tideScore));
+  return { ...d, fishRating, fishStr: fishEmojis[fishRating] };
 });
 
 // Today's chart
@@ -170,7 +193,7 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
         <h2 class="text-sm font-semibold mb-2">📊 توقعات ٧ أيام للمد والجزر</h2>
         <p class="text-[10px] text-[var(--text-dim)] mb-2">جميع الأوقات محلية. المد = ارتفاع الماء، الجزر = انخفاضه.</p>
         <div class="space-y-3">
-          {forecast.map((day, i) => (
+          {forecastWithFish.map((day, i) => (
             <div id={`day-${i}`} class={`rounded-xl bg-white border p-3 ${day.isToday?'border-[var(--accent-border)]':'border-[var(--border-subtle)]'}`} style={day.isToday?'box-shadow:var(--shadow-md)':''}>
               <div class="flex items-center gap-3 mb-2">
                 <span class="text-lg">{day.moon.emoji}</span>
@@ -178,7 +201,10 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
                   <div class="text-sm font-semibold">{day.label} <span class="text-[10px] text-[var(--text-dim)] font-normal">{day.moon.phaseNameAr}</span></div>
                   <div class="text-[10px] text-[var(--text-dim)] latin">{day.dateStr} · {day.moonPct}%</div>
                 </div>
-                <div class="mr-auto text-xs latin font-medium text-[var(--accent)]">المدى {day.range} سم</div>
+                <div class="mr-auto text-right">
+                  <div class="text-xs font-medium text-[var(--text-primary)]">{day.fishStr}</div>
+                  <div class="text-[10px] text-[var(--text-dim)] latin">المدى {day.range} سم</div>
+                </div>
               </div>
               <div class="grid grid-cols-2 gap-2 text-[11px]">
                 <div>
@@ -209,7 +235,7 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
       <section class="mb-5"><h2 class="text-sm font-semibold mb-2">📅 تقويم {monthNames[month]} {year}</h2>
         <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]"><table class="w-full text-[10px]">
           <thead><tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><th class="p-1">السبت</th><th class="p-1">الجمعة</th><th class="p-1">الخميس</th><th class="p-1">الأربعاء</th><th class="p-1">الثلاثاء</th><th class="p-1">الإثنين</th><th class="p-1">الأحد</th></tr></thead>
-          <tbody>{(()=>{const fd=new Date(year,month,1).getDay();const off=(6-fd)%7;const wks:number[][]=[];let wk:number[]=Array(off).fill(0);for(let d=1;d<=daysInMonth;d++){wk.push(d);if(wk.length===7||d===daysInMonth){while(wk.length<7)wk.push(0);wks.push(wk);wk=[]}}return wks.map(w=><tr class="divide-x divide-[var(--border-subtle)] border-t border-[var(--border-subtle)]">{w.map(day=>{if(day===0)return<td class="p-1.5 text-center"></td>;const d=monthDays[day-1];return<td class={`p-1.5 text-center ${d.isToday?'bg-teal-50 ring-1 ring-teal-300 ring-inset':''}`}><div class={`font-medium ${d.isToday?'text-[var(--accent)]':'text-[var(--text-primary)]'}`}>{day}</div><div class="text-[9px]">{d.moon.emoji}</div><div class={`text-[9px] latin ${d.isToday?'text-teal-700':'text-[var(--text-dim)]'}`}>{d.range>0?d.range.toFixed(0):'—'}</div></td>})}</tr>)})()}</tbody>
+          <tbody>{(()=>{const fd=new Date(year,month,1).getDay();const off=(6-fd)%7;const wks:number[][]=[];let wk:number[]=Array(off).fill(0);for(let d=1;d<=daysInMonth;d++){wk.push(d);if(wk.length===7||d===daysInMonth){while(wk.length<7)wk.push(0);wks.push(wk);wk=[]}}return wks.map(w=><tr class="divide-x divide-[var(--border-subtle)] border-t border-[var(--border-subtle)]">{w.map(day=>{if(day===0)return<td class="p-1.5 text-center"></td>;const d=monthDays[day-1];return<td class={`p-1.5 text-center ${d.isToday?'bg-teal-50 ring-1 ring-teal-300 ring-inset':''}`}><div class={`font-medium ${d.isToday?'text-[var(--accent)]':'text-[var(--text-primary)]'}`}>{day}</div><div class="text-[9px]">{d.moon.emoji}</div><div class="text-[8px] leading-tight">{d.fishStr||'—'}</div></td>})}</tr>)})()}</tbody>
         </table></div>
       </section>
 
