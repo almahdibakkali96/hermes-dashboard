@@ -229,9 +229,12 @@ const daysJSON = JSON.stringify(allDays.map(d => ({
   </div>
 
   <!-- 7-day chart data embed -->
-  <script is:inline define:vars={{ daysJSON }}>
+  <script type="application/json" id="tide-days" set:html={daysJSON}></script>
+  <script is:inline>
     (function () {
-      var days = JSON.parse(daysJSON), cur = 0;
+      var el = document.getElementById('tide-days');
+      if (!el) return;
+      var days = JSON.parse(el.textContent || '[]'), cur = 0;
       if (!days.length) return;
 
       function swDay(idx) {

@@ -141,3 +141,12 @@ body {
   background: var(--accent-muted);
   color: var(--accent);
 }
+
+/* Tailwind scrollbar-hide fallback */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
