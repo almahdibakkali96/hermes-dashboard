@@ -4,7 +4,7 @@ import placesIndex from '../data/places/places_index.json';
 import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
 import {
-  generateTideCurve, findExtremes, formatTime,
+  generateTideCurve, dayExtremes, formatTime,
   getTimezoneOffset
 } from '../lib/tides';
 
@@ -22,9 +22,9 @@ const featuredPorts = await Promise.all(
     const today = new Date();
     const tz = getTimezoneOffset(p.timezone, today);
     const curve = generateTideCurve(constituents, today, tz);
-    const extremes = findExtremes(curve);
-    const nextHigh = extremes.find(e => e.type === 'high' && e.hours > today.getHours() + today.getMinutes() / 60) || extremes.find(e => e.type === 'high');
-    const nextLow = extremes.find(e => e.type === 'low' && e.hours > today.getHours() + today.getMinutes() / 60) || extremes.find(e => e.type === 'low');
+    const extremes = dayExtremes(constituents, today, tz);
+    const nextHigh = extremes.find(e => e.type === 'high' && e.time > today) || extremes.find(e => e.type === 'high');
+    const nextLow = extremes.find(e => e.type === 'low' && e.time > today) || extremes.find(e => e.type === 'low');
     // Sparkline of today's curve (120×32 viewBox)
     const hs = curve.map((c: { height: number }) => c.height);
     const lo = Math.min(...hs), hi = Math.max(...hs), span = hi - lo || 1;

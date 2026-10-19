@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import placesIndex from '../../data/places/places_index.json';
 import {
-  generateTideCurve, findExtremes, formatTime,
+  generateTideCurve, dayExtremes, formatTime,
   classifyTide, getTimezoneOffset
 } from '../../lib/tides';
 import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
@@ -25,7 +25,7 @@ const constituents = port.constituents as Record<string, { amp: number; phase: n
 const today = new Date();
 const tzOffset = getTimezoneOffset(port.timezone, today);
 const curve = generateTideCurve(constituents, today, tzOffset);
-const extremes = findExtremes(curve);
+const extremes = dayExtremes(constituents, today, tzOffset);
 const tideClass = classifyTide(constituents);
 
 const moon = moonPhase(today);
@@ -40,8 +40,7 @@ const hijri = gregorianToHijri(today);
 const weekDays = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 const forecast = Array.from({ length: 7 }, (_, i) => {
   const d = new Date(today); d.setDate(d.getDate() + i);
-  const c = generateTideCurve(constituents, d, tzOffset);
-  const ex = findExtremes(c);
+  const ex = dayExtremes(constituents, d, tzOffset);
   const hs = ex.filter((e: { type: string }) => e.type === 'high').sort((a: { height: number }, b: { height: number }) => b.height - a.height);
   const ls = ex.filter((e: { type: string }) => e.type === 'low').sort((a: { height: number }, b: { height: number }) => a.height - b.height);
   const m = moonPhase(d);
@@ -60,8 +59,7 @@ const year = today.getFullYear(), month = today.getMonth();
 const daysInMonth = new Date(year, month+1, 0).getDate();
 const monthDaysRaw = Array.from({length: daysInMonth}, (_,i) => {
   const d = new Date(year, month, i+1);
-  const c = generateTideCurve(constituents, d, tzOffset);
-  const ex = findExtremes(c);
+  const ex = dayExtremes(constituents, d, tzOffset);
   const hs = ex.filter((e: { type: string }) => e.type==='high'), ls = ex.filter((e: { type: string }) => e.type==='low');
   const range = hs.length&&ls.length?Math.max(...hs.map((h: { height: number }) => h.height))-Math.min(...ls.map((l: { height: number }) => l.height)):0;
   const m = moonPhase(d);
@@ -122,7 +120,7 @@ const worstDays = monthDays.filter(d => d.fishRating <= 2).slice(0, 3);
 // Today's chart
 const CHART_W=720,CHART_H=200,PAD_L=40,PAD_R=10,PAD_T=10,PAD_B=22,plotW=CHART_W-PAD_L-PAD_R,plotH=CHART_H-PAD_T-PAD_B;
 const heights=curve.map((p: { height: number }) => p.height),hMin=Math.min(...heights),hMax=Math.max(...heights),hRange=hMax-hMin||1;
-const yScale=(h:number)=>PAD_T+plotH-((h-hMin)/hRange)*plotH,xScale=(i:number)=>PAD_L+(i/(curve.length-1))*plotW;
+const yScale=(h:number)=>PAD_T+plotH-((h-hMin)/hRange)*plotH,xScale=(i:number)=>PAD_L+(i/(curve.length-1))*plotW,xHours=(h:number)=>PAD_L+(h/24)*plotW;
 const pathD=curve.map((p: { height: number },i: number)=>`${i===0?'M':'L'}${xScale(i).toFixed(1)},${yScale(p.height).toFixed(1)}`).join(' ');
 
 const title=`${port.name_ar} — مواقيت المد والجزر`;
@@ -172,11 +170,11 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
       <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 overflow-x-auto" style="box-shadow:var(--shadow-sm)"><div class="chart-ltr">
         <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img" aria-label={`منحنى المد والجزر لـ${port.name_ar}`}>
           {[0,.25,.5,.75,1].map(f=>{const y=PAD_T+plotH*(1-f);return(<><line x1={PAD_L} y1={y} x2={CHART_W-PAD_R} y2={y} stroke="#e8ecf0" stroke-width=".5"/><text x={PAD_L-4} y={y+4} text-anchor="end" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{(hMin+hRange*f).toFixed(0)}</text></>);})}
-          {[0,3,6,9,12,15,18,21,24].map((h: number)=><text x={xScale(Math.round(h*curve.length/24))} y={CHART_H-4} text-anchor="middle" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>)}
+          {[0,3,6,9,12,15,18,21,24].map((h: number)=><text x={xHours(h)} y={CHART_H-4} text-anchor="middle" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>)}
           <line x1={PAD_L} y1={yScale(0)} x2={CHART_W-PAD_R} y2={yScale(0)} stroke="#cbd5e1" stroke-width=".5" stroke-dasharray="4,3"/>
           <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2" stroke-linejoin="round"/>
           <path d={`${pathD} L${xScale(curve.length-1).toFixed(1)},${CHART_H-PAD_B} L${xScale(0).toFixed(1)},${CHART_H-PAD_B} Z`} fill="rgba(13,148,136,0.06)"/>
-          {extremes.slice(0,4).map((ex: { type: string, hours: number, height: number, time: Date })=>{const idx=curve.findIndex((p: { hours: number })=>Math.abs(p.hours-ex.hours)<.01);const cx=xScale(idx>=0?idx:0).toFixed(1),cy=yScale(ex.height).toFixed(1);return(<><circle cx={cx} cy={cy} r="3.5" fill={ex.type==='high'?'#0d9488':'#ef4444'} stroke="white" stroke-width="1.5"/><text x={cx} y={parseFloat(cy)+(ex.type==='high'?-9:14)} text-anchor="middle" font-size="8" fill="#64748b" font-family="Inter,sans-serif">{formatTime(ex.time,tzOffset)}</text></>);})}
+          {extremes.slice(0,4).map((ex: { type: string, hours: number, height: number, time: Date })=>{const cx=xHours(ex.hours).toFixed(1),cy=yScale(ex.height).toFixed(1);return(<><circle cx={cx} cy={cy} r="3.5" fill={ex.type==='high'?'#0d9488':'#ef4444'} stroke="white" stroke-width="1.5"/><text x={cx} y={parseFloat(cy)+(ex.type==='high'?-9:14)} text-anchor="middle" font-size="8" fill="#64748b" font-family="Inter,sans-serif">{formatTime(ex.time,tzOffset)}</text></>);})}
         </svg>
       </div></div></section>
 
