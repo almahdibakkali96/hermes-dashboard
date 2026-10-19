@@ -31,54 +31,36 @@ const constituents = port.constituents as Record<string, { amp: number; phase: n
 
 const today = new Date();
 const tzOffset = getTimezoneOffset(port.timezone, today);
+const curve = generateTideCurve(constituents, today, tzOffset);
+const extremes = findExtremes(curve);
+const tideClass = classifyTide(constituents);
 
+const moon = moonPhase(today);
 const sun = sunTimes(today, port.lat, port.lon, tzOffset);
 const moonT = moonTimes(today, port.lat, port.lon, tzOffset);
+const solunar = solunarPeriods(moonT.moonrise, moonT.moonset, moonT.lunarTransit, moon.phase, today);
 
 const prayers = calculatePrayerTimes(today, port.lat, port.lon, tzOffset, 'UmmAlQura');
 const hijri = gregorianToHijri(today);
 
+// 7-day forecast — simple data, no per-day charts
 const weekDays = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-
-// Pre-compute full tide curves + chart params for all 7 days
-const CHART_W=720,CHART_H=200,PAD_L=40,PAD_R=10,PAD_T=10,PAD_B=22,plotW=CHART_W-PAD_L-PAD_R,plotH=CHART_H-PAD_T-PAD_B;
-
-const allDays: { label:string; dateStr:string; curve:{hours:number;height:number}[]; extremes:{type:'high'|'low';hours:number;height:number;time:Date}[]; pathD:string; yMin:number; yMax:number; yRange:number; highs:{time:Date;hours:number;height:number}[]; lows:{time:Date;hours:number;height:number}[]; range:string; moon:ReturnType<typeof moonPhase>; moonLabel:string; moonPct:number; dateLabel:string }[] = [];
-for (let i = 0; i < 7; i++) {
+const forecast = Array.from({ length: 7 }, (_, i) => {
   const d = new Date(today); d.setDate(d.getDate() + i);
   const c = generateTideCurve(constituents, d, tzOffset);
   const ex = findExtremes(c);
-  const hs = ex.filter(e => e.type === 'high').sort((a,b) => b.height - a.height);
-  const ls = ex.filter(e => e.type === 'low').sort((a,b) => a.height - b.height);
-  const heights = c.map(p => p.height);
-  const yMin = Math.min(...heights), yMax = Math.max(...heights), yRange = yMax - yMin || 1;
-  const yScale = (h:number) => PAD_T + plotH - ((h - yMin) / yRange) * plotH;
-  const xScale = (idx:number) => PAD_L + (idx / (c.length - 1)) * plotW;
-  const pathD = c.map((p,idx) => `${idx===0?'M':'L'}${xScale(idx).toFixed(1)},${yScale(p.height).toFixed(1)}`).join(' ');
+  const hs = ex.filter((e: { type: string }) => e.type === 'high').sort((a: { height: number }, b: { height: number }) => b.height - a.height);
+  const ls = ex.filter((e: { type: string }) => e.type === 'low').sort((a: { height: number }, b: { height: number }) => a.height - b.height);
   const m = moonPhase(d);
-  allDays.push({
+  return {
     label: i===0?'اليوم':weekDays[d.getDay()],
     dateStr: d.toLocaleDateString('en-GB',{day:'numeric',month:'short'}),
-    curve: c, extremes: ex, pathD, yMin, yMax, yRange,
-    highs: hs, lows: ls,
+    highs: hs.slice(0, 3), lows: ls.slice(0, 3),
     range: hs.length&&ls.length?(hs[0].height-ls[0].height).toFixed(0):'—',
-    moon: m, moonLabel: m.phaseNameAr, moonPct: Math.round(m.illumination*100),
-    dateLabel: d.toLocaleDateString('en-GB')
-  });
-}
-
-// Today-only references for initial render
-const day0 = allDays[0];
-const forecast = allDays; // alias — used in the table
-
-const moon = day0.moon;
-const solunar = solunarPeriods(moonT.moonrise, moonT.moonset, moonT.lunarTransit, moon.phase, today);
-
-const tideClass = classifyTide(constituents);
-const title=`${port.name_ar} — مواقيت المد والجزر`;
-const shareText=encodeURIComponent(`مواقيت المد والجزر — ${port.name_ar}`);
-const shareUrl=encodeURIComponent(`https://prompt-tempest-on6uicu.vercel.app/ports/${port.id}`);
-const monthNames=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+    moon: m, moonPct: Math.round(m.illumination*100),
+    isToday: i===0
+  };
+});
 
 // Monthly calendar
 const year = today.getFullYear(), month = today.getMonth();
@@ -87,18 +69,18 @@ const monthDays = Array.from({length: daysInMonth}, (_,i) => {
   const d = new Date(year, month, i+1);
   const c = generateTideCurve(constituents, d, tzOffset);
   const ex = findExtremes(c);
-  const hs = ex.filter(e=>e.type==='high'), ls = ex.filter(e=>e.type==='low');
-  return { day: i+1, range: hs.length&&ls.length?Math.max(...hs.map(h=>h.height))-Math.min(...ls.map(l=>l.height)):0, moon: moonPhase(d), isToday: i+1===today.getDate() };
+  const hs = ex.filter((e: { type: string }) => e.type==='high'), ls = ex.filter((e: { type: string }) => e.type==='low');
+  return { day: i+1, range: hs.length&&ls.length?Math.max(...hs.map((h: { height: number }) => h.height))-Math.min(...ls.map((l: { height: number }) => l.height)):0, moon: moonPhase(d), isToday: i+1===today.getDate() };
 });
 
-// Embed all 7 days as JSON for client-side switching (only what JS needs)
-const daysJSON = JSON.stringify(allDays.map(d => ({
-  pathD: d.pathD, yMin: d.yMin, yMax: d.yMax, yRange: d.yRange,
-  extremes: d.extremes.map(ex => ({ type: ex.type, hours: ex.hours, height: ex.height, timeStr: formatTime(ex.time, tzOffset) })),
-  highs: d.highs.slice(0,4).map(ex => ({ timeStr: formatTime(ex.time, tzOffset), height: ex.height })),
-  lows: d.lows.slice(0,4).map(ex => ({ timeStr: formatTime(ex.time, tzOffset), height: ex.height })),
-  moonLabel: d.moonLabel, moonPct: d.moonPct, dateLabel: d.dateLabel, range: d.range
-})));
+// Today's chart
+const CHART_W=720,CHART_H=200,PAD_L=40,PAD_R=10,PAD_T=10,PAD_B=22,plotW=CHART_W-PAD_L-PAD_R,plotH=CHART_H-PAD_T-PAD_B;
+const heights=curve.map((p: { height: number }) => p.height),hMin=Math.min(...heights),hMax=Math.max(...heights),hRange=hMax-hMin||1;
+const yScale=(h:number)=>PAD_T+plotH-((h-hMin)/hRange)*plotH,xScale=(i:number)=>PAD_L+(i/(curve.length-1))*plotW;
+const pathD=curve.map((p: { height: number },i: number)=>`${i===0?'M':'L'}${xScale(i).toFixed(1)},${yScale(p.height).toFixed(1)}`).join(' ');
+
+const title=`${port.name_ar} — مواقيت المد والجزر`;
+const monthNames=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 ---
 
 <BaseLayout title={title} description={`مواقيت المد والجزر لـ${port.name_ar}`}>
@@ -112,14 +94,6 @@ const daysJSON = JSON.stringify(allDays.map(d => ({
         <span class="text-sm" aria-hidden="true">{moon.emoji}</span>
         <span class="text-[10px] text-[var(--text-dim)] hidden sm:inline">{hijri.day} {hijri.monthAr}</span>
       </nav>
-      <div class="flex overflow-x-auto gap-1 px-3 pb-2 scrollbar-hide" role="list" aria-label="أيام التوقعات" id="day-pills">
-        {forecast.map((day,i) => (
-          <button type="button" role="listitem" data-index={i}
-            class={`day-pill shrink-0 px-3 py-1.5 rounded-lg text-xs text-center min-w-[60px] border-0 cursor-pointer font-[inherit] ${i===0?'bg-[var(--accent)] text-white font-medium':'bg-[var(--surface-elevated)] text-[var(--text-secondary)]'}`}>
-            <span class="block">{day.label}</span><span class="block text-[10px] opacity-70 latin" lang="en">{day.dateStr}</span>
-          </button>
-        ))}
-      </div>
     </header>
 
     <main id="main" class="flex-1 max-w-4xl mx-auto px-3 py-4 w-full">
@@ -140,27 +114,27 @@ const daysJSON = JSON.stringify(allDays.map(d => ({
         <p class="text-[10px] text-[var(--text-dim)] mt-1.5 text-center">خريطة الموقع · بيانات &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
       </section>
 
-      <!-- Tide chart -->
+      <!-- Today's tide chart -->
       <section class="mb-5"><div class="flex items-center gap-2 mb-2">
-        <h2 class="text-sm font-semibold">منحنى المد والجزر</h2>
+        <h2 class="text-sm font-semibold">منحنى المد والجزر — اليوم</h2>
         <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--accent-muted)] text-[var(--accent)]">{tideClass.typeAr}</span>
-        <div class="flex-1"></div><span id="chart-date" class="text-[10px] text-[var(--text-dim)] latin">{day0.dateLabel}</span>
+        <div class="flex-1"></div><span class="text-[10px] text-[var(--text-dim)] latin">{today.toLocaleDateString('en-GB')}</span>
       </div>
       <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 overflow-x-auto" style="box-shadow:var(--shadow-sm)"><div class="chart-ltr">
-        <svg id="tide-svg" viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img" aria-label={`منحنى المد والجزر لـ${port.name_ar}، نوع المد: ${tideClass.typeAr}`}>
-          {[0,.25,.5,.75,1].map(f=>{const y=PAD_T+plotH*(1-f);return(<><line x1={PAD_L} y1={y} x2={CHART_W-PAD_R} y2={y} stroke="#e8ecf0" stroke-width=".5"/><text x={PAD_L-4} y={y+4} text-anchor="end" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{(day0.yMin+day0.yRange*f).toFixed(0)}</text></>);})}
-          {[0,3,6,9,12,15,18,21,24].map(h=><text x={PAD_L + (Math.round(h*day0.curve.length/24) / (day0.curve.length-1)) * plotW} y={CHART_H-4} text-anchor="middle" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>)}
-          <line x1={PAD_L} y1={PAD_T+plotH-((0-day0.yMin)/day0.yRange)*plotH} x2={CHART_W-PAD_R} y2={PAD_T+plotH-((0-day0.yMin)/day0.yRange)*plotH} stroke="#cbd5e1" stroke-width=".5" stroke-dasharray="4,3"/>
-          <path id="tide-path" d={day0.pathD} fill="none" stroke="#0d9488" stroke-width="2" stroke-linejoin="round"/>
-          <path d={`${day0.pathD} L${PAD_L+(plotW).toFixed(1)},${CHART_H-PAD_B} L${PAD_L.toFixed(1)},${CHART_H-PAD_B} Z`} fill="rgba(13,148,136,0.06)"/>
-          {day0.extremes.slice(0,6).map(ex=>{const idx=day0.curve.findIndex(p=>Math.abs(p.hours-ex.hours)<.01);const cx=PAD_L+(idx/(day0.curve.length-1))*plotW,cy=PAD_T+plotH-((ex.height-day0.yMin)/day0.yRange)*plotH;return(<><circle cx={cx.toFixed(1)} cy={cy.toFixed(1)} r="3.5" fill={ex.type==='high'?'#0d9488':'#ef4444'} stroke="white" stroke-width="1.5"/><text x={cx.toFixed(1)} y={cy+(ex.type==='high'?-9:14)} text-anchor="middle" font-size="8" fill="#64748b" font-family="Inter,sans-serif">{formatTime(ex.time,tzOffset)}</text></>);})}
+        <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img" aria-label={`منحنى المد والجزر لـ${port.name_ar}`}>
+          {[0,.25,.5,.75,1].map(f=>{const y=PAD_T+plotH*(1-f);return(<><line x1={PAD_L} y1={y} x2={CHART_W-PAD_R} y2={y} stroke="#e8ecf0" stroke-width=".5"/><text x={PAD_L-4} y={y+4} text-anchor="end" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{(hMin+hRange*f).toFixed(0)}</text></>);})}
+          {[0,3,6,9,12,15,18,21,24].map((h: number)=><text x={xScale(Math.round(h*curve.length/24))} y={CHART_H-4} text-anchor="middle" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>)}
+          <line x1={PAD_L} y1={yScale(0)} x2={CHART_W-PAD_R} y2={yScale(0)} stroke="#cbd5e1" stroke-width=".5" stroke-dasharray="4,3"/>
+          <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2" stroke-linejoin="round"/>
+          <path d={`${pathD} L${xScale(curve.length-1).toFixed(1)},${CHART_H-PAD_B} L${xScale(0).toFixed(1)},${CHART_H-PAD_B} Z`} fill="rgba(13,148,136,0.06)"/>
+          {extremes.slice(0,4).map((ex: { type: string, hours: number, height: number, time: Date })=>{const idx=curve.findIndex((p: { hours: number })=>Math.abs(p.hours-ex.hours)<.01);const cx=xScale(idx>=0?idx:0).toFixed(1),cy=yScale(ex.height).toFixed(1);return(<><circle cx={cx} cy={cy} r="3.5" fill={ex.type==='high'?'#0d9488':'#ef4444'} stroke="white" stroke-width="1.5"/><text x={cx} y={parseFloat(cy)+(ex.type==='high'?-9:14)} text-anchor="middle" font-size="8" fill="#64748b" font-family="Inter,sans-serif">{formatTime(ex.time,tzOffset)}</text></>);})}
         </svg>
       </div></div></section>
 
       <!-- Quick stats -->
-      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-5 text-center" id="quick-stats">
-        {day0.extremes.slice(0,4).map(ex=><div class={`stat-card p-2 rounded-lg border text-xs ${ex.type==='high'?'bg-teal-50 border-teal-200':'bg-red-50 border-red-100'}`}><div class={`${ex.type==='high'?'text-teal-700':'text-red-600'} font-medium`}>{ex.type==='high'?'مد':'جزر'}</div><div class="font-bold latin">{formatTime(ex.time,tzOffset)}</div><div class="text-[10px] text-[var(--text-dim)] latin">{ex.height.toFixed(0)} سم</div></div>)}
-        <div class="stat-card p-2 rounded-lg border border-[var(--border-subtle)] text-xs"><div class="text-[var(--text-dim)]">🌙</div><div class="font-bold" id="moon-pct">{day0.moonPct}%</div><div class="text-[10px] text-[var(--text-dim)]" id="moon-label">{day0.moonLabel}</div></div>
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-5 text-center">
+        {extremes.slice(0,4).map((ex: { type: string, time: Date, height: number })=><div class={`p-2 rounded-lg border text-xs ${ex.type==='high'?'bg-teal-50 border-teal-200':'bg-red-50 border-red-100'}`}><div class={`${ex.type==='high'?'text-teal-700':'text-red-600'} font-medium`}>{ex.type==='high'?'مد':'جزر'}</div><div class="font-bold latin">{formatTime(ex.time,tzOffset)}</div><div class="text-[10px] text-[var(--text-dim)] latin">{ex.height.toFixed(0)} سم</div></div>)}
+        <div class="p-2 rounded-lg border border-[var(--border-subtle)] text-xs"><div class="text-[var(--text-dim)]">🌙</div><div class="font-bold">{Math.round(moon.illumination*100)}%</div><div class="text-[10px] text-[var(--text-dim)]">{moon.phaseNameAr}</div></div>
         <div class="p-2 rounded-lg border border-[var(--border-subtle)] text-xs"><div class="text-[var(--text-dim)]">🎣</div><div class="font-bold">{solunar.ratingAr}</div><div class="text-[10px] text-[var(--text-dim)]">الصيد</div></div>
       </div>
 
@@ -174,7 +148,7 @@ const daysJSON = JSON.stringify(allDays.map(d => ({
             <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">غروب القمر</span><span class="font-medium latin">{moonT.moonset||'—'}</span></div>
           </div></div>
         <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3"><h3 class="text-xs font-semibold text-[var(--text-muted)] mb-2">🎣 أوقات الصيد</h3>
-          {solunar.periods.slice(0,4).map(p=><div class={`flex items-center gap-2 p-1.5 rounded text-[11px] ${p.type==='major'?'bg-teal-50':''}`}><span class={`w-1.5 h-1.5 rounded-full shrink-0 ${p.quality==='excellent'?'bg-green-500':p.quality==='good'?'bg-teal-500':'bg-amber-400'}`}></span><span class="font-medium">{p.typeAr}</span><span class="text-[var(--text-dim)] latin ml-auto">{p.start} — {p.end}</span></div>)}
+          {solunar.periods.slice(0,4).map((p: { type: string, typeAr: string, quality: string, start: string, end: string })=><div class={`flex items-center gap-2 p-1.5 rounded text-[11px] ${p.type==='major'?'bg-teal-50':''}`}><span class={`w-1.5 h-1.5 rounded-full shrink-0 ${p.quality==='excellent'?'bg-green-500':p.quality==='good'?'bg-teal-500':'bg-amber-400'}`}></span><span class="font-medium">{p.typeAr}</span><span class="text-[var(--text-dim)] latin ml-auto">{p.start} — {p.end}</span></div>)}
           {solunar.periods.length===0&&<p class="text-[11px] text-[var(--text-dim)]">لا توجد بيانات</p>}
         </div>
       </div>
@@ -191,18 +165,40 @@ const daysJSON = JSON.stringify(allDays.map(d => ({
         <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 flex items-center justify-center gap-4"><div class="text-3xl">📅</div><div class="text-center"><div class="text-lg font-bold">{hijri.day} {hijri.monthAr} {hijri.year} هـ</div><div class="text-[10px] text-[var(--text-dim)] mt-1">تقديري — قد يختلف بيوم</div></div></div>
       </div>
 
-      <!-- 7-day -->
-      <section class="mb-5"><h2 class="text-sm font-semibold mb-2">📊 توقعات ٧ أيام</h2>
-        <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]"><table class="w-full text-xs">
-          <thead><tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><th class="text-right px-2 py-2 font-medium">اليوم</th><th class="text-center px-1 w-6">🌙</th><th class="text-center px-1">المدى</th><th class="text-right px-2" colspan="2">المد</th><th class="text-right px-2" colspan="2">الجزر</th></tr></thead>
-          <tbody class="divide-y divide-[var(--border-subtle)]">{forecast.map((day,i)=><tr class={`${i===0?'bg-teal-50/60':''} hover:bg-[var(--surface-elevated)]`}><td class="px-2 py-1.5"><div class="font-medium">{day.label}</div><div class="text-[10px] text-[var(--text-dim)] latin">{day.dateStr}</div></td><td class="text-center px-1 py-1.5 text-sm">{day.moon.emoji}</td><td class="text-center px-1 py-1.5 latin font-medium">{day.range} سم</td><td class="px-1 py-1.5" colspan="2">{day.highs.map(h=><div class="flex gap-1"><span class="text-teal-600 font-medium latin w-10 text-right">{formatTime(h.time,tzOffset)}</span><span class="text-[var(--text-dim)] latin">{h.height.toFixed(0)}</span></div>)}</td><td class="px-1 py-1.5" colspan="2">{day.lows.map(l=><div class="flex gap-1"><span class="text-red-500 font-medium latin w-10 text-right">{formatTime(l.time,tzOffset)}</span><span class="text-[var(--text-dim)] latin">{l.height.toFixed(0)}</span></div>)}</td></tr>)}</tbody>
-        </table></div>
+      <!-- 7-day forecast — main feature for fishermen -->
+      <section class="mb-5">
+        <h2 class="text-sm font-semibold mb-2">📊 توقعات ٧ أيام للمد والجزر</h2>
+        <p class="text-[10px] text-[var(--text-dim)] mb-2">جميع الأوقات محلية. المد = ارتفاع الماء، الجزر = انخفاضه.</p>
+        <div class="space-y-3">
+          {forecast.map((day, i) => (
+            <div id={`day-${i}`} class={`rounded-xl bg-white border p-3 ${day.isToday?'border-[var(--accent-border)]':'border-[var(--border-subtle)]'}`} style={day.isToday?'box-shadow:var(--shadow-md)':''}>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-lg">{day.moon.emoji}</span>
+                <div>
+                  <div class="text-sm font-semibold">{day.label} <span class="text-[10px] text-[var(--text-dim)] font-normal">{day.moon.phaseNameAr}</span></div>
+                  <div class="text-[10px] text-[var(--text-dim)] latin">{day.dateStr} · {day.moonPct}%</div>
+                </div>
+                <div class="mr-auto text-xs latin font-medium text-[var(--accent)]">المدى {day.range} سم</div>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <div>
+                  <div class="text-teal-700 font-medium text-[10px] mb-1">🔼 مد (ارتفاع)</div>
+                  {day.highs.length > 0 ? day.highs.map((h: { time: Date, height: number })=><div class="flex justify-between py-0.5 px-1.5 rounded bg-teal-50/70 mb-0.5"><span class="latin font-medium">{formatTime(h.time,tzOffset)}</span><span class="latin text-[var(--text-dim)]">{h.height.toFixed(0)} سم</span></div>) : <div class="text-[var(--text-dim)] text-[10px]">—</div>}
+                </div>
+                <div>
+                  <div class="text-red-600 font-medium text-[10px] mb-1">🔽 جزر (انخفاض)</div>
+                  {day.lows.length > 0 ? day.lows.map((l: { time: Date, height: number })=><div class="flex justify-between py-0.5 px-1.5 rounded bg-red-50/70 mb-0.5"><span class="latin font-medium">{formatTime(l.time,tzOffset)}</span><span class="latin text-[var(--text-dim)]">{l.height.toFixed(0)} سم</span></div>) : <div class="text-[var(--text-dim)] text-[10px]">—</div>}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <!-- Share -->
       <div class="flex flex-wrap items-center gap-2 mb-5 text-xs">
         <button onclick="window.print()" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors">🖨️ طباعة</button>
-        <a href={`https://wa.me/?text=${shareText}%20${shareUrl}`} target="_blank" rel="noopener" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors">💬 واتساب</a>
+        <a href={`https://wa.me/?text=${encodeURIComponent(`مواقيت المد والجزر — ${port.name_ar}`)}%20${encodeURIComponent(`https://prompt-tempest-on6uicu.vercel.app/ports/${port.id}`)}`} target="_blank" rel="noopener" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors">💬 واتساب</a>
         <a href={`${BASE}methodology`} class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors mr-auto">📖 كيف تعمل الحسابات؟</a>
       </div>
 
@@ -219,7 +215,7 @@ const daysJSON = JSON.stringify(allDays.map(d => ({
 
       <!-- Constituents -->
       <details class="mb-5 group"><summary class="flex items-center gap-2 cursor-pointer text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors select-none"><span class="text-[10px] transition-transform group-open:rotate-90">&#9654;</span>المركبات التوافقية (17)</summary>
-        <div class="mt-2 overflow-x-auto rounded-lg border border-[var(--border-subtle)]"><table class="w-full text-xs"><thead class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><tr><th class="text-right px-3 py-1.5">المركبة</th><th class="text-right px-3 py-1.5 latin">السعة (سم)</th><th class="text-right px-3 py-1.5 latin">الطور (&deg;)</th></tr></thead><tbody class="divide-y divide-[var(--border-subtle)]">{Object.entries(constituents).map(([name,c]:[string,{amp:number;phase:number}])=><tr class="hover:bg-[var(--surface-elevated)]"><td class="px-3 py-1.5 font-medium latin">{name}</td><td class="px-3 py-1.5 text-[var(--text-secondary)] latin">{c.amp.toFixed(2)}</td><td class="px-3 py-1.5 text-[var(--text-secondary)] latin">{c.phase.toFixed(1)}</td></tr>)}</tbody></table></div>
+        <div class="mt-2 overflow-x-auto rounded-lg border border-[var(--border-subtle)]"><table class="w-full text-xs"><thead class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><tr><th class="text-right px-3 py-1.5">المركبة</th><th class="text-right px-3 py-1.5 latin">السعة (سم)</th><th class="text-right px-3 py-1.5 latin">الطور (&deg;)</th></tr></thead><tbody class="divide-y divide-[var(--border-subtle)]">{Object.entries(constituents).map(([name,c]: [string, { amp: number, phase: number }])=><tr class="hover:bg-[var(--surface-elevated)]"><td class="px-3 py-1.5 font-medium latin">{name}</td><td class="px-3 py-1.5 text-[var(--text-secondary)] latin">{c.amp.toFixed(2)}</td><td class="px-3 py-1.5 text-[var(--text-secondary)] latin">{c.phase.toFixed(1)}</td></tr>)}</tbody></table></div>
       </details>
 
       <div class="border-t border-[var(--border-subtle)] pt-3 text-[10px] text-[var(--text-dim)] leading-relaxed">
@@ -228,99 +224,7 @@ const daysJSON = JSON.stringify(allDays.map(d => ({
     </main>
   </div>
 
-  <!-- 7-day chart data embed -->
-  <script type="application/json" id="tide-days" set:html={daysJSON}></script>
-  <script is:inline>
-    (function () {
-      var el = document.getElementById('tide-days');
-      if (!el) return;
-      var days = JSON.parse(el.textContent || '[]'), cur = 0;
-      if (!days.length) return;
-
-      function swDay(idx) {
-        cur = idx; var d = days[idx];
-        // pills
-        document.querySelectorAll('.day-pill').forEach(function (btn, i) {
-          btn.className = btn.className.replace(/bg-\[[^\]]+\]\s+text-\[^\s]+/g, '').replace(/\s+/g,' ');
-          if (i === idx) { btn.className += ' bg-[var(--accent)] text-white font-medium'; }
-          else { btn.className += ' bg-[var(--surface-elevated)] text-[var(--text-secondary)]'; }
-        });
-        // date label
-        var cd = document.getElementById('chart-date'); if (cd) cd.textContent = d.dateLabel;
-        // SVG — rebuild the chart
-        var svg = document.getElementById('tide-svg'); if (!svg) return;
-        var ns = 'http://www.w3.org/2000/svg';
-        while (svg.firstChild) svg.removeChild(svg.firstChild);
-        var W=720,H=200,PL=40,PR=10,PT=10,PB=22,pW=W-PL-PR,pH=H-PT-PB;
-        // grid lines + Y axis labels
-        [0,.25,.5,.75,1].forEach(function(f){
-          var y=PT+pH*(1-f), val=Math.round(d.yMin+d.yRange*f);
-          var line=document.createElementNS(ns,'line'); line.setAttribute('x1',PL); line.setAttribute('y1',y); line.setAttribute('x2',W-PR); line.setAttribute('y2',y); line.setAttribute('stroke','#e8ecf0'); line.setAttribute('stroke-width','0.5'); svg.appendChild(line);
-          var text=document.createElementNS(ns,'text'); text.setAttribute('x',PL-4); text.setAttribute('y',y+4); text.setAttribute('text-anchor','end'); text.setAttribute('font-size','9'); text.setAttribute('fill','#94a3b8'); text.setAttribute('font-family','Inter,sans-serif'); text.textContent=val; svg.appendChild(text);
-        });
-        // X axis labels
-        [0,3,6,9,12,15,18,21,24].forEach(function(h){
-          var text=document.createElementNS(ns,'text');
-          var x = PL + (h/24) * pW;
-          text.setAttribute('x', x); text.setAttribute('y', H-4);
-          text.setAttribute('text-anchor','middle'); text.setAttribute('font-size','9');
-          text.setAttribute('fill','#94a3b8'); text.setAttribute('font-family','Inter,sans-serif');
-          text.textContent=h+':00'; svg.appendChild(text);
-        });
-        // Zero line
-        var zeroY = PT+pH-((0-d.yMin)/d.yRange)*pH;
-        var zeroLine=document.createElementNS(ns,'line'); zeroLine.setAttribute('x1',PL); zeroLine.setAttribute('y1',zeroY); zeroLine.setAttribute('x2',W-PR); zeroLine.setAttribute('y2',zeroY); zeroLine.setAttribute('stroke','#cbd5e1'); zeroLine.setAttribute('stroke-width','0.5'); zeroLine.setAttribute('stroke-dasharray','4,3'); svg.appendChild(zeroLine);
-        var curve=document.createElementNS(ns,'path'); curve.setAttribute('d',d.pathD); curve.setAttribute('fill','none'); curve.setAttribute('stroke','#0d9488'); curve.setAttribute('stroke-width','2'); curve.setAttribute('stroke-linejoin','round'); svg.appendChild(curve);
-        var area=document.createElementNS(ns,'path'); area.setAttribute('d',d.pathD + ' L'+(PL+pW).toFixed(1)+','+(H-PB)+' L'+PL+','+(H-PB)+' Z'); area.setAttribute('fill','rgba(13,148,136,0.06)'); svg.appendChild(area);
-        // Extreme markers
-        d.extremes.slice(0,6).forEach(function(ex){
-          // Reconstruct coordinates from pathD
-          var pts = d.pathD.match(/[ML]([\d.]+),([\d.]+)/g);
-          if (!pts) return;
-          var hStart = ex.hours / 24; // fraction of day
-          // Find nearest curve point
-          var hFrac = ex.hours / 24;
-          var cx = PL + hFrac * pW;
-          var cy = PT+pH-((ex.height-d.yMin)/d.yRange)*pH;
-          var circle=document.createElementNS(ns,'circle'); circle.setAttribute('cx',cx.toFixed(1)); circle.setAttribute('cy',cy.toFixed(1)); circle.setAttribute('r','3.5'); circle.setAttribute('fill',ex.type==='high'?'#0d9488':'#ef4444'); circle.setAttribute('stroke','white'); circle.setAttribute('stroke-width','1.5'); svg.appendChild(circle);
-          var label=document.createElementNS(ns,'text'); label.setAttribute('x',cx.toFixed(1)); label.setAttribute('y',cy+(ex.type==='high'?-9:14)); label.setAttribute('text-anchor','middle'); label.setAttribute('font-size','8'); label.setAttribute('fill','#64748b'); label.setAttribute('font-family','Inter,sans-serif'); label.textContent=ex.timeStr; svg.appendChild(label);
-        });
-        // Quick stats
-        var stats = document.getElementById('quick-stats');
-        if (stats) {
-          var cards = stats.querySelectorAll('.stat-card');
-          // First 4 cards = high/low extremes
-          var ex4 = d.highs.slice(0,2).map(function(h){ return {type:'high', timeStr:h.timeStr, height:h.height}; })
-                    .concat(d.lows.slice(0,2).map(function(l){ return {type:'low', timeStr:l.timeStr, height:l.height}; }));
-          for (var i=0; i<4 && i<cards.length; i++) {
-            var card = cards[i], e = ex4[i];
-            if (!e) { card.style.display='none'; continue; }
-            card.style.display='';
-            card.className = card.className.replace(/bg-teal-50 border-teal-200|bg-red-50 border-red-100/,'');
-            card.className += ' ' + (e.type==='high'?'bg-teal-50 border-teal-200':'bg-red-50 border-red-100');
-            var lines = card.querySelectorAll('div');
-            if (lines[0]) { lines[0].className = (e.type==='high'?'text-teal-700':'text-red-600') + ' font-medium'; lines[0].textContent = e.type==='high'?'مد':'جزر'; }
-            if (lines[1]) lines[1].textContent = e.timeStr;
-            if (lines[2]) lines[2].textContent = e.height.toFixed(0) + ' سم';
-          }
-          // Moon card (5th): use explicit IDs
-          var mp = document.getElementById('moon-pct'), ml = document.getElementById('moon-label');
-          if (mp) mp.textContent = d.moonPct + '%';
-          if (ml) ml.textContent = d.moonLabel;
-        }
-      }
-
-      // Wire up pill clicks
-      document.getElementById('day-pills').addEventListener('click', function (e) {
-        var btn = e.target.closest('.day-pill');
-        if (!btn) return;
-        var idx = parseInt(btn.getAttribute('data-index'));
-        if (!isNaN(idx) && idx >= 0 && idx < days.length) swDay(idx);
-      });
-    })();
-  </script>
-
-  <!-- Leaflet map (client-only, free OSM tiles, no API key) -->
+  <!-- Leaflet map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script is:inline>
@@ -331,13 +235,11 @@ const daysJSON = JSON.stringify(allDays.map(d => ({
         var lat = parseFloat(el.dataset.lat), lon = parseFloat(el.dataset.lon);
         var map = L.map(el, { scrollWheelZoom: false, attributionControl: false }).setView([lat, lon], 9);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 18,
-          attribution: '&copy; OpenStreetMap'
+          maxZoom: 18, attribution: '&copy; OpenStreetMap'
         }).addTo(map);
         L.circleMarker([lat, lon], {
           radius: 8, color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.6, weight: 2
         }).addTo(map).bindPopup(el.dataset.name);
-        // enable scroll-zoom only after click, so page scroll isn't hijacked
         map.on('click', function () { map.scrollWheelZoom.enable(); });
         setTimeout(function () { map.invalidateSize(); }, 200);
       }
