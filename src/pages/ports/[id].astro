@@ -5,6 +5,7 @@ import {
   generateTideCurve, findExtremes, formatTime,
   classifyTide, getTimezoneOffset
 } from '../../lib/tides';
+import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
 
 export function getStaticPaths() {
   return placesIndex.map((p: { id: string }) => ({ params: { id: p.id } }));
@@ -32,6 +33,12 @@ const tzOffset = getTimezoneOffset(port.timezone, today);
 const curve = generateTideCurve(constituents, today, tzOffset);
 const extremes = findExtremes(curve);
 const tideClass = classifyTide(constituents);
+
+// Astronomy
+const moon = moonPhase(today);
+const sun = sunTimes(today, port.lat, port.lon, tzOffset);
+const moonT = moonTimes(today, port.lat, port.lon, tzOffset);
+const solunar = solunarPeriods(moonT.moonrise, moonT.moonset, moonT.lunarTransit, moon.phase, today);
 
 const CHART_W = 720; const CHART_H = 220;
 const PAD_L = 45; const PAD_R = 15; const PAD_T = 15; const PAD_B = 30;
@@ -120,6 +127,79 @@ const title = `${port.name_ar} — مواقيت المد والجزر`;
           </div>
         ))}
       </div>
+
+      <!-- Astronomy row: sun, moon, solunar -->
+      <section class="mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Sun & Moon card -->
+          <div class="rounded-[var(--radius-xl)] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">{moon.emoji}</span>
+              <div>
+                <div class="text-sm font-medium text-[var(--text-primary)]">{moon.phaseNameAr}</div>
+                <div class="text-xs text-[var(--text-dim)] latin">{moon.phaseNameEn} &middot; {moon.age.toFixed(1)} يوم</div>
+              </div>
+              <div class="mr-auto">
+                <div class="text-lg font-bold text-[var(--text-primary)] latin">{Math.round(moon.illumination * 100)}%</div>
+                <div class="text-[10px] text-[var(--text-dim)]">الإضاءة</div>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="p-2 rounded-[var(--radius-md)] bg-[var(--surface-elevated)]">
+                <div class="text-[var(--text-dim)]">الشروق</div>
+                <div class="text-[var(--text-primary)] font-medium latin mt-0.5">{sun.sunrise || '—'}</div>
+              </div>
+              <div class="p-2 rounded-[var(--radius-md)] bg-[var(--surface-elevated)]">
+                <div class="text-[var(--text-dim)]">الغروب</div>
+                <div class="text-[var(--text-primary)] font-medium latin mt-0.5">{sun.sunset || '—'}</div>
+              </div>
+              <div class="p-2 rounded-[var(--radius-md)] bg-[var(--surface-elevated)]">
+                <div class="text-[var(--text-dim)]">شروق القمر</div>
+                <div class="text-[var(--text-primary)] font-medium latin mt-0.5">{moonT.moonrise || '—'}</div>
+              </div>
+              <div class="p-2 rounded-[var(--radius-md)] bg-[var(--surface-elevated)]">
+                <div class="text-[var(--text-dim)]">غروب القمر</div>
+                <div class="text-[var(--text-primary)] font-medium latin mt-0.5">{moonT.moonset || '—'}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solunar card -->
+          <div class="rounded-[var(--radius-xl)] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-lg">🎣</span>
+              <h3 class="text-sm font-medium text-[var(--text-primary)]">أوقات الصيد (سولونار)</h3>
+              <span class={`text-[10px] px-2 py-0.5 rounded-full mr-auto ${
+                solunar.rating === 'excellent' ? 'bg-green-100 text-green-700' :
+                solunar.rating === 'good' ? 'bg-teal-50 text-teal-700' :
+                solunar.rating === 'fair' ? 'bg-amber-50 text-amber-700' :
+                'bg-gray-100 text-gray-500'
+              }`}>{solunar.ratingAr}</span>
+            </div>
+            <div class="space-y-2">
+              {solunar.periods.length === 0 ? (
+                <p class="text-xs text-[var(--text-dim)]">لا توجد بيانات كافية لحساب فترات الصيد</p>
+              ) : solunar.periods.map(p => (
+                <div class={`flex items-center gap-2 p-2 rounded-[var(--radius-md)] text-xs ${
+                  p.type === 'major' ? 'bg-[var(--accent-muted)]' : 'bg-[var(--surface-elevated)]'
+                }`}>
+                  <span class={`w-2 h-2 rounded-full shrink-0 ${
+                    p.quality === 'excellent' ? 'bg-green-500' :
+                    p.quality === 'good' ? 'bg-teal-500' : 'bg-amber-400'
+                  }`}></span>
+                  <span class="text-[var(--text-primary)] font-medium">{p.typeAr}</span>
+                  <span class="text-[var(--text-dim)] latin ml-auto">
+                    {p.start} — {p.end}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p class="text-[10px] text-[var(--text-dim)] mt-3 leading-relaxed">
+              الفترات الكبرى: ±1 ساعة حول عبور القمر. الفترات الصغرى: ±30 دقيقة حول شروق/غروب القمر. التوقيت تقديري.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- Constituents (collapsible) -->
       <details class="mb-8 group">
