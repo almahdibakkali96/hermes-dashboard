@@ -26,10 +26,14 @@ export async function GET({ site }: { site: URL | undefined }) {
     urls.push({ loc: `${origin}${BASE}/articles/${a.slug}`, priority: 0.8, changefreq: 'monthly', lastmod: a.updated });
   });
 
+  // Shop
+  urls.push({ loc: `${origin}${BASE}/guide`, priority: 0.9, changefreq: 'weekly', lastmod: today });
+
   // Static pages
   urls.push({ loc: `${origin}${BASE}/methodology`, priority: 0.6, changefreq: 'monthly' });
   urls.push({ loc: `${origin}${BASE}/about`, priority: 0.5, changefreq: 'monthly' });
   urls.push({ loc: `${origin}${BASE}/disclaimer`, priority: 0.3, changefreq: 'yearly' });
+  urls.push({ loc: `${origin}${BASE}/privacy`, priority: 0.2, changefreq: 'yearly' });
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

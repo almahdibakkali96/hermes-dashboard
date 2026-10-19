@@ -371,3 +371,52 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
 .stat .l { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
 .rank-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.15rem 0.25rem; border-radius: var(--radius-md); }
 .rank-row:hover { background: var(--surface-elevated); }
+
+/* --- Shop: guide promos, buttons, sign-up form --- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.7rem 1.3rem; border-radius: var(--radius-pill);
+  background: #2dd4bf; color: #0b2540; font-weight: 700;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.btn-primary:hover { background: #5eead4; transform: translateY(-1px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; padding: 0.7rem 1.2rem; border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,.3); color: #fff; font-weight: 600;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.1); }
+.guide-card .btn-primary { background: var(--accent); color: #fff; }
+.guide-card .btn-primary:hover { background: var(--accent-hover); }
+.guide-banner {
+  color: #fff; border-radius: 1.5rem; padding: 2rem;
+  background: radial-gradient(600px 300px at 90% 0%, rgba(45,212,191,.22), transparent 60%), linear-gradient(160deg, #0b2540, #0f3d5c 60%, #0d5c63);
+}
+.guide-cover img { border-radius: 0.6rem; box-shadow: 0 18px 40px -12px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); transform: rotate(-2deg); transition: transform .2s ease; }
+.guide-cover:hover img { transform: rotate(0deg) scale(1.02); }
+.guide-strip { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-radius: var(--radius-xl); background: #fff; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); }
+.guide-strip:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md); }
+
+/* Honeypot hidden by clipping in place — an off-screen offset would widen RTL pages */
+.signup { position: relative; }
+.signup .hp { position: absolute; top: 0; inset-inline-start: 0; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); opacity: 0; pointer-events: none; }
+.signup-input {
+  flex: 1; min-width: 0; padding: 0.75rem 1rem; border-radius: 0.8rem;
+  background: #fff; border: 1px solid var(--border-standard); color: var(--text-primary); text-align: left;
+}
+.signup-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(13,148,136,.15); }
+.signup-btn {
+  padding: 0.75rem 1.2rem; border-radius: 0.8rem; font-weight: 700; white-space: nowrap;
+  background: var(--accent); color: #fff; transition: background-color .15s ease;
+}
+.signup-btn:hover { background: var(--accent-hover); }
+.signup-btn:disabled { opacity: .6; }
+.signup-note { margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
+.signup-note a { text-decoration: underline; }
+.signup-error { margin-top: 0.4rem; font-size: 0.8rem; color: #dc2626; }
+.signup-dark .signup-btn { background: #2dd4bf; color: #0b2540; }
+.signup-dark .signup-btn:hover { background: #5eead4; }
+.signup-dark .signup-note { color: #94a3b8; }
+
+/* Guide link in the header */
+.site-nav-link.nav-guide { background: #0b2540; color: #5eead4; font-weight: 600; }
+.site-nav-link.nav-guide:hover, .site-nav-link.nav-guide.active { background: #0f3d5c; color: #99f6e4; }

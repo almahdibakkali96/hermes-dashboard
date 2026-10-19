@@ -1,0 +1,20 @@
+---
+// Stripe "after payment" redirect target. Not linked anywhere, not in the sitemap, noindex.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { GUIDE, CHEAT_SHEET_PDF } from '../../lib/shop';
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+---
+
+<BaseLayout title="شكراً لشرائك" description="تأكيد شراء دليل ArabTides" noindex>
+  <main id="main" class="max-w-2xl mx-auto px-4 py-16 w-full text-center">
+    <div class="text-6xl" aria-hidden="true">🎉</div>
+    <h1 class="mt-4 text-3xl font-bold display">شكراً لشرائك!</h1>
+    <p class="mt-4 text-lg text-[var(--text-secondary)] leading-relaxed">تم الدفع بنجاح. سيصلك <strong>{GUIDE.title}</strong> (PDF) على البريد الإلكتروني الذي استخدمته عند الدفع خلال <strong>24 ساعة</strong>. إن لم تجده، تحقق من مجلد الرسائل غير المرغوب فيها.</p>
+    <div class="card p-6 mt-8 text-start">
+      <h2 class="font-semibold">في الأثناء: ورقتك المختصرة جاهزة</h2>
+      <p class="text-sm text-[var(--text-secondary)] mt-1">كل الدليل في صفحة واحدة.</p>
+      <a href={`${BASE}${CHEAT_SHEET_PDF}`} class="signup-btn inline-flex mt-3" download>⬇️ تحميل الورقة المختصرة</a>
+    </div>
+    <a href={BASE} class="inline-block mt-8 text-[var(--accent)] hover:underline">← ابحث عن أوقات المد في ميناءك</a>
+  </main>
+</BaseLayout>

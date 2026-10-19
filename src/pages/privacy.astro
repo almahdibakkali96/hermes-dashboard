@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+---
+<BaseLayout title="سياسة الخصوصية" description="كيف يتعامل ArabTides مع بياناتك: البريد الإلكتروني، الدفع، والإحصاءات.">
+  <div class="page-head">
+    <div class="max-w-2xl mx-auto px-4 py-8">
+      <nav class="breadcrumb" aria-label="مسار التنقل"><a href={BASE}>الرئيسية</a><span class="sep">/</span><span aria-current="page">الخصوصية</span></nav>
+      <h1 class="mt-3 text-3xl font-bold display">سياسة الخصوصية</h1>
+    </div>
+  </div>
+  <main id="main" class="max-w-2xl mx-auto px-4 py-8 w-full">
+    <div class="card p-6 text-[var(--text-secondary)] leading-relaxed space-y-4">
+      <h2 class="text-lg font-semibold text-[var(--text-primary)]">البريد الإلكتروني</h2>
+      <p>إذا تركت بريدك الإلكتروني لتحميل الورقة المختصرة، نحفظه مع اسم الصفحة التي سجّلت منها وتاريخ التسجيل. نستخدمه فقط لإرسال الورقة المختصرة ونصائح الصيد وأخبار ArabTides. لا نبيع بريدك ولا نشاركه مع أي طرف لأغراض تسويقية. يمكنك إلغاء الاشتراك أو طلب حذف بريدك في أي وقت بالرد على أي رسالة منا.</p>
+      <h2 class="text-lg font-semibold text-[var(--text-primary)]">الدفع</h2>
+      <p>تتم عمليات الشراء عبر Stripe. بيانات بطاقتك تذهب مباشرة إلى Stripe ولا نراها ولا نحفظها. نستلم من Stripe اسمك وبريدك الإلكتروني لإرسال المنتج إليك.</p>
+      <h2 class="text-lg font-semibold text-[var(--text-primary)]">الإحصاءات</h2>
+      <p>نستخدم إحصاءات زيارات مجمّعة ومجهولة الهوية لمعرفة الصفحات الأكثر فائدة. لا نستخدم هذه الإحصاءات لتتبعك شخصياً.</p>
+      <h2 class="text-lg font-semibold text-[var(--text-primary)]">بيانات المد والجزر</h2>
+      <p>كل الحسابات تتم على خوادمنا من نموذج EOT20 (CC BY 4.0). لا نحتاج موقعك الجغرافي ولا نطلبه.</p>
+    </div>
+  </main>
+</BaseLayout>

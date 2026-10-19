@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { articles, type ArticleMeta } from '../lib/articles';
 import placesIndex from '../data/places/places_index.json';
+import GuidePromo from './GuidePromo.astro';
 
 export interface Props {
   meta: ArticleMeta;
@@ -96,6 +97,8 @@ const jsonLd = [
         <div class="article-body">
           <slot />
         </div>
+
+        <div class="mt-12"><GuidePromo variant="strip" /></div>
 
         <!-- FAQ -->
         <section id="faq" class="mt-12 scroll-mt-24" aria-labelledby="faq-title">

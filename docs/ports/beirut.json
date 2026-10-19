@@ -10,7 +10,7 @@
     "timezone": "Asia/Beirut"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/beirut",
-  "generated_utc": "2026-10-19T21:51:15.746Z",
+  "generated_utc": "2026-10-19T22:42:54.373Z",
   "tide_type_ar": "مختلط، نصف يومي غالباً",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
@@ -118,7 +118,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.82
+        "illumination": 0.83
       }
     },
     {
@@ -192,41 +192,6 @@
       }
     },
     {
-      "date": "2026-10-24",
-      "utc_offset_minutes": 120,
-      "tides": [
-        {
-          "type": "low",
-          "time_local": "02:40",
-          "time_utc": "2026-10-24T00:40:24.146Z",
-          "height_cm": -14
-        },
-        {
-          "type": "high",
-          "time_local": "08:52",
-          "time_utc": "2026-10-24T06:51:53.206Z",
-          "height_cm": 21
-        },
-        {
-          "type": "low",
-          "time_local": "14:48",
-          "time_utc": "2026-10-24T12:48:10.869Z",
-          "height_cm": -14
-        },
-        {
-          "type": "high",
-          "time_local": "21:00",
-          "time_utc": "2026-10-24T19:00:13.142Z",
-          "height_cm": 24
-        }
-      ],
-      "moon": {
-        "phase_ar": "أحدب متزايد",
-        "phase_en": "Waxing Gibbous",
-        "illumination": 0.99
-      }
-    },
-    {
       "date": "2026-10-25",
       "utc_offset_minutes": 120,
       "tides": [
@@ -253,6 +218,41 @@
           "time_local": "21:27",
           "time_utc": "2026-10-25T19:27:13.983Z",
           "height_cm": 26
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متزايد",
+        "phase_en": "Waxing Gibbous",
+        "illumination": 0.99
+      }
+    },
+    {
+      "date": "2026-10-26",
+      "utc_offset_minutes": 120,
+      "tides": [
+        {
+          "type": "low",
+          "time_local": "03:46",
+          "time_utc": "2026-10-26T01:46:23.196Z",
+          "height_cm": -19
+        },
+        {
+          "type": "high",
+          "time_local": "09:56",
+          "time_utc": "2026-10-26T07:56:00.707Z",
+          "height_cm": 21
+        },
+        {
+          "type": "low",
+          "time_local": "15:48",
+          "time_utc": "2026-10-26T13:47:46.122Z",
+          "height_cm": -14
+        },
+        {
+          "type": "high",
+          "time_local": "21:56",
+          "time_utc": "2026-10-26T19:55:49.437Z",
+          "height_cm": 27
         }
       ],
       "moon": {

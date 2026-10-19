@@ -4,6 +4,7 @@ import placesIndex from '../data/places/places_index.json';
 import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
+import GuidePromo from '../components/GuidePromo.astro';
 import {
   generateTideCurve, dayExtremes, formatTime,
   getTimezoneOffset
@@ -160,6 +161,9 @@ const features = [
         ))}
       </div>
     </section>
+
+    <!-- Paid guide -->
+    <div class="mb-16"><GuidePromo variant="banner" /></div>
 
     <!-- What each port page offers -->
     <section class="mb-16" aria-labelledby="features-title">

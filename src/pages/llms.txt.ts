@@ -2,6 +2,7 @@
 import placesIndex from '../data/places/places_index.json';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
+import { GUIDE } from '../lib/shop';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
@@ -27,6 +28,9 @@ ${ports}
 
 ## Articles
 ${articles.map(a => `- [${a.title}](${origin}/articles/${a.slug}): ${a.summary}`).join('\n')}
+
+## Guide (paid, PDF)
+- [${GUIDE.title}](${origin}/guide): ${GUIDE.pages}-page Arabic PDF on moon phases, spring/neap tides, reading tide tables and solunar periods for fishing; ${GUIDE.priceLabel}. A free one-page cheat sheet is offered on the same page.
 
 ## About
 - [How the calculations work](${origin}/methodology)

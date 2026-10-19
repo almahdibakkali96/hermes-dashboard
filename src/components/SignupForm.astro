@@ -1,0 +1,60 @@
+---
+// Email capture → Google Sheet (SIGNUP_URL), then reveals the free cheat sheet download.
+import { SIGNUP_URL, CHEAT_SHEET_PDF } from '../lib/shop';
+
+export interface Props {
+  source: string;          // where the form sits, stored with the email (e.g. 'home', 'port', 'guide')
+  port?: string;
+  dark?: boolean;
+  compact?: boolean;
+}
+const { source, port = '', dark = false, compact = false } = Astro.props;
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+---
+
+<form class:list={['signup', { 'signup-dark': dark }]} data-endpoint={SIGNUP_URL} data-pdf={`${BASE}${CHEAT_SHEET_PDF}`} novalidate>
+  <input type="hidden" name="source" value={source} />
+  <input type="hidden" name="port" value={port} />
+  <!-- Honeypot: bots fill it, people never see it -->
+  <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+  <div class:list={['flex gap-2', compact ? 'flex-col' : 'flex-col sm:flex-row']}>
+    <label class="sr-only" for={`email-${source}`}>بريدك الإلكتروني</label>
+    <input id={`email-${source}`} type="email" name="email" required inputmode="email" autocomplete="email" dir="ltr"
+           placeholder="your@email.com" class="signup-input" />
+    <button type="submit" class="signup-btn">احصل على الورقة المختصرة مجاناً</button>
+  </div>
+  <p class="signup-note">نرسل لك أحياناً نصائح الصيد وتوقعات المد. لا رسائل مزعجة، ويمكنك إلغاء الاشتراك متى شئت. <a href={`${BASE}privacy`}>الخصوصية</a></p>
+  <p class="signup-error" role="alert" hidden>أدخل بريداً إلكترونياً صحيحاً.</p>
+  <div class="signup-done" hidden>
+    <p class="font-semibold">✓ شكراً! هذه ورقتك المختصرة:</p>
+    <a class="signup-btn inline-flex mt-2" download>⬇️ تحميل الورقة المختصرة (PDF)</a>
+  </div>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.signup').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const email = String(data.get('email') || '').trim();
+      const err = form.querySelector<HTMLElement>('.signup-error')!;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.hidden = false; return; }
+      err.hidden = true;
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      btn.disabled = true; btn.textContent = '...';
+      data.set('page', location.pathname);
+      const endpoint = form.dataset.endpoint;
+      if (endpoint) {
+        try {
+          // Apps Script answers with a redirect; no-cors keeps the browser happy, the row is written either way
+          await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data as unknown as Record<string, string>) });
+        } catch { /* network hiccup: still give the free PDF */ }
+      }
+      form.querySelector('.flex')!.remove();
+      form.querySelector('.signup-note')!.remove();
+      const done = form.querySelector<HTMLElement>('.signup-done')!;
+      done.querySelector('a')!.setAttribute('href', form.dataset.pdf!);
+      done.hidden = false;
+    });
+  });
+</script>

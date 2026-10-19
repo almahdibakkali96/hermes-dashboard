@@ -10,7 +10,7 @@
     "timezone": "Asia/Gaza"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/gaza",
-  "generated_utc": "2026-10-19T21:51:15.762Z",
+  "generated_utc": "2026-10-19T22:42:54.407Z",
   "tide_type_ar": "نصف يومي",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
@@ -118,7 +118,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.82
+        "illumination": 0.83
       }
     },
     {
@@ -192,41 +192,6 @@
       }
     },
     {
-      "date": "2026-10-24",
-      "utc_offset_minutes": 120,
-      "tides": [
-        {
-          "type": "low",
-          "time_local": "02:44",
-          "time_utc": "2026-10-24T00:44:19.549Z",
-          "height_cm": -14
-        },
-        {
-          "type": "high",
-          "time_local": "08:59",
-          "time_utc": "2026-10-24T06:58:36.410Z",
-          "height_cm": 22
-        },
-        {
-          "type": "low",
-          "time_local": "14:48",
-          "time_utc": "2026-10-24T12:48:02.794Z",
-          "height_cm": -11
-        },
-        {
-          "type": "high",
-          "time_local": "21:00",
-          "time_utc": "2026-10-24T19:00:12.551Z",
-          "height_cm": 26
-        }
-      ],
-      "moon": {
-        "phase_ar": "أحدب متزايد",
-        "phase_en": "Waxing Gibbous",
-        "illumination": 0.99
-      }
-    },
-    {
       "date": "2026-10-25",
       "utc_offset_minutes": 120,
       "tides": [
@@ -252,6 +217,41 @@
           "type": "high",
           "time_local": "21:28",
           "time_utc": "2026-10-25T19:28:14.068Z",
+          "height_cm": 27
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متزايد",
+        "phase_en": "Waxing Gibbous",
+        "illumination": 0.99
+      }
+    },
+    {
+      "date": "2026-10-26",
+      "utc_offset_minutes": 120,
+      "tides": [
+        {
+          "type": "low",
+          "time_local": "03:47",
+          "time_utc": "2026-10-26T01:46:53.092Z",
+          "height_cm": -18
+        },
+        {
+          "type": "high",
+          "time_local": "10:02",
+          "time_utc": "2026-10-26T08:02:10.085Z",
+          "height_cm": 22
+        },
+        {
+          "type": "low",
+          "time_local": "15:46",
+          "time_utc": "2026-10-26T13:46:10.325Z",
+          "height_cm": -12
+        },
+        {
+          "type": "high",
+          "time_local": "21:58",
+          "time_utc": "2026-10-26T19:58:01.090Z",
           "height_cm": 27
         }
       ],

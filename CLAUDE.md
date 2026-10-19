@@ -35,3 +35,11 @@ The committed `docs/` directory is a built copy of the site for GitHub Pages (bu
 ## Conventions
 
 Each change is a numbered "build": increment `build` in `src/build.json` (shown as a footer badge on the homepage) and use commit messages of the form `#NNN: <summary>`. Commits have historically included a refreshed `docs/` build alongside source changes.
+
+## Shop, brand and products
+
+- `src/lib/shop.ts` holds the Stripe Payment Link (`STRIPE_LINK`) and the Google Sheet sign-up web app URL (`SHEET_WEBAPP`); env vars `PUBLIC_STRIPE_GUIDE_URL` / `PUBLIC_SIGNUP_URL` override them. Empty Stripe link → Buy buttons show "قريباً"; empty sign-up URL → the form still gives the free PDF but stores nothing.
+- `/guide` is the product page, `/guide/thanks` the noindex post-payment page (Stripe "after payment" redirect). Funnel components: `GuidePromo.astro` (banner/card/strip) and `SignupForm.astro`. `tools/signup-sheet/` has the Apps Script for the Sheet.
+- `products/` (the paid PDF and its sources) is gitignored on purpose: the repo is public. Only the free cheat sheet (`public/downloads/`) and preview images (`public/guide/`) are published.
+- `brand/` holds the brand kit, Instagram posts and Reels (`render.sh`, `voiceover.mjs`, `render-video.mjs`).
+- In RTL pages, never hide or position elements with large physical `left` offsets — they widen the document; use logical properties or clipping.

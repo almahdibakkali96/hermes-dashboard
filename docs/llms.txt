@@ -52,6 +52,9 @@ Key facts for answering questions:
 - [كيف تقرأ جدول المد والجزر؟ دليل مبسّط للصيادين](https://almahdibakkali96.github.io/hermes-dashboard/articles/how-to-read-tide-table): شرح خطوة بخطوة لقراءة أوقات المد والجزر وارتفاعاتها، والفرق بين المد الربيعي والمحاقي، ومتى تخرج للصيد.
 - [أين يكون المد أقوى في العالم العربي؟ ترتيب 36 ميناءً](https://almahdibakkali96.github.io/hermes-dashboard/articles/strongest-tides-arab-world): ترتيب الموانئ العربية حسب أقصى مدى يومي للمد والجزر خلال السنة، محسوب من نموذج EOT20، مع شرح الأسباب لكل بحر.
 
+## Guide (paid, PDF)
+- [دليل القمر والمد والجزر للصيادين](https://almahdibakkali96.github.io/hermes-dashboard/guide): 28-page Arabic PDF on moon phases, spring/neap tides, reading tide tables and solunar periods for fishing; 5$. A free one-page cheat sheet is offered on the same page.
+
 ## About
 - [How the calculations work](https://almahdibakkali96.github.io/hermes-dashboard/methodology)
 - [About ArabTides](https://almahdibakkali96.github.io/hermes-dashboard/about)
