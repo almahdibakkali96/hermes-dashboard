@@ -35,322 +35,153 @@ const curve = generateTideCurve(constituents, today, tzOffset);
 const extremes = findExtremes(curve);
 const tideClass = classifyTide(constituents);
 
-// Astronomy
 const moon = moonPhase(today);
 const sun = sunTimes(today, port.lat, port.lon, tzOffset);
 const moonT = moonTimes(today, port.lat, port.lon, tzOffset);
 const solunar = solunarPeriods(moonT.moonrise, moonT.moonset, moonT.lunarTransit, moon.phase, today);
 
-// Prayer times & Hijri
 const prayers = calculatePrayerTimes(today, port.lat, port.lon, tzOffset, 'UmmAlQura');
 const hijri = gregorianToHijri(today);
 
-// 7-day forecast
-const weekDays = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const weekDays = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 const forecast = Array.from({ length: 7 }, (_, i) => {
-  const d = new Date(today);
-  d.setDate(d.getDate() + i);
-  const curve = generateTideCurve(constituents, d, tzOffset);
-  const ex = findExtremes(curve);
-  const highs = ex.filter(e => e.type === 'high').sort((a, b) => b.height - a.height);
-  const lows = ex.filter(e => e.type === 'low').sort((a, b) => a.height - b.height);
-  const dailyRange = highs.length > 0 && lows.length > 0 ? (highs[0].height - lows[0].height).toFixed(0) : '—';
-  const m = moonPhase(d);
-  return {
-    date: d,
-    label: i === 0 ? 'اليوم' : weekDays[d.getDay()],
-    dateStr: d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }),
-    highs: highs.slice(0, 2),
-    lows: lows.slice(0, 2),
-    range: dailyRange,
-    moon: m,
-  };
+  const d = new Date(today); d.setDate(d.getDate() + i);
+  const c = generateTideCurve(constituents, d, tzOffset);
+  const ex = findExtremes(c);
+  const highs = ex.filter(e => e.type === 'high').sort((a,b) => b.height - a.height);
+  const lows = ex.filter(e => e.type === 'low').sort((a,b) => a.height - b.height);
+  return { date: d, label: i===0?'اليوم':weekDays[d.getDay()], dateStr: d.toLocaleDateString('en-GB',{day:'numeric',month:'short'}), highs: highs.slice(0,2), lows: lows.slice(0,2), range: highs.length&&lows.length?(highs[0].height-lows[0].height).toFixed(0):'—', moon: moonPhase(d) };
 });
 
-const CHART_W = 720; const CHART_H = 220;
-const PAD_L = 45; const PAD_R = 15; const PAD_T = 15; const PAD_B = 30;
-const plotW = CHART_W - PAD_L - PAD_R;
-const plotH = CHART_H - PAD_T - PAD_B;
-const heights = curve.map(p => p.height);
-const hMin = Math.min(...heights);
-const hMax = Math.max(...heights);
-const hRange = hMax - hMin || 1;
-const yScale = (h: number) => PAD_T + plotH - ((h - hMin) / hRange) * plotH;
-const xScale = (i: number) => PAD_L + (i / (curve.length - 1)) * plotW;
-const pathD = curve.map((p, i) => `${i === 0 ? 'M' : 'L'}${xScale(i).toFixed(1)},${yScale(p.height).toFixed(1)}`).join(' ');
+// Monthly calendar
+const year = today.getFullYear(), month = today.getMonth();
+const daysInMonth = new Date(year, month+1, 0).getDate();
+const monthDays = Array.from({length: daysInMonth}, (_,i) => {
+  const d = new Date(year, month, i+1);
+  const c = generateTideCurve(constituents, d, tzOffset);
+  const ex = findExtremes(c);
+  const hs = ex.filter(e=>e.type==='high'), ls = ex.filter(e=>e.type==='low');
+  return { day: i+1, range: hs.length&&ls.length?Math.max(...hs.map(h=>h.height))-Math.min(...ls.map(l=>l.height)):0, moon: moonPhase(d), isToday: i+1===today.getDate() };
+});
 
-const title = `${port.name_ar} — مواقيت المد والجزر`;
+// Chart
+const CHART_W=720,CHART_H=200,PAD_L=40,PAD_R=10,PAD_T=10,PAD_B=22,plotW=CHART_W-PAD_L-PAD_R,plotH=CHART_H-PAD_T-PAD_B;
+const heights=curve.map(p=>p.height),hMin=Math.min(...heights),hMax=Math.max(...heights),hRange=hMax-hMin||1;
+const yScale=(h:number)=>PAD_T+plotH-((h-hMin)/hRange)*plotH,xScale=(i:number)=>PAD_L+(i/(curve.length-1))*plotW;
+const pathD=curve.map((p,i)=>`${i===0?'M':'L'}${xScale(i).toFixed(1)},${yScale(p.height).toFixed(1)}`).join(' ');
+
+const title=`${port.name_ar} — مواقيت المد والجزر`;
+const shareText=encodeURIComponent(`مواقيت المد والجزر — ${port.name_ar}`);
+const shareUrl=encodeURIComponent(`https://prompt-tempest-on6uicu.vercel.app/ports/${port.id}`);
+const monthNames=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 ---
 
 <BaseLayout title={title} description={`مواقيت المد والجزر لـ${port.name_ar}`}>
-  <div class="min-h-screen flex flex-col">
+  <div class="min-h-screen flex flex-col bg-[var(--surface-page)]">
 
-    <header class="sticky top-0 z-10 backdrop-blur-md bg-white/90 border-b border-[var(--border-subtle)] shadow-sm">
-      <div class="max-w-4xl mx-auto px-4 py-3 flex items-center gap-4">
-        <a href={BASE} class="flex items-center gap-2 shrink-0 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
-          <span class="text-sm">&larr;</span><span class="text-sm hidden sm:inline">الرئيسية</span>
-        </a>
-        <span class="text-[var(--text-dim)] text-sm">/</span>
-        <span class="text-[var(--text-primary)] text-sm font-medium truncate">{port.name_ar}</span>
-        <span class="text-xs text-[var(--text-dim)] latin ml-auto shrink-0">{port.name_en}</span>
+    <header class="sticky top-0 z-10 backdrop-blur-md bg-white/95 border-b border-[var(--border-subtle)] shadow-sm">
+      <div class="max-w-4xl mx-auto px-3 py-2 flex items-center gap-2">
+        <a href={BASE} class="text-[var(--text-muted)] hover:text-[var(--accent)] shrink-0 text-sm">&larr;</a>
+        <div class="min-w-0"><div class="text-sm font-semibold truncate">{port.name_ar}</div><div class="text-[10px] text-[var(--text-dim)] latin">{port.name_en}</div></div>
+        <div class="flex-1"></div>
+        <span class="text-sm">{moon.emoji}</span>
+        <span class="text-[10px] text-[var(--text-dim)] hidden sm:inline">{hijri.day} {hijri.monthAr}</span>
+      </div>
+      <div class="flex overflow-x-auto gap-1 px-3 pb-2 scrollbar-hide">
+        {forecast.map((day,i) => (
+          <span class={`shrink-0 px-3 py-1.5 rounded-lg text-xs text-center min-w-[60px] ${i===0?'bg-[var(--accent)] text-white font-medium':'bg-[var(--surface-elevated)] text-[var(--text-secondary)]'}`}>
+            <div>{day.label}</div><div class="text-[10px] opacity-70 latin">{day.dateStr}</div>
+          </span>
+        ))}
       </div>
     </header>
 
-    <main class="flex-1 max-w-4xl mx-auto px-4 py-6 w-full">
-      <div class="mb-4">
-        <div class="text-xs text-[var(--text-muted)]">{countryNames[port.country] || port.country}</div>
-        <h1 class="text-2xl font-bold text-[var(--text-primary)] mt-1">{port.name_ar}</h1>
-        <div class="text-xs text-[var(--text-dim)] latin mt-1">{port.name_en} &middot; {port.lat.toFixed(2)}&deg;N, {port.lon.toFixed(2)}&deg;E &middot; {port.timezone}</div>
-      </div>
+    <main class="flex-1 max-w-4xl mx-auto px-3 py-4 w-full">
 
       <!-- Tide chart -->
-      <section class="mb-6">
-        <div class="flex items-center gap-2 mb-3">
-          <h2 class="text-sm font-medium text-[var(--text-muted)]">منحنى المد والجزر</h2>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-muted)] text-[var(--accent)]">{tideClass.typeAr}</span>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-          <span class="text-[10px] text-[var(--text-dim)] latin">{today.toLocaleDateString('en-GB')}</span>
-        </div>
-        <div class="rounded-[var(--radius-xl)] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-3 overflow-x-auto">
-          <div class="chart-ltr">
-            <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img">
-              {[0, 0.25, 0.5, 0.75, 1].map(frac => {
-                const y = PAD_T + plotH * (1 - frac);
-                const label = (hMin + hRange * frac).toFixed(0);
-                return (<>
-                  <line x1={PAD_L} y1={y} x2={CHART_W-PAD_R} y2={y} stroke="#e8ecf0" stroke-width="0.5"/>
-                  <text x={PAD_L-5} y={y+4} text-anchor="end" font-size="10" fill="#94a3b8" font-family="Inter,sans-serif">{label}</text>
-                </>);
-              })}
-              {[0,3,6,9,12,15,18,21,24].map(h => (
-                <text x={xScale(Math.round(h*curve.length/24))} y={CHART_H-4} text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>
-              ))}
-              <line x1={PAD_L} y1={yScale(0)} x2={CHART_W-PAD_R} y2={yScale(0)} stroke="#cbd5e1" stroke-width="0.5" stroke-dasharray="4,3"/>
-              <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2" stroke-linejoin="round"/>
-              <path d={`${pathD} L${xScale(curve.length-1).toFixed(1)},${CHART_H-PAD_B} L${xScale(0).toFixed(1)},${CHART_H-PAD_B} Z`} fill="rgba(13,148,136,0.08)"/>
-              {extremes.slice(0, 8).map(ex => {
-                const idx = curve.findIndex(p => Math.abs(p.hours - ex.hours) < 0.01);
-                const cx = xScale(idx >= 0 ? idx : 0).toFixed(1);
-                const cy = yScale(ex.height).toFixed(1);
-                return (<>
-                  <circle cx={cx} cy={cy} r="4" fill={ex.type==='high'?'#0d9488':'#ef4444'} stroke="white" stroke-width="1.5"/>
-                  <text x={cx} y={parseFloat(cy)+(ex.type==='high'?-10:16)} text-anchor="middle" font-size="9" fill="#64748b" font-family="Inter,sans-serif">{formatTime(ex.time, tzOffset)}</text>
-                </>);
-              })}
-            </svg>
-          </div>
-        </div>
-      </section>
+      <section class="mb-5"><div class="flex items-center gap-2 mb-2">
+        <h2 class="text-sm font-semibold">منحنى المد والجزر</h2>
+        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--accent-muted)] text-[var(--accent)]">{tideClass.typeAr}</span>
+        <div class="flex-1"></div><span class="text-[10px] text-[var(--text-dim)] latin">{today.toLocaleDateString('en-GB')}</span>
+      </div>
+      <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 overflow-x-auto"><div class="chart-ltr">
+        <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto">
+          {[0,.25,.5,.75,1].map(f=>{const y=PAD_T+plotH*(1-f);return(<><line x1={PAD_L} y1={y} x2={CHART_W-PAD_R} y2={y} stroke="#e8ecf0" stroke-width=".5"/><text x={PAD_L-4} y={y+4} text-anchor="end" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{(hMin+hRange*f).toFixed(0)}</text></>);})}
+          {[0,3,6,9,12,15,18,21,24].map(h=><text x={xScale(Math.round(h*curve.length/24))} y={CHART_H-4} text-anchor="middle" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>)}
+          <line x1={PAD_L} y1={yScale(0)} x2={CHART_W-PAD_R} y2={yScale(0)} stroke="#cbd5e1" stroke-width=".5" stroke-dasharray="4,3"/>
+          <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2" stroke-linejoin="round"/>
+          <path d={`${pathD} L${xScale(curve.length-1).toFixed(1)},${CHART_H-PAD_B} L${xScale(0).toFixed(1)},${CHART_H-PAD_B} Z`} fill="rgba(13,148,136,0.06)"/>
+          {extremes.slice(0,6).map(ex=>{const idx=curve.findIndex(p=>Math.abs(p.hours-ex.hours)<.01);const cx=xScale(idx>=0?idx:0).toFixed(1),cy=yScale(ex.height).toFixed(1);return(<><circle cx={cx} cy={cy} r="3.5" fill={ex.type==='high'?'#0d9488':'#ef4444'} stroke="white" stroke-width="1.5"/><text x={cx} y={parseFloat(cy)+(ex.type==='high'?-9:14)} text-anchor="middle" font-size="8" fill="#64748b" font-family="Inter,sans-serif">{formatTime(ex.time,tzOffset)}</text></>);})}
+        </svg>
+      </div></div></section>
 
-      <!-- High/Low cards -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-        {extremes.slice(0, 8).map(ex => (
-          <div class={`p-3 rounded-[var(--radius-lg)] border ${ex.type==='high' ? 'bg-[var(--accent-muted)] border-[var(--accent-border)]' : 'bg-[var(--surface-card)] border-[var(--border-subtle)]'}`}>
-            <div class={`text-[10px] tracking-wide ${ex.type==='high' ? 'text-[var(--accent)]' : 'text-[var(--text-dim)]'}`}>
-              {ex.type==='high' ? 'مد مرتفع' : 'مد منخفض'}
-            </div>
-            <div class="text-lg font-semibold text-[var(--text-primary)] latin mt-0.5">{formatTime(ex.time, tzOffset)}</div>
-            <div class="text-xs text-[var(--text-secondary)] latin">{ex.height.toFixed(1)} سم</div>
-          </div>
-        ))}
+      <!-- Quick stats -->
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-5 text-center">
+        {extremes.slice(0,4).map(ex=><div class={`p-2 rounded-lg border text-xs ${ex.type==='high'?'bg-teal-50 border-teal-200':'bg-red-50 border-red-100'}`}><div class={`${ex.type==='high'?'text-teal-700':'text-red-600'} font-medium`}>{ex.type==='high'?'مد':'جزر'}</div><div class="font-bold latin">{formatTime(ex.time,tzOffset)}</div><div class="text-[10px] text-[var(--text-dim)] latin">{ex.height.toFixed(0)} سم</div></div>)}
+        <div class="p-2 rounded-lg border border-[var(--border-subtle)] text-xs"><div class="text-[var(--text-dim)]">🌙</div><div class="font-bold">{Math.round(moon.illumination*100)}%</div><div class="text-[10px] text-[var(--text-dim)]">{moon.phaseNameAr}</div></div>
+        <div class="p-2 rounded-lg border border-[var(--border-subtle)] text-xs"><div class="text-[var(--text-dim)]">🎣</div><div class="font-bold">{solunar.ratingAr}</div><div class="text-[10px] text-[var(--text-dim)]">الصيد</div></div>
       </div>
 
-      <!-- Astronomy row: sun, moon, solunar -->
-      <section class="mb-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- Sun & Moon card -->
-          <div class="rounded-[var(--radius-xl)] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">{moon.emoji}</span>
-              <div>
-                <div class="text-sm font-medium text-[var(--text-primary)]">{moon.phaseNameAr}</div>
-                <div class="text-xs text-[var(--text-dim)] latin">{moon.phaseNameEn} &middot; {moon.age.toFixed(1)} يوم</div>
-              </div>
-              <div class="mr-auto">
-                <div class="text-lg font-bold text-[var(--text-primary)] latin">{Math.round(moon.illumination * 100)}%</div>
-                <div class="text-[10px] text-[var(--text-dim)]">الإضاءة</div>
-              </div>
-            </div>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-              <div class="p-2 rounded-[var(--radius-md)] bg-[var(--surface-elevated)]">
-                <div class="text-[var(--text-dim)]">الشروق</div>
-                <div class="text-[var(--text-primary)] font-medium latin mt-0.5">{sun.sunrise || '—'}</div>
-              </div>
-              <div class="p-2 rounded-[var(--radius-md)] bg-[var(--surface-elevated)]">
-                <div class="text-[var(--text-dim)]">الغروب</div>
-                <div class="text-[var(--text-primary)] font-medium latin mt-0.5">{sun.sunset || '—'}</div>
-              </div>
-              <div class="p-2 rounded-[var(--radius-md)] bg-[var(--surface-elevated)]">
-                <div class="text-[var(--text-dim)]">شروق القمر</div>
-                <div class="text-[var(--text-primary)] font-medium latin mt-0.5">{moonT.moonrise || '—'}</div>
-              </div>
-              <div class="p-2 rounded-[var(--radius-md)] bg-[var(--surface-elevated)]">
-                <div class="text-[var(--text-dim)]">غروب القمر</div>
-                <div class="text-[var(--text-primary)] font-medium latin mt-0.5">{moonT.moonset || '—'}</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Solunar card -->
-          <div class="rounded-[var(--radius-xl)] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="text-lg">🎣</span>
-              <h3 class="text-sm font-medium text-[var(--text-primary)]">أوقات الصيد (سولونار)</h3>
-              <span class={`text-[10px] px-2 py-0.5 rounded-full mr-auto ${
-                solunar.rating === 'excellent' ? 'bg-green-100 text-green-700' :
-                solunar.rating === 'good' ? 'bg-teal-50 text-teal-700' :
-                solunar.rating === 'fair' ? 'bg-amber-50 text-amber-700' :
-                'bg-gray-100 text-gray-500'
-              }`}>{solunar.ratingAr}</span>
-            </div>
-            <div class="space-y-2">
-              {solunar.periods.length === 0 ? (
-                <p class="text-xs text-[var(--text-dim)]">لا توجد بيانات كافية لحساب فترات الصيد</p>
-              ) : solunar.periods.map(p => (
-                <div class={`flex items-center gap-2 p-2 rounded-[var(--radius-md)] text-xs ${
-                  p.type === 'major' ? 'bg-[var(--accent-muted)]' : 'bg-[var(--surface-elevated)]'
-                }`}>
-                  <span class={`w-2 h-2 rounded-full shrink-0 ${
-                    p.quality === 'excellent' ? 'bg-green-500' :
-                    p.quality === 'good' ? 'bg-teal-500' : 'bg-amber-400'
-                  }`}></span>
-                  <span class="text-[var(--text-primary)] font-medium">{p.typeAr}</span>
-                  <span class="text-[var(--text-dim)] latin ml-auto">
-                    {p.start} — {p.end}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <p class="text-[10px] text-[var(--text-dim)] mt-3 leading-relaxed">
-              الفترات الكبرى: ±1 ساعة حول عبور القمر. الفترات الصغرى: ±30 دقيقة حول شروق/غروب القمر. التوقيت تقديري.
-            </p>
-          </div>
+      <!-- Sun/Moon + Solunar -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3"><h3 class="text-xs font-semibold text-[var(--text-muted)] mb-2">☀️🌙 الشمس والقمر</h3>
+          <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+            <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">الشروق</span><span class="font-medium latin">{sun.sunrise||'—'}</span></div>
+            <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">الغروب</span><span class="font-medium latin">{sun.sunset||'—'}</span></div>
+            <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">شروق القمر</span><span class="font-medium latin">{moonT.moonrise||'—'}</span></div>
+            <div class="flex justify-between p-1.5 rounded bg-[var(--surface-elevated)]"><span class="text-[var(--text-dim)]">غروب القمر</span><span class="font-medium latin">{moonT.moonset||'—'}</span></div>
+          </div></div>
+        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3"><h3 class="text-xs font-semibold text-[var(--text-muted)] mb-2">🎣 أوقات الصيد</h3>
+          {solunar.periods.slice(0,4).map(p=><div class={`flex items-center gap-2 p-1.5 rounded text-[11px] ${p.type==='major'?'bg-teal-50':''}`}><span class={`w-1.5 h-1.5 rounded-full shrink-0 ${p.quality==='excellent'?'bg-green-500':p.quality==='good'?'bg-teal-500':'bg-amber-400'}`}></span><span class="font-medium">{p.typeAr}</span><span class="text-[var(--text-dim)] latin ml-auto">{p.start} — {p.end}</span></div>)}
+          {solunar.periods.length===0&&<p class="text-[11px] text-[var(--text-dim)]">لا توجد بيانات</p>}
         </div>
+      </div>
+
+      <!-- Ad zone -->
+      <div class="mb-5 p-4 rounded-xl bg-[var(--surface-elevated)] border border-dashed border-[var(--border-standard)] text-center"><p class="text-[10px] text-[var(--text-dim)] tracking-wide">مساحة إعلانية</p></div>
+
+      <!-- Prayer + Hijri -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3"><h3 class="text-xs font-semibold text-[var(--text-muted)] mb-2">🕌 أوقات الصلاة</h3>
+          <div class="grid grid-cols-3 gap-1 text-[11px]">
+            {Object.entries(prayers).map(([name,time])=>{const labels:Record<string,string>={fajr:'الفجر',sunrise:'الشروق',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'};return<div class="p-1.5 rounded bg-[var(--surface-elevated)] text-center"><div class="text-[10px] text-[var(--text-dim)]">{labels[name]}</div><div class="font-medium latin">{time}</div></div>;})}
+          </div></div>
+        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 flex items-center justify-center gap-4"><div class="text-3xl">📅</div><div class="text-center"><div class="text-lg font-bold">{hijri.day} {hijri.monthAr} {hijri.year} هـ</div><div class="text-[10px] text-[var(--text-dim)] mt-1">تقديري — قد يختلف بيوم</div></div></div>
+      </div>
+
+      <!-- 7-day -->
+      <section class="mb-5"><h2 class="text-sm font-semibold mb-2">📊 توقعات ٧ أيام</h2>
+        <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]"><table class="w-full text-xs">
+          <thead><tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><th class="text-right px-2 py-2 font-medium">اليوم</th><th class="text-center px-1 w-6">🌙</th><th class="text-center px-1">المدى</th><th class="text-right px-2" colspan="2">المد</th><th class="text-right px-2" colspan="2">الجزر</th></tr></thead>
+          <tbody class="divide-y divide-[var(--border-subtle)]">{forecast.map((day,i)=><tr class={`${i===0?'bg-teal-50/60':''} hover:bg-[var(--surface-elevated)]`}><td class="px-2 py-1.5"><div class="font-medium">{day.label}</div><div class="text-[10px] text-[var(--text-dim)] latin">{day.dateStr}</div></td><td class="text-center px-1 py-1.5 text-sm">{day.moon.emoji}</td><td class="text-center px-1 py-1.5 latin font-medium">{day.range} سم</td><td class="px-1 py-1.5" colspan="2">{day.highs.map(h=><div class="flex gap-1"><span class="text-teal-600 font-medium latin w-10 text-right">{formatTime(h.time,tzOffset)}</span><span class="text-[var(--text-dim)] latin">{h.height.toFixed(0)}</span></div>)}</td><td class="px-1 py-1.5" colspan="2">{day.lows.map(l=><div class="flex gap-1"><span class="text-red-500 font-medium latin w-10 text-right">{formatTime(l.time,tzOffset)}</span><span class="text-[var(--text-dim)] latin">{l.height.toFixed(0)}</span></div>)}</td></tr>)}</tbody>
+        </table></div>
       </section>
 
-      <!-- Prayer times + Hijri + actions -->
-      <section class="mb-8">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <!-- Prayer times -->
-          <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-4">
-            <h3 class="text-sm font-semibold text-[var(--text-primary)] mb-3">🕌 أوقات الصلاة</h3>
-            <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
-              <div class="flex justify-between"><span class="text-[var(--text-dim)]">الفجر</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.fajr}</span></div>
-              <div class="flex justify-between"><span class="text-[var(--text-dim)]">الشروق</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.sunrise}</span></div>
-              <div class="flex justify-between"><span class="text-[var(--text-dim)]">الظهر</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.dhuhr}</span></div>
-              <div class="flex justify-between"><span class="text-[var(--text-dim)]">العصر</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.asr}</span></div>
-              <div class="flex justify-between"><span class="text-[var(--text-dim)]">المغرب</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.maghrib}</span></div>
-              <div class="flex justify-between"><span class="text-[var(--text-dim)]">العشاء</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.isha}</span></div>
-            </div>
-            <p class="text-[10px] text-[var(--text-dim)] mt-2">طريقة أم القرى</p>
-          </div>
+      <!-- Share -->
+      <div class="flex flex-wrap items-center gap-2 mb-5 text-xs">
+        <button onclick="window.print()" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors">🖨️ طباعة</button>
+        <a href={`https://wa.me/?text=${shareText}%20${shareUrl}`} target="_blank" rel="noopener" class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors">💬 واتساب</a>
+        <a href={`${BASE}methodology`} class="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-standard)] text-[var(--text-secondary)] hover:bg-[var(--surface-elevated)] transition-colors mr-auto">📖 كيف تعمل الحسابات؟</a>
+      </div>
 
-          <!-- Hijri date -->
-          <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center text-center">
-            <div class="text-3xl mb-1">📅</div>
-            <div class="text-lg font-bold text-[var(--text-primary)]">{hijri.day} {hijri.monthAr}</div>
-            <div class="text-sm text-[var(--text-secondary)] mt-0.5">{hijri.year} هـ</div>
-            <div class="text-[10px] text-[var(--text-dim)] mt-2">التاريخ الهجري (تقديري)</div>
-          </div>
+      <!-- Ad zone 2 -->
+      <div class="mb-5 p-4 rounded-xl bg-[var(--surface-elevated)] border border-dashed border-[var(--border-standard)] text-center"><p class="text-[10px] text-[var(--text-dim)] tracking-wide">مساحة إعلانية</p></div>
 
-          <!-- Actions -->
-          <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-4 flex flex-col gap-3">
-            <h3 class="text-sm font-semibold text-[var(--text-primary)]">إجراءات</h3>
-            <a href={`javascript:window.print()`} class="flex items-center gap-2 text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">
-              <span>🖨️</span> طباعة الصفحة
-            </a>
-            <a href={`https://wa.me/?text=${encodeURIComponent(`مواقيت المد والجزر — ${port.name_ar}\n${BASE}ports/${port.id}`)}`}
-               target="_blank" rel="noopener"
-               class="flex items-center gap-2 text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">
-              <span>💬</span> مشاركة واتساب
-            </a>
-            <a href={`mailto:?subject=${encodeURIComponent(`مواقيت المد والجزر — ${port.name_ar}`)}&body=${encodeURIComponent(`${BASE}ports/${port.id}`)}`}
-               class="flex items-center gap-2 text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">
-              <span>📧</span> مشاركة بالبريد
-            </a>
-          </div>
-        </div>
+      <!-- Monthly calendar -->
+      <section class="mb-5"><h2 class="text-sm font-semibold mb-2">📅 تقويم {monthNames[month]} {year}</h2>
+        <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]"><table class="w-full text-[10px]">
+          <thead><tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><th class="p-1">السبت</th><th class="p-1">الجمعة</th><th class="p-1">الخميس</th><th class="p-1">الأربعاء</th><th class="p-1">الثلاثاء</th><th class="p-1">الإثنين</th><th class="p-1">الأحد</th></tr></thead>
+          <tbody>{(()=>{const fd=new Date(year,month,1).getDay();const off=(6-fd)%7;const wks:number[][]=[];let wk:number[]=Array(off).fill(0);for(let d=1;d<=daysInMonth;d++){wk.push(d);if(wk.length===7||d===daysInMonth){while(wk.length<7)wk.push(0);wks.push(wk);wk=[]}}return wks.map(w=><tr class="divide-x divide-[var(--border-subtle)] border-t border-[var(--border-subtle)]">{w.map(day=>{if(day===0)return<td class="p-1.5 text-center"></td>;const d=monthDays[day-1];return<td class={`p-1.5 text-center ${d.isToday?'bg-teal-50 ring-1 ring-teal-300 ring-inset':''}`}><div class={`font-medium ${d.isToday?'text-[var(--accent)]':'text-[var(--text-primary)]'}`}>{day}</div><div class="text-[9px]">{d.moon.emoji}</div><div class={`text-[9px] latin ${d.isToday?'text-teal-700':'text-[var(--text-dim)]'}`}>{d.range>0?d.range.toFixed(0):'—'}</div></td>})}</tr>)})()}</tbody>
+        </table></div>
       </section>
 
-      <!-- 7-day forecast -->
-      <section class="mb-8">
-        <h2 class="text-sm font-semibold text-[var(--text-primary)] mb-3">توقعات ٧ أيام</h2>
-        <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]">
-          <table class="w-full text-xs">
-            <thead>
-              <tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]">
-                <th class="text-right px-3 py-2 font-medium">اليوم</th>
-                <th class="text-center px-2 py-2 font-medium w-6">🌙</th>
-                <th class="text-center px-2 py-2 font-medium">المدى</th>
-                <th class="text-right px-3 py-2 font-medium" colspan="2">المد المرتفع</th>
-                <th class="text-right px-3 py-2 font-medium" colspan="2">المد المنخفض</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-[var(--border-subtle)]">
-              {forecast.map((day, i) => (
-                <tr class={`${i === 0 ? 'bg-teal-50/50' : ''} hover:bg-[var(--surface-elevated)] transition-colors`}>
-                  <td class="px-3 py-2.5">
-                    <div class="font-medium text-[var(--text-primary)]">{day.label}</div>
-                    <div class="text-[10px] text-[var(--text-dim)] latin">{day.dateStr}</div>
-                  </td>
-                  <td class="text-center px-2 py-2.5 text-sm">{day.moon.emoji}</td>
-                  <td class="text-center px-2 py-2.5">
-                    <span class="font-medium text-[var(--text-primary)] latin">{day.range}</span>
-                    <span class="text-[10px] text-[var(--text-dim)]"> سم</span>
-                  </td>
-                  <td class="px-2 py-2.5" colspan="2">
-                    {day.highs.length > 0 ? day.highs.map(h => (
-                      <div class="flex items-center gap-1.5">
-                        <span class="text-[var(--accent)] font-medium latin w-10 text-right">{formatTime(h.time, tzOffset)}</span>
-                        <span class="text-[var(--text-dim)] latin">{h.height.toFixed(0)} سم</span>
-                      </div>
-                    )) : <span class="text-[var(--text-dim)]">—</span>}
-                  </td>
-                  <td class="px-2 py-2.5" colspan="2">
-                    {day.lows.length > 0 ? day.lows.map(l => (
-                      <div class="flex items-center gap-1.5">
-                        <span class="text-red-500 font-medium latin w-10 text-right">{formatTime(l.time, tzOffset)}</span>
-                        <span class="text-[var(--text-dim)] latin">{l.height.toFixed(0)} سم</span>
-                      </div>
-                    )) : <span class="text-[var(--text-dim)]">—</span>}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- Constituents (collapsible) -->
-      <details class="mb-8 group">
-        <summary class="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors select-none">
-          <span class="text-xs transition-transform group-open:rotate-90">&#9654;</span>
-          المركبات التوافقية (17)
-        </summary>
-        <div class="mt-3 overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
-          <table class="w-full text-sm">
-            <thead class="bg-[var(--surface-elevated)] text-[var(--text-muted)] text-xs">
-              <tr><th class="text-right px-4 py-2 font-medium">المركبة</th><th class="text-right px-4 py-2 font-medium latin">السعة (سم)</th><th class="text-right px-4 py-2 font-medium latin">الطور (&deg;)</th></tr>
-            </thead>
-            <tbody class="divide-y divide-[var(--border-subtle)]">
-              {Object.entries(constituents).map(([name, c]: [string, { amp: number; phase: number }]) => (
-                <tr class="hover:bg-[var(--surface-elevated)] transition-colors">
-                  <td class="px-4 py-2 text-[var(--text-primary)] font-medium latin">{name}</td>
-                  <td class="px-4 py-2 text-[var(--text-secondary)] latin">{c.amp.toFixed(2)}</td>
-                  <td class="px-4 py-2 text-[var(--text-secondary)] latin">{c.phase.toFixed(1)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <!-- Constituents -->
+      <details class="mb-5 group"><summary class="flex items-center gap-2 cursor-pointer text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors select-none"><span class="text-[10px] transition-transform group-open:rotate-90">&#9654;</span>المركبات التوافقية (17)</summary>
+        <div class="mt-2 overflow-x-auto rounded-lg border border-[var(--border-subtle)]"><table class="w-full text-xs"><thead class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><tr><th class="text-right px-3 py-1.5">المركبة</th><th class="text-right px-3 py-1.5 latin">السعة (سم)</th><th class="text-right px-3 py-1.5 latin">الطور (&deg;)</th></tr></thead><tbody class="divide-y divide-[var(--border-subtle)]">{Object.entries(constituents).map(([name,c]:[string,{amp:number;phase:number}])=><tr class="hover:bg-[var(--surface-elevated)]"><td class="px-3 py-1.5 font-medium latin">{name}</td><td class="px-3 py-1.5 text-[var(--text-secondary)] latin">{c.amp.toFixed(2)}</td><td class="px-3 py-1.5 text-[var(--text-secondary)] latin">{c.phase.toFixed(1)}</td></tr>)}</tbody></table></div>
       </details>
 
-      <p class="text-xs text-[var(--text-dim)] leading-relaxed border-t border-[var(--border-subtle)] pt-6">
-        ⚠️ تقديرات فلكية باستخدام النموذج التوافقي. قد تختلف القيم الفعلية. المصدر: {port.source}
-      </p>
-
-      <div class="pt-6 text-center">
-        <a href={BASE} class="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">&larr; العودة للرئيسية</a>
+      <div class="border-t border-[var(--border-subtle)] pt-3 text-[10px] text-[var(--text-dim)] leading-relaxed">
+        <p>⚠️ تقديرات فلكية. <a href={`${BASE}disclaimer`} class="text-[var(--accent)] hover:underline">إخلاء المسؤولية</a>. المصدر: {port.source}</p>
       </div>
     </main>
   </div>
