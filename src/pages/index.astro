@@ -40,6 +40,11 @@ const featuredPorts = await Promise.all(
 );
 
 const moon = moonPhase(new Date());
+
+// Lightweight port list for the overview map (client-side)
+const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number; lon: number }) => ({
+  id: p.id, name: p.name_ar, lat: p.lat, lon: p.lon
+}));
 ---
 
 <BaseLayout
@@ -52,18 +57,18 @@ const moon = moonPhase(new Date());
     <header class="border-b border-[var(--border-subtle)] bg-gradient-to-b from-teal-50/50 to-white">
       <div class="max-w-6xl mx-auto px-4 py-12 sm:py-18">
         <!-- Top nav -->
-        <div class="flex items-center gap-4 mb-10">
-          <a href={BASE} class="flex items-center gap-2 shrink-0">
-            <span class="text-xl font-bold text-[var(--text-primary)]">ArabTides</span>
+        <nav class="flex items-center gap-4 mb-10" aria-label="التنقّل الرئيسي">
+          <a href={BASE} class="flex items-center gap-2 shrink-0" aria-label="ArabTides — الصفحة الرئيسية">
+            <span class="text-xl font-bold text-[var(--text-primary)] display">ArabTides</span>
           </a>
           <span class="text-xs text-[var(--text-dim)] hidden sm:inline">المد والجزر العربي</span>
           <div class="flex-1"></div>
           <span class="text-xs text-[var(--text-dim)]">{placesIndex.length} ميناء عربي</span>
-        </div>
+        </nav>
 
         <!-- Hero content -->
         <div class="max-w-2xl">
-          <h1 class="text-3xl sm:text-4xl font-bold text-[var(--text-primary)] leading-tight">
+          <h1 class="text-3xl sm:text-4xl font-bold text-[var(--text-primary)] leading-tight display">
             مواقيت المد والجزر<br/>للموانئ العربية
           </h1>
           <p class="text-[var(--text-secondary)] mt-3 max-w-lg leading-relaxed">
@@ -73,12 +78,14 @@ const moon = moonPhase(new Date());
 
         <!-- Search -->
         <div class="mt-6 max-w-md">
+          <label for="port-search" class="sr-only">ابحث عن ميناء</label>
           <div class="relative">
             <input
               type="search"
               id="port-search"
               placeholder="ابحث عن ميناء... دبي، جدة، الإسكندرية..."
               autocomplete="off"
+              aria-controls="ports-list"
               class="w-full px-5 py-3.5 text-sm rounded-xl
                      bg-white border border-[var(--border-standard)]
                      text-[var(--text-primary)]
@@ -86,20 +93,30 @@ const moon = moonPhase(new Date());
                      focus:outline-none focus:border-[var(--accent)] focus:ring-3 focus:ring-teal-100
                      shadow-sm transition-all"
             />
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-dim)] text-sm">🔍</span>
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-dim)] text-sm" aria-hidden="true">🔍</span>
           </div>
         </div>
 
         <!-- Moon widget -->
         <div class="mt-4 flex items-center gap-2 text-xs text-[var(--text-dim)]">
-          <span>{moon.emoji}</span>
+          <span aria-hidden="true">{moon.emoji}</span>
           <span>{moon.phaseNameAr}</span>
           <span class="latin">{Math.round(moon.illumination * 100)}%</span>
         </div>
       </div>
     </header>
 
-    <main class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
+    <main id="main" class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
+
+      <!-- Ports overview map -->
+      <section class="mb-12" aria-label="خريطة الموانئ">
+        <div class="flex items-center gap-2 mb-5">
+          <h2 class="text-base font-semibold text-[var(--text-primary)]">خريطة الموانئ</h2>
+          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
+        </div>
+        <div id="ports-map" class="port-map w-full border border-[var(--border-subtle)]" style="height:360px"></div>
+        <p class="text-[10px] text-[var(--text-dim)] mt-1.5 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
+      </section>
 
       <!-- Featured ports -->
       <section class="mb-12">
@@ -213,6 +230,36 @@ const moon = moonPhase(new Date());
     </footer>
   </div>
 </BaseLayout>
+
+<!-- Leaflet overview map (client-only, free OSM tiles) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script is:inline define:vars={{ ports: mapPorts, base: BASE }}>
+  (function () {
+    function initMap() {
+      var el = document.getElementById('ports-map');
+      if (!el || typeof L === 'undefined' || !ports.length) return;
+      var map = L.map(el, { scrollWheelZoom: false, attributionControl: false });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18, attribution: '&copy; OpenStreetMap'
+      }).addTo(map);
+      var pts = [];
+      ports.forEach(function (p) {
+        var m = L.circleMarker([p.lat, p.lon], {
+          radius: 5, color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.65, weight: 1.5
+        }).addTo(map);
+        m.bindPopup('<a href="' + base + 'ports/' + p.id + '" style="color:#0d9488;font-weight:600">' + p.name + '</a>');
+        pts.push([p.lat, p.lon]);
+      });
+      map.fitBounds(pts, { padding: [30, 30] });
+      map.on('click', function () { map.scrollWheelZoom.enable(); });
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMap);
+    } else { initMap(); }
+  })();
+</script>
 
 <script>
   const search = document.getElementById('port-search') as HTMLInputElement | null;

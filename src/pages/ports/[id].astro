@@ -79,24 +79,40 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
 <BaseLayout title={title} description={`مواقيت المد والجزر لـ${port.name_ar}`}>
   <div class="min-h-screen flex flex-col bg-[var(--surface-page)]">
 
-    <header class="sticky top-0 z-10 backdrop-blur-md bg-white/95 border-b border-[var(--border-subtle)] shadow-sm">
-      <div class="max-w-4xl mx-auto px-3 py-2 flex items-center gap-2">
-        <a href={BASE} class="text-[var(--text-muted)] hover:text-[var(--accent)] shrink-0 text-sm">&larr;</a>
-        <div class="min-w-0"><div class="text-sm font-semibold truncate">{port.name_ar}</div><div class="text-[10px] text-[var(--text-dim)] latin">{port.name_en}</div></div>
+    <header class="sticky top-0 z-10 backdrop-blur-md bg-white/95 border-b border-[var(--border-subtle)]" style="box-shadow:var(--shadow-sm)">
+      <nav class="max-w-4xl mx-auto px-3 py-2 flex items-center gap-2" aria-label="التنقّل الرئيسي">
+        <a href={BASE} class="text-[var(--text-muted)] hover:text-[var(--accent)] shrink-0 text-sm" aria-label="العودة إلى الصفحة الرئيسية">&larr;</a>
+        <div class="min-w-0"><div class="text-sm font-semibold truncate display">{port.name_ar}</div><div class="text-[10px] text-[var(--text-dim)] latin" lang="en">{port.name_en}</div></div>
         <div class="flex-1"></div>
-        <span class="text-sm">{moon.emoji}</span>
+        <span class="text-sm" aria-hidden="true">{moon.emoji}</span>
         <span class="text-[10px] text-[var(--text-dim)] hidden sm:inline">{hijri.day} {hijri.monthAr}</span>
-      </div>
-      <div class="flex overflow-x-auto gap-1 px-3 pb-2 scrollbar-hide">
+      </nav>
+      <div class="flex overflow-x-auto gap-1 px-3 pb-2 scrollbar-hide" role="list" aria-label="أيام التوقعات">
         {forecast.map((day,i) => (
-          <span class={`shrink-0 px-3 py-1.5 rounded-lg text-xs text-center min-w-[60px] ${i===0?'bg-[var(--accent)] text-white font-medium':'bg-[var(--surface-elevated)] text-[var(--text-secondary)]'}`}>
-            <div>{day.label}</div><div class="text-[10px] opacity-70 latin">{day.dateStr}</div>
+          <span role="listitem" class={`shrink-0 px-3 py-1.5 rounded-lg text-xs text-center min-w-[60px] ${i===0?'bg-[var(--accent)] text-white font-medium':'bg-[var(--surface-elevated)] text-[var(--text-secondary)]'}`}>
+            <span class="block">{day.label}</span><span class="block text-[10px] opacity-70 latin" lang="en">{day.dateStr}</span>
           </span>
         ))}
       </div>
     </header>
 
-    <main class="flex-1 max-w-4xl mx-auto px-3 py-4 w-full">
+    <main id="main" class="flex-1 max-w-4xl mx-auto px-3 py-4 w-full">
+
+      <!-- Page title + location -->
+      <div class="mb-5">
+        <p class="text-xs text-[var(--text-muted)] mb-1">{countryNames[port.country] || port.country}</p>
+        <h1 class="text-2xl font-bold display leading-tight">{port.name_ar}</h1>
+        <p class="text-[11px] text-[var(--text-dim)] mt-1">
+          <span class="latin" lang="en">{port.lat.toFixed(2)}°, {port.lon.toFixed(2)}°</span>
+          <span class="mx-1">·</span>{port.timezone}
+        </p>
+      </div>
+
+      <!-- Location map -->
+      <section class="mb-5" aria-label="موقع الميناء على الخريطة">
+        <div id="map" class="port-map w-full border border-[var(--border-subtle)]" data-lat={port.lat} data-lon={port.lon} data-name={port.name_ar}></div>
+        <p class="text-[10px] text-[var(--text-dim)] mt-1.5 text-center">خريطة الموقع · بيانات &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
+      </section>
 
       <!-- Tide chart -->
       <section class="mb-5"><div class="flex items-center gap-2 mb-2">
@@ -104,8 +120,8 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
         <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-[var(--accent-muted)] text-[var(--accent)]">{tideClass.typeAr}</span>
         <div class="flex-1"></div><span class="text-[10px] text-[var(--text-dim)] latin">{today.toLocaleDateString('en-GB')}</span>
       </div>
-      <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 overflow-x-auto"><div class="chart-ltr">
-        <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto">
+      <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-3 overflow-x-auto" style="box-shadow:var(--shadow-sm)"><div class="chart-ltr">
+        <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img" aria-label={`منحنى المد والجزر لـ${port.name_ar}، نوع المد: ${tideClass.typeAr}`}>
           {[0,.25,.5,.75,1].map(f=>{const y=PAD_T+plotH*(1-f);return(<><line x1={PAD_L} y1={y} x2={CHART_W-PAD_R} y2={y} stroke="#e8ecf0" stroke-width=".5"/><text x={PAD_L-4} y={y+4} text-anchor="end" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{(hMin+hRange*f).toFixed(0)}</text></>);})}
           {[0,3,6,9,12,15,18,21,24].map(h=><text x={xScale(Math.round(h*curve.length/24))} y={CHART_H-4} text-anchor="middle" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>)}
           <line x1={PAD_L} y1={yScale(0)} x2={CHART_W-PAD_R} y2={yScale(0)} stroke="#cbd5e1" stroke-width=".5" stroke-dasharray="4,3"/>
@@ -185,4 +201,31 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
       </div>
     </main>
   </div>
+
+  <!-- Leaflet map (client-only, free OSM tiles, no API key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script is:inline>
+    (function () {
+      function initMap() {
+        var el = document.getElementById('map');
+        if (!el || typeof L === 'undefined') return;
+        var lat = parseFloat(el.dataset.lat), lon = parseFloat(el.dataset.lon);
+        var map = L.map(el, { scrollWheelZoom: false, attributionControl: false }).setView([lat, lon], 9);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; OpenStreetMap'
+        }).addTo(map);
+        L.circleMarker([lat, lon], {
+          radius: 8, color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.6, weight: 2
+        }).addTo(map).bindPopup(el.dataset.name);
+        // enable scroll-zoom only after click, so page scroll isn't hijacked
+        map.on('click', function () { map.scrollWheelZoom.enable(); });
+        setTimeout(function () { map.invalidateSize(); }, 200);
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMap);
+      } else { initMap(); }
+    })();
+  </script>
 </BaseLayout>
