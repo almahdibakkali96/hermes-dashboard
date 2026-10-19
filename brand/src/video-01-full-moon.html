@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو بدر 26 أكتوبر</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480. */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(900px 700px at 80% 5%, rgba(45, 212, 191, .20), transparent 60%),
+                linear-gradient(170deg, #0b2540 0%, #0f3d5c 62%, #0d5c63 100%); }
+  .scene { position: absolute; inset: 0; padding: 0 110px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .star { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+  #waves { position: absolute; left: -1080px; bottom: 0; width: 3240px; height: 260px; }
+  #moon { position: absolute; width: 520px; height: 520px; left: 280px; border-radius: 50%;
+    background: radial-gradient(circle at 38% 35%, #fff9e0 0%, #fde68a 48%, #f3c64a 100%);
+    box-shadow: 0 0 160px 50px rgba(253, 230, 138, .32); }
+  #moon::before, #moon::after { content: ''; position: absolute; border-radius: 50%; background: rgba(205, 160, 50, .25); }
+  #moon::before { width: 110px; height: 110px; top: 120px; left: 130px; }
+  #moon::after { width: 70px; height: 70px; top: 300px; left: 300px; }
+
+  /* Scene 1 */
+  #s1 .t1 { margin-top: 300px; font-size: 200px; line-height: 1; }
+  #s1 .t2 { font-size: 120px; margin-top: 10px; }
+  #s1 .t3 { margin-top: 40px; font-size: 64px; color: var(--lagoon); font-weight: 700; }
+  /* Scene 2 */
+  #s2 .h { margin-top: 300px; font-size: 104px; line-height: 1.25; }
+  #s2 .bodies { position: relative; width: 860px; height: 300px; margin-top: 110px; }
+  #s2 .b { position: absolute; top: 150px; border-radius: 50%; transform: translate(-50%, -50%); }
+  #s2 .sun { left: 90px; width: 170px; height: 170px; background: radial-gradient(circle, #fff3c4, #fbbf24 60%, #f59e0b); box-shadow: 0 0 80px 20px rgba(251, 191, 36, .45); }
+  #s2 .earth { left: 470px; width: 130px; height: 130px; background: radial-gradient(circle at 35% 35%, #5eead4, #0d9488 55%, #0b4f6c); }
+  #s2 .moon2 { left: 760px; width: 64px; height: 64px; background: #fde68a; box-shadow: 0 0 40px 10px rgba(253, 230, 138, .4); }
+  #s2 .line { position: absolute; top: 148px; left: 90px; height: 4px; width: 670px; background: linear-gradient(90deg, rgba(253,230,138,.9), rgba(45,212,191,.9)); transform-origin: left; }
+  #s2 .p { margin-top: 90px; font-size: 60px; line-height: 1.5; color: #cbd5e1; }
+  #s2 .tag { margin-top: 30px; font-size: 72px; color: var(--sand); }
+  /* Scene 3 */
+  #s3 .h { margin-top: 270px; font-size: 76px; color: #cbd5e1; }
+  #s3 .big { font-size: 150px; line-height: 1.1; margin-top: 10px; }
+  #s3 .bars { width: 860px; margin-top: 90px; display: flex; flex-direction: column; gap: 46px; }
+  #s3 .bar { text-align: start; }
+  #s3 .bar .row { display: flex; align-items: baseline; justify-content: space-between; font-size: 58px; margin-bottom: 16px; }
+  #s3 .bar .v { font-family: var(--font-num); font-weight: 800; font-size: 70px; color: var(--lagoon); direction: ltr; }
+  #s3 .track { height: 46px; border-radius: 23px; background: rgba(255, 255, 255, .1); overflow: hidden; display: flex; }
+  #s3 .fill { height: 100%; border-radius: 23px; background: linear-gradient(270deg, #0d9488, #2dd4bf); }
+  /* Scene 4 */
+  #s4 .h { margin-top: 300px; font-size: 96px; }
+  #s4 .dates { margin-top: 50px; font-size: 230px; font-weight: 800; line-height: 1; color: #4ade80; }
+  #s4 .m { font-size: 90px; margin-top: 10px; }
+  #s4 .fish { display: flex; gap: 22px; margin-top: 90px; direction: ltr; }
+  #s4 .fish svg { width: 120px; height: 84px; }
+  #s4 .p { margin-top: 60px; font-size: 56px; color: #cbd5e1; }
+  /* Scene 5 */
+  #s5 { justify-content: center; padding-bottom: 260px; }
+  #s5 img { width: 300px; height: 300px; }
+  #s5 .wm { font-family: var(--font-num); font-weight: 800; font-size: 120px; letter-spacing: -.02em; margin-top: 40px; direction: ltr; }
+  #s5 .p { font-size: 70px; margin-top: 50px; }
+  #s5 .url { font-family: var(--font-num); font-weight: 800; font-size: 96px; color: var(--lagoon); margin-top: 24px; direction: ltr; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="stars"></div>
+  <div id="moon"></div>
+
+  <div class="scene" id="s1">
+    <div class="d t1">بدر</div>
+    <div class="d t2"><span class="k" style="font-weight:800;color:var(--sand)">26</span> أكتوبر</div>
+    <div class="t3">أقوى مد في الشهر 🌊</div>
+  </div>
+
+  <div class="scene" id="s2">
+    <div class="d h">الشمس والأرض والقمر<br>على خط واحد</div>
+    <div class="bodies"><div class="line"></div><div class="b sun"></div><div class="b earth"></div><div class="b moon2"></div></div>
+    <div class="p">مد أعلى، وجزر أخفض</div>
+    <div class="d tag">= المد الربيعي</div>
+  </div>
+
+  <div class="scene" id="s3">
+    <div class="h">الفرق بين المد والجزر</div>
+    <div class="d big">يصل إلى <span class="k" style="color:var(--lagoon)">4</span> م</div>
+    <div class="bars">
+      <div class="bar" data-v="3.97"><div class="row"><span>الكويت</span><span class="v"><span class="n">0.00</span> م</span></div><div class="track"><div class="fill"></div></div></div>
+      <div class="bar" data-v="3.80"><div class="row"><span>أم قصر</span><span class="v"><span class="n">0.00</span> م</span></div><div class="track"><div class="fill"></div></div></div>
+      <div class="bar" data-v="2.98"><div class="row"><span>الدار البيضاء</span><span class="v"><span class="n">0.00</span> م</span></div><div class="track"><div class="fill"></div></div></div>
+    </div>
+  </div>
+
+  <div class="scene" id="s4">
+    <div class="d h">أفضل أيام الصيد 🎣</div>
+    <div class="dates k">25–28</div>
+    <div class="d m">أكتوبر</div>
+    <div class="fish"></div>
+    <div class="p">في معظم الموانئ العربية</div>
+  </div>
+
+  <div class="scene" id="s5">
+    <img src="../logo/arabtides-mark.svg" alt="">
+    <div class="wm">ArabTides</div>
+    <div class="p">ابحث عن ميناءك</div>
+    <div class="url">arabtides.com</div>
+  </div>
+
+  <svg id="waves" viewBox="0 0 3240 260" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 110c135-50 270-50 405 0s270 50 405 0 270-50 405 0 270 50 405 0 270-50 405 0 270 50 405 0 270-50 405 0 270 50 405 0v150H0z" fill="rgba(45,212,191,.10)"/>
+    <path id="w2" d="M0 160c135-40 270-40 405 0s270 40 405 0 270-40 405 0 270 40 405 0 270-40 405 0 270 40 405 0 270-40 405 0 270 40 405 0v100H0z" fill="rgba(45,212,191,.16)"/>
+  </svg>
+</div>
+
+<script>
+  var DURATION = 18.5;
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  // progress of t through [a, b], eased
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  // in at [a, a+d], out at [b-d, b]
+  var vis = function (t, a, b, d) { d = d || .35; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+
+  // Deterministic stars
+  var starsHtml = '', seed = 7;
+  var rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  for (var i = 0; i < 46; i++) starsHtml += '<div class="star" style="left:' + (rnd() * 1080) + 'px;top:' + (rnd() * 1300) + 'px" data-p="' + (rnd() * 6.28) + '"></div>';
+  $('#stars').innerHTML = starsHtml;
+  var fishSvg = function (c) { return '<svg viewBox="0 0 20 14"><path d="M1 7c2.6-4 7.6-5 12-2.2L17.5 2v10L13 9.2C8.6 12 3.6 11 1 7z" fill="' + c + '" stroke="' + (c === 'none' ? 'rgba(255,255,255,.35)' : c) + '" stroke-width="1.2" stroke-linejoin="round"/></svg>'; };
+
+  window.renderAt = function (t) {
+    // Ambient: stars twinkle, waves drift
+    document.querySelectorAll('.star').forEach(function (s) { s.style.opacity = .25 + .35 * (1 + Math.sin(t * 2 + +s.dataset.p)) / 2; });
+    $('#waves').style.transform = 'translateX(' + ((t * 60) % 810) + 'px)';
+    $('#w2').style.transform = 'translateX(' + (-(t * 40) % 810) + 'px)';
+
+    // Moon: rises (0–1.6s), stays behind scene 1, then drifts up and fades for scene 2
+    var rise = seg(t, 0, 1.6, out), leave = seg(t, 2.8, 3.6);
+    var my = 1700 - rise * 700 - leave * 1300;
+    $('#moon').style.top = my + 'px';
+    $('#moon').style.opacity = 1 - leave;
+
+    // Scene 1 (0–3.4)
+    var s1 = vis(t, 0.5, 3.4);
+    show($('#s1 .t1'), Math.min(s1, seg(t, .5, 1)), 40 * (1 - seg(t, .5, 1.1, out)));
+    show($('#s1 .t2'), Math.min(s1, seg(t, .8, 1.3)), 40 * (1 - seg(t, .8, 1.4, out)));
+    show($('#s1 .t3'), Math.min(s1, seg(t, 1.4, 1.9)), 30 * (1 - seg(t, 1.4, 2, out)));
+
+    // Scene 2 (3.2–7.2): moon swings down into line with sun and earth
+    var s2 = vis(t, 3.2, 7.2);
+    $('#s2').style.opacity = s2;
+    var align = seg(t, 3.8, 5.2);
+    $('#s2 .moon2').style.top = (150 - 170 * (1 - align)) + 'px';
+    $('#s2 .line').style.transform = 'scaleX(' + seg(t, 5.0, 5.6, out) + ')';
+    show($('#s2 .p'), seg(t, 5.3, 5.8), 20 * (1 - seg(t, 5.3, 5.9, out)));
+    show($('#s2 .tag'), seg(t, 5.8, 6.3), 20 * (1 - seg(t, 5.8, 6.4, out)));
+
+    // Scene 3 (7.0–11.6): bars grow, numbers count up
+    var s3 = vis(t, 7.0, 11.6);
+    $('#s3').style.opacity = s3;
+    show($('#s3 .big'), seg(t, 7.3, 7.8), 30 * (1 - seg(t, 7.3, 7.9, out)));
+    document.querySelectorAll('#s3 .bar').forEach(function (b, i) {
+      var v = +b.dataset.v, p = seg(t, 8.0 + i * .45, 9.4 + i * .45);
+      b.querySelector('.fill').style.width = (p * v / 4 * 100) + '%';
+      b.querySelector('.n').textContent = (p * v).toFixed(2);
+      b.style.opacity = seg(t, 7.8 + i * .45, 8.2 + i * .45);
+    });
+
+    // Scene 4 (11.4–15.4): fish fill one by one
+    var s4 = vis(t, 11.4, 15.4);
+    $('#s4').style.opacity = s4;
+    show($('#s4 .dates'), seg(t, 11.8, 12.3), 30 * (1 - seg(t, 11.8, 12.4, out)));
+    show($('#s4 .m'), seg(t, 12.0, 12.5));
+    var nFish = Math.round(clamp((t - 12.5) / 1.5) * 5), fh = '';
+    for (var f = 1; f <= 5; f++) fh += fishSvg(f <= nFish ? '#4ade80' : 'none');
+    $('#s4 .fish').innerHTML = fh;
+    show($('#s4 .p'), seg(t, 14.0, 14.4));
+
+    // Scene 5 (15.2–end): logo and URL
+    var s5 = seg(t, 15.2, 15.7, out);
+    $('#s5').style.opacity = s5;
+    $('#s5 img').style.transform = 'scale(' + (.6 + .4 * seg(t, 15.2, 16.0, out)) + ')';
+    show($('#s5 .p'), seg(t, 16.0, 16.4), 20 * (1 - seg(t, 16.0, 16.5, out)));
+    show($('#s5 .url'), seg(t, 16.3, 16.7), 20 * (1 - seg(t, 16.3, 16.8, out)));
+  };
+  window.DURATION = DURATION;
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>

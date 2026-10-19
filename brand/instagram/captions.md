@@ -58,3 +58,19 @@ Post them in this order. The full-moon post is date-sensitive: publish it **befo
   36 ميناءً عربياً · مجاناً
   👇 ابحث عن ميناءك
 - **Link:** https://www.arabtides.com
+
+---
+
+## Reel — Full moon (`../video/video-01-full-moon.mp4`, 18.5 s)
+
+Post together with (or the day after) post 2, **before Sunday 25 October**. No voice: add a trending sound in Instagram (the file has a silent audio track). In "Edit cover", upload `../video/video-01-cover.png`, because the first frame is almost empty.
+
+**Caption:**
+
+بدر الإثنين 26 أكتوبر 🌕 وأقوى مد في الشهر
+
+في الكويت يقترب الفرق بين المد والجزر من 4 أمتار. أفضل أيام الصيد من 25 إلى 28 أكتوبر.
+
+ابحث عن ميناءك على arabtides.com، والرابط في البايو 🎣
+
+#المد_والجزر #صيد_السمك #البدر

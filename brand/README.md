@@ -10,6 +10,8 @@
 | Instagram profile picture 1080×1080 | `instagram/00-profile-picture.png` |
 | Launch carousel, 7 slides 1080×1350 | `instagram/01-launch/` |
 | Full-moon carousel, 7 slides 1080×1350 | `instagram/02-full-moon/` |
+| Full-moon Reel, 1080×1920, 18.5 s | `video/video-01-full-moon.mp4` |
+| Reel cover image | `video/video-01-cover.png` |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours
@@ -35,4 +37,12 @@ Every PNG is rendered from the HTML in `src/`. Edit the text there, then run fro
 bash brand/render.sh
 ```
 
-It uses your installed Chrome. To preview all the slides of a post in the browser, open for example `src/ig-02-full-moon.html?all`.
+It uses your installed Chrome.
+
+Videos render frame by frame from `src/video-*.html` (each exposes `renderAt(seconds)`), then ffmpeg encodes them:
+
+```
+node brand/render-video.mjs video-01-full-moon
+```
+
+This needs Node 22+ and ffmpeg on PATH. To preview one moment in the browser, open for example `src/video-01-full-moon.html?t=10`. To preview all the slides of a post in the browser, open for example `src/ig-02-full-moon.html?all`.
