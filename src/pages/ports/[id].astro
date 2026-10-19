@@ -267,7 +267,7 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
       <section class="mb-5"><h2 class="text-sm font-semibold mb-2">📅 تقويم {monthNames[month]} {year}</h2>
         <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]"><table class="w-full text-[10px]">
           <thead><tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><th class="p-1">السبت</th><th class="p-1">الجمعة</th><th class="p-1">الخميس</th><th class="p-1">الأربعاء</th><th class="p-1">الثلاثاء</th><th class="p-1">الإثنين</th><th class="p-1">الأحد</th></tr></thead>
-          <tbody>{(()=>{const fd=new Date(year,month,1).getDay();const off=(6-fd)%7;const wks:number[][]=[];let wk:number[]=Array(off).fill(0);for(let d=1;d<=daysInMonth;d++){wk.push(d);if(wk.length===7||d===daysInMonth){while(wk.length<7)wk.push(0);wks.push(wk);wk=[]}}return wks.map(w=><tr class="divide-x divide-[var(--border-subtle)] border-t border-[var(--border-subtle)]">{w.map(day=>{if(day===0)return<td class="p-1.5 text-center"></td>;const d=monthDays[day-1];return<td class={`p-1.5 text-center ${d.isToday?'bg-teal-50 ring-1 ring-teal-300 ring-inset':''}`}><div class={`font-medium ${d.isToday?'text-[var(--accent)]':'text-[var(--text-primary)]'}`}>{day}</div><div class="text-[9px]">{d.moon.emoji}</div><div class="text-[7px] leading-tight"><span style={`color:${d.fishColor}`}>{d.fullFish}</span><span class="opacity-15">{d.emptyFish}</span></div></td>})}</tr>)})()}</tbody>
+          <tbody>{(()=>{const fd=new Date(year,month,1).getDay();const off=(6-fd)%7;const wks:number[][]=[];let wk:number[]=Array(off).fill(0);for(let d=1;d<=daysInMonth;d++){wk.push(d);if(wk.length===7||d===daysInMonth){while(wk.length<7)wk.push(0);wks.push(wk);wk=[]}}return wks.map(w=><tr class="divide-x divide-[var(--border-subtle)] border-t border-[var(--border-subtle)]">{w.map(day=>{if(day===0)return<td class="p-1.5 text-center"></td>;const d=monthDays[day-1];return<td class={`p-1.5 text-center ${d.isToday?'bg-teal-50 ring-1 ring-teal-300 ring-inset':''}`} data-day={day} data-rating={d.fishRating} data-fullfish={d.fullFish} data-color={d.fishColor} data-label={d.fishLabel}><div class={`font-medium ${d.isToday?'text-[var(--accent)]':'text-[var(--text-primary)]'}`}>{day}</div><div class="text-[9px]">{d.moon.emoji}</div><div class="text-[7px] leading-tight"><span style={`color:${d.fishColor}`}>{d.fullFish}</span><span class="opacity-15">{d.emptyFish}</span></div></td>})}</tr>)})()}</tbody>
         </table></div>
       </section>
 
@@ -275,20 +275,8 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
       <section class="mb-5">
         <h2 class="text-sm font-semibold mb-2">🎣 خلاصة الصيد لهذا الشهر</h2>
         <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-4" style="box-shadow:var(--shadow-sm)">
-          {bestDays.length > 0 ? (
-            <div class="mb-3">
-              <div class="text-xs font-semibold text-[var(--text-primary)] mb-1.5">✅ أفضل أيام الصيد</div>
-              <div class="flex flex-wrap gap-2">
-                {bestDays.map(d => (
-                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium" style={`background:${d.fishColor}1a;color:${d.fishColor};border:1px solid ${d.fishColor}40`}>
-                    {monthNames[month]} {d.day}
-                    <span class="text-[10px]">{d.fullFish}</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-          ) : null}
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]">
+          <div id="fish-conclusion"><p class="text-xs text-[var(--text-dim)]">تحميل...</p></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]" id="fish-tips">
             <div class="p-2.5 rounded-lg bg-[var(--surface-elevated)]">
               <div class="font-semibold text-[var(--text-primary)] mb-1">📖 التفسير</div>
               <p class="text-[var(--text-dim)] leading-relaxed">أفضل الصيد عند اكتمال القمر (بدر) وميلاده (محاق) — قوى الجذب ترفع المد وتحرّك الماء، فتنشط الأسماك على التغذي. الأيام البعيدة عن هذه الفترات يكون الصيد فيها أضعف.</p>
@@ -311,6 +299,44 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
       </div>
     </main>
   </div>
+
+  <!-- Fish conclusion — client-side, reads calendar data -->
+  <script is:inline>
+    (function () {
+      var container = document.getElementById('fish-conclusion');
+      if (!container) return;
+      // Read all calendar cells with data attributes
+      var cells = document.querySelectorAll('td[data-day][data-rating]');
+      if (!cells.length) { container.innerHTML = '<p class="text-xs text-[var(--text-dim)]">لا توجد بيانات</p>'; return; }
+      var days = [];
+      cells.forEach(function (td) {
+        var day = parseInt(td.getAttribute('data-day'));
+        var rating = parseInt(td.getAttribute('data-rating'));
+        var fullfish = td.getAttribute('data-fullfish') || '';
+        var color = td.getAttribute('data-color') || '#0d9488';
+        if (day && rating) days.push({ day: day, rating: rating, fullfish: fullfish, color: color });
+      });
+      // Sort by rating descending, take top 6
+      days.sort(function (a, b) { return b.rating - a.rating; });
+      var top = days.filter(function (d) { return d.rating >= 4; }).slice(0, 6);
+      var now = new Date();
+      var monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+      var html = '';
+      if (top.length > 0) {
+        html += '<div class="text-xs font-semibold text-[var(--text-primary)] mb-2">✅ أفضل أيام الصيد في ' + monthNames[now.getMonth()] + '</div>';
+        html += '<div class="flex flex-wrap gap-2">';
+        top.forEach(function (d) {
+          html += '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium" style="background:' + d.color + '1a;color:' + d.color + ';border:1px solid ' + d.color + '40">';
+          html += monthNames[now.getMonth()] + ' ' + d.day + ' <span class="text-[10px]">' + d.fullfish + '</span>';
+          html += '</span>';
+        });
+        html += '</div>';
+      } else {
+        html += '<p class="text-xs text-[var(--text-dim)]">لا توجد أيام ممتازة هذا الشهر</p>';
+      }
+      container.innerHTML = html;
+    })();
+  </script>
 
   <!-- Leaflet map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
