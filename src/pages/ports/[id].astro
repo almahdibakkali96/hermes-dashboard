@@ -75,25 +75,37 @@ const monthDaysRaw = Array.from({length: daysInMonth}, (_,i) => {
   return { day: i+1, range, moon: m, isToday: i+1===today.getDate() };
 });
 
-// Fish rating: moon proximity to new/full (0-4) + tide range relative to month max (0-2)
+// Fish rating: 1-5 scale, moon phase (0-3) + tide range relative to month max (0-2)
+// Colors: 5=green(excellent), 4=teal(good), 3=amber(average), 2=orange(poor), 1=red(bad)
 const maxMonthRange = Math.max(...monthDaysRaw.map(d => d.range), 1);
-const fishEmojis = ['', '🐟', '🐟🐟', '🐟🐟🐟', '🐟🐟🐟🐟', '🐟🐟🐟🐟🐟', '🐟🐟🐟🐟🐟🐟'];
+const fishColors = ['', '#ef4444', '#f97316', '#f59e0b', '#0d9488', '#16a34a'];
+const fishLabels = ['', 'ضعيف', 'أقل من المتوسط', 'متوسط', 'جيد', 'ممتاز'];
+const fishEmojis = ['', '🐟', '🐟🐟', '🐟🐟🐟', '🐟🐟🐟🐟', '🐟🐟🐟🐟🐟'];
+
+const calcFish = (range: number, moonPhase: number) => {
+  // Moon score: 0-2. How close to new or full moon.
+  const mp = Math.abs(Math.cos(moonPhase)); // 1=new/full, 0=quarters
+  const moonScore = mp > 0.7 ? 2 : mp > 0.35 ? 1 : 0;
+  // Tide range score: 0-2.
+  const pct = range / maxMonthRange;
+  const tideScore = pct >= 0.85 ? 2 : pct >= 0.55 ? 1 : 0;
+  // 1-5 scale
+  return 1 + moonScore + tideScore;
+};
 
 const monthDays = monthDaysRaw.map(d => {
-  // Moon score: how close to new or full moon (abs(cos(phase)))
-  const moonScore = Math.round(Math.abs(Math.cos(d.moon.phase)) * 4);
-  // Tide range score: normalized against month max
-  const tideScore = d.range / maxMonthRange >= 0.8 ? 2 : d.range / maxMonthRange >= 0.5 ? 1 : 0;
-  const fishRating = Math.max(1, Math.min(6, moonScore + tideScore)); // never 0
-  return { ...d, fishRating, fishStr: fishEmojis[fishRating] };
+  const fishRating = calcFish(d.range, d.moon.phase);
+  const emptyFish = '🐟'.repeat(5 - fishRating);
+  const fullFish = '🐟'.repeat(fishRating);
+  return { ...d, fishRating, fullFish, emptyFish, fishColor: fishColors[fishRating], fishLabel: fishLabels[fishRating] };
 });
 
 // Add fish rating to 7-day forecast
 const forecastWithFish = forecast.map(d => {
-  const moonScore = Math.round(Math.abs(Math.cos(d.moon.phase)) * 4);
-  const tideScore = parseFloat(String(d.range)) / maxMonthRange >= 0.8 ? 2 : parseFloat(String(d.range)) / maxMonthRange >= 0.5 ? 1 : 0;
-  const fishRating = Math.max(1, Math.min(6, moonScore + tideScore));
-  return { ...d, fishRating, fishStr: fishEmojis[fishRating] };
+  const fishRating = calcFish(parseFloat(String(d.range)), d.moon.phase);
+  const emptyFish = '🐟'.repeat(5 - fishRating);
+  const fullFish = '🐟'.repeat(fishRating);
+  return { ...d, fishRating, fullFish, emptyFish, fishColor: fishColors[fishRating], fishLabel: fishLabels[fishRating] };
 });
 
 // Today's chart
@@ -202,7 +214,8 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
                   <div class="text-[10px] text-[var(--text-dim)] latin">{day.dateStr} · {day.moonPct}%</div>
                 </div>
                 <div class="mr-auto text-right">
-                  <div class="text-xs font-medium text-[var(--text-primary)]">{day.fishStr}</div>
+                  <div class="text-xs"><span style={`color:${day.fishColor}`}>{day.fullFish}</span><span class="opacity-20">{day.emptyFish}</span></div>
+                  <div class="text-[9px] font-medium" style={`color:${day.fishColor}`}>{day.fishLabel}</div>
                   <div class="text-[10px] text-[var(--text-dim)] latin">المدى {day.range} سم</div>
                 </div>
               </div>
@@ -235,7 +248,7 @@ const monthNames=['يناير','فبراير','مارس','أبريل','مايو'
       <section class="mb-5"><h2 class="text-sm font-semibold mb-2">📅 تقويم {monthNames[month]} {year}</h2>
         <div class="overflow-x-auto rounded-xl border border-[var(--border-subtle)]"><table class="w-full text-[10px]">
           <thead><tr class="bg-[var(--surface-elevated)] text-[var(--text-muted)]"><th class="p-1">السبت</th><th class="p-1">الجمعة</th><th class="p-1">الخميس</th><th class="p-1">الأربعاء</th><th class="p-1">الثلاثاء</th><th class="p-1">الإثنين</th><th class="p-1">الأحد</th></tr></thead>
-          <tbody>{(()=>{const fd=new Date(year,month,1).getDay();const off=(6-fd)%7;const wks:number[][]=[];let wk:number[]=Array(off).fill(0);for(let d=1;d<=daysInMonth;d++){wk.push(d);if(wk.length===7||d===daysInMonth){while(wk.length<7)wk.push(0);wks.push(wk);wk=[]}}return wks.map(w=><tr class="divide-x divide-[var(--border-subtle)] border-t border-[var(--border-subtle)]">{w.map(day=>{if(day===0)return<td class="p-1.5 text-center"></td>;const d=monthDays[day-1];return<td class={`p-1.5 text-center ${d.isToday?'bg-teal-50 ring-1 ring-teal-300 ring-inset':''}`}><div class={`font-medium ${d.isToday?'text-[var(--accent)]':'text-[var(--text-primary)]'}`}>{day}</div><div class="text-[9px]">{d.moon.emoji}</div><div class="text-[8px] leading-tight">{d.fishStr||'—'}</div></td>})}</tr>)})()}</tbody>
+          <tbody>{(()=>{const fd=new Date(year,month,1).getDay();const off=(6-fd)%7;const wks:number[][]=[];let wk:number[]=Array(off).fill(0);for(let d=1;d<=daysInMonth;d++){wk.push(d);if(wk.length===7||d===daysInMonth){while(wk.length<7)wk.push(0);wks.push(wk);wk=[]}}return wks.map(w=><tr class="divide-x divide-[var(--border-subtle)] border-t border-[var(--border-subtle)]">{w.map(day=>{if(day===0)return<td class="p-1.5 text-center"></td>;const d=monthDays[day-1];return<td class={`p-1.5 text-center ${d.isToday?'bg-teal-50 ring-1 ring-teal-300 ring-inset':''}`}><div class={`font-medium ${d.isToday?'text-[var(--accent)]':'text-[var(--text-primary)]'}`}>{day}</div><div class="text-[9px]">{d.moon.emoji}</div><div class="text-[7px] leading-tight"><span style={`color:${d.fishColor}`}>{d.fullFish}</span><span class="opacity-15">{d.emptyFish}</span></div></td>})}</tr>)})()}</tbody>
         </table></div>
       </section>
 

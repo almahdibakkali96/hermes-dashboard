@@ -108,6 +108,33 @@ const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number;
 
     <main id="main" class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
 
+      <!-- All ports (search results) — moved up so search is useful on mobile -->
+      <section class="mb-12">
+        <div class="flex items-center gap-2 mb-4">
+          <h2 class="text-base font-semibold text-[var(--text-primary)]">جميع الموانئ</h2>
+          <span class="text-xs text-[var(--text-dim)]">{placesIndex.length}</span>
+          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
+        </div>
+        <div id="ports-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
+          {placesIndex.map((port: { id: string; name_ar: string; name_en: string; country: string }) => (
+            <a
+              href={`${BASE}ports/${port.id}`}
+              data-search={port.name_ar + ' ' + port.name_en + ' ' + (countryNames[port.country] || '')}
+              class="flex items-center gap-3 px-3 py-2 rounded-lg
+                     hover:bg-white hover:shadow-sm
+                     border border-transparent hover:border-[var(--border-subtle)]
+                     transition-all duration-150
+                     text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+            >
+              <span class="text-[var(--accent)] text-xs">⚓</span>
+              <span class="text-sm truncate">{port.name_ar}</span>
+              <span class="text-[10px] text-[var(--text-dim)] latin ml-auto truncate hidden sm:inline">{port.name_en}</span>
+            </a>
+          ))}
+        </div>
+        <div id="no-results" class="hidden text-center py-16 text-[var(--text-dim)] text-sm">لا توجد نتائج</div>
+      </section>
+
       <!-- Ports overview map -->
       <section class="mb-12" aria-label="خريطة الموانئ">
         <div class="flex items-center gap-2 mb-5">
@@ -188,32 +215,36 @@ const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number;
         </div>
       </section>
 
-      <!-- All ports -->
-      <section>
-        <div class="flex items-center gap-2 mb-4">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">جميع الموانئ</h2>
-          <span class="text-xs text-[var(--text-dim)]">{placesIndex.length}</span>
+      <!-- Fishing methodology -->
+      <section class="mb-12">
+        <div class="flex items-center gap-2 mb-5">
+          <h2 class="text-base font-semibold text-[var(--text-primary)]">🎣 عن توقعات الصيد</h2>
           <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
         </div>
-        <div id="ports-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
-          {placesIndex.map((port: { id: string; name_ar: string; name_en: string; country: string }) => (
-            <a
-              href={`${BASE}ports/${port.id}`}
-              data-search={port.name_ar + ' ' + port.name_en + ' ' + (countryNames[port.country] || '')}
-              class="flex items-center gap-3 px-3 py-2 rounded-lg
-                     hover:bg-white hover:shadow-sm
-                     border border-transparent hover:border-[var(--border-subtle)]
-                     transition-all duration-150
-                     text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-            >
-              <span class="text-[var(--accent)] text-xs">⚓</span>
-              <span class="text-sm truncate">{port.name_ar}</span>
-              <span class="text-[10px] text-[var(--text-dim)] latin ml-auto truncate hidden sm:inline">{port.name_en}</span>
-            </a>
-          ))}
+        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-5 text-sm leading-relaxed">
+          <p class="text-[var(--text-secondary)] mb-4">
+            يعتمد تقييم جودة الصيد (🐟 من ١ إلى ٥) على عاملين رئيسيين يؤثران على نشاط الأسماك:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div class="p-3 rounded-lg bg-[var(--surface-elevated)]">
+              <div class="font-semibold text-[var(--text-primary)] mb-1">🌙 طور القمر</div>
+              <p class="text-[var(--text-dim)]">يكون الصيد في أفضل حالاته عند اكتمال القمر (بدر) أو ميلاده (محاق)، حيث تكون قوى الجذب في أقصاها ويتحرك الماء بقوة أكبر، مما يحفز الأسماك على التغذي. يمنح القمر حتى ٣ نقاط من التقييم.</p>
+            </div>
+            <div class="p-3 rounded-lg bg-[var(--surface-elevated)]">
+              <div class="font-semibold text-[var(--text-primary)] mb-1">📏 مدى المد والجزر</div>
+              <p class="text-[var(--text-dim)]">كلما زاد الفرق بين أعلى مد وأدنى جزر في اليوم، زادت حركة المياه وجرفت معها الغذاء، مما ينشط الأسماك. يمنح المدى حتى نقطتين إضافيتين.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3 text-xs items-center">
+            <span class="text-[var(--text-dim)]">المقياس:</span>
+            <span style="color:#16a34a">🐟🐟🐟🐟🐟 ممتاز</span>
+            <span style="color:#0d9488">🐟🐟🐟🐟 جيد</span>
+            <span style="color:#f59e0b">🐟🐟🐟 متوسط</span>
+            <span style="color:#f97316">🐟🐟 أقل من المتوسط</span>
+            <span style="color:#ef4444">🐟 ضعيف</span>
+          </div>
         </div>
       </section>
-      <div id="no-results" class="hidden text-center py-16 text-[var(--text-dim)] text-sm">لا توجد نتائج</div>
     </main>
 
     <!-- Footer -->
