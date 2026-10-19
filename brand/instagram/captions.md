@@ -61,9 +61,11 @@ Post them in this order. The full-moon post is date-sensitive: publish it **befo
 
 ---
 
-## Reel — Full moon (`../video/video-01-full-moon.mp4`, 18.5 s)
+## Reel — Full moon (`../video/video-01-full-moon.mp4`, 29 s)
 
-Post together with (or the day after) post 2, **before Sunday 25 October**. No voice: add a trending sound in Instagram (the file has a silent audio track). In "Edit cover", upload `../video/video-01-cover.png`, because the first frame is almost empty.
+Post together with (or the day after) post 2, **before Sunday 25 October**. It has an Arabic voiceover (ElevenLabs, voice "Brian") and a calm music bed, mixed to Instagram loudness, so **don't add an Instagram sound** on top. In "Edit cover", upload `../video/video-01-cover.png`, because the first frame is almost empty.
+
+Voice script: `../src/video-01-full-moon.voice.txt`
 
 **Caption:**
 

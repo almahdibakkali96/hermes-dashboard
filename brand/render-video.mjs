@@ -1,8 +1,10 @@
 // Render brand/src/<name>.html into an MP4 (1080×1920, 30 fps) using installed Chrome + ffmpeg.
 // The page must expose window.renderAt(seconds) and window.DURATION.
 // Usage:  node brand/render-video.mjs video-01-full-moon   → brand/video/video-01-full-moon.mp4
+// If brand/video/<name>/timeline.json and soundtrack.m4a exist (from voiceover.mjs), scenes are
+// stretched to the voiceover and the soundtrack is muxed in; otherwise the audio track is silent.
 import { spawn, execFileSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -39,6 +41,9 @@ for (let i = 0; i < 100 && !(await evaluate('typeof window.renderAt === "functio
 await evaluate('document.fonts.ready.then(() => true)');
 await sleep(800); // let images and fonts settle
 
+const timelineFile = join(outDir, name, 'timeline.json'), soundtrack = join(outDir, name, 'soundtrack.m4a');
+const voiced = existsSync(timelineFile) && existsSync(soundtrack);
+if (voiced) await evaluate(`window.setTimeline(${JSON.stringify(JSON.parse(readFileSync(timelineFile, 'utf8')).real)})`);
 const duration = await evaluate('window.DURATION');
 const total = Math.round(duration * FPS);
 for (let f = 0; f < total; f++) {
@@ -51,8 +56,9 @@ ws.close(); proc.kill();
 
 const out = join(outDir, `${name}.mp4`);
 // Silent AAC track so every app treats it as a normal video; add music in Instagram.
+const audio = voiced ? ['-i', soundtrack] : ['-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100'];
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', join(frames, 'f%04d.png'),
-  '-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100', '-shortest',
+  ...audio, '-shortest',
   '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-crf', '18', '-preset', 'slow', '-movflags', '+faststart',
   '-c:a', 'aac', '-b:a', '128k', out], { stdio: 'inherit' });
 rmSync(frames, { recursive: true, force: true });

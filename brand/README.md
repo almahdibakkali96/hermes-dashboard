@@ -10,7 +10,7 @@
 | Instagram profile picture 1080×1080 | `instagram/00-profile-picture.png` |
 | Launch carousel, 7 slides 1080×1350 | `instagram/01-launch/` |
 | Full-moon carousel, 7 slides 1080×1350 | `instagram/02-full-moon/` |
-| Full-moon Reel, 1080×1920, 18.5 s | `video/video-01-full-moon.mp4` |
+| Full-moon Reel, 1080×1920, 29 s, Arabic voiceover + music | `video/video-01-full-moon.mp4` |
 | Reel cover image | `video/video-01-cover.png` |
 | Captions, alt text, bio | `instagram/captions.md` |
 
@@ -38,6 +38,12 @@ bash brand/render.sh
 ```
 
 It uses your installed Chrome.
+
+Voiceover and music come from ElevenLabs (key read from `arabtides-videos/arabtides-video/.env`). Generated audio is cached in `video/<name>/`, so re-running costs nothing unless you delete a file:
+
+```
+node brand/voiceover.mjs video-01-full-moon
+```
 
 Videos render frame by frame from `src/video-*.html` (each exposes `renderAt(seconds)`), then ffmpeg encodes them:
 

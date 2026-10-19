@@ -129,7 +129,7 @@
   $('#stars').innerHTML = starsHtml;
   var fishSvg = function (c) { return '<svg viewBox="0 0 20 14"><path d="M1 7c2.6-4 7.6-5 12-2.2L17.5 2v10L13 9.2C8.6 12 3.6 11 1 7z" fill="' + c + '" stroke="' + (c === 'none' ? 'rgba(255,255,255,.35)' : c) + '" stroke-width="1.2" stroke-linejoin="round"/></svg>'; };
 
-  window.renderAt = function (t) {
+  var drawAt = function (t) {
     // Ambient: stars twinkle, waves drift
     document.querySelectorAll('.star').forEach(function (s) { s.style.opacity = .25 + .35 * (1 + Math.sin(t * 2 + +s.dataset.p)) / 2; });
     $('#waves').style.transform = 'translateX(' + ((t * 60) % 810) + 'px)';
@@ -183,6 +183,15 @@
     $('#s5 img').style.transform = 'scale(' + (.6 + .4 * seg(t, 15.2, 16.0, out)) + ')';
     show($('#s5 .p'), seg(t, 16.0, 16.4), 20 * (1 - seg(t, 16.0, 16.5, out)));
     show($('#s5 .url'), seg(t, 16.3, 16.7), 20 * (1 - seg(t, 16.3, 16.8, out)));
+  };
+  // Timeline remap: scenes are designed on DESIGN; a voiceover can stretch them to REAL.
+  var DESIGN = [0, 3.2, 7.0, 11.4, 15.2, 18.5], REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
   };
   window.DURATION = DURATION;
   var q = new URLSearchParams(location.search);
