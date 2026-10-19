@@ -1,0 +1,37 @@
+---
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const path = Astro.url.pathname.replace(/\/$/, '');
+
+const links = [
+  { href: `${BASE}#ports`, label: 'الموانئ', match: '/ports' },
+  { href: `${BASE}#countries`, label: 'الدول', match: '/country' },
+  { href: `${BASE}methodology`, label: 'المنهجية', match: '/methodology' },
+  { href: `${BASE}about`, label: 'عن الموقع', match: '/about', extra: 'hide-xs' },
+];
+---
+
+<header class="site-header">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-6">
+    <a href={BASE} class="flex items-center gap-2.5 shrink-0" aria-label="ArabTides — الصفحة الرئيسية">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="32" height="32">
+          <rect width="32" height="32" rx="9" fill="currentColor" />
+          <path d="M6 18c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" />
+          <path d="M6 23c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round" />
+          <circle cx="22" cy="9.5" r="3" fill="#fde68a" />
+        </svg>
+      </span>
+      <span class="leading-none">
+        <span class="block text-lg font-bold display text-[var(--text-primary)]">ArabTides</span>
+        <span class="block text-[11px] text-[var(--text-muted)] mt-0.5">المد والجزر العربي</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="التنقّل الرئيسي">
+      {links.map(l => (
+        <a href={l.href} class:list={['site-nav-link', l.extra, { active: path.includes(l.match) }]}
+           aria-current={path.includes(l.match) ? 'page' : undefined}>{l.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

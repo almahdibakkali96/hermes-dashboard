@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import VercelAnalytics from '@vercel/analytics/astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 
 export interface Props {
   title: string;
@@ -11,6 +13,8 @@ const { title, description } = Astro.props;
 const fullTitle = `${title} — ArabTides`;
 const desc = description || 'مواقيت المد والجزر والحسابات الفلكية للموانئ العربية';
 const gaId = import.meta.env.PUBLIC_GA_ID || null;
+// No trailing slash, matching the sitemap and internal links
+const canonical = new URL(Astro.url.pathname.replace(/(.)\/$/, '$1'), Astro.site).href;
 ---
 
 <!doctype html>
@@ -20,12 +24,16 @@ const gaId = import.meta.env.PUBLIC_GA_ID || null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
+    <meta name="theme-color" content="#0b2540" />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
     <link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}/favicon.ico`} />
-    <!-- Canonical + OG -->
+    <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ar_AR" />
     <meta property="og:site_name" content="ArabTides — المد والجزر العربي" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fullTitle} />
@@ -44,9 +52,13 @@ const gaId = import.meta.env.PUBLIC_GA_ID || null;
       </script>
     </>)}
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col">
     <a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
-    <slot />
+    <SiteHeader />
+    <div class="flex-1 flex flex-col">
+      <slot />
+    </div>
+    <SiteFooter />
     <VercelAnalytics />
   </body>
 </html>

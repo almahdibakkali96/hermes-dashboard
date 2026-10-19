@@ -84,9 +84,78 @@ function toJulian(date: Date): number {
   return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
 }
 
+// --- Low-precision sun & moon positions (Astronomical Almanac / Meeus ch. 47 main terms) ---
+
+function sunRaDec(jd: number): { ra: number; dec: number } {
+  const n = jd - 2451545.0;
+  const L = 280.460 + 0.9856474 * n;
+  const g = (357.528 + 0.9856003 * n) * RAD;
+  const lambda = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * RAD;
+  const eps = (23.439 - 0.0000004 * n) * RAD;
+  return {
+    ra: Math.atan2(Math.cos(eps) * Math.sin(lambda), Math.cos(lambda)) * DEG,
+    dec: Math.asin(Math.sin(eps) * Math.sin(lambda)) * DEG,
+  };
+}
+
+function moonRaDec(jd: number): { ra: number; dec: number } {
+  const d = jd - 2451545.0;
+  const Lp = 218.316 + 13.176396 * d;
+  const Mp = (134.963 + 13.064993 * d) * RAD;
+  const F = (93.272 + 13.229350 * d) * RAD;
+  const D = (297.850 + 12.190749 * d) * RAD;
+  const Ms = (357.529 + 0.985600 * d) * RAD;
+  const lambda = (Lp + 6.289 * Math.sin(Mp) + 1.274 * Math.sin(2 * D - Mp) + 0.658 * Math.sin(2 * D)
+    + 0.214 * Math.sin(2 * Mp) - 0.186 * Math.sin(Ms) - 0.114 * Math.sin(2 * F)) * RAD;
+  const beta = (5.128 * Math.sin(F) + 0.281 * Math.sin(Mp + F) + 0.278 * Math.sin(Mp - F)) * RAD;
+  const eps = 23.439 * RAD;
+  return {
+    ra: Math.atan2(Math.sin(lambda) * Math.cos(eps) - Math.tan(beta) * Math.sin(eps), Math.cos(lambda)) * DEG,
+    dec: Math.asin(Math.sin(beta) * Math.cos(eps) + Math.cos(beta) * Math.sin(eps) * Math.sin(lambda)) * DEG,
+  };
+}
+
+function altitude(body: (jd: number) => { ra: number; dec: number }, jd: number, lat: number, lon: number): number {
+  const { ra, dec } = body(jd);
+  const gmst = 280.46061837 + 360.98564736629 * (jd - 2451545.0);
+  const H = (gmst + lon - ra) * RAD;
+  return Math.asin(Math.sin(lat * RAD) * Math.sin(dec * RAD) + Math.cos(lat * RAD) * Math.cos(dec * RAD) * Math.cos(H)) * DEG;
+}
+
+/** JD of local midnight for the calendar date `date` falls on in the port's timezone */
+function localMidnightJD(date: Date, tzOffset: number): number {
+  const local = new Date(date.getTime() + tzOffset * 60000);
+  const midnightUtcMs = Date.UTC(local.getUTCFullYear(), local.getUTCMonth(), local.getUTCDate()) - tzOffset * 60000;
+  return midnightUtcMs / 86400000 + 2440587.5;
+}
+
 /**
- * Simple sunrise/sunset calculation.
- * Accuracy: ~2 minutes. Uses NOAA solar calculator approximation.
+ * Scan the local day in 5-minute steps for horizon crossings (altitude = h0)
+ * and the highest point (transit). Returns hours after local midnight.
+ */
+function scanDay(body: (jd: number) => { ra: number; dec: number }, jd0: number, lat: number, lon: number, h0: number) {
+  const STEP = 5 / 1440;
+  let rise: number | null = null, set: number | null = null, transit = 0, maxAlt = -Infinity;
+  let prev = altitude(body, jd0, lat, lon) - h0;
+  for (let i = 1; i <= 288; i++) {
+    const alt = altitude(body, jd0 + i * STEP, lat, lon) - h0;
+    if (prev < 0 && alt >= 0 && rise === null) rise = (i - 1 + prev / (prev - alt)) * STEP * 24;
+    if (prev >= 0 && alt < 0 && set === null) set = (i - 1 + prev / (prev - alt)) * STEP * 24;
+    if (alt > maxAlt) { maxAlt = alt; transit = i * STEP * 24; }
+    prev = alt;
+  }
+  return { rise, set, transit };
+}
+
+function hhmm(hours: number | null): string | null {
+  if (hours === null) return null;
+  const mins = ((Math.round(hours * 60) % 1440) + 1440) % 1440;
+  return `${String(Math.floor(mins / 60)).padStart(2, '0')}:${String(mins % 60).padStart(2, '0')}`;
+}
+
+/**
+ * Sunrise/sunset for the local calendar day.
+ * Accuracy: ~1-2 minutes (standard -0.833° altitude for refraction + solar disc).
  */
 export function sunTimes(date: Date, lat: number, lon: number, tzOffset: number): {
   sunrise: string | null;
@@ -94,102 +163,30 @@ export function sunTimes(date: Date, lat: number, lon: number, tzOffset: number)
   solarNoon: string | null;
   dayLength: number | null; // minutes
 } {
-  const jd = toJulian(date) - tzOffset / (24 * 60);
-  const n = jd - 2451545.0 + 0.0008;
-  const jStar = n - lon / 360;
-  const M_sun = (357.5291 + 0.98560028 * jStar) % 360;
-  const C = 1.9148 * Math.sin(M_sun * RAD) + 0.02 * Math.sin(2 * M_sun * RAD) + 0.0003 * Math.sin(3 * M_sun * RAD);
-  const lambda = ((M_sun + C + 180 + 102.9372) % 360 + 360) % 360;
-  const jTransit = 2451545.0 + jStar + 0.0053 * Math.sin(M_sun * RAD) - 0.0069 * Math.sin(2 * lambda * RAD);
-  const delta = Math.asin(Math.sin(lambda * RAD) * Math.sin(23.44 * RAD)) * DEG;
-  const cosOmega = (Math.sin(-0.833 * RAD) - Math.sin(lat * RAD) * Math.sin(delta * RAD)) /
-    (Math.cos(lat * RAD) * Math.cos(delta * RAD));
-
-  if (Math.abs(cosOmega) > 1) {
-    // Polar day/night
-    return { sunrise: null, sunset: null, solarNoon: null, dayLength: null };
-  }
-
-  const omega = Math.acos(cosOmega) * DEG;
-  const jRise = jTransit - omega / 360;
-  const jSet = jTransit + omega / 360;
-
-  const toHHMM = (jdVal: number, offset: number): string => {
-    const totalHours = (jdVal - Math.floor(jdVal)) * 24 + 12 + offset / 60;
-    const h = Math.floor(((totalHours % 24) + 24) % 24);
-    const m = Math.floor(((totalHours % 1) * 60));
-    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-  };
-
-  // Day length in minutes — use 24h for polar day
-  const dayLength = Math.abs(cosOmega) > 1 ? 1440 : Math.round(omega * 8); // 360° ≈ 24h, so omega° * 4min/°
-
+  const { rise, set, transit } = scanDay(sunRaDec, localMidnightJD(date, tzOffset), lat, lon, -0.833);
   return {
-    sunrise: toHHMM(jRise, tzOffset),
-    sunset: toHHMM(jSet, tzOffset),
-    solarNoon: toHHMM(jTransit, tzOffset),
-    dayLength: dayLength > 1440 ? 1440 : (dayLength < 0 ? 0 : dayLength),
+    sunrise: hhmm(rise),
+    sunset: hhmm(set),
+    solarNoon: hhmm(transit),
+    dayLength: rise !== null && set !== null ? Math.round((set - rise) * 60) : null,
   };
 }
 
 /**
- * Approximate moonrise/moonset.
- * Simplified — accuracy ~10-15 minutes.
+ * Moonrise/moonset/upper transit for the local calendar day.
+ * Accuracy: ~5 minutes. Rise or set can be null — the moon skips one roughly every 29 days.
  */
 export function moonTimes(date: Date, lat: number, lon: number, tzOffset: number): {
   moonrise: string | null;
   moonset: string | null;
   lunarTransit: string | null;
 } {
-  const jd = toJulian(date) - tzOffset / (24 * 60);
-  const d = jd - 2451545.0;
-
-  // Moon's mean elements
-  const Lp = (218.316 + 13.176396 * d) % 360;
-  const Mp = (134.963 + 13.064993 * d) % 360;
-  const F = (93.272 + 13.229350 * d) % 360;
-
-  // Moon's ecliptic longitude (simplified)
-  const lambda = Lp + 6.289 * Math.sin(Mp * RAD) + 1.274 * Math.sin((2 * (d / 365.25 * 360 - Mp)) * RAD);
-  const beta = 5.128 * Math.sin(F * RAD);
-  const delta = Math.asin(Math.sin(lambda * RAD) * Math.sin(23.44 * RAD) + Math.cos(lambda * RAD) * Math.cos(23.44 * RAD) * Math.sin(beta * RAD)) * DEG;
-
-  // Right ascension
-  const ra = Math.atan2(
-    Math.sin(lambda * RAD) * Math.cos(23.44 * RAD) - Math.tan(beta * RAD) * Math.sin(23.44 * RAD),
-    Math.cos(lambda * RAD)
-  ) * DEG;
-
-  // Meridian passage adjustment
-  const HAadj = 0.0003 * (lat);
-
-  // Approx transit time (GMT hours)
-  const transitGMT = (12 + (lon - ra / 15) + HAadj) % 24;
-
-  // Moon's semi-diurnal arc
-  const cosH0 = (Math.sin(-0.833 * RAD) - Math.sin(lat * RAD) * Math.sin(delta * RAD)) /
-    (Math.cos(lat * RAD) * Math.cos(delta * RAD));
-
-  if (Math.abs(cosH0) > 1) {
-    return { moonrise: null, moonset: null, lunarTransit: null };
-  }
-
-  const H0 = Math.acos(cosH0) * DEG / 15; // hours
-
-  const riseGMT = transitGMT - H0;
-  const setGMT = transitGMT + H0;
-
-  const toHHMM = (hoursGMT: number): string => {
-    const total = hoursGMT + tzOffset / 60 + 24;
-    const h = Math.floor(total % 24);
-    const m = Math.floor(((total % 1) * 60));
-    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-  };
-
+  // h0 = +0.125° accounts for lunar parallax minus refraction
+  const { rise, set, transit } = scanDay(moonRaDec, localMidnightJD(date, tzOffset), lat, lon, 0.125);
   return {
-    moonrise: toHHMM(riseGMT),
-    moonset: toHHMM(setGMT),
-    lunarTransit: toHHMM(transitGMT),
+    moonrise: hhmm(rise),
+    moonset: hhmm(set),
+    lunarTransit: hhmm(transit),
   };
 }
 

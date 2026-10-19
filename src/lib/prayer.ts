@@ -60,7 +60,8 @@ export function calculatePrayerTimes(
   const RA = Math.atan2(Math.cos(e * RAD) * Math.sin(L * RAD), Math.cos(L * RAD)) * DEG;
 
   // Equation of time
-  const EqT = q / 15 - RA / 15;
+  // Equation of time, wrapped to ±12h (q and RA come from different ranges)
+  const EqT = ((((q - RA) / 15 + 12) % 24) + 24) % 24 - 12;
 
   // Dhuhr (solar noon in local time)
   const dhuhrTime = 12 + tzOffset / 60 - lon / 15 - EqT;
@@ -80,28 +81,28 @@ export function calculatePrayerTimes(
   const angles = methods[method] || methods.UmmAlQura;
 
   // Helper: compute time for a given sun altitude
-  const computeTime = (alt: number, isAsr = false): number => {
+  // Morning events (fajr, sunrise) fall before solar noon; asr, maghrib and isha after it
+  const computeTime = (alt: number, isAsr = false, afterNoon = isAsr): number => {
     const targetAlt = isAsr ? asrAlt : -alt;
     const cosH = (Math.sin(targetAlt * RAD) - Math.sin(lat * RAD) * Math.sin(delta * RAD)) /
       (Math.cos(lat * RAD) * Math.cos(delta * RAD));
-    if (Math.abs(cosH) > 1) return isAsr ? dhuhrTime + 1 : dhuhrTime - 1;
+    if (Math.abs(cosH) > 1) return afterNoon ? dhuhrTime + 1 : dhuhrTime - 1;
     const H = Math.acos(cosH) * DEG / 15;
-    return isAsr ? dhuhrTime + H : dhuhrTime - H;
+    return afterNoon ? dhuhrTime + H : dhuhrTime - H;
   };
 
   const fmt = (hours: number): string => {
-    const h = ((Math.floor(hours) % 24) + 24) % 24;
-    const m = Math.round((hours % 1) * 60);
-    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    const mins = ((Math.round(hours * 60) % 1440) + 1440) % 1440;
+    return `${String(Math.floor(mins / 60)).padStart(2, '0')}:${String(mins % 60).padStart(2, '0')}`;
   };
 
   const fajr = computeTime(angles.fajr);
   const sunrise = computeTime(0.833);
   const dhuhr = dhuhrTime;
   const asr = computeTime(0, true);
-  const maghrib = computeTime(0.833 + 0.0347 * Math.sqrt(0)); // sea level
+  const maghrib = computeTime(0.833 + 0.0347 * Math.sqrt(0), false, true); // sea level
   // Isha: Umm al-Qura uses fixed 90 min after maghrib
-  const ishaTime = method === 'UmmAlQura' ? maghrib + 1.5 : computeTime(angles.isha);
+  const ishaTime = method === 'UmmAlQura' ? maghrib + 1.5 : computeTime(angles.isha, false, true);
 
   return {
     fajr: fmt(fajr),
@@ -118,23 +119,24 @@ export function calculatePrayerTimes(
  * Accuracy: ±1 day. Uses Kuwaiti algorithm.
  */
 export function gregorianToHijri(date: Date): HijriDate {
-  const jd = Math.floor(toJulian(date)) + 0.5;
+  // Integer Julian Day Number — the Kuwaiti algorithm breaks on fractional days
+  const jd = Math.floor(toJulian(date) + 0.5);
   const l = jd - 1948440 + 10632;
   const n = Math.floor((l - 1) / 10631);
   const l2 = l - 10631 * n + 354;
   const j = Math.floor((10985 - l2) / 5316) * Math.floor((50 * l2) / 17719) + Math.floor(l2 / 5670) * Math.floor((43 * l2) / 15238);
   const l3 = l2 - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) - Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
-  const month = Math.floor((24 * l3) / 709);
+  const month = Math.floor((24 * l3) / 709); // 1-12
   const day = l3 - Math.floor((709 * month) / 24);
   const year = 30 * n + j - 30;
 
   return {
     year,
-    month: month + 1,
+    month,
     day,
-    monthAr: HIJRI_MONTHS_AR[month],
-    monthEn: HIJRI_MONTHS_EN[month],
-    formatted: `${day} ${HIJRI_MONTHS_AR[month]} ${year} هـ`,
+    monthAr: HIJRI_MONTHS_AR[month - 1],
+    monthEn: HIJRI_MONTHS_EN[month - 1],
+    formatted: `${day} ${HIJRI_MONTHS_AR[month - 1]} ${year} هـ`,
   };
 }
 

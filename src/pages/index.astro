@@ -1,26 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import placesIndex from '../data/places/places_index.json';
-import buildInfo from '../build.json';
 import { moonPhase } from '../lib/astronomy';
+import { countryName } from '../lib/countries';
 import {
   generateTideCurve, findExtremes, formatTime,
-  getTimezoneOffset, classifyTide
+  getTimezoneOffset
 } from '../lib/tides';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
-const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))].sort();
-const buildNum = String(buildInfo.build).padStart(3, '0');
-const buildTime = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
-
-const countryNames: Record<string, string> = {
-  AE: 'الإمارات', BH: 'البحرين', DJ: 'جيبوتي', DZ: 'الجزائر',
-  EG: 'مصر', IQ: 'العراق', JO: 'الأردن', KM: 'جزر القمر',
-  KW: 'الكويت', LB: 'لبنان', LY: 'ليبيا', MA: 'المغرب',
-  MR: 'موريتانيا', OM: 'عُمان', PS: 'فلسطين', QA: 'قطر',
-  SA: 'السعودية', SD: 'السودان', SO: 'الصومال', SY: 'سوريا',
-  TN: 'تونس', YE: 'اليمن',
-};
+const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))]
+  .sort((a, b) => countryName(a).localeCompare(countryName(b), 'ar'));
 
 // Featured ports — popular destinations
 const featuredIds = ['dubai', 'jeddah', 'casablanca', 'alexandria', 'muscat', 'tunis'];
@@ -35,11 +25,17 @@ const featuredPorts = await Promise.all(
     const extremes = findExtremes(curve);
     const nextHigh = extremes.find(e => e.type === 'high' && e.hours > today.getHours() + today.getMinutes() / 60) || extremes.find(e => e.type === 'high');
     const nextLow = extremes.find(e => e.type === 'low' && e.hours > today.getHours() + today.getMinutes() / 60) || extremes.find(e => e.type === 'low');
-    return { ...p, nextHigh, nextLow, tz, countryName: countryNames[p.country] || p.country };
+    // Sparkline of today's curve (120×32 viewBox)
+    const hs = curve.map((c: { height: number }) => c.height);
+    const lo = Math.min(...hs), hi = Math.max(...hs), span = hi - lo || 1;
+    const spark = curve.map((c: { height: number }, i: number) =>
+      `${i === 0 ? 'M' : 'L'}${(i / (curve.length - 1) * 120).toFixed(1)},${(30 - (c.height - lo) / span * 28).toFixed(1)}`).join(' ');
+    return { ...p, nextHigh, nextLow, tz, spark, range: Math.round(span), countryName: countryName(p.country) };
   })
 );
 
 const moon = moonPhase(new Date());
+const todayAr = new Date().toLocaleDateString('ar-EG-u-nu-latn', { weekday: 'long', day: 'numeric', month: 'long' });
 
 // Lightweight port list for the overview map (client-side)
 const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number; lon: number }) => ({
@@ -48,212 +44,203 @@ const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number;
 
 // Full port list for the search dropdown (client-side)
 const searchPorts = placesIndex.map((p: { id: string; name_ar: string; name_en: string; country: string }) => ({
-  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryNames[p.country] || p.country
+  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryName(p.country)
 }));
 const searchPortsJSON = JSON.stringify(searchPorts);
+
+const features = [
+  { icon: '🌊', title: 'منحنى المد والجزر', text: 'منحنى يومي لارتفاع الماء مع أوقات المد العالي والجزر المنخفض وتوقعات ٧ أيام.' },
+  { icon: '🎣', title: 'أوقات الصيد', text: 'تقييم يومي من ١ إلى ٥ وفترات السولونار الكبرى والصغرى وتقويم شهري لأفضل الأيام.' },
+  { icon: '🌙', title: 'الشمس والقمر', text: 'شروق وغروب الشمس والقمر، طور القمر ونسبة إضاءته.' },
+  { icon: '🕌', title: 'الصلاة والتاريخ الهجري', text: 'أوقات الصلاة بطريقة أم القرى والتاريخ الهجري التقديري.' },
+];
 ---
 
 <BaseLayout
-  title="المد والجزر العربي"
-  description="مواقيت المد والجزر، أوقات الصيد، التاريخ الهجري للموانئ العربية"
+  title="مواقيت المد والجزر للموانئ العربية"
+  description="مواقيت المد والجزر، أوقات الصيد، أطوار القمر، أوقات الصلاة والتاريخ الهجري لـ٣٦ ميناءً عربياً"
 >
-  <div class="min-h-screen flex flex-col">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="max-w-6xl mx-auto px-4 pt-14 pb-24 sm:pt-20 sm:pb-28">
+      <p class="inline-flex items-center gap-2 text-xs text-teal-100 bg-white/10 border border-white/15 rounded-full px-3 py-1">
+        <span aria-hidden="true">{moon.emoji}</span>
+        <span>{todayAr}</span>
+        <span class="opacity-50">·</span>
+        <span>{moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
+      </p>
+      <h1 class="mt-5 text-4xl sm:text-5xl font-bold leading-tight display max-w-2xl">
+        مواقيت المد والجزر<br/><span class="text-teal-300">للموانئ العربية</span>
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed">
+        توقعات المد والجزر، أفضل أوقات الصيد، أطوار القمر وأوقات الصلاة لـ{placesIndex.length} ميناءً من المحيط الأطلسي إلى الخليج العربي.
+      </p>
 
-    <!-- Hero area -->
-    <header class="border-b border-[var(--border-subtle)] bg-gradient-to-b from-teal-50/50 to-white">
-      <div class="max-w-6xl mx-auto px-4 py-12 sm:py-18">
-        <!-- Top nav -->
-        <nav class="flex items-center gap-4 mb-10" aria-label="التنقّل الرئيسي">
-          <a href={BASE} class="flex items-center gap-2 shrink-0" aria-label="ArabTides — الصفحة الرئيسية">
-            <span class="text-xl font-bold text-[var(--text-primary)] display">ArabTides</span>
-          </a>
-          <span class="text-xs text-[var(--text-dim)] hidden sm:inline">المد والجزر العربي</span>
-          <div class="flex-1"></div>
-          <span class="text-xs text-[var(--text-dim)]">{placesIndex.length} ميناء عربي</span>
-        </nav>
-
-        <!-- Hero content -->
-        <div class="max-w-2xl">
-          <h1 class="text-3xl sm:text-4xl font-bold text-[var(--text-primary)] leading-tight display">
-            مواقيت المد والجزر<br/>للموانئ العربية
-          </h1>
-          <p class="text-[var(--text-secondary)] mt-3 max-w-lg leading-relaxed">
-            حسابات فلكية دقيقة للمد والجزر، أوقات الصيد، أطوار القمر، وشروق وغروب الشمس لـ ٣٦ ميناءً عربياً
-          </p>
-        </div>
-
-        <!-- Search -->
-        <div class="mt-6 max-w-md relative">
-          <label for="port-search" class="sr-only">ابحث عن ميناء</label>
-          <input
-            type="search"
-            id="port-search"
-            placeholder="ابحث عن ميناء... دبي، جدة، الإسكندرية..."
-            autocomplete="off"
-            aria-controls="search-results"
-            aria-expanded="false"
-            class="w-full px-5 py-3.5 text-sm rounded-xl
-                   bg-white border border-[var(--border-standard)]
-                   text-[var(--text-primary)]
-                   placeholder:text-[var(--text-dim)]
-                   focus:outline-none focus:border-[var(--accent)] focus:ring-3 focus:ring-teal-100
-                   shadow-sm transition-all"
-          />
-          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-dim)] text-sm" aria-hidden="true">🔍</span>
-          <div id="search-results" class="absolute z-20 top-full mt-1 w-full hidden rounded-xl bg-white border border-[var(--border-subtle)] shadow-lg max-h-80 overflow-y-auto"></div>
-        </div>
-
-        <!-- Moon widget -->
-        <div class="mt-4 flex items-center gap-2 text-xs text-[var(--text-dim)]">
-          <span aria-hidden="true">{moon.emoji}</span>
-          <span>{moon.phaseNameAr}</span>
-          <span class="latin">{Math.round(moon.illumination * 100)}%</span>
-        </div>
+      <!-- Search -->
+      <div class="mt-8 max-w-xl relative">
+        <label for="port-search" class="sr-only">ابحث عن ميناء</label>
+        <input
+          type="search"
+          id="port-search"
+          placeholder="ابحث عن ميناء أو دولة… دبي، جدة، المغرب"
+          autocomplete="off"
+          aria-controls="search-results"
+          aria-expanded="false"
+          class="w-full ps-5 pe-12 py-4 text-base rounded-2xl
+                 bg-white text-[var(--text-primary)]
+                 placeholder:text-[var(--text-dim)]
+                 focus:outline-none focus:ring-4 focus:ring-teal-300/40
+                 shadow-xl shadow-black/20"
+        />
+        <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-dim)] pointer-events-none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <div id="search-results" class="absolute z-40 top-full mt-2 w-full hidden rounded-xl bg-white border border-[var(--border-subtle)] shadow-2xl max-h-80 overflow-y-auto text-[var(--text-primary)]"></div>
       </div>
-    </header>
 
-    <main id="main" class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
+      <div class="mt-4 flex flex-wrap items-center gap-2 text-sm">
+        <span class="text-slate-400 text-xs">الأكثر بحثاً:</span>
+        {featuredPorts.slice(0, 4).map(p => (
+          <a href={`${BASE}ports/${p.id}`} class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-white text-xs transition-colors">{p.name_ar}</a>
+        ))}
+      </div>
 
-      <!-- Fishing — methodology -->
-      <section class="mb-12">
-        <div class="flex items-center gap-2 mb-5">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">🎣 توقعات الصيد</h2>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-5 text-sm leading-relaxed" style="box-shadow:var(--shadow-sm)">
-          <p class="text-[var(--text-secondary)] mb-4">
-            يعتمد تقييم جودة الصيد (🐟 من ١ إلى ٥) على طور القمر ومدى المد والجزر. اختر أي ميناء لترى التقييم اليومي وأفضل أيام الصيد لهذا الشهر.
-          </p>
-          <div class="flex flex-wrap gap-3 text-xs items-center">
-            <span class="text-[var(--text-dim)]">المقياس:</span>
-            <span style="color:#16a34a">🐟🐟🐟🐟🐟 ممتاز</span>
-            <span style="color:#0d9488">🐟🐟🐟🐟 جيد</span>
-            <span style="color:#f59e0b">🐟🐟🐟 متوسط</span>
-            <span style="color:#f97316">🐟🐟 ضعيف</span>
-            <span style="color:#ef4444">🐟 غير مناسب</span>
-          </div>
-        </div>
-      </section>
+      <!-- Stats -->
+      <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl">
+        <div class="hero-stat"><dt class="text-xs text-slate-400">موانئ</dt><dd class="text-2xl font-bold latin mt-0.5">{placesIndex.length}</dd></div>
+        <div class="hero-stat"><dt class="text-xs text-slate-400">دولة عربية</dt><dd class="text-2xl font-bold latin mt-0.5">{countries.length}</dd></div>
+        <div class="hero-stat"><dt class="text-xs text-slate-400">أيام توقعات</dt><dd class="text-2xl font-bold latin mt-0.5">7</dd></div>
+        <div class="hero-stat"><dt class="text-xs text-slate-400">مركبة توافقية</dt><dd class="text-2xl font-bold latin mt-0.5">17</dd></div>
+      </dl>
+    </div>
+    <svg class="hero-waves" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 40c120-20 240-30 360-18s240 40 360 36 240-34 360-38 240 18 360 26v26H0z" fill="currentColor" />
+    </svg>
+  </section>
 
-      <!-- Featured ports -->
-      <section class="mb-12">
-        <div class="flex items-center gap-2 mb-5">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">موانئ مميزة</h2>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featuredPorts.map(port => (
-            <a href={`${BASE}ports/${port.id}`}
-               class="group block rounded-xl bg-white border border-[var(--border-subtle)]
-                      hover:border-[var(--accent-border)] hover:shadow-md
-                      transition-all duration-200 overflow-hidden">
-              <div class="p-4">
-                <div class="flex items-start justify-between">
-                  <div>
-                    <div class="text-[10px] text-[var(--text-dim)] tracking-wide uppercase">{port.countryName}</div>
-                    <div class="text-base font-semibold text-[var(--text-primary)] mt-0.5 group-hover:text-[var(--accent)] transition-colors">
-                      {port.name_ar}
-                    </div>
-                    <div class="text-xs text-[var(--text-dim)] latin mt-0.5">{port.name_en}</div>
-                  </div>
-                  <span class="text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity text-lg">&larr;</span>
-                </div>
-                <!-- Mini tide info -->
-                <div class="flex gap-4 mt-3 pt-3 border-t border-[var(--border-subtle)] text-xs">
-                  {port.nextHigh && (
-                    <div>
-                      <div class="text-[10px] text-[var(--text-dim)]">المد القادم</div>
-                      <div class="font-semibold text-[var(--accent)] latin">{formatTime(port.nextHigh.time, port.tz)}</div>
-                      <div class="text-[var(--text-dim)] latin">{port.nextHigh.height.toFixed(0)} سم</div>
-                    </div>
-                  )}
-                  {port.nextLow && (
-                    <div>
-                      <div class="text-[10px] text-[var(--text-dim)]">الجزر القادم</div>
-                      <div class="font-semibold text-red-500 latin">{formatTime(port.nextLow.time, port.tz)}</div>
-                      <div class="text-[var(--text-dim)] latin">{port.nextLow.height.toFixed(0)} سم</div>
-                    </div>
-                  )}
-                </div>
+  <main id="main" class="max-w-6xl mx-auto px-4 w-full">
+
+    <!-- Featured ports -->
+    <section class="mt-6 mb-16" aria-labelledby="featured-title">
+      <div class="section-title">
+        <h2 id="featured-title">موانئ مميزة</h2>
+        <p>المد والجزر القادم — بالتوقيت المحلي</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {featuredPorts.map(port => (
+          <a href={`${BASE}ports/${port.id}`} class="card group block p-5">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="text-xs text-[var(--text-muted)]">{port.countryName}</div>
+                <div class="text-lg font-semibold display mt-0.5 group-hover:text-[var(--accent)] transition-colors">{port.name_ar}</div>
+                <div class="text-xs text-[var(--text-dim)] latin" lang="en">{port.name_en}</div>
               </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <!-- Ports overview map -->
-      <section class="mb-12" aria-label="خريطة الموانئ">
-        <div class="flex items-center gap-2 mb-5">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">خريطة الموانئ</h2>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <div id="ports-map" class="port-map w-full border border-[var(--border-subtle)]" style="height:360px"></div>
-        <p class="text-[10px] text-[var(--text-dim)] mt-1.5 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
-      </section>
-
-      <!-- Quick country jump -->
-      <section class="mb-12">
-        <div class="flex items-center gap-2 mb-4">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">تصفح حسب الدولة</h2>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          {countries.map((code: string) => {
-            const count = placesIndex.filter((p: { country: string }) => p.country === code).length;
-            return (
-              <a href={`${BASE}country/${code}`}
-                 class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm
-                        bg-white border border-[var(--border-standard)]
-                        hover:border-[var(--accent-border)] hover:bg-teal-50
-                        text-[var(--text-secondary)] hover:text-[var(--accent)]
-                        transition-all duration-150">
-                <span>{countryNames[code] || code}</span>
-                <span class="text-[10px] text-[var(--text-dim)] bg-[var(--surface-elevated)] px-1.5 py-0.5 rounded-full">{count}</span>
-              </a>
-            );
-          })}
-        </div>
-      </section>
-
-      <!-- All ports — full list -->
-      <section class="mb-12">
-        <div class="flex items-center gap-2 mb-4">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">جميع الموانئ</h2>
-          <span class="text-xs text-[var(--text-dim)]">{placesIndex.length}</span>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
-          {placesIndex.map((port: { id: string; name_ar: string; name_en: string; country: string }) => (
-            <a
-              href={`${BASE}ports/${port.id}`}
-              class="flex items-center gap-3 px-3 py-2 rounded-lg
-                     hover:bg-white hover:shadow-sm
-                     border border-transparent hover:border-[var(--border-subtle)]
-                     transition-all duration-150
-                     text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-            >
-              <span class="text-[var(--accent)] text-xs">⚓</span>
-              <span class="text-sm truncate">{port.name_ar}</span>
-              <span class="text-[10px] text-[var(--text-dim)] latin ml-auto truncate hidden sm:inline">{port.name_en}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-[var(--border-subtle)] mt-12">
-      <div class="max-w-6xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[var(--text-dim)]">
-        <span>&copy; ArabTides — حسابات فلكية تقديرية</span>
-        <div class="flex items-center gap-3">
-          <span class="latin">EOT20 CC BY 4.0</span>
-          <span class="px-2 py-0.5 rounded bg-[var(--accent-muted)] text-[var(--accent)] text-[10px] font-mono tracking-wider">
-            #{buildNum}
-          </span>
-        </div>
+              <svg viewBox="0 0 120 32" class="w-28 h-8 chart-ltr shrink-0" aria-hidden="true">
+                <path d={port.spark} fill="none" stroke="#0d9488" stroke-width="1.8" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-[var(--border-subtle)] text-xs">
+              {port.nextHigh && (
+                <div>
+                  <div class="text-[var(--text-muted)]">▲ المد القادم</div>
+                  <div class="text-base font-semibold text-teal-700 latin mt-0.5">{formatTime(port.nextHigh.time, port.tz)}</div>
+                </div>
+              )}
+              {port.nextLow && (
+                <div>
+                  <div class="text-[var(--text-muted)]">▼ الجزر القادم</div>
+                  <div class="text-base font-semibold text-rose-600 latin mt-0.5">{formatTime(port.nextLow.time, port.tz)}</div>
+                </div>
+              )}
+              <div>
+                <div class="text-[var(--text-muted)]">مدى اليوم</div>
+                <div class="text-base font-semibold latin mt-0.5">{port.range} <span class="text-xs font-normal text-[var(--text-muted)]">سم</span></div>
+              </div>
+            </div>
+          </a>
+        ))}
       </div>
-    </footer>
-  </div>
+    </section>
+
+    <!-- What each port page offers -->
+    <section class="mb-16" aria-labelledby="features-title">
+      <div class="section-title">
+        <h2 id="features-title">ماذا تجد في صفحة كل ميناء؟</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {features.map(f => (
+          <div class="card p-5">
+            <div class="w-10 h-10 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-xl" aria-hidden="true">{f.icon}</div>
+            <h3 class="mt-3 font-semibold">{f.title}</h3>
+            <p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">{f.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="card p-5 mt-4 flex flex-col sm:flex-row sm:items-center gap-3 text-sm">
+        <span class="font-semibold shrink-0">مقياس جودة الصيد:</span>
+        <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs">
+          <span style="color:#16a34a">🐟🐟🐟🐟🐟 ممتاز</span>
+          <span style="color:#0d9488">🐟🐟🐟🐟 جيد</span>
+          <span style="color:#d97706">🐟🐟🐟 متوسط</span>
+          <span style="color:#ea580c">🐟🐟 دون المتوسط</span>
+          <span style="color:#dc2626">🐟 ضعيف</span>
+        </div>
+        <a href={`${BASE}methodology`} class="sm:ms-auto text-xs text-[var(--accent)] hover:underline shrink-0">كيف نحسبه؟</a>
+      </div>
+    </section>
+
+    <!-- Ports overview map -->
+    <section class="mb-16" aria-labelledby="map-title">
+      <div class="section-title">
+        <h2 id="map-title">خريطة الموانئ</h2>
+        <p>اضغط على أي نقطة لفتح صفحة الميناء</p>
+      </div>
+      <div id="ports-map" class="port-map w-full border border-[var(--border-subtle)]" style="height:420px"></div>
+      <p class="text-[11px] text-[var(--text-dim)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
+    </section>
+
+    <!-- Countries -->
+    <section id="countries" class="mb-16 scroll-mt-20" aria-labelledby="countries-title">
+      <div class="section-title">
+        <h2 id="countries-title">تصفح حسب الدولة</h2>
+        <p><span class="latin">{countries.length}</span> دولة</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {countries.map((code: string) => {
+          const count = placesIndex.filter((p: { country: string }) => p.country === code).length;
+          return (
+            <a href={`${BASE}country/${code}`} class="card px-4 py-3 flex items-center justify-between gap-2 group">
+              <span class="font-medium group-hover:text-[var(--accent)] transition-colors">{countryName(code)}</span>
+              <span class="text-xs text-[var(--text-muted)] bg-[var(--surface-elevated)] rounded-full px-2 py-0.5 latin">{count}</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- All ports, grouped by country -->
+    <section id="ports" class="mb-8 scroll-mt-20" aria-labelledby="ports-title">
+      <div class="section-title">
+        <h2 id="ports-title">جميع الموانئ</h2>
+        <p><span class="latin">{placesIndex.length}</span> ميناءً</p>
+      </div>
+      <div class="card p-5 sm:p-6 columns-1 sm:columns-2 lg:columns-3 gap-8">
+        {countries.map((code: string) => (
+          <div class="break-inside-avoid mb-5">
+            <a href={`${BASE}country/${code}`} class="text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--accent)]">{countryName(code)}</a>
+            <ul class="mt-1.5 space-y-0.5">
+              {placesIndex.filter((p: { country: string }) => p.country === code).map((port: { id: string; name_ar: string; name_en: string }) => (
+                <li>
+                  <a href={`${BASE}ports/${port.id}`} class="flex items-baseline gap-2 py-1 text-sm hover:text-[var(--accent)] transition-colors">
+                    <span>{port.name_ar}</span>
+                    <span class="text-[11px] text-[var(--text-dim)] latin" lang="en">{port.name_en}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
 </BaseLayout>
 
 <!-- Leaflet overview map (client-only, free OSM tiles) -->
@@ -271,9 +258,10 @@ const searchPortsJSON = JSON.stringify(searchPorts);
       var pts = [];
       ports.forEach(function (p) {
         var m = L.circleMarker([p.lat, p.lon], {
-          radius: 5, color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.65, weight: 1.5
+          radius: 6, color: '#ffffff', fillColor: '#0d9488', fillOpacity: 0.9, weight: 2
         }).addTo(map);
-        m.bindPopup('<a href="' + base + 'ports/' + p.id + '" style="color:#0d9488;font-weight:600">' + p.name + '</a>');
+        m.bindTooltip(p.name, { direction: 'top', offset: [0, -6] });
+        m.on('click', function () { window.location.href = base + 'ports/' + p.id; });
         pts.push([p.lat, p.lon]);
       });
       map.fitBounds(pts, { padding: [30, 30] });
@@ -309,20 +297,26 @@ const searchPortsJSON = JSON.stringify(searchPorts);
       if (txt.indexOf(q) !== -1) matches.push(p);
     }
     if (!matches.length) {
-      dropdown.innerHTML = '<div class="px-4 py-3 text-xs text-[var(--text-dim)]">لا توجد نتائج</div>';
+      dropdown.innerHTML = '<div class="px-4 py-3 text-sm text-[var(--text-dim)]">لا توجد نتائج</div>';
     } else {
       var html = '';
       for (var j=0; j<Math.min(matches.length, 8); j++) {
         var m = matches[j];
-        html += '<a href="' + base + 'ports/' + m.id + '" class="flex items-center gap-3 px-4 py-2.5 hover:bg-[var(--surface-elevated)] transition-colors text-sm"><span class="text-[var(--accent)] text-xs">⚓</span><span>' + m.name_ar + '</span><span class="text-[10px] text-[var(--text-dim)] latin ml-auto">' + m.name_en + '</span><span class="text-[10px] text-[var(--text-dim)]">' + m.countryName + '</span></a>';
+        html += '<a href="' + base + 'ports/' + m.id + '" class="flex items-center gap-3 px-4 py-3 hover:bg-[var(--surface-elevated)] transition-colors text-sm border-b border-[var(--border-subtle)] last:border-0"><span class="font-medium">' + m.name_ar + '</span><span class="text-xs text-[var(--text-dim)]">' + m.countryName + '</span><span class="text-xs text-[var(--text-dim)] latin ms-auto">' + m.name_en + '</span></a>';
       }
-      if (matches.length > 8) html += '<div class="px-4 py-2 text-[10px] text-[var(--text-dim)]">و ' + (matches.length - 8) + ' ميناء آخر...</div>';
+      if (matches.length > 8) html += '<div class="px-4 py-2 text-xs text-[var(--text-dim)]">و ' + (matches.length - 8) + ' ميناء آخر...</div>';
       dropdown.innerHTML = html;
     }
     dropdown.classList.remove('hidden');
     this.setAttribute('aria-expanded','true');
   });
 
+  searchEl?.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && dropdown) {
+      var first = dropdown.querySelector('a');
+      if (first) { e.preventDefault(); window.location.href = first.getAttribute('href'); }
+    }
+  });
   searchEl?.addEventListener('blur', function () {
     setTimeout(function () { if (dropdown) dropdown.classList.add('hidden'); if (searchEl) searchEl.setAttribute('aria-expanded','false'); }, 200);
   });

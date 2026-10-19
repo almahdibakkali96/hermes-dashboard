@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import placesIndex from '../../data/places/places_index.json';
+import { countryName, formatCoords } from '../../lib/countries';
 
 export function getStaticPaths() {
   const codes = [...new Set(placesIndex.map((p: { country: string }) => p.country))];
@@ -10,72 +11,40 @@ export function getStaticPaths() {
 const { code } = Astro.params;
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 
-const countryNames: Record<string, string> = {
-  AE: 'الإمارات', BH: 'البحرين', DJ: 'جيبوتي', DZ: 'الجزائر',
-  EG: 'مصر', IQ: 'العراق', JO: 'الأردن', KM: 'جزر القمر',
-  KW: 'الكويت', LB: 'لبنان', LY: 'ليبيا', MA: 'المغرب',
-  MR: 'موريتانيا', OM: 'عُمان', PS: 'فلسطين', QA: 'قطر',
-  SA: 'السعودية', SD: 'السودان', SO: 'الصومال', SY: 'سوريا',
-  TN: 'تونس', YE: 'اليمن',
-};
-
-const name = countryNames[code!] || code!;
+const name = countryName(code!);
 const ports = placesIndex.filter((p: { country: string }) => p.country === code);
 const title = `موانئ ${name}`;
 ---
 
-<BaseLayout title={title} description={`مواقيت المد والجزر للموانئ في ${name}`}>
-  <div class="min-h-screen flex flex-col">
-
-    <!-- Top bar -->
-    <header class="sticky top-0 z-10 backdrop-blur-md bg-white/90 border-b border-[var(--border-subtle)] shadow-sm">
-      <div class="max-w-4xl mx-auto px-4 py-3 flex items-center gap-4">
-        <a href={BASE} class="flex items-center gap-2 shrink-0 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
-          <span class="text-sm">&larr;</span>
-          <span class="text-sm">الرئيسية</span>
-        </a>
-        <span class="text-[var(--text-dim)] text-sm hidden sm:inline">/</span>
-        <span class="text-[var(--text-primary)] text-sm font-medium">{name}</span>
-        <span class="text-xs text-[var(--text-dim)] ml-auto shrink-0">{ports.length} ميناء</span>
-      </div>
-    </header>
-
-    <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full">
-      <h1 class="text-2xl font-semibold text-white mb-2">{title}</h1>
-      <p class="text-sm text-[var(--text-secondary)] mb-8">
-        اختر ميناء لعرض مواقيت المد والجزر والحسابات الفلكية
+<BaseLayout title={`مواقيت المد والجزر في ${name}`} description={`مواقيت المد والجزر وأوقات الصيد للموانئ في ${name}`}>
+  <div class="page-head">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+      <nav class="breadcrumb" aria-label="مسار التنقل">
+        <a href={BASE}>الرئيسية</a><span class="sep">/</span>
+        <a href={`${BASE}#countries`}>الدول</a><span class="sep">/</span>
+        <span aria-current="page">{name}</span>
+      </nav>
+      <h1 class="mt-3 text-3xl font-bold display">{title}</h1>
+      <p class="mt-2 text-[var(--text-secondary)]">
+        <span class="latin">{ports.length}</span> {ports.length === 1 ? 'ميناء' : 'موانئ'} — اختر ميناءً لعرض مواقيت المد والجزر وأوقات الصيد
       </p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {ports.map((port: { id: string; name_ar: string; name_en: string; lat: number; lon: number }) => (
-          <a
-            href={`${BASE}ports/${port.id}`}
-            class="block p-4 rounded-[var(--radius-lg)]
-                   bg-[var(--surface-card)]
-                   border border-[var(--border-subtle)]
-                   hover:border-[var(--accent-border)]
-                   hover:bg-[var(--surface-elevated)]
-                   transition-all duration-150"
-          >
-            <div class="flex items-center gap-3">
-              <span class="text-[var(--accent)] text-sm opacity-60">⚓</span>
-              <div>
-                <div class="text-white font-medium">{port.name_ar}</div>
-                <div class="text-xs text-[var(--text-dim)] latin mt-0.5">
-                  {port.name_en} &middot; {port.lat.toFixed(2)}&deg;N, {port.lon.toFixed(2)}&deg;E
-                </div>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-
-      <div class="mt-12 pt-8 border-t border-[var(--border-subtle)] text-center">
-        <a href={BASE} class="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
-          &larr; العودة للرئيسية
-        </a>
-      </div>
-    </main>
-
+    </div>
   </div>
+
+  <main id="main" class="max-w-4xl mx-auto px-4 py-8 w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {ports.map((port: { id: string; name_ar: string; name_en: string; lat: number; lon: number }) => (
+        <a href={`${BASE}ports/${port.id}`} class="card group flex items-center gap-4 p-5">
+          <span class="w-11 h-11 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-lg shrink-0" aria-hidden="true">⚓</span>
+          <div class="min-w-0">
+            <div class="text-lg font-semibold display group-hover:text-[var(--accent)] transition-colors">{port.name_ar}</div>
+            <div class="text-xs text-[var(--text-muted)] latin mt-0.5" lang="en">
+              {port.name_en} · {formatCoords(port.lat, port.lon)}
+            </div>
+          </div>
+          <span class="ms-auto text-[var(--text-dim)] group-hover:text-[var(--accent)] transition-colors" aria-hidden="true">&larr;</span>
+        </a>
+      ))}
+    </div>
+  </main>
 </BaseLayout>

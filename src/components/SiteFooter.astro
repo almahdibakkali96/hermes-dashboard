@@ -1,0 +1,57 @@
+---
+import buildInfo from '../build.json';
+
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const buildNum = String(buildInfo.build).padStart(3, '0');
+const year = new Date().getFullYear();
+
+const popular = [
+  { id: 'dubai', name: 'دبي' },
+  { id: 'jeddah', name: 'جدة' },
+  { id: 'casablanca', name: 'الدار البيضاء' },
+  { id: 'alexandria', name: 'الإسكندرية' },
+  { id: 'muscat', name: 'مسقط' },
+  { id: 'doha', name: 'الدوحة' },
+];
+---
+
+<footer class="site-footer">
+  <div class="max-w-6xl mx-auto px-4 pt-12 pb-8 grid grid-cols-2 sm:grid-cols-4 gap-8 text-sm">
+    <div class="col-span-2">
+      <div class="text-lg font-bold display text-white">ArabTides</div>
+      <p class="mt-2 max-w-sm leading-relaxed text-slate-400">
+        مواقيت المد والجزر، أطوار القمر، أوقات الصيد والصلاة لأكثر من ٣٠ ميناءً عربياً — من المحيط الأطلسي إلى الخليج العربي.
+      </p>
+      <p class="mt-4 text-xs text-slate-500 leading-relaxed max-w-sm">
+        ⚠️ حسابات فلكية تقديرية، لا تُستخدم للملاحة.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="footer-heading">موانئ شائعة</h2>
+      <ul class="space-y-2">
+        {popular.map(p => <li><a href={`${BASE}ports/${p.id}`} class="footer-link">{p.name}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="footer-heading">الموقع</h2>
+      <ul class="space-y-2">
+        <li><a href={`${BASE}methodology`} class="footer-link">كيف تعمل الحسابات</a></li>
+        <li><a href={`${BASE}about`} class="footer-link">عن الموقع</a></li>
+        <li><a href={`${BASE}disclaimer`} class="footer-link">إخلاء المسؤولية</a></li>
+        <li><a href={`${BASE}#countries`} class="footer-link">تصفح حسب الدولة</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+      <span>&copy; <span class="latin">{year}</span> ArabTides</span>
+      <div class="flex items-center gap-3">
+        <span class="latin">Tide data: EOT20 · CC BY 4.0</span>
+        <span class="latin px-2 py-0.5 rounded bg-white/5 text-slate-400 font-mono" title="رقم الإصدار">#{buildNum}</span>
+      </div>
+    </div>
+  </div>
+</footer>
