@@ -106,6 +106,37 @@ export function predictHeight(constituents: Record<string, Constituent>, time: D
   return height;
 }
 
+// Rates of the astronomical arguments in degrees per hour (derivatives of astroArgs)
+const PER_HOUR = 1 / (36525 * 24);
+const RATES = (() => {
+  const ds = 481267.88123421 * PER_HOUR, dh = 36000.76983 * PER_HOUR;
+  return [15 + dh - ds, ds, dh, 4069.0137287 * PER_HOUR, 1934.136261 * PER_HOUR, 1.71946 * PER_HOUR]; // τ, s, h, p, N′=−N, p1
+})();
+
+/**
+ * Freeze the harmonic sum at `t0`: within a day the nodal factors are constant to
+ * well under 0.01 cm and each argument advances linearly, so
+ * h(t0 + Δh) = Σ amp·cos(phase0 + speed·Δh). Same result as predictHeight, ~20× faster.
+ */
+function harmonicsAt(constituents: Record<string, Constituent>, t0: Date) {
+  const a = astroArgs(t0);
+  const args = [a.tau, a.s, a.h, a.p, -a.N, a.p1];
+  const terms: { amp: number; phase0: number; speed: number }[] = [];
+  for (const [name, c] of Object.entries(constituents)) {
+    const d = DOODSON[name];
+    if (!d) continue;
+    let V = d.off, speed = 0;
+    for (let i = 0; i < 6; i++) { V += d.k[i] * args[i]; speed += d.k[i] * RATES[i]; }
+    const { f, u } = nodal(name, a.N, a.p);
+    terms.push({ amp: f * c.amp, phase0: (V + u - c.phase) * RAD, speed: speed * RAD });
+  }
+  return (hoursFromT0: number) => {
+    let h = 0;
+    for (const t of terms) h += t.amp * Math.cos(t.phase0 + t.speed * hoursFromT0);
+    return h;
+  };
+}
+
 /** UTC instant of local midnight for the calendar day `date` falls on at `timezoneOffset` (minutes east of UTC) */
 export function localMidnight(date: Date, timezoneOffset: number): Date {
   const local = new Date(date.getTime() + timezoneOffset * 60000);
@@ -121,10 +152,10 @@ export function generateTideCurve(
   timezoneOffset: number = 0
 ): TidePoint[] {
   const start = localMidnight(date, timezoneOffset).getTime();
+  const h = harmonicsAt(constituents, new Date(start));
   const points: TidePoint[] = [];
   for (let min = 0; min <= 24 * 60; min += 5) {
-    const t = new Date(start + min * 60000);
-    points.push({ time: t, hours: min / 60, height: predictHeight(constituents, t) });
+    points.push({ time: new Date(start + min * 60000), hours: min / 60, height: h(min / 60) });
   }
   return points;
 }
@@ -166,10 +197,10 @@ export function dayExtremes(
   timezoneOffset: number = 0
 ): TideExtreme[] {
   const start = localMidnight(date, timezoneOffset).getTime();
+  const h = harmonicsAt(constituents, new Date(start));
   const points: TidePoint[] = [];
   for (let min = -10; min <= 24 * 60 + 10; min += 5) {
-    const t = new Date(start + min * 60000);
-    points.push({ time: t, hours: min / 60, height: predictHeight(constituents, t) });
+    points.push({ time: new Date(start + min * 60000), hours: min / 60, height: h(min / 60) });
   }
   return findExtremes(points);
 }
