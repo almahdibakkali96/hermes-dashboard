@@ -8,6 +8,7 @@ export interface Props {
 
 const { title, description } = Astro.props;
 const fullTitle = `${title} — ArabTides`;
+const desc = description || 'مواقيت المد والجزر والحسابات الفلكية للموانئ العربية';
 ---
 
 <!doctype html>
@@ -16,10 +17,15 @@ const fullTitle = `${title} — ArabTides`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
-    <meta name="description" content={description || 'مواقيت المد والجزر والحسابات الفلكية للموانئ العربية'} />
+    <meta name="description" content={desc} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Fonts: Arabic primary, Inter for Latin -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <!-- OG -->
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description || 'مواقيت المد والجزر والحسابات الفلكية للموانئ العربية'} />
+    <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
   </head>
   <body>

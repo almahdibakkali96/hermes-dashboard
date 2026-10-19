@@ -1,31 +1,90 @@
 @import "tailwindcss";
 
-/* Arabic font stack */
-@font-face {
-  font-family: 'Noto Naskh Arabic';
-  src: url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
-}
+/* ===== ArabTides Design System =====
+   Surface: Monitor (data dashboard)
+   Influences: Linear (dark precision) + Supabase (emerald accent)
+   Maritime adaptation: deep navy base + teal accent
+   Arabic-first RTL typography
+*/
 
+/* --- Design Tokens --- */
 :root {
+  /* Surfaces - luminance stacking on dark */
+  --surface-abyss:   #060b10;
+  --surface-page:    #0a0f16;
+  --surface-card:    #111920;
+  --surface-elevated:#182230;
+  --surface-input:   #0d1520;
+
+  /* Text - stepped white opacity */
+  --text-primary:    #e4e8ec;
+  --text-secondary:  #94a3b8;
+  --text-muted:      #64748b;
+  --text-dim:        #475569;
+
+  /* Accent - maritime teal */
+  --accent:          #2dd4bf;
+  --accent-hover:    #5eead4;
+  --accent-muted:    rgba(45, 212, 191, 0.12);
+  --accent-border:   rgba(45, 212, 191, 0.25);
+
+  /* Borders - semi-transparent white, Linear-style */
+  --border-subtle:    rgba(255, 255, 255, 0.05);
+  --border-standard:  rgba(255, 255, 255, 0.08);
+  --border-prominent: rgba(255, 255, 255, 0.12);
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 9999px;
+
+  /* Typography */
   --font-arabic: 'Noto Naskh Arabic', 'Traditional Arabic', 'Scheherazade New', serif;
-  --font-latin: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-latin:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* --- Base --- */
 html {
   font-family: var(--font-arabic);
   direction: rtl;
+  background: var(--surface-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  @apply bg-slate-950 text-slate-200 antialiased;
+  margin: 0;
+  background: var(--surface-page);
 }
 
-/* RTL logical properties */
-.ltr {
+/* Latin / LTR overrides */
+.latin, .ltr {
+  font-family: var(--font-latin);
   direction: ltr;
 }
 
-/* Chart containers preserve LTR for time axes */
+/* Chart LTR */
 .chart-ltr {
   direction: ltr;
+}
+
+/* --- Focus --- */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface-page); }
+::-webkit-scrollbar-thumb { background: var(--border-prominent); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* --- Selection --- */
+::selection {
+  background: var(--accent-muted);
+  color: var(--accent);
 }
