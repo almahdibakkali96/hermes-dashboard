@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+---
+<BaseLayout title="عن الموقع" description="عن موقع ArabTides للمد والجزر العربي">
+  <div class="min-h-screen max-w-2xl mx-auto px-4 py-12">
+    <a href={BASE} class="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">&larr; الرئيسية</a>
+    <h1 class="text-2xl font-bold text-[var(--text-primary)] mt-6 mb-4">عن ArabTides</h1>
+    <div class="prose prose-sm text-[var(--text-secondary)] leading-relaxed space-y-4">
+      <p>موقع المد والجزر العربي يوفر حسابات فلكية تقديرية لمواقيت المد والجزر، أوقات الصلاة، التاريخ الهجري، وأوقات الصيد (السولونار) للموانئ العربية.</p>
+      <p>جميع الحسابات تتم محلياً دون الاعتماد على خدمات خارجية. لا يتم جمع أي بيانات شخصية ولا تستخدم ملفات تعريف الارتباط.</p>
+      <p>البيانات الأساسية مستمدة من نموذج EOT20 العالمي للمحيطات (CC BY 4.0).</p>
+      <h2 class="text-lg font-semibold text-[var(--text-primary)] mt-6">تنبيه</h2>
+      <p>هذه تقديرات فلكية. قد تختلف ارتفاعات المد والجزر الفعلية حسب الظروف الجوية والضغط الجوي وعوامل محلية أخرى. لا تعتمد على هذه المعلومات للملاحة أو الأغراض الحيوية.</p>
+    </div>
+  </div>
+</BaseLayout>

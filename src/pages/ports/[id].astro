@@ -6,6 +6,7 @@ import {
   classifyTide, getTimezoneOffset
 } from '../../lib/tides';
 import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
+import { calculatePrayerTimes, gregorianToHijri } from '../../lib/prayer';
 
 export function getStaticPaths() {
   return placesIndex.map((p: { id: string }) => ({ params: { id: p.id } }));
@@ -39,6 +40,10 @@ const moon = moonPhase(today);
 const sun = sunTimes(today, port.lat, port.lon, tzOffset);
 const moonT = moonTimes(today, port.lat, port.lon, tzOffset);
 const solunar = solunarPeriods(moonT.moonrise, moonT.moonset, moonT.lunarTransit, moon.phase, today);
+
+// Prayer times & Hijri
+const prayers = calculatePrayerTimes(today, port.lat, port.lon, tzOffset, 'UmmAlQura');
+const hijri = gregorianToHijri(today);
 
 // 7-day forecast
 const weekDays = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
@@ -219,6 +224,50 @@ const title = `${port.name_ar} — مواقيت المد والجزر`;
             <p class="text-[10px] text-[var(--text-dim)] mt-3 leading-relaxed">
               الفترات الكبرى: ±1 ساعة حول عبور القمر. الفترات الصغرى: ±30 دقيقة حول شروق/غروب القمر. التوقيت تقديري.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prayer times + Hijri + actions -->
+      <section class="mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <!-- Prayer times -->
+          <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-4">
+            <h3 class="text-sm font-semibold text-[var(--text-primary)] mb-3">🕌 أوقات الصلاة</h3>
+            <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+              <div class="flex justify-between"><span class="text-[var(--text-dim)]">الفجر</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.fajr}</span></div>
+              <div class="flex justify-between"><span class="text-[var(--text-dim)]">الشروق</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.sunrise}</span></div>
+              <div class="flex justify-between"><span class="text-[var(--text-dim)]">الظهر</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.dhuhr}</span></div>
+              <div class="flex justify-between"><span class="text-[var(--text-dim)]">العصر</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.asr}</span></div>
+              <div class="flex justify-between"><span class="text-[var(--text-dim)]">المغرب</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.maghrib}</span></div>
+              <div class="flex justify-between"><span class="text-[var(--text-dim)]">العشاء</span><span class="font-medium text-[var(--text-primary)] latin">{prayers.isha}</span></div>
+            </div>
+            <p class="text-[10px] text-[var(--text-dim)] mt-2">طريقة أم القرى</p>
+          </div>
+
+          <!-- Hijri date -->
+          <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center text-center">
+            <div class="text-3xl mb-1">📅</div>
+            <div class="text-lg font-bold text-[var(--text-primary)]">{hijri.day} {hijri.monthAr}</div>
+            <div class="text-sm text-[var(--text-secondary)] mt-0.5">{hijri.year} هـ</div>
+            <div class="text-[10px] text-[var(--text-dim)] mt-2">التاريخ الهجري (تقديري)</div>
+          </div>
+
+          <!-- Actions -->
+          <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-4 flex flex-col gap-3">
+            <h3 class="text-sm font-semibold text-[var(--text-primary)]">إجراءات</h3>
+            <a href={`javascript:window.print()`} class="flex items-center gap-2 text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">
+              <span>🖨️</span> طباعة الصفحة
+            </a>
+            <a href={`https://wa.me/?text=${encodeURIComponent(`مواقيت المد والجزر — ${port.name_ar}\n${BASE}ports/${port.id}`)}`}
+               target="_blank" rel="noopener"
+               class="flex items-center gap-2 text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">
+              <span>💬</span> مشاركة واتساب
+            </a>
+            <a href={`mailto:?subject=${encodeURIComponent(`مواقيت المد والجزر — ${port.name_ar}`)}&body=${encodeURIComponent(`${BASE}ports/${port.id}`)}`}
+               class="flex items-center gap-2 text-xs text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">
+              <span>📧</span> مشاركة بالبريد
+            </a>
           </div>
         </div>
       </section>
