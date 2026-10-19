@@ -41,35 +41,6 @@ const featuredPorts = await Promise.all(
 
 const moon = moonPhase(new Date());
 
-// Compute best fishing days for current month (moon-phase based, universal)
-const monthNamesGen = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-const now = new Date();
-const thisMonth = now.getMonth(), thisYear = now.getFullYear();
-const daysInMonthGen = new Date(thisYear, thisMonth + 1, 0).getDate();
-const fishEmojisHome = ['', '🐟', '🐟🐟', '🐟🐟🐟', '🐟🐟🐟🐟', '🐟🐟🐟🐟🐟'];
-const fishColorsHome = ['', '#ef4444', '#f97316', '#f59e0b', '#0d9488', '#16a34a'];
-
-// Moon-based fish score for any day
-const moonScoreHome = (day: number) => {
-  const d = new Date(thisYear, thisMonth, day);
-  const m = moonPhase(d);
-  const a = ((m.age % 29.53) + 29.53) % 29.53;
-  if (a <= 2 || a >= 28.0) return 3;
-  if (a <= 3.5 || a >= 27.0) return 2;
-  if (a <= 5 || a >= 25.5) return 1;
-  if (a >= 13.5 && a <= 16.0) return 3;
-  if (a >= 12.5 && a <= 17.0) return 2;
-  if (a >= 11.5 && a <= 18.0) return 1;
-  return 0;
-};
-
-// Best days (moon score >= 2 = good or excellent)
-const bestFishingDays: { day: number; score: number }[] = [];
-for (let d = 1; d <= daysInMonthGen; d++) {
-  const s = moonScoreHome(d);
-  if (s >= 2) bestFishingDays.push({ day: d, score: Math.min(5, s + 1) });
-}
-
 // Lightweight port list for the overview map (client-side)
 const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number; lon: number }) => ({
   id: p.id, name: p.name_ar, lat: p.lat, lon: p.lon
@@ -143,42 +114,23 @@ const searchPortsJSON = JSON.stringify(searchPorts);
 
     <main id="main" class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
 
-      <!-- Fishing conclusion — prominent -->
+      <!-- Fishing — methodology -->
       <section class="mb-12">
         <div class="flex items-center gap-2 mb-5">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">🎣 أفضل أيام الصيد في {monthNamesGen[thisMonth]} {thisYear}</h2>
+          <h2 class="text-base font-semibold text-[var(--text-primary)]">🎣 توقعات الصيد</h2>
           <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
         </div>
-        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-5" style="box-shadow:var(--shadow-sm)">
-          {bestFishingDays.length > 0 ? (
-            <div class="mb-4">
-              <div class="text-xs font-semibold text-[var(--text-primary)] mb-2">✅ تواريخ ممتازة للصيد هذا الشهر</div>
-              <div class="flex flex-wrap gap-2">
-                {bestFishingDays.map(d => (
-                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium" style={`background:${fishColorsHome[d.score]}1a;color:${fishColorsHome[d.score]};border:1px solid ${fishColorsHome[d.score]}40`}>
-                    <span class="font-bold latin">{d.day}</span>
-                    <span>{monthNamesGen[thisMonth]}</span>
-                    <span class="text-[10px]">{fishEmojisHome[d.score]}</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-          ) : <p class="text-xs text-[var(--text-dim)] mb-3">لا توجد أيام ممتازة متبقية هذا الشهر.</p>}
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]">
-            <div class="p-2.5 rounded-lg bg-[var(--surface-elevated)]">
-              <div class="font-semibold text-[var(--text-primary)] mb-1">📖 كيف تعمل التوقعات</div>
-              <p class="text-[var(--text-dim)] leading-relaxed">أفضل الصيد عند اكتمال القمر (بدر) وميلاده (محاق). قوى الجذب ترفع المد وتحرّك الماء، فتنشط الأسماك على التغذي. اختر ميناءك لترى تقييمًا دقيقًا يشمل المد والجزر.</p>
-            </div>
-            <div class="p-2.5 rounded-lg bg-[var(--surface-elevated)]">
-              <div class="font-semibold text-[var(--text-primary)] mb-1">المقياس</div>
-              <div class="flex flex-wrap gap-x-3 gap-y-0.5">
-                <span style="color:#16a34a">🐟🐟🐟🐟🐟 ممتاز</span>
-                <span style="color:#0d9488">🐟🐟🐟🐟 جيد</span>
-                <span style="color:#f59e0b">🐟🐟🐟 متوسط</span>
-                <span style="color:#f97316">🐟🐟 ضعيف</span>
-                <span style="color:#ef4444">🐟 غير مناسب</span>
-              </div>
-            </div>
+        <div class="rounded-xl bg-white border border-[var(--border-subtle)] p-5 text-sm leading-relaxed" style="box-shadow:var(--shadow-sm)">
+          <p class="text-[var(--text-secondary)] mb-4">
+            يعتمد تقييم جودة الصيد (🐟 من ١ إلى ٥) على طور القمر ومدى المد والجزر. اختر أي ميناء لترى التقييم اليومي وأفضل أيام الصيد لهذا الشهر.
+          </p>
+          <div class="flex flex-wrap gap-3 text-xs items-center">
+            <span class="text-[var(--text-dim)]">المقياس:</span>
+            <span style="color:#16a34a">🐟🐟🐟🐟🐟 ممتاز</span>
+            <span style="color:#0d9488">🐟🐟🐟🐟 جيد</span>
+            <span style="color:#f59e0b">🐟🐟🐟 متوسط</span>
+            <span style="color:#f97316">🐟🐟 ضعيف</span>
+            <span style="color:#ef4444">🐟 غير مناسب</span>
           </div>
         </div>
       </section>
