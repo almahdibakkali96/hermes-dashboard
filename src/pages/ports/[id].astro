@@ -7,7 +7,7 @@ export function getStaticPaths() {
 }
 
 const { id } = Astro.params;
-const BASE = import.meta.env.BASE_URL + '/';
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 
 // Dynamic import of port JSON
 const portModule = await import(`../../data/places/${id}.json`);

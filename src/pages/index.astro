@@ -4,7 +4,7 @@ import placesIndex from '../data/places/places_index.json';
 import dubaiData from '../data/places/dubai.json';
 import buildInfo from '../build.json';
 
-const BASE = import.meta.env.BASE_URL + '/';
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))].sort();
 const buildNum = String(buildInfo.build).padStart(3, '0');
 const buildTime = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
