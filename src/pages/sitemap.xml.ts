@@ -1,4 +1,5 @@
 import placesIndex from '../data/places/places_index.json';
+import { articles } from '../lib/articles';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
@@ -17,6 +18,12 @@ export async function GET({ site }: { site: URL | undefined }) {
 
   placesIndex.forEach((p: { id: string }) => {
     urls.push({ loc: `${origin}${BASE}/ports/${p.id}`, priority: 0.9, changefreq: 'daily', lastmod: today });
+  });
+
+  // Articles
+  urls.push({ loc: `${origin}${BASE}/articles`, priority: 0.8, changefreq: 'weekly', lastmod: today });
+  articles.forEach((a) => {
+    urls.push({ loc: `${origin}${BASE}/articles/${a.slug}`, priority: 0.8, changefreq: 'monthly', lastmod: a.updated });
   });
 
   // Static pages

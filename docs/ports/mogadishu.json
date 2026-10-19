@@ -1,0 +1,265 @@
+{
+  "port": {
+    "id": "mogadishu",
+    "name_ar": "مقديشو",
+    "name_en": "Mogadishu",
+    "country": "SO",
+    "country_ar": "الصومال",
+    "lat": 2.04,
+    "lon": 45.34,
+    "timezone": "Africa/Mogadishu"
+  },
+  "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/mogadishu",
+  "generated_utc": "2026-10-19T21:51:15.582Z",
+  "tide_type_ar": "مختلط، نصف يومي غالباً",
+  "datum": "mean sea level (heights in cm; negative = below MSL)",
+  "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
+  "disclaimer": "Astronomical estimate. Not official harbour predictions. Not for navigation.",
+  "days": [
+    {
+      "date": "2026-10-20",
+      "utc_offset_minutes": 180,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "00:46",
+          "time_utc": "2026-10-19T21:46:23.384Z",
+          "height_cm": 9
+        },
+        {
+          "type": "low",
+          "time_local": "05:26",
+          "time_utc": "2026-10-20T02:26:07.157Z",
+          "height_cm": -4
+        },
+        {
+          "type": "high",
+          "time_local": "11:36",
+          "time_utc": "2026-10-20T08:36:28.444Z",
+          "height_cm": 28
+        },
+        {
+          "type": "low",
+          "time_local": "18:45",
+          "time_utc": "2026-10-20T15:45:16.293Z",
+          "height_cm": -42
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متزايد",
+        "phase_en": "Waxing Gibbous",
+        "illumination": 0.64
+      }
+    },
+    {
+      "date": "2026-10-21",
+      "utc_offset_minutes": 180,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "01:29",
+          "time_utc": "2026-10-20T22:28:55.459Z",
+          "height_cm": 31
+        },
+        {
+          "type": "low",
+          "time_local": "07:11",
+          "time_utc": "2026-10-21T04:11:14.342Z",
+          "height_cm": -23
+        },
+        {
+          "type": "high",
+          "time_local": "13:07",
+          "time_utc": "2026-10-21T10:07:11.989Z",
+          "height_cm": 41
+        },
+        {
+          "type": "low",
+          "time_local": "19:31",
+          "time_utc": "2026-10-21T16:30:33.217Z",
+          "height_cm": -53
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متزايد",
+        "phase_en": "Waxing Gibbous",
+        "illumination": 0.74
+      }
+    },
+    {
+      "date": "2026-10-22",
+      "utc_offset_minutes": 180,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "01:55",
+          "time_utc": "2026-10-21T22:55:25.627Z",
+          "height_cm": 53
+        },
+        {
+          "type": "low",
+          "time_local": "07:57",
+          "time_utc": "2026-10-22T04:56:58.745Z",
+          "height_cm": -46
+        },
+        {
+          "type": "high",
+          "time_local": "13:56",
+          "time_utc": "2026-10-22T10:55:30.755Z",
+          "height_cm": 55
+        },
+        {
+          "type": "low",
+          "time_local": "20:03",
+          "time_utc": "2026-10-22T17:03:07.480Z",
+          "height_cm": -65
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متزايد",
+        "phase_en": "Waxing Gibbous",
+        "illumination": 0.82
+      }
+    },
+    {
+      "date": "2026-10-23",
+      "utc_offset_minutes": 180,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "02:21",
+          "time_utc": "2026-10-22T23:20:31.098Z",
+          "height_cm": 76
+        },
+        {
+          "type": "low",
+          "time_local": "08:32",
+          "time_utc": "2026-10-23T05:32:27.876Z",
+          "height_cm": -69
+        },
+        {
+          "type": "high",
+          "time_local": "14:33",
+          "time_utc": "2026-10-23T11:32:33.546Z",
+          "height_cm": 68
+        },
+        {
+          "type": "low",
+          "time_local": "20:32",
+          "time_utc": "2026-10-23T17:31:40.187Z",
+          "height_cm": -76
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متزايد",
+        "phase_en": "Waxing Gibbous",
+        "illumination": 0.9
+      }
+    },
+    {
+      "date": "2026-10-24",
+      "utc_offset_minutes": 180,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "02:46",
+          "time_utc": "2026-10-23T23:46:17.206Z",
+          "height_cm": 98
+        },
+        {
+          "type": "low",
+          "time_local": "09:05",
+          "time_utc": "2026-10-24T06:05:25.961Z",
+          "height_cm": -90
+        },
+        {
+          "type": "high",
+          "time_local": "15:06",
+          "time_utc": "2026-10-24T12:05:44.369Z",
+          "height_cm": 76
+        },
+        {
+          "type": "low",
+          "time_local": "20:59",
+          "time_utc": "2026-10-24T17:59:05.137Z",
+          "height_cm": -86
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متزايد",
+        "phase_en": "Waxing Gibbous",
+        "illumination": 0.95
+      }
+    },
+    {
+      "date": "2026-10-25",
+      "utc_offset_minutes": 180,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "03:14",
+          "time_utc": "2026-10-25T00:13:30.910Z",
+          "height_cm": 118
+        },
+        {
+          "type": "low",
+          "time_local": "09:38",
+          "time_utc": "2026-10-25T06:38:10.690Z",
+          "height_cm": -108
+        },
+        {
+          "type": "high",
+          "time_local": "15:38",
+          "time_utc": "2026-10-25T12:37:44.504Z",
+          "height_cm": 81
+        },
+        {
+          "type": "low",
+          "time_local": "21:27",
+          "time_utc": "2026-10-25T18:26:46.248Z",
+          "height_cm": -95
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متزايد",
+        "phase_en": "Waxing Gibbous",
+        "illumination": 0.99
+      }
+    },
+    {
+      "date": "2026-10-26",
+      "utc_offset_minutes": 180,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "03:43",
+          "time_utc": "2026-10-26T00:42:36.274Z",
+          "height_cm": 135
+        },
+        {
+          "type": "low",
+          "time_local": "10:12",
+          "time_utc": "2026-10-26T07:11:41.786Z",
+          "height_cm": -122
+        },
+        {
+          "type": "high",
+          "time_local": "16:10",
+          "time_utc": "2026-10-26T13:09:54.881Z",
+          "height_cm": 81
+        },
+        {
+          "type": "low",
+          "time_local": "21:56",
+          "time_utc": "2026-10-26T18:55:34.775Z",
+          "height_cm": -101
+        }
+      ],
+      "moon": {
+        "phase_ar": "بدر",
+        "phase_en": "Full Moon",
+        "illumination": 1
+      }
+    }
+  ]
+}

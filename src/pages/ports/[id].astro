@@ -9,6 +9,7 @@ import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astron
 import { calculatePrayerTimes, gregorianToHijri } from '../../lib/prayer';
 import { countryName, formatCoords } from '../../lib/countries';
 import FishRating from '../../components/FishRating.astro';
+import { yearStats } from '../../lib/seas';
 
 export function getStaticPaths() {
   return placesIndex.map((p: { id: string }) => ({ params: { id: p.id } }));
@@ -141,13 +142,63 @@ const firstWeekday = new Date(year, month, 1).getDay();
 const leadingBlanks = (firstWeekday + 1) % 7;
 const calWeekdays = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
 
-const title = `${port.name_ar} — مواقيت المد والجزر`;
+const title = `مواقيت المد والجزر في ${port.name_ar} اليوم — جدول 7 أيام وأوقات الصيد`;
 const pageUrl = new URL(`${BASE}ports/${port.id}`, Astro.site).href;
 const monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
+
+// --- Plain-language summary + FAQ: quotable by search engines and AI assistants
+const country = countryName(port.country);
+const stats = (await yearStats(year)).find(r => r.id === port.id)!;
+const dateAr = today.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: port.timezone, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+const fmtList = (xs: { time: Date; height: number }[]) => xs.map(x => `${formatTime(x.time, tzOffset)} (${x.height.toFixed(0)} سم)`).join('، ');
+const todayHighs = extremes.filter(e => e.type === 'high'), todayLows = extremes.filter(e => e.type === 'low');
+const tideTypeExplain: Record<string, string> = {
+  'نصف يومي': 'مدّان عاليان وجزران منخفضان كل يوم تقريباً، بارتفاعات متقاربة',
+  'مختلط، نصف يومي غالباً': 'مدّان وجزران في معظم الأيام، لكن بارتفاعات مختلفة بوضوح',
+  'مختلط، يومي غالباً': 'مد عالٍ وجزر منخفض واحد في معظم الأيام، وأحياناً اثنان',
+  'يومي': 'مد عالٍ واحد وجزر منخفض واحد كل يوم',
+};
+const maxRangeDateAr = new Date(stats.maxRangeDate + 'T12:00:00Z').toLocaleDateString('ar-EG-u-nu-latn', { day: 'numeric', month: 'long' });
+const summary = `${dateAr} في ${port.name_ar} (${country}): المد العالي عند ${fmtList(todayHighs) || '—'}، والجزر المنخفض عند ${fmtList(todayLows) || '—'} بالتوقيت المحلي. المد هنا ${tideClass.typeAr}، ومدى اليوم ${todayRange} سم (${springNeap.conditionAr}). أقصى مدى متوقع خلال ${year} نحو ${(stats.maxRange / 100).toFixed(1)} م في ${maxRangeDateAr}.`;
+const faq = [
+  { q: `متى المد العالي اليوم في ${port.name_ar}؟`,
+    a: todayHighs.length ? `اليوم (${dateAr}) المد العالي في ${port.name_ar} عند ${fmtList(todayHighs)}، والجزر المنخفض عند ${fmtList(todayLows)} بالتوقيت المحلي (${port.timezone}).` : 'لا يوجد مد عالٍ اليوم.' },
+  { q: `ما نوع المد والجزر في ${port.name_ar}؟`,
+    a: `المد في ${port.name_ar} ${tideClass.typeAr}: ${tideTypeExplain[tideClass.typeAr] ?? ''}. معامل الشكل F = ${tideClass.formFactor}.` },
+  { q: `ما أكبر فرق بين المد والجزر في ${port.name_ar}؟`,
+    a: `أقصى مدى يومي متوقع في ${port.name_ar} خلال ${year} نحو ${(stats.maxRange / 100).toFixed(2)} م (${maxRangeDateAr})، وأقل مدى نحو ${stats.minRange} سم في أيام المد المحاقي.` },
+  { q: `ما أفضل أيام الصيد في ${port.name_ar} في ${monthNames[month]}؟`,
+    a: bestDays.length ? `حسب تقييم ArabTides (طور القمر وقوة المد): ${bestDays.map(d => `${d.day} ${monthNames[month]}`).join('، ')}.` : `لا توجد أيام بتقييم جيد أو ممتاز في ${monthNames[month]}.` },
+  { q: 'هل يمكن استخدام هذه الأوقات للملاحة؟',
+    a: 'لا. هذه تقديرات فلكية من نموذج EOT20 العالمي، وليست جداول رسمية للميناء. قد يختلف المد الفعلي بسبب الرياح والضغط الجوي. للملاحة استخدم جداول الهيئة الهيدروغرافية الرسمية.' },
+];
+const pageJsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: new URL(BASE, Astro.site).href },
+      { '@type': 'ListItem', position: 2, name: country, item: new URL(`${BASE}country/${port.country}`, Astro.site).href },
+      { '@type': 'ListItem', position: 3, name: port.name_ar, item: pageUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'WebPage', url: pageUrl, name: title, inLanguage: 'ar',
+    dateModified: today.toISOString(), description: summary,
+    about: {
+      '@type': 'Place', name: port.name_ar, alternateName: port.name_en,
+      geo: { '@type': 'GeoCoordinates', latitude: port.lat, longitude: port.lon },
+      address: { '@type': 'PostalAddress', addressCountry: port.country },
+    },
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
 ---
 
-<BaseLayout title={title} description={`مواقيت المد والجزر وأوقات الصيد وأطوار القمر في ${port.name_ar}، ${countryName(port.country)} — توقعات ٧ أيام`}>
+<BaseLayout title={title} jsonLd={pageJsonLd} description={`مواقيت المد والجزر في ${port.name_ar} (${country}) اليوم وتوقعات 7 أيام: أوقات المد العالي والجزر المنخفض، أفضل أيام الصيد، طور القمر وأوقات الصلاة.`}>
   <!-- Hero -->
   <section class="hero">
     <div class="max-w-6xl mx-auto px-4 pt-8 pb-20 sm:pb-24">
@@ -207,6 +258,11 @@ const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
 
       <!-- Main column -->
       <div class="lg:col-span-2 space-y-6 min-w-0">
+
+        <section class="card p-5 summary-card" aria-labelledby="summary-title">
+          <h2 id="summary-title" class="text-sm font-semibold text-[var(--accent)]">ملخص اليوم</h2>
+          <p class="mt-2 leading-relaxed text-[var(--text-secondary)]">{summary}</p>
+        </section>
 
         <!-- Today's tide chart -->
         <section class="card p-5" aria-labelledby="chart-title">
@@ -337,6 +393,21 @@ const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
               <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">📖 التفسير:</strong> أفضل الصيد قرب اكتمال القمر (بدر) وميلاده (محاق) — يرتفع المد وتتحرك المياه فتنشط الأسماك على التغذي.</p>
               <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">🎯 القاعدة العملية:</strong> انطلق قبل ساعتين من ذروة المد أو بعدها مباشرة. أثناء الجزر تتركز الأسماك في القنوات العميقة.</p>
             </div>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="card p-5" aria-labelledby="faq-title">
+          <h2 id="faq-title" class="text-lg font-semibold display">أسئلة شائعة عن المد والجزر في {port.name_ar}</h2>
+          <div class="mt-3 divide-y divide-[var(--border-subtle)]">
+            {faq.map((f, i) => (
+              <details class="faq py-3" open={i === 0}>
+                <summary class="flex items-center gap-3 cursor-pointer font-medium list-none">
+                  <span class="faq-icon" aria-hidden="true">+</span>{f.q}
+                </summary>
+                <p class="mt-2 ps-9 text-sm leading-relaxed text-[var(--text-secondary)]">{f.a}</p>
+              </details>
+            ))}
           </div>
         </section>
       </div>

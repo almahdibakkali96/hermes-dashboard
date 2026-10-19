@@ -38,4 +38,8 @@ if [ -f src/brand-guide.html ]; then
   echo "Brand guide"
   shot brand-guide.html "" 1600 2600 "brand-guide.png"
 fi
+if [ -f src/og.html ]; then
+  echo "Open Graph image (website)"
+  shot og.html "" 1200 630 "../public/og-default.png"
+fi
 rm -rf "$PROFILE"

@@ -7,14 +7,44 @@ import SiteFooter from '../components/SiteFooter.astro';
 export interface Props {
   title: string;
   description?: string;
+  /** schema.org objects for this page, added next to the site-wide Organization/WebSite */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  ogType?: 'website' | 'article';
+  ogImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, jsonLd, ogType = 'website', ogImage } = Astro.props;
 const fullTitle = `${title} — ArabTides`;
 const desc = description || 'مواقيت المد والجزر والحسابات الفلكية للموانئ العربية';
 const gaId = import.meta.env.PUBLIC_GA_ID || null;
 // No trailing slash, matching the sitemap and internal links
 const canonical = new URL(Astro.url.pathname.replace(/(.)\/$/, '$1'), Astro.site).href;
+const siteUrl = new URL(import.meta.env.BASE_URL, Astro.site).href;
+const image = new URL(ogImage || `${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/og-default.png`, Astro.site).href;
+
+// Site-wide entities: lets search engines and AI assistants identify the publisher and the site
+const siteGraph = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${siteUrl}#org`,
+    name: 'ArabTides',
+    alternateName: 'المد والجزر العربي',
+    url: siteUrl,
+    logo: new URL(`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/favicon.svg`, Astro.site).href,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteUrl}#website`,
+    name: 'ArabTides — المد والجزر العربي',
+    url: siteUrl,
+    inLanguage: 'ar',
+    publisher: { '@id': `${siteUrl}#org` },
+    description: 'مواقيت المد والجزر وأوقات الصيد وأطوار القمر لـ36 ميناءً عربياً، محسوبة من نموذج EOT20.',
+  },
+];
+const graph = [...siteGraph, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [])];
 ---
 
 <!doctype html>
@@ -24,6 +54,7 @@ const canonical = new URL(Astro.url.pathname.replace(/(.)\/$/, '$1'), Astro.site
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="theme-color" content="#0b2540" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
@@ -31,13 +62,19 @@ const canonical = new URL(Astro.url.pathname.replace(/(.)\/$/, '$1'), Astro.site
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="ar_AR" />
     <meta property="og:site_name" content="ArabTides — المد والجزر العربي" />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={image} />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={desc} />
+    <link rel="alternate" type="text/plain" title="LLM guide" href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/llms.txt`} />
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

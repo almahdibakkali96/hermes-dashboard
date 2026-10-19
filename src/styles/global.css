@@ -310,3 +310,64 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
   padding: 0.35rem 0.1rem 0.4rem;
 }
 .cal-today { outline: 2px solid var(--accent); outline-offset: 1px; background: #f0fdfa; }
+
+/* --- Summary card + FAQ accordion --- */
+.summary-card { border-inline-start: 4px solid var(--accent); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq-icon {
+  flex-shrink: 0; width: 1.5rem; height: 1.5rem; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-muted); color: var(--accent); font-weight: 700;
+  transition: transform 0.2s ease;
+}
+.faq[open] .faq-icon { transform: rotate(45deg); }
+
+/* --- Articles --- */
+.toc { counter-reset: toc; }
+.toc li { counter-increment: toc; }
+.toc a { display: flex; gap: 0.5rem; color: var(--text-secondary); padding: 0.15rem 0; }
+.toc a::before { content: counter(toc); font-family: var(--font-latin); color: var(--accent); font-weight: 600; min-width: 1rem; }
+.toc a:hover { color: var(--accent); }
+.takeaways {
+  border-radius: var(--radius-xl); padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #ecfdf5, #f0fdfa); border: 1px solid #99f6e4;
+}
+.takeaways li { position: relative; padding-inline-start: 1.6rem; line-height: 1.8; }
+.takeaways li::before { content: '✓'; position: absolute; inset-inline-start: 0; color: var(--accent); font-weight: 700; }
+.article-body { counter-reset: sec; font-size: 1.075rem; line-height: 2; color: #1e293b; }
+.article-body > h2 {
+  counter-increment: sec; scroll-margin-top: 6rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-top: 3rem; margin-bottom: 0.75rem;
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; line-height: 1.4; color: var(--text-primary);
+}
+.article-body > h2::before {
+  content: counter(sec); flex-shrink: 0;
+  width: 2.2rem; height: 2.2rem; border-radius: 0.7rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #0b2540; color: #5eead4; font-family: var(--font-latin); font-size: 1rem;
+}
+.article-body > h3 { margin-top: 1.75rem; margin-bottom: 0.4rem; font-weight: 700; font-size: 1.2rem; }
+.article-body p { margin: 0.9rem 0; }
+.article-body strong { color: var(--text-primary); }
+/* Inline links only — ranking rows, chips and cards stay clean */
+.article-body p a, .article-body figcaption a, .article-body .callout a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.article-body ul.bullets { margin: 0.75rem 0; padding-inline-start: 1.25rem; list-style: disc; }
+.article-body ul.bullets li { margin: 0.35rem 0; }
+.figure { margin: 1.75rem 0; border-radius: var(--radius-xl); background: #fff; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); padding: 1.25rem; }
+.figure figcaption { margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-muted); text-align: center; line-height: 1.6; }
+.callout { margin: 1.5rem 0; border-radius: var(--radius-xl); padding: 1rem 1.25rem; display: flex; gap: 0.9rem; line-height: 1.85; }
+.callout .ic { font-size: 1.5rem; line-height: 1.4; }
+.callout.tip { background: #f0fdfa; border: 1px solid #99f6e4; }
+.callout.warn { background: #fff7ed; border: 1px solid #fed7aa; }
+.callout.fact { background: #eff6ff; border: 1px solid #bfdbfe; }
+.pull { margin: 2rem 0; padding: 1.25rem 1.5rem; border-inline-start: 4px solid var(--accent); font-family: var(--font-display); font-size: 1.4rem; line-height: 1.7; color: #0b2540; background: #f8fafc; border-radius: 0 var(--radius-xl) var(--radius-xl) 0; }
+.data-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.95rem; overflow: hidden; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); }
+.data-table th { background: #0b2540; color: #e2e8f0; font-weight: 600; padding: 0.6rem 0.8rem; text-align: start; }
+.data-table td { padding: 0.55rem 0.8rem; border-top: 1px solid var(--border-subtle); background: #fff; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+.stat { border-radius: var(--radius-xl); padding: 1rem; background: #fff; border: 1px solid var(--border-subtle); text-align: center; }
+.stat .v { font-family: var(--font-latin); font-weight: 800; font-size: 1.9rem; color: var(--accent); line-height: 1.2; }
+.stat .l { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+.rank-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.15rem 0.25rem; border-radius: var(--radius-md); }
+.rank-row:hover { background: var(--surface-elevated); }

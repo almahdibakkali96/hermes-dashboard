@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import placesIndex from '../data/places/places_index.json';
 import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
+import { articles } from '../lib/articles';
 import {
   generateTideCurve, dayExtremes, formatTime,
   getTimezoneOffset
@@ -184,6 +185,26 @@ const features = [
           <span style="color:#dc2626">🐟 ضعيف</span>
         </div>
         <a href={`${BASE}methodology`} class="sm:ms-auto text-xs text-[var(--accent)] hover:underline shrink-0">كيف نحسبه؟</a>
+      </div>
+    </section>
+
+    <!-- Articles -->
+    <section class="mb-16" aria-labelledby="articles-title">
+      <div class="section-title">
+        <h2 id="articles-title">مقالات</h2>
+        <p>أدلة وأرقام من بياناتنا</p>
+        <a href={`${BASE}articles`} class="ms-auto text-sm text-[var(--accent)] hover:underline">كل المقالات ←</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {articles.map(a => (
+          <a href={`${BASE}articles/${a.slug}`} class="card p-5 flex gap-4 items-start group">
+            <span class="w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center text-2xl" style="background:linear-gradient(160deg,#0b2540,#0f3d5c)" aria-hidden="true">{a.icon}</span>
+            <span>
+              <span class="block font-semibold leading-snug group-hover:text-[var(--accent)] transition-colors">{a.title}</span>
+              <span class="block text-sm text-[var(--text-muted)] mt-1 leading-relaxed">{a.summary}</span>
+            </span>
+          </a>
+        ))}
       </div>
     </section>
 

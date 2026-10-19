@@ -1,0 +1,194 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { yearStats } from '../../lib/seas';
+import { generateTideCurve, dayExtremes, getTimezoneOffset, formatTime, type Constituent } from '../../lib/tides';
+import { moonPhase } from '../../lib/astronomy';
+
+const meta = articleBySlug('how-to-read-tide-table');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const today = new Date();
+const load = async (id: string) => (await import(`../../data/places/${id}.json`)).default;
+
+// --- Live example: Casablanca today
+const casa = await load('casablanca');
+const casaCons = casa.constituents as Record<string, Constituent>;
+const tz = getTimezoneOffset(casa.timezone, today);
+const curve = generateTideCurve(casaCons, today, tz);
+const ex = dayExtremes(casaCons, today, tz);
+const hi = ex.filter(e => e.type === 'high'), lo = ex.filter(e => e.type === 'low');
+const range = Math.round(Math.max(...hi.map(e => e.height)) - Math.min(...lo.map(e => e.height)));
+const dateAr = today.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: casa.timezone, day: 'numeric', month: 'long', year: 'numeric' });
+
+// Chart geometry
+const W = 680, H = 300, PL = 46, PR = 16, PT = 40, PB = 34, pw = W - PL - PR, ph = H - PT - PB;
+const hs = curve.map(p => p.height), hmin = Math.min(...hs) - 10, hmax = Math.max(...hs) + 10;
+const X = (h: number) => PL + (h / 24) * pw, Y = (v: number) => PT + ph - ((v - hmin) / (hmax - hmin)) * ph;
+const path = curve.map((p, i) => `${i ? 'L' : 'M'}${X(p.hours).toFixed(1)},${Y(p.height).toFixed(1)}`).join(' ');
+const topHi = hi.reduce((a, b) => (b.height > a.height ? b : a)), botLo = lo.reduce((a, b) => (b.height < a.height ? b : a));
+
+// --- Tide types: one real port per type, today's curve
+const stats = await yearStats(today.getUTCFullYear());
+const typeOrder = ['نصف يومي', 'مختلط، نصف يومي غالباً', 'مختلط، يومي غالباً', 'يومي'];
+const typeNote: Record<string, string> = {
+  'نصف يومي': 'مدّان وجزران متساويان تقريباً',
+  'مختلط، نصف يومي غالباً': 'مدّان وجزران بارتفاعات مختلفة',
+  'مختلط، يومي غالباً': 'غالباً مد وجزر واحد يومياً',
+  'يومي': 'مد واحد وجزر واحد يومياً',
+};
+const preferred = ['casablanca', 'dubai', 'manama', 'port-sudan'];
+const typeExamples = [];
+for (const t of typeOrder) {
+  const row = stats.find(r => r.tideTypeAr === t && preferred.includes(r.id)) || stats.find(r => r.tideTypeAr === t);
+  if (!row) continue;
+  const p = await load(row.id);
+  const c = generateTideCurve(p.constituents, today, getTimezoneOffset(p.timezone, today));
+  const v = c.map(q => q.height), mn = Math.min(...v), mx = Math.max(...v), sp = mx - mn || 1;
+  const d = c.map((q, i) => `${i ? 'L' : 'M'}${(q.hours / 24 * 200).toFixed(1)},${(70 - (q.height - mn) / sp * 60).toFixed(1)}`).join(' ');
+  typeExamples.push({ type: t, port: row, d, count: dayExtremes(p.constituents, today, getTimezoneOffset(p.timezone, today)).filter(e => e.type === 'high').length });
+}
+const casaType = stats.find(r => r.id === 'casablanca')!;
+
+// --- Spring / neap: Casablanca's daily range across this month
+const y = today.getUTCFullYear(), m = today.getUTCMonth();
+const nDays = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+const monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const daily = Array.from({ length: nDays }, (_, i) => {
+  const d = new Date(Date.UTC(y, m, i + 1, 12));
+  const e = dayExtremes(casaCons, d, getTimezoneOffset(casa.timezone, d));
+  const h = e.filter(q => q.type === 'high'), l = e.filter(q => q.type === 'low');
+  const mp = moonPhase(d);
+  return { day: i + 1, range: Math.round(Math.max(...h.map(q => q.height)) - Math.min(...l.map(q => q.height))), emoji: mp.emoji, name: mp.phaseNameAr };
+});
+const maxDay = daily.reduce((a, b) => (b.range > a.range ? b : a)), minDay = daily.reduce((a, b) => (b.range < a.range ? b : a));
+const maxR = Math.max(...daily.map(d => d.range));
+// Mark only the four principal phases (first day each name appears)
+const keyPhases = new Set(['محاق', 'تربيع أول', 'بدر', 'تربيع أخير']);
+let lastPhase = '';
+const markers = daily.map(d => { const show = keyPhases.has(d.name) && d.name !== lastPhase; lastPhase = d.name; return show; });
+
+const toc = [
+  { id: 'what', label: 'ما هو المد والجزر؟' },
+  { id: 'anatomy', label: 'أربعة أرقام في الجدول' },
+  { id: 'types', label: 'أنواع المد' },
+  { id: 'spring-neap', label: 'المد الربيعي والمحاقي' },
+  { id: 'negative', label: 'لماذا ارتفاع سالب؟' },
+  { id: 'fishing', label: 'متى تخرج للصيد؟' },
+  { id: 'mistakes', label: 'أخطاء شائعة' },
+];
+const takeaways = [
+  'كل يوم تقريباً يأتي <strong>مدّان عاليان وجزران منخفضان</strong>، بينهما نحو <strong>6 ساعات و12 دقيقة</strong>، ويتأخر كل منهما قرابة <strong>50 دقيقة</strong> يومياً.',
+  '<strong>المدى</strong> هو الفرق بين أعلى مد وأدنى جزر في اليوم، وهو أهم رقم للصياد.',
+  'عند <strong>البدر والمحاق</strong> يكون المد قوياً (مد ربيعي)، وعند <strong>التربيع</strong> يكون ضعيفاً (مد محاقي).',
+  'أفضل وقت للصيد غالباً <strong>قبل ساعتين من ذروة المد</strong>، حين يتحرك الماء بقوة.',
+];
+const faq = [
+  { q: 'كم مرة يحدث المد والجزر في اليوم؟', a: 'في معظم السواحل يحدث مدّان عاليان وجزران منخفضان كل 24 ساعة و50 دقيقة تقريباً (اليوم القمري). في بعض الموانئ ذات المد اليومي يحدث مد واحد وجزر واحد فقط.' },
+  { q: 'ما الفرق بين المد الربيعي والمد المحاقي؟', a: 'المد الربيعي يحدث قرب البدر والمحاق حين تصطف الشمس والأرض والقمر، فيكون المدى كبيراً. المد المحاقي يحدث عند التربيع الأول والأخير، فيكون المدى صغيراً. لا علاقة لاسم «الربيعي» بفصل الربيع.' },
+  { q: 'لماذا يتأخر موعد المد كل يوم؟', a: 'لأن القمر يعود إلى نفس الموقع في السماء كل 24 ساعة و50 دقيقة تقريباً، فيتأخر المد العالي نحو 50 دقيقة من يوم إلى آخر.' },
+  { q: 'هل تتأثر أوقات المد بالطقس؟', a: 'نعم. الرياح القوية والضغط الجوي قد يرفعان مستوى الماء أو يخفضانه عشرات السنتيمترات، ويؤخران المد أو يقدّمانه قليلاً. جداول المد تحسب الجزء الفلكي فقط.' },
+  { q: 'هل جداول ArabTides صالحة للملاحة؟', a: 'لا. هي تقديرات فلكية من نموذج EOT20 العالمي ومفيدة للصيد والنزهات، لكن للملاحة يجب استخدام الجداول الرسمية للهيئة الهيدروغرافية في بلدك.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={['casablanca', 'dubai', 'jeddah', 'muscat']}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    <defs><mask id="cr"><rect width="300" height="260" fill="#fff"/><circle cx="232" cy="52" r="34" fill="#000"/></mask></defs>
+    <circle cx="210" cy="70" r="40" fill="#fde68a" mask="url(#cr)"/>
+    <path d="M0 170 C50 170 50 110 100 110 S150 210 200 210 S250 130 300 130" fill="none" stroke="#2dd4bf" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="100" cy="110" r="10" fill="#2dd4bf" stroke="#0b2540" stroke-width="4"/>
+    <circle cx="200" cy="210" r="10" fill="#f43f5e" stroke="#0b2540" stroke-width="4"/>
+    <text x="100" y="92" fill="#5eead4" font-size="16" text-anchor="middle" font-family="Noto Naskh Arabic">مد عالٍ</text>
+    <text x="200" y="245" fill="#fda4af" font-size="16" text-anchor="middle" font-family="Noto Naskh Arabic">جزر منخفض</text>
+  </svg>
+
+  <h2 id="what">ما هو المد والجزر؟</h2>
+  <p>المد والجزر هو <strong>ارتفاع مستوى البحر وانخفاضه</strong> بانتظام، بسبب جذب القمر والشمس لمياه المحيطات. القمر أقرب إلينا، لذلك تأثيره أقوى من الشمس بنحو الضعف. حين يرتفع الماء نسمّيه <strong>مداً</strong>، وحين ينخفض نسمّيه <strong>جزراً</strong>.</p>
+  <div class="callout fact"><span class="ic">💡</span><div>الأرض تدور تحت «انتفاختين» من الماء: واحدة مقابل القمر وأخرى في الجهة المعاكسة. لهذا تمر معظم السواحل بمدّين وجزرين في اليوم الواحد.</div></div>
+
+  <h2 id="anatomy">أربعة أرقام في جدول المد</h2>
+  <p>أي جدول مد — ومنها صفحات ArabTides — يعطيك أربعة أشياء: <strong>وقت المد العالي</strong> وارتفاعه، و<strong>وقت الجزر المنخفض</strong> وارتفاعه. ومن هذه الأرقام نستخرج <strong>المدى</strong>. هذا منحنى حقيقي للدار البيضاء اليوم:</p>
+  <figure class="figure">
+    <div class="chart-ltr">
+      <svg viewBox={`0 0 ${W} ${H}`} class="w-full h-auto" role="img" aria-label={`منحنى المد والجزر في الدار البيضاء ${dateAr}`}>
+        <defs><linearGradient id="af" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14b8a6" stop-opacity=".3"/><stop offset="1" stop-color="#14b8a6" stop-opacity=".02"/></linearGradient></defs>
+        {[0, 6, 12, 18, 24].map(h => <><line x1={X(h)} x2={X(h)} y1={PT} y2={PT + ph} stroke="#eef2f6"/><text x={X(h)} y={H - 10} text-anchor="middle" font-size="12" fill="#94a3b8" font-family="Inter">{String(h).padStart(2, '0')}:00</text></>)}
+        <path d={`${path} L${X(24)},${PT + ph} L${X(0)},${PT + ph} Z`} fill="url(#af)"/>
+        <path d={path} fill="none" stroke="#0d9488" stroke-width="3"/>
+        <line x1={X(topHi.hours)} x2={X(topHi.hours)} y1={Y(topHi.height)} y2={Y(botLo.height)} stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x={X(topHi.hours) + 8} y={(Y(topHi.height) + Y(botLo.height)) / 2} font-size="13" font-weight="700" fill="#b45309" font-family="Noto Naskh Arabic">المدى {range} سم</text>
+        {ex.map(e => (
+          <>
+            <circle cx={X(e.hours)} cy={Y(e.height)} r="6" fill={e.type === 'high' ? '#0d9488' : '#e11d48'} stroke="#fff" stroke-width="2"/>
+            <text x={X(e.hours)} y={e.type === 'high' ? Y(e.height) - 14 : Y(e.height) + 22} text-anchor="middle" font-size="12" font-weight="700" fill={e.type === 'high' ? '#0f766e' : '#be123c'} font-family="Inter">{formatTime(e.time, tz)} · {Math.round(e.height)}</text>
+          </>
+        ))}
+      </svg>
+    </div>
+    <figcaption>الدار البيضاء، {dateAr} — الأوقات بالتوقيت المحلي والارتفاعات بالسنتيمتر. <a href={`${BASE}ports/casablanca`}>الجدول الكامل ←</a></figcaption>
+  </figure>
+  <table class="data-table">
+    <thead><tr><th>الحدث</th><th>الوقت</th><th>الارتفاع</th></tr></thead>
+    <tbody>
+      {[...ex].sort((a, b) => a.time.getTime() - b.time.getTime()).map(e => (
+        <tr><td>{e.type === 'high' ? '▲ مد عالٍ' : '▼ جزر منخفض'}</td><td class="latin">{formatTime(e.time, tz)}</td><td><span class="latin">{Math.round(e.height)}</span> سم</td></tr>
+      ))}
+    </tbody>
+  </table>
+  <p>لاحظ أن المسافة بين المد العالي والجزر المنخفض نحو <strong>6 ساعات</strong>. ولأن الدورة الكاملة أطول من 12 ساعة بقليل، <strong>يتأخر المد العالي كل يوم نحو 50 دقيقة</strong> — فإذا كان المد اليوم في الثامنة صباحاً، سيكون غداً قرابة الثامنة وخمسين دقيقة.</p>
+
+  <h2 id="types">ليس كل البحار متشابهة: أنواع المد</h2>
+  <p>شكل المنحنى يختلف من ميناء لآخر. نصنّفه بـ«معامل الشكل» F الذي يقارن المركبات اليومية بنصف اليومية. هذه منحنيات حقيقية لليوم من موانئ عربية:</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-6">
+    {typeExamples.map(t => (
+      <a href={`${BASE}ports/${t.port.id}`} class="card p-4 block group">
+        <div class="flex items-baseline justify-between gap-2">
+          <span class="font-semibold group-hover:text-[var(--accent)]">{t.type}</span>
+          <span class="text-xs text-[var(--text-muted)]">{t.port.name_ar}</span>
+        </div>
+        <svg viewBox="0 0 200 80" class="w-full h-16 mt-2 chart-ltr" aria-hidden="true"><path d={t.d} fill="none" stroke="#0d9488" stroke-width="2.5"/></svg>
+        <div class="text-sm text-[var(--text-secondary)] mt-1">{typeNote[t.type]}</div>
+      </a>
+    ))}
+  </div>
+  <p>الدار البيضاء مثال كلاسيكي على المد <strong>{casaType.tideTypeAr}</strong>. أما في الخليج العربي والبحر الأحمر فالمد غالباً مختلط، لذلك قد تجد في نفس اليوم مداً عالياً قوياً وآخر ضعيفاً.</p>
+
+  <h2 id="spring-neap">المد الربيعي والمد المحاقي</h2>
+  <p>المدى لا يبقى ثابتاً طوال الشهر. حين تصطف <strong>الشمس والأرض والقمر</strong> (عند البدر والمحاق) تتجمع قوى الجذب فيكبر المدى: هذا <strong>المد الربيعي</strong>. وحين يكون القمر في التربيع تتعاكس القوى فيصغر المدى: هذا <strong>المد المحاقي</strong>. هذا مدى المد اليومي في الدار البيضاء خلال {monthNames[m]} {y}:</p>
+  <figure class="figure">
+    <div class="flex items-end gap-[2px] h-44 chart-ltr" role="img" aria-label={`مدى المد اليومي في الدار البيضاء خلال ${monthNames[m]}`}>
+      {daily.map((d, i) => (
+        <div class="flex-1 flex flex-col items-center justify-end h-full">
+          <span class="text-[10px] leading-none mb-1" style={markers[i] ? '' : 'visibility:hidden'}>{d.emoji}</span>
+          <div class="w-full rounded-t" style={`height:${(d.range / maxR) * 80}%;background:${d.day === maxDay.day ? '#0d9488' : d.day === minDay.day ? '#f59e0b' : '#99f6e4'}`} title={`${d.day}: ${d.range} سم`}></div>
+        </div>
+      ))}
+    </div>
+    <div class="flex justify-between text-[11px] text-[var(--text-muted)] mt-1 chart-ltr latin"><span>1</span><span>{Math.round(nDays / 2)}</span><span>{nDays}</span></div>
+    <figcaption>أكبر مدى: <strong class="latin">{maxDay.range}</strong> سم يوم {maxDay.day} {monthNames[m]} (مد ربيعي) · أصغر مدى: <strong class="latin">{minDay.range}</strong> سم يوم {minDay.day} {monthNames[m]} (مد محاقي). الرموز تشير إلى أطوار القمر الرئيسية.</figcaption>
+  </figure>
+  <div class="pull">في نفس الميناء، قد يتضاعف الفرق بين المد والجزر مرتين أو ثلاثاً بين أسبوع وآخر — والسبب هو القمر.</div>
+  <div class="callout tip"><span class="ic">📝</span><div>اسم «الربيعي» لا علاقة له بفصل الربيع. هو ترجمة لـ <span class="latin">spring tide</span> بمعنى «القفز»، أي أن الماء «يقفز» أعلى.</div></div>
+
+  <h2 id="negative">لماذا ترى ارتفاعاً سالباً مثل −92 سم؟</h2>
+  <p>كل جدول مد يقيس الارتفاع من «مستوى مرجعي». في ArabTides المرجع هو <strong>متوسط سطح البحر</strong>: الصفر هو المستوى المتوسط، والقيم الموجبة فوقه والسالبة تحته. الجداول الرسمية للموانئ تقيس غالباً من «أدنى جزر فلكي»، لذلك تكون كل أرقامها موجبة.</p>
+  <div class="callout fact"><span class="ic">📏</span><div>المهم أن <strong>المدى والأوقات لا تتغير</strong> بتغيّر المرجع. جزر −92 سم ومد +116 سم يعني مدى 208 سم، أياً كان الصفر.</div></div>
+
+  <h2 id="fishing">متى تخرج للصيد؟</h2>
+  <p>الأسماك تتغذى أكثر حين <strong>يتحرك الماء</strong>، لأن التيار يحمل الطعام ويقلّب القاع. لذلك:</p>
+  <div class="stat-grid">
+    <div class="stat"><div class="v">−2h</div><div class="l">ابدأ قبل ساعتين من ذروة المد</div></div>
+    <div class="stat"><div class="v">🌕🌑</div><div class="l">أيام البدر والمحاق أقوى</div></div>
+    <div class="stat"><div class="v">⬇️</div><div class="l">عند الجزر: ابحث عن القنوات العميقة</div></div>
+  </div>
+  <p>في صفحة كل ميناء على ArabTides ستجد <strong>تقييماً من 1 إلى 5</strong> لكل يوم يجمع طور القمر وقوة المد، وتقويماً شهرياً يبيّن أفضل الأيام. <a href={`${BASE}methodology`}>كيف نحسب التقييم؟</a></p>
+  <div class="callout warn"><span class="ic">⚠️</span><div>إذا كنت تصطاد على الصخور أو في منطقة مكشوفة أثناء الجزر، <strong>راقب ساعة المد القادم</strong>: الماء قد يعود بسرعة ويقطع طريق العودة.</div></div>
+
+  <h2 id="mistakes">أخطاء شائعة</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-5">
+    <div class="card p-4"><div class="font-semibold">🕐 الخلط في التوقيت</div><p class="text-sm text-[var(--text-secondary)] !my-1">الأوقات بالتوقيت المحلي للميناء. انتبه لتغيير الساعة الصيفي.</p></div>
+    <div class="card p-4"><div class="font-semibold">💨 تجاهل الرياح</div><p class="text-sm text-[var(--text-secondary)] !my-1">الرياح القوية نحو الشاطئ ترفع الماء فوق المتوقع، والعكس.</p></div>
+    <div class="card p-4"><div class="font-semibold">📍 استخدام ميناء بعيد</div><p class="text-sm text-[var(--text-secondary)] !my-1">المد يتغير كثيراً بين خليج وآخر. اختر أقرب ميناء لمكانك.</p></div>
+    <div class="card p-4"><div class="font-semibold">🧭 الاعتماد عليه للملاحة</div><p class="text-sm text-[var(--text-secondary)] !my-1">هذه تقديرات فلكية. للملاحة استخدم الجداول الرسمية.</p></div>
+  </div>
+</ArticleLayout>

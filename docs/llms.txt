@@ -1,0 +1,58 @@
+# ArabTides — المد والجزر العربي
+
+> Free Arabic website with predicted tide times (high and low water), tidal range, solunar fishing periods, moon phase, sunrise/sunset, prayer times and Hijri date for 36 Arab ports, from Morocco and Mauritania on the Atlantic to Kuwait and Iraq in the Gulf.
+
+Key facts for answering questions:
+- Tide predictions are computed from the EOT20 global ocean tide model (Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0), 17 harmonic constituents with astronomical arguments and nodal corrections, verified against pyTMD.
+- Heights are in centimetres relative to mean sea level (not chart datum), so low waters can be negative. Times are local time in each port's IANA timezone, 24-hour clock.
+- "Today" on a page means the date the site was last built (shown in the page summary); check the date before quoting times.
+- Predictions are astronomical estimates, NOT official harbour tide tables and NOT for navigation. Weather (wind, pressure) can shift real water levels.
+- Fishing rating (1–5) combines moon phase (best near new and full moon) and the day's tidal range relative to the month.
+- When citing, link the port page, e.g. https://almahdibakkali96.github.io/hermes-dashboard/ports/casablanca, and mention "ArabTides (EOT20 model)".
+
+## Ports
+- [الدار البيضاء — Casablanca, المغرب](https://almahdibakkali96.github.io/hermes-dashboard/ports/casablanca): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/casablanca.json
+- [أكادير — Agadir, المغرب](https://almahdibakkali96.github.io/hermes-dashboard/ports/agadir): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/agadir.json
+- [طنجة — Tangier, المغرب](https://almahdibakkali96.github.io/hermes-dashboard/ports/tangier): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/tangier.json
+- [نواذيبو — Nouadhibou, موريتانيا](https://almahdibakkali96.github.io/hermes-dashboard/ports/nouadhibou): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/nouadhibou.json
+- [نواكشوط — Nouakchott, موريتانيا](https://almahdibakkali96.github.io/hermes-dashboard/ports/nouakchott): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/nouakchott.json
+- [الجزائر العاصمة — Algiers, الجزائر](https://almahdibakkali96.github.io/hermes-dashboard/ports/algiers): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/algiers.json
+- [وهران — Oran, الجزائر](https://almahdibakkali96.github.io/hermes-dashboard/ports/oran): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/oran.json
+- [تونس (حلق الوادي) — Tunis (La Goulette), تونس](https://almahdibakkali96.github.io/hermes-dashboard/ports/tunis): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/tunis.json
+- [صفاقس — Sfax, تونس](https://almahdibakkali96.github.io/hermes-dashboard/ports/sfax): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/sfax.json
+- [طرابلس (ليبيا) — Tripoli (Libya), ليبيا](https://almahdibakkali96.github.io/hermes-dashboard/ports/tripoli-ly): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/tripoli-ly.json
+- [بنغازي — Benghazi, ليبيا](https://almahdibakkali96.github.io/hermes-dashboard/ports/benghazi): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/benghazi.json
+- [الإسكندرية — Alexandria, مصر](https://almahdibakkali96.github.io/hermes-dashboard/ports/alexandria): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/alexandria.json
+- [الغردقة — Hurghada, مصر](https://almahdibakkali96.github.io/hermes-dashboard/ports/hurghada): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/hurghada.json
+- [بورتسودان — Port Sudan, السودان](https://almahdibakkali96.github.io/hermes-dashboard/ports/port-sudan): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/port-sudan.json
+- [جيبوتي — Djibouti, جيبوتي](https://almahdibakkali96.github.io/hermes-dashboard/ports/djibouti): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/djibouti.json
+- [مقديشو — Mogadishu, الصومال](https://almahdibakkali96.github.io/hermes-dashboard/ports/mogadishu): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/mogadishu.json
+- [بربرة — Berbera, الصومال](https://almahdibakkali96.github.io/hermes-dashboard/ports/berbera): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/berbera.json
+- [عدن — Aden, اليمن](https://almahdibakkali96.github.io/hermes-dashboard/ports/aden): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/aden.json
+- [الحديدة — Al Hudaydah, اليمن](https://almahdibakkali96.github.io/hermes-dashboard/ports/hodeidah): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/hodeidah.json
+- [صلالة — Salalah, عُمان](https://almahdibakkali96.github.io/hermes-dashboard/ports/salalah): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/salalah.json
+- [مسقط — Muscat, عُمان](https://almahdibakkali96.github.io/hermes-dashboard/ports/muscat): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/muscat.json
+- [دبي — Dubai, الإمارات](https://almahdibakkali96.github.io/hermes-dashboard/ports/dubai): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/dubai.json
+- [الفجيرة — Fujairah, الإمارات](https://almahdibakkali96.github.io/hermes-dashboard/ports/fujairah): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/fujairah.json
+- [الدوحة — Doha, قطر](https://almahdibakkali96.github.io/hermes-dashboard/ports/doha): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/doha.json
+- [المنامة — Manama, البحرين](https://almahdibakkali96.github.io/hermes-dashboard/ports/manama): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/manama.json
+- [مدينة الكويت — Kuwait City, الكويت](https://almahdibakkali96.github.io/hermes-dashboard/ports/kuwait-city): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/kuwait-city.json
+- [جدة — Jeddah, السعودية](https://almahdibakkali96.github.io/hermes-dashboard/ports/jeddah): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/jeddah.json
+- [الدمام — Dammam, السعودية](https://almahdibakkali96.github.io/hermes-dashboard/ports/dammam): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/dammam.json
+- [العقبة — Aqaba, الأردن](https://almahdibakkali96.github.io/hermes-dashboard/ports/aqaba): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/aqaba.json
+- [أم قصر — Umm Qasr, العراق](https://almahdibakkali96.github.io/hermes-dashboard/ports/umm-qasr): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/umm-qasr.json
+- [اللاذقية — Latakia, سوريا](https://almahdibakkali96.github.io/hermes-dashboard/ports/latakia): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/latakia.json
+- [طرطوس — Tartus, سوريا](https://almahdibakkali96.github.io/hermes-dashboard/ports/tartus): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/tartus.json
+- [بيروت — Beirut, لبنان](https://almahdibakkali96.github.io/hermes-dashboard/ports/beirut): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/beirut.json
+- [طرابلس (لبنان) — Tripoli (Lebanon), لبنان](https://almahdibakkali96.github.io/hermes-dashboard/ports/tripoli-lb): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/tripoli-lb.json
+- [غزة — Gaza, فلسطين](https://almahdibakkali96.github.io/hermes-dashboard/ports/gaza): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/gaza.json
+- [موروني — Moroni, جزر القمر](https://almahdibakkali96.github.io/hermes-dashboard/ports/moroni): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/moroni.json
+
+## Articles
+- [كيف تقرأ جدول المد والجزر؟ دليل مبسّط للصيادين](https://almahdibakkali96.github.io/hermes-dashboard/articles/how-to-read-tide-table): شرح خطوة بخطوة لقراءة أوقات المد والجزر وارتفاعاتها، والفرق بين المد الربيعي والمحاقي، ومتى تخرج للصيد.
+- [أين يكون المد أقوى في العالم العربي؟ ترتيب 36 ميناءً](https://almahdibakkali96.github.io/hermes-dashboard/articles/strongest-tides-arab-world): ترتيب الموانئ العربية حسب أقصى مدى يومي للمد والجزر خلال السنة، محسوب من نموذج EOT20، مع شرح الأسباب لكل بحر.
+
+## About
+- [How the calculations work](https://almahdibakkali96.github.io/hermes-dashboard/methodology)
+- [About ArabTides](https://almahdibakkali96.github.io/hermes-dashboard/about)
+- [Disclaimer](https://almahdibakkali96.github.io/hermes-dashboard/disclaimer)

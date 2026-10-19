@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { articles, type ArticleMeta } from '../lib/articles';
+import placesIndex from '../data/places/places_index.json';
+
+export interface Props {
+  meta: ArticleMeta;
+  toc: { id: string; label: string }[];
+  takeaways: string[];
+  faq: { q: string; a: string }[];
+  relatedPorts?: string[];
+}
+
+const { meta, toc, takeaways, faq, relatedPorts = ['casablanca', 'dubai', 'kuwait-city', 'jeddah'] } = Astro.props;
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const url = new URL(`${BASE}articles/${meta.slug}`, Astro.site).href;
+const siteUrl = new URL(BASE, Astro.site).href;
+const fmtDate = (d: string) => new Date(d + 'T12:00:00Z').toLocaleDateString('ar-EG-u-nu-latn', { day: 'numeric', month: 'long', year: 'numeric' });
+const others = articles.filter(a => a.slug !== meta.slug);
+const ports = relatedPorts.map(id => (placesIndex as { id: string; name_ar: string; name_en: string }[]).find(p => p.id === id)!).filter(Boolean);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'Article',
+    headline: meta.title, description: meta.description, inLanguage: 'ar',
+    datePublished: meta.published, dateModified: meta.updated,
+    author: { '@type': 'Organization', name: 'فريق ArabTides', url: siteUrl },
+    publisher: { '@id': `${siteUrl}#org` },
+    mainEntityOfPage: url,
+    image: new URL(`${BASE}og-default.png`, Astro.site).href,
+    keywords: 'المد والجزر, جدول المد, صيد السمك, المد الربيعي, الموانئ العربية',
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'مقالات', item: new URL(`${BASE}articles`, Astro.site).href },
+      { '@type': 'ListItem', position: 3, name: meta.title, item: url },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<BaseLayout title={meta.title} description={meta.description} jsonLd={jsonLd} ogType="article">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="max-w-6xl mx-auto px-4 pt-8 pb-24 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
+      <div>
+        <nav class="breadcrumb breadcrumb-light" aria-label="مسار التنقل">
+          <a href={BASE}>الرئيسية</a><span class="sep">/</span>
+          <a href={`${BASE}articles`}>مقالات</a><span class="sep">/</span>
+          <span aria-current="page">{meta.tag}</span>
+        </nav>
+        <span class="hero-chip mt-5 text-xs">{meta.icon} {meta.tag}</span>
+        <h1 class="mt-4 text-3xl sm:text-5xl font-bold display leading-snug max-w-3xl">{meta.title}</h1>
+        <p class="mt-4 text-lg text-slate-300 max-w-2xl leading-relaxed">{meta.description}</p>
+        <p class="mt-5 text-sm text-slate-400 flex flex-wrap gap-x-4 gap-y-1">
+          <span>✍️ فريق ArabTides</span>
+          <span>📅 <time datetime={meta.updated}>{fmtDate(meta.updated)}</time></span>
+          <span>⏱️ <span class="latin">{meta.readingMinutes}</span> دقائق قراءة</span>
+        </p>
+      </div>
+      <div class="hidden md:block w-72 lg:w-80" aria-hidden="true"><slot name="art" /></div>
+    </div>
+    <svg class="hero-waves" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 40c120-20 240-30 360-18s240 40 360 36 240-34 360-38 240 18 360 26v26H0z" fill="currentColor" />
+    </svg>
+  </section>
+
+  <main id="main" class="max-w-6xl mx-auto px-4 w-full mt-2">
+    <div class="grid grid-cols-1 lg:grid-cols-[15rem_1fr] gap-10 items-start">
+      <!-- Table of contents -->
+      <aside class="hidden lg:block sticky top-24">
+        <nav class="card p-4 text-sm" aria-label="محتويات المقال">
+          <div class="font-semibold mb-2">المحتويات</div>
+          <ol class="toc space-y-1.5">
+            {toc.map(t => <li><a href={`#${t.id}`}>{t.label}</a></li>)}
+            <li><a href="#faq">أسئلة شائعة</a></li>
+          </ol>
+        </nav>
+      </aside>
+
+      <article class="min-w-0 max-w-3xl">
+        <!-- Key takeaways -->
+        <section class="takeaways" aria-labelledby="tldr">
+          <h2 id="tldr" class="font-semibold display text-lg">⚡ الخلاصة في 30 ثانية</h2>
+          <ul class="mt-3 space-y-2">
+            {takeaways.map(t => <li set:html={t} />)}
+          </ul>
+        </section>
+
+        <div class="article-body">
+          <slot />
+        </div>
+
+        <!-- FAQ -->
+        <section id="faq" class="mt-12 scroll-mt-24" aria-labelledby="faq-title">
+          <h2 id="faq-title" class="text-2xl font-bold display">أسئلة شائعة</h2>
+          <div class="card mt-4 px-5 divide-y divide-[var(--border-subtle)]">
+            {faq.map((f, i) => (
+              <details class="faq py-4" open={i === 0}>
+                <summary class="flex items-center gap-3 cursor-pointer font-medium list-none">
+                  <span class="faq-icon" aria-hidden="true">+</span>{f.q}
+                </summary>
+                <p class="mt-2 ps-9 leading-relaxed text-[var(--text-secondary)]">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="mt-12 rounded-2xl p-6 sm:p-8 text-white" style="background:linear-gradient(160deg,#0b2540,#0f3d5c 60%,#0d5c63)">
+          <h2 class="text-2xl font-bold display">اعرف أوقات المد في ميناءك</h2>
+          <p class="mt-2 text-slate-300">جدول اليوم وتوقعات 7 أيام وأفضل أيام الصيد — مجاناً.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            {ports.map(p => <a href={`${BASE}ports/${p.id}`} class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-sm transition-colors">{p.name_ar}</a>)}
+            <a href={`${BASE}#ports`} class="px-4 py-2 rounded-full bg-teal-400 text-[#0b2540] font-semibold text-sm hover:bg-teal-300 transition-colors">كل الموانئ ←</a>
+          </div>
+        </section>
+
+        <p class="mt-8 text-xs text-[var(--text-muted)] leading-relaxed">
+          المصدر: حسابات ArabTides من نموذج EOT20 العالمي للمد والجزر (Hart-Davis et al. 2021, CC BY 4.0). الارتفاعات بالنسبة لمتوسط سطح البحر. تقديرات فلكية — ليست جداول رسمية ولا تُستخدم للملاحة.
+        </p>
+
+        {others.length > 0 && (
+          <section class="mt-10" aria-labelledby="more-title">
+            <h2 id="more-title" class="font-semibold">اقرأ أيضاً</h2>
+            <div class="mt-3 grid gap-3">
+              {others.map(a => (
+                <a href={`${BASE}articles/${a.slug}`} class="card p-4 flex items-center gap-4 group">
+                  <span class="text-3xl" aria-hidden="true">{a.icon}</span>
+                  <span>
+                    <span class="block font-semibold group-hover:text-[var(--accent)] transition-colors">{a.title}</span>
+                    <span class="block text-sm text-[var(--text-muted)] mt-0.5">{a.summary}</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+      </article>
+    </div>
+  </main>
+</BaseLayout>
