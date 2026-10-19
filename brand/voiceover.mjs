@@ -16,8 +16,9 @@ mkdirSync(outDir, { recursive: true });
 
 const VOICE_ID = 'nPczCjzI2devNBz1zQrb'; // Brian — same as arabtides-video/scripts/voice.mjs
 const ENV_FILE = 'C:/Users/ULTRAPC/Documents/arabtides-videos/arabtides-video/.env';
-// Scene starts and end as designed in src/<name>.html (seconds)
-const DESIGN = [0, 3.2, 7.0, 11.4, 15.2, 18.5];
+// Scene starts and end as designed in src/<name>.html (its `var DESIGN = [...]` line, seconds)
+const html = readFileSync(resolve(here, 'src', `${name}.html`), 'utf8');
+const DESIGN = JSON.parse(html.match(/var DESIGN = (\[[^\]]*\])/)[1]);
 const LEAD = [0.5, 0.35, 0.35, 0.35, 0.45]; // voice starts this long after each scene starts
 const TAIL = 0.45;                          // silence after a line before the next scene
 

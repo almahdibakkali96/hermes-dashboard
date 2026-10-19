@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو المد والجزر والصيد</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480. */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(900px 600px at 80% 0%, rgba(45, 212, 191, .18), transparent 60%),
+                linear-gradient(180deg, #0b2540 0%, #0c3352 40%, #0d4a63 75%, #0e5a66 100%); }
+  .scene { position: absolute; inset: 0; padding: 0 100px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .lead2 { font-size: 60px; line-height: 1.5; color: #cbd5e1; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish, .dot, .bubble { left: 0; top: 0; }
+  .fish { position: absolute; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  .dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: rgba(253, 230, 138, .75); }
+  .bubble { position: absolute; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); }
+  #waves { position: absolute; left: -1080px; bottom: 0; width: 3240px; height: 220px; }
+
+  /* Scene 1 */
+  #s1 .q { margin-top: 300px; font-size: 150px; line-height: 1.15; }
+  #s1 .a { margin-top: 60px; font-size: 70px; color: var(--lagoon); font-weight: 700; }
+  /* Scene 2 */
+  #s2 .h { margin-top: 280px; font-size: 104px; line-height: 1.25; }
+  #s2 .chain { margin-top: 50px; display: flex; flex-direction: column; gap: 18px; font-size: 58px; }
+  #s2 .chain span { display: inline-block; }
+  /* Scene 3 */
+  #s3 .h { margin-top: 260px; font-size: 96px; }
+  #s3 .sub { margin-top: 24px; font-size: 64px; color: var(--sand); font-weight: 700; }
+  #s3 svg.curve { position: absolute; left: 90px; top: 880px; width: 900px; height: 520px; overflow: visible; }
+  /* Scene 4 */
+  #s4 .h { margin-top: 260px; font-size: 104px; }
+  #s4 .sub { margin-top: 24px; font-size: 62px; color: #cbd5e1; line-height: 1.45; }
+  #s4 svg.section { position: absolute; left: 0; top: 860px; width: 1080px; height: 700px; }
+  /* Scene 5 */
+  #s5 { justify-content: center; padding-bottom: 300px; }
+  #s5 img { width: 280px; height: 280px; }
+  #s5 .wm { font-family: var(--font-num); font-weight: 800; font-size: 116px; letter-spacing: -.02em; margin-top: 36px; direction: ltr; }
+  #s5 .p { font-size: 64px; margin-top: 44px; }
+  #s5 .url { font-family: var(--font-num); font-weight: 800; font-size: 96px; color: var(--lagoon); margin-top: 20px; direction: ltr; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="dots"></div>
+  <div class="layer" id="bubbles"></div>
+
+  <div class="scene" id="s1">
+    <div class="d q">متى تنشطُ<br>الأسماك؟</div>
+    <div class="a">الجواب في المد والجزر 🌊</div>
+  </div>
+
+  <div class="scene" id="s2">
+    <div class="d h">عندما يتحرك<br>الماء</div>
+    <div class="chain">
+      <span class="c1">🌊 يتحرك الطعام</span>
+      <span class="c2">🐟 تنشط الأسماك</span>
+      <span class="c3">🏖️ وتقترب من الشاطئ</span>
+    </div>
+  </div>
+
+  <div class="scene" id="s3">
+    <div class="d h">أفضل وقت للصيد</div>
+    <div class="sub">قبل ساعتين من ذروة المد</div>
+    <svg class="curve" viewBox="0 0 900 520" aria-hidden="true">
+      <defs>
+        <linearGradient id="cf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".35"/><stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient>
+      </defs>
+      <rect id="win" x="0" y="20" width="0" height="440" rx="18" fill="rgba(253,230,138,.16)" stroke="rgba(253,230,138,.6)" stroke-width="3" stroke-dasharray="10 8"/>
+      <path id="cfill" fill="url(#cf)"/>
+      <path id="cpath" fill="none" stroke="#2dd4bf" stroke-width="9" stroke-linecap="round"/>
+      <circle id="peak" r="16" fill="#2dd4bf" stroke="#0b2540" stroke-width="6"/>
+      <text id="peakLbl" font-size="40" font-weight="700" fill="#5eead4" text-anchor="middle" font-family="Noto Naskh Arabic">ذروة المد</text>
+      <text id="winLbl" font-size="38" font-weight="700" fill="#fde68a" text-anchor="middle" font-family="Noto Naskh Arabic">−٢ ساعة</text>
+      <circle id="mark" r="14" fill="#fde68a"/>
+    </svg>
+  </div>
+
+  <div class="scene" id="s4">
+    <div class="d h">عند الجزر</div>
+    <div class="sub">تتجمع الأسماك في<br>القنوات العميقة</div>
+    <svg class="section" viewBox="0 0 1080 700" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".28"/><stop offset="1" stop-color="#0d9488" stop-opacity=".18"/></linearGradient>
+      </defs>
+      <rect id="waterRect" x="0" y="80" width="1080" height="620" fill="url(#water)"/>
+      <line id="waterLine" x1="0" x2="1080" y1="80" y2="80" stroke="#5eead4" stroke-width="5" stroke-dasharray="18 12"/>
+      <!-- seabed with a deep channel in the middle -->
+      <path d="M0 330 C180 330 300 360 380 420 C430 470 440 610 540 615 C640 610 650 470 700 420 C780 360 900 330 1080 330 V700 H0Z" fill="#c9a96e"/>
+      <path d="M0 330 C180 330 300 360 380 420 C430 470 440 610 540 615 C640 610 650 470 700 420 C780 360 900 330 1080 330" fill="none" stroke="#e6cf9a" stroke-width="6"/>
+      <text id="lowLbl" x="900" y="60" font-size="38" font-weight="700" fill="#fda4af" text-anchor="middle" font-family="Noto Naskh Arabic">▼ الماء ينخفض</text>
+    </svg>
+  </div>
+
+  <div class="scene" id="s5">
+    <img src="../logo/arabtides-mark.svg" alt="">
+    <div class="wm">ArabTides</div>
+    <div class="p">اعرف أوقات المد لميناءك</div>
+    <div class="url">arabtides.com</div>
+  </div>
+
+  <div class="layer" id="fishLayer"></div>
+
+  <svg id="waves" viewBox="0 0 3240 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 90c135-45 270-45 405 0s270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0v130H0z" fill="rgba(45,212,191,.10)"/>
+    <path id="w2" d="M0 140c135-36 270-36 405 0s270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0v80H0z" fill="rgba(45,212,191,.16)"/>
+  </svg>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var lerp = function (a, b, p) { return a + (b - a) * p; };
+  var seed = 11, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 4.5, 10.5, 16.5, 22.5, 26.5];
+
+  // --- Fish: a body, a wagging tail, a fin and an eye; faces left in its own coordinates
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#5eead4', '#0d9488'], ['#fca5a5', '#f87171'], ['#93c5fd', '#60a5fa']];
+  var fish = [];
+  for (var i = 0; i < 9; i++) {
+    var c = COLORS[i % COLORS.length], el = document.createElement('div');
+    el.className = 'fish';
+    el.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(el);
+    fish.push({ el: el, tail: el.querySelector('.tail'), ph: rnd() * 6.28, sc: .75 + rnd() * .5 });
+  }
+  // Place fish i at (x, y), facing right when dir > 0, with tail wag speed w
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 8;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+
+  // Food particles (scene 2) and bubbles (ambient)
+  var dots = [], bubbles = [];
+  for (var j = 0; j < 70; j++) { var d = document.createElement('div'); d.className = 'dot'; $('#dots').appendChild(d); dots.push({ el: d, x: rnd() * 1300, y: 760 + rnd() * 760, v: 380 + rnd() * 300 }); }
+  for (var b = 0; b < 16; b++) { var e = document.createElement('div'); e.className = 'bubble'; var s = 10 + rnd() * 22; e.style.width = e.style.height = s + 'px'; $('#bubbles').appendChild(e); bubbles.push({ el: e, x: 80 + rnd() * 920, y0: rnd() * 1920, v: 60 + rnd() * 70 }); }
+
+  // Tide curve for scene 3: one tidal cycle, high water at x = 600
+  var CW = 900, CTOP = 60, CBOT = 420, PEAK_X = 600, HOUR = 900 / 12.4;
+  var curveY = function (x) { return CTOP + (CBOT - CTOP) * (1 - Math.cos((x - PEAK_X) / (CW / 1.15) * 2 * Math.PI)) / 2; };
+  var cpts = []; for (var x = 0; x <= CW; x += 6) cpts.push(x + ',' + curveY(x).toFixed(1));
+  $('#cpath').setAttribute('d', 'M' + cpts.join(' L'));
+  $('#cfill').setAttribute('d', 'M' + cpts.join(' L') + ' L' + CW + ',470 L0,470 Z');
+
+  function drawAt(t) {
+    // Ambient: waves drift, bubbles rise
+    $('#waves').style.transform = 'translateX(' + ((t * 50) % 810) + 'px)';
+    $('#w2').style.transform = 'translateX(' + (-(t * 35) % 810) + 'px)';
+    bubbles.forEach(function (q) { var y = ((q.y0 - t * q.v) % 1920 + 1920) % 1920; q.el.style.transform = 'translate(' + (q.x + Math.sin(t * 1.5 + q.y0) * 12) + 'px,' + y + 'px)'; q.el.style.opacity = .5; });
+
+    var s1 = vis(t, 0, 4.5), s2 = vis(t, 4.5, 10.5), s3 = vis(t, 10.5, 16.5), s4 = vis(t, 16.5, 22.5), s5 = seg(t, 22.5, 23, out);
+    $('#s1').style.opacity = 1; $('#s2').style.opacity = s2; $('#s3').style.opacity = s3; $('#s4').style.opacity = s4; $('#s5').style.opacity = s5;
+
+    // Scene 1: question, then answer; fish drift lazily
+    show($('#s1 .q'), Math.min(seg(t, .2, .8), 1 - seg(t, 4.1, 4.5)), 40 * (1 - seg(t, .2, .9, out)));
+    show($('#s1 .a'), Math.min(seg(t, 1.9, 2.4), 1 - seg(t, 4.1, 4.5)), 30 * (1 - seg(t, 1.9, 2.5, out)));
+
+    // Scene 2: current of food right→left, chain lines appear
+    var cur = s2;
+    dots.forEach(function (q) { var xx = ((q.x - t * q.v) % 1300 + 1300) % 1300 - 110; q.el.style.transform = 'translate(' + xx + 'px,' + (q.y + Math.sin(t * 3 + q.x) * 10) + 'px)'; q.el.style.opacity = cur; });
+    show($('#s2 .c1'), seg(t, 5.6, 6.1), 20 * (1 - seg(t, 5.6, 6.2, out)));
+    show($('#s2 .c2'), seg(t, 6.6, 7.1), 20 * (1 - seg(t, 6.6, 7.2, out)));
+    show($('#s2 .c3'), seg(t, 7.6, 8.1), 20 * (1 - seg(t, 7.6, 8.2, out)));
+
+    // Scene 3: curve draws in, best window grows toward the peak, marker travels
+    var draw = seg(t, 11, 12.4);
+    $('#cpath').style.strokeDasharray = '2000'; $('#cpath').style.strokeDashoffset = 2000 * (1 - draw);
+    $('#cfill').style.opacity = draw;
+    var py = curveY(PEAK_X);
+    $('#peak').setAttribute('cx', PEAK_X); $('#peak').setAttribute('cy', py); $('#peak').style.opacity = seg(t, 12.2, 12.6);
+    $('#peakLbl').setAttribute('x', PEAK_X); $('#peakLbl').setAttribute('y', py - 32); $('#peakLbl').style.opacity = seg(t, 12.3, 12.7);
+    var wp = seg(t, 12.8, 13.8), x0 = PEAK_X - 2 * HOUR, x1 = PEAK_X + 0.5 * HOUR;
+    $('#win').setAttribute('x', x0); $('#win').setAttribute('width', (x1 - x0) * wp); $('#win').style.opacity = wp ? 1 : 0;
+    $('#winLbl').setAttribute('x', x0); $('#winLbl').setAttribute('y', 505); $('#winLbl').style.opacity = seg(t, 13.4, 13.8);
+    var mx = lerp(60, PEAK_X, seg(t, 12.6, 15.4, function (x) { return clamp(x); }));
+    $('#mark').setAttribute('cx', mx); $('#mark').setAttribute('cy', curveY(mx)); $('#mark').style.opacity = seg(t, 12.6, 12.9);
+
+    // Scene 4: water level drops, fish converge into the channel
+    var drop = seg(t, 17.6, 19.6);
+    var wl = lerp(80, 300, drop);
+    $('#waterRect').setAttribute('y', wl); $('#waterRect').setAttribute('height', 700 - wl);
+    $('#waterLine').setAttribute('y1', wl); $('#waterLine').setAttribute('y2', wl);
+    $('#lowLbl').setAttribute('y', wl - 22); $('#lowLbl').style.opacity = seg(t, 17.6, 18);
+
+    // --- Fish choreography per scene (positions in stage px)
+    fish.forEach(function (f, i) {
+      var ph = f.ph, x, y, dir, w = 8, o = 1;
+      if (t < 4.5) {                         // lazy drift across the lower water
+        dir = i % 2 ? 1 : -1;
+        var sp = 40 + i * 6, span = 1300;
+        x = dir > 0 ? ((i * 160 + t * sp) % span) - 100 : 1180 - ((i * 160 + t * sp) % span);
+        y = 1000 + (i % 5) * 95;
+        w = 5; o = clamp(t / .6) * (1 - seg(t, 4.1, 4.5));
+      } else if (t < 10.5) {                 // school racing with the current (right → left)
+        dir = -1;
+        var p = (t - 4.5) / 6, col = i % 3, row = Math.floor(i / 3);
+        x = 1250 - p * 1500 + col * 120 + (row % 2) * 60;
+        y = 1060 + row * 110 + Math.sin(t * 3 + i) * 12;
+        w = 16; o = s2;
+      } else if (t < 16.5) {                 // three fish swim into the best window, under the curve
+        dir = 1;
+        var k = i % 3, arrive = seg(t, 13.0 + k * .35, 14.6 + k * .35);
+        var wx = 90 + PEAK_X - 1.3 * HOUR + (k - 1) * 70;
+        x = lerp(-120, wx, arrive) + Math.sin(t * 1.7 + k) * 10;
+        y = 880 + 300 + k * 50;
+        o = i < 3 ? s3 : 0; w = arrive < 1 ? 14 : 7;
+      } else if (t < 22.5) {                 // spread out, then gather in the channel
+        dir = i % 2 ? 1 : -1;
+        var g = seg(t, 18.4, 20.6), sx = 120 + (i * 113) % 840, sy = 860 + 180 + (i % 3) * 60;
+        var cx = 540 + ((i % 5) - 2) * 50 + Math.sin(t * 2 + i) * 18, cy = 860 + 480 + (i % 3) * 38;
+        x = lerp(sx, cx, g); y = lerp(sy, cy, g);
+        if (g > .98) dir = Math.sin(t * 1.3 + i) > 0 ? 1 : -1;
+        w = 10; o = s4;
+      } else {                               // two lanes of fish below the URL
+        dir = i % 2 ? 1 : -1;
+        var lane = (t - 22.5) * 90 + i * 210;
+        x = dir > 0 ? (lane % 1400) - 160 : 1240 - (lane % 1400);
+        y = 1330 + (i % 2) * 120 + (i % 3) * 18;
+        o = s5 * (i < 6 ? 1 : 0); w = 9;
+      }
+      putFish(f, x, y, dir, t, w, o);
+    });
+
+    // Scene 5 text
+    $('#s5 img').style.transform = 'scale(' + (.6 + .4 * seg(t, 22.5, 23.3, out)) + ')';
+    show($('#s5 .p'), seg(t, 23.2, 23.6), 20 * (1 - seg(t, 23.2, 23.7, out)));
+    show($('#s5 .url'), seg(t, 23.5, 23.9), 20 * (1 - seg(t, 23.5, 24, out)));
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>

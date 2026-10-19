@@ -12,6 +12,7 @@
 | Full-moon carousel, 7 slides 1080×1350 | `instagram/02-full-moon/` |
 | Full-moon Reel, 1080×1920, 29 s, Arabic voiceover + music | `video/video-01-full-moon.mp4` |
 | Reel cover image | `video/video-01-cover.png` |
+| "How tides affect fishing" Reel, 29 s, voice + music | `video/video-02-tides-fishing.mp4` (cover `video/video-02-cover.png`) |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours

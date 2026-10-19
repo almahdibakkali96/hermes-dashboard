@@ -76,3 +76,28 @@ Voice script: `../src/video-01-full-moon.voice.txt`
 ابحث عن ميناءك على arabtides.com، والرابط في البايو 🎣
 
 #المد_والجزر #صيد_السمك #البدر
+
+---
+
+## Reel — How tides affect fishing (`../video/video-02-tides-fishing.mp4`, 29 s)
+
+Evergreen: post any time (a good slot is the day after the full-moon Reel). It has an Arabic voiceover and a music bed, so **don't add an Instagram sound**. Cover: `../video/video-02-cover.png`.
+
+Voice script: `../src/video-02-tides-fishing.voice.txt`
+
+**Caption:**
+
+متى تنشط الأسماك؟ الجواب في المد والجزر 🐟🌊
+
+عندما يتحرك الماء يتحرك معه الطعام، فتنشط الأسماك وتقترب من الشاطئ.
+
+🎣 أفضل وقت للصيد: قبل ساعتين من ذروة المد، وحتى بعدها بقليل.
+🏝️ وعند الجزر تتجمع الأسماك في القنوات العميقة.
+
+أوقات المد لميناءك على arabtides.com، والرابط في البايو.
+
+احفظ الفيديو لرحلة الصيد القادمة 🔖
+
+#صيد_السمك #المد_والجزر #هواة_الصيد
+
+**Alt text (cover):** رسم لأسماك ملوّنة تسبح تحت الماء، مع سؤال «متى تنشط الأسماك؟» والجواب: في المد والجزر.
