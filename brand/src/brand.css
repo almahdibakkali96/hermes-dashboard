@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600;700&family=Reem+Kufi:wght@500;600;700&family=Inter:wght@400;600;700;800&display=block');
+
+/* ===== ArabTides brand tokens ===== */
+:root {
+  --navy: #0b2540;      /* Deep Sea — primary background */
+  --ocean: #0f3d5c;     /* Open Water — gradients, secondary surfaces */
+  --teal: #0d9488;      /* Tide Teal — primary accent on light */
+  --lagoon: #2dd4bf;    /* Lagoon — accent on dark, high tide */
+  --sand: #fde68a;      /* Moon Sand — moon, highlights (sparingly) */
+  --coral: #f43f5e;     /* Low Tide Coral — low tide only */
+  --foam: #f4f8f9;      /* Sea Foam — light background */
+  --ink: #0f172a;       /* Ink — text on light */
+  --mist: #94a3b8;      /* Mist — secondary text on dark */
+
+  --font-display: 'Reem Kufi', 'Noto Naskh Arabic', serif;
+  --font-body: 'Noto Naskh Arabic', serif;
+  --font-num: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #222; }
+body { font-family: var(--font-body); direction: rtl; -webkit-font-smoothing: antialiased; }
+.num { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+.display { font-family: var(--font-display); }
+
+/* ===== Slides: 1080×1350 (Instagram 4:5) ===== */
+.slide {
+  position: relative;
+  width: 1080px; height: 1350px;
+  overflow: hidden;
+  padding: 140px 120px 170px;
+  display: none;
+  flex-direction: column;
+}
+.slide.on { display: flex; }
+body.all .slide { display: flex; margin: 0 auto 40px; }
+
+.dark { color: #fff; background:
+  radial-gradient(900px 500px at 90% 0%, rgba(45, 212, 191, .22), transparent 60%),
+  linear-gradient(165deg, var(--navy) 0%, var(--ocean) 60%, #0d5c63 100%); }
+.light { color: var(--ink); background: var(--foam); }
+
+/* Waves along the bottom of every slide */
+.waves { position: absolute; inset-inline: 0; bottom: 0; width: 100%; height: 150px; pointer-events: none; }
+.dark .waves .w1 { fill: rgba(45, 212, 191, .10); } .dark .waves .w2 { fill: rgba(45, 212, 191, .16); }
+.light .waves .w1 { fill: rgba(13, 148, 136, .07); } .light .waves .w2 { fill: rgba(13, 148, 136, .12); }
+
+/* Footer: mark + site + counter */
+.foot {
+  position: absolute; inset-inline: 120px; bottom: 56px;
+  display: flex; align-items: center; gap: 18px; font-size: 30px; z-index: 2;
+}
+.foot img { width: 52px; height: 52px; }
+.foot .site { font-family: var(--font-num); font-weight: 600; letter-spacing: .01em; }
+.foot .count { margin-inline-start: auto; font-family: var(--font-num); font-weight: 600; opacity: .7; }
+.dark .foot { color: #e2e8f0; } .light .foot { color: #334155; }
+
+/* Type */
+.eyebrow {
+  align-self: flex-start;
+  font-size: 32px; font-weight: 600;
+  padding: 10px 28px; border-radius: 999px;
+}
+.dark .eyebrow { background: rgba(255,255,255,.1); border: 2px solid rgba(255,255,255,.18); color: var(--lagoon); }
+.light .eyebrow { background: rgba(13,148,136,.1); color: var(--teal); }
+/* Reem Kufi's word space is narrow at display sizes */
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 128px; line-height: 1.15; word-spacing: .12em; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: 92px; line-height: 1.2; word-spacing: .12em; }
+.lead { font-size: 46px; line-height: 1.6; margin-top: 36px; }
+.dark .lead { color: #cbd5e1; } .light .lead { color: #334155; }
+.accent-dark { color: var(--lagoon); } .accent-light { color: var(--teal); }
+.sand { color: var(--sand); }
+
+/* Cards on slides */
+.card { border-radius: 36px; padding: 40px 44px; }
+.light .card { background: #fff; box-shadow: 0 10px 40px -12px rgba(15,23,42,.15); border: 2px solid #e2e8f0; }
+.dark .card { background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.14); }

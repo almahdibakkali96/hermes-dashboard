@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — منشور الإطلاق</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  .curve { margin-top: auto; }
+  .row { display: flex; gap: 28px; margin-top: 56px; }
+  .row .card { flex: 1; }
+  .big { font-family: var(--font-num); font-weight: 800; font-size: 96px; line-height: 1; direction: ltr; unicode-bidi: isolate; }
+  .lbl { font-size: 34px; color: #64748b; margin-bottom: 12px; }
+  .fishline { display: flex; align-items: center; gap: 28px; font-size: 40px; padding: 18px 0; border-bottom: 2px solid #e2e8f0; }
+  .fishline:last-child { border: 0; }
+  .fishline svg { width: 64px; height: 45px; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 64px; }
+  .tile { text-align: center; padding: 44px 16px; }
+  .tile .ic { font-size: 84px; }
+  .tile .t { font-family: var(--font-display); font-size: 40px; margin-top: 18px; font-weight: 600; }
+  .countries { display: flex; flex-wrap: wrap; gap: 16px 18px; margin-top: 56px; }
+  .countries span { font-size: 34px; padding: 10px 26px; border-radius: 999px; background: #fff; border: 2px solid #e2e8f0; }
+  .stats { display: flex; gap: 28px; margin-top: 48px; }
+  .stats .card { flex: 1; text-align: center; }
+  .url { font-family: var(--font-num); font-weight: 800; font-size: 104px; direction: ltr; margin-top: 56px; color: var(--lagoon); letter-spacing: -.01em; }
+</style>
+</head>
+<body>
+
+<!-- 1 COVER -->
+<section class="slide dark">
+  <span class="eyebrow">جديد · مجاناً</span>
+  <h1 style="margin-top:56px">متى يرتفع<br><span class="accent-dark">البحر؟</span></h1>
+  <p class="lead" style="font-size:52px">مواقيت المد والجزر وأفضل أيام الصيد لـ<span class="num">36</span> ميناءً عربياً</p>
+  <svg class="curve" viewBox="0 0 840 300" width="840" height="300" aria-hidden="true">
+    <defs><linearGradient id="f1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".35"/><stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/></linearGradient>
+    <mask id="cm"><rect width="840" height="300" fill="#fff"/><circle cx="745" cy="38" r="40" fill="#000"/></mask></defs>
+    <circle cx="720" cy="58" r="46" fill="#fde68a" mask="url(#cm)"/>
+    <path d="M0 210 C105 210 105 90 210 90 S315 250 420 250 S525 120 630 120 S735 220 840 220 V300 H0Z" fill="url(#f1)"/>
+    <path d="M0 210 C105 210 105 90 210 90 S315 250 420 250 S525 120 630 120 S735 220 840 220" fill="none" stroke="#2dd4bf" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="210" cy="90" r="16" fill="#2dd4bf" stroke="#0b2540" stroke-width="6"/>
+    <circle cx="420" cy="250" r="16" fill="#f43f5e" stroke="#0b2540" stroke-width="6"/>
+  </svg>
+</section>
+
+<!-- 2 STAKE -->
+<section class="slide dark">
+  <h2 style="margin-top:120px">البحر لا<br>ينتظر أحداً</h2>
+  <p class="lead">من يعرف موعد المد يخرج في الوقت الصحيح: صيد أوفر، ونزهة أكثر أماناً على الشاطئ.</p>
+  <p class="lead" style="margin-top:auto;color:var(--sand);font-size:44px">ولهذا أطلقنا <b>ArabTides</b> 🌊</p>
+</section>
+
+<!-- 3 TIDES -->
+<section class="slide light">
+  <span class="eyebrow">1 · المد والجزر</span>
+  <h2 style="margin-top:44px">أوقات المد<br>والجزر كل يوم</h2>
+  <p class="lead">منحنى يومي وأوقات المد العالي والجزر المنخفض، مع توقعات <span class="num">7</span> أيام.</p>
+  <div class="row">
+    <div class="card"><div class="lbl">▲ مد عالٍ</div><div class="big" style="color:var(--teal)">08:30</div></div>
+    <div class="card"><div class="lbl">▼ جزر منخفض</div><div class="big" style="color:var(--coral)">15:11</div></div>
+  </div>
+  <p style="font-size:30px;color:#64748b;margin-top:22px">مثال توضيحي</p>
+</section>
+
+<!-- 4 FISHING -->
+<section class="slide light">
+  <span class="eyebrow">2 · الصيد</span>
+  <h2 style="margin-top:44px">أفضل أيام<br>الصيد</h2>
+  <p class="lead">تقييم يومي من <span class="num">1</span> إلى <span class="num">5</span> يجمع طور القمر وقوة المد.</p>
+  <div class="card" style="margin-top:48px;padding:24px 44px">
+    <div class="fishline" data-r="5" data-c="#16a34a"><span class="f"></span><b style="color:#16a34a">ممتاز</b></div>
+    <div class="fishline" data-r="4" data-c="#0d9488"><span class="f"></span><b style="color:#0d9488">جيد</b></div>
+    <div class="fishline" data-r="3" data-c="#d97706"><span class="f"></span><b style="color:#d97706">متوسط</b></div>
+    <div class="fishline" data-r="1" data-c="#dc2626"><span class="f"></span><b style="color:#dc2626">ضعيف</b></div>
+  </div>
+</section>
+
+<!-- 5 SUN, MOON, PRAYER -->
+<section class="slide light">
+  <span class="eyebrow">3 · السماء</span>
+  <h2 style="margin-top:44px">القمر والشمس<br>والصلاة</h2>
+  <p class="lead">طور القمر، الشروق والغروب، أوقات الصلاة والتاريخ الهجري — لكل ميناء.</p>
+  <div class="tiles">
+    <div class="card tile"><div class="ic">🌕</div><div class="t">طور القمر</div></div>
+    <div class="card tile"><div class="ic">🌅</div><div class="t">الشروق والغروب</div></div>
+    <div class="card tile"><div class="ic">🕌</div><div class="t">أوقات الصلاة</div></div>
+  </div>
+</section>
+
+<!-- 6 RECAP -->
+<section class="slide light">
+  <span class="eyebrow">من الأطلسي إلى الخليج</span>
+  <div class="stats">
+    <div class="card"><div class="big" style="color:var(--teal)">36</div><div class="lbl" style="margin:12px 0 0">ميناءً</div></div>
+    <div class="card"><div class="big" style="color:var(--teal)">22</div><div class="lbl" style="margin:12px 0 0">دولة عربية</div></div>
+    <div class="card"><div class="big" style="color:var(--teal)">7</div><div class="lbl" style="margin:12px 0 0">أيام توقعات</div></div>
+  </div>
+  <div class="countries">
+    <span>المغرب</span><span>موريتانيا</span><span>الجزائر</span><span>تونس</span><span>ليبيا</span><span>مصر</span><span>السودان</span><span>فلسطين</span><span>لبنان</span><span>سوريا</span><span>الأردن</span><span>السعودية</span><span>اليمن</span><span>عُمان</span><span>الإمارات</span><span>قطر</span><span>البحرين</span><span>الكويت</span><span>العراق</span><span>جيبوتي</span><span>الصومال</span><span>جزر القمر</span>
+  </div>
+</section>
+
+<!-- 7 CTA -->
+<section class="slide dark">
+  <h2 style="margin-top:110px">ابحث عن<br><span class="accent-dark">ميناءك</span></h2>
+  <div class="url">arabtides.com</div>
+  <p class="lead" style="margin-top:auto">🔖 احفظ المنشور، وتابعنا لتوقعات المد وأفضل أيام الصيد كل أسبوع.</p>
+</section>
+
+<script>
+  // Fish rows: filled fish in colour, the rest outlined
+  document.querySelectorAll('.fishline').forEach(function (row) {
+    var r = +row.dataset.r, c = row.dataset.c, html = '';
+    for (var i = 1; i <= 5; i++) html += '<svg viewBox="0 0 20 14"><path d="M1 7c2.6-4 7.6-5 12-2.2L17.5 2v10L13 9.2C8.6 12 3.6 11 1 7z" fill="' + (i <= r ? c : 'none') + '" stroke="' + (i <= r ? c : '#cbd5e1') + '" stroke-width="1.3" stroke-linejoin="round"/>' + (i <= r ? '<circle cx="5" cy="6.2" r="1" fill="#fff"/>' : '') + '</svg>';
+    row.querySelector('.f').innerHTML = html;
+    row.querySelector('.f').style.cssText = 'display:flex;gap:6px';
+  });
+</script>
+<script src="slides.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — صورة الحساب</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* Instagram shows the profile picture as a circle: keep the mark inside the centre ~70% */
+  body { margin: 0; }
+  .pp { width: 1080px; height: 1080px; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(700px 500px at 75% 10%, rgba(45, 212, 191, .25), transparent 60%),
+                linear-gradient(160deg, #0b2540 0%, #0f3d5c 70%, #0d5c63 100%); }
+  .pp svg { width: 700px; height: 700px; }
+</style>
+</head>
+<body>
+<div class="pp">
+  <svg viewBox="0 0 64 64" aria-label="ArabTides">
+    <mask id="c"><rect width="64" height="64" fill="#fff"/><circle cx="47.5" cy="16" r="8.6" fill="#000"/></mask>
+    <circle cx="42" cy="20" r="10" fill="#fde68a" mask="url(#c)"/>
+    <path d="M9 39c3.75-5 7.5-5 11.25 0s7.5 5 11.25 0 7.5-5 11.25 0 7.5 5 11.25 0" fill="none" stroke="#2dd4bf" stroke-width="4.2" stroke-linecap="round"/>
+    <path d="M9 49c3.75-5 7.5-5 11.25 0s7.5 5 11.25 0 7.5-5 11.25 0 7.5 5 11.25 0" fill="none" stroke="#14b8a6" stroke-opacity=".55" stroke-width="4.2" stroke-linecap="round"/>
+  </svg>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+# ArabTides brand kit
+
+| What | File |
+|---|---|
+| Brand guide (logo, colours, fonts, voice, Instagram rules) | `brand-guide.png` · source `src/brand-guide.html` |
+| Logo mark (SVG, on navy tile) | `logo/arabtides-mark.svg` |
+| Logo mark (SVG, transparent, for light backgrounds) | `logo/arabtides-mark-transparent.svg` |
+| Logo mark PNG 1024×1024 | `logo/arabtides-mark-1024.png` |
+| Horizontal logo on navy / on white | `logo/arabtides-logo-on-navy.png`, `logo/arabtides-logo-on-white.png` |
+| Instagram profile picture 1080×1080 | `instagram/00-profile-picture.png` |
+| Launch carousel, 7 slides 1080×1350 | `instagram/01-launch/` |
+| Full-moon carousel, 7 slides 1080×1350 | `instagram/02-full-moon/` |
+| Captions, alt text, bio | `instagram/captions.md` |
+
+## Colours
+
+| Name | Hex | Use |
+|---|---|---|
+| Deep Sea (كحلي) | `#0B2540` | primary background |
+| Open Water | `#0F3D5C` | gradients |
+| Tide Teal | `#0D9488` | accent on light |
+| Lagoon | `#2DD4BF` | accent on dark, high tide |
+| Moon Sand | `#FDE68A` | the moon only, sparingly |
+| Low-Tide Coral | `#F43F5E` | low tide only |
+| Sea Foam | `#F4F8F9` | light background |
+| Ink | `#0F172A` | text on light |
+
+Fonts (Google Fonts, free): **Reem Kufi** for headlines, **Noto Naskh Arabic** for body text, **Inter** for numbers and times.
+
+## Editing and re-exporting
+
+Every PNG is rendered from the HTML in `src/`. Edit the text there, then run from Git Bash:
+
+```
+bash brand/render.sh
+```
+
+It uses your installed Chrome. To preview all the slides of a post in the browser, open for example `src/ig-02-full-moon.html?all`.

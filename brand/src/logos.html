@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — الشعار</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  html, body { margin: 0; background: transparent; }
+  .v { display: none; }
+  .mark { width: 1024px; height: 1024px; background: transparent; }
+  .mark img { width: 1024px; height: 1024px; display: block; }
+  .h { width: 1800px; height: 600px; align-items: center; justify-content: center; gap: 56px; direction: ltr; }
+  .h img { width: 300px; height: 300px; }
+  .h .words { direction: rtl; text-align: start; }
+  .h .en { font-family: var(--font-num); font-weight: 800; font-size: 150px; letter-spacing: -.02em; line-height: 1; direction: ltr; }
+  .h .ar { font-family: var(--font-display); font-weight: 600; font-size: 74px; margin-top: 22px; }
+  .h.dark { background: linear-gradient(160deg, #0b2540, #0f3d5c); }
+  .h.dark .en { color: #fff; } .h.dark .ar { color: #2dd4bf; }
+  .h.light { background: #fff; }
+  .h.light .en { color: #0b2540; } .h.light .ar { color: #0d9488; }
+</style>
+</head>
+<body>
+<div class="v mark" id="mark"><img src="../logo/arabtides-mark.svg" alt="ArabTides"></div>
+<div class="v h dark" id="horizontal-dark"><img src="../logo/arabtides-mark.svg" alt=""><div class="words"><div class="en">ArabTides</div><div class="ar">المد والجزر العربي</div></div></div>
+<div class="v h light" id="horizontal-light"><img src="../logo/arabtides-mark.svg" alt=""><div class="words"><div class="en">ArabTides</div><div class="ar">المد والجزر العربي</div></div></div>
+<script>
+  var v = new URLSearchParams(location.search).get('v') || 'mark';
+  document.getElementById(v).style.display = 'flex';
+</script>
+</body>
+</html>

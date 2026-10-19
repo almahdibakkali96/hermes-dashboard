@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — بدر 26 أكتوبر</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* Data: ArabTides engine (EOT20), October 2026 — biggest daily range 20–31 Oct,
+     5/5 fishing days; full moon 26 Oct 04:12 UTC. Re-check before reposting. */
+  .moon-big { position: absolute; left: 110px; top: 830px; width: 380px; height: 380px; border-radius: 50%;
+    background: radial-gradient(circle at 38% 35%, #fff7d6 0%, #fde68a 45%, #f5c94a 100%);
+    box-shadow: 0 0 120px 30px rgba(253, 230, 138, .35); }
+  .moon-big::before, .moon-big::after { content: ''; position: absolute; border-radius: 50%; background: rgba(214, 170, 60, .28); }
+  .moon-big::before { width: 80px; height: 80px; top: 90px; left: 100px; }
+  .moon-big::after { width: 52px; height: 52px; top: 220px; left: 220px; }
+  .bars { margin-top: 48px; display: flex; flex-direction: column; gap: 22px; }
+  .bar { display: grid; grid-template-columns: 250px 1fr 150px; align-items: center; gap: 22px; font-size: 38px; }
+  .bar .track { height: 44px; border-radius: 12px; background: #e2e8f0; overflow: hidden; }
+  .bar .fill { height: 100%; border-radius: 12px; background: linear-gradient(90deg, #0d9488, #2dd4bf); }
+  .bar .v { font-family: var(--font-num); font-weight: 800; font-size: 44px; direction: ltr; text-align: end; }
+  .note { font-size: 28px; color: #64748b; margin-top: 30px; line-height: 1.5; }
+  .small-tide { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 60px; }
+  .small-tide .card { text-align: center; padding: 40px 10px; }
+  .small-tide .v { font-family: var(--font-num); font-weight: 800; font-size: 84px; color: var(--teal); direction: ltr; }
+  .small-tide .u { font-size: 34px; color: #64748b; }
+  .small-tide .n { font-family: var(--font-display); font-size: 40px; margin-top: 8px; }
+  .days { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 40px; }
+  .day { text-align: center; padding: 26px 10px; }
+  .day .d { font-family: var(--font-num); font-weight: 800; font-size: 84px; line-height: 1; color: #16a34a; direction: ltr; }
+  .day .m { font-size: 36px; margin-top: 8px; }
+  .day .fish { display: flex; justify-content: center; gap: 6px; margin-top: 18px; }
+  .day .fish svg { width: 44px; height: 31px; }
+  .rule { display: flex; gap: 30px; align-items: flex-start; margin-top: 44px; }
+  .rule .ic { font-size: 80px; line-height: 1; }
+  .rule p { font-size: 42px; line-height: 1.6; }
+  .recap li { font-size: 44px; line-height: 1.55; margin-bottom: 28px; list-style: none; display: flex; gap: 22px; }
+  .recap li b { color: var(--lagoon); font-family: var(--font-num); }
+  .url { font-family: var(--font-num); font-weight: 800; font-size: 84px; direction: ltr; color: var(--lagoon); }
+</style>
+</head>
+<body>
+
+<!-- 1 COVER -->
+<section class="slide dark">
+  <span class="eyebrow">هذا الأسبوع</span>
+  <h1 style="margin-top:56px">بدر <span class="num sand">26</span><br>أكتوبر</h1>
+  <p class="lead" style="font-size:52px">أقوى مد في الشهر<br>وأفضل أيام الصيد 🎣</p>
+  <div class="moon-big"></div>
+</section>
+
+<!-- 2 STAKE -->
+<section class="slide dark">
+  <span class="eyebrow">لماذا يقوى المد؟</span>
+  <h2 style="margin-top:56px">الشمس والأرض<br>والقمر على<br><span class="accent-dark">خط واحد</span></h2>
+  <p class="lead">فتجتمع قوى الجذب: المد أعلى والجزر أخفض من أي وقت في الشهر. يُسمّى <b class="sand">المد الربيعي</b>.</p>
+</section>
+
+<!-- 3 BIGGEST RANGES -->
+<section class="slide light">
+  <span class="eyebrow">أكبر مدى هذا الأسبوع</span>
+  <h2 style="margin-top:40px;font-size:80px">الفرق بين المد<br>والجزر يصل إلى <span class="accent-light num">4</span> م</h2>
+  <div class="bars">
+    <div class="bar"><span>الكويت</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="v">3.97 م</span></div>
+    <div class="bar"><span>موروني</span><div class="track"><div class="fill" style="width:97%"></div></div><span class="v">3.86 م</span></div>
+    <div class="bar"><span>أم قصر</span><div class="track"><div class="fill" style="width:96%"></div></div><span class="v">3.80 م</span></div>
+    <div class="bar"><span>الدار البيضاء</span><div class="track"><div class="fill" style="width:75%"></div></div><span class="v">2.98 م</span></div>
+    <div class="bar"><span>أكادير</span><div class="track"><div class="fill" style="width:71%"></div></div><span class="v">2.83 م</span></div>
+    <div class="bar"><span>الفجيرة</span><div class="track"><div class="fill" style="width:71%"></div></div><span class="v">2.83 م</span></div>
+  </div>
+  <p class="note">أعلى مد ناقص أدنى جزر في اليوم، بين <span class="num">26</span> و<span class="num">30</span> أكتوبر.</p>
+</section>
+
+<!-- 4 SMALL TIDES -->
+<section class="slide light">
+  <span class="eyebrow">وفي المتوسط والبحر الأحمر؟</span>
+  <h2 style="margin-top:40px">المد هناك<br><span class="accent-light">هادئ جداً</span></h2>
+  <p class="lead">حتى في أيام البدر لا يتجاوز الفرق بضعة سنتيمترات.</p>
+  <div class="small-tide">
+    <div class="card"><div class="v">29</div><div class="u">سم</div><div class="n">جدة</div></div>
+    <div class="card"><div class="v">29</div><div class="u">سم</div><div class="n">الإسكندرية</div></div>
+    <div class="card"><div class="v">16</div><div class="u">سم</div><div class="n">بنغازي</div></div>
+  </div>
+</section>
+
+<!-- 5 BEST DAYS -->
+<section class="slide light">
+  <span class="eyebrow">أفضل أيام الصيد</span>
+  <h2 style="margin-top:40px">من <span class="num accent-light">25</span> إلى <span class="num accent-light">28</span><br>أكتوبر</h2>
+  <p class="lead">تقييم <span class="num">5/5</span> في معظم الموانئ العربية.</p>
+  <div class="days">
+    <div class="card day"><div class="d">25</div><div class="m">الأحد</div><div class="fish"></div></div>
+    <div class="card day"><div class="d">26</div><div class="m">الإثنين · بدر</div><div class="fish"></div></div>
+    <div class="card day"><div class="d">27</div><div class="m">الثلاثاء</div><div class="fish"></div></div>
+    <div class="card day"><div class="d">28</div><div class="m">الأربعاء</div><div class="fish"></div></div>
+  </div>
+</section>
+
+<!-- 6 WHEN TO GO -->
+<section class="slide light">
+  <span class="eyebrow">متى تخرج؟</span>
+  <h2 style="margin-top:40px">القاعدة<br>العملية</h2>
+  <div class="rule"><span class="ic">⏱️</span><p>انطلق قبل ساعتين من ذروة المد، أو بعدها مباشرة.</p></div>
+  <div class="rule"><span class="ic">🌊</span><p>أثناء الجزر تتجمع الأسماك في القنوات الأعمق.</p></div>
+  <div class="rule"><span class="ic">📍</span><p>الأوقات تختلف من ميناء لآخر — افتح صفحة ميناءك.</p></div>
+</section>
+
+<!-- 7 RECAP + CTA -->
+<section class="slide dark">
+  <h2 style="font-size:84px">الخلاصة</h2>
+  <ul class="recap" style="margin-top:44px">
+    <li>🌕 <span>بدر يوم <b>26</b> أكتوبر</span></li>
+    <li>🌊 <span>مد ربيعي: حتى <b>4</b> م في الخليج وجزر القمر</span></li>
+    <li>🎣 <span>أفضل الصيد من <b>25</b> إلى <b>28</b> أكتوبر</span></li>
+  </ul>
+  <p class="lead" style="margin-top:auto;margin-bottom:18px">أوقات المد لميناءك بالدقيقة:</p>
+  <div class="url">arabtides.com</div>
+</section>
+
+<script>
+  var fish = '';
+  for (var i = 0; i < 5; i++) fish += '<svg viewBox="0 0 20 14"><path d="M1 7c2.6-4 7.6-5 12-2.2L17.5 2v10L13 9.2C8.6 12 3.6 11 1 7z" fill="#16a34a" stroke="#16a34a" stroke-width="1.3" stroke-linejoin="round"/><circle cx="5" cy="6.2" r="1" fill="#fff"/></svg>';
+  document.querySelectorAll('.day .fish').forEach(function (el) { el.innerHTML = fish; });
+</script>
+<script src="slides.js"></script>
+</body>
+</html>
