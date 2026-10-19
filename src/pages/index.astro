@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import placesIndex from '../data/places/places_index.json';
+import buildInfo from '../build.json';
 
 const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))].sort();
+const buildNum = String(buildInfo.build).padStart(3, '0');
+const buildTime = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
 
 const countryNames: Record<string, string> = {
   AE: 'الإمارات', BH: 'البحرين', DJ: 'جيبوتي', DZ: 'الجزائر',
@@ -123,7 +126,12 @@ const countryNames: Record<string, string> = {
     <footer class="border-t border-[var(--border-subtle)] mt-12">
       <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--text-dim)]">
         <span>&copy; ArabTides — حسابات فلكية تقديرية</span>
-        <span class="latin">EOT20 CC BY 4.0</span>
+        <div class="flex items-center gap-3">
+          <span class="latin">EOT20 CC BY 4.0</span>
+          <span class="px-2 py-0.5 rounded-[var(--radius-sm)] bg-[var(--accent-muted)] text-[var(--accent)] text-[10px] font-mono tracking-wider">
+            #{buildNum} &middot; {buildTime}
+          </span>
+        </div>
       </div>
     </footer>
   </div>
