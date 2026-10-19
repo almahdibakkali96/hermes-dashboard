@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # local symlinks
 hermes-dashboard
+
+# Paid products: keep out of the public repo
+products/
