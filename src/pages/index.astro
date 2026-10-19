@@ -114,16 +114,6 @@ const searchPortsJSON = JSON.stringify(searchPorts);
 
     <main id="main" class="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
 
-      <!-- Ports overview map — back up top -->
-      <section class="mb-12" aria-label="خريطة الموانئ">
-        <div class="flex items-center gap-2 mb-5">
-          <h2 class="text-base font-semibold text-[var(--text-primary)]">خريطة الموانئ</h2>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <div id="ports-map" class="port-map w-full border border-[var(--border-subtle)]" style="height:360px"></div>
-        <p class="text-[10px] text-[var(--text-dim)] mt-1.5 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
-      </section>
-
       <!-- Fishing conclusion — prominent -->
       <section class="mb-12">
         <div class="flex items-center gap-2 mb-5">
@@ -248,6 +238,16 @@ const searchPortsJSON = JSON.stringify(searchPorts);
             </a>
           ))}
         </div>
+      </section>
+
+      <!-- Ports overview map — bottom -->
+      <section class="mb-12" aria-label="خريطة الموانئ">
+        <div class="flex items-center gap-2 mb-5">
+          <h2 class="text-base font-semibold text-[var(--text-primary)]">خريطة الموانئ</h2>
+          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
+        </div>
+        <div id="ports-map" class="port-map w-full border border-[var(--border-subtle)]" style="height:360px"></div>
+        <p class="text-[10px] text-[var(--text-dim)] mt-1.5 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
       </section>
     </main>
 

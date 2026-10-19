@@ -19,14 +19,19 @@ const desc = description || 'مواقيت المد والجزر والحسابا
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
+    <link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}/favicon.ico`} />
+    <!-- Canonical + OG -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ArabTides — المد والجزر العربي" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={desc} />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <!-- OG -->
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={desc} />
-    <meta property="og:type" content="website" />
   </head>
   <body>
     <a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>

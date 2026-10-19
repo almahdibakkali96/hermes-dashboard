@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://almahdibakkali96.github.io/hermes-dashboard/sitemap.xml

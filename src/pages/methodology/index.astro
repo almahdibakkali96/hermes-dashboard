@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+---
+<BaseLayout title="كيف تعمل الحسابات" description="منهجية حساب المد والجزر في ArabTides">
+  <div class="min-h-screen max-w-2xl mx-auto px-4 py-12">
+    <a href={BASE} class="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">&larr; الرئيسية</a>
+    <h1 class="text-2xl font-bold text-[var(--text-primary)] mt-6 mb-4">📖 كيف تعمل الحسابات؟</h1>
+    <div class="text-sm text-[var(--text-secondary)] leading-relaxed space-y-4">
+      <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
+        <h2 class="font-semibold text-[var(--text-primary)] mb-2">🌊 حساب المد والجزر</h2>
+        <p>نستخدم النموذج التوافقي (Harmonic Model) لحساب المد والجزر. يقوم هذا النموذج على فكرة أن حركة المد والجزر هي مجموع موجات جيبية بسيطة، كل منها يمثل تأثير قوة فلكية معينة (القمر، الشمس، دوران الأرض).</p>
+        <p class="mt-2">المركبات التوافقية الـ ١٧ المستخدمة في حساباتنا مستمدة من نموذج EOT20 العالمي (Hart-Davis et al. 2021, CC BY 4.0). لكل موقع بحري، نقرأ قيم السعة والطور من أقرب خلية مائية.</p>
+        <p class="mt-2">المعادلة الأساسية: η(t) = Σ A<sub>i</sub> · cos(ω<sub>i</sub>·t - φ<sub>i</sub>) حيث A السعة، ω السرعة الزاوية، و φ الطور لكل مركبة.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
+        <h2 class="font-semibold text-[var(--text-primary)] mb-2">🌙 حساب أطوار القمر</h2>
+        <p>نحسب طور القمر من الفرق بين خط طول القمر وخط طول الشمس (الاستطالة). العمر القمري (من ٠ إلى ٢٩.٥٣ يوماً) يحدد نسبة الإضاءة واسم الطور (محاق، هلال، تربيع، أحدب، بدر).</p>
+        <p class="mt-2">أوقات شروق وغروب الشمس والقمر تحسب فلكياً من الإحداثيات الاستوائية مع تصحيح الانكسار الجوي.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
+        <h2 class="font-semibold text-[var(--text-primary)] mb-2">🎣 أوقات الصيد (سولونار)</h2>
+        <p>نظرية السولونار (Solunar Theory) تقول أن نشاط الأسماك يبلغ ذروته عندما يكون القمر في أعلى نقطة (عبور) أو أدنى نقطة، وكذلك عند شروقه وغروبه.</p>
+        <p class="mt-2">الفترات الكبرى (±١ ساعة حول عبور القمر) هي الأقوى. الفترات الصغرى (±٣٠ دقيقة حول شروق/غروب القمر) أقل قوة. التقييم النهائي (ممتاز، جيد، متوسط، ضعيف) يعتمد على قرب هذه الفترات من الشروق/الغروب الشمسي أيضاً.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
+        <h2 class="font-semibold text-[var(--text-primary)] mb-2">🕌 أوقات الصلاة</h2>
+        <p>تحسب باستخدام طريقة أم القرى (Umm al-Qura)، وهي الطريقة الرسمية المعتمدة في أغلب الدول العربية. تعتمد على زاوية الشمس تحت الأفق لحساب الفجر والعشاء، وعلى طول الظل لحساب العصر.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
+        <h2 class="font-semibold text-[var(--text-primary)] mb-2">📅 التاريخ الهجري</h2>
+        <p>تحويل تقديري من التقويم الميلادي إلى الهجري باستخدام حساب فلكي. قد يختلف بيوم واحد عن الرؤية الفعلية للهلال.</p>
+      </div>
+      <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
+        <h2 class="font-semibold text-[var(--text-primary)] mb-2">🐟 تقييم جودة الصيد</h2>
+        <p>يجمع بين عاملين: (١) قرب اليوم من المحاق أو البدر — حيث تكون قوى الجذب في أقصاها، و (٢) مدى المد والجزر — الفرق بين أعلى مد وأدنى جزر. كلما زاد المدى، زادت حركة الماء وتحفيز الأسماك.</p>
+        <p class="mt-2">التقييم من ١ إلى ٥ أسماك 🐟، حيث ٥ = يوم ممتاز للصيد (بدر/محاق + مدى كبير)، و ١ = يوم ضعيف (تربيع + مدى صغير).</p>
+      </div>
+    </div>
+    <p class="text-xs text-[var(--text-dim)] mt-8 border-t border-[var(--border-subtle)] pt-4">⚠️ جميع الحسابات تقديرية. قد تختلف القيم الفعلية. لا تستخدم للملاحة.</p>
+  </div>
+</BaseLayout>
