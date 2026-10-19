@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SignupForm from '../../components/SignupForm.astro';
-import { GUIDE, STRIPE_GUIDE_URL } from '../../lib/shop';
+import { GUIDE, buyUrl } from '../../lib/shop';
+
+const BUY = buyUrl(GUIDE.id);
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const url = new URL(`${BASE}guide`, Astro.site).href;
@@ -27,7 +29,7 @@ const jsonLd = [
     brand: { '@type': 'Brand', name: 'ArabTides' },
     offers: {
       '@type': 'Offer', price: GUIDE.price.toFixed(2), priceCurrency: GUIDE.currency, url,
-      availability: STRIPE_GUIDE_URL ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
+      availability: BUY ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
     },
   },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
@@ -51,8 +53,8 @@ const jsonLd = [
         </ul>
         <div class="mt-7 flex flex-wrap items-center gap-4" id="buy">
           <div class="leading-none"><span class="latin text-5xl font-extrabold text-white">{GUIDE.priceLabel}</span></div>
-          {STRIPE_GUIDE_URL
-            ? <a href={STRIPE_GUIDE_URL} class="btn-primary text-lg" rel="noopener">اشترِ الدليل الآن</a>
+          {BUY
+            ? <a href={BUY} class="btn-primary text-lg" rel="noopener">اشترِ الدليل الآن</a>
             : <span class="btn-primary text-lg opacity-70 cursor-not-allowed" aria-disabled="true">قريباً</span>}
         </div>
         <p class="mt-3 text-sm text-slate-400">🔒 دفع آمن عبر Stripe · يصلك ملف PDF على بريدك الإلكتروني</p>
@@ -132,8 +134,8 @@ const jsonLd = [
         <img src={img('cover.jpg')} alt="" width="160" height="226" loading="lazy" class="w-32 h-auto mx-auto rounded-md shadow-lg" />
         <div class="mt-4 font-semibold">{GUIDE.title}</div>
         <div class="latin text-4xl font-extrabold mt-2 text-[var(--accent)]">{GUIDE.priceLabel}</div>
-        {STRIPE_GUIDE_URL
-          ? <a href={STRIPE_GUIDE_URL} class="btn-primary w-full justify-center mt-4" style="background:var(--accent);color:#fff" rel="noopener">اشترِ الدليل الآن</a>
+        {BUY
+          ? <a href={BUY} class="btn-primary w-full justify-center mt-4" style="background:var(--accent);color:#fff" rel="noopener">اشترِ الدليل الآن</a>
           : <span class="btn-primary w-full justify-center mt-4 opacity-70 cursor-not-allowed" style="background:var(--accent);color:#fff" aria-disabled="true">قريباً</span>}
         <p class="mt-3 text-xs text-[var(--text-muted)]">تقديرات فلكية — ليست للملاحة</p>
       </div>

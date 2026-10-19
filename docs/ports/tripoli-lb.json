@@ -10,7 +10,7 @@
     "timezone": "Asia/Beirut"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/tripoli-lb",
-  "generated_utc": "2026-10-19T22:42:54.389Z",
+  "generated_utc": "2026-10-19T22:59:38.020Z",
   "tide_type_ar": "مختلط، نصف يومي غالباً",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
