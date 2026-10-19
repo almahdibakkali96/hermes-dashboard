@@ -10,7 +10,7 @@
     "timezone": "Africa/Mogadishu"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/berbera",
-  "generated_utc": "2026-10-19T22:59:37.617Z",
+  "generated_utc": "2026-10-19T23:31:06.402Z",
   "tide_type_ar": "مختلط، نصف يومي غالباً",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
@@ -182,7 +182,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.95
+        "illumination": 0.96
       }
     },
     {

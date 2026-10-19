@@ -23,6 +23,10 @@ const SHEET_WEBAPP = 'https://script.google.com/macros/s/AKfycbxaf_1RR9Iuvavu0QP
 export const STRIPE_GUIDE_URL: string = import.meta.env.PUBLIC_STRIPE_GUIDE_URL || STRIPE_LINK;
 export const SIGNUP_URL: string = import.meta.env.PUBLIC_SIGNUP_URL || SHEET_WEBAPP;
 
+/** Sales are open only once a Stripe link is set. Until then the site hides prices and Buy
+ *  buttons, presents the guide as "coming soon" and only collects emails. */
+export const SALES_OPEN = Boolean(STRIPE_GUIDE_URL);
+
 export const GUIDE = {
   id: 'moon-tide-guide',   // Stripe client_reference_id — letters, digits, - and _ only
   title: 'دليل القمر والمد والجزر للصيادين',

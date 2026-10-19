@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SignupForm from '../../components/SignupForm.astro';
-import { GUIDE, buyUrl } from '../../lib/shop';
+import { GUIDE, buyUrl, SALES_OPEN } from '../../lib/shop';
 
 const BUY = buyUrl(GUIDE.id);
 
@@ -16,33 +16,37 @@ const samples = [
 ];
 const faq = [
   { q: 'ما صيغة الدليل؟', a: `ملف PDF من ${GUIDE.pages} صفحة بحجم A4، باللغة العربية، يُقرأ على الهاتف أو الحاسوب ويمكن طباعته.` },
-  { q: 'كيف أدفع؟', a: 'الدفع آمن عبر Stripe بالبطاقة البنكية. لا نرى بيانات بطاقتك ولا نحفظها.' },
-  { q: 'متى يصلني الدليل؟', a: 'يصلك ملف الدليل على البريد الإلكتروني الذي تستخدمه عند الدفع.' },
+  ...(SALES_OPEN ? [
+    { q: 'كيف أدفع؟', a: 'الدفع آمن عبر Stripe بالبطاقة البنكية. لا نرى بيانات بطاقتك ولا نحفظها.' },
+    { q: 'متى يصلني الدليل؟', a: 'يصلك ملف الدليل على البريد الإلكتروني الذي تستخدمه عند الدفع.' },
+  ] : [
+    { q: 'متى يصدر الدليل؟', a: 'الدليل في مراحله الأخيرة. اترك بريدك الإلكتروني في الأسفل لتصلك رسالة يوم صدوره، وتحمّل الورقة المختصرة مجاناً الآن.' },
+  ]),
   { q: 'هل يناسب ميناءي؟', a: 'نعم. الدليل يشرح المبادئ التي تنطبق على كل السواحل، مع أمثلة من الخليج والأطلسي والبحر الأحمر والمتوسط والمحيط الهندي. وأوقات ميناءك اليومية تجدها مجاناً على ArabTides.' },
   { q: 'هل يمكن استخدامه للملاحة؟', a: 'لا. الدليل والموقع للصيد والنزهات. أرقام المد تقديرات فلكية من نموذج EOT20 العالمي، وليست جداول رسمية للموانئ.' },
 ];
 const jsonLd = [
-  {
+  ...(SALES_OPEN ? [{
     '@context': 'https://schema.org', '@type': 'Product',
     name: GUIDE.title, description: GUIDE.subtitle, inLanguage: 'ar',
     image: new URL(img('cover.jpg'), Astro.site).href,
     brand: { '@type': 'Brand', name: 'ArabTides' },
     offers: {
       '@type': 'Offer', price: GUIDE.price.toFixed(2), priceCurrency: GUIDE.currency, url,
-      availability: BUY ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
+      availability: 'https://schema.org/InStock',
     },
-  },
+  }] : []),
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
 ];
 ---
 
-<BaseLayout title={`${GUIDE.title} — PDF`} description={`${GUIDE.subtitle}. دليل عربي من ${GUIDE.pages} صفحة: أطوار القمر، المد الربيعي، جداول المد وفترات السولونار. السعر ${GUIDE.priceLabel}.`} jsonLd={jsonLd} ogImage={img('cover.jpg')}>
+<BaseLayout title={`${GUIDE.title} — PDF`} description={`${GUIDE.subtitle}. دليل عربي من ${GUIDE.pages} صفحة: أطوار القمر، المد الربيعي، جداول المد وفترات السولونار. ${SALES_OPEN ? `السعر ${GUIDE.priceLabel}.` : 'قريباً — والورقة المختصرة مجاناً الآن.'}`} jsonLd={jsonLd} ogImage={img('cover.jpg')}>
   <!-- Hero -->
   <section class="hero">
     <div class="max-w-6xl mx-auto px-4 pt-10 pb-24 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center">
       <div>
         <nav class="breadcrumb breadcrumb-light" aria-label="مسار التنقل"><a href={BASE}>الرئيسية</a><span class="sep">/</span><span aria-current="page">دليل الصياد</span></nav>
-        <span class="hero-chip mt-5 text-xs">📘 دليل PDF · <span class="latin">{GUIDE.pages}</span> صفحة</span>
+        <span class="hero-chip mt-5 text-xs">📘 دليل PDF · <span class="latin">{GUIDE.pages}</span> صفحة{!SALES_OPEN && ' · قريباً'}</span>
         <h1 class="mt-4 text-3xl sm:text-5xl font-bold display leading-snug">{GUIDE.title}</h1>
         <p class="mt-4 text-lg text-slate-300 leading-relaxed max-w-xl">{GUIDE.subtitle}.</p>
         <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-slate-200">
@@ -51,13 +55,23 @@ const jsonLd = [
           <li>✓ طريقة من 4 خطوات قبل كل رحلة</li>
           <li>✓ ورقة مختصرة للطباعة والهاتف</li>
         </ul>
-        <div class="mt-7 flex flex-wrap items-center gap-4" id="buy">
-          <div class="leading-none"><span class="latin text-5xl font-extrabold text-white">{GUIDE.priceLabel}</span></div>
-          {BUY
-            ? <a href={BUY} class="btn-primary text-lg" rel="noopener">اشترِ الدليل الآن</a>
-            : <span class="btn-primary text-lg opacity-70 cursor-not-allowed" aria-disabled="true">قريباً</span>}
-        </div>
-        <p class="mt-3 text-sm text-slate-400">🔒 دفع آمن عبر Stripe · يصلك ملف PDF على بريدك الإلكتروني</p>
+        {SALES_OPEN ? (
+          <>
+            <div class="mt-7 flex flex-wrap items-center gap-4" id="buy">
+              <div class="leading-none"><span class="latin text-5xl font-extrabold text-white">{GUIDE.priceLabel}</span></div>
+              <a href={BUY} class="btn-primary text-lg" rel="noopener">اشترِ الدليل الآن</a>
+            </div>
+            <p class="mt-3 text-sm text-slate-400">🔒 دفع آمن عبر Stripe · يصلك ملف PDF على بريدك الإلكتروني</p>
+          </>
+        ) : (
+          <>
+            <div class="mt-7 flex flex-wrap items-center gap-3">
+              <a href="#free" class="btn-primary text-lg">أخبرني عند صدوره</a>
+              <a href="#free" class="btn-ghost">الورقة المختصرة مجاناً</a>
+            </div>
+            <p class="mt-3 text-sm text-slate-400">✉️ اترك بريدك: تحمّل الورقة المختصرة الآن، ونخبرك يوم صدور الدليل</p>
+          </>
+        )}
       </div>
       <div class="guide-cover mx-auto"><img src={img('cover.jpg')} alt={`غلاف ${GUIDE.title}`} width="290" height="410" class="w-56 sm:w-72 h-auto" /></div>
     </div>
@@ -110,7 +124,7 @@ const jsonLd = [
         <div>
           <span class="text-xs font-semibold text-[var(--accent)] bg-white rounded-full px-3 py-1">مجاناً</span>
           <h2 id="free-title" class="mt-3 text-2xl font-bold display">الورقة المختصرة: القمر والمد والصيد في صفحة واحدة</h2>
-          <p class="mt-2 text-[var(--text-secondary)] leading-relaxed">أطوار القمر، أفضل الساعات، السولونار، و4 خطوات قبل كل رحلة — في صفحة PDF تطبعها أو تحفظها في هاتفك. اترك بريدك وحمّلها فوراً.</p>
+          <p class="mt-2 text-[var(--text-secondary)] leading-relaxed">أطوار القمر، أفضل الساعات، السولونار، و4 خطوات قبل كل رحلة — في صفحة PDF تطبعها أو تحفظها في هاتفك. اترك بريدك وحمّلها فوراً{!SALES_OPEN && '، وسنخبرك يوم صدور الدليل الكامل'}.</p>
           <div class="mt-5 max-w-xl"><SignupForm source="guide" /></div>
         </div>
         <img src={img('cheat-sheet.jpg')} alt="الورقة المختصرة" width="827" height="1170" loading="lazy" class="w-48 h-auto rounded-lg shadow-lg mx-auto rotate-2 border border-[var(--border-subtle)]" />
@@ -133,10 +147,17 @@ const jsonLd = [
       <div class="card p-6 text-center lg:sticky lg:top-24">
         <img src={img('cover.jpg')} alt="" width="160" height="226" loading="lazy" class="w-32 h-auto mx-auto rounded-md shadow-lg" />
         <div class="mt-4 font-semibold">{GUIDE.title}</div>
-        <div class="latin text-4xl font-extrabold mt-2 text-[var(--accent)]">{GUIDE.priceLabel}</div>
-        {BUY
-          ? <a href={BUY} class="btn-primary w-full justify-center mt-4" style="background:var(--accent);color:#fff" rel="noopener">اشترِ الدليل الآن</a>
-          : <span class="btn-primary w-full justify-center mt-4 opacity-70 cursor-not-allowed" style="background:var(--accent);color:#fff" aria-disabled="true">قريباً</span>}
+        {SALES_OPEN ? (
+          <>
+            <div class="latin text-4xl font-extrabold mt-2 text-[var(--accent)]">{GUIDE.priceLabel}</div>
+            <a href={BUY} class="btn-primary w-full justify-center mt-4" style="background:var(--accent);color:#fff" rel="noopener">اشترِ الدليل الآن</a>
+          </>
+        ) : (
+          <>
+            <div class="text-2xl font-bold mt-2 text-[var(--accent)]">قريباً</div>
+            <a href="#free" class="btn-primary w-full justify-center mt-4" style="background:var(--accent);color:#fff">أخبرني عند صدوره</a>
+          </>
+        )}
         <p class="mt-3 text-xs text-[var(--text-muted)]">تقديرات فلكية — ليست للملاحة</p>
       </div>
     </section>

@@ -10,7 +10,7 @@
     "timezone": "Asia/Gaza"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/gaza",
-  "generated_utc": "2026-10-19T22:59:38.044Z",
+  "generated_utc": "2026-10-19T23:31:06.517Z",
   "tide_type_ar": "نصف يومي",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
@@ -158,37 +158,37 @@
     },
     {
       "date": "2026-10-24",
-      "utc_offset_minutes": 180,
+      "utc_offset_minutes": 120,
       "tides": [
         {
           "type": "low",
-          "time_local": "03:44",
-          "time_utc": "2026-10-24T00:44:19.559Z",
+          "time_local": "02:44",
+          "time_utc": "2026-10-24T00:44:19.549Z",
           "height_cm": -14
         },
         {
           "type": "high",
-          "time_local": "09:59",
-          "time_utc": "2026-10-24T06:58:36.419Z",
+          "time_local": "08:59",
+          "time_utc": "2026-10-24T06:58:36.410Z",
           "height_cm": 22
         },
         {
           "type": "low",
-          "time_local": "15:48",
-          "time_utc": "2026-10-24T12:48:02.810Z",
+          "time_local": "14:48",
+          "time_utc": "2026-10-24T12:48:02.794Z",
           "height_cm": -11
         },
         {
           "type": "high",
-          "time_local": "22:00",
-          "time_utc": "2026-10-24T19:00:12.564Z",
+          "time_local": "21:00",
+          "time_utc": "2026-10-24T19:00:12.551Z",
           "height_cm": 26
         }
       ],
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.95
+        "illumination": 0.96
       }
     },
     {
