@@ -1,0 +1,89 @@
+{
+ "id": "tartus",
+ "name_en": "Tartus",
+ "name_ar": "طرطوس",
+ "country": "SY",
+ "lat": 34.89,
+ "lon": 35.88,
+ "timezone": "Asia/Damascus",
+ "grid": {
+  "lat": 34.875,
+  "lon": 35.875,
+  "distance_km": 1.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.19136,
+   "phase": -169.493
+  },
+  "J1": {
+   "amp": 0.10098,
+   "phase": -67.278
+  },
+  "K1": {
+   "amp": 3.24603,
+   "phase": -85.793
+  },
+  "K2": {
+   "amp": 2.01227,
+   "phase": -117.188
+  },
+  "M2": {
+   "amp": 12.02295,
+   "phase": -124.64
+  },
+  "M4": {
+   "amp": 0.26337,
+   "phase": -103.619
+  },
+  "MF": {
+   "amp": 0.17879,
+   "phase": -45.831
+  },
+  "MM": {
+   "amp": 0.28352,
+   "phase": -24.627
+  },
+  "N2": {
+   "amp": 2.17148,
+   "phase": -118.341
+  },
+  "O1": {
+   "amp": 2.30888,
+   "phase": -106.823
+  },
+  "P1": {
+   "amp": 1.27258,
+   "phase": -67.484
+  },
+  "Q1": {
+   "amp": 0.44826,
+   "phase": -129.582
+  },
+  "S1": {
+   "amp": 0.88805,
+   "phase": 50.028
+  },
+  "S2": {
+   "amp": 6.79493,
+   "phase": -112.333
+  },
+  "SA": {
+   "amp": 3.57169,
+   "phase": -81.609
+  },
+  "SSA": {
+   "amp": 0.07842,
+   "phase": -131.033
+  },
+  "T2": {
+   "amp": 0.16229,
+   "phase": -118.605
+  }
+ }
+}

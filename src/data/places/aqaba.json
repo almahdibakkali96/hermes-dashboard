@@ -1,0 +1,89 @@
+{
+ "id": "aqaba",
+ "name_en": "Aqaba",
+ "name_ar": "العقبة",
+ "country": "JO",
+ "lat": 29.52,
+ "lon": 35.0,
+ "timezone": "Asia/Amman",
+ "grid": {
+  "lat": 29.375,
+  "lon": 34.875,
+  "distance_km": 20.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.81868,
+   "phase": -158.001
+  },
+  "J1": {
+   "amp": 1.22964,
+   "phase": -4.015
+  },
+  "K1": {
+   "amp": 3.28847,
+   "phase": 139.183
+  },
+  "K2": {
+   "amp": 2.10913,
+   "phase": 143.701
+  },
+  "M2": {
+   "amp": 26.45346,
+   "phase": 120.108
+  },
+  "M4": {
+   "amp": 1.33667,
+   "phase": -142.944
+  },
+  "MF": {
+   "amp": 0.75436,
+   "phase": 15.172
+  },
+  "MM": {
+   "amp": 0.35279,
+   "phase": 145.133
+  },
+  "N2": {
+   "amp": 9.99777,
+   "phase": 97.756
+  },
+  "O1": {
+   "amp": 1.80381,
+   "phase": 76.025
+  },
+  "P1": {
+   "amp": 2.96128,
+   "phase": -155.858
+  },
+  "Q1": {
+   "amp": 1.58511,
+   "phase": 152.972
+  },
+  "S1": {
+   "amp": 1.35222,
+   "phase": 8.115
+  },
+  "S2": {
+   "amp": 9.20996,
+   "phase": 139.861
+  },
+  "SA": {
+   "amp": 8.93043,
+   "phase": 23.486
+  },
+  "SSA": {
+   "amp": 0.48862,
+   "phase": -166.96
+  },
+  "T2": {
+   "amp": 1.90717,
+   "phase": 131.435
+  }
+ }
+}

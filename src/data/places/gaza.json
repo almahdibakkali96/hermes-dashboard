@@ -1,0 +1,89 @@
+{
+ "id": "gaza",
+ "name_en": "Gaza",
+ "name_ar": "غزة",
+ "country": "PS",
+ "lat": 31.52,
+ "lon": 34.45,
+ "timezone": "Asia/Gaza",
+ "grid": {
+  "lat": 31.5,
+  "lon": 34.375,
+  "distance_km": 7.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.19072,
+   "phase": -160.302
+  },
+  "J1": {
+   "amp": 0.17035,
+   "phase": 114.772
+  },
+  "K1": {
+   "amp": 2.30945,
+   "phase": -87.176
+  },
+  "K2": {
+   "amp": 2.18619,
+   "phase": -110.456
+  },
+  "M2": {
+   "amp": 11.58193,
+   "phase": -120.834
+  },
+  "M4": {
+   "amp": 0.2717,
+   "phase": -153.255
+  },
+  "MF": {
+   "amp": 0.88485,
+   "phase": 8.21
+  },
+  "MM": {
+   "amp": 0.5693,
+   "phase": -20.498
+  },
+  "N2": {
+   "amp": 1.85876,
+   "phase": -118.039
+  },
+  "O1": {
+   "amp": 1.69118,
+   "phase": -119.267
+  },
+  "P1": {
+   "amp": 0.90891,
+   "phase": -82.349
+  },
+  "Q1": {
+   "amp": 0.32164,
+   "phase": -5.465
+  },
+  "S1": {
+   "amp": 1.1768,
+   "phase": 39.147
+  },
+  "S2": {
+   "amp": 6.12447,
+   "phase": -107.443
+  },
+  "SA": {
+   "amp": 4.15853,
+   "phase": -80.499
+  },
+  "SSA": {
+   "amp": 0.09871,
+   "phase": -34.523
+  },
+  "T2": {
+   "amp": 0.67477,
+   "phase": -80.545
+  }
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "tangier",
+ "name_en": "Tangier",
+ "name_ar": "طنجة",
+ "country": "MA",
+ "lat": 35.78,
+ "lon": -5.81,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 35.875,
+  "lon": -5.75,
+  "distance_km": 11.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.93733,
+   "phase": 30.529
+  },
+  "J1": {
+   "amp": 0.27394,
+   "phase": 55.374
+  },
+  "K1": {
+   "amp": 4.42322,
+   "phase": 77.203
+  },
+  "K2": {
+   "amp": 6.30713,
+   "phase": 81.096
+  },
+  "M2": {
+   "amp": 60.84664,
+   "phase": 60.081
+  },
+  "M4": {
+   "amp": 3.67462,
+   "phase": 169.741
+  },
+  "MF": {
+   "amp": 0.40495,
+   "phase": 167.758
+  },
+  "MM": {
+   "amp": 0.86398,
+   "phase": -129.911
+  },
+  "N2": {
+   "amp": 13.18393,
+   "phase": 45.969
+  },
+  "O1": {
+   "amp": 2.62089,
+   "phase": -28.437
+  },
+  "P1": {
+   "amp": 1.3451,
+   "phase": 74.399
+  },
+  "Q1": {
+   "amp": 1.26741,
+   "phase": -88.07
+  },
+  "S1": {
+   "amp": 0.92614,
+   "phase": 30.198
+  },
+  "S2": {
+   "amp": 22.26968,
+   "phase": 86.308
+  },
+  "SA": {
+   "amp": 2.30442,
+   "phase": -69.137
+  },
+  "SSA": {
+   "amp": 0.31547,
+   "phase": 177.462
+  },
+  "T2": {
+   "amp": 1.09611,
+   "phase": 74.243
+  }
+ }
+}

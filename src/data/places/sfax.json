@@ -1,0 +1,89 @@
+{
+ "id": "sfax",
+ "name_en": "Sfax",
+ "name_ar": "صفاقس",
+ "country": "TN",
+ "lat": 34.73,
+ "lon": 10.77,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 34.75,
+  "lon": 10.875,
+  "distance_km": 9.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.34426,
+   "phase": 61.595
+  },
+  "J1": {
+   "amp": 0.31789,
+   "phase": 31.785
+  },
+  "K1": {
+   "amp": 1.65781,
+   "phase": 5.285
+  },
+  "K2": {
+   "amp": 5.96715,
+   "phase": 78.787
+  },
+  "M2": {
+   "amp": 26.89584,
+   "phase": 69.676
+  },
+  "M4": {
+   "amp": 0.58485,
+   "phase": 106.18
+  },
+  "MF": {
+   "amp": 0.45519,
+   "phase": -15.735
+  },
+  "MM": {
+   "amp": 0.36431,
+   "phase": -84.671
+  },
+  "N2": {
+   "amp": 4.42384,
+   "phase": 60.983
+  },
+  "O1": {
+   "amp": 0.70517,
+   "phase": 83.26
+  },
+  "P1": {
+   "amp": 0.54287,
+   "phase": -32.206
+  },
+  "Q1": {
+   "amp": 0.71189,
+   "phase": 32.145
+  },
+  "S1": {
+   "amp": 0.98663,
+   "phase": 51.042
+  },
+  "S2": {
+   "amp": 18.36632,
+   "phase": 83.475
+  },
+  "SA": {
+   "amp": 3.77383,
+   "phase": -83.271
+  },
+  "SSA": {
+   "amp": 0.08674,
+   "phase": -153.122
+  },
+  "T2": {
+   "amp": 0.21057,
+   "phase": 98.094
+  }
+ }
+}

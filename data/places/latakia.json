@@ -1,0 +1,89 @@
+{
+ "id": "latakia",
+ "name_en": "Latakia",
+ "name_ar": "اللاذقية",
+ "country": "SY",
+ "lat": 35.52,
+ "lon": 35.78,
+ "timezone": "Asia/Damascus",
+ "grid": {
+  "lat": 35.5,
+  "lon": 35.75,
+  "distance_km": 3.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.08474,
+   "phase": -148.378
+  },
+  "J1": {
+   "amp": 0.18865,
+   "phase": -148.056
+  },
+  "K1": {
+   "amp": 3.08265,
+   "phase": -89.497
+  },
+  "K2": {
+   "amp": 2.20561,
+   "phase": -116.556
+  },
+  "M2": {
+   "amp": 11.93929,
+   "phase": -125.102
+  },
+  "M4": {
+   "amp": 0.26169,
+   "phase": -86.732
+  },
+  "MF": {
+   "amp": 0.20174,
+   "phase": -41.34
+  },
+  "MM": {
+   "amp": 0.47276,
+   "phase": -26.115
+  },
+  "N2": {
+   "amp": 2.12485,
+   "phase": -123.718
+  },
+  "O1": {
+   "amp": 2.15118,
+   "phase": -113.656
+  },
+  "P1": {
+   "amp": 1.58591,
+   "phase": -67.893
+  },
+  "Q1": {
+   "amp": 0.20368,
+   "phase": -100.715
+  },
+  "S1": {
+   "amp": 0.66587,
+   "phase": 43.148
+  },
+  "S2": {
+   "amp": 6.76306,
+   "phase": -112.378
+  },
+  "SA": {
+   "amp": 3.6109,
+   "phase": -80.427
+  },
+  "SSA": {
+   "amp": 0.09335,
+   "phase": -103.864
+  },
+  "T2": {
+   "amp": 0.19439,
+   "phase": -35.64
+  }
+ }
+}

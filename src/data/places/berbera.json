@@ -1,0 +1,89 @@
+{
+ "id": "berbera",
+ "name_en": "Berbera",
+ "name_ar": "بربرة",
+ "country": "SO",
+ "lat": 10.44,
+ "lon": 45.01,
+ "timezone": "Africa/Mogadishu",
+ "grid": {
+  "lat": 10.5,
+  "lon": 45.0,
+  "distance_km": 6.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.64844,
+   "phase": 105.867
+  },
+  "J1": {
+   "amp": 2.66898,
+   "phase": 4.417
+  },
+  "K1": {
+   "amp": 39.72913,
+   "phase": -9.447
+  },
+  "K2": {
+   "amp": 6.00053,
+   "phase": 148.192
+  },
+  "M2": {
+   "amp": 47.46946,
+   "phase": 135.024
+  },
+  "M4": {
+   "amp": 0.49639,
+   "phase": 133.925
+  },
+  "MF": {
+   "amp": 1.02707,
+   "phase": 11.429
+  },
+  "MM": {
+   "amp": 0.61921,
+   "phase": 0.322
+  },
+  "N2": {
+   "amp": 13.44639,
+   "phase": 131.54
+  },
+  "O1": {
+   "amp": 19.24944,
+   "phase": -6.733
+  },
+  "P1": {
+   "amp": 12.26673,
+   "phase": -10.741
+  },
+  "Q1": {
+   "amp": 4.22983,
+   "phase": -8.245
+  },
+  "S1": {
+   "amp": 3.44698,
+   "phase": 99.924
+  },
+  "S2": {
+   "amp": 21.03964,
+   "phase": 156.395
+  },
+  "SA": {
+   "amp": 6.16821,
+   "phase": 67.494
+  },
+  "SSA": {
+   "amp": 0.41131,
+   "phase": -37.989
+  },
+  "T2": {
+   "amp": 1.55544,
+   "phase": 160.831
+  }
+ }
+}

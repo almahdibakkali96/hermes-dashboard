@@ -1,0 +1,89 @@
+{
+ "id": "casablanca",
+ "name_en": "Casablanca",
+ "name_ar": "الدار البيضاء",
+ "country": "MA",
+ "lat": 33.6,
+ "lon": -7.62,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 33.625,
+  "lon": -7.625,
+  "distance_km": 2.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.24341,
+   "phase": 18.581
+  },
+  "J1": {
+   "amp": 0.5453,
+   "phase": 77.078
+  },
+  "K1": {
+   "amp": 6.94692,
+   "phase": 48.335
+  },
+  "K2": {
+   "amp": 10.16441,
+   "phase": 75.552
+  },
+  "M2": {
+   "amp": 100.21899,
+   "phase": 53.486
+  },
+  "M4": {
+   "amp": 1.58696,
+   "phase": 145.856
+  },
+  "MF": {
+   "amp": 0.28154,
+   "phase": -15.897
+  },
+  "MM": {
+   "amp": 0.1274,
+   "phase": -6.178
+  },
+  "N2": {
+   "amp": 21.41972,
+   "phase": 37.568
+  },
+  "O1": {
+   "amp": 6.18556,
+   "phase": -51.92
+  },
+  "P1": {
+   "amp": 2.5614,
+   "phase": 36.388
+  },
+  "Q1": {
+   "amp": 2.26701,
+   "phase": -108.92
+  },
+  "S1": {
+   "amp": 1.14873,
+   "phase": 34.895
+  },
+  "S2": {
+   "amp": 36.96112,
+   "phase": 78.924
+  },
+  "SA": {
+   "amp": 2.67814,
+   "phase": -52.732
+  },
+  "SSA": {
+   "amp": 0.07496,
+   "phase": 161.227
+  },
+  "T2": {
+   "amp": 2.02865,
+   "phase": 74.821
+  }
+ }
+}

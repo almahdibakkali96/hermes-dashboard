@@ -1,0 +1,89 @@
+{
+ "id": "djibouti",
+ "name_en": "Djibouti",
+ "name_ar": "جيبوتي",
+ "country": "DJ",
+ "lat": 11.59,
+ "lon": 43.15,
+ "timezone": "Africa/Djibouti",
+ "grid": {
+  "lat": 11.625,
+  "lon": 43.125,
+  "distance_km": 4.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.09997,
+   "phase": 98.223
+  },
+  "J1": {
+   "amp": 2.68032,
+   "phase": 8.397
+  },
+  "K1": {
+   "amp": 41.08754,
+   "phase": -9.733
+  },
+  "K2": {
+   "amp": 6.38553,
+   "phase": 148.664
+  },
+  "M2": {
+   "amp": 48.23696,
+   "phase": 135.422
+  },
+  "M4": {
+   "amp": 1.29885,
+   "phase": 99.835
+  },
+  "MF": {
+   "amp": 0.52371,
+   "phase": 1.49
+  },
+  "MM": {
+   "amp": 1.29543,
+   "phase": -32.944
+  },
+  "N2": {
+   "amp": 12.86282,
+   "phase": 136.661
+  },
+  "O1": {
+   "amp": 20.55435,
+   "phase": -6.907
+  },
+  "P1": {
+   "amp": 12.69455,
+   "phase": -12.716
+  },
+  "Q1": {
+   "amp": 4.31332,
+   "phase": -9.477
+  },
+  "S1": {
+   "amp": 4.10579,
+   "phase": 90.257
+  },
+  "S2": {
+   "amp": 21.98465,
+   "phase": 153.761
+  },
+  "SA": {
+   "amp": 6.01846,
+   "phase": 49.777
+  },
+  "SSA": {
+   "amp": 0.45331,
+   "phase": -50.667
+  },
+  "T2": {
+   "amp": 2.00267,
+   "phase": 175.081
+  }
+ }
+}

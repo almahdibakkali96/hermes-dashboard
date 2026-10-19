@@ -1,0 +1,89 @@
+{
+ "id": "agadir",
+ "name_en": "Agadir",
+ "name_ar": "أكادير",
+ "country": "MA",
+ "lat": 30.42,
+ "lon": -9.63,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 30.375,
+  "lon": -9.625,
+  "distance_km": 5.0
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.7773,
+   "phase": 14.679
+  },
+  "J1": {
+   "amp": 0.22637,
+   "phase": 58.412
+  },
+  "K1": {
+   "amp": 7.00999,
+   "phase": 42.048
+  },
+  "K2": {
+   "amp": 9.96905,
+   "phase": 62.751
+  },
+  "M2": {
+   "amp": 94.50664,
+   "phase": 42.886
+  },
+  "M4": {
+   "amp": 1.60227,
+   "phase": 138.981
+  },
+  "MF": {
+   "amp": 0.18207,
+   "phase": -10.402
+  },
+  "MM": {
+   "amp": 0.21356,
+   "phase": -54.467
+  },
+  "N2": {
+   "amp": 19.86797,
+   "phase": 28.108
+  },
+  "O1": {
+   "amp": 6.18927,
+   "phase": -57.827
+  },
+  "P1": {
+   "amp": 2.43557,
+   "phase": 38.018
+  },
+  "Q1": {
+   "amp": 1.76951,
+   "phase": -112.05
+  },
+  "S1": {
+   "amp": 0.57189,
+   "phase": 43.15
+  },
+  "S2": {
+   "amp": 35.29038,
+   "phase": 67.154
+  },
+  "SA": {
+   "amp": 2.12343,
+   "phase": -43.55
+  },
+  "SSA": {
+   "amp": 0.00669,
+   "phase": 8.883
+  },
+  "T2": {
+   "amp": 2.10508,
+   "phase": 53.113
+  }
+ }
+}

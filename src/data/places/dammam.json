@@ -1,0 +1,89 @@
+{
+ "id": "dammam",
+ "name_en": "Dammam",
+ "name_ar": "الدمام",
+ "country": "SA",
+ "lat": 26.43,
+ "lon": 50.1,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 26.5,
+  "lon": 50.125,
+  "distance_km": 8.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.53988,
+   "phase": -18.442
+  },
+  "J1": {
+   "amp": 0.23794,
+   "phase": 109.961
+  },
+  "K1": {
+   "amp": 13.06824,
+   "phase": -57.606
+  },
+  "K2": {
+   "amp": 7.69766,
+   "phase": 100.312
+  },
+  "M2": {
+   "amp": 70.13433,
+   "phase": 50.003
+  },
+  "M4": {
+   "amp": 3.30936,
+   "phase": 89.13
+  },
+  "MF": {
+   "amp": 0.43763,
+   "phase": 26.979
+  },
+  "MM": {
+   "amp": 1.11854,
+   "phase": 29.055
+  },
+  "N2": {
+   "amp": 13.83112,
+   "phase": 25.963
+  },
+  "O1": {
+   "amp": 10.96297,
+   "phase": -113.802
+  },
+  "P1": {
+   "amp": 3.60033,
+   "phase": -59.572
+  },
+  "Q1": {
+   "amp": 2.44159,
+   "phase": -126.541
+  },
+  "S1": {
+   "amp": 1.72795,
+   "phase": 61.256
+  },
+  "S2": {
+   "amp": 23.9798,
+   "phase": 105.331
+  },
+  "SA": {
+   "amp": 2.86758,
+   "phase": -74.211
+  },
+  "SSA": {
+   "amp": 0.41379,
+   "phase": 176.251
+  },
+  "T2": {
+   "amp": 1.4632,
+   "phase": 127.666
+  }
+ }
+}

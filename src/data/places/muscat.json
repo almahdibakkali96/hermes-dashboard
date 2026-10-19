@@ -1,0 +1,89 @@
+{
+ "id": "muscat",
+ "name_en": "Muscat",
+ "name_ar": "مسقط",
+ "country": "OM",
+ "lat": 23.62,
+ "lon": 58.59,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 23.625,
+  "lon": 58.625,
+  "distance_km": 3.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.46209,
+   "phase": 103.674
+  },
+  "J1": {
+   "amp": 2.33817,
+   "phase": -8.117
+  },
+  "K1": {
+   "amp": 39.49763,
+   "phase": -19.095
+  },
+  "K2": {
+   "amp": 6.78614,
+   "phase": -174.23
+  },
+  "M2": {
+   "amp": 64.74777,
+   "phase": 158.262
+  },
+  "M4": {
+   "amp": 0.92055,
+   "phase": -148.453
+  },
+  "MF": {
+   "amp": 0.68132,
+   "phase": 6.864
+  },
+  "MM": {
+   "amp": 0.5658,
+   "phase": 39.874
+  },
+  "N2": {
+   "amp": 15.63846,
+   "phase": 142.008
+  },
+  "O1": {
+   "amp": 19.81276,
+   "phase": -18.205
+  },
+  "P1": {
+   "amp": 12.17639,
+   "phase": -19.691
+  },
+  "Q1": {
+   "amp": 4.00185,
+   "phase": -17.345
+  },
+  "S1": {
+   "amp": 2.25841,
+   "phase": 115.14
+  },
+  "S2": {
+   "amp": 24.99975,
+   "phase": -170.584
+  },
+  "SA": {
+   "amp": 1.90739,
+   "phase": 50.874
+  },
+  "SSA": {
+   "amp": 0.31738,
+   "phase": -44.03
+  },
+  "T2": {
+   "amp": 1.42908,
+   "phase": 175.051
+  }
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "algiers",
+ "name_en": "Algiers",
+ "name_ar": "الجزائر العاصمة",
+ "country": "DZ",
+ "lat": 36.77,
+ "lon": 3.06,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 36.75,
+  "lon": 3.125,
+  "distance_km": 6.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.42065,
+   "phase": 105.227
+  },
+  "J1": {
+   "amp": 0.20637,
+   "phase": 174.966
+  },
+  "K1": {
+   "amp": 3.86653,
+   "phase": 171.339
+  },
+  "K2": {
+   "amp": 0.19526,
+   "phase": -5.125
+  },
+  "M2": {
+   "amp": 2.27407,
+   "phase": -161.582
+  },
+  "M4": {
+   "amp": 0.37428,
+   "phase": -103.986
+  },
+  "MF": {
+   "amp": 0.09991,
+   "phase": -75.337
+  },
+  "MM": {
+   "amp": 0.47955,
+   "phase": -63.905
+  },
+  "N2": {
+   "amp": 0.6102,
+   "phase": 137.512
+  },
+  "O1": {
+   "amp": 1.94732,
+   "phase": 105.986
+  },
+  "P1": {
+   "amp": 1.22345,
+   "phase": 167.687
+  },
+  "Q1": {
+   "amp": 0.21328,
+   "phase": 66.332
+  },
+  "S1": {
+   "amp": 0.92636,
+   "phase": 24.168
+  },
+  "S2": {
+   "amp": 0.68421,
+   "phase": -178.937
+  },
+  "SA": {
+   "amp": 3.82916,
+   "phase": -78.71
+  },
+  "SSA": {
+   "amp": 0.19365,
+   "phase": -176.61
+  },
+  "T2": {
+   "amp": 0.31893,
+   "phase": -35.872
+  }
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "alexandria",
+ "name_en": "Alexandria",
+ "name_ar": "الإسكندرية",
+ "country": "EG",
+ "lat": 31.2,
+ "lon": 29.88,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 31.25,
+  "lon": 29.875,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.14029,
+   "phase": -116.103
+  },
+  "J1": {
+   "amp": 0.10522,
+   "phase": -127.216
+  },
+  "K1": {
+   "amp": 2.03744,
+   "phase": -76.334
+  },
+  "K2": {
+   "amp": 1.18552,
+   "phase": -123.796
+  },
+  "M2": {
+   "amp": 7.45933,
+   "phase": -113.587
+  },
+  "M4": {
+   "amp": 0.10627,
+   "phase": -80.525
+  },
+  "MF": {
+   "amp": 0.39853,
+   "phase": -53.421
+  },
+  "MM": {
+   "amp": 0.40617,
+   "phase": -99.918
+  },
+  "N2": {
+   "amp": 1.43323,
+   "phase": -100.119
+  },
+  "O1": {
+   "amp": 1.30074,
+   "phase": -122.087
+  },
+  "P1": {
+   "amp": 0.48964,
+   "phase": -85.28
+  },
+  "Q1": {
+   "amp": 0.17857,
+   "phase": 76.957
+  },
+  "S1": {
+   "amp": 0.77065,
+   "phase": 1.239
+  },
+  "S2": {
+   "amp": 4.24514,
+   "phase": -110.142
+  },
+  "SA": {
+   "amp": 3.75006,
+   "phase": -74.998
+  },
+  "SSA": {
+   "amp": 0.16041,
+   "phase": -37.465
+  },
+  "T2": {
+   "amp": 0.82208,
+   "phase": -86.667
+  }
+ }
+}

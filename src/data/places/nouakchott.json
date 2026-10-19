@@ -1,0 +1,89 @@
+{
+ "id": "nouakchott",
+ "name_en": "Nouakchott",
+ "name_ar": "نواكشوط",
+ "country": "MR",
+ "lat": 18.09,
+ "lon": -16.03,
+ "timezone": "Africa/Nouakchott",
+ "grid": {
+  "lat": 18.125,
+  "lon": -16.125,
+  "distance_km": 10.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.02856,
+   "phase": -130.968
+  },
+  "J1": {
+   "amp": 0.1947,
+   "phase": -38.076
+  },
+  "K1": {
+   "amp": 6.33676,
+   "phase": 2.685
+  },
+  "K2": {
+   "amp": 4.50256,
+   "phase": -35.117
+  },
+  "M2": {
+   "amp": 41.90054,
+   "phase": -70.347
+  },
+  "M4": {
+   "amp": 1.65351,
+   "phase": -61.489
+  },
+  "MF": {
+   "amp": 1.1364,
+   "phase": -16.365
+  },
+  "MM": {
+   "amp": 0.3694,
+   "phase": -60.639
+  },
+  "N2": {
+   "amp": 7.22594,
+   "phase": -92.379
+  },
+  "O1": {
+   "amp": 4.43386,
+   "phase": -100.902
+  },
+  "P1": {
+   "amp": 1.50396,
+   "phase": -6.09
+  },
+  "Q1": {
+   "amp": 1.25933,
+   "phase": -155.843
+  },
+  "S1": {
+   "amp": 1.34549,
+   "phase": -1.902
+  },
+  "S2": {
+   "amp": 16.6777,
+   "phase": -32.933
+  },
+  "SA": {
+   "amp": 4.36935,
+   "phase": -113.28
+  },
+  "SSA": {
+   "amp": 0.59066,
+   "phase": -2.476
+  },
+  "T2": {
+   "amp": 1.06126,
+   "phase": -63.565
+  }
+ }
+}

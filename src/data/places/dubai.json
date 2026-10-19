@@ -1,0 +1,89 @@
+{
+ "id": "dubai",
+ "name_en": "Dubai",
+ "name_ar": "دبي",
+ "country": "AE",
+ "lat": 25.27,
+ "lon": 55.3,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 25.25,
+  "lon": 55.25,
+  "distance_km": 5.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.29019,
+   "phase": -172.871
+  },
+  "J1": {
+   "amp": 0.89913,
+   "phase": 69.644
+  },
+  "K1": {
+   "amp": 22.95159,
+   "phase": 95.01
+  },
+  "K2": {
+   "amp": 4.48785,
+   "phase": -93.744
+  },
+  "M2": {
+   "amp": 45.10851,
+   "phase": -121.287
+  },
+  "M4": {
+   "amp": 1.18,
+   "phase": 97.722
+  },
+  "MF": {
+   "amp": 0.58268,
+   "phase": 13.235
+  },
+  "MM": {
+   "amp": 1.0917,
+   "phase": 32.123
+  },
+  "N2": {
+   "amp": 9.70287,
+   "phase": -143.833
+  },
+  "O1": {
+   "amp": 16.52679,
+   "phase": 44.415
+  },
+  "P1": {
+   "amp": 6.29801,
+   "phase": 80.343
+  },
+  "Q1": {
+   "amp": 2.97057,
+   "phase": 22.814
+  },
+  "S1": {
+   "amp": 0.7962,
+   "phase": -29.982
+  },
+  "S2": {
+   "amp": 16.98627,
+   "phase": -79.479
+  },
+  "SA": {
+   "amp": 2.07627,
+   "phase": -53.507
+  },
+  "SSA": {
+   "amp": 0.3274,
+   "phase": -171.426
+  },
+  "T2": {
+   "amp": 1.01277,
+   "phase": -57.009
+  }
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "hodeidah",
+ "name_en": "Al Hudaydah",
+ "name_ar": "الحديدة",
+ "country": "YE",
+ "lat": 14.8,
+ "lon": 42.95,
+ "timezone": "Asia/Aden",
+ "grid": {
+  "lat": 14.75,
+  "lon": 42.875,
+  "distance_km": 9.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.2303,
+   "phase": -160.573
+  },
+  "J1": {
+   "amp": 0.12011,
+   "phase": -127.533
+  },
+  "K1": {
+   "amp": 2.71279,
+   "phase": 22.372
+  },
+  "K2": {
+   "amp": 2.21543,
+   "phase": -28.482
+  },
+  "M2": {
+   "amp": 28.95788,
+   "phase": -64.365
+  },
+  "M4": {
+   "amp": 0.294,
+   "phase": -39.779
+  },
+  "MF": {
+   "amp": 1.37273,
+   "phase": 19.29
+  },
+  "MM": {
+   "amp": 0.57629,
+   "phase": -68.764
+  },
+  "N2": {
+   "amp": 10.22853,
+   "phase": -93.422
+  },
+  "O1": {
+   "amp": 1.00366,
+   "phase": 40.391
+  },
+  "P1": {
+   "amp": 0.5265,
+   "phase": 30.839
+  },
+  "Q1": {
+   "amp": 0.16333,
+   "phase": 173.265
+  },
+  "S1": {
+   "amp": 1.26897,
+   "phase": 22.259
+  },
+  "S2": {
+   "amp": 8.0761,
+   "phase": -34.92
+  },
+  "SA": {
+   "amp": 7.71461,
+   "phase": 37.802
+  },
+  "SSA": {
+   "amp": 0.18181,
+   "phase": -85.504
+  },
+  "T2": {
+   "amp": 0.13084,
+   "phase": 57.897
+  }
+ }
+}

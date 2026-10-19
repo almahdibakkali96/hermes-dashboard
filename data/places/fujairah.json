@@ -1,0 +1,89 @@
+{
+ "id": "fujairah",
+ "name_en": "Fujairah",
+ "name_ar": "الفجيرة",
+ "country": "AE",
+ "lat": 25.12,
+ "lon": 56.36,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 25.125,
+  "lon": 56.375,
+  "distance_km": 1.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.48995,
+   "phase": 106.145
+  },
+  "J1": {
+   "amp": 2.25556,
+   "phase": -8.91
+  },
+  "K1": {
+   "amp": 39.00466,
+   "phase": -20.147
+  },
+  "K2": {
+   "amp": 7.33511,
+   "phase": -175.945
+  },
+  "M2": {
+   "amp": 68.42083,
+   "phase": 160.73
+  },
+  "M4": {
+   "amp": 0.52826,
+   "phase": -134.37
+  },
+  "MF": {
+   "amp": 0.95707,
+   "phase": 22.636
+  },
+  "MM": {
+   "amp": 0.3323,
+   "phase": 79.813
+  },
+  "N2": {
+   "amp": 16.75115,
+   "phase": 142.511
+  },
+  "O1": {
+   "amp": 20.43963,
+   "phase": -17.438
+  },
+  "P1": {
+   "amp": 11.87051,
+   "phase": -22.855
+  },
+  "Q1": {
+   "amp": 4.12409,
+   "phase": -20.686
+  },
+  "S1": {
+   "amp": 0.70814,
+   "phase": 119.923
+  },
+  "S2": {
+   "amp": 26.35778,
+   "phase": -168.492
+  },
+  "SA": {
+   "amp": 1.2223,
+   "phase": -2.333
+  },
+  "SSA": {
+   "amp": 0.24724,
+   "phase": -55.582
+  },
+  "T2": {
+   "amp": 1.32454,
+   "phase": 176.915
+  }
+ }
+}

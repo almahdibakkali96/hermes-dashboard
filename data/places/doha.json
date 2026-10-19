@@ -1,0 +1,89 @@
+{
+ "id": "doha",
+ "name_en": "Doha",
+ "name_ar": "الدوحة",
+ "country": "QA",
+ "lat": 25.29,
+ "lon": 51.53,
+ "timezone": "Asia/Qatar",
+ "grid": {
+  "lat": 25.25,
+  "lon": 51.625,
+  "distance_km": 10.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.26092,
+   "phase": -17.684
+  },
+  "J1": {
+   "amp": 1.70648,
+   "phase": 95.125
+  },
+  "K1": {
+   "amp": 37.18549,
+   "phase": 74.651
+  },
+  "K2": {
+   "amp": 3.23178,
+   "phase": 73.604
+  },
+  "M2": {
+   "amp": 32.62649,
+   "phase": 51.447
+  },
+  "M4": {
+   "amp": 3.29198,
+   "phase": -26.755
+  },
+  "MF": {
+   "amp": 0.7452,
+   "phase": -7.907
+  },
+  "MM": {
+   "amp": 1.09369,
+   "phase": 20.737
+  },
+  "N2": {
+   "amp": 9.00278,
+   "phase": 26.061
+  },
+  "O1": {
+   "amp": 16.91592,
+   "phase": 26.948
+  },
+  "P1": {
+   "amp": 10.35638,
+   "phase": 66.175
+  },
+  "Q1": {
+   "amp": 2.63206,
+   "phase": 6.318
+  },
+  "S1": {
+   "amp": 0.97043,
+   "phase": 11.216
+  },
+  "S2": {
+   "amp": 12.09085,
+   "phase": 78.852
+  },
+  "SA": {
+   "amp": 2.64048,
+   "phase": -68.966
+  },
+  "SSA": {
+   "amp": 0.29104,
+   "phase": 172.059
+  },
+  "T2": {
+   "amp": 1.16337,
+   "phase": 88.704
+  }
+ }
+}

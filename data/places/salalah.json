@@ -1,0 +1,89 @@
+{
+ "id": "salalah",
+ "name_en": "Salalah",
+ "name_ar": "صلالة",
+ "country": "OM",
+ "lat": 16.94,
+ "lon": 54.0,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 16.875,
+  "lon": 54.0,
+  "distance_km": 7.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.4362,
+   "phase": 97.202
+  },
+  "J1": {
+   "amp": 2.03284,
+   "phase": -2.113
+  },
+  "K1": {
+   "amp": 35.92885,
+   "phase": -15.882
+  },
+  "K2": {
+   "amp": 3.39305,
+   "phase": 156.713
+  },
+  "M2": {
+   "amp": 30.84629,
+   "phase": 143.153
+  },
+  "M4": {
+   "amp": 0.31247,
+   "phase": -138.952
+  },
+  "MF": {
+   "amp": 1.23804,
+   "phase": 16.875
+  },
+  "MM": {
+   "amp": 0.39316,
+   "phase": 64.061
+  },
+  "N2": {
+   "amp": 8.33742,
+   "phase": 131.748
+  },
+  "O1": {
+   "amp": 18.30899,
+   "phase": -14.382
+  },
+  "P1": {
+   "amp": 11.04356,
+   "phase": -16.667
+  },
+  "Q1": {
+   "amp": 4.09153,
+   "phase": -10.413
+  },
+  "S1": {
+   "amp": 2.16173,
+   "phase": 103.579
+  },
+  "S2": {
+   "amp": 11.59554,
+   "phase": 168.358
+  },
+  "SA": {
+   "amp": 6.4405,
+   "phase": 52.56
+  },
+  "SSA": {
+   "amp": 0.2019,
+   "phase": -75.367
+  },
+  "T2": {
+   "amp": 0.74566,
+   "phase": 168.731
+  }
+ }
+}

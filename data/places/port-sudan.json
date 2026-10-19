@@ -1,0 +1,89 @@
+{
+ "id": "port-sudan",
+ "name_en": "Port Sudan",
+ "name_ar": "بورتسودان",
+ "country": "SD",
+ "lat": 19.62,
+ "lon": 37.22,
+ "timezone": "Africa/Khartoum",
+ "grid": {
+  "lat": 19.625,
+  "lon": 37.25,
+  "distance_km": 3.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.72071,
+   "phase": 157.927
+  },
+  "J1": {
+   "amp": 0.88075,
+   "phase": -174.835
+  },
+  "K1": {
+   "amp": 2.59203,
+   "phase": 168.505
+  },
+  "K2": {
+   "amp": 0.13995,
+   "phase": -177.878
+  },
+  "M2": {
+   "amp": 1.65098,
+   "phase": 125.658
+  },
+  "M4": {
+   "amp": 1.1156,
+   "phase": 117.704
+  },
+  "MF": {
+   "amp": 0.73099,
+   "phase": -8.986
+  },
+  "MM": {
+   "amp": 0.39343,
+   "phase": -23.798
+  },
+  "N2": {
+   "amp": 0.54617,
+   "phase": 124.859
+  },
+  "O1": {
+   "amp": 2.05986,
+   "phase": 149.143
+  },
+  "P1": {
+   "amp": 1.06649,
+   "phase": 129.611
+  },
+  "Q1": {
+   "amp": 0.38525,
+   "phase": 122.585
+  },
+  "S1": {
+   "amp": 2.4683,
+   "phase": -57.943
+  },
+  "S2": {
+   "amp": 0.14209,
+   "phase": 85.732
+  },
+  "SA": {
+   "amp": 8.18777,
+   "phase": 33.539
+  },
+  "SSA": {
+   "amp": 0.25456,
+   "phase": -144.693
+  },
+  "T2": {
+   "amp": 0.51837,
+   "phase": -176.157
+  }
+ }
+}

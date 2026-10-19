@@ -1,0 +1,89 @@
+{
+ "id": "manama",
+ "name_en": "Manama",
+ "name_ar": "المنامة",
+ "country": "BH",
+ "lat": 26.23,
+ "lon": 50.58,
+ "timezone": "Asia/Bahrain",
+ "grid": {
+  "lat": 26.25,
+  "lon": 50.625,
+  "distance_km": 5.0
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.26599,
+   "phase": -10.596
+  },
+  "J1": {
+   "amp": 0.51491,
+   "phase": 87.927
+  },
+  "K1": {
+   "amp": 9.64839,
+   "phase": -7.635
+  },
+  "K2": {
+   "amp": 5.37669,
+   "phase": 108.481
+  },
+  "M2": {
+   "amp": 56.66763,
+   "phase": 58.987
+  },
+  "M4": {
+   "amp": 1.96289,
+   "phase": 76.739
+  },
+  "MF": {
+   "amp": 0.48708,
+   "phase": 16.825
+  },
+  "MM": {
+   "amp": 1.03285,
+   "phase": 32.032
+  },
+  "N2": {
+   "amp": 10.3666,
+   "phase": 34.432
+  },
+  "O1": {
+   "amp": 8.02055,
+   "phase": -82.599
+  },
+  "P1": {
+   "amp": 3.53032,
+   "phase": -10.242
+  },
+  "Q1": {
+   "amp": 1.93274,
+   "phase": -98.089
+  },
+  "S1": {
+   "amp": 2.33108,
+   "phase": 82.472
+  },
+  "S2": {
+   "amp": 17.67507,
+   "phase": 113.694
+  },
+  "SA": {
+   "amp": 2.87051,
+   "phase": -74.681
+  },
+  "SSA": {
+   "amp": 0.38323,
+   "phase": 175.697
+  },
+  "T2": {
+   "amp": 1.28418,
+   "phase": 139.426
+  }
+ }
+}

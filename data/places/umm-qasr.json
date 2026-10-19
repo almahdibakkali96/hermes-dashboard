@@ -1,0 +1,89 @@
+{
+ "id": "umm-qasr",
+ "name_en": "Umm Qasr",
+ "name_ar": "أم قصر",
+ "country": "IQ",
+ "lat": 30.03,
+ "lon": 47.93,
+ "timezone": "Asia/Baghdad",
+ "grid": {
+  "lat": 30.0,
+  "lon": 48.0,
+  "distance_km": 7.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.4979,
+   "phase": 179.256
+  },
+  "J1": {
+   "amp": 2.54438,
+   "phase": -120.362
+  },
+  "K1": {
+   "amp": 52.05321,
+   "phase": -103.864
+  },
+  "K2": {
+   "amp": 10.41064,
+   "phase": -73.696
+  },
+  "M2": {
+   "amp": 84.57016,
+   "phase": -119.59
+  },
+  "M4": {
+   "amp": 2.01147,
+   "phase": -3.252
+  },
+  "MF": {
+   "amp": 0.6731,
+   "phase": -125.422
+  },
+  "MM": {
+   "amp": 1.06659,
+   "phase": 12.729
+  },
+  "N2": {
+   "amp": 18.58924,
+   "phase": -148.965
+  },
+  "O1": {
+   "amp": 31.69745,
+   "phase": -145.215
+  },
+  "P1": {
+   "amp": 15.20124,
+   "phase": -110.992
+  },
+  "Q1": {
+   "amp": 5.38287,
+   "phase": -165.762
+  },
+  "S1": {
+   "amp": 1.84694,
+   "phase": 30.948
+  },
+  "S2": {
+   "amp": 30.44732,
+   "phase": -63.973
+  },
+  "SA": {
+   "amp": 2.67656,
+   "phase": -97.123
+  },
+  "SSA": {
+   "amp": 0.6978,
+   "phase": 166.981
+  },
+  "T2": {
+   "amp": 1.66718,
+   "phase": -77.833
+  }
+ }
+}

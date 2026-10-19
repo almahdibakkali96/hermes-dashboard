@@ -1,0 +1,89 @@
+{
+ "id": "hurghada",
+ "name_en": "Hurghada",
+ "name_ar": "الغردقة",
+ "country": "EG",
+ "lat": 27.23,
+ "lon": 33.84,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 27.25,
+  "lon": 33.875,
+  "distance_km": 4.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.49776,
+   "phase": 36.746
+  },
+  "J1": {
+   "amp": 0.32135,
+   "phase": -147.608
+  },
+  "K1": {
+   "amp": 1.577,
+   "phase": 147.303
+  },
+  "K2": {
+   "amp": 1.94255,
+   "phase": 120.012
+  },
+  "M2": {
+   "amp": 25.1117,
+   "phase": 115.94
+  },
+  "M4": {
+   "amp": 0.30492,
+   "phase": -42.303
+  },
+  "MF": {
+   "amp": 0.39689,
+   "phase": 36.393
+  },
+  "MM": {
+   "amp": 0.20219,
+   "phase": 101.125
+  },
+  "N2": {
+   "amp": 7.90337,
+   "phase": 97.334
+  },
+  "O1": {
+   "amp": 1.01097,
+   "phase": 93.956
+  },
+  "P1": {
+   "amp": 0.79741,
+   "phase": 150.517
+  },
+  "Q1": {
+   "amp": 0.17062,
+   "phase": -179.42
+  },
+  "S1": {
+   "amp": 1.66883,
+   "phase": -9.757
+  },
+  "S2": {
+   "amp": 7.50291,
+   "phase": 146.685
+  },
+  "SA": {
+   "amp": 7.94717,
+   "phase": 20.703
+  },
+  "SSA": {
+   "amp": 0.38604,
+   "phase": -140.385
+  },
+  "T2": {
+   "amp": 1.18035,
+   "phase": 147.321
+  }
+ }
+}

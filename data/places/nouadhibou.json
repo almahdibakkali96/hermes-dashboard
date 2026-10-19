@@ -1,0 +1,89 @@
+{
+ "id": "nouadhibou",
+ "name_en": "Nouadhibou",
+ "name_ar": "نواذيبو",
+ "country": "MR",
+ "lat": 20.93,
+ "lon": -17.03,
+ "timezone": "Africa/Nouakchott",
+ "grid": {
+  "lat": 20.875,
+  "lon": -17.0,
+  "distance_km": 6.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.28542,
+   "phase": -52.978
+  },
+  "J1": {
+   "amp": 0.38983,
+   "phase": 71.035
+  },
+  "K1": {
+   "amp": 6.94569,
+   "phase": 25.311
+  },
+  "K2": {
+   "amp": 5.80593,
+   "phase": 11.42
+  },
+  "M2": {
+   "amp": 56.27447,
+   "phase": -17.32
+  },
+  "M4": {
+   "amp": 2.36512,
+   "phase": 52.246
+  },
+  "MF": {
+   "amp": 1.09493,
+   "phase": -12.738
+  },
+  "MM": {
+   "amp": 0.64495,
+   "phase": -38.662
+  },
+  "N2": {
+   "amp": 10.03296,
+   "phase": -30.654
+  },
+  "O1": {
+   "amp": 4.64074,
+   "phase": -83.728
+  },
+  "P1": {
+   "amp": 1.81722,
+   "phase": 28.11
+  },
+  "Q1": {
+   "amp": 1.49718,
+   "phase": -140.907
+  },
+  "S1": {
+   "amp": 1.03886,
+   "phase": 21.774
+  },
+  "S2": {
+   "amp": 22.81912,
+   "phase": 17.464
+  },
+  "SA": {
+   "amp": 2.92848,
+   "phase": -101.562
+  },
+  "SSA": {
+   "amp": 0.45369,
+   "phase": -6.5
+  },
+  "T2": {
+   "amp": 1.00688,
+   "phase": 23.416
+  }
+ }
+}

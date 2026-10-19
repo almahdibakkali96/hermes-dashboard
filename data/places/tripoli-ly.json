@@ -1,0 +1,89 @@
+{
+ "id": "tripoli-ly",
+ "name_en": "Tripoli (Libya)",
+ "name_ar": "طرابلس (ليبيا)",
+ "country": "LY",
+ "lat": 32.9,
+ "lon": 13.18,
+ "timezone": "Africa/Tripoli",
+ "grid": {
+  "lat": 33.0,
+  "lon": 13.125,
+  "distance_km": 12.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.50694,
+   "phase": 102.793
+  },
+  "J1": {
+   "amp": 0.21488,
+   "phase": 20.76
+  },
+  "K1": {
+   "amp": 1.56947,
+   "phase": 7.266
+  },
+  "K2": {
+   "amp": 1.96458,
+   "phase": 82.793
+  },
+  "M2": {
+   "amp": 11.71123,
+   "phase": 65.866
+  },
+  "M4": {
+   "amp": 0.45287,
+   "phase": -68.094
+  },
+  "MF": {
+   "amp": 0.33814,
+   "phase": -37.217
+  },
+  "MM": {
+   "amp": 0.67624,
+   "phase": -90.047
+  },
+  "N2": {
+   "amp": 1.90471,
+   "phase": 64.528
+  },
+  "O1": {
+   "amp": 0.63904,
+   "phase": 118.177
+  },
+  "P1": {
+   "amp": 0.42583,
+   "phase": -9.462
+  },
+  "Q1": {
+   "amp": 0.45818,
+   "phase": 82.243
+  },
+  "S1": {
+   "amp": 0.77767,
+   "phase": 8.779
+  },
+  "S2": {
+   "amp": 7.0066,
+   "phase": 84.232
+  },
+  "SA": {
+   "amp": 4.01169,
+   "phase": -70.782
+  },
+  "SSA": {
+   "amp": 0.06289,
+   "phase": -136.218
+  },
+  "T2": {
+   "amp": 0.27033,
+   "phase": -18.994
+  }
+ }
+}

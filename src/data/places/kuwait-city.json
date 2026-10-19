@@ -1,0 +1,89 @@
+{
+ "id": "kuwait-city",
+ "name_en": "Kuwait City",
+ "name_ar": "مدينة الكويت",
+ "country": "KW",
+ "lat": 29.37,
+ "lon": 47.98,
+ "timezone": "Asia/Kuwait",
+ "grid": {
+  "lat": 29.375,
+  "lon": 47.875,
+  "distance_km": 10.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.15157,
+   "phase": -167.423
+  },
+  "J1": {
+   "amp": 2.15478,
+   "phase": -108.972
+  },
+  "K1": {
+   "amp": 54.25633,
+   "phase": -98.199
+  },
+  "K2": {
+   "amp": 12.0744,
+   "phase": -55.584
+  },
+  "M2": {
+   "amp": 89.83915,
+   "phase": -97.068
+  },
+  "M4": {
+   "amp": 2.83787,
+   "phase": 25.524
+  },
+  "MF": {
+   "amp": 0.90926,
+   "phase": -128.592
+  },
+  "MM": {
+   "amp": 0.95766,
+   "phase": 18.967
+  },
+  "N2": {
+   "amp": 20.2685,
+   "phase": -131.336
+  },
+  "O1": {
+   "amp": 32.73962,
+   "phase": -138.964
+  },
+  "P1": {
+   "amp": 15.56289,
+   "phase": -107.532
+  },
+  "Q1": {
+   "amp": 5.91424,
+   "phase": -154.802
+  },
+  "S1": {
+   "amp": 2.74167,
+   "phase": 39.329
+  },
+  "S2": {
+   "amp": 35.21582,
+   "phase": -43.029
+  },
+  "SA": {
+   "amp": 2.99866,
+   "phase": -88.847
+  },
+  "SSA": {
+   "amp": 0.6663,
+   "phase": 168.779
+  },
+  "T2": {
+   "amp": 1.64752,
+   "phase": -68.02
+  }
+ }
+}

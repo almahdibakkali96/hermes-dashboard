@@ -1,0 +1,89 @@
+{
+ "id": "oran",
+ "name_en": "Oran",
+ "name_ar": "وهران",
+ "country": "DZ",
+ "lat": 35.72,
+ "lon": -0.65,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 35.75,
+  "lon": -0.625,
+  "distance_km": 4.0
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.5111,
+   "phase": -70.854
+  },
+  "J1": {
+   "amp": 0.40874,
+   "phase": 89.49
+  },
+  "K1": {
+   "amp": 4.25496,
+   "phase": 153.492
+  },
+  "K2": {
+   "amp": 0.68295,
+   "phase": 64.973
+  },
+  "M2": {
+   "amp": 5.82133,
+   "phase": 71.671
+  },
+  "M4": {
+   "amp": 0.8211,
+   "phase": 172.737
+  },
+  "MF": {
+   "amp": 0.1719,
+   "phase": -114.188
+  },
+  "MM": {
+   "amp": 0.49616,
+   "phase": -45.783
+  },
+  "N2": {
+   "amp": 1.45861,
+   "phase": 50.106
+  },
+  "O1": {
+   "amp": 2.06547,
+   "phase": 114.198
+  },
+  "P1": {
+   "amp": 1.15105,
+   "phase": 154.906
+  },
+  "Q1": {
+   "amp": 0.27301,
+   "phase": 75.409
+  },
+  "S1": {
+   "amp": 1.11799,
+   "phase": 20.327
+  },
+  "S2": {
+   "amp": 3.11976,
+   "phase": 91.495
+  },
+  "SA": {
+   "amp": 2.85072,
+   "phase": -79.843
+  },
+  "SSA": {
+   "amp": 0.11299,
+   "phase": -154.553
+  },
+  "T2": {
+   "amp": 0.44884,
+   "phase": 40.811
+  }
+ }
+}

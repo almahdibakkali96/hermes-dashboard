@@ -1,0 +1,89 @@
+{
+ "id": "aden",
+ "name_en": "Aden",
+ "name_ar": "عدن",
+ "country": "YE",
+ "lat": 12.79,
+ "lon": 45.03,
+ "timezone": "Asia/Aden",
+ "grid": {
+  "lat": 12.75,
+  "lon": 45.0,
+  "distance_km": 5.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.38972,
+   "phase": 101.585
+  },
+  "J1": {
+   "amp": 2.67018,
+   "phase": 3.83
+  },
+  "K1": {
+   "amp": 39.89234,
+   "phase": -9.937
+  },
+  "K2": {
+   "amp": 6.01402,
+   "phase": 146.522
+  },
+  "M2": {
+   "amp": 47.28439,
+   "phase": 134.484
+  },
+  "M4": {
+   "amp": 0.36154,
+   "phase": 113.249
+  },
+  "MF": {
+   "amp": 1.10423,
+   "phase": 15.27
+  },
+  "MM": {
+   "amp": 0.6379,
+   "phase": 10.073
+  },
+  "N2": {
+   "amp": 13.02136,
+   "phase": 130.893
+  },
+  "O1": {
+   "amp": 19.87865,
+   "phase": -8.53
+  },
+  "P1": {
+   "amp": 12.10561,
+   "phase": -9.747
+  },
+  "Q1": {
+   "amp": 4.32214,
+   "phase": -7.182
+  },
+  "S1": {
+   "amp": 3.13208,
+   "phase": 100.491
+  },
+  "S2": {
+   "amp": 21.22958,
+   "phase": 154.782
+  },
+  "SA": {
+   "amp": 6.72334,
+   "phase": 59.748
+  },
+  "SSA": {
+   "amp": 0.33609,
+   "phase": -51.322
+  },
+  "T2": {
+   "amp": 1.34374,
+   "phase": 146.125
+  }
+ }
+}

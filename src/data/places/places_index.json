@@ -1,0 +1,290 @@
+[
+ {
+  "id": "casablanca",
+  "name_en": "Casablanca",
+  "name_ar": "الدار البيضاء",
+  "country": "MA",
+  "lat": 33.6,
+  "lon": -7.62
+ },
+ {
+  "id": "agadir",
+  "name_en": "Agadir",
+  "name_ar": "أكادير",
+  "country": "MA",
+  "lat": 30.42,
+  "lon": -9.63
+ },
+ {
+  "id": "tangier",
+  "name_en": "Tangier",
+  "name_ar": "طنجة",
+  "country": "MA",
+  "lat": 35.78,
+  "lon": -5.81
+ },
+ {
+  "id": "nouadhibou",
+  "name_en": "Nouadhibou",
+  "name_ar": "نواذيبو",
+  "country": "MR",
+  "lat": 20.93,
+  "lon": -17.03
+ },
+ {
+  "id": "nouakchott",
+  "name_en": "Nouakchott",
+  "name_ar": "نواكشوط",
+  "country": "MR",
+  "lat": 18.09,
+  "lon": -16.03
+ },
+ {
+  "id": "algiers",
+  "name_en": "Algiers",
+  "name_ar": "الجزائر العاصمة",
+  "country": "DZ",
+  "lat": 36.77,
+  "lon": 3.06
+ },
+ {
+  "id": "oran",
+  "name_en": "Oran",
+  "name_ar": "وهران",
+  "country": "DZ",
+  "lat": 35.72,
+  "lon": -0.65
+ },
+ {
+  "id": "tunis",
+  "name_en": "Tunis (La Goulette)",
+  "name_ar": "تونس (حلق الوادي)",
+  "country": "TN",
+  "lat": 36.82,
+  "lon": 10.31
+ },
+ {
+  "id": "sfax",
+  "name_en": "Sfax",
+  "name_ar": "صفاقس",
+  "country": "TN",
+  "lat": 34.73,
+  "lon": 10.77
+ },
+ {
+  "id": "tripoli-ly",
+  "name_en": "Tripoli (Libya)",
+  "name_ar": "طرابلس (ليبيا)",
+  "country": "LY",
+  "lat": 32.9,
+  "lon": 13.18
+ },
+ {
+  "id": "benghazi",
+  "name_en": "Benghazi",
+  "name_ar": "بنغازي",
+  "country": "LY",
+  "lat": 32.12,
+  "lon": 20.07
+ },
+ {
+  "id": "alexandria",
+  "name_en": "Alexandria",
+  "name_ar": "الإسكندرية",
+  "country": "EG",
+  "lat": 31.2,
+  "lon": 29.88
+ },
+ {
+  "id": "hurghada",
+  "name_en": "Hurghada",
+  "name_ar": "الغردقة",
+  "country": "EG",
+  "lat": 27.23,
+  "lon": 33.84
+ },
+ {
+  "id": "port-sudan",
+  "name_en": "Port Sudan",
+  "name_ar": "بورتسودان",
+  "country": "SD",
+  "lat": 19.62,
+  "lon": 37.22
+ },
+ {
+  "id": "djibouti",
+  "name_en": "Djibouti",
+  "name_ar": "جيبوتي",
+  "country": "DJ",
+  "lat": 11.59,
+  "lon": 43.15
+ },
+ {
+  "id": "mogadishu",
+  "name_en": "Mogadishu",
+  "name_ar": "مقديشو",
+  "country": "SO",
+  "lat": 2.04,
+  "lon": 45.34
+ },
+ {
+  "id": "berbera",
+  "name_en": "Berbera",
+  "name_ar": "بربرة",
+  "country": "SO",
+  "lat": 10.44,
+  "lon": 45.01
+ },
+ {
+  "id": "aden",
+  "name_en": "Aden",
+  "name_ar": "عدن",
+  "country": "YE",
+  "lat": 12.79,
+  "lon": 45.03
+ },
+ {
+  "id": "hodeidah",
+  "name_en": "Al Hudaydah",
+  "name_ar": "الحديدة",
+  "country": "YE",
+  "lat": 14.8,
+  "lon": 42.95
+ },
+ {
+  "id": "salalah",
+  "name_en": "Salalah",
+  "name_ar": "صلالة",
+  "country": "OM",
+  "lat": 16.94,
+  "lon": 54.0
+ },
+ {
+  "id": "muscat",
+  "name_en": "Muscat",
+  "name_ar": "مسقط",
+  "country": "OM",
+  "lat": 23.62,
+  "lon": 58.59
+ },
+ {
+  "id": "dubai",
+  "name_en": "Dubai",
+  "name_ar": "دبي",
+  "country": "AE",
+  "lat": 25.27,
+  "lon": 55.3
+ },
+ {
+  "id": "fujairah",
+  "name_en": "Fujairah",
+  "name_ar": "الفجيرة",
+  "country": "AE",
+  "lat": 25.12,
+  "lon": 56.36
+ },
+ {
+  "id": "doha",
+  "name_en": "Doha",
+  "name_ar": "الدوحة",
+  "country": "QA",
+  "lat": 25.29,
+  "lon": 51.53
+ },
+ {
+  "id": "manama",
+  "name_en": "Manama",
+  "name_ar": "المنامة",
+  "country": "BH",
+  "lat": 26.23,
+  "lon": 50.58
+ },
+ {
+  "id": "kuwait-city",
+  "name_en": "Kuwait City",
+  "name_ar": "مدينة الكويت",
+  "country": "KW",
+  "lat": 29.37,
+  "lon": 47.98
+ },
+ {
+  "id": "jeddah",
+  "name_en": "Jeddah",
+  "name_ar": "جدة",
+  "country": "SA",
+  "lat": 21.48,
+  "lon": 39.17
+ },
+ {
+  "id": "dammam",
+  "name_en": "Dammam",
+  "name_ar": "الدمام",
+  "country": "SA",
+  "lat": 26.43,
+  "lon": 50.1
+ },
+ {
+  "id": "aqaba",
+  "name_en": "Aqaba",
+  "name_ar": "العقبة",
+  "country": "JO",
+  "lat": 29.52,
+  "lon": 35.0
+ },
+ {
+  "id": "umm-qasr",
+  "name_en": "Umm Qasr",
+  "name_ar": "أم قصر",
+  "country": "IQ",
+  "lat": 30.03,
+  "lon": 47.93
+ },
+ {
+  "id": "latakia",
+  "name_en": "Latakia",
+  "name_ar": "اللاذقية",
+  "country": "SY",
+  "lat": 35.52,
+  "lon": 35.78
+ },
+ {
+  "id": "tartus",
+  "name_en": "Tartus",
+  "name_ar": "طرطوس",
+  "country": "SY",
+  "lat": 34.89,
+  "lon": 35.88
+ },
+ {
+  "id": "beirut",
+  "name_en": "Beirut",
+  "name_ar": "بيروت",
+  "country": "LB",
+  "lat": 33.9,
+  "lon": 35.5
+ },
+ {
+  "id": "tripoli-lb",
+  "name_en": "Tripoli (Lebanon)",
+  "name_ar": "طرابلس (لبنان)",
+  "country": "LB",
+  "lat": 34.45,
+  "lon": 35.82
+ },
+ {
+  "id": "gaza",
+  "name_en": "Gaza",
+  "name_ar": "غزة",
+  "country": "PS",
+  "lat": 31.52,
+  "lon": 34.45
+ },
+ {
+  "id": "moroni",
+  "name_en": "Moroni",
+  "name_ar": "موروني",
+  "country": "KM",
+  "lat": -11.7,
+  "lon": 43.25
+ }
+]

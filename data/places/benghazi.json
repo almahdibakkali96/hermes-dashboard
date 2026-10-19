@@ -1,0 +1,89 @@
+{
+ "id": "benghazi",
+ "name_en": "Benghazi",
+ "name_ar": "بنغازي",
+ "country": "LY",
+ "lat": 32.12,
+ "lon": 20.07,
+ "timezone": "Africa/Tripoli",
+ "grid": {
+  "lat": 32.125,
+  "lon": 20.0,
+  "distance_km": 6.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.33341,
+   "phase": 52.197
+  },
+  "J1": {
+   "amp": 0.42318,
+   "phase": 71.244
+  },
+  "K1": {
+   "amp": 1.01179,
+   "phase": 32.718
+  },
+  "K2": {
+   "amp": 0.70159,
+   "phase": 56.878
+  },
+  "M2": {
+   "amp": 4.45905,
+   "phase": 51.799
+  },
+  "M4": {
+   "amp": 0.22571,
+   "phase": 119.584
+  },
+  "MF": {
+   "amp": 0.31746,
+   "phase": -32.935
+  },
+  "MM": {
+   "amp": 0.48486,
+   "phase": -66.26
+  },
+  "N2": {
+   "amp": 0.83137,
+   "phase": 28.41
+  },
+  "O1": {
+   "amp": 0.09516,
+   "phase": 159.167
+  },
+  "P1": {
+   "amp": 0.53678,
+   "phase": 15.24
+  },
+  "Q1": {
+   "amp": 0.48095,
+   "phase": 151.918
+  },
+  "S1": {
+   "amp": 0.48814,
+   "phase": -0.96
+  },
+  "S2": {
+   "amp": 2.57005,
+   "phase": 67.569
+  },
+  "SA": {
+   "amp": 3.96239,
+   "phase": -60.49
+  },
+  "SSA": {
+   "amp": 0.09225,
+   "phase": -98.063
+  },
+  "T2": {
+   "amp": 0.28431,
+   "phase": -34.499
+  }
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "moroni",
+ "name_en": "Moroni",
+ "name_ar": "موروني",
+ "country": "KM",
+ "lat": -11.7,
+ "lon": 43.25,
+ "timezone": "Indian/Comoro",
+ "grid": {
+  "lat": -11.625,
+  "lon": 43.25,
+  "distance_km": 8.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.56321,
+   "phase": -34.629
+  },
+  "J1": {
+   "amp": 1.05253,
+   "phase": -0.14
+  },
+  "K1": {
+   "amp": 14.70453,
+   "phase": 2.085
+  },
+  "K2": {
+   "amp": 15.46353,
+   "phase": 64.871
+  },
+  "M2": {
+   "amp": 108.36696,
+   "phase": 26.079
+  },
+  "M4": {
+   "amp": 0.4573,
+   "phase": -178.243
+  },
+  "MF": {
+   "amp": 1.52703,
+   "phase": -11.486
+  },
+  "MM": {
+   "amp": 0.92914,
+   "phase": 38.395
+  },
+  "N2": {
+   "amp": 19.50673,
+   "phase": 6.946
+  },
+  "O1": {
+   "amp": 9.2081,
+   "phase": 2.225
+  },
+  "P1": {
+   "amp": 4.46557,
+   "phase": 2.256
+  },
+  "Q1": {
+   "amp": 2.06613,
+   "phase": -9.605
+  },
+  "S1": {
+   "amp": 1.15715,
+   "phase": 105.792
+  },
+  "S2": {
+   "amp": 56.33502,
+   "phase": 65.029
+  },
+  "SA": {
+   "amp": 1.48842,
+   "phase": -69.372
+  },
+  "SSA": {
+   "amp": 0.5641,
+   "phase": -4.273
+  },
+  "T2": {
+   "amp": 3.83906,
+   "phase": 56.77
+  }
+ }
+}

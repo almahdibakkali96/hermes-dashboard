@@ -1,0 +1,89 @@
+{
+ "id": "tripoli-lb",
+ "name_en": "Tripoli (Lebanon)",
+ "name_ar": "طرابلس (لبنان)",
+ "country": "LB",
+ "lat": 34.45,
+ "lon": 35.82,
+ "timezone": "Asia/Beirut",
+ "grid": {
+  "lat": 34.5,
+  "lon": 35.875,
+  "distance_km": 7.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.31341,
+   "phase": 164.326
+  },
+  "J1": {
+   "amp": 0.14711,
+   "phase": 46.917
+  },
+  "K1": {
+   "amp": 3.06264,
+   "phase": -85.659
+  },
+  "K2": {
+   "amp": 2.00423,
+   "phase": -117.402
+  },
+  "M2": {
+   "amp": 12.03481,
+   "phase": -124.19
+  },
+  "M4": {
+   "amp": 0.26331,
+   "phase": -110.054
+  },
+  "MF": {
+   "amp": 0.22457,
+   "phase": -6.038
+  },
+  "MM": {
+   "amp": 0.19156,
+   "phase": -28.05
+  },
+  "N2": {
+   "amp": 2.2036,
+   "phase": -118.19
+  },
+  "O1": {
+   "amp": 2.34718,
+   "phase": -105.568
+  },
+  "P1": {
+   "amp": 1.0734,
+   "phase": -61.836
+  },
+  "Q1": {
+   "amp": 0.51489,
+   "phase": -140.025
+  },
+  "S1": {
+   "amp": 0.92984,
+   "phase": 44.729
+  },
+  "S2": {
+   "amp": 6.84758,
+   "phase": -111.759
+  },
+  "SA": {
+   "amp": 3.62059,
+   "phase": -80.727
+  },
+  "SSA": {
+   "amp": 0.06579,
+   "phase": -132.138
+  },
+  "T2": {
+   "amp": 0.24543,
+   "phase": -122.869
+  }
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "jeddah",
+ "name_en": "Jeddah",
+ "name_ar": "جدة",
+ "country": "SA",
+ "lat": 21.48,
+ "lon": 39.17,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 21.5,
+  "lon": 39.125,
+  "distance_km": 5.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.16042,
+   "phase": 80.854
+  },
+  "J1": {
+   "amp": 0.42173,
+   "phase": -156.519
+  },
+  "K1": {
+   "amp": 3.30523,
+   "phase": 164.745
+  },
+  "K2": {
+   "amp": 1.13258,
+   "phase": 130.464
+  },
+  "M2": {
+   "amp": 6.92233,
+   "phase": 109.367
+  },
+  "M4": {
+   "amp": 0.51119,
+   "phase": 90.664
+  },
+  "MF": {
+   "amp": 1.09167,
+   "phase": 19.334
+  },
+  "MM": {
+   "amp": 0.20659,
+   "phase": -5.952
+  },
+  "N2": {
+   "amp": 1.89387,
+   "phase": 74.724
+  },
+  "O1": {
+   "amp": 2.35523,
+   "phase": 170.271
+  },
+  "P1": {
+   "amp": 1.1606,
+   "phase": 129.336
+  },
+  "Q1": {
+   "amp": 0.61546,
+   "phase": 160.667
+  },
+  "S1": {
+   "amp": 1.5562,
+   "phase": -58.112
+  },
+  "S2": {
+   "amp": 2.09425,
+   "phase": 125.7
+  },
+  "SA": {
+   "amp": 9.19645,
+   "phase": 22.97
+  },
+  "SSA": {
+   "amp": 0.30847,
+   "phase": -142.336
+  },
+  "T2": {
+   "amp": 0.92055,
+   "phase": 148.427
+  }
+ }
+}

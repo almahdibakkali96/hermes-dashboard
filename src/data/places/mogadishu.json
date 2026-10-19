@@ -1,0 +1,89 @@
+{
+ "id": "mogadishu",
+ "name_en": "Mogadishu",
+ "name_ar": "مقديشو",
+ "country": "SO",
+ "lat": 2.04,
+ "lon": 45.34,
+ "timezone": "Africa/Mogadishu",
+ "grid": {
+  "lat": 2.0,
+  "lon": 45.375,
+  "distance_km": 5.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.46103,
+   "phase": -29.992
+  },
+  "J1": {
+   "amp": 1.34866,
+   "phase": 3.958
+  },
+  "K1": {
+   "amp": 22.60891,
+   "phase": -7.991
+  },
+  "K2": {
+   "amp": 9.89433,
+   "phase": 59.113
+  },
+  "M2": {
+   "amp": 70.63067,
+   "phase": 24.065
+  },
+  "M4": {
+   "amp": 0.31357,
+   "phase": -88.389
+  },
+  "MF": {
+   "amp": 1.9755,
+   "phase": 2.906
+  },
+  "MM": {
+   "amp": 1.19101,
+   "phase": 4.205
+  },
+  "N2": {
+   "amp": 13.05204,
+   "phase": 2.666
+  },
+  "O1": {
+   "amp": 12.79534,
+   "phase": -4.024
+  },
+  "P1": {
+   "amp": 6.99199,
+   "phase": -10.414
+  },
+  "Q1": {
+   "amp": 2.91374,
+   "phase": -6.492
+  },
+  "S1": {
+   "amp": 2.64123,
+   "phase": 107.703
+  },
+  "S2": {
+   "amp": 34.61161,
+   "phase": 62.285
+  },
+  "SA": {
+   "amp": 1.2243,
+   "phase": 82.125
+  },
+  "SSA": {
+   "amp": 0.87148,
+   "phase": 35.471
+  },
+  "T2": {
+   "amp": 2.03126,
+   "phase": 77.175
+  }
+ }
+}

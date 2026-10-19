@@ -1,0 +1,89 @@
+{
+ "id": "beirut",
+ "name_en": "Beirut",
+ "name_ar": "بيروت",
+ "country": "LB",
+ "lat": 33.9,
+ "lon": 35.5,
+ "timezone": "Asia/Beirut",
+ "grid": {
+  "lat": 34.0,
+  "lon": 35.5,
+  "distance_km": 11.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.41203,
+   "phase": 146.345
+  },
+  "J1": {
+   "amp": 0.2096,
+   "phase": 41.139
+  },
+  "K1": {
+   "amp": 2.87009,
+   "phase": -81.785
+  },
+  "K2": {
+   "amp": 1.87582,
+   "phase": -116.602
+  },
+  "M2": {
+   "amp": 11.82103,
+   "phase": -123.49
+  },
+  "M4": {
+   "amp": 0.28992,
+   "phase": -93.027
+  },
+  "MF": {
+   "amp": 0.36752,
+   "phase": 9.832
+  },
+  "MM": {
+   "amp": 0.22012,
+   "phase": -25.637
+  },
+  "N2": {
+   "amp": 2.21944,
+   "phase": -119.716
+  },
+  "O1": {
+   "amp": 2.23448,
+   "phase": -105.655
+  },
+  "P1": {
+   "amp": 0.89967,
+   "phase": -57.129
+  },
+  "Q1": {
+   "amp": 0.55684,
+   "phase": -136.501
+  },
+  "S1": {
+   "amp": 0.73734,
+   "phase": 20.147
+  },
+  "S2": {
+   "amp": 6.77053,
+   "phase": -109.729
+  },
+  "SA": {
+   "amp": 3.82297,
+   "phase": -81.153
+  },
+  "SSA": {
+   "amp": 0.03966,
+   "phase": -136.166
+  },
+  "T2": {
+   "amp": 0.32938,
+   "phase": -92.786
+  }
+ }
+}

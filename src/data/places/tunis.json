@@ -1,0 +1,89 @@
+{
+ "id": "tunis",
+ "name_en": "Tunis (La Goulette)",
+ "name_ar": "تونس (حلق الوادي)",
+ "country": "TN",
+ "lat": 36.82,
+ "lon": 10.31,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 36.875,
+  "lon": 10.375,
+  "distance_km": 8.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.40873,
+   "phase": -177.055
+  },
+  "J1": {
+   "amp": 0.47063,
+   "phase": -92.986
+  },
+  "K1": {
+   "amp": 3.08166,
+   "phase": -152.942
+  },
+  "K2": {
+   "amp": 0.94025,
+   "phase": -73.353
+  },
+  "M2": {
+   "amp": 7.99665,
+   "phase": -111.313
+  },
+  "M4": {
+   "amp": 0.08217,
+   "phase": 131.738
+  },
+  "MF": {
+   "amp": 0.36801,
+   "phase": -12.438
+  },
+  "MM": {
+   "amp": 0.78411,
+   "phase": -77.451
+  },
+  "N2": {
+   "amp": 1.56725,
+   "phase": -132.749
+  },
+  "O1": {
+   "amp": 1.07177,
+   "phase": 107.407
+  },
+  "P1": {
+   "amp": 0.93084,
+   "phase": -152.221
+  },
+  "Q1": {
+   "amp": 0.32619,
+   "phase": -2.029
+  },
+  "S1": {
+   "amp": 1.39251,
+   "phase": 9.089
+  },
+  "S2": {
+   "amp": 2.85529,
+   "phase": -69.728
+  },
+  "SA": {
+   "amp": 3.63944,
+   "phase": -70.518
+  },
+  "SSA": {
+   "amp": 0.23635,
+   "phase": -158.004
+  },
+  "T2": {
+   "amp": 0.42936,
+   "phase": -59.999
+  }
+ }
+}
