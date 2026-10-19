@@ -2,36 +2,34 @@
 
 /* ===== ArabTides Design System =====
    Surface: Monitor (data dashboard)
-   Influences: Linear (dark precision) + Supabase (emerald accent)
-   Maritime adaptation: deep navy base + teal accent
+   Light maritime theme — clean, airy, professional
    Arabic-first RTL typography
 */
 
 /* --- Design Tokens --- */
 :root {
-  /* Surfaces - luminance stacking on dark */
-  --surface-abyss:   #060b10;
-  --surface-page:    #0a0f16;
-  --surface-card:    #111920;
-  --surface-elevated:#182230;
-  --surface-input:   #0d1520;
+  /* Surfaces — light stacking */
+  --surface-page:     #f8fafb;
+  --surface-card:     #ffffff;
+  --surface-elevated: #f1f5f7;
+  --surface-input:    #f1f5f7;
 
-  /* Text - stepped white opacity */
-  --text-primary:    #e4e8ec;
-  --text-secondary:  #94a3b8;
+  /* Text — dark navy stepped */
+  --text-primary:    #0f172a;
+  --text-secondary:  #475569;
   --text-muted:      #64748b;
-  --text-dim:        #475569;
+  --text-dim:        #94a3b8;
 
-  /* Accent - maritime teal */
-  --accent:          #2dd4bf;
-  --accent-hover:    #5eead4;
-  --accent-muted:    rgba(45, 212, 191, 0.12);
-  --accent-border:   rgba(45, 212, 191, 0.25);
+  /* Accent — maritime teal */
+  --accent:          #0d9488;
+  --accent-hover:    #0f766e;
+  --accent-muted:    rgba(13, 148, 136, 0.08);
+  --accent-border:   rgba(13, 148, 136, 0.25);
 
-  /* Borders - semi-transparent white, Linear-style */
-  --border-subtle:    rgba(255, 255, 255, 0.05);
-  --border-standard:  rgba(255, 255, 255, 0.08);
-  --border-prominent: rgba(255, 255, 255, 0.12);
+  /* Borders — light gray */
+  --border-subtle:    #e8ecf0;
+  --border-standard:  #dde1e6;
+  --border-prominent: #cbd5e1;
 
   /* Radii */
   --radius-sm: 4px;
