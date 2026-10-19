@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import placesIndex from '../../data/places/places_index.json';
+import {
+  generateTideCurve, findExtremes, formatTime,
+  classifyTide, getTimezoneOffset
+} from '../../lib/tides';
 
 export function getStaticPaths() {
   return placesIndex.map((p: { id: string }) => ({ params: { id: p.id } }));
@@ -9,7 +13,6 @@ export function getStaticPaths() {
 const { id } = Astro.params;
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 
-// Dynamic import of port JSON
 const portModule = await import(`../../data/places/${id}.json`);
 const port = portModule.default;
 
@@ -23,27 +26,35 @@ const countryNames: Record<string, string> = {
 };
 
 const constituents = port.constituents as Record<string, { amp: number; phase: number }>;
-const m2 = constituents.M2;
-const s2 = constituents.S2;
-const k1 = constituents.K1;
-const o1 = constituents.O1;
-const tidalRange = ((m2.amp + s2.amp) * 2).toFixed(0);
+
+const today = new Date();
+const tzOffset = getTimezoneOffset(port.timezone, today);
+const curve = generateTideCurve(constituents, today, tzOffset);
+const extremes = findExtremes(curve);
+const tideClass = classifyTide(constituents);
+
+const CHART_W = 720; const CHART_H = 220;
+const PAD_L = 45; const PAD_R = 15; const PAD_T = 15; const PAD_B = 30;
+const plotW = CHART_W - PAD_L - PAD_R;
+const plotH = CHART_H - PAD_T - PAD_B;
+const heights = curve.map(p => p.height);
+const hMin = Math.min(...heights);
+const hMax = Math.max(...heights);
+const hRange = hMax - hMin || 1;
+const yScale = (h: number) => PAD_T + plotH - ((h - hMin) / hRange) * plotH;
+const xScale = (i: number) => PAD_L + (i / (curve.length - 1)) * plotW;
+const pathD = curve.map((p, i) => `${i === 0 ? 'M' : 'L'}${xScale(i).toFixed(1)},${yScale(p.height).toFixed(1)}`).join(' ');
 
 const title = `${port.name_ar} — مواقيت المد والجزر`;
 ---
 
-<BaseLayout
-  title={title}
-  description={`مواقيت المد والجزر والحسابات الفلكية لـ${port.name_ar}، ${countryNames[port.country] || port.country}`}
->
+<BaseLayout title={title} description={`مواقيت المد والجزر لـ${port.name_ar}`}>
   <div class="min-h-screen flex flex-col">
 
-    <!-- Top bar -->
     <header class="sticky top-0 z-10 backdrop-blur-md bg-white/90 border-b border-[var(--border-subtle)] shadow-sm">
       <div class="max-w-4xl mx-auto px-4 py-3 flex items-center gap-4">
         <a href={BASE} class="flex items-center gap-2 shrink-0 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
-          <span class="text-sm">&larr;</span>
-          <span class="text-sm hidden sm:inline">الرئيسية</span>
+          <span class="text-sm">&larr;</span><span class="text-sm hidden sm:inline">الرئيسية</span>
         </a>
         <span class="text-[var(--text-dim)] text-sm">/</span>
         <span class="text-[var(--text-primary)] text-sm font-medium truncate">{port.name_ar}</span>
@@ -52,70 +63,77 @@ const title = `${port.name_ar} — مواقيت المد والجزر`;
     </header>
 
     <main class="flex-1 max-w-4xl mx-auto px-4 py-6 w-full">
-
-      <!-- Port identity -->
-      <div class="mb-8">
+      <div class="mb-4">
         <div class="text-xs text-[var(--text-muted)]">{countryNames[port.country] || port.country}</div>
         <h1 class="text-2xl font-bold text-[var(--text-primary)] mt-1">{port.name_ar}</h1>
-        <div class="flex flex-wrap gap-3 mt-2 text-xs text-[var(--text-dim)]">
-          <span class="latin">{port.name_en}</span>
-          <span>&middot;</span>
-          <span class="latin">{port.lat.toFixed(2)}&deg;N, {port.lon.toFixed(2)}&deg;E</span>
-          <span>&middot;</span>
-          <span class="latin">{port.timezone}</span>
-        </div>
+        <div class="text-xs text-[var(--text-dim)] latin mt-1">{port.name_en} &middot; {port.lat.toFixed(2)}&deg;N, {port.lon.toFixed(2)}&deg;E &middot; {port.timezone}</div>
       </div>
 
-      <!-- Quick stats row -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-        <div class="p-3 rounded-[var(--radius-lg)] bg-[var(--surface-card)] border border-[var(--border-subtle)]">
-          <div class="text-[10px] text-[var(--text-dim)] tracking-wide">المدى التقريبي</div>
-          <div class="text-lg font-semibold text-[var(--text-primary)] latin mt-1">{tidalRange} سم</div>
-        </div>
-        <div class="p-3 rounded-[var(--radius-lg)] bg-[var(--surface-card)] border border-[var(--border-subtle)]">
-          <div class="text-[10px] text-[var(--text-dim)] tracking-wide">M2 السعة</div>
-          <div class="text-lg font-semibold text-[var(--text-primary)] latin mt-1">{m2.amp.toFixed(1)} سم</div>
-        </div>
-        <div class="p-3 rounded-[var(--radius-lg)] bg-[var(--surface-card)] border border-[var(--border-subtle)]">
-          <div class="text-[10px] text-[var(--text-dim)] tracking-wide">المركبات</div>
-          <div class="text-lg font-semibold text-[var(--text-primary)] mt-1">{Object.keys(constituents).length}</div>
-        </div>
-        <div class="p-3 rounded-[var(--radius-lg)] bg-[var(--surface-card)] border border-[var(--border-subtle)]">
-          <div class="text-[10px] text-[var(--text-dim)] tracking-wide">خلية الشبكة</div>
-          <div class="text-lg font-semibold text-[var(--text-primary)] latin mt-1">{port.grid.distance_km.toFixed(0)} كم</div>
-        </div>
-      </div>
-
-      <!-- Tide info (placeholder for chart) -->
-      <section class="mb-8">
-        <div class="flex items-center gap-2 mb-4">
-          <h2 class="text-sm font-medium text-[var(--text-muted)] tracking-wide">المد والجزر</h2>
+      <!-- Tide chart -->
+      <section class="mb-6">
+        <div class="flex items-center gap-2 mb-3">
+          <h2 class="text-sm font-medium text-[var(--text-muted)]">منحنى المد والجزر</h2>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-muted)] text-[var(--accent)]">{tideClass.typeAr}</span>
           <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
+          <span class="text-[10px] text-[var(--text-dim)] latin">{today.toLocaleDateString('en-GB')}</span>
         </div>
-        <div class="p-8 rounded-[var(--radius-xl)] bg-[var(--surface-card)] border border-[var(--border-subtle)] text-center">
-          <div class="text-4xl mb-3">🌊</div>
-          <p class="text-[var(--text-secondary)] text-sm">مخطط المد والجزر قيد التطوير</p>
-          <p class="text-[var(--text-dim)] text-xs mt-1">سيتم عرض منحنى المد والجزر اليومي هنا</p>
+        <div class="rounded-[var(--radius-xl)] bg-[var(--surface-card)] border border-[var(--border-subtle)] p-3 overflow-x-auto">
+          <div class="chart-ltr">
+            <svg viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img">
+              {[0, 0.25, 0.5, 0.75, 1].map(frac => {
+                const y = PAD_T + plotH * (1 - frac);
+                const label = (hMin + hRange * frac).toFixed(0);
+                return (<>
+                  <line x1={PAD_L} y1={y} x2={CHART_W-PAD_R} y2={y} stroke="#e8ecf0" stroke-width="0.5"/>
+                  <text x={PAD_L-5} y={y+4} text-anchor="end" font-size="10" fill="#94a3b8" font-family="Inter,sans-serif">{label}</text>
+                </>);
+              })}
+              {[0,3,6,9,12,15,18,21,24].map(h => (
+                <text x={xScale(Math.round(h*curve.length/24))} y={CHART_H-4} text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Inter,sans-serif">{h}:00</text>
+              ))}
+              <line x1={PAD_L} y1={yScale(0)} x2={CHART_W-PAD_R} y2={yScale(0)} stroke="#cbd5e1" stroke-width="0.5" stroke-dasharray="4,3"/>
+              <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2" stroke-linejoin="round"/>
+              <path d={`${pathD} L${xScale(curve.length-1).toFixed(1)},${CHART_H-PAD_B} L${xScale(0).toFixed(1)},${CHART_H-PAD_B} Z`} fill="rgba(13,148,136,0.08)"/>
+              {extremes.slice(0, 8).map(ex => {
+                const idx = curve.findIndex(p => Math.abs(p.hours - ex.hours) < 0.01);
+                const cx = xScale(idx >= 0 ? idx : 0).toFixed(1);
+                const cy = yScale(ex.height).toFixed(1);
+                return (<>
+                  <circle cx={cx} cy={cy} r="4" fill={ex.type==='high'?'#0d9488':'#ef4444'} stroke="white" stroke-width="1.5"/>
+                  <text x={cx} y={parseFloat(cy)+(ex.type==='high'?-10:16)} text-anchor="middle" font-size="9" fill="#64748b" font-family="Inter,sans-serif">{formatTime(ex.time, tzOffset)}</text>
+                </>);
+              })}
+            </svg>
+          </div>
         </div>
       </section>
 
-      <!-- Constituents table -->
-      <section class="mb-8">
-        <div class="flex items-center gap-2 mb-4">
-          <h2 class="text-sm font-medium text-[var(--text-muted)] tracking-wide">المركبات التوافقية</h2>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <div class="overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
+      <!-- High/Low cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        {extremes.slice(0, 8).map(ex => (
+          <div class={`p-3 rounded-[var(--radius-lg)] border ${ex.type==='high' ? 'bg-[var(--accent-muted)] border-[var(--accent-border)]' : 'bg-[var(--surface-card)] border-[var(--border-subtle)]'}`}>
+            <div class={`text-[10px] tracking-wide ${ex.type==='high' ? 'text-[var(--accent)]' : 'text-[var(--text-dim)]'}`}>
+              {ex.type==='high' ? 'مد مرتفع' : 'مد منخفض'}
+            </div>
+            <div class="text-lg font-semibold text-[var(--text-primary)] latin mt-0.5">{formatTime(ex.time, tzOffset)}</div>
+            <div class="text-xs text-[var(--text-secondary)] latin">{ex.height.toFixed(1)} سم</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Constituents (collapsible) -->
+      <details class="mb-8 group">
+        <summary class="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors select-none">
+          <span class="text-xs transition-transform group-open:rotate-90">&#9654;</span>
+          المركبات التوافقية (17)
+        </summary>
+        <div class="mt-3 overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
           <table class="w-full text-sm">
             <thead class="bg-[var(--surface-elevated)] text-[var(--text-muted)] text-xs">
-              <tr>
-                <th class="text-right px-4 py-2 font-medium">المركبة</th>
-                <th class="text-right px-4 py-2 font-medium latin">السعة (سم)</th>
-                <th class="text-right px-4 py-2 font-medium latin">الطور (&deg;)</th>
-              </tr>
+              <tr><th class="text-right px-4 py-2 font-medium">المركبة</th><th class="text-right px-4 py-2 font-medium latin">السعة (سم)</th><th class="text-right px-4 py-2 font-medium latin">الطور (&deg;)</th></tr>
             </thead>
             <tbody class="divide-y divide-[var(--border-subtle)]">
-              {Object.entries(constituents).map(([name, c]) => (
+              {Object.entries(constituents).map(([name, c]: [string, { amp: number; phase: number }]) => (
                 <tr class="hover:bg-[var(--surface-elevated)] transition-colors">
                   <td class="px-4 py-2 text-[var(--text-primary)] font-medium latin">{name}</td>
                   <td class="px-4 py-2 text-[var(--text-secondary)] latin">{c.amp.toFixed(2)}</td>
@@ -125,29 +143,15 @@ const title = `${port.name_ar} — مواقيت المد والجزر`;
             </tbody>
           </table>
         </div>
-      </section>
+      </details>
 
-      <!-- Source -->
-      <section class="mb-8">
-        <div class="flex items-center gap-2 mb-4">
-          <h2 class="text-sm font-medium text-[var(--text-muted)] tracking-wide">المصدر</h2>
-          <div class="flex-1 h-px bg-[var(--border-subtle)]"></div>
-        </div>
-        <p class="text-xs text-[var(--text-dim)] leading-relaxed">
-          {port.source}
-        </p>
-        <p class="text-xs text-[var(--text-dim)] mt-2">
-          ⚠️ هذه حسابات فلكية تقديرية. قد تختلف ارتفاعات المد والجزر الفعلية تبعاً للظروف الجوية وعوامل محلية أخرى.
-        </p>
-      </section>
+      <p class="text-xs text-[var(--text-dim)] leading-relaxed border-t border-[var(--border-subtle)] pt-6">
+        ⚠️ تقديرات فلكية باستخدام النموذج التوافقي. قد تختلف القيم الفعلية. المصدر: {port.source}
+      </p>
 
-      <!-- Back link -->
-      <div class="pt-8 border-t border-[var(--border-subtle)] text-center">
-        <a href={BASE} class="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
-          &larr; العودة للرئيسية
-        </a>
+      <div class="pt-6 text-center">
+        <a href={BASE} class="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">&larr; العودة للرئيسية</a>
       </div>
-
     </main>
   </div>
 </BaseLayout>
