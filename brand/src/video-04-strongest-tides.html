@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو أقوى مد في العالم العربي</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480. */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(900px 600px at 80% 0%, rgba(45, 212, 191, .18), transparent 60%),
+                linear-gradient(180deg, #0b2540 0%, #0c3352 40%, #0d4a63 75%, #0e5a66 100%); }
+  .scene { position: absolute; inset: 0; padding: 0 100px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish, .bubble { left: 0; top: 0; }
+  .fish { position: absolute; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  .bubble { position: absolute; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); }
+  #waves { position: absolute; left: -1080px; bottom: 0; width: 3240px; height: 220px; }
+
+  #s1 .q { margin-top: 300px; font-size: 128px; line-height: 1.25; }
+  #s1 .a { margin-top: 50px; font-size: 64px; color: var(--lagoon); font-weight: 700; }
+  /* Scene 2: water against a person */
+  #s2 .h { margin-top: 250px; font-size: 92px; }
+  #s2 .big { margin-top: 0; font-size: 150px; font-weight: 800; color: var(--lagoon); line-height: 1.1; }
+  #s2 .big .k { font-weight: 800; }
+  #s2 svg.depth { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  /* Scenes 3–4: ranked bars, growing from the right (RTL inline start) */
+  #s3 .h, #s4 .h { margin-top: 250px; font-size: 100px; }
+  #s4 .sub { margin-top: 16px; font-size: 52px; color: #cbd5e1; }
+  .rows { align-self: stretch; margin-top: 60px; display: flex; flex-direction: column; gap: 34px; }
+  #s4 .rows { margin-top: 70px; }
+  .row { text-align: start; }
+  .row .lbl { display: flex; justify-content: space-between; align-items: baseline; font-size: 52px; font-weight: 700; line-height: 1.3; }
+  .row .lbl small { font-size: 38px; color: var(--mist); font-weight: 600; margin-inline-start: 14px; }
+  .row .val { font-size: 52px; color: #fff; }
+  .row .val .k { font-weight: 700; }
+  .row .bar { margin-top: 10px; height: 36px; border-radius: 18px; background: linear-gradient(270deg, #2dd4bf, #0d9488); width: 0; }
+  .row.top .bar { background: linear-gradient(270deg, #fde68a, #2dd4bf); }
+  .row.ghost { opacity: .45; }
+  .row.low .bar { background: #f43f5e; }
+  .row.low .val { color: #fda4af; }
+  #s5 { justify-content: center; padding-bottom: 300px; }
+  #s5 img { width: 280px; height: 280px; }
+  #s5 .wm { font-family: var(--font-num); font-weight: 800; font-size: 116px; letter-spacing: -.02em; margin-top: 36px; direction: ltr; }
+  #s5 .p { font-size: 64px; margin-top: 44px; }
+  #s5 .url { font-family: var(--font-num); font-weight: 800; font-size: 96px; color: var(--lagoon); margin-top: 20px; direction: ltr; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="bubbles"></div>
+
+  <div class="scene" id="s1">
+    <div class="d q">أين أقوى مدٍّ<br>في العالم العربي؟</div>
+    <div class="a"><span class="k">36</span> ميناءً · أرقام <span class="k">2026</span></div>
+  </div>
+
+  <div class="scene" id="s2">
+    <svg class="depth" viewBox="0 0 1080 1920" aria-hidden="true">
+      <defs>
+        <linearGradient id="wat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".45"/><stop offset="1" stop-color="#0d9488" stop-opacity=".25"/></linearGradient>
+      </defs>
+      <!-- 1 m = 140 px, ground (lowest low tide) at y = 1440 -->
+      <g id="ticks" font-family="Inter" font-size="34" font-weight="600" fill="#94a3b8"></g>
+      <g id="person" fill="#f4f8f9">
+        <circle cx="780" cy="1213" r="22"/>
+        <path d="M762 1240 h36 a12 12 0 0 1 12 12 v84 h-12 v104 h-14 v-96 h-8 v96 h-14 v-104 h-12 v-84 a12 12 0 0 1 12-12z"/>
+      </g>
+      <text id="pLbl" x="865" y="1300" font-family="Inter" font-size="38" font-weight="700" fill="#f4f8f9" text-anchor="middle" direction="ltr">1.75 m</text>
+      <rect id="water" x="0" width="1080" fill="url(#wat)"/>
+      <line id="wLine" x1="0" x2="1080" stroke="#5eead4" stroke-width="6" stroke-dasharray="20 12"/>
+      <text id="wLbl" x="300" font-family="Inter" font-size="44" font-weight="800" fill="#5eead4" text-anchor="middle" direction="ltr"></text>
+      <rect x="0" y="1440" width="1080" height="480" fill="#c9a96e"/>
+      <line x1="0" x2="1080" y1="1440" y2="1440" stroke="#e6cf9a" stroke-width="6"/>
+    </svg>
+    <div class="d h">مدينة الكويت</div>
+    <div class="big"><span class="k">4.3</span> م</div>
+  </div>
+
+  <div class="scene" id="s3">
+    <div class="d h">الأقوى</div>
+    <div class="rows" id="topRows"></div>
+  </div>
+
+  <div class="scene" id="s4">
+    <div class="d h">والأضعف</div>
+    <div class="sub">البحر المتوسط ووسط البحر الأحمر</div>
+    <div class="rows" id="lowRows"></div>
+  </div>
+
+  <div class="scene" id="s5">
+    <img src="../logo/arabtides-mark.svg" alt="">
+    <div class="wm">ArabTides</div>
+    <div class="p">كم يبلغ المد في ميناءك؟</div>
+    <div class="url">arabtides.com</div>
+  </div>
+
+  <div class="layer" id="fishLayer"></div>
+
+  <svg id="waves" viewBox="0 0 3240 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 90c135-45 270-45 405 0s270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0v130H0z" fill="rgba(45,212,191,.10)"/>
+    <path id="w2" d="M0 140c135-36 270-36 405 0s270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0v80H0z" fill="rgba(45,212,191,.16)"/>
+  </svg>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var lerp = function (a, b, p) { return a + (b - a) * p; };
+  var seed = 23, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 4, 10.5, 17, 23, 27];
+
+  // Largest daily range in 2026 per port, from the ArabTides tide engine (article "strongest-tides-arab-world")
+  var TOP = [['مدينة الكويت', 'الكويت', 430], ['أم قصر', 'العراق', 400], ['موروني', 'جزر القمر', 400], ['الدار البيضاء', 'المغرب', 330], ['أكادير', 'المغرب', 310]];
+  var LOW = [['مدينة الكويت', 'للمقارنة', 430, 'ghost'], ['جدة', 'السعودية', 32, 'low'], ['الإسكندرية', 'مصر', 31, 'low'], ['بنغازي', 'ليبيا', 19, 'low']];
+  var BARMAX = 880; // px for 4.3 m
+  var fmt = function (cm) { return cm >= 100 ? '<span class="k">' + (cm / 100).toFixed(1) + '</span> م' : '<span class="k">' + cm + '</span> سم'; };
+  function rows(box, list) {
+    return list.map(function (r, n) {
+      var el = document.createElement('div');
+      el.className = 'row ' + (r[3] || (n === 0 ? 'top' : ''));
+      el.innerHTML = '<div class="lbl"><span>' + r[0] + '<small>' + r[1] + '</small></span><span class="val">' + fmt(r[2]) + '</span></div><div class="bar"></div>';
+      $(box).appendChild(el);
+      return { el: el, bar: el.querySelector('.bar'), w: BARMAX * r[2] / 430 };
+    });
+  }
+  var topRows = rows('#topRows', TOP), lowRows = rows('#lowRows', LOW);
+
+  // Depth scale for scene 2
+  var GROUND = 1440, M = 140;
+  for (var m = 0; m <= 4; m++) {
+    var y = GROUND - m * M;
+    $('#ticks').insertAdjacentHTML('beforeend', '<line x1="100" x2="140" y1="' + y + '" y2="' + y + '" stroke="#94a3b8" stroke-width="3"/><text x="60" y="' + (y + 12) + '" text-anchor="middle" direction="ltr">' + m + ' m</text>');
+  }
+
+  // --- Fish: a body, a wagging tail, a fin and an eye; faces left in its own coordinates
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#5eead4', '#0d9488'], ['#fca5a5', '#f87171'], ['#93c5fd', '#60a5fa']];
+  var fish = [];
+  for (var i = 0; i < 9; i++) {
+    var c = COLORS[i % COLORS.length], el = document.createElement('div');
+    el.className = 'fish';
+    el.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(el);
+    fish.push({ el: el, tail: el.querySelector('.tail'), ph: rnd() * 6.28, sc: .7 + rnd() * .45 });
+  }
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 8;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+  var bubbles = [];
+  for (var b = 0; b < 16; b++) { var e = document.createElement('div'); e.className = 'bubble'; var s = 10 + rnd() * 22; e.style.width = e.style.height = s + 'px'; $('#bubbles').appendChild(e); bubbles.push({ el: e, x: 80 + rnd() * 920, y0: rnd() * 1920, v: 60 + rnd() * 70 }); }
+
+  function drawAt(t) {
+    $('#waves').style.transform = 'translateX(' + ((t * 50) % 810) + 'px)';
+    $('#w2').style.transform = 'translateX(' + (-(t * 35) % 810) + 'px)';
+    bubbles.forEach(function (q) { var y = ((q.y0 - t * q.v) % 1920 + 1920) % 1920; q.el.style.transform = 'translate(' + (q.x + Math.sin(t * 1.5 + q.y0) * 12) + 'px,' + y + 'px)'; q.el.style.opacity = .5; });
+
+    var s2 = vis(t, 4, 10.5), s3 = vis(t, 10.5, 17), s4 = vis(t, 17, 23), s5 = seg(t, 23, 23.5, out);
+    $('#s1').style.opacity = 1; $('#s2').style.opacity = s2; $('#s3').style.opacity = s3; $('#s4').style.opacity = s4; $('#s5').style.opacity = s5;
+
+    show($('#s1 .q'), Math.min(seg(t, .2, .8), 1 - seg(t, 3.6, 4)), 40 * (1 - seg(t, .2, .9, out)));
+    show($('#s1 .a'), Math.min(seg(t, 1.6, 2.1), 1 - seg(t, 3.6, 4)), 30 * (1 - seg(t, 1.6, 2.2, out)));
+
+    // Scene 2: the sea rises from lowest low to highest high, past the person
+    var rise = seg(t, 5.2, 8.6);
+    var level = rise * 4.3, wy = GROUND - level * M;
+    $('#water').setAttribute('y', wy); $('#water').setAttribute('height', GROUND - wy);
+    $('#wLine').setAttribute('y1', wy); $('#wLine').setAttribute('y2', wy); $('#wLine').style.opacity = rise > .01 ? 1 : 0;
+    $('#wLbl').setAttribute('y', wy - 22); $('#wLbl').textContent = level.toFixed(1) + ' m'; $('#wLbl').style.opacity = rise > .03 ? 1 : 0;
+    show($('#s2 .big'), seg(t, 8.4, 8.9), 20 * (1 - seg(t, 8.4, 9, out)));
+
+    // Scenes 3 and 4: bars grow one after another
+    topRows.forEach(function (r, n) { r.bar.style.width = r.w * seg(t, 11.2 + n * .45, 12.2 + n * .45, out) + 'px'; show(r.el, seg(t, 11 + n * .45, 11.4 + n * .45), 0); });
+    lowRows.forEach(function (r, n) { r.bar.style.width = r.w * seg(t, 18 + n * .6, 18.9 + n * .6, out) + 'px'; r.el.style.opacity = seg(t, 17.8 + n * .6, 18.2 + n * .6) * (n ? 1 : .45); });
+
+    fish.forEach(function (f, i) {
+      var x, y, dir, w = 8, o = 1;
+      if (t < 4) {                           // lazy drift
+        dir = i % 2 ? 1 : -1;
+        var sp = 40 + i * 6, span = 1300;
+        x = dir > 0 ? ((i * 160 + t * sp) % span) - 100 : 1180 - ((i * 160 + t * sp) % span);
+        y = 1050 + (i % 5) * 95;
+        w = 5; o = clamp(t / .6) * (1 - seg(t, 3.6, 4));
+      } else if (t < 10.5) {                 // fish ride the rising water, each one shows up once its depth is flooded
+        dir = i % 2 ? 1 : -1;
+        var depth = 1400 - (i % 5) * 105;    // 1400 … 980
+        var lane = (t - 4) * (60 + i * 8) + i * 230;
+        x = dir > 0 ? (lane % 1300) - 110 : 1190 - (lane % 1300);
+        y = Math.max(depth, wy + 70);
+        w = 10; o = s2 * clamp((GROUND - 40 - wy - (GROUND - depth)) / 60);
+      } else if (t < 23) {                   // quick lanes under the bars
+        dir = i % 2 ? 1 : -1;
+        var ln = (t - 10.5) * 120 + i * 200;
+        x = dir > 0 ? (ln % 1400) - 160 : 1240 - (ln % 1400);
+        y = 1530 + (i % 3) * 70;
+        w = 12; o = (t < 17 ? s3 : s4) * (i < 6 ? 1 : 0);
+      } else {
+        dir = i % 2 ? 1 : -1;
+        var l5 = (t - 23) * 90 + i * 210;
+        x = dir > 0 ? (l5 % 1400) - 160 : 1240 - (l5 % 1400);
+        y = 1330 + (i % 2) * 120 + (i % 3) * 18;
+        o = s5 * (i < 6 ? 1 : 0); w = 9;
+      }
+      putFish(f, x, y, dir, t, w, o);
+    });
+
+    $('#s5 img').style.transform = 'scale(' + (.6 + .4 * seg(t, 23, 23.8, out)) + ')';
+    show($('#s5 .p'), seg(t, 23.7, 24.1), 20 * (1 - seg(t, 23.7, 24.2, out)));
+    show($('#s5 .url'), seg(t, 24, 24.4), 20 * (1 - seg(t, 24, 24.5, out)));
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>

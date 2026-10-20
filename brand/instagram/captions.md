@@ -101,3 +101,84 @@ Voice script: `../src/video-02-tides-fishing.voice.txt`
 #صيد_السمك #المد_والجزر #هواة_الصيد
 
 **Alt text (cover):** رسم لأسماك ملوّنة تسبح تحت الماء، مع سؤال «متى تنشط الأسماك؟» والجواب: في المد والجزر.
+
+---
+
+## Reel — Solunar fishing hours (`../video/video-03-solunar.mp4`, 33 s)
+
+Best posted on **Saturday 24 or Sunday 25 October**, just before the full moon (26 Oct), when the major periods are strongest. It has an Arabic voiceover and a music bed, so **don't add an Instagram sound**. Cover: `../video/video-03-cover.png`.
+
+Voice script: `../src/video-03-solunar.voice.txt`
+
+**Caption:**
+
+للصيد ساعات ذهبية كل يوم، والقمر هو الذي يحددها 🌙🎣
+
+🌕 الفترات الكبرى: نحو ساعتين حول عبور القمر، حين يكون في أعلى السماء أو في الجهة المقابلة من الأرض.
+🌙 الفترات الصغرى: نحو ساعة عند شروق القمر وغروبه.
+
+أربع فترات في اليوم، وتكون أقوى في أيام البدر والمحاق.
+
+ساعات الصيد لميناءك على arabtides.com، والرابط في البايو.
+
+احفظ الفيديو لرحلة الصيد القادمة 🔖
+
+#صيد_السمك #هواة_الصيد #القمر
+
+**Alt text (cover):** سماء ليلية فيها قمر مضيء فوق البحر وأسماك ملوّنة، بعنوان «ساعات الصيد الذهبية يحددها القمر».
+
+---
+
+## Reel — Strongest tides in the Arab world (`../video/video-04-strongest-tides.mp4`, 38 s)
+
+Evergreen. It has an Arabic voiceover and a music bed, so **don't add an Instagram sound**. Cover: `../video/video-04-cover.png`.
+
+Voice script: `../src/video-04-strongest-tides.voice.txt`
+
+**Caption:**
+
+أين أقوى مد وجزر في العالم العربي؟ 🌊
+
+🥇 مدينة الكويت: 4.3 م بين أعلى مد وأدنى جزر
+🥈 أم قصر وموروني: 4.0 م
+🌍 الدار البيضاء 3.3 م وأكادير 3.1 م على المحيط الأطلسي
+
+وفي المقابل يكاد المد يختفي في البحر المتوسط ووسط البحر الأحمر: جدة 32 سم، وبنغازي 19 سم فقط.
+
+كم يبلغ المد في ميناءك؟ اعرف على arabtides.com، والرابط في البايو.
+
+اكتب اسم ميناءك في التعليقات 👇
+
+#المد_والجزر #البحر #صيد_السمك
+
+**Alt text (cover):** أسماك ملوّنة تحت الماء مع سؤال «أين أقوى مدٍّ في العالم العربي؟».
+
+**Data source:** ArabTides tide engine (EOT20). Largest daily range (highest high minus lowest low on one day) during 2026, the same numbers as the article `/articles/strongest-tides-arab-world`.
+
+---
+
+## Reel — How to read a tide table (`../video/video-05-tide-table.mp4`, 34 s)
+
+Evergreen. It has an Arabic voiceover and a music bed, so **don't add an Instagram sound**. Cover: `../video/video-05-cover.png`.
+
+Voice script: `../src/video-05-tide-table.voice.txt`
+
+**Caption:**
+
+كيف تقرأ جدول المد والجزر؟ في 30 ثانية ⏱️
+
+1️⃣ كل يوم تقريباً مدّان عاليان وجزران منخفضان، وبين كل مد وجزر نحو 6 ساعات.
+2️⃣ المدى هو الفرق بين أعلى مد وأدنى جزر، وهو أهم رقم للصياد.
+3️⃣ عند البدر والمحاق يكبر المدى (مد ربيعي)، وعند التربيع يصغر (مد محاقي).
+
+المثال في الفيديو: الدار البيضاء، 19 أكتوبر 2026.
+
+جدول المد لميناءك على arabtides.com، والرابط في البايو.
+
+أرسل الفيديو لصديق بدأ الصيد للتو 🐟
+
+#المد_والجزر #صيد_السمك #هواة_الصيد
+
+**Alt text (cover):** أسماك ملوّنة تحت الماء مع عنوان «كيف تقرأ جدول المد؟ في 30 ثانية».
+
+**Data source:** Casablanca, 19 Oct 2026, from the ArabTides tide engine (the example in the article `/articles/how-to-read-tide-table`). Spring/neap ranges: 300 cm on 9 Oct, 89 cm on 19 Oct.

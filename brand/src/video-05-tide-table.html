@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو كيف تقرأ جدول المد</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480. */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(900px 600px at 80% 0%, rgba(45, 212, 191, .18), transparent 60%),
+                linear-gradient(180deg, #0b2540 0%, #0c3352 40%, #0d4a63 75%, #0e5a66 100%); }
+  .scene { position: absolute; inset: 0; padding: 0 100px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish, .bubble { left: 0; top: 0; }
+  .fish { position: absolute; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  .bubble { position: absolute; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); }
+  #waves { position: absolute; left: -1080px; bottom: 0; width: 3240px; height: 220px; }
+  svg.chart { position: absolute; left: 90px; top: 580px; width: 900px; height: 500px; overflow: visible; }
+
+  #s1 .q { margin-top: 300px; font-size: 140px; line-height: 1.2; }
+  #s1 .a { margin-top: 50px; font-size: 70px; color: var(--lagoon); font-weight: 700; }
+  #s2 .h, #s3 .h, #s4 .h { margin-top: 250px; font-size: 100px; }
+  #s4 .h { font-size: 88px; }
+  #s2 .sub, #s3 .sub { margin-top: 18px; font-size: 54px; color: #cbd5e1; }
+  /* Scene 2: the table under the chart */
+  .table { position: absolute; left: 110px; right: 110px; top: 1110px; display: flex; flex-direction: column; gap: 8px; }
+  .table .tr { display: flex; align-items: center; gap: 30px; padding: 12px 28px; border-radius: 18px; font-size: 48px; font-weight: 700; background: rgba(255,255,255,.06); }
+  .table .tr .ev { flex: 1; text-align: start; }
+  .table .tr .k { font-weight: 700; min-width: 170px; text-align: center; }
+  .table .hi .ev { color: #5eead4; } .table .lo .ev { color: #fda4af; }
+  /* Scene 3 */
+  #s3 .range { position: absolute; left: 0; right: 0; top: 1130px; font-size: 150px; font-weight: 800; color: var(--lagoon); }
+  #s3 .note { position: absolute; left: 0; right: 0; top: 1330px; font-size: 60px; font-weight: 700; color: var(--sand); }
+  /* Scene 4: spring vs neap */
+  .panel { align-self: stretch; margin-top: 50px; padding: 26px 34px 10px; border-radius: 28px; background: rgba(255,255,255,.06); }
+  .panel + .panel { margin-top: 34px; }
+  .panel .top { display: flex; justify-content: space-between; align-items: baseline; font-size: 50px; font-weight: 700; }
+  .panel .top .v { color: var(--lagoon); } .panel.neap .top .v { color: #cbd5e1; }
+  .panel .top small { font-size: 40px; color: var(--mist); margin-inline-start: 12px; }
+  .panel svg { display: block; width: 812px; height: 330px; margin-top: 6px; }
+  #s4 .src { margin-top: 22px; font-size: 38px; color: var(--mist); }
+  #s5 { justify-content: center; padding-bottom: 300px; }
+  #s5 img { width: 280px; height: 280px; }
+  #s5 .wm { font-family: var(--font-num); font-weight: 800; font-size: 116px; letter-spacing: -.02em; margin-top: 36px; direction: ltr; }
+  #s5 .p { font-size: 64px; margin-top: 44px; }
+  #s5 .url { font-family: var(--font-num); font-weight: 800; font-size: 96px; color: var(--lagoon); margin-top: 20px; direction: ltr; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="bubbles"></div>
+
+  <div class="scene" id="s1">
+    <div class="d q">كيف تقرأ<br>جدول المد؟</div>
+    <div class="a">في <span class="k">30</span> ثانية ⏱️</div>
+  </div>
+
+  <div class="scene" id="s2">
+    <div class="d h">مدّان وجزران</div>
+    <div class="sub">كل يوم تقريباً، بينهما نحو <span class="k">6</span> ساعات</div>
+    <svg class="chart" id="chart2" viewBox="0 0 900 500" aria-hidden="true"></svg>
+    <div class="table" id="table"></div>
+  </div>
+
+  <div class="scene" id="s3">
+    <div class="d h">المدى</div>
+    <div class="sub">الفرق بين أعلى مد وأدنى جزر</div>
+    <svg class="chart" id="chart3" viewBox="0 0 900 500" aria-hidden="true"></svg>
+    <div class="range"><span class="k" id="rangeNum">0</span> سم</div>
+    <div class="note">أهم رقم للصياد 🎣</div>
+  </div>
+
+  <div class="scene" id="s4">
+    <div class="d h">المد الربيعي والمحاقي</div>
+    <div class="panel spring">
+      <div class="top"><span>🌕🌑 البدر والمحاق<small>مد ربيعي</small></span><span class="v"><span class="k">300</span> سم</span></div>
+      <svg viewBox="0 0 812 330" aria-hidden="true"><line x1="0" x2="812" y1="165" y2="165" stroke="rgba(255,255,255,.18)" stroke-width="3" stroke-dasharray="8 10"/><path id="wSpring" fill="none" stroke="#2dd4bf" stroke-width="9" stroke-linecap="round"/></svg>
+    </div>
+    <div class="panel neap">
+      <div class="top"><span>🌓 التربيع<small>مد محاقي</small></span><span class="v"><span class="k">89</span> سم</span></div>
+      <svg viewBox="0 0 812 330" aria-hidden="true"><line x1="0" x2="812" y1="165" y2="165" stroke="rgba(255,255,255,.18)" stroke-width="3" stroke-dasharray="8 10"/><path id="wNeap" fill="none" stroke="#94a3b8" stroke-width="9" stroke-linecap="round"/></svg>
+    </div>
+    <div class="src">المدى اليومي في الدار البيضاء، أكتوبر <span class="k">2026</span></div>
+  </div>
+
+  <div class="scene" id="s5">
+    <img src="../logo/arabtides-mark.svg" alt="">
+    <div class="wm">ArabTides</div>
+    <div class="p">جدول المد لميناءك</div>
+    <div class="url">arabtides.com</div>
+  </div>
+
+  <div class="layer" id="fishLayer"></div>
+
+  <svg id="waves" viewBox="0 0 3240 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 90c135-45 270-45 405 0s270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0v130H0z" fill="rgba(45,212,191,.10)"/>
+    <path id="w2" d="M0 140c135-36 270-36 405 0s270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0v80H0z" fill="rgba(45,212,191,.16)"/>
+  </svg>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var lerp = function (a, b, p) { return a + (b - a) * p; };
+  var seed = 5, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  var NS = 'http://www.w3.org/2000/svg';
+  var svgEl = function (parent, tag, attrs, text) { var e = document.createElementNS(NS, tag); for (var a in attrs) e.setAttribute(a, attrs[a]); if (text != null) e.textContent = text; parent.appendChild(e); return e; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 4, 10.5, 17, 23, 27];
+
+  // Casablanca, 19 Oct 2026 (the example in the "how to read a tide table" article): [hour, cm]
+  var EXT = [[1 + 38 / 60, -29], [8.5, 49], [15 + 11 / 60, -40], [21.5, 38]];
+  var LABEL = ['01:38', '08:30', '15:11', '21:30'];
+  // Chart: x = hour (0–24 → 0–900, left to right), y = 230 − 3.6·cm
+  var X = function (h) { return h * 37.5; }, Y = function (cm) { return 230 - cm * 3.6; };
+  var ext = [[EXT[0][0] - 6.6, 46]].concat(EXT, [[EXT[3][0] + 6.4, -35]]);
+  function height(h) { // cosine between neighbouring extremes, like a real tide curve
+    for (var n = 0; n < ext.length - 1; n++) if (h <= ext[n + 1][0]) {
+      var p = (h - ext[n][0]) / (ext[n + 1][0] - ext[n][0]);
+      return ext[n][1] + (ext[n + 1][1] - ext[n][1]) * (1 - Math.cos(p * Math.PI)) / 2;
+    }
+  }
+  var pts = []; for (var h = 0; h <= 24.001; h += .2) pts.push(X(h).toFixed(1) + ',' + Y(height(h)).toFixed(1));
+  function baseChart(svg) {
+    svgEl(svg, 'line', { x1: 0, x2: 900, y1: Y(0), y2: Y(0), stroke: 'rgba(255,255,255,.18)', 'stroke-width': 3, 'stroke-dasharray': '8 10' });
+    ['00:00', '06:00', '12:00', '18:00', '24:00'].forEach(function (s, n) { svgEl(svg, 'text', { x: n * 225, y: 480, 'font-family': 'Inter', 'font-size': 32, 'font-weight': 600, fill: '#94a3b8', 'text-anchor': 'middle', direction: 'ltr' }, s); });
+    return svgEl(svg, 'path', { d: 'M' + pts.join(' L'), fill: 'none', stroke: '#2dd4bf', 'stroke-width': 9, 'stroke-linecap': 'round' });
+  }
+  var c2 = baseChart($('#chart2')), c3 = baseChart($('#chart3'));
+  // Scene 2 markers + table rows
+  var marks = EXT.map(function (e, n) {
+    var hi = e[1] > 0, x = X(e[0]), y = Y(e[1]), col = hi ? '#2dd4bf' : '#f43f5e';
+    var g = svgEl($('#chart2'), 'g', {});
+    svgEl(g, 'circle', { cx: x, cy: y, r: 17, fill: col, stroke: '#0b2540', 'stroke-width': 6 });
+    svgEl(g, 'text', { x: x, y: hi ? y - 34 : y + 62, 'font-family': 'Inter', 'font-size': 38, 'font-weight': 800, fill: hi ? '#5eead4' : '#fda4af', 'text-anchor': 'middle', direction: 'ltr' }, LABEL[n]);
+    var tr = document.createElement('div');
+    tr.className = 'tr ' + (hi ? 'hi' : 'lo');
+    tr.innerHTML = '<span class="ev">' + (hi ? '▲ مد عالٍ' : '▼ جزر منخفض') + '</span><span class="k">' + LABEL[n] + '</span><span><span class="k">' + String(e[1]).replace('-', '−') + '</span> سم</span>';
+    $('#table').appendChild(tr);
+    return { g: g, tr: tr };
+  });
+  // Scene 3: highest high and lowest low lines, with the range arrow between them
+  var yHi = Y(49), yLo = Y(-40), AX = 680;
+  var hiLine = svgEl($('#chart3'), 'line', { x1: 0, x2: 900, y1: yHi, y2: yHi, stroke: '#5eead4', 'stroke-width': 4, 'stroke-dasharray': '14 10' });
+  var loLine = svgEl($('#chart3'), 'line', { x1: 0, x2: 900, y1: yLo, y2: yLo, stroke: '#fda4af', 'stroke-width': 4, 'stroke-dasharray': '14 10' });
+  var arrow = svgEl($('#chart3'), 'g', {});
+  svgEl(arrow, 'line', { x1: AX, x2: AX, y1: yHi + 14, y2: yLo - 14, stroke: '#fde68a', 'stroke-width': 8 });
+  svgEl(arrow, 'path', { d: 'M' + (AX - 20) + ' ' + (yHi + 30) + ' L' + AX + ' ' + (yHi + 4) + ' L' + (AX + 20) + ' ' + (yHi + 30) + 'Z', fill: '#fde68a' });
+  svgEl(arrow, 'path', { d: 'M' + (AX - 20) + ' ' + (yLo - 30) + ' L' + AX + ' ' + (yLo - 4) + ' L' + (AX + 20) + ' ' + (yLo - 30) + 'Z', fill: '#fde68a' });
+  // Scene 4 waves: 1 px per cm of range, two cycles per panel
+  function wave(amp, phase) { var p = []; for (var x = 0; x <= 812; x += 6) p.push(x + ',' + (165 - amp / 2 * Math.cos((x / 812) * 4 * Math.PI + phase)).toFixed(1)); return 'M' + p.join(' L'); }
+
+  // --- Fish: a body, a wagging tail, a fin and an eye; faces left in its own coordinates
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#5eead4', '#0d9488'], ['#fca5a5', '#f87171'], ['#93c5fd', '#60a5fa']];
+  var fish = [];
+  for (var i = 0; i < 9; i++) {
+    var c = COLORS[i % COLORS.length], el = document.createElement('div');
+    el.className = 'fish';
+    el.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(el);
+    fish.push({ el: el, tail: el.querySelector('.tail'), ph: rnd() * 6.28, sc: .7 + rnd() * .45 });
+  }
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 8;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+  var bubbles = [];
+  for (var b = 0; b < 16; b++) { var e = document.createElement('div'); e.className = 'bubble'; var s = 10 + rnd() * 22; e.style.width = e.style.height = s + 'px'; $('#bubbles').appendChild(e); bubbles.push({ el: e, x: 80 + rnd() * 920, y0: rnd() * 1920, v: 60 + rnd() * 70 }); }
+
+  function drawAt(t) {
+    $('#waves').style.transform = 'translateX(' + ((t * 50) % 810) + 'px)';
+    $('#w2').style.transform = 'translateX(' + (-(t * 35) % 810) + 'px)';
+    bubbles.forEach(function (q) { var y = ((q.y0 - t * q.v) % 1920 + 1920) % 1920; q.el.style.transform = 'translate(' + (q.x + Math.sin(t * 1.5 + q.y0) * 12) + 'px,' + y + 'px)'; q.el.style.opacity = .5; });
+
+    var s2 = vis(t, 4, 10.5), s3 = vis(t, 10.5, 17), s4 = vis(t, 17, 23), s5 = seg(t, 23, 23.5, out);
+    $('#s1').style.opacity = 1; $('#s2').style.opacity = s2; $('#s3').style.opacity = s3; $('#s4').style.opacity = s4; $('#s5').style.opacity = s5;
+
+    show($('#s1 .q'), Math.min(seg(t, .2, .8), 1 - seg(t, 3.6, 4)), 40 * (1 - seg(t, .2, .9, out)));
+    show($('#s1 .a'), Math.min(seg(t, 1.6, 2.1), 1 - seg(t, 3.6, 4)), 30 * (1 - seg(t, 1.6, 2.2, out)));
+
+    // Scene 2: curve draws, then each high/low pops with its table row
+    var d2 = seg(t, 4.6, 6.2);
+    c2.style.strokeDasharray = '1500'; c2.style.strokeDashoffset = 1500 * (1 - d2);
+    marks.forEach(function (m, n) {
+      var a = 6.4 + n * .7, p = seg(t, a, a + .35, out);
+      m.g.style.opacity = p;
+      m.tr.style.opacity = seg(t, a + .1, a + .45);
+      m.tr.style.transform = 'translateY(' + 20 * (1 - seg(t, a + .1, a + .5, out)) + 'px)';
+      m.tr.style.background = t > a && t < a + 1.1 ? 'rgba(253,230,138,.16)' : 'rgba(255,255,255,.06)';
+    });
+
+    // Scene 3: lines at the extremes, arrow grows, number counts up
+    var l = seg(t, 11.2, 11.8);
+    hiLine.style.opacity = l; loLine.style.opacity = seg(t, 11.5, 12.1);
+    var ar = seg(t, 12.1, 13.1, out);
+    arrow.style.opacity = ar ? 1 : 0;
+    arrow.setAttribute('transform', 'translate(0,' + ((yHi + yLo) / 2) + ') scale(1,' + Math.max(ar, .001) + ') translate(0,' + (-(yHi + yLo) / 2) + ')');
+    $('#rangeNum').textContent = Math.round(89 * seg(t, 12.1, 13.4, out));
+    show($('#s3 .range'), seg(t, 12, 12.4), 0);
+    show($('#s3 .note'), seg(t, 13.8, 14.2), 20 * (1 - seg(t, 13.8, 14.3, out)));
+
+    // Scene 4: amplitudes grow from flat, waves travel
+    $('#wSpring').setAttribute('d', wave(300 * seg(t, 17.6, 18.8, out), -t * 2));
+    $('#wNeap').setAttribute('d', wave(89 * seg(t, 18.6, 19.8, out), -t * 2));
+
+    fish.forEach(function (f, i) {
+      var x, y, dir, w = 8, o = 1;
+      if (t < 4) {                           // lazy drift
+        dir = i % 2 ? 1 : -1;
+        var sp = 40 + i * 6, span = 1300;
+        x = dir > 0 ? ((i * 160 + t * sp) % span) - 100 : 1180 - ((i * 160 + t * sp) % span);
+        y = 1050 + (i % 5) * 95;
+        w = 5; o = clamp(t / .6) * (1 - seg(t, 3.6, 4));
+      } else if (t < 23) {                   // lanes below the content
+        dir = i % 2 ? 1 : -1;
+        var ln = (t - 4) * (80 + (i % 3) * 25) + i * 200;
+        x = dir > 0 ? (ln % 1400) - 160 : 1240 - (ln % 1400);
+        y = 1610 + (i % 3) * 65;
+        w = 10; o = (t < 10.5 ? s2 : t < 17 ? s3 : s4) * (i < 6 ? 1 : 0);
+      } else {
+        dir = i % 2 ? 1 : -1;
+        var l5 = (t - 23) * 90 + i * 210;
+        x = dir > 0 ? (l5 % 1400) - 160 : 1240 - (l5 % 1400);
+        y = 1330 + (i % 2) * 120 + (i % 3) * 18;
+        o = s5 * (i < 6 ? 1 : 0); w = 9;
+      }
+      putFish(f, x, y, dir, t, w, o);
+    });
+
+    $('#s5 img').style.transform = 'scale(' + (.6 + .4 * seg(t, 23, 23.8, out)) + ')';
+    show($('#s5 .p'), seg(t, 23.7, 24.1), 20 * (1 - seg(t, 23.7, 24.2, out)));
+    show($('#s5 .url'), seg(t, 24, 24.4), 20 * (1 - seg(t, 24, 24.5, out)));
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>

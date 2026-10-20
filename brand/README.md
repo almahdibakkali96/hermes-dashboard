@@ -13,6 +13,9 @@
 | Full-moon Reel, 1080×1920, 29 s, Arabic voiceover + music | `video/video-01-full-moon.mp4` |
 | Reel cover image | `video/video-01-cover.png` |
 | "How tides affect fishing" Reel, 29 s, voice + music | `video/video-02-tides-fishing.mp4` (cover `video/video-02-cover.png`) |
+| "Solunar fishing hours" Reel, 33 s, voice + music | `video/video-03-solunar.mp4` (cover `video/video-03-cover.png`) |
+| "Strongest tides in the Arab world" Reel, 38 s, voice + music | `video/video-04-strongest-tides.mp4` (cover `video/video-04-cover.png`) |
+| "How to read a tide table" Reel, 34 s, voice + music | `video/video-05-tide-table.mp4` (cover `video/video-05-cover.png`) |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours

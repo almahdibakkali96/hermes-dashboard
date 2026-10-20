@@ -53,15 +53,7 @@ for (const [i, text] of lines.entries()) {
     join(outDir, `line-${i + 1}.mp3`));
 }
 
-// 2. Music bed (same prompt as arabtides-video/scripts/music.mjs, shorter)
-await eleven('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_128', {
-  model_id: 'music_v1',
-  prompt: 'Instrumental only, no vocals. Calm ambient track with soft warm pads and gentle sparse piano, light ocean mood, slow tempo around 70 BPM, peaceful and steady, suitable under a spoken voiceover.',
-  music_length_ms: 30000,
-  force_instrumental: true,
-}, join(outDir, 'music.mp3'));
-
-// 3. Timeline: each scene lasts as long as its design length or its voice line, whichever is longer
+// 2. Timeline: each scene lasts as long as its design length or its voice line, whichever is longer
 const voiceLen = lines.map((_, i) => duration(join(outDir, `line-${i + 1}.mp3`)));
 const real = [0];
 for (let i = 0; i < voiceLen.length; i++) {
@@ -71,6 +63,14 @@ for (let i = 0; i < voiceLen.length; i++) {
 real[real.length - 1] += 0.8; // hold the end card
 writeFileSync(join(outDir, 'timeline.json'), JSON.stringify({ design: DESIGN, real, voiceLen }, null, 2));
 console.log('scene starts (s):', real.join(' · '));
+
+// 3. Music bed (same prompt as arabtides-video/scripts/music.mjs), as long as the video
+await eleven('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_128', {
+  model_id: 'music_v1',
+  prompt: 'Instrumental only, no vocals. Calm ambient track with soft warm pads and gentle sparse piano, light ocean mood, slow tempo around 70 BPM, peaceful and steady, suitable under a spoken voiceover.',
+  music_length_ms: Math.max(30000, Math.ceil(real[real.length - 1] + 1) * 1000),
+  force_instrumental: true,
+}, join(outDir, 'music.mp3'));
 
 // 4. Mix: voice lines at their scene starts, music underneath at low volume with fades
 const total = real[real.length - 1];

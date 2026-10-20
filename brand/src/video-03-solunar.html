@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو ساعات الصيد الذهبية</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480. */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(800px 500px at 50% 35%, rgba(253, 230, 138, .10), transparent 65%),
+                linear-gradient(180deg, #06162a 0%, #0b2540 45%, #0f3d5c 62%); }
+  .scene { position: absolute; inset: 0; padding: 0 100px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish, .star, .bubble { left: 0; top: 0; }
+  .fish { position: absolute; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  .star { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+  .bubble { position: absolute; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); }
+  #sky { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #waves { position: absolute; left: -1080px; bottom: 0; width: 3240px; height: 220px; }
+
+  #s1 .q { margin-top: 270px; font-size: 140px; line-height: 1.2; }
+  #s1 .a { margin-top: 40px; font-size: 68px; color: var(--sand); font-weight: 700; }
+  #s2 .h, #s3 .h, #s4 .h { margin-top: 260px; font-size: 104px; }
+  #s2 .sub, #s3 .sub { margin-top: 24px; font-size: 60px; color: var(--sand); font-weight: 700; line-height: 1.4; }
+  #s4 .sub { margin-top: 24px; font-size: 58px; color: #cbd5e1; }
+  #s4 svg.bar { position: absolute; left: 90px; top: 700px; width: 900px; height: 330px; overflow: visible; }
+  #s5 { justify-content: center; padding-bottom: 420px; }
+  #s5 img { width: 280px; height: 280px; }
+  #s5 .wm { font-family: var(--font-num); font-weight: 800; font-size: 116px; letter-spacing: -.02em; margin-top: 36px; direction: ltr; }
+  #s5 .p { font-size: 64px; margin-top: 44px; }
+  #s5 .url { font-family: var(--font-num); font-weight: 800; font-size: 96px; color: var(--lagoon); margin-top: 20px; direction: ltr; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="stars"></div>
+
+  <!-- Sky: moon path over the horizon, the sea hides the moon below it -->
+  <svg id="sky" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <radialGradient id="glow"><stop offset="0" stop-color="#fde68a" stop-opacity=".55"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d4a63"/><stop offset="1" stop-color="#0e5a66"/></linearGradient>
+    </defs>
+    <path id="arc" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-dasharray="4 14" stroke-linecap="round"/>
+    <path id="major" fill="none" stroke="#fde68a" stroke-width="26" stroke-linecap="round" opacity=".55"/>
+    <text id="majorLbl" font-size="42" font-weight="700" fill="#fde68a" text-anchor="middle" font-family="Noto Naskh Arabic">عبور القمر</text>
+    <circle id="haloL" r="90" fill="url(#glow)"/>
+    <circle id="haloR" r="90" fill="url(#glow)"/>
+    <g id="moon"><circle r="150" fill="url(#glow)"/><circle r="52" fill="#fde68a"/><circle cx="-16" cy="-12" r="10" fill="#f5d36a"/><circle cx="18" cy="14" r="7" fill="#f5d36a"/></g>
+    <g id="moon2" opacity="0"><circle r="52" fill="#fde68a" opacity=".55"/></g>
+    <rect x="0" y="1180" width="1080" height="740" fill="url(#sea)"/>
+    <line x1="0" x2="1080" y1="1180" y2="1180" stroke="#5eead4" stroke-width="4" opacity=".5"/>
+    <text id="riseLbl" font-size="42" font-weight="700" fill="#fde68a" text-anchor="middle" font-family="Noto Naskh Arabic">شروق القمر</text>
+    <text id="setLbl" font-size="42" font-weight="700" fill="#fde68a" text-anchor="middle" font-family="Noto Naskh Arabic">غروب القمر</text>
+  </svg>
+
+  <div class="layer" id="bubbles"></div>
+
+  <div class="scene" id="s1">
+    <div class="d q">ساعات الصيد<br>الذهبية</div>
+    <div class="a">يحددها القمر 🌙</div>
+  </div>
+
+  <div class="scene" id="s2">
+    <div class="d h">الفترات الكبرى</div>
+    <div class="sub">نحو ساعتين حول عبور القمر</div>
+  </div>
+
+  <div class="scene" id="s3">
+    <div class="d h">الفترات الصغرى</div>
+    <div class="sub">نحو ساعة عند شروق القمر وغروبه</div>
+  </div>
+
+  <div class="scene" id="s4">
+    <div class="d h"><span class="k">4</span> فترات كل يوم</div>
+    <div class="sub">أقوى أيام البدر والمحاق 🌕🌑</div>
+    <!-- 24-hour day, left to right like a clock axis -->
+    <svg class="bar" viewBox="0 0 900 330" aria-hidden="true">
+      <rect x="0" y="40" width="900" height="100" rx="22" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)" stroke-width="3"/>
+      <g id="blocks"></g>
+      <g font-family="Inter" font-size="34" font-weight="600" fill="#94a3b8" text-anchor="middle">
+        <text x="0" y="190">00:00</text><text x="225" y="190">06:00</text><text x="450" y="190">12:00</text><text x="675" y="190">18:00</text><text x="900" y="190">24:00</text>
+      </g>
+      <g id="legend" font-family="Noto Naskh Arabic" font-size="42" font-weight="700" text-anchor="middle">
+        <rect x="560" y="245" width="44" height="44" rx="10" fill="#2dd4bf"/><text x="720" y="282" fill="#fff">كبرى · ساعتان</text>
+        <rect x="120" y="245" width="44" height="44" rx="10" fill="#fde68a"/><text x="290" y="282" fill="#fff">صغرى · ساعة</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="scene" id="s5">
+    <img src="../logo/arabtides-mark.svg" alt="">
+    <div class="wm">ArabTides</div>
+    <div class="p">ساعات الصيد لميناءك</div>
+    <div class="url">arabtides.com</div>
+  </div>
+
+  <div class="layer" id="fishLayer"></div>
+
+  <svg id="waves" viewBox="0 0 3240 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 90c135-45 270-45 405 0s270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0v130H0z" fill="rgba(45,212,191,.10)"/>
+    <path id="w2" d="M0 140c135-36 270-36 405 0s270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0v80H0z" fill="rgba(45,212,191,.16)"/>
+  </svg>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var lerp = function (a, b, p) { return a + (b - a) * p; };
+  var seed = 7, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 4.5, 10.5, 16.5, 22.5, 26.5];
+
+  // --- Fish: a body, a wagging tail, a fin and an eye; faces left in its own coordinates
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#5eead4', '#0d9488'], ['#fca5a5', '#f87171'], ['#93c5fd', '#60a5fa']];
+  var fish = [];
+  for (var i = 0; i < 9; i++) {
+    var c = COLORS[i % COLORS.length], el = document.createElement('div');
+    el.className = 'fish';
+    el.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(el);
+    fish.push({ el: el, tail: el.querySelector('.tail'), ph: rnd() * 6.28, sc: .7 + rnd() * .45 });
+  }
+  // Place fish at (x, y), facing right when dir > 0, with tail wag speed w
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 8;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+
+  // Stars (sky only) and bubbles (sea only)
+  var stars = [], bubbles = [];
+  for (var j = 0; j < 60; j++) { var s = document.createElement('div'); s.className = 'star'; $('#stars').appendChild(s); var r = .5 + rnd(); s.style.transform = 'translate(' + (rnd() * 1080) + 'px,' + (rnd() * 1120) + 'px) scale(' + r + ')'; stars.push({ el: s, ph: rnd() * 6.28, sp: 1 + rnd() * 2 }); }
+  for (var b = 0; b < 12; b++) { var e = document.createElement('div'); e.className = 'bubble'; var sz = 10 + rnd() * 20; e.style.width = e.style.height = sz + 'px'; $('#bubbles').appendChild(e); bubbles.push({ el: e, x: 80 + rnd() * 920, y0: rnd() * 700, v: 50 + rnd() * 60 }); }
+
+  // Moon path: half circle over the horizon. θ = 180° is moonrise (left), 90° transit, 0° moonset.
+  // Half a day ≈ 180°, so one hour ≈ 15°.
+  var CX = 540, CY = 1180, R = 420, rad = Math.PI / 180;
+  var arcPt = function (deg) { return [CX + R * Math.cos(deg * rad), CY - R * Math.sin(deg * rad)]; };
+  var arcD = function (a, b) { var p = [], st = a > b ? -1 : 1; for (var d = a; st * (b - d) >= 0; d += st) p.push(arcPt(d).map(function (v) { return v.toFixed(1); }).join(',')); return 'M' + p.join(' L'); };
+  $('#arc').setAttribute('d', arcD(180, 0));
+  $('#major').setAttribute('d', arcD(105, 75));
+  var apex = arcPt(90); $("#majorLbl").setAttribute("x", apex[0]); $("#majorLbl").setAttribute("y", apex[1] + 120);
+  $('#haloL').setAttribute('cx', CX - R); $('#haloL').setAttribute('cy', CY);
+  $('#haloR').setAttribute('cx', CX + R); $('#haloR').setAttribute('cy', CY);
+  $('#riseLbl').setAttribute('x', CX - R + 40); $('#riseLbl').setAttribute('y', CY - 130);
+  $('#setLbl').setAttribute('x', CX + R - 40); $('#setLbl').setAttribute('y', CY - 130);
+  var moveMoon = function (g, x, y, o) { g.setAttribute('transform', 'translate(' + x + ',' + y + ')'); g.style.opacity = o; };
+
+  // Day bar for scene 4 (900 px = 24 h): two major periods around transits, two minor around rise/set
+  var HOURPX = 900 / 24, BLOCKS = [[4, 6, '#2dd4bf'], [10.7, 11.7, '#fde68a'], [16.4, 18.4, '#2dd4bf'], [22.9, 23.9, '#fde68a']];
+  BLOCKS.forEach(function (k) {
+    var r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    r.setAttribute('x', k[0] * HOURPX); r.setAttribute('y', 52); r.setAttribute('height', 76); r.setAttribute('rx', 14); r.setAttribute('fill', k[2]);
+    $('#blocks').appendChild(r); k.push(r);
+  });
+
+  function drawAt(t) {
+    // Ambient: waves drift, bubbles rise in the sea, stars twinkle
+    $('#waves').style.transform = 'translateX(' + ((t * 50) % 810) + 'px)';
+    $('#w2').style.transform = 'translateX(' + (-(t * 35) % 810) + 'px)';
+    bubbles.forEach(function (q) { var y = 1220 + ((q.y0 - t * q.v) % 700 + 700) % 700; q.el.style.transform = 'translate(' + (q.x + Math.sin(t * 1.5 + q.y0) * 12) + 'px,' + y + 'px)'; q.el.style.opacity = .45; });
+    stars.forEach(function (q) { q.el.style.opacity = .35 + .45 * (.5 + .5 * Math.sin(t * q.sp + q.ph)); });
+
+    var s2 = vis(t, 4.5, 10.5), s3 = vis(t, 10.5, 16.5), s4 = vis(t, 16.5, 22.5), s5 = seg(t, 22.5, 23, out);
+    $('#s1').style.opacity = 1; $('#s2').style.opacity = s2; $('#s3').style.opacity = s3; $('#s4').style.opacity = s4; $('#s5').style.opacity = s5;
+
+    // Scene 1: title, moon glowing at the top of its path
+    show($('#s1 .q'), Math.min(seg(t, .2, .8), 1 - seg(t, 4.1, 4.5)), 40 * (1 - seg(t, .2, .9, out)));
+    show($('#s1 .a'), Math.min(seg(t, 1.8, 2.3), 1 - seg(t, 4.1, 4.5)), 30 * (1 - seg(t, 1.8, 2.4, out)));
+
+    // Moon: S1 hangs high; S2 rises from the left and crosses the top; S3 sits just above the left horizon
+    var moon = $('#moon'), m;
+    if (t < 4.5) { m = arcPt(90); moveMoon(moon, m[0], m[1] + 40 + Math.sin(t) * 6, seg(t, .1, .9) * (1 - seg(t, 4.1, 4.5))); }
+    else if (t < 10.5) { m = arcPt(lerp(178, 80, seg(t, 5.2, 9.6, function (x) { return clamp(x); }))); moveMoon(moon, m[0], m[1], s2); }
+    else if (t < 16.5) { m = arcPt(lerp(190, 168, seg(t, 11, 12.8, out))); moveMoon(moon, m[0], m[1], s3); }
+    else moveMoon(moon, 0, 0, 0);
+    // Setting moon on the right in scene 3
+    m = arcPt(lerp(12, -10, seg(t, 13, 15.2, function (x) { return clamp(x); })));
+    moveMoon($('#moon2'), m[0], m[1], Math.min(seg(t, 12.8, 13.3), s3));
+
+    $('#arc').style.opacity = Math.max(s2, s3) * .9;
+    $('#arc').style.strokeDashoffset = -t * 20;
+    var maj = seg(t, 7.2, 8.4);
+    $('#major').style.strokeDasharray = '230'; $('#major').style.strokeDashoffset = 230 * (1 - maj);
+    $('#major').style.opacity = maj ? .6 * s2 : 0;
+    $('#majorLbl').style.opacity = Math.min(seg(t, 8.2, 8.6), s2);
+    var pulse = 1 + .12 * Math.sin(t * 4);
+    $('#haloL').style.opacity = Math.min(seg(t, 11.6, 12.2), s3); $('#haloL').setAttribute('r', 110 * pulse);
+    $('#haloR').style.opacity = Math.min(seg(t, 13.4, 14), s3); $('#haloR').setAttribute('r', 110 * pulse);
+    $('#riseLbl').style.opacity = Math.min(seg(t, 12, 12.4), s3);
+    $('#setLbl').style.opacity = Math.min(seg(t, 13.8, 14.2), s3);
+
+    // Scene 4: the four periods drop into the day bar one by one
+    BLOCKS.forEach(function (k, n) { var g = seg(t, 17.4 + n * .55, 18 + n * .55, out); k[3].setAttribute('width', (k[1] - k[0]) * HOURPX * g); });
+    $('#legend').style.opacity = seg(t, 19.8, 20.3);
+
+    // --- Fish choreography per scene (positions in stage px, sea starts at y = 1180)
+    fish.forEach(function (f, i) {
+      var x, y, dir, w = 8, o = 1;
+      if (t < 4.5) {                         // lazy drift
+        dir = i % 2 ? 1 : -1;
+        var sp = 40 + i * 6, span = 1300;
+        x = dir > 0 ? ((i * 160 + t * sp) % span) - 100 : 1180 - ((i * 160 + t * sp) % span);
+        y = 1290 + (i % 4) * 75;
+        w = 5; o = clamp(t / .6) * (1 - seg(t, 4.1, 4.5));
+      } else if (t < 10.5) {                 // fish wake up and gather under the moon as it nears the top
+        var g = seg(t, 7.4, 9.4);
+        dir = i % 2 ? 1 : -1;
+        var sx = ((i * 140 + (t - 4.5) * 50 * (i % 2 ? 1 : -1)) % 1200 + 1200) % 1200 - 60;
+        var cx = 540 + ((i % 3) - 1) * 130 + Math.sin(t * 2 + i) * 20, cy = 1280 + Math.floor(i / 3) * 80;
+        x = lerp(sx, cx, g); y = lerp(1300 + (i % 4) * 70, cy, g);
+        if (g > .97) dir = Math.sin(t * 1.4 + i) > 0 ? 1 : -1;
+        w = lerp(6, 18, g); o = s2;
+      } else if (t < 16.5) {                 // two groups: near moonrise (left) and moonset (right)
+        var left = i % 2 === 0, k = Math.floor(i / 2);
+        var gx = left ? 150 + (k % 3) * 85 : 930 - (k % 3) * 85;
+        var g3 = seg(t, left ? 11.6 : 13.4, left ? 13 : 14.8);
+        x = lerp(540 + (left ? 60 : -60), gx, g3) + Math.sin(t * 1.8 + i) * 14;
+        y = 1290 + (k % 3) * 80;
+        dir = g3 < .95 ? (left ? -1 : 1) : (Math.sin(t * 1.3 + i) > 0 ? 1 : -1);
+        w = g3 < .95 ? 14 : 9; o = s3;
+      } else {                               // active lanes for scenes 4 and 5
+        dir = i % 2 ? 1 : -1;
+        var lane = (t - 16.5) * 110 + i * 190;
+        x = dir > 0 ? (lane % 1400) - 160 : 1240 - (lane % 1400);
+        y = 1290 + (i % 3) * 85;
+        w = 12; o = t < 22.5 ? s4 : s5 * (i < 6 ? 1 : 0);
+      }
+      putFish(f, x, y, dir, t, w, o);
+    });
+
+    // Scene 5 text
+    $('#s5 img').style.transform = 'scale(' + (.6 + .4 * seg(t, 22.5, 23.3, out)) + ')';
+    show($('#s5 .p'), seg(t, 23.2, 23.6), 20 * (1 - seg(t, 23.2, 23.7, out)));
+    show($('#s5 .url'), seg(t, 23.5, 23.9), 20 * (1 - seg(t, 23.5, 24, out)));
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>
