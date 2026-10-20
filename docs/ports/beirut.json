@@ -10,7 +10,7 @@
     "timezone": "Asia/Beirut"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/beirut",
-  "generated_utc": "2026-10-20T11:09:05.424Z",
+  "generated_utc": "2026-10-20T12:35:43.861Z",
   "tide_type_ar": "مختلط، نصف يومي غالباً",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
@@ -48,7 +48,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.69
+        "illumination": 0.7
       }
     },
     {
@@ -188,7 +188,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.97
+        "illumination": 0.98
       }
     },
     {

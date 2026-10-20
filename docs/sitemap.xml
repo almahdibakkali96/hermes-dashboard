@@ -339,6 +339,30 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://almahdibakkali96.github.io/hermes-dashboard/articles/solunar-fishing-hours</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almahdibakkali96.github.io/hermes-dashboard/articles/moon-phases-fishing</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almahdibakkali96.github.io/hermes-dashboard/articles/tide-safety-rule-of-twelfths</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://almahdibakkali96.github.io/hermes-dashboard/articles/gulf-tides-fishing-guide</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://almahdibakkali96.github.io/hermes-dashboard/articles/how-to-read-tide-table</loc>
     <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -365,6 +389,11 @@
     <loc>https://almahdibakkali96.github.io/hermes-dashboard/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://almahdibakkali96.github.io/hermes-dashboard/contact</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://almahdibakkali96.github.io/hermes-dashboard/disclaimer</loc>

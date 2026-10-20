@@ -1,0 +1,80 @@
+---
+// Contact form → "Messages" tab of the sign-ups Google Sheet (see tools/signup-sheet). No email address is published.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SIGNUP_URL } from '../lib/shop';
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const subjects = ['سؤال عن المد والجزر', 'خطأ في بيانات ميناء', 'اقتراح ميناء جديد', 'إعلان أو تعاون', 'أخرى'];
+---
+<BaseLayout title="اتصل بنا" description="تواصل مع فريق ArabTides: أسئلة عن المد والجزر، تصحيح بيانات ميناء، اقتراح ميناء جديد، أو إعلان وتعاون.">
+  <div class="page-head">
+    <div class="max-w-2xl mx-auto px-4 py-8">
+      <nav class="breadcrumb" aria-label="مسار التنقل"><a href={BASE}>الرئيسية</a><span class="sep">/</span><span aria-current="page">اتصل بنا</span></nav>
+      <h1 class="mt-3 text-3xl font-bold display">اتصل بنا</h1>
+      <p class="mt-2 text-[var(--text-secondary)] leading-relaxed">لديك سؤال، أو لاحظت خطأً في بيانات ميناء، أو تريد أن نضيف ميناءك؟ اكتب لنا وسنرد على بريدك الإلكتروني في أقرب وقت.</p>
+    </div>
+  </div>
+  <main id="main" class="max-w-2xl mx-auto px-4 py-8 w-full">
+    <form class="signup card p-6 space-y-4" id="contact" data-endpoint={SIGNUP_URL} novalidate>
+      <input type="hidden" name="form" value="contact" />
+      <!-- Honeypot: bots fill it, people never see it -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+      <div>
+        <label for="c-name" class="block text-sm font-semibold mb-1">الاسم</label>
+        <input id="c-name" name="name" type="text" autocomplete="name" maxlength="100" class="signup-input w-full" />
+      </div>
+      <div>
+        <label for="c-email" class="block text-sm font-semibold mb-1">بريدك الإلكتروني <span class="text-[var(--text-muted)] font-normal">(لنرد عليك)</span></label>
+        <input id="c-email" name="reply_to" type="email" required inputmode="email" autocomplete="email" dir="ltr" placeholder="your@email.com" class="signup-input w-full" />
+      </div>
+      <div>
+        <label for="c-subject" class="block text-sm font-semibold mb-1">الموضوع</label>
+        <select id="c-subject" name="subject" class="signup-input w-full">
+          {subjects.map(s => <option value={s}>{s}</option>)}
+        </select>
+      </div>
+      <div>
+        <label for="c-message" class="block text-sm font-semibold mb-1">رسالتك</label>
+        <textarea id="c-message" name="message" required rows="6" maxlength="5000" class="signup-input w-full"></textarea>
+      </div>
+      <p class="signup-error" role="alert" hidden></p>
+      <button type="submit" class="signup-btn">إرسال الرسالة</button>
+      <p class="signup-note">نستخدم بريدك فقط للرد على رسالتك، ولا نضيفه إلى أي قائمة بريدية. <a href={`${BASE}privacy`}>الخصوصية</a></p>
+      <div class="signup-done" hidden>
+        <p class="font-semibold">✓ شكراً! وصلتنا رسالتك، وسنرد عليك قريباً.</p>
+      </div>
+    </form>
+
+    <div class="card p-6 mt-6 text-[var(--text-secondary)] leading-relaxed space-y-3">
+      <h2 class="text-lg font-semibold text-[var(--text-primary)]">قبل أن تكتب</h2>
+      <p>📋 كيف نحسب المد والقمر وتقييم الصيد؟ الجواب في <a href={`${BASE}methodology`} class="text-[var(--accent)] underline">صفحة المنهجية</a>.</p>
+      <p>⚠️ أرقامنا تقديرات فلكية ولا تُستخدم للملاحة. التفاصيل في <a href={`${BASE}disclaimer`} class="text-[var(--accent)] underline">إخلاء المسؤولية</a>.</p>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#contact')!;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const email = String(data.get('reply_to') || '').trim();
+    const message = String(data.get('message') || '').trim();
+    const err = form.querySelector<HTMLElement>('.signup-error')!;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.textContent = 'أدخل بريداً إلكترونياً صحيحاً.'; err.hidden = false; return; }
+    if (!message) { err.textContent = 'اكتب رسالتك أولاً.'; err.hidden = false; return; }
+    err.hidden = true;
+    const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    btn.disabled = true; btn.textContent = '...';
+    data.set('page', location.pathname);
+    try {
+      // Apps Script answers with a redirect; no-cors keeps the browser happy, the row is written either way
+      await fetch(form.dataset.endpoint!, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data as unknown as Record<string, string>) });
+    } catch {
+      err.textContent = 'تعذّر الإرسال. تحقق من اتصالك وحاول مرة أخرى.'; err.hidden = false;
+      btn.disabled = false; btn.textContent = 'إرسال الرسالة';
+      return;
+    }
+    form.querySelectorAll(':scope > div:not(.signup-done), :scope > button, :scope > .signup-note').forEach(el => el.remove());
+    form.querySelector<HTMLElement>('.signup-done')!.hidden = false;
+  });
+</script>

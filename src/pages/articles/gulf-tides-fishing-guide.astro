@@ -1,0 +1,118 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { yearStats } from '../../lib/seas';
+import { countryName } from '../../lib/countries';
+import { dayExtremes, getTimezoneOffset, formatTime, type Constituent } from '../../lib/tides';
+
+const meta = articleBySlug('gulf-tides-fishing-guide');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const today = new Date();
+const year = today.getUTCFullYear();
+const m = (cm: number) => (cm / 100).toFixed(1);
+
+// Gulf ports, north to south as the year statistics rank them (largest range first)
+const gulf = (await yearStats(year)).filter(r => r.sea === 'gulf');
+const rows = [];
+for (const r of gulf) {
+  const port = (await import(`../../data/places/${r.id}.json`)).default;
+  const tz = getTimezoneOffset(port.timezone, today);
+  const ex = dayExtremes(port.constituents as Record<string, Constituent>, today, tz);
+  const hs = ex.filter(e => e.type === 'high'), ls = ex.filter(e => e.type === 'low');
+  rows.push({
+    ...r,
+    highs: hs.map(e => `${formatTime(e.time, tz)} (${Math.round(e.height)})`),
+    lows: ls.map(e => `${formatTime(e.time, tz)} (${Math.round(e.height)})`),
+    todayRange: hs.length && ls.length ? Math.round(Math.max(...hs.map(e => e.height)) - Math.min(...ls.map(e => e.height))) : 0,
+  });
+}
+const top = gulf[0], low = gulf[gulf.length - 1];
+const dateAr = today.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'Asia/Riyadh', day: 'numeric', month: 'long', year: 'numeric' });
+const maxR = top.maxRange;
+
+const toc = [
+  { id: 'numbers', label: 'المد في موانئ الخليج بالأرقام' },
+  { id: 'why', label: 'لماذا يختلف المد داخل الخليج؟' },
+  { id: 'mixed', label: 'المد المختلط: مدّان غير متساويين' },
+  { id: 'today', label: 'أوقات المد اليوم' },
+  { id: 'fishing', label: 'نصائح للصيد في الخليج' },
+];
+const takeaways = [
+  `أقوى مد في الخليج العربي في <strong>${top.name_ar}</strong>: يصل المدى إلى نحو <strong>${m(top.maxRange)} م</strong> في ${year}، وأضعفه في <strong>${low.name_ar}</strong> (${m(low.maxRange)} م).`,
+  'المد في معظم الخليج <strong>مختلط</strong>: مدّان عاليان في اليوم غالباً، لكن أحدهما أعلى بكثير من الآخر.',
+  'المد يدخل من <strong>مضيق هرمز</strong> ويدور داخل الخليج، فيكبر في رأسه الشمالي ويصغر في وسطه.',
+  'في الصيف الحار، اجمع بين <strong>حركة المد</strong> وساعات <strong>الفجر والليل</strong>.',
+];
+const faq = [
+  { q: 'كم يبلغ المد والجزر في الخليج العربي؟', a: `يختلف كثيراً من ميناء لآخر. حسب حسابات ArabTides لعام ${year}، أقصى مدى يومي نحو ${m(top.maxRange)} م في ${top.name_ar}، وينخفض إلى نحو ${m(low.maxRange)} م في ${low.name_ar}. وفي أيام التربيع يكون المدى أصغر بكثير.` },
+  { q: 'لماذا يأتي في الخليج مد عالٍ قوي وآخر ضعيف في نفس اليوم؟', a: 'لأن المد في الخليج مختلط: تجتمع فيه موجة نصف يومية (مرتين في اليوم) وموجة يومية (مرة في اليوم) بقوة متقاربة. حين تتوافقان يرتفع أحد المدّين كثيراً، وحين تتعاكسان يضعف الآخر.' },
+  { q: 'هل الفجيرة ومسقط على الخليج العربي؟', a: 'لا، تقعان على خليج عُمان وبحر العرب خارج مضيق هرمز، ولذلك نضعهما في ArabTides مع موانئ المحيط الهندي. المد فيهما مختلف عن داخل الخليج.' },
+  { q: 'هل أحتاج رخصة للصيد في الخليج؟', a: 'في عدة دول خليجية يلزم ترخيص للصيد الترفيهي، وبعض الأنواع عليها حظر موسمي أو حد أدنى للحجم. تحقق دائماً من الجهة المختصة في بلدك قبل الصيد.' },
+  { q: 'ما أفضل وقت للصيد في الخليج صيفاً؟', a: 'الحرارة العالية تقلل نشاط الأسماك في المياه الضحلة نهاراً. الأفضل غالباً الفجر والمساء والليل، خاصة إذا وافقت ساعتين قبل مد عالٍ قوي.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={gulf.map(r => r.id)}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    <path d="M60 30 C90 40 110 70 150 100 C190 130 230 160 250 210 L270 230" fill="none" stroke="#2dd4bf" stroke-width="34" stroke-linecap="round" opacity=".35"/>
+    <circle cx="70" cy="34" r="9" fill="#fde68a"/><circle cx="150" cy="100" r="7" fill="#5eead4"/><circle cx="235" cy="185" r="7" fill="#5eead4"/>
+    <text x="90" y="30" fill="#fde68a" font-size="15" font-family="Noto Naskh Arabic">الكويت</text>
+    <text x="250" y="250" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="Noto Naskh Arabic">هرمز</text>
+  </svg>
+
+  <h2 id="numbers">المد في موانئ الخليج بالأرقام</h2>
+  <p>الخليج العربي بحر ضحل شبه مغلق، متوسط عمقه بضع عشرات من الأمتار فقط، ويتصل بالمحيط عبر <strong>مضيق هرمز</strong>. هذا أقصى وأدنى مدى يومي في موانئه خلال {year}:</p>
+  <figure class="figure">
+    <div class="space-y-3">
+      {gulf.map(r => (
+        <a href={`${BASE}ports/${r.id}`} class="block group">
+          <div class="flex justify-between text-sm"><span class="font-semibold group-hover:text-[var(--accent)]">{r.name_ar} <span class="text-[var(--text-muted)] font-normal">· {countryName(r.country)}</span></span><span><span class="latin">{m(r.maxRange)}</span> م</span></div>
+          <div class="h-3 rounded-full bg-[#eef2f6] mt-1"><div class="h-3 rounded-full" style={`width:${(r.maxRange / maxR) * 100}%;background:#0d9488`}></div></div>
+        </a>
+      ))}
+    </div>
+    <figcaption>أقصى فرق بين أعلى مد وأدنى جزر في يوم واحد خلال {year}. <a href={`${BASE}articles/strongest-tides-arab-world`}>ترتيب كل الموانئ العربية ←</a></figcaption>
+  </figure>
+  <table class="data-table">
+    <thead><tr><th>الميناء</th><th>أقصى مدى</th><th>أدنى مدى</th><th>نوع المد</th></tr></thead>
+    <tbody>
+      {gulf.map(r => <tr><td>{r.name_ar}</td><td><span class="latin">{m(r.maxRange)}</span> م</td><td><span class="latin">{r.minRange}</span> سم</td><td>{r.tideTypeAr}</td></tr>)}
+    </tbody>
+  </table>
+
+  <h2 id="why">لماذا يختلف المد داخل الخليج؟</h2>
+  <p>موجة المد تدخل من مضيق هرمز ثم <strong>تدور داخل الخليج</strong> وتنعكس عن سواحله. في رأسه الشمالي، عند <strong>الكويت وأم قصر وشط العرب</strong>، يتراكم الماء في نهاية الحوض فيكبر المدى. أما في الوسط، قرب <strong>البحرين وقطر</strong>، فتقع مناطق قريبة من «نقاط انعدام المد» لبعض موجات المد، فيصغر المدى هناك.</p>
+  <div class="callout fact"><span class="ic">💡</span><div>«نقطة انعدام المد» (النقطة الأمفيدرومية) مكان يكاد لا يتغير فيه مستوى الماء، وتدور موجة المد حوله. كلما ابتعدت عنها كبر المد.</div></div>
+
+  <h2 id="mixed">المد المختلط: مدّان غير متساويين</h2>
+  <p>في الدار البيضاء يأتي مدّان متشابهان كل يوم. أما في الخليج فالمد <strong>مختلط</strong>: غالباً مدّان عاليان وجزران منخفضان، لكن بارتفاعات مختلفة جداً، وفي بعض الأيام قد يكاد أحد المدّين يختفي.</p>
+  <div class="pull">في الخليج لا يكفي أن تعرف وقت المد العالي: اعرف أيّ المدّين هو القوي.</div>
+  <p>المد العالي القوي يحرك الماء أكثر ويغمر مساحات أوسع، لذلك هو الأهم للصياد. في جدول كل ميناء على ArabTides تجد ارتفاع كل مد بالسنتيمتر حتى تميّز القوي من الضعيف.</p>
+
+  <h2 id="today">أوقات المد اليوم</h2>
+  <p>المد العالي والجزر المنخفض اليوم ({dateAr}) بالتوقيت المحلي، والارتفاع بالسنتيمتر بين قوسين:</p>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead><tr><th>الميناء</th><th>▲ المد العالي</th><th>▼ الجزر المنخفض</th><th>مدى اليوم</th></tr></thead>
+      <tbody>
+        {rows.map(r => (
+          <tr>
+            <td><a href={`${BASE}ports/${r.id}`} class="text-[var(--accent)] underline">{r.name_ar}</a></td>
+            <td class="latin">{r.highs.map(s => <div>{s}</div>)}</td>
+            <td class="latin">{r.lows.map(s => <div>{s}</div>)}</td>
+            <td><span class="latin">{r.todayRange}</span> سم</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="fishing">نصائح للصيد في الخليج</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-5">
+    <div class="card p-4"><div class="font-semibold">🌅 الفجر والليل</div><p class="text-sm text-[var(--text-secondary)] !my-1">حرارة الصيف ترفع حرارة المياه الضحلة نهاراً فتقل حركة الأسماك. الصيد في الفجر والمساء والليل أنشط غالباً.</p></div>
+    <div class="card p-4"><div class="font-semibold">📈 المد القوي أولاً</div><p class="text-sm text-[var(--text-secondary)] !my-1">اختر الساعتين قبل المد العالي الأقوى في اليوم، لا الأضعف.</p></div>
+    <div class="card p-4"><div class="font-semibold">🪸 الشعاب والقنوات</div><p class="text-sm text-[var(--text-secondary)] !my-1">عند الجزر تتجمع الأسماك حول الشعاب والقنوات الأعمق، مثل الهامور والشعري حول الصخور.</p></div>
+    <div class="card p-4"><div class="font-semibold">⚠️ السهول المكشوفة</div><p class="text-sm text-[var(--text-secondary)] !my-1">في الكويت وشمال الخليج ينكشف قاع واسع عند الجزر ويعود الماء بسرعة. <a href={`${BASE}articles/tide-safety-rule-of-twelfths`} class="text-[var(--accent)] underline">اقرأ قاعدة الاثني عشر</a>.</p></div>
+  </div>
+  <p>وانتبه: في معظم البحار يأتي أقوى مد قرب <strong>البدر والمحاق</strong>، أما في الخليج فالمد المختلط يتأثر أيضاً بـ<strong>ميل القمر</strong>، فقد يأتي أكبر مد في أيام أخرى. لذلك اعتمد على تقويم ميناءك لا على طور القمر وحده. <a href={`${BASE}articles/moon-phases-fishing`}>أطوار القمر والصيد ←</a></p>
+</ArticleLayout>

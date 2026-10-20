@@ -22,6 +22,12 @@ The website's sign-up forms (guide page, homepage banner, port pages) send each 
 
 New sign-ups appear in the **Signups** tab with the columns: date, email, source (`home`, `port`, `guide`), page, port. Duplicate emails are skipped.
 
+## Contact messages
+
+The contact page (`/contact`) posts to the same web app. Messages go to a separate **Messages** tab with the columns: date, name, email, subject, message, page. They are never added to the sign-up list.
+
+This needs the version of `Code.gs` that has `contact_`. To check, open the `/exec` URL: the answer must include `"contact":true`. If it doesn't, paste the new `Code.gs` and publish a new version (see below). Until then, contact messages are not saved.
+
 ## Later
 
 When you're ready to send emails, use **File → Download → CSV** and import it into Brevo, Mailchimp or similar.

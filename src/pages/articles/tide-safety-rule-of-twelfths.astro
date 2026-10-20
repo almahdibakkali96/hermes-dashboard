@@ -1,0 +1,110 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { dayExtremes, predictHeight, getTimezoneOffset, formatTime, type Constituent } from '../../lib/tides';
+
+const meta = articleBySlug('tide-safety-rule-of-twelfths');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const today = new Date();
+
+// --- Kuwait City: the first rising tide (low → next high) from today, hour by hour
+const kw = (await import('../../data/places/kuwait-city.json')).default;
+const cons = kw.constituents as Record<string, Constituent>;
+const tz = getTimezoneOffset(kw.timezone, today);
+const ex = [...dayExtremes(cons, today, tz), ...dayExtremes(cons, new Date(today.getTime() + 86400000), tz)]
+  .sort((a, b) => a.time.getTime() - b.time.getTime());
+// Mixed tide: the two daily rises differ a lot, so take the largest one that starts today
+const localDay = (d: Date) => new Date(d.getTime() + tz * 60000).toISOString().slice(0, 10);
+const rises = ex.map((e, i) => [e, ex[i + 1]] as const).filter(([a, b]) => a.type === 'low' && b?.type === 'high');
+const pairs = rises.filter(([a]) => localDay(a.time) === localDay(today));
+const [low, high] = (pairs.length ? pairs : rises).reduce((best, p) => (p[1].height - p[0].height > best[1].height - best[0].height ? p : best));
+const rise = high.height - low.height;
+const dur = high.time.getTime() - low.time.getTime();
+const RULE = [1, 2, 3, 3, 2, 1];
+const steps = RULE.map((k, n) => {
+  const a = predictHeight(cons, new Date(low.time.getTime() + dur * n / 6));
+  const b = predictHeight(cons, new Date(low.time.getTime() + dur * (n + 1) / 6));
+  return { n: n + 1, rule: Math.round(rise * k / 12), model: Math.round(b - a), k };
+});
+const durH = Math.floor(dur / 3600000), durM = Math.round((dur % 3600000) / 60000);
+const dateAr = low.time.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: kw.timezone, day: 'numeric', month: 'long' });
+const maxStep = Math.max(...steps.map(s => Math.max(s.rule, s.model)));
+
+const toc = [
+  { id: 'rule', label: 'قاعدة الاثني عشر' },
+  { id: 'example', label: 'مثال حقيقي من الكويت' },
+  { id: 'dangers', label: 'أين يحاصرك المد؟' },
+  { id: 'checklist', label: 'قائمة السلامة قبل الرحلة' },
+];
+const takeaways = [
+  'الماء لا يرتفع بسرعة ثابتة: في <strong>الساعتين الثالثة والرابعة</strong> من المد يرتفع <strong>نصف المدى كله</strong>.',
+  'قاعدة الاثني عشر: <strong>1، 2، 3، 3، 2، 1</strong> من اثني عشر جزءاً من المدى في كل ساعة من الساعات الست.',
+  `في الكويت اليوم يرتفع الماء نحو <strong>${(rise / 100).toFixed(1)} م</strong> في ${durH} ساعات و${durM} دقيقة، منها قرابة <strong>${Math.round(steps[2].model + steps[3].model)} سم</strong> في الثلث الأوسط من المد.`,
+  'قبل أن تمشي على رمال أو صخور مكشوفة عند الجزر، <strong>اعرف موعد المد القادم</strong> وارجع قبله بساعتين على الأقل.',
+];
+const faq = [
+  { q: 'ما هي قاعدة الاثني عشر في المد والجزر؟', a: 'طريقة تقريبية لمعرفة كم يرتفع الماء أو ينخفض في كل ساعة بين الجزر والمد: في الساعة الأولى 1/12 من المدى، والثانية 2/12، والثالثة 3/12، والرابعة 3/12، والخامسة 2/12، والسادسة 1/12.' },
+  { q: 'هل القاعدة دقيقة في كل الموانئ؟', a: 'هي دقيقة نسبياً في الموانئ ذات المد نصف اليومي المنتظم مثل الدار البيضاء. في الموانئ ذات المد المختلط، مثل معظم الخليج العربي، قد تطول دورة المد أو تقصر فيتغير التوزيع، لذلك استخدمها كتقدير فقط.' },
+  { q: 'ما أخطر وقت للصيد على الصخور؟', a: 'منتصف المد الصاعد، أي الساعتان الثالثة والرابعة بعد الجزر، لأن الماء يرتفع فيهما بأسرع معدل، وقد يقطع الطريق إلى الشاطئ في دقائق.' },
+  { q: 'هل يكفي أن أعرف وقت المد العالي؟', a: 'لا. اعرف أيضاً مقدار المدى في ذلك اليوم: يوم المد الربيعي (قرب البدر والمحاق) يرتفع الماء أعلى وأسرع من يوم المد المحاقي. وراقب الرياح، فالرياح القوية نحو الشاطئ ترفع الماء فوق المتوقع.' },
+  { q: 'هل جداول ArabTides كافية لسلامتي؟', a: 'هي تقديرات فلكية مفيدة للتخطيط، لكنها لا تحسب أثر الطقس والأمواج. اتبع دائماً تعليمات خفر السواحل والجهات الرسمية في بلدك، ولا تعتمد على الجداول للملاحة.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={['kuwait-city', 'umm-qasr', 'casablanca', 'agadir']}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    {[1, 2, 3, 3, 2, 1].map((k, n) => <rect x={30 + n * 42} y={200 - k * 45} width="32" height={k * 45} rx="6" fill={k === 3 ? '#fde68a' : '#2dd4bf'} opacity=".85"/>)}
+    <line x1="20" x2="280" y1="200" y2="200" stroke="#5eead4" stroke-width="3"/>
+    {[1, 2, 3, 3, 2, 1].map((k, n) => <text x={46 + n * 42} y="228" fill="#e2e8f0" font-size="18" text-anchor="middle" font-family="Inter">{k}</text>)}
+  </svg>
+
+  <h2 id="rule">قاعدة الاثني عشر</h2>
+  <p>بين الجزر والمد نحو <strong>6 ساعات</strong>. لكن الماء لا يرتفع فيها بنفس السرعة: يبدأ ببطء، ثم يتسارع في المنتصف، ثم يتباطأ قبل الذروة. يلخّص البحّارة ذلك في <strong>قاعدة الاثني عشر</strong>: قسّم المدى إلى 12 جزءاً، فيرتفع الماء في كل ساعة:</p>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead><tr><th>الساعة</th><th>الأولى</th><th>الثانية</th><th>الثالثة</th><th>الرابعة</th><th>الخامسة</th><th>السادسة</th></tr></thead>
+      <tbody><tr><td>من المدى</td>{RULE.map(k => <td class="latin">{k}/12</td>)}</tr></tbody>
+    </table>
+  </div>
+  <div class="pull">في الساعتين الوسطيين يرتفع نصف الماء كله. هنا تقع معظم حوادث الحصار.</div>
+  <p>ونفس القاعدة تنطبق على الجزر بالعكس: ينخفض الماء ببطء أولاً، ثم بسرعة، ثم ببطء.</p>
+
+  <h2 id="example">مثال حقيقي من الكويت</h2>
+  <p>في مدينة الكويت ({dateAr}) يكون الجزر عند <strong class="latin">{formatTime(low.time, tz)}</strong> والمد العالي عند <strong class="latin">{formatTime(high.time, tz)}</strong>، والفرق بينهما <strong><span class="latin">{Math.round(rise)}</span> سم</strong>. هذا ما تتوقعه القاعدة لكل سدس من هذه المدة، مقارنة بحسابات ArabTides:</p>
+  <figure class="figure">
+    <div class="chart-ltr space-y-2">
+      {steps.map(s => (
+        <div class="flex items-center gap-3 text-sm">
+          <span class="w-6 latin text-[var(--text-muted)]">{s.n}</span>
+          <div class="flex-1 space-y-1">
+            <div class="h-3 rounded-full" style={`width:${(s.rule / maxStep) * 100}%;background:#99f6e4`}></div>
+            <div class="h-3 rounded-full" style={`width:${(s.model / maxStep) * 100}%;background:#0d9488`}></div>
+          </div>
+          <span class="w-28 latin text-end">{s.rule} / {s.model} cm</span>
+        </div>
+      ))}
+    </div>
+    <figcaption>الشريط الفاتح: قاعدة الاثني عشر · الشريط الداكن: حسابات ArabTides. بالسنتيمتر، لكل سدس من مدة المد الصاعد ({durH} س {durM} د).</figcaption>
+  </figure>
+  <p>القاعدة ليست مثالية، لكنها تعطي الصورة الصحيحة: <strong>الماء في منتصف المد يرتفع أسرع بثلاث مرات تقريباً</strong> من أوله وآخره. في ميناء بمد قوي مثل الكويت، هذا يعني عشرات السنتيمترات في الساعة الواحدة.</p>
+
+  <h2 id="dangers">أين يحاصرك المد؟</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-5">
+    <div class="card p-4"><div class="font-semibold">🏖️ السهول الرملية والطينية</div><p class="text-sm text-[var(--text-secondary)] !my-1">في الموانئ ذات المد القوي ينكشف قاع واسع عند الجزر. حين يعود الماء يتقدم بسرعة على الأرض المستوية، وقد يصبح الطريق خلفك أعمق مما أمامك.</p></div>
+    <div class="card p-4"><div class="font-semibold">🪨 الصخور والجزر الصغيرة</div><p class="text-sm text-[var(--text-secondary)] !my-1">صخرة تصل إليها مشياً عند الجزر قد تصبح جزيرة بعد ساعتين. تأكد أن طريق العودة لا يمر بمنخفض يمتلئ أولاً.</p></div>
+    <div class="card p-4"><div class="font-semibold">🌊 القنوات والمجاري</div><p class="text-sm text-[var(--text-secondary)] !my-1">الماء يعود أولاً من القنوات العميقة، فتمتلئ خلفك قبل أن تلاحظ ارتفاع الماء حولك. والتيار فيها أقوى.</p></div>
+    <div class="card p-4"><div class="font-semibold">💨 الرياح والأمواج</div><p class="text-sm text-[var(--text-secondary)] !my-1">الرياح القوية نحو الشاطئ ترفع الماء فوق الأرقام المحسوبة، والأمواج تصل أبعد. في الأيام العاصفة ضاعف هامش الأمان.</p></div>
+  </div>
+  <p>الخطر أكبر في الموانئ ذات <a href={`${BASE}articles/strongest-tides-arab-world`}>المد القوي</a>، مثل الكويت وأم قصر والدار البيضاء وأكادير، وفي أيام <strong>المد الربيعي</strong> قرب البدر والمحاق.</p>
+
+  <h2 id="checklist">قائمة السلامة قبل الرحلة</h2>
+  <ol class="list-decimal ps-6 space-y-2 my-4">
+    <li>افتح صفحة <strong>أقرب ميناء</strong> لمكانك واعرف وقت <strong>الجزر والمد القادمين</strong> ومدى اليوم.</li>
+    <li>خطط لتكون على أرض آمنة قبل <strong>منتصف المد الصاعد</strong> (نحو 3 ساعات بعد الجزر).</li>
+    <li>انظر خلفك كل فترة: هل تغير طريق العودة؟</li>
+    <li>لا تصطد وحدك على الصخور أو السهول المكشوفة، وأخبر أحداً بمكانك وموعد عودتك.</li>
+    <li>احمل هاتفاً مشحوناً في كيس مقاوم للماء، وارتدِ سترة نجاة في الأماكن الخطرة.</li>
+    <li>انتبه لنشرات الطقس وتحذيرات الجهات الرسمية، فهي مقدَّمة على أي جدول.</li>
+  </ol>
+  <div class="callout warn"><span class="ic">⚠️</span><div>إذا حاصرك الماء، <strong>لا تحاول السباحة عكس التيار</strong>. اصعد إلى أعلى نقطة ممكنة واتصل بالطوارئ، فالماء سيعود للانخفاض بعد المد.</div></div>
+</ArticleLayout>

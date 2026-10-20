@@ -49,6 +49,10 @@ Key facts for answering questions:
 - [موروني — Moroni, جزر القمر](https://almahdibakkali96.github.io/hermes-dashboard/ports/moroni): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/moroni.json
 
 ## Articles
+- [ساعات الصيد الذهبية: ما هي فترات السولونار وكيف تستخدمها؟](https://almahdibakkali96.github.io/hermes-dashboard/articles/solunar-fishing-hours): كيف يحدد عبور القمر وشروقه وغروبه ساعات نشاط الأسماك، وكيف تجمعها مع حركة المد لتختار ساعة الصيد.
+- [أطوار القمر والصيد: هل البدر أفضل أم المحاق؟](https://almahdibakkali96.github.io/hermes-dashboard/articles/moon-phases-fishing): أطوار القمر الثمانية وما يعنيه كل طور للمد والصيد، مع مواعيد البدر والمحاق القادمة ومدى المد عندها.
+- [السلامة أثناء الصيد: قاعدة الاثني عشر وكيف لا يحاصرك المد](https://almahdibakkali96.github.io/hermes-dashboard/articles/tide-safety-rule-of-twelfths): قاعدة بسيطة لتقدير سرعة ارتفاع الماء، مثال حقيقي من الكويت، وقائمة سلامة قبل كل رحلة صيد.
+- [المد والجزر في الخليج العربي: دليل الصياد من الكويت إلى دبي](https://almahdibakkali96.github.io/hermes-dashboard/articles/gulf-tides-fishing-guide): أرقام المد في موانئ الخليج العربي الستة، وشرح المد المختلط، وأوقات اليوم، ونصائح الصيد في الخليج.
 - [كيف تقرأ جدول المد والجزر؟ دليل مبسّط للصيادين](https://almahdibakkali96.github.io/hermes-dashboard/articles/how-to-read-tide-table): شرح خطوة بخطوة لقراءة أوقات المد والجزر وارتفاعاتها، والفرق بين المد الربيعي والمحاقي، ومتى تخرج للصيد.
 - [أين يكون المد أقوى في العالم العربي؟ ترتيب 36 ميناءً](https://almahdibakkali96.github.io/hermes-dashboard/articles/strongest-tides-arab-world): ترتيب الموانئ العربية حسب أقصى مدى يومي للمد والجزر خلال السنة، محسوب من نموذج EOT20، مع شرح الأسباب لكل بحر.
 

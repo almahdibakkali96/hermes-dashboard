@@ -32,6 +32,7 @@ export async function GET({ site }: { site: URL | undefined }) {
   // Static pages
   urls.push({ loc: `${origin}${BASE}/methodology`, priority: 0.6, changefreq: 'monthly' });
   urls.push({ loc: `${origin}${BASE}/about`, priority: 0.5, changefreq: 'monthly' });
+  urls.push({ loc: `${origin}${BASE}/contact`, priority: 0.4, changefreq: 'yearly' });
   urls.push({ loc: `${origin}${BASE}/disclaimer`, priority: 0.3, changefreq: 'yearly' });
   urls.push({ loc: `${origin}${BASE}/privacy`, priority: 0.2, changefreq: 'yearly' });
 

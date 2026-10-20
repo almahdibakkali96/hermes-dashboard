@@ -157,6 +157,52 @@ function hhmm(hours: number | null): string | null {
  * Sunrise/sunset for the local calendar day.
  * Accuracy: ~1-2 minutes (standard -0.833° altitude for refraction + solar disc).
  */
+/**
+ * Exact time of a principal moon phase (Meeus, Astronomical Algorithms ch. 49, main periodic terms;
+ * accurate to a few minutes). k = lunations since 2000-01-06, with .0 new, .25 first quarter, .5 full, .75 last quarter.
+ */
+function principalPhaseTime(k: number): Date {
+  const T = k / 1236.85, s = (x: number) => Math.sin(x * RAD), c = (x: number) => Math.cos(x * RAD);
+  let jde = 2451550.09766 + 29.530588861 * k + 0.00015437 * T * T - 0.00000015 * T ** 3 + 0.00000000073 * T ** 4;
+  const E = 1 - 0.002516 * T - 0.0000074 * T * T;
+  const M = 2.5534 + 29.1053567 * k - 0.0000014 * T * T;
+  const Mp = 201.5643 + 385.81693528 * k + 0.0107582 * T * T + 0.00001238 * T ** 3;
+  const F = 160.7108 + 390.67050284 * k - 0.0016118 * T * T - 0.00000227 * T ** 3;
+  const Om = 124.7746 - 1.56375588 * k + 0.0020672 * T * T;
+  const q = ((k % 1) + 1) % 1;
+  if (q === 0 || q === 0.5) {
+    const full = q === 0.5;
+    jde += (full ? -0.40614 : -0.4072) * s(Mp) + (full ? 0.17302 : 0.17241) * E * s(M) + (full ? 0.01614 : 0.01608) * s(2 * Mp)
+      + (full ? 0.01043 : 0.01039) * s(2 * F) + (full ? 0.00734 : 0.00739) * E * s(Mp - M) - (full ? 0.00515 : 0.00514) * E * s(Mp + M)
+      + (full ? 0.00209 : 0.00208) * E * E * s(2 * M) - 0.00111 * s(Mp - 2 * F) - 0.00057 * s(Mp + 2 * F) + 0.00056 * E * s(2 * Mp + M)
+      - 0.00042 * s(3 * Mp) + 0.00042 * E * s(M + 2 * F) + 0.00038 * E * s(M - 2 * F) - 0.00024 * E * s(2 * Mp - M) - 0.00017 * s(Om);
+  } else {
+    jde += -0.62801 * s(Mp) + 0.17172 * E * s(M) - 0.01183 * E * s(Mp + M) + 0.00862 * s(2 * Mp) + 0.00804 * s(2 * F)
+      + 0.00454 * E * s(Mp - M) + 0.00204 * E * E * s(2 * M) - 0.0018 * s(Mp - 2 * F) - 0.0007 * s(Mp + 2 * F) - 0.0004 * s(3 * Mp)
+      - 0.00034 * E * s(2 * Mp - M) + 0.00032 * E * s(M + 2 * F) + 0.00032 * E * s(M - 2 * F) - 0.00028 * E * E * s(Mp + 2 * M)
+      + 0.00027 * E * s(2 * Mp + M) - 0.00017 * s(Om);
+    const W = 0.00306 - 0.00038 * E * c(M) + 0.00034 * c(Mp) - 0.00002 * c(Mp - M) + 0.00002 * c(Mp + M) + 0.00002 * c(2 * F);
+    jde += q === 0.25 ? W : -W;
+  }
+  return new Date((jde - 2440587.5 - 69 / 86400) * 86400000); // TT → UTC (ΔT ≈ 69 s)
+}
+
+/** The next principal phases (new moon, first quarter, full moon, last quarter) after `from`, with their exact times. */
+export function nextPrincipalPhases(from: Date, count: number): { date: Date; target: number; nameAr: string; emoji: string }[] {
+  const NAMES: Record<number, [string, string]> = { 0: ['محاق', '🌑'], 0.25: ['تربيع أول', '🌓'], 0.5: ['بدر', '🌕'], 0.75: ['تربيع أخير', '🌗'] };
+  const yearsSince2000 = (from.getTime() - Date.UTC(2000, 0, 6)) / (365.25 * 86400000);
+  let k = Math.floor(yearsSince2000 * 12.3685) - 1; // start a lunation early, then skip past phases
+  const out: { date: Date; target: number; nameAr: string; emoji: string }[] = [];
+  while (out.length < count) {
+    for (const t of [0, 0.25, 0.5, 0.75]) {
+      const date = principalPhaseTime(k + t);
+      if (date > from && out.length < count) out.push({ date, target: t, nameAr: NAMES[t][0], emoji: NAMES[t][1] });
+    }
+    k++;
+  }
+  return out;
+}
+
 export function sunTimes(date: Date, lat: number, lon: number, tzOffset: number): {
   sunrise: string | null;
   sunset: string | null;

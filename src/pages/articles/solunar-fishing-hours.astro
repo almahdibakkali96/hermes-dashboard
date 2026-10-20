@@ -1,0 +1,129 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { dayExtremes, getTimezoneOffset, formatTime, type Constituent } from '../../lib/tides';
+import { moonTimes, nextPrincipalPhases } from '../../lib/astronomy';
+import placesIndex from '../../data/places/places_index.json';
+
+const meta = articleBySlug('solunar-fishing-hours');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const today = new Date();
+const places = placesIndex as { id: string; name_ar: string; lat: number; lon: number }[];
+
+// --- Today's solunar periods and high tides in five ports (each in its own local time)
+const portIds = ['kuwait-city', 'dubai', 'muscat', 'jeddah', 'casablanca'];
+const rows = [];
+for (const id of portIds) {
+  const p = places.find(x => x.id === id)!;
+  const port = (await import(`../../data/places/${id}.json`)).default;
+  const tz = getTimezoneOffset(port.timezone, today);
+  const mt = moonTimes(today, p.lat, p.lon, tz);
+  const highs = dayExtremes(port.constituents as Record<string, Constituent>, today, tz).filter(e => e.type === 'high');
+  // Exact to the minute (solunarPeriods rounds to half hours): major = transit and opposite transit (+12h25) ± 1h, minor = rise/set ± 30 min
+  const mins = (s: string) => { const [h, m] = s.split(':').map(Number); return h * 60 + m; };
+  const fmt = (x: number) => { x = ((Math.round(x) % 1440) + 1440) % 1440; return `${String(Math.floor(x / 60)).padStart(2, '0')}:${String(x % 60).padStart(2, '0')}`; };
+  const around = (c: number, half: number) => ({ c: ((c % 1440) + 1440) % 1440, s: `${fmt(c - half)}–${fmt(c + half)}` });
+  const bySort = (a: { c: number }, b: { c: number }) => a.c - b.c;
+  const tr = mt.lunarTransit ? mins(mt.lunarTransit) : null;
+  rows.push({
+    id, name: p.name_ar,
+    major: (tr === null ? [] : [around(tr, 60), around(tr + 745, 60)]).sort(bySort).map(q => q.s),
+    minor: [mt.moonrise, mt.moonset].filter((s): s is string => !!s).map(s => around(mins(s), 30)).sort(bySort).map(q => q.s),
+    highs: highs.map(e => formatTime(e.time, tz)),
+  });
+}
+const dateAr = today.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'Asia/Dubai', day: 'numeric', month: 'long', year: 'numeric' });
+
+// --- Strongest solunar days in the next 30 days: new and full moon
+const best = nextPrincipalPhases(today, 4).filter(p => p.target === 0 || p.target === 0.5).map(p => ({
+  date: p.date.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'Asia/Riyadh', weekday: 'long', day: 'numeric', month: 'long' }), emoji: p.emoji, name: p.nameAr,
+}));
+
+const toc = [
+  { id: 'what', label: 'ما هي نظرية السولونار؟' },
+  { id: 'major-minor', label: 'الفترات الكبرى والصغرى' },
+  { id: 'today', label: 'أوقات اليوم في موانئ عربية' },
+  { id: 'strongest', label: 'متى تكون الفترات أقوى؟' },
+  { id: 'with-tide', label: 'اجمعها مع المد' },
+  { id: 'science', label: 'ماذا يقول العلم؟' },
+];
+const takeaways = [
+  'في كل يوم <strong>أربع فترات</strong> تنشط فيها الأسماك حسب نظرية السولونار: <strong>فترتان كبريان</strong> (نحو ساعتين) و<strong>فترتان صغريان</strong> (نحو ساعة).',
+  'الفترات الكبرى حول <strong>عبور القمر</strong> أعلى السماء وأسفلها، والصغرى حول <strong>شروق القمر وغروبه</strong>.',
+  'تتأخر هذه الفترات نحو <strong>50 دقيقة كل يوم</strong>، مثل المد، لأنها تتبع القمر.',
+  'تكون أقوى أيام <strong>البدر والمحاق</strong>، وأفضل ساعة هي التي تجتمع فيها فترة كبرى مع <strong>حركة المد</strong>.',
+];
+const faq = [
+  { q: 'ما معنى كلمة سولونار؟', a: 'كلمة إنجليزية مركبة من Sol (الشمس) وLunar (القمر). تشير إلى جداول تتوقع ساعات نشاط الأسماك والحيوانات حسب موقع القمر، ونشرها الأمريكي جون ألدن نايت في عشرينيات القرن الماضي.' },
+  { q: 'هل تختلف أوقات السولونار من مدينة لأخرى؟', a: 'نعم. تعتمد على وقت عبور القمر وشروقه وغروبه في مكانك، وهذه تختلف حسب خط الطول والعرض والتوقيت المحلي. لذلك نحسبها في ArabTides لكل ميناء على حدة.' },
+  { q: 'هل أصطاد فقط في الفترات الكبرى؟', a: 'لا. الفترات مؤشر على الساعات الأنشط غالباً، وليست قاعدة صارمة. الأسماك تتغذى في أوقات أخرى أيضاً، والمد والطقس والمكان لها تأثير كبير.' },
+  { q: 'ما الفرق بين السولونار وتقييم الصيد في ArabTides؟', a: 'السولونار يعطيك ساعات اليوم. أما تقييم الصيد من 1 إلى 5 فيقيّم اليوم كله حسب طور القمر وقوة المد. استخدم التقييم لاختيار اليوم، والسولونار والمد لاختيار الساعة.' },
+  { q: 'لماذا لا يظهر أحياناً شروق القمر أو غروبه؟', a: 'لأن القمر يتأخر نحو 50 دقيقة يومياً، فيمر يوم تقريباً كل شهر دون شروق أو دون غروب في التقويم المحلي. في ذلك اليوم تكون هناك فترة صغرى واحدة فقط.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={portIds}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    <path d="M30 200 A120 120 0 0 1 270 200" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-dasharray="3 9" stroke-linecap="round"/>
+    <path d="M119 88 A120 120 0 0 1 181 88" fill="none" stroke="#fde68a" stroke-width="14" stroke-linecap="round" opacity=".55"/>
+    <circle cx="150" cy="80" r="26" fill="#fde68a"/>
+    <line x1="10" x2="290" y1="200" y2="200" stroke="#5eead4" stroke-width="3"/>
+    <path d="M60 228 l28 -12 l-6 12 l6 12z M195 236 l28 -12 l-6 12 l6 12z" fill="#2dd4bf"/>
+  </svg>
+
+  <h2 id="what">ما هي نظرية السولونار؟</h2>
+  <p>لاحظ الصيادون منذ زمن طويل أن الأسماك لا تتغذى بنفس النشاط طوال اليوم، بل في <strong>نوبات قصيرة</strong> تتكرر بانتظام. في عشرينيات القرن الماضي جمع الأمريكي <strong>جون ألدن نايت</strong> هذه الملاحظات في جداول سمّاها <span class="latin">Solunar</span>، من الشمس والقمر، وربط فيها نوبات النشاط بموقع القمر في السماء.</p>
+  <p>الفكرة بسيطة: القمر الذي يحرّك المد يؤثر أيضاً على إيقاع الحيوانات، فتنشط أكثر حين يكون القمر في مواقع معينة.</p>
+
+  <h2 id="major-minor">الفترات الكبرى والصغرى</h2>
+  <div class="stat-grid">
+    <div class="stat"><div class="v">2</div><div class="l">فترتان كبريان: نحو ساعتين حول عبور القمر أعلى السماء، وحول عبوره أسفل الأرض بعد ~12 ساعة</div></div>
+    <div class="stat"><div class="v">2</div><div class="l">فترتان صغريان: نحو ساعة حول شروق القمر وغروبه</div></div>
+    <div class="stat"><div class="v">+50′</div><div class="l">تتأخر كل الفترات نحو 50 دقيقة يومياً</div></div>
+  </div>
+  <div class="callout fact"><span class="ic">💡</span><div><strong>عبور القمر</strong> هو اللحظة التي يصل فيها القمر إلى أعلى نقطة في السماء. بعد نحو 12 ساعة و25 دقيقة يكون في الجهة المقابلة من الأرض، وهذه أيضاً فترة كبرى رغم أنك لا ترى القمر.</div></div>
+
+  <h2 id="today">أوقات اليوم في موانئ عربية</h2>
+  <p>هذه فترات السولونار وأوقات المد العالي اليوم ({dateAr})، كلٌّ بالتوقيت المحلي لميناءه:</p>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead><tr><th>الميناء</th><th>الفترات الكبرى</th><th>الفترات الصغرى</th><th>المد العالي</th></tr></thead>
+      <tbody>
+        {rows.map(r => (
+          <tr>
+            <td><a href={`${BASE}ports/${r.id}`} class="text-[var(--accent)] underline">{r.name}</a></td>
+            <td class="latin">{r.major.map(s => <div>{s}</div>)}</td>
+            <td class="latin">{r.minor.length ? r.minor.map(s => <div>{s}</div>) : '—'}</td>
+            <td class="latin">{r.highs.map(s => <div>{s}</div>)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p>لاحظ أن الفترات تختلف من ميناء لآخر رغم أنه نفس اليوم: كل ميناء يرى القمر يعبر سماءه في وقت مختلف. أوقات ميناءك يوماً بيوم في صفحته على ArabTides.</p>
+
+  <h2 id="strongest">متى تكون الفترات أقوى؟</h2>
+  <p>حسب النظرية تكون الفترات أقوى حين تصطف الشمس والأرض والقمر، أي في أيام <strong>البدر والمحاق</strong>. وهي نفس الأيام التي يكون فيها المد في أقوى حالاته (المد الربيعي)، لذلك تجتمع فيها حركة الماء الكبيرة مع ساعات النشاط.</p>
+  {best.length > 0 && (
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-5">
+      {best.map(b => (
+        <div class="card p-4 flex items-center gap-3"><span class="text-3xl" aria-hidden="true">{b.emoji}</span><div><div class="font-semibold">{b.name}</div><div class="text-sm text-[var(--text-secondary)]">{b.date}</div></div></div>
+      ))}
+    </div>
+  )}
+  <p>أيام <strong>التربيع</strong> (نصف القمر) تكون الفترات فيها أضعف، والمد أضعف أيضاً. <a href={`${BASE}articles/moon-phases-fishing`}>المزيد عن أطوار القمر والصيد ←</a></p>
+
+  <h2 id="with-tide">اجمعها مع المد</h2>
+  <p>في الصيد من الشاطئ وفي المياه الضحلة، <strong>حركة المد غالباً أهم من السولونار</strong>. الأسماك تتغذى حين يتحرك الماء ويحمل الطعام، أي في الساعات التي يرتفع فيها الماء أو ينخفض بسرعة، لا عند الذروة الساكنة.</p>
+  <div class="pull">أفضل ساعة في يومك: فترة كبرى تقع في الساعتين قبل ذروة المد.</div>
+  <p>طريقة عملية من ثلاث خطوات:</p>
+  <ol class="list-decimal ps-6 space-y-2 my-4">
+    <li>اختر <strong>اليوم</strong> من تقويم الصيد في صفحة ميناءك (تقييم 4 أو 5).</li>
+    <li>انظر إلى <strong>المد العالي</strong> في ذلك اليوم، والساعتين قبله.</li>
+    <li>إذا وقعت <strong>فترة كبرى</strong> في هاتين الساعتين أو قربهما، فهذه ساعتك. وكن في مكانك قبلها بنصف ساعة.</li>
+  </ol>
+
+  <h2 id="science">ماذا يقول العلم؟</h2>
+  <p>الدراسات العلمية عن السولونار <strong>متباينة</strong>: بعضها وجد علاقة بين طور القمر ونشاط بعض الأسماك، وبعضها لم يجد أثراً واضحاً. أما أثر <strong>المد والتيار</strong> على التغذية فأوضح وأكثر ثباتاً.</p>
+  <div class="callout tip"><span class="ic">🎣</span><div>تعامل مع السولونار كعامل مساعد لا كقاعدة. سجّل رحلاتك (اليوم، الساعة، المد، النتيجة) لبضعة أسابيع، وستعرف بنفسك أي العوامل أهم في ساحلك.</div></div>
+</ArticleLayout>
