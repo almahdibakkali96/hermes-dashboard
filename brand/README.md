@@ -16,6 +16,7 @@
 | "Solunar fishing hours" Reel, 33 s, voice + music | `video/video-03-solunar.mp4` (cover `video/video-03-cover.png`) |
 | "Strongest tides in the Arab world" Reel, 38 s, voice + music | `video/video-04-strongest-tides.mp4` (cover `video/video-04-cover.png`) |
 | "How to read a tide table" Reel, 34 s, voice + music | `video/video-05-tide-table.mp4` (cover `video/video-05-cover.png`) |
+| "Where to fish by tide" Reel (beach, port, rocks), 39 s, voice + music | `video/video-06-where-to-fish.mp4` (cover `video/video-06-cover.png`, caption `video/video-06-caption.txt`) |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours
