@@ -10,7 +10,7 @@
     "timezone": "Africa/Khartoum"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/port-sudan",
-  "generated_utc": "2026-10-19T23:31:06.389Z",
+  "generated_utc": "2026-10-20T11:09:05.259Z",
   "tide_type_ar": "مختلط، يومي غالباً",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
@@ -66,7 +66,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.64
+        "illumination": 0.69
       }
     },
     {
@@ -125,7 +125,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.74
+        "illumination": 0.79
       }
     },
     {
@@ -184,7 +184,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.83
+        "illumination": 0.87
       }
     },
     {
@@ -231,7 +231,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.9
+        "illumination": 0.93
       }
     },
     {
@@ -278,7 +278,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.96
+        "illumination": 0.97
       }
     },
     {
@@ -323,9 +323,9 @@
         }
       ],
       "moon": {
-        "phase_ar": "أحدب متزايد",
-        "phase_en": "Waxing Gibbous",
-        "illumination": 0.99
+        "phase_ar": "بدر",
+        "phase_en": "Full Moon",
+        "illumination": 1
       }
     },
     {
