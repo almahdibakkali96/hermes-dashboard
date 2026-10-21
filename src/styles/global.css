@@ -420,3 +420,39 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
 /* Guide link in the header */
 .site-nav-link.nav-guide { background: #0b2540; color: #5eead4; font-weight: 600; }
 .site-nav-link.nav-guide:hover, .site-nav-link.nav-guide.active { background: #0f3d5c; color: #99f6e4; }
+
+/* --- Flags and fish photos --- */
+.flag {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 3px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.12);
+}
+.fish-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  /* Whole fish in frame: long species (kingfish, barracuda) would lose head and tail to a crop */
+  object-fit: contain;
+  background: #e6edf1;
+}
+.sea-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+}
+.sea-chip::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--sea, var(--accent));
+}
+button.sea-chip { cursor: pointer; }
+button.sea-chip[aria-pressed="true"] { background: var(--accent-muted); border-color: var(--accent-border); color: var(--accent-hover); font-weight: 600; }

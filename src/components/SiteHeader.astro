@@ -5,6 +5,7 @@ const path = Astro.url.pathname.replace(/\/$/, '');
 const links = [
   { href: `${BASE}#ports`, label: 'الموانئ', match: '/ports' },
   { href: `${BASE}#countries`, label: 'الدول', match: '/country', extra: 'hide-xs' },
+  { href: `${BASE}fish`, label: 'الأسماك', match: '/fish' },
   { href: `${BASE}articles`, label: 'مقالات', match: '/articles' },
   { href: `${BASE}methodology`, label: 'المنهجية', match: '/methodology', extra: 'hide-xs' },
   { href: `${BASE}about`, label: 'عن الموقع', match: '/about', extra: 'hide-xs' },

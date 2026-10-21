@@ -1,5 +1,6 @@
 import placesIndex from '../data/places/places_index.json';
 import { articles } from '../lib/articles';
+import { fish } from '../lib/fish';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
@@ -25,6 +26,13 @@ export async function GET({ site }: { site: URL | undefined }) {
   articles.forEach((a) => {
     urls.push({ loc: `${origin}${BASE}/articles/${a.slug}`, priority: 0.8, changefreq: 'monthly', lastmod: a.updated });
   });
+
+  // Fish guide
+  urls.push({ loc: `${origin}${BASE}/fish`, priority: 0.8, changefreq: 'weekly', lastmod: today });
+  fish.forEach((f) => {
+    urls.push({ loc: `${origin}${BASE}/fish/${f.id}`, priority: 0.7, changefreq: 'daily', lastmod: today });
+  });
+  urls.push({ loc: `${origin}${BASE}/fish/credits`, priority: 0.2, changefreq: 'yearly' });
 
   // Shop
   urls.push({ loc: `${origin}${BASE}/guide`, priority: 0.9, changefreq: 'weekly', lastmod: today });

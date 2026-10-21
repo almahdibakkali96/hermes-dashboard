@@ -5,6 +5,8 @@ import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
 import GuidePromo from '../components/GuidePromo.astro';
+import Flag from '../components/Flag.astro';
+import { fish } from '../lib/fish';
 import {
   generateTideCurve, dayExtremes, formatTime,
   getTimezoneOffset
@@ -165,6 +167,29 @@ const features = [
     <!-- Paid guide -->
     <div class="mb-16"><GuidePromo variant="banner" /></div>
 
+    <!-- Fish guide teaser -->
+    <section class="mb-16" aria-labelledby="fish-title">
+      <div class="section-title">
+        <h2 id="fish-title">دليل الأسماك</h2>
+        <p><span class="latin">{fish.length}</span> نوعاً بأسمائها المحلية في كل بلد</p>
+        <a href={`${BASE}fish`} class="ms-auto text-sm text-[var(--accent)] hover:underline">كل الأسماك ←</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {['hamour', 'kanad', 'sheri', 'dorade', 'seabass', 'coraltrout'].map(fid => {
+          const f = fish.find(x => x.id === fid)!;
+          return (
+            <a href={`${BASE}fish/${f.id}`} class="card overflow-hidden group block">
+              <img src={`${BASE}fish/${f.id}.webp`} alt={f.ar} loading="lazy" decoding="async" class="fish-thumb" />
+              <span class="block px-3 py-2">
+                <span class="block font-semibold text-sm group-hover:text-[var(--accent)] transition-colors">{f.ar}</span>
+                <span class="block text-[11px] text-[var(--text-dim)] truncate">{f.local.map(l => l.name).filter(n => n !== f.ar).slice(0, 2).join('، ') || f.en}</span>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
     <!-- What each port page offers -->
     <section class="mb-16" aria-labelledby="features-title">
       <div class="section-title">
@@ -233,7 +258,10 @@ const features = [
           const count = placesIndex.filter((p: { country: string }) => p.country === code).length;
           return (
             <a href={`${BASE}country/${code}`} class="card px-4 py-3 flex items-center justify-between gap-2 group">
-              <span class="font-medium group-hover:text-[var(--accent)] transition-colors">{countryName(code)}</span>
+              <span class="flex items-center gap-2.5 min-w-0">
+                <Flag code={code} size={28} />
+                <span class="font-medium group-hover:text-[var(--accent)] transition-colors">{countryName(code)}</span>
+              </span>
               <span class="text-xs text-[var(--text-muted)] bg-[var(--surface-elevated)] rounded-full px-2 py-0.5 latin">{count}</span>
             </a>
           );
@@ -250,7 +278,7 @@ const features = [
       <div class="card p-5 sm:p-6 columns-1 sm:columns-2 lg:columns-3 gap-8">
         {countries.map((code: string) => (
           <div class="break-inside-avoid mb-5">
-            <a href={`${BASE}country/${code}`} class="text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--accent)]">{countryName(code)}</a>
+            <a href={`${BASE}country/${code}`} class="inline-flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--accent)]"><Flag code={code} size={18} />{countryName(code)}</a>
             <ul class="mt-1.5 space-y-0.5">
               {placesIndex.filter((p: { country: string }) => p.country === code).map((port: { id: string; name_ar: string; name_en: string }) => (
                 <li>

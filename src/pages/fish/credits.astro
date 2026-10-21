@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { fish, fishPhotos } from '../../lib/fish';
+
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+---
+
+<BaseLayout title="مصادر صور الأسماك" description="مصادر صور دليل الأسماك في ArabTides: المصوّر والترخيص ورابط الملف الأصلي على ويكيميديا كومنز لكل صورة.">
+  <div class="page-head">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+      <nav class="breadcrumb" aria-label="مسار التنقل">
+        <a href={BASE}>الرئيسية</a><span class="sep">/</span>
+        <a href={`${BASE}fish`}>دليل الأسماك</a><span class="sep">/</span>
+        <span aria-current="page">مصادر الصور</span>
+      </nav>
+      <h1 class="mt-3 text-3xl font-bold display">مصادر صور الأسماك</h1>
+      <p class="mt-2 text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+        كل صور دليل الأسماك من ويكيميديا كومنز، منشورة بتراخيص مفتوحة أو في الملكية العامة. صغّرنا الصور وحوّلناها إلى صيغة WebP دون أي تعديل آخر. الملف الأصلي وشروط الترخيص في الرابط بجانب كل صورة.
+      </p>
+    </div>
+  </div>
+
+  <main id="main" class="max-w-4xl mx-auto px-4 py-8 w-full">
+    <ul class="card divide-y divide-[var(--border-subtle)]">
+      {fish.map(f => {
+        const p = fishPhotos[f.id];
+        return (
+          <li class="flex items-center gap-4 p-3">
+            <img src={`${BASE}fish/${f.id}.webp`} alt="" loading="lazy" decoding="async" class="w-20 h-14 rounded-md object-cover shrink-0" />
+            <div class="min-w-0 text-sm">
+              <a href={`${BASE}fish/${f.id}`} class="font-semibold hover:text-[var(--accent)]">{f.ar}</a>
+              <span class="text-xs text-[var(--text-dim)] latin italic ms-1" lang="la">{f.sci}</span>
+              <div class="text-xs text-[var(--text-muted)] mt-0.5 break-words" lang="en" dir="ltr" style="text-align:end">
+                {p.artist} ·
+                {p.licenseUrl ? <a href={p.licenseUrl} rel="license noopener" class="underline hover:text-[var(--accent)]">{p.license}</a> : p.license} ·
+                <a href={p.source} rel="noopener" class="underline hover:text-[var(--accent)]">Wikimedia Commons</a>
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="mt-6 text-xs text-[var(--text-muted)] leading-relaxed">
+      أعلام الدول من مشروع <a href="https://github.com/lipis/flag-icons" rel="noopener" class="underline" lang="en">flag-icons</a> (ترخيص MIT).
+    </p>
+  </main>
+</BaseLayout>

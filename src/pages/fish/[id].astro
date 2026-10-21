@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Flag from '../../components/Flag.astro';
+import { fish, fishPhotos, kindNames, methodNames, portsForFish } from '../../lib/fish';
+import { seas } from '../../lib/seaNames';
+import { countryName } from '../../lib/countries';
+import { dayExtremes, formatTime, getTimezoneOffset, classifySpringNeap } from '../../lib/tides';
+import { moonPhase } from '../../lib/astronomy';
+
+export function getStaticPaths() {
+  return fish.map(f => ({ params: { id: f.id } }));
+}
+
+const { id } = Astro.params;
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const f = fish.find(x => x.id === id)!;
+const photo = fishPhotos[f.id];
+const pageUrl = new URL(`${BASE}fish/${f.id}`, Astro.site).href;
+
+// Today's tides at every port in this species' seas (build date; refreshed with each daily build)
+const today = new Date();
+const moon = moonPhase(today);
+const springNeap = classifySpringNeap(moon.age);
+const ports = await Promise.all(portsForFish(f).map(async p => {
+  const port = (await import(`../../data/places/${p.id}.json`)).default;
+  const tz = getTimezoneOffset(port.timezone, today);
+  const ex = dayExtremes(port.constituents, today, tz);
+  const hs = ex.filter(e => e.type === 'high'), ls = ex.filter(e => e.type === 'low');
+  const range = hs.length && ls.length ? Math.round(Math.max(...hs.map(h => h.height)) - Math.min(...ls.map(l => l.height))) : null;
+  return { ...p, highs: hs.map(h => formatTime(h.time, tz)), range };
+}));
+const countries = [...new Set(ports.map(p => p.country))];
+
+const others = fish.filter(x => x.id !== f.id && x.seas.some(s => f.seas.includes(s))).slice(0, 4);
+const localLine = f.local.map(l => `${l.name} (${l.where})`).join('، ');
+const description = `${f.ar} (${f.sci}): ${localLine}. أين يعيش، وأفضل وقت ومد لصيده، والطعم المناسب، ومواقيت المد اليوم في موانئ ${f.seas.map(s => seas[s].name).join(' و')}.`;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: new URL(BASE, Astro.site).href },
+      { '@type': 'ListItem', position: 2, name: 'دليل الأسماك', item: new URL(`${BASE}fish`, Astro.site).href },
+      { '@type': 'ListItem', position: 3, name: f.ar, item: pageUrl },
+    ],
+  },
+];
+---
+
+<BaseLayout title={`سمك ${f.ar}: أسماؤه المحلية وأفضل وقت لصيده`} description={description} jsonLd={jsonLd}
+  ogImage={`${BASE}fish/${f.id}.webp`}>
+  <div class="page-head">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+      <nav class="breadcrumb" aria-label="مسار التنقل">
+        <a href={BASE}>الرئيسية</a><span class="sep">/</span>
+        <a href={`${BASE}fish`}>دليل الأسماك</a><span class="sep">/</span>
+        <span aria-current="page">{f.ar}</span>
+      </nav>
+      <h1 class="mt-3 text-3xl font-bold display">{f.ar}</h1>
+      <p class="mt-1 text-sm text-[var(--text-muted)]">
+        <span class="latin italic" lang="la">{f.sci}</span> · <span class="latin" lang="en">{f.en}</span>
+      </p>
+    </div>
+  </div>
+
+  <main id="main" class="max-w-5xl mx-auto px-4 py-8 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-6 items-start">
+      <figure class="card overflow-hidden">
+        <img src={`${BASE}fish/${f.id}.webp`} alt={`سمك ${f.ar}`} width={photo.w} height={photo.h} class="w-full h-auto block" />
+        <figcaption class="px-4 py-2 text-[11px] text-[var(--text-dim)]">
+          الصورة: <span lang="en">{photo.artist}</span> ·
+          {photo.licenseUrl ? <a href={photo.licenseUrl} rel="license noopener" class="underline hover:text-[var(--accent)]" lang="en">{photo.license}</a> : <span lang="en">{photo.license}</span>} ·
+          <a href={photo.source} rel="noopener" class="underline hover:text-[var(--accent)]">ويكيميديا كومنز</a>
+        </figcaption>
+      </figure>
+
+      <div class="space-y-4">
+        <section class="card p-5" aria-labelledby="names-title">
+          <h2 id="names-title" class="font-semibold">الأسماء المحلية</h2>
+          <ul class="mt-3 space-y-2">
+            {f.local.map(l => (
+              <li class="flex items-baseline justify-between gap-3 text-sm border-b border-[var(--border-subtle)] last:border-0 pb-2 last:pb-0">
+                <span class="font-semibold text-base">{l.name}</span>
+                <span class="text-xs text-[var(--text-muted)] text-end">{l.where}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <p class="text-[var(--text-secondary)] leading-relaxed">{f.about}</p>
+
+        <dl class="grid grid-cols-2 gap-2 text-sm">
+          <div class="info-tile"><dt>الطول الشائع</dt><dd>{f.size}</dd></div>
+          <div class="info-tile"><dt>طريقة الصيد</dt><dd>{f.methods.map(m => methodNames[m]).join(' و')}</dd></div>
+          <div class="info-tile col-span-2"><dt>البيئة</dt><dd>{kindNames[f.kind]}</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+      <section class="card p-5" aria-labelledby="tide-title">
+        <h2 id="tide-title" class="font-semibold">🌊 أفضل مد ووقت</h2>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{f.tide}</p>
+        <p class="mt-3 text-xs text-[var(--text-muted)]">
+          اليوم: <span aria-hidden="true">{moon.emoji}</span> {moon.phaseNameAr}، {springNeap.conditionAr}.
+        </p>
+      </section>
+      <section class="card p-5" aria-labelledby="bait-title">
+        <h2 id="bait-title" class="font-semibold">🎣 الطعم</h2>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{f.bait}</p>
+      </section>
+    </div>
+
+    {f.note && (
+      <p class="mt-4 rounded-xl border border-amber-200 bg-amber-50 text-amber-900 px-4 py-3 text-sm leading-relaxed">⚠️ {f.note}</p>
+    )}
+
+    <section class="mt-10" aria-labelledby="ports-title">
+      <div class="section-title">
+        <h2 id="ports-title">أين تصطاده: مواقيت المد اليوم</h2>
+        <p>{f.seas.map(s => seas[s].name).join('، ')}</p>
+      </div>
+      <div class="card p-5 sm:p-6 columns-1 sm:columns-2 lg:columns-3 gap-8">
+        {countries.map(code => (
+          <div class="break-inside-avoid mb-5">
+            <div class="flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)]"><Flag code={code} size={18} />{countryName(code)}</div>
+            <ul class="mt-1.5 space-y-0.5">
+              {ports.filter(p => p.country === code).map(p => (
+                <li>
+                  <a href={`${BASE}ports/${p.id}`} class="flex items-baseline gap-2 py-1 text-sm hover:text-[var(--accent)] transition-colors">
+                    <span>{p.name_ar}</span>
+                    <span class="ms-auto text-[11px] text-[var(--text-dim)]">
+                      {/* inline-block keeps each time atomic so RTL lists them earliest-first */}
+                      {p.highs.length > 0 && <>▲ {p.highs.map((h, i) => <>{i > 0 && '، '}<span class="latin inline-block">{h}</span></>)}</>}
+                      {p.range != null && <> · <span class="latin inline-block">{p.range}</span> سم</>}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="mt-2 text-xs text-[var(--text-muted)]">▲ أوقات المد العالي اليوم بالتوقيت المحلي، ثم مدى المد. افتح صفحة الميناء لتقييم الصيد وأوقات السولونار.</p>
+    </section>
+
+    {others.length > 0 && (
+      <section class="mt-10" aria-labelledby="others-title">
+        <div class="section-title"><h2 id="others-title">أسماك في البحار نفسها</h2></div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {others.map(o => (
+            <a href={`${BASE}fish/${o.id}`} class="card overflow-hidden group block">
+              <img src={`${BASE}fish/${o.id}.webp`} alt={o.ar} loading="lazy" decoding="async" class="fish-thumb" />
+              <span class="block px-3 py-2 font-semibold text-sm group-hover:text-[var(--accent)] transition-colors">{o.ar}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <p class="mt-10 text-xs text-[var(--text-muted)]">
+      <a href={`${BASE}fish`} class="text-[var(--accent)] hover:underline">← كل الأسماك</a> ·
+      <a href={`${BASE}fish/credits`} class="text-[var(--accent)] hover:underline">مصادر الصور</a>
+    </p>
+  </main>
+</BaseLayout>
