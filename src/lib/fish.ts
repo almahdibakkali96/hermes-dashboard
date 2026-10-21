@@ -4,10 +4,11 @@
  * (both produced by tools/fish-photos/fetch.mjs from Wikimedia Commons).
  */
 import photos from '../data/fish-photos.json';
+import portSpecies from '../data/port-species.json';
 import { portSea, type SeaId } from './seaNames';
 import placesIndex from '../data/places/places_index.json';
 
-export type FishKind = 'reef' | 'bottom' | 'pelagic' | 'cephalopod';
+export type FishKind = 'reef' | 'bottom' | 'pelagic' | 'shark' | 'cephalopod' | 'crustacean';
 export type Method = 'shore' | 'boat';
 
 export interface Fish {
@@ -32,7 +33,9 @@ export const kindNames: Record<FishKind, string> = {
   reef: 'أسماك الشعاب والصخور',
   bottom: 'أسماك القاع الرملي والطيني',
   pelagic: 'أسماك المياه المفتوحة',
-  cephalopod: 'الحبار والرخويات',
+  shark: 'القروش واللخم',
+  cephalopod: 'الحبار والأخطبوط',
+  crustacean: 'القشريات',
 };
 
 export const methodNames: Record<Method, string> = { shore: 'من الشاطئ', boat: 'من القارب' };
@@ -310,15 +313,289 @@ export const fish: Fish[] = [
     bait: 'طعم صناعي خاص بالحبار (إيجي) يُسحب ببطء.',
     about: 'تغير لونها بسرعة للتخفي. صدفتها الداخلية البيضاء هي «عظم الحبار» الذي يُلقى على الشواطئ.',
   },
+
+  // --- Added from iNaturalist observation counts near our ports
+  {
+    id: 'faskar', ar: 'فسكر', en: 'Twobar seabream', sci: 'Acanthopagrus bifasciatus',
+    local: [{ name: 'فسكر', where: 'الخليج العربي' }, { name: 'دنيس أبو خطين', where: 'تسمية عامة' }],
+    seas: ['gulf', 'red', 'indian'], kind: 'reef', methods: ['shore', 'boat'], size: '25–45 سم',
+    tide: 'المد الصاعد في الفجر والغروب، قرب الصخور وكواسر الأمواج.',
+    bait: 'ربيان، سرطان صغير، بلح البحر.',
+    about: 'يعرف بخطين أسودين على الرأس وزعانف صفراء. من أسماك الصخور المحبوبة في الخليج وعُمان والبحر الأحمر.',
+  },
+  {
+    id: 'naiser', ar: 'نيسر', en: 'Blackspot snapper', sci: 'Lutjanus fulviflamma',
+    local: [{ name: 'نيسر', where: 'الخليج العربي' }],
+    seas: ['gulf', 'red', 'indian'], kind: 'reef', methods: ['shore', 'boat'], size: '20–30 سم',
+    tide: 'الغروب وأول الليل، مع تيار متوسط حول الشعاب وأرصفة الموانئ.',
+    bait: 'شرائح سمك، ربيان، حبار.',
+    about: 'سمكة صغيرة صفراء الخطوط، تحمل بقعة سوداء على جانبها. تتجمع في أسراب حول الشعاب والحطام، وتباع في أسواق الخليج.',
+  },
+  {
+    id: 'sweetlips', ar: 'فرش', en: 'Blackspotted rubberlip', sci: 'Plectorhinchus gaterinus',
+    local: [{ name: 'فرش', where: 'الخليج العربي' }],
+    seas: ['gulf', 'red', 'indian'], kind: 'reef', methods: ['boat'], size: '30–45 سم',
+    tide: 'الليل، حين يخرج من مخابئه للتغذي على القاع الرملي.',
+    bait: 'ربيان، سرطان، ديدان.',
+    about: 'تقضي نهارها ساكنة تحت حواف الشعاب، وتتميز بشفاه غليظة ونقاط سوداء على جسم أصفر. يختلف لون صغارها تماماً عن الكبار.',
+  },
+  {
+    id: 'wahra', ar: 'وحرة', en: 'Bartail flathead', sci: 'Platycephalus indicus',
+    local: [{ name: 'وحرة', where: 'الخليج العربي' }],
+    seas: ['gulf', 'indian'], kind: 'bottom', methods: ['shore', 'boat'], size: '30–60 سم',
+    tide: 'المد المتحرك فوق القيعان الرملية والطينية، في الصباح والغروب.',
+    bait: 'ربيان، سمك صغير حي، وطعوم سيليكون على القاع.',
+    about: 'سمكة مسطحة الرأس تدفن نفسها في الرمل ولا يظهر منها إلا عيناها، ثم تنقض على الأسماك الصغيرة المارة.',
+    note: 'أشواك الرأس والغطاء الخيشومي حادة؛ أمسكها بحذر.',
+  },
+  {
+    id: 'sbour', ar: 'صبور', en: 'Hilsa shad', sci: 'Tenualosa ilisha',
+    local: [{ name: 'صبور', where: 'الكويت والعراق' }],
+    seas: ['gulf', 'indian'], kind: 'pelagic', methods: ['boat'], size: '30–50 سم',
+    tide: 'يُصطاد بالشباك في الربيع والصيف حين يقترب من مصب شط العرب.',
+    bait: 'يُصطاد تجارياً بالشباك الخيشومية، ونادراً بالسنارة.',
+    about: 'السمكة الأشهر على موائد الكويت في الصيف. تعيش في البحر، وتصعد إلى شط العرب لتضع بيضها في الماء العذب، وعظامها كثيرة ودقيقة.',
+  },
+  {
+    id: 'redmullet', ar: 'سلطان إبراهيم', en: 'Striped red mullet', sci: 'Mullus surmuletus',
+    local: [{ name: 'سلطان إبراهيم', where: 'مصر' }, { name: 'بربوني', where: 'لبنان وسوريا' }, { name: 'تريلية', where: 'تونس' }],
+    seas: ['med', 'atlantic'], kind: 'bottom', methods: ['shore', 'boat'], size: '15–30 سم',
+    tide: 'النهار، مع مد هادئ فوق القيعان الرملية قرب الصخور.',
+    bait: 'ديدان، ربيان صغير، بخطاف صغير على القاع.',
+    about: 'تبحث عن طعامها بشاربين تحت ذقنها تنبش بهما الرمل. من أغلى أسماك المائدة في البحر المتوسط.',
+  },
+  {
+    id: 'pandora', ar: 'مرجان', en: 'Common pandora', sci: 'Pagellus erythrinus',
+    local: [{ name: 'مرجان', where: 'مصر والشام' }],
+    seas: ['med', 'atlantic'], kind: 'bottom', methods: ['boat', 'shore'], size: '15–35 سم',
+    tide: 'الفجر والغروب، فوق القيعان الرملية والصخرية على أعماق متوسطة.',
+    bait: 'ديدان، حبار، ربيان.',
+    about: 'سمكة وردية من عائلة الدنيس، تعيش في أسراب قرب القاع. تبدأ حياتها أنثى ثم يتحول كثير منها إلى ذكور.',
+  },
+  {
+    id: 'salema', ar: 'شلبة', en: 'Salema', sci: 'Sarpa salpa',
+    local: [{ name: 'شلبة', where: 'تونس وليبيا' }],
+    seas: ['med', 'atlantic'], kind: 'reef', methods: ['shore'], size: '20–35 سم',
+    tide: 'النهار، مع المد فوق الصخور المغطاة بالطحالب.',
+    bait: 'طحالب خضراء، عجين خبز، بخطاف صغير وعوامة.',
+    about: 'سمكة نباتية تسبح في أسراب كبيرة بخطوط ذهبية. قد يسبب أكل رأسها أو أحشائها في بعض المواسم هلوسات تستمر أياماً.',
+    note: 'نظّفها جيداً وتخلص من الرأس والأحشاء قبل الطهي.',
+  },
+  {
+    id: 'sardine', ar: 'سردين', en: 'European pilchard', sci: 'Sardina pilchardus',
+    local: [{ name: 'سردين', where: 'المغرب ومصر والجزائر' }, { name: 'سردينة', where: 'تسمية عامة' }],
+    seas: ['atlantic', 'med'], kind: 'pelagic', methods: ['boat', 'shore'], size: '12–20 سم',
+    tide: 'الليل، حين تقترب الأسراب من الأضواء.',
+    bait: 'يُصطاد بالشباك، أو بسلسلة خطافات صغيرة (سابيكي).',
+    about: 'المغرب أكبر مصدّر للسردين المعلّب في العالم. وهو أيضاً من أفضل الطعوم الحية لأسماك كبيرة كثيرة.',
+  },
+  {
+    id: 'mackerel', ar: 'إسقمري', en: 'Atlantic chub mackerel', sci: 'Scomber colias',
+    local: [{ name: 'إسقمري', where: 'الفصحى' }, { name: 'ماكريل', where: 'مصر' }, { name: 'كبايلا', where: 'المغرب' }],
+    seas: ['atlantic', 'med'], kind: 'pelagic', methods: ['shore', 'boat'], size: '20–35 سم',
+    tide: 'الصباح الباكر والغروب، مع المد المتحرك عند أرصفة الموانئ.',
+    bait: 'شرائح سردين، وسلسلة خطافات بريش لامع.',
+    about: 'يسبح في أسراب سريعة، وغالباً ما يُصطاد منه عدد كبير دفعة واحدة. من الأسماك الشعبية الرخيصة في المغرب العربي.',
+  },
+  {
+    id: 'sole', ar: 'سمك موسى', en: 'Common sole', sci: 'Solea solea',
+    local: [{ name: 'موسى', where: 'مصر والشام' }, { name: 'صول', where: 'المغرب العربي' }],
+    seas: ['med', 'atlantic'], kind: 'bottom', methods: ['shore', 'boat'], size: '20–40 سم',
+    tide: 'الليل، مع المد الصاعد فوق الرمل والطين.',
+    bait: 'ديدان رملية، ربيان صغير.',
+    about: 'يولد بعين على كل جانب، ثم تنتقل إحدى عينيه إلى الجانب الآخر فيعيش مستلقياً على القاع. وتروي الحكاية الشعبية أنه انشق نصفين حين ضرب موسى البحر بعصاه.',
+  },
+  {
+    id: 'scorpionfish', ar: 'عقرب البحر', en: 'Black scorpionfish', sci: 'Scorpaena porcus',
+    local: [{ name: 'عقرب البحر', where: 'تسمية عامة' }],
+    seas: ['med', 'atlantic'], kind: 'reef', methods: ['shore', 'boat'], size: '15–30 سم',
+    tide: 'الليل، بين الصخور في المياه الضحلة.',
+    bait: 'شرائح سمك، ربيان.',
+    about: 'يتخفى بين الصخور والطحالب حتى يكاد لا يُرى، ثم يبتلع فريسته في جزء من الثانية. لحمه ممتاز في الحساء.',
+    note: 'أشواك ظهره سامة ولسعتها مؤلمة جداً؛ لا تمسكه بيدك المجردة.',
+  },
+  {
+    id: 'bluefin', ar: 'التونة الحمراء', en: 'Atlantic bluefin tuna', sci: 'Thunnus thynnus',
+    local: [{ name: 'التن الأحمر', where: 'تونس والمغرب' }, { name: 'تونة زرقاء الزعانف', where: 'تسمية عامة' }],
+    seas: ['atlantic', 'med'], kind: 'pelagic', methods: ['boat'], size: '100–300 سم',
+    tide: 'الربيع، حين تعبر مضيق جبل طارق إلى المتوسط لتتكاثر.',
+    bait: 'سمك حي، وطعوم تُسحب خلف القارب؛ ويُصطاد تقليدياً بشباك المصائد الثابتة.',
+    about: 'أكبر أنواع التونة؛ يتجاوز وزنها ستمئة كيلوغرام. تهاجر بين الأطلسي والمتوسط، وما زالت المصائد التقليدية تنصب لها على سواحل المغرب وتونس.',
+    note: 'صيدها خاضع لحصص دولية صارمة.',
+  },
+  {
+    id: 'swordfish', ar: 'أبو سيف', en: 'Swordfish', sci: 'Xiphias gladius',
+    local: [{ name: 'أبو سيف', where: 'تسمية عامة' }],
+    seas: ['med', 'atlantic', 'indian'], kind: 'pelagic', methods: ['boat'], size: '120–300 سم',
+    tide: 'الليل في المياه العميقة، حين يصعد قرب السطح.',
+    bait: 'حبار، سمك كامل، يُصطاد بخيوط طويلة من القوارب.',
+    about: 'يستخدم منقاره الطويل المسطح كالسيف ليضرب أسراب الأسماك. يدفئ عينيه ودماغه بعضو خاص ليرى جيداً في المياه الباردة العميقة.',
+  },
+  {
+    id: 'octopus', ar: 'أخطبوط', en: 'Common octopus', sci: 'Octopus vulgaris',
+    local: [{ name: 'أخطبوط', where: 'تسمية عامة' }, { name: 'قرنيط', where: 'تونس وليبيا' }],
+    seas: ['med', 'atlantic'], kind: 'cephalopod', methods: ['shore', 'boat'], size: '30–90 سم',
+    tide: 'الجزر، حين تنكشف الصخور والجحور في المياه الضحلة.',
+    bait: 'طعم صناعي خاص بالأخطبوط، أو سرطان مربوط.',
+    about: 'له ثلاثة قلوب ودم أزرق، ويغير لونه وملمس جلده في لحظة. سواحل المغرب وموريتانيا من أغنى مناطق صيده في العالم.',
+  },
+  {
+    id: 'bluecrab', ar: 'السرطان الأزرق', en: 'Blue swimming crab', sci: 'Portunus segnis',
+    local: [{ name: 'قبقب', where: 'الخليج العربي' }, { name: 'كابوريا', where: 'مصر' }],
+    seas: ['gulf', 'red', 'indian', 'med'], kind: 'crustacean', methods: ['shore', 'boat'], size: '12–20 سم',
+    tide: 'المد الصاعد في الليل، فوق القيعان الرملية والطينية الضحلة.',
+    bait: 'رؤوس سمك أو دجاج في سلة أو شبكة قاع.',
+    about: 'سرطان سبّاح بأرجل خلفية كالمجاديف. عبر قناة السويس وانتشر في تونس حتى لقّبه الصيادون «داعش» لأنه يمزق الشباك، ثم صار من صادرات تونس.',
+  },
+  {
+    id: 'shrimp', ar: 'ربيان', en: 'Green tiger prawn', sci: 'Penaeus semisulcatus',
+    local: [{ name: 'ربيان', where: 'الخليج العربي' }, { name: 'جمبري', where: 'مصر' }, { name: 'قمبري', where: 'تونس' }],
+    seas: ['gulf', 'red', 'indian', 'med'], kind: 'crustacean', methods: ['boat'], size: '10–25 سم',
+    tide: 'الليل، حين يخرج من الرمل ليتغذى؛ وأوفر صيده في الأحمال.',
+    bait: 'يُصطاد بشباك الجر من القوارب، وبالشبك اليدوي في الضحضاح.',
+    about: 'يختبئ في الرمل نهاراً ويخرج ليلاً. يفتتح موسمه في الكويت والسعودية بعد أشهر من المنع، فيصبح حدثاً ينتظره الجميع.',
+    note: 'موسم صيده محدد في دول الخليج؛ راجع مواعيد الفتح والمنع في بلدك.',
+  },
+  {
+    id: 'lobster', ar: 'جراد البحر', en: 'European spiny lobster', sci: 'Palinurus elephas',
+    local: [{ name: 'جراد البحر', where: 'الفصحى' }, { name: 'استاكوزا', where: 'مصر والشام' }, { name: 'لنقوست', where: 'المغرب العربي' }],
+    seas: ['med', 'atlantic'], kind: 'crustacean', methods: ['boat'], size: '20–50 سم',
+    tide: 'الليل، حين يخرج من الشقوق الصخرية.',
+    bait: 'يُصطاد بالأقفاص المطعّمة بالسمك.',
+    about: 'ليس له مخالب كبيرة، بل قرنا استشعار طويلان شائكان يصدر بهما صوتاً كالصرير ليخيف أعداءه. يعيش عشرات السنين.',
+    note: 'يُمنع صيد الإناث الحاملات للبيض والصغار في معظم الدول.',
+  },
+  {
+    id: 'blacktip', ar: 'قرش أسود الطرف', en: 'Blacktip shark', sci: 'Carcharhinus limbatus',
+    local: [{ name: 'جرجور', where: 'الخليج العربي (للقروش عامة)' }, { name: 'قرش أسود الطرف', where: 'تسمية عامة' }],
+    seas: ['gulf', 'red', 'indian'], kind: 'shark', methods: ['boat', 'shore'], size: '120–200 سم',
+    tide: 'المد المتحرك في المياه الضحلة الدافئة.',
+    bait: 'لا يُنصح باستهدافه؛ أطلقه إن علق بالخطاف.',
+    about: 'أشهر قروش الخليج، تعرفه من الأطراف السوداء لزعانفه. يقفز أحياناً خارج الماء وهو يدور حول نفسه أثناء مطاردة الأسماك.',
+    note: 'تمنع بعض دول الخليج صيد القروش أو تقيده في مواسم محددة.',
+  },
+  {
+    id: 'hammerhead', ar: 'قرش أبو مطرقة', en: 'Great hammerhead', sci: 'Sphyrna mokarran',
+    local: [{ name: 'أبو مطرقة', where: 'تسمية عامة' }],
+    seas: ['gulf', 'red', 'indian'], kind: 'shark', methods: [], size: '250–450 سم',
+    tide: 'يُشاهد في الغطس عند حواف الشعاب العميقة.',
+    bait: 'لا يُصطاد؛ أطلقه فوراً إن علق بالخطاف.',
+    about: 'رأسه العريض كالمطرقة يحمل حواس تلتقط الإشارات الكهربائية للأسماك المدفونة في الرمل، وخاصة اللخم الذي يحبه.',
+    note: 'مهدد بالانقراض بدرجة حرجة.',
+  },
+  {
+    id: 'whaleshark', ar: 'القرش الحوتي', en: 'Whale shark', sci: 'Rhincodon typus',
+    local: [{ name: 'القرش الحوتي', where: 'تسمية عامة' }],
+    seas: ['gulf', 'red', 'indian'], kind: 'shark', methods: [], size: '5–12 متر',
+    tide: 'يُشاهد في الصيف عند تجمعات العوالق، قبالة قطر وجيبوتي وعُمان.',
+    bait: 'لا يُصطاد؛ محمي.',
+    about: 'أكبر سمكة في العالم، لكنه مسالم تماماً ويتغذى على العوالق الدقيقة. تتجمع المئات منه كل صيف في حقل الشاهين قبالة قطر.',
+    note: 'مهدد بالانقراض ومحمي في معظم الدول العربية.',
+  },
+  {
+    id: 'bluespotray', ar: 'لخمة منقطة بالأزرق', en: 'Bluespotted ribbontail ray', sci: 'Taeniura lymma',
+    local: [{ name: 'لخمة', where: 'الخليج والبحر الأحمر' }],
+    seas: ['red', 'indian'], kind: 'shark', methods: [], size: '25–35 سم (عرض القرص)',
+    tide: 'المد العالي، حين تخرج من تحت الشعاب إلى الرمل الضحل.',
+    bait: 'لا تُصطاد.',
+    about: 'من أجمل ما يراه الغطاسون في البحر الأحمر بنقاطها الزرقاء اللامعة. تختبئ نهاراً تحت حواف المرجان.',
+    note: 'في ذيلها شوكة سامة؛ امشِ في الماء الضحل بخطوات جارّة كي لا تدوس عليها.',
+  },
+  {
+    id: 'torpedo', ar: 'الرعّاد', en: 'Marbled electric ray', sci: 'Torpedo marmorata',
+    local: [{ name: 'رعّاد', where: 'تسمية عامة' }],
+    seas: ['med', 'atlantic'], kind: 'shark', methods: [], size: '30–60 سم',
+    tide: 'الليل، مدفوناً في الرمل.',
+    bait: 'لا يُصطاد.',
+    about: 'يصعق فريسته بتيار كهربائي قد يصل إلى مئتي فولت. استخدمه الأطباء الإغريق والرومان لعلاج الصداع.',
+    note: 'لا تلمسه حتى لو بدا ميتاً؛ صعقته مؤلمة.',
+  },
+  {
+    id: 'lionfish', ar: 'سمكة الأسد', en: 'Devil firefish', sci: 'Pterois miles',
+    local: [{ name: 'سمكة الأسد', where: 'تسمية عامة' }],
+    seas: ['red', 'indian', 'med'], kind: 'reef', methods: ['shore'], size: '20–35 سم',
+    tide: 'الغروب والليل، حين تخرج للصيد.',
+    bait: 'تُصطاد بالحربة في الغطس للحد من انتشارها في المتوسط.',
+    about: 'موطنها البحر الأحمر، لكنها عبرت قناة السويس وغزت شرق المتوسط فأكلت صغار الأسماك المحلية. لحمها لذيذ ويُشجع على أكلها.',
+    note: 'أشواكها سامة جداً؛ اللسعة تحتاج إلى غمر المكان في ماء ساخن وزيارة الطبيب.',
+  },
+  {
+    id: 'puffer', ar: 'سمكة الأرنب', en: 'Silver-cheeked toadfish', sci: 'Lagocephalus sceleratus',
+    local: [{ name: 'أرنب', where: 'مصر ولبنان' }],
+    seas: ['red', 'med'], kind: 'pelagic', methods: ['shore', 'boat'], size: '30–70 سم',
+    tide: 'تظهر في كل الأوقات وتقطع الخيوط بأسنانها.',
+    bait: 'تأخذ أي طعم؛ اقطع الخيط وأطلقها بحذر.',
+    about: 'غزت المتوسط عبر قناة السويس. أسنانها الأربعة كالمقص تقطع الشباك والخيوط، وجسمها يحمل سماً قاتلاً لا يزول بالطهي.',
+    note: 'سامة قاتلة: لا تأكلها أبداً، ولا تبعها.',
+  },
+  {
+    id: 'napoleon', ar: 'نابليون', en: 'Humphead wrasse', sci: 'Cheilinus undulatus',
+    local: [{ name: 'نابليون', where: 'مصر والبحر الأحمر' }],
+    seas: ['red', 'indian'], kind: 'reef', methods: [], size: '100–200 سم',
+    tide: 'يُشاهد في الغطس على حواف الشعاب في كل الأوقات.',
+    bait: 'لا يُصطاد؛ محمي.',
+    about: 'سُمّي نابليون لنتوء على جبينه يشبه قبعة القائد الفرنسي. فضولي يقترب من الغطاسين، ويأكل نجم البحر الشوكي الذي يدمر المرجان.',
+    note: 'مهدد بالانقراض وتجارته مقيدة دولياً.',
+  },
+  {
+    id: 'sohal', ar: 'الجرّاح العربي', en: 'Sohal surgeonfish', sci: 'Acanthurus sohal',
+    local: [{ name: 'سمكة الجرّاح', where: 'تسمية عامة' }],
+    seas: ['red', 'gulf', 'indian'], kind: 'reef', methods: [], size: '25–40 سم',
+    tide: 'يُرى في الأمواج المتكسرة على حافة الشعاب الضحلة.',
+    bait: 'لا يُستهدف بالصيد.',
+    about: 'على جانبي ذيله شوكة حادة كمشرط الجرّاح، يرفعها حين يدافع عن منطقته من الطحالب. شرس مع الأسماك الأخرى وأحياناً مع الغطاسين.',
+  },
+  {
+    id: 'angelfish', ar: 'سمكة الملاك', en: 'Yellowbar angelfish', sci: 'Pomacanthus maculosus',
+    local: [{ name: 'سمكة الملاك', where: 'تسمية عامة' }],
+    seas: ['gulf', 'red', 'indian'], kind: 'reef', methods: [], size: '20–50 سم',
+    tide: 'تُرى في الغطس حول الشعاب والحطام.',
+    bait: 'لا تُستهدف بالصيد.',
+    about: 'من أكثر الأسماك التي يصورها الغطاسون في الخليج، بلونها الأزرق وبقعتها الصفراء. صغارها مخططة بالأبيض والأزرق حتى تبدو نوعاً آخر.',
+  },
+  {
+    id: 'clownfish', ar: 'سمكة المهرج', en: 'Red Sea clownfish', sci: 'Amphiprion bicinctus',
+    local: [{ name: 'سمكة المهرج', where: 'تسمية عامة' }, { name: 'نيمو', where: 'شائع' }],
+    seas: ['red'], kind: 'reef', methods: [], size: '10–14 سم',
+    tide: 'تُرى في الغطس طوال اليوم داخل شقائق النعمان البحرية.',
+    bait: 'لا تُصطاد.',
+    about: 'تعيش بين لوامس شقائق النعمان اللاسعة دون أن تتأذى. تولد كلها ذكوراً، وأكبرها في المجموعة يتحول إلى أنثى.',
+  },
+  {
+    id: 'seahorse', ar: 'حصان البحر', en: 'Spotted seahorse', sci: 'Hippocampus kuda',
+    local: [{ name: 'حصان البحر', where: 'تسمية عامة' }, { name: 'فرس البحر', where: 'تسمية عامة' }],
+    seas: ['gulf', 'red', 'indian'], kind: 'reef', methods: [], size: '10–17 سم',
+    tide: 'يُرى في المياه الهادئة بين الأعشاب البحرية وجذور المانغروف.',
+    bait: 'لا يُصطاد.',
+    about: 'الذكر هو الذي يحمل البيض في جيب على بطنه حتى يفقس. يتمسك بالأعشاب بذيله، وتتحرك كل عين من عينيه وحدها.',
+    note: 'تجارته مقيدة دولياً؛ أعده إلى الماء إن علق في الشبكة.',
+  },
 ];
 
 export interface FishPhoto { w: number; h: number; artist: string; license: string; licenseUrl: string; source: string }
 export const fishPhotos = photos as Record<string, FishPhoto>;
 
-/** Species found in a given port's sea */
-export function fishForPort(portId: string): Fish[] {
+// iNaturalist research-grade observations within 50 km of each port (tools/fish-photos/inat-counts.mjs)
+const observations = portSpecies as Record<string, [string, number][]>;
+// Our names → the name iNaturalist files the species under, where they differ
+const INAT_NAME: Record<string, string> = { 'Sepia pharaonis': 'Acanthosepion pharaonis' };
+
+/** How many times a species was recorded near a port (genus-level for "spp." entries) */
+export function observedNear(f: Fish, portId: string): number {
+  const name = INAT_NAME[f.sci] || f.sci;
+  const genus = name.endsWith('spp.') ? name.split(' ')[0] + ' ' : null;
+  return (observations[portId] || [])
+    .filter(([n]) => genus ? n.startsWith(genus) : n === name)
+    .reduce((s, [, c]) => s + c, 0);
+}
+
+/** Species for a port page: those recorded near the port first (most-recorded first), then the rest of its sea */
+export function fishForPort(portId: string): { fish: Fish[]; observed: Set<string> } {
   const sea = portSea[portId];
-  return fish.filter(f => f.seas.includes(sea));
+  const inSea = fish.filter(f => f.seas.includes(sea));
+  const counts = new Map(inSea.map(f => [f.id, observedNear(f, portId)]));
+  const seen = inSea.filter(f => counts.get(f.id)! > 0).sort((a, b) => counts.get(b.id)! - counts.get(a.id)!);
+  return { fish: [...seen, ...inSea.filter(f => !counts.get(f.id))], observed: new Set(seen.map(f => f.id)) };
 }
 
 /** Ports whose sea a species lives in */

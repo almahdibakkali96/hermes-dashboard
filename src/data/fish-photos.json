@@ -262,5 +262,245 @@
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Acanthosepion_pharaonis.jpg"
+ },
+ "bluecrab": {
+  "w": 800,
+  "h": 600,
+  "artist": "Andrew Deacon",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Portunus_segnisCCO.jpg"
+ },
+ "naiser": {
+  "w": 800,
+  "h": 533,
+  "artist": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Pargo_de_mancha_negra_(Lutjanus_fulviflamma),_mar_Rojo,_Egipto,_2023-04-15,_DD_89.jpg"
+ },
+ "blacktip": {
+  "w": 800,
+  "h": 458,
+  "artist": "Albert Kok",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Carcharhinus_limbatus_-_Caraibische_zwartpunthaai.jpg"
+ },
+ "wahra": {
+  "w": 800,
+  "h": 600,
+  "artist": "Micromesistius",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Platycephalus_indicus,_Taiwan.JPG"
+ },
+ "bluespotray": {
+  "w": 800,
+  "h": 600,
+  "artist": "Jens Petersen",
+  "license": "CC BY 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:Taeniura_lymma2a.jpg"
+ },
+ "hammerhead": {
+  "w": 800,
+  "h": 403,
+  "artist": "Josh Hallett from Winter Haven, FL, USA",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Sphyrna_mokarran_at_georgia.jpg"
+ },
+ "lionfish": {
+  "w": 800,
+  "h": 1067,
+  "artist": "Alan Slater",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Pterois_miles_red_sea.JPG"
+ },
+ "napoleon": {
+  "w": 800,
+  "h": 533,
+  "artist": "R Vasconcellos",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Cheilinus_undulatus_-_R_Vasconcellos_-_582969181.jpeg"
+ },
+ "sohal": {
+  "w": 800,
+  "h": 533,
+  "artist": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Pez_cirujano_%C3%A1rabe_(Acanthurus_sohal),_islas_Ad_Dimaniyat,_Om%C3%A1n,_2024-08-13,_DD_02.jpg"
+ },
+ "sweetlips": {
+  "w": 800,
+  "h": 533,
+  "artist": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Labiudo_africano_(Plectorhinchus_gaterinus),_Zanz%C3%ADbar,_Tanzania,_2024-05-31,_DD_03.jpg"
+ },
+ "redmullet": {
+  "w": 800,
+  "h": 450,
+  "artist": "Hans Hillewaert",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Mullus_surmuletus.jpg"
+ },
+ "octopus": {
+  "w": 800,
+  "h": 533,
+  "artist": "Beckmannjan",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Octopus_vulgaris2.jpg"
+ },
+ "shrimp": {
+  "w": 800,
+  "h": 532,
+  "artist": "Chan T. Y. & Lin C. W.",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Penaeus_semisulcatus_(MNHN-IU-2011-5741).jpeg"
+ },
+ "lobster": {
+  "w": 800,
+  "h": 533,
+  "artist": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Langosta_com%C3%BAn_(Palinurus_elephas),_Parque_natural_de_la_Arr%C3%A1bida,_Portugal,_2023-07-27,_DD_12.jpg"
+ },
+ "sardine": {
+  "w": 800,
+  "h": 533,
+  "artist": "margherita_bg",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Sardina_pilchardus_Italy.jpg"
+ },
+ "salema": {
+  "w": 800,
+  "h": 533,
+  "artist": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Salema_(Sarpa_salpa),_Catania,_Sicilia,_Italia,_2025-04-04,_DD_90.jpg"
+ },
+ "mackerel": {
+  "w": 800,
+  "h": 600,
+  "artist": "Etrusko25",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Lanzardo_2.jpg"
+ },
+ "whaleshark": {
+  "w": 800,
+  "h": 368,
+  "artist": "Zac Wolf",
+  "license": "CC BY-SA 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+  "source": "https://commons.wikimedia.org/wiki/File:Whale_shark_Georgia_aquarium.jpg"
+ },
+ "torpedo": {
+  "w": 800,
+  "h": 600,
+  "artist": "Philippe Guillaume",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Torpedo_marmorata2.jpg"
+ },
+ "puffer": {
+  "w": 800,
+  "h": 600,
+  "artist": "Rickard Zerpe",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Silver_puffer_(Lagocephalus_sceleratus)_(48272090586).jpg"
+ },
+ "clownfish": {
+  "w": 800,
+  "h": 1067,
+  "artist": "Alexander Vasenin",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Twoband_anemonefish_in_the_Red_Sea_2.JPG"
+ },
+ "bluefin": {
+  "w": 800,
+  "h": 528,
+  "artist": "Unknown author",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Bluefin-big.jpg"
+ },
+ "sole": {
+  "w": 800,
+  "h": 600,
+  "artist": "Hans Hillewaert",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Solea_solea_1.jpg"
+ },
+ "angelfish": {
+  "w": 800,
+  "h": 533,
+  "artist": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Pez_%C3%A1ngel_de_barra_amarilla_(Pomacanthus_maculosus),_parque_nacional_Ras_Muhammad,_Egipto,_2022-03-26,_DD_138.jpg"
+ },
+ "seahorse": {
+  "w": 800,
+  "h": 599,
+  "artist": "Nick Hobgood",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Hippocampus_kuda_(Yellow_estuary_seahorse).jpg"
+ },
+ "faskar": {
+  "w": 800,
+  "h": 535,
+  "artist": "Michal Mikula",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Acanthopagrus_bifasciatus_by_Michal_Mikula.jpg"
+ },
+ "pandora": {
+  "w": 800,
+  "h": 533,
+  "artist": "Julien Renoult",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Pagellus_erythrinus_-_Julien_Renoult_-_585827535.jpeg"
+ },
+ "scorpionfish": {
+  "w": 800,
+  "h": 480,
+  "artist": "George Chernilevsky",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Scorpaena_porcus_2009_G1.jpg"
+ },
+ "sbour": {
+  "w": 800,
+  "h": 367,
+  "artist": "Francis Day",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Tenualosa_ilisha_Day.png"
+ },
+ "swordfish": {
+  "w": 800,
+  "h": 303,
+  "artist": "Werner",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Xiphias_gladius2.jpg"
  }
 }

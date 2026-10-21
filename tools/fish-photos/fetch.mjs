@@ -3,7 +3,8 @@
 // src/data/fish-photos.json for the credits page.
 //
 // Usage: node tools/fish-photos/fetch.mjs   (re-run after adding a species to FILES)
-import { writeFile, mkdir } from 'node:fs/promises';
+import { writeFile, readFile, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import sharp from 'sharp';
 
 const FILES = {
@@ -40,14 +41,48 @@ const FILES = {
   amberjack: 'Pez_limón_(Seriola_dumerili),_Madeira,_Portugal,_2019-05-31,_DD_31.jpg',
   squid: 'Loligo_vulgaris.jpg',
   sepia: 'Acanthosepion_pharaonis.jpg',
+  // Added from iNaturalist observation counts near our ports; photos chosen via wikidata.mjs
+  bluecrab: 'Portunus segnisCCO.jpg',
+  naiser: 'Pargo de mancha negra (Lutjanus fulviflamma), mar Rojo, Egipto, 2023-04-15, DD 89.jpg',
+  blacktip: 'Carcharhinus limbatus - Caraibische zwartpunthaai.jpg',
+  wahra: 'Platycephalus indicus, Taiwan.JPG',
+  bluespotray: 'Taeniura lymma2a.jpg',
+  hammerhead: 'Sphyrna mokarran at georgia.jpg',
+  faskar: 'Acanthopagrus bifasciatus by Michal Mikula.jpg',
+  lionfish: 'Pterois miles red sea.JPG',
+  napoleon: 'Cheilinus undulatus - R Vasconcellos - 582969181.jpeg',
+  sohal: 'Pez cirujano árabe (Acanthurus sohal), islas Ad Dimaniyat, Omán, 2024-08-13, DD 02.jpg',
+  sweetlips: 'Labiudo africano (Plectorhinchus gaterinus), Zanzíbar, Tanzania, 2024-05-31, DD 03.jpg',
+  redmullet: 'Mullus surmuletus.jpg',
+  octopus: 'Octopus vulgaris2.jpg',
+  shrimp: 'Penaeus semisulcatus (MNHN-IU-2011-5741).jpeg',
+  lobster: 'Langosta común (Palinurus elephas), Parque natural de la Arrábida, Portugal, 2023-07-27, DD 12.jpg',
+  sardine: 'Sardina pilchardus Italy.jpg',
+  salema: 'Salema (Sarpa salpa), Catania, Sicilia, Italia, 2025-04-04, DD 90.jpg',
+  pandora: 'Pagellus erythrinus - Julien Renoult - 585827535.jpeg',
+  mackerel: 'Lanzardo 2.jpg',
+  whaleshark: 'Whale shark Georgia aquarium.jpg',
+  torpedo: 'Torpedo marmorata2.jpg',
+  puffer: 'Silver puffer (Lagocephalus sceleratus) (48272090586).jpg',
+  clownfish: 'Twoband anemonefish in the Red Sea 2.JPG',
+  scorpionfish: 'Scorpaena porcus 2009 G1.jpg',
+  bluefin: 'Bluefin-big.jpg',
+  swordfish: 'Xiphias gladius2.jpg',
+  sbour: 'Tenualosa ilisha Day.png',
+  sole: 'Solea solea 1.jpg',
+  angelfish: 'Pez ángel de barra amarilla (Pomacanthus maculosus), parque nacional Ras Muhammad, Egipto, 2022-03-26, DD 138.jpg',
+  seahorse: 'Hippocampus kuda (Yellow estuary seahorse).jpg',
 };
 
 const UA = 'ArabTides/1.0 (https://www.arabtides.com; fish photo credits)';
 const strip = (html = '') => html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
 
 await mkdir('public/fish', { recursive: true });
-const meta = {};
+// Species already downloaded are kept; delete an entry from fish-photos.json to fetch it again
+const META_FILE = 'src/data/fish-photos.json';
+const meta = existsSync(META_FILE) ? JSON.parse(await readFile(META_FILE, 'utf8')) : {};
 for (const [id, file] of Object.entries(FILES)) {
+  if (meta[id] && existsSync(`public/fish/${id}.webp`)) continue;
   const api = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo'
     + '&iiprop=url|extmetadata&iiurlwidth=900&titles=' + encodeURIComponent('File:' + file);
   const j = await (await fetch(api, { headers: { 'User-Agent': UA } })).json();
@@ -67,4 +102,4 @@ for (const [id, file] of Object.entries(FILES)) {
   };
   console.log(id, meta[id].license, '·', meta[id].artist);
 }
-await writeFile('src/data/fish-photos.json', JSON.stringify(meta, null, 1) + '\n');
+await writeFile(META_FILE, JSON.stringify(meta, null, 1) + '\n');

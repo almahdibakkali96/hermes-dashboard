@@ -10,7 +10,7 @@
     "timezone": "Asia/Muscat"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/muscat",
-  "generated_utc": "2026-10-21T11:14:39.137Z",
+  "generated_utc": "2026-10-21T12:07:19.212Z",
   "tide_type_ar": "مختلط، نصف يومي غالباً",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
@@ -147,7 +147,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.97
+        "illumination": 0.98
       }
     },
     {
@@ -252,7 +252,7 @@
       "moon": {
         "phase_ar": "أحدب متناقص",
         "phase_en": "Waning Gibbous",
-        "illumination": 0.98
+        "illumination": 0.97
       }
     }
   ]

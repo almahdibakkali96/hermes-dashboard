@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Flag from '../../components/Flag.astro';
-import { fish, fishPhotos, kindNames, methodNames, portsForFish } from '../../lib/fish';
+import { fish, fishPhotos, kindNames, methodNames, portsForFish, observedNear } from '../../lib/fish';
 import { seas } from '../../lib/seaNames';
 import { countryName } from '../../lib/countries';
 import { dayExtremes, formatTime, getTimezoneOffset, classifySpringNeap } from '../../lib/tides';
@@ -27,7 +27,7 @@ const ports = await Promise.all(portsForFish(f).map(async p => {
   const ex = dayExtremes(port.constituents, today, tz);
   const hs = ex.filter(e => e.type === 'high'), ls = ex.filter(e => e.type === 'low');
   const range = hs.length && ls.length ? Math.round(Math.max(...hs.map(h => h.height)) - Math.min(...ls.map(l => l.height))) : null;
-  return { ...p, highs: hs.map(h => formatTime(h.time, tz)), range };
+  return { ...p, highs: hs.map(h => formatTime(h.time, tz)), range, seen: observedNear(f, p.id) > 0 };
 }));
 const countries = [...new Set(ports.map(p => p.country))];
 
@@ -90,7 +90,7 @@ const jsonLd = [
 
         <dl class="grid grid-cols-2 gap-2 text-sm">
           <div class="info-tile"><dt>الطول الشائع</dt><dd>{f.size}</dd></div>
-          <div class="info-tile"><dt>طريقة الصيد</dt><dd>{f.methods.map(m => methodNames[m]).join(' و')}</dd></div>
+          <div class="info-tile"><dt>طريقة الصيد</dt><dd>{f.methods.length ? f.methods.map(m => methodNames[m]).join(' و') : 'لا يُستهدف بالصيد'}</dd></div>
           <div class="info-tile col-span-2"><dt>البيئة</dt><dd>{kindNames[f.kind]}</dd></div>
         </dl>
       </div>
@@ -105,7 +105,7 @@ const jsonLd = [
         </p>
       </section>
       <section class="card p-5" aria-labelledby="bait-title">
-        <h2 id="bait-title" class="font-semibold">🎣 الطعم</h2>
+        <h2 id="bait-title" class="font-semibold">🎣 {f.methods.length ? 'الطعم' : 'الصيد'}</h2>
         <p class="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{f.bait}</p>
       </section>
     </div>
@@ -127,7 +127,7 @@ const jsonLd = [
               {ports.filter(p => p.country === code).map(p => (
                 <li>
                   <a href={`${BASE}ports/${p.id}`} class="flex items-baseline gap-2 py-1 text-sm hover:text-[var(--accent)] transition-colors">
-                    <span>{p.name_ar}</span>
+                    <span>{p.seen && <span title="سُجّلت مشاهدته قرب الميناء">📍 </span>}{p.name_ar}</span>
                     <span class="ms-auto text-[11px] text-[var(--text-dim)]">
                       {/* inline-block keeps each time atomic so RTL lists them earliest-first */}
                       {p.highs.length > 0 && <>▲ {p.highs.map((h, i) => <>{i > 0 && '، '}<span class="latin inline-block">{h}</span></>)}</>}
@@ -140,7 +140,7 @@ const jsonLd = [
           </div>
         ))}
       </div>
-      <p class="mt-2 text-xs text-[var(--text-muted)]">▲ أوقات المد العالي اليوم بالتوقيت المحلي، ثم مدى المد. افتح صفحة الميناء لتقييم الصيد وأوقات السولونار.</p>
+      <p class="mt-2 text-xs text-[var(--text-muted)] leading-relaxed">▲ أوقات المد العالي اليوم بالتوقيت المحلي، ثم مدى المد. 📍 سُجّلت مشاهدته في نطاق <span class="latin">50</span> كم من الميناء على منصة iNaturalist. افتح صفحة الميناء لتقييم الصيد وأوقات السولونار.</p>
     </section>
 
     {others.length > 0 && (
