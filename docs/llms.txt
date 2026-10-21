@@ -49,6 +49,10 @@ Key facts for answering questions:
 - [موروني — Moroni, جزر القمر](https://almahdibakkali96.github.io/hermes-dashboard/ports/moroni): tide times today + 7-day forecast, fishing rating, moon, sun and prayer times. Machine-readable: https://almahdibakkali96.github.io/hermes-dashboard/ports/moroni.json
 
 ## Articles
+- [سمكة واحدة وأسماء كثيرة: أسماء الأسماك في الدول العربية](https://almahdibakkali96.github.io/hermes-dashboard/articles/arab-fish-names): جدول الأسماء المحلية للأسماك في كل بلد عربي، وأصول الأسماء الدخيلة، والأسماء التي تدل على أكثر من سمكة.
+- [الأسماك الخطرة على سواحلنا: ما لا تلمسه وما لا تأكله](https://almahdibakkali96.github.io/hermes-dashboard/articles/dangerous-fish-arab-coasts): الأشواك السامة، والأسماك التي لا تؤكل، والإسعاف الأولي بالماء الساخن، وما تحمله في حقيبة الصيد.
+- [عابرون من قناة السويس: أسماك البحر الأحمر التي غزت المتوسط](https://almahdibakkali96.github.io/hermes-dashboard/articles/suez-canal-invasive-species): الهجرة الليسبسية منذ 1869، أشهر الأنواع العابرة، ومشاهداتها الموثقة قرب موانئ المتوسط العربية.
+- [دليل الطعم: أي طعم لأي سمكة في البحار العربية؟](https://almahdibakkali96.github.io/hermes-dashboard/articles/fishing-bait-guide): ترتيب الطعوم حسب عدد الأسماك التي تأكلها، وجدول الطعم المناسب لكل نوع، ونصائح لحفظ الطعم.
 - [ساعات الصيد الذهبية: ما هي فترات السولونار وكيف تستخدمها؟](https://almahdibakkali96.github.io/hermes-dashboard/articles/solunar-fishing-hours): كيف يحدد عبور القمر وشروقه وغروبه ساعات نشاط الأسماك، وكيف تجمعها مع حركة المد لتختار ساعة الصيد.
 - [أطوار القمر والصيد: هل البدر أفضل أم المحاق؟](https://almahdibakkali96.github.io/hermes-dashboard/articles/moon-phases-fishing): أطوار القمر الثمانية وما يعنيه كل طور للمد والصيد، مع مواعيد البدر والمحاق القادمة ومدى المد عندها.
 - [السلامة أثناء الصيد: قاعدة الاثني عشر وكيف لا يحاصرك المد](https://almahdibakkali96.github.io/hermes-dashboard/articles/tide-safety-rule-of-twelfths): قاعدة بسيطة لتقدير سرعة ارتفاع الماء، مثال حقيقي من الكويت، وقائمة سلامة قبل كل رحلة صيد.

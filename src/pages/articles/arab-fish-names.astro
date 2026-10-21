@@ -1,0 +1,108 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { fish } from '../../lib/fish';
+
+const meta = articleBySlug('arab-fish-names');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const link = (id: string) => `${BASE}fish/${id}`;
+
+// Species with more than one regional name: the heart of the article
+const multi = fish.filter(f => f.local.filter(l => !/عامة|الفصحى|شائع/.test(l.where)).length >= 2);
+const totalNames = fish.reduce((s, f) => s + f.local.length, 0);
+
+// Names that came into Arabic dialects from Mediterranean languages
+const loans = [
+  { name: 'جمبري / قمبري', where: 'مصر / تونس', from: 'الإيطالية gambero', id: 'shrimp' },
+  { name: 'سوبيا', where: 'مصر والشام', from: 'الإيطالية seppia', id: 'sepia' },
+  { name: 'كاليماري', where: 'مصر والشام', from: 'الإيطالية calamari', id: 'squid' },
+  { name: 'تريلية', where: 'تونس', from: 'الإيطالية triglia', id: 'redmullet' },
+  { name: 'استاكوزا', where: 'مصر والشام', from: 'اليونانية astakós', id: 'lobster' },
+  { name: 'ليبراكس', where: 'مصر', from: 'اليونانية lábrax', id: 'seabass' },
+  { name: 'دوراد', where: 'المغرب والجزائر', from: 'الفرنسية dorade', id: 'dorade' },
+  { name: 'لنقوست', where: 'المغرب العربي', from: 'الفرنسية langouste', id: 'lobster' },
+  { name: 'كبايلا', where: 'المغرب', from: 'الإسبانية caballa', id: 'mackerel' },
+];
+
+const toc = [
+  { id: 'why', label: 'لماذا تختلف الأسماء؟' },
+  { id: 'table', label: 'سمكة واحدة وأسماء كثيرة' },
+  { id: 'loans', label: 'أسماء جاءت من وراء البحر' },
+  { id: 'confuse', label: 'أسماء تخدعك' },
+  { id: 'help', label: 'ساعدنا نكمل القائمة' },
+];
+const takeaways = [
+  `في دليل ArabTides <strong>${fish.length}</strong> نوعاً و<strong>${totalNames}</strong> اسماً محلياً، و<strong>${multi.length}</strong> نوعاً منها لها أكثر من اسم حسب البلد.`,
+  'أسماء الخليج غالباً عربية قديمة، بينما دخلت أسماء من <strong>الإيطالية والفرنسية والإسبانية</strong> إلى لهجات المتوسط والمغرب العربي.',
+  'الاسم الواحد قد يعني سمكتين مختلفتين: «الوقار» في مصر هامور، و«البوري» الصغير في الخليج «ميد».',
+  'الاسم العلمي اللاتيني هو الطريقة الوحيدة المؤكدة لمعرفة السمكة نفسها في كل البلدان.',
+];
+const faq = [
+  { q: 'ما الاسم الصحيح لسمكة الهامور بالفصحى؟', a: 'الهامور اسم مستخدم في الفصحى المعاصرة أيضاً، وفي مصر تُسمى هذه العائلة «الوقار». لكن أدق طريقة للتعريف هي الاسم العلمي، مثل Epinephelus coioides للهامور البرتقالي المنقط.' },
+  { q: 'هل الكنعد والدراك سمكة واحدة؟', a: 'نعم. الكنعد في الخليج وعُمان والدراك في مصر والبحر الأحمر اسمان للسمكة نفسها، واسمها العلمي Scomberomorus commerson.' },
+  { q: 'لماذا يسمى سمك موسى بهذا الاسم؟', a: 'تقول حكاية شعبية في مصر والشام إن السمكة انشقت نصفين حين ضرب النبي موسى البحر بعصاه، فصار لها جانب واحد. والسبب العلمي أنها تولد بعين على كل جانب ثم تنتقل عين إلى الجانب الآخر فتعيش مستلقية على القاع.' },
+  { q: 'وجدت اسماً خاطئاً أو ناقصاً، كيف أخبركم؟', a: 'راسلنا من صفحة الاتصال أو اكتب في التعليقات على حساباتنا: اسم السمكة كما تعرفه، واسم مدينتك. نراجع كل اقتراح ونضيفه إلى دليل الأسماك.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={['kuwait-city', 'alexandria', 'tunis', 'casablanca']}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    <ellipse cx="150" cy="140" rx="80" ry="38" fill="#2dd4bf" opacity=".85"/><path d="M228 140 l40 -30 v60z" fill="#14b8a6"/><circle cx="105" cy="130" r="7" fill="#0b2540"/>
+    <g font-family="Noto Naskh Arabic" font-size="20" fill="#fde68a" text-anchor="middle"><text x="70" y="60">كنعد</text><text x="230" y="70">درّاك</text><text x="150" y="235">؟</text></g>
+  </svg>
+
+  <p>اطلب «كنعد» في سوق السمك في القاهرة، فقد ينظر إليك البائع باستغراب. واطلب «دراك» في الكويت، فستلقى النظرة نفسها. والسمكة واحدة! هذه من طرائف العالم العربي: لغة واحدة، وبحار متصلة، لكن لكل ساحل أسماؤه الخاصة لأسماكه.</p>
+
+  <h2 id="why">لماذا تختلف الأسماء؟</h2>
+  <p>تكونت أسماء الأسماك عبر قرون في كل ميناء على حدة، قبل أن توجد أسواق كبيرة تجمع الناس من كل البلدان. فأخذ كل ساحل أسماءه من لهجته المحلية، ومن تجاره وجيرانه:</p>
+  <ul>
+    <li><strong>في الخليج</strong>: أسماء عربية قديمة متوارثة عند البحارة والغواصين مثل الهامور والكنعد والشعري والسبيطي والزبيدي، مع أثر محدود من لغات التجار الذين عبروا المحيط الهندي.</li>
+    <li><strong>في مصر والشام</strong>: أسماء أخذت كثيراً من الإيطالية واليونانية، بسبب قرون من التجارة البحرية مع موانئ المتوسط الشمالية.</li>
+    <li><strong>في المغرب العربي</strong>: أثر واضح للفرنسية والإسبانية والإيطالية في أسماء الأسماك والمأكولات البحرية.</li>
+  </ul>
+
+  <h2 id="table">سمكة واحدة وأسماء كثيرة</h2>
+  <p>هذه الأنواع في <a href={`${BASE}fish`}>دليل الأسماك</a> التي تحمل أكثر من اسم حسب البلد:</p>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead><tr><th>السمكة</th><th>الأسماء المحلية</th><th>الاسم العلمي</th></tr></thead>
+      <tbody>
+        {multi.map(f => (
+          <tr>
+            <td><a href={link(f.id)} class="text-[var(--accent)] underline font-semibold">{f.ar}</a></td>
+            <td class="text-sm">{f.local.map(l => <div><strong>{l.name}</strong> <span class="text-[var(--text-muted)]">· {l.where}</span></div>)}</td>
+            <td class="text-xs latin italic" lang="la">{f.sci}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="loans">أسماء جاءت من وراء البحر</h2>
+  <p>كثير من الأسماء التي نظنها عامية محلية جاءت في الأصل من لغات الموانئ الأوروبية على الضفة الأخرى من المتوسط، وتغير نطقها حتى صارت عربية الشكل:</p>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead><tr><th>الاسم</th><th>أين يُستخدم</th><th>الأصل</th></tr></thead>
+      <tbody>
+        {loans.map(l => (
+          <tr><td><a href={link(l.id)} class="text-[var(--accent)] underline">{l.name}</a></td><td class="text-sm">{l.where}</td><td class="text-sm">{l.from}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p>حتى «السردين» نفسه اسم قديم مرتبط بجزيرة سردينيا الإيطالية، و«الإسقمري» في الفصحى قريب من الاسم اليوناني القديم للماكريل. فأسماء الأسماك سجل صغير لتاريخ التجارة في البحر.</p>
+
+  <h2 id="confuse">أسماء تخدعك</h2>
+  <p>المشكلة ليست فقط أن السمكة الواحدة لها أسماء كثيرة، بل أن الاسم الواحد قد يدل على سمكتين:</p>
+  <ul>
+    <li><a href={link('wagar')}><strong>الوقار</strong></a> في مصر اسم عام للهوامير، بينما الهامور في الخليج نوع آخر من العائلة نفسها هو <a href={link('hamour')}>الهامور البرتقالي المنقط</a>.</li>
+    <li><a href={link('boori')}><strong>البوري</strong></a> في مصر والشام سمكة مائدة كاملة، بينما يسمي أهل الخليج صغار البوري «الميد» ويستخدمونها طعماً حياً.</li>
+    <li><a href={link('hamra')}><strong>الحمرا</strong></a> في الخليج اسم لعدة أنواع من النهاش الأحمر، و«البهار» في البحر الأحمر نوع قريب منها.</li>
+    <li>كلمة <strong>«جرجور»</strong> في الخليج تطلق على القروش عامة، لا على نوع واحد، مثل <a href={link('blacktip')}>القرش أسود الطرف</a>.</li>
+    <li><a href={link('safi')}><strong>الصافي</strong></a> في الإمارات هو «البطاطا» في الكويت و«السيجان» في مصر، وكلها أنواع من الجنس نفسه.</li>
+  </ul>
+  <div class="callout fact"><span class="ic">💡</span><div>الحل الذي يستخدمه العلماء: الاسم العلمي اللاتيني. لكل نوع اسم واحد فقط في كل العالم، مثل <span class="latin italic" lang="la">Scomberomorus commerson</span> للكنعد والدراك معاً. لهذا نكتبه في كل صفحة من دليل الأسماك.</div></div>
+
+  <h2 id="help">ساعدنا نكمل القائمة</h2>
+  <p>جمعنا هذه الأسماء من مصادر كثيرة، لكن الأسماء تتغير من مدينة إلى أخرى داخل البلد الواحد، وأكيد أن بعضها ينقصنا. إذا كنت تعرف اسماً آخر لسمكة في دليلنا، أو وجدت اسماً لا يُستخدم في بلدك، <a href={`${BASE}contact`}>راسلنا</a> واذكر اسم مدينتك. نراجع كل اقتراح ونضيف الأسماء الجديدة إلى صفحات الأسماك.</p>
+</ArticleLayout>

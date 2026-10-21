@@ -575,6 +575,9 @@ export const fish: Fish[] = [
 export interface FishPhoto { w: number; h: number; artist: string; license: string; licenseUrl: string; source: string }
 export const fishPhotos = photos as Record<string, FishPhoto>;
 
+/** "N species" in Arabic: 3–10 take the plural أنواع, other numbers the accusative singular نوعاً */
+export const speciesCount = (n: number) => (n >= 3 && n <= 10 ? `${n} أنواع` : `${n} نوعاً`);
+
 // iNaturalist research-grade observations within 50 km of each port (tools/fish-photos/inat-counts.mjs)
 const observations = portSpecies as Record<string, [string, number][]>;
 // Our names → the name iNaturalist files the species under, where they differ

@@ -420,7 +420,7 @@ const pageJsonLd = [
             {portFish.observed.size > 0
               ? <>📍 <span class="latin">{portFish.observed.size}</span> من هذه الأنواع سجّل الغواصون والصيادون مشاهدتها في نطاق <span class="latin">50</span> كم من {port.name_ar} على منصة iNaturalist.</>
               : <>الأنواع الشائعة في {seas[portSea[id!]].name}.</>}
-            {portFish.fish.length > 12 && <> و<span class="latin">{portFish.fish.length - 12}</span> أنواع أخرى في <a href={`${BASE}fish`} class="text-[var(--accent)] hover:underline">دليل الأسماك</a>.</>}
+            {portFish.fish.length > 12 && <> وأنواع أخرى في <a href={`${BASE}fish`} class="text-[var(--accent)] hover:underline">دليل الأسماك</a>.</>}
           </p>
         </section>
 

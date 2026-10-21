@@ -1,0 +1,106 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { fish, observedNear } from '../../lib/fish';
+import { portSea } from '../../lib/seaNames';
+import { countryName } from '../../lib/countries';
+import placesIndex from '../../data/places/places_index.json';
+
+const meta = articleBySlug('suez-canal-invasive-species');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const F = (id: string) => fish.find(f => f.id === id)!;
+const link = (id: string) => `${BASE}fish/${id}`;
+
+// Red Sea species now living in the Mediterranean, and where iNaturalist users recorded them near our Med ports
+const migrants = ['lionfish', 'puffer', 'safi', 'bluecrab'];
+const medPorts = (placesIndex as { id: string; name_ar: string; country: string }[]).filter(p => portSea[p.id] === 'med');
+const sightings = migrants.map(id => {
+  const f = F(id);
+  const ports = medPorts.map(p => ({ ...p, n: observedNear(f, p.id) })).filter(p => p.n > 0).sort((a, b) => b.n - a.n);
+  return { f, ports, total: ports.reduce((s, p) => s + p.n, 0) };
+});
+
+const toc = [
+  { id: 'canal', label: 'باب مفتوح منذ 1869' },
+  { id: 'who', label: 'أشهر العابرين' },
+  { id: 'map', label: 'أين سُجّلوا قرب موانئنا؟' },
+  { id: 'impact', label: 'ماذا يعني ذلك للصياد؟' },
+  { id: 'help', label: 'كيف تساعد؟' },
+];
+const takeaways = [
+  'منذ افتتاح قناة السويس عام <strong>1869</strong> عبرت مئات الأنواع من البحر الأحمر إلى المتوسط، في هجرة يسميها العلماء «الهجرة الليسبسية».',
+  'أشهرها: <strong>سمكة الأسد</strong> و<strong>سمكة الأرنب</strong> و<strong>السيجان</strong> و<strong>السرطان الأزرق</strong>.',
+  'بعضها صار صيداً مفيداً يؤكل، وبعضها، مثل سمكة الأرنب، <strong>سام قاتل</strong> لا يؤكل أبداً.',
+  'تسجيل مشاهداتك بالصور على منصات مثل iNaturalist يساعد العلماء على تتبع انتشارها.',
+];
+const faq = [
+  { q: 'لماذا تعبر الأسماك من البحر الأحمر إلى المتوسط وليس العكس غالباً؟', a: 'لأن أنواع البحر الأحمر معتادة على مياه أدفأ وأكثر ملوحة، وشرق المتوسط صار أدفأ مع الوقت فناسبها. كما أن تيار الماء في القناة يتجه في معظم السنة من البحر الأحمر نحو المتوسط. لذلك عبر عدد كبير من الأنواع شمالاً، وعدد قليل جداً جنوباً.' },
+  { q: 'هل يمكن أكل سمكة الأسد؟', a: 'نعم، لحمها أبيض ولذيذ وآمن، والسم في أشواكها فقط. تشجع عدة دول متوسطية على صيدها وأكلها للحد من انتشارها، بشرط إزالة الأشواك بحذر.' },
+  { q: 'كيف أميز سمكة الأرنب السامة؟', a: 'جسم فضي ممدود، نقاط داكنة على الظهر، بطن أبيض، أسنان أمامية ملتحمة في منقار حاد، وتنتفخ حين تُمسك. إذا شككت فلا تأكلها.' },
+  { q: 'هل السرطان الأزرق مضر؟', a: 'هو يمزق الشباك ويأكل الأسماك العالقة فيها، فأضر بالصيادين في تونس في البداية. لكنه يؤكل، وصار يُصاد ويُصدَّر، فتحول جزء من المشكلة إلى مصدر دخل.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={['alexandria', 'beirut', 'latakia', 'tunis']}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    <path d="M150 20 C140 80 160 120 150 160 C140 200 150 230 150 250" fill="none" stroke="#2dd4bf" stroke-width="16" stroke-linecap="round" opacity=".6"/>
+    <text x="150" y="16" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="Noto Naskh Arabic">المتوسط</text>
+    <text x="150" y="258" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="Noto Naskh Arabic">البحر الأحمر</text>
+    <g fill="#fde68a"><path d="M200 190 l-12 -20 l24 0z"/><path d="M200 130 l-12 -20 l24 0z"/><path d="M200 70 l-12 -20 l24 0z"/></g>
+  </svg>
+
+  <p>إذا صدت سمكة أسد على صخور بيروت، أو سرطاناً أزرق في خليج قابس، فأنت تمسك بجزء من قصة بدأت قبل أكثر من قرن ونصف: يوم فُتحت قناة السويس، وصار البحر الأحمر والبحر المتوسط متصلين لأول مرة منذ ملايين السنين.</p>
+
+  <h2 id="canal">باب مفتوح منذ 1869</h2>
+  <p>قبل القناة، كان البرزخ اليابس يفصل بين بحرين مختلفين: البحر الأحمر الدافئ المالح المتصل بالمحيط الهندي، والبحر المتوسط الأبرد المتصل بالأطلسي. وبعد افتتاح القناة بدأت الكائنات تعبرها ببطء، بعضها سابحاً، وبعضها يرقات يحملها التيار، وبعضها عالقاً بأجسام السفن.</p>
+  <p>في البداية كانت البحيرات المرة في منتصف القناة، بملوحتها الشديدة، عائقاً أمام كثير من الأنواع. ومع الوقت انخفضت ملوحتها، ووُسعت القناة وعُمّقت، وارتفعت حرارة شرق المتوسط، فتسارع العبور. واليوم يعد العلماء مئات الأنواع من أصل البحر الأحمر تعيش في المتوسط، ويسمون هذه الظاهرة «الهجرة الليسبسية» نسبة إلى فرديناند دي ليسبس، مهندس مشروع القناة.</p>
+  <div class="callout fact"><span class="ic">💡</span><div>شرق المتوسط، قرب سواحل مصر وفلسطين ولبنان وسوريا، هو أكثر المناطق تأثراً، لأنه أقرب إلى القناة وأدفأ من غربه.</div></div>
+
+  <h2 id="who">أشهر العابرين</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5">
+    {migrants.map(id => (
+      <a href={link(id)} class="card overflow-hidden group block !no-underline">
+        <img src={`${BASE}fish/${id}.webp`} alt={F(id).ar} loading="lazy" class="fish-thumb" />
+        <span class="block p-3">
+          <span class="block font-semibold group-hover:text-[var(--accent)]">{F(id).ar}</span>
+          <span class="block text-xs text-[var(--text-muted)] latin italic" lang="la">{F(id).sci}</span>
+        </span>
+      </a>
+    ))}
+  </div>
+  <ul>
+    <li><a href={link('safi')}><strong>السيجان</strong></a>: من أوائل العابرين وأنجحهم. صار من أكثر الأسماك شيوعاً على صخور لبنان وسوريا، ويصطاده الناس ويأكلونه، لكن أشواكه سامة.</li>
+    <li><a href={link('lionfish')}><strong>سمكة الأسد</strong></a>: وصلت متأخرة نسبياً، ثم انتشرت بسرعة كبيرة في العقد الأخير على سواحل لبنان وقبرص وتركيا واليونان. تأكل صغار الأسماك المحلية ولا يعرفها أي مفترس محلي.</li>
+    <li><a href={link('puffer')}><strong>سمكة الأرنب</strong></a>: أخطر العابرين. تقطع الخيوط والشباك بأسنانها، وتحمل سماً قاتلاً لا يزول بالطهي.</li>
+    <li><a href={link('bluecrab')}><strong>السرطان الأزرق</strong></a>: انتشر بسرعة على سواحل تونس قبل نحو عقد، حتى لقبه الصيادون «داعش» لأنه يمزق الشباك. ثم صار يُصاد ويُصدَّر.</li>
+  </ul>
+
+  <h2 id="map">أين سُجّلوا قرب موانئنا؟</h2>
+  <p>هذا عدد المشاهدات الموثّقة لكل نوع على منصة iNaturalist في نطاق 50 كيلومتراً من موانئ المتوسط في ArabTides. هي مشاهدات غطاسين وصيادين وهواة صوّروا الأسماك ورفعوا صورها، فهي لا تعني أن النوع غائب حيث لا توجد مشاهدات، بل أن أحداً لم يسجله هناك بعد.</p>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead><tr><th>النوع</th><th>المشاهدات</th><th>الموانئ التي سُجّل قربها</th></tr></thead>
+      <tbody>
+        {sightings.map(s => (
+          <tr>
+            <td><a href={link(s.f.id)} class="text-[var(--accent)] underline">{s.f.ar}</a></td>
+            <td class="latin">{s.total}</td>
+            <td>{s.ports.length ? s.ports.map(p => p.name_ar.includes("(") ? p.name_ar : `${p.name_ar} (${countryName(p.country)})`).join('، ') : 'لا مشاهدات قرب موانئنا بعد'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="impact">ماذا يعني ذلك للصياد؟</h2>
+  <p>للعابرين أثران متعاكسان. من جهة، تنافس بعض الأنواع الأسماك المحلية على الغذاء والمكان، وتأكل سمكة الأسد صغارها، وتقطع سمكة الأرنب الخيوط وتأكل الطعم، فتصبح رحلة الصيد في بعض المناطق أصعب. ومن جهة أخرى، صار السيجان والسرطان الأزرق جزءاً من صيد الناس ومن الأسواق، وصارت سمكة الأسد طبقاً يُشجَّع عليه.</p>
+  <div class="pull">القاعدة: كُل ما يؤكل منها بأمان، ولا تقترب أبداً من سمكة الأرنب.</div>
+
+  <h2 id="help">كيف تساعد؟</h2>
+  <ul>
+    <li><strong>تعرّف عليها:</strong> افتح صفحة كل نوع في <a href={`${BASE}fish`}>دليل الأسماك</a> وانظر إلى الصورة جيداً.</li>
+    <li><strong>صوّرها وسجّلها:</strong> رفع صورة مع المكان والتاريخ على منصات المشاهدة يساعد الباحثين على معرفة حدود انتشارها.</li>
+    <li><strong>كُل الصالح منها:</strong> السيجان وسمكة الأسد والسرطان الأزرق تؤكل، وكل واحدة تصطادها تخفف الضغط على الأنواع المحلية.</li>
+    <li><strong>تخلص من سمكة الأرنب بأمان:</strong> لا تعدها إلى البحر قرب الناس ولا تعطها لأحد، واقطع الخيط بعيداً عن فمها.</li>
+  </ul>
+</ArticleLayout>

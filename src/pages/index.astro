@@ -225,7 +225,7 @@ const features = [
         <a href={`${BASE}articles`} class="ms-auto text-sm text-[var(--accent)] hover:underline">كل المقالات ←</a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {articles.map(a => (
+        {articles.slice(0, 6).map(a => (
           <a href={`${BASE}articles/${a.slug}`} class="card p-5 flex gap-4 items-start group">
             <span class="w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center text-2xl" style="background:linear-gradient(160deg,#0b2540,#0f3d5c)" aria-hidden="true">{a.icon}</span>
             <span>

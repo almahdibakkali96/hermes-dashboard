@@ -1,0 +1,123 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { fish, kindNames, speciesCount, type FishKind } from '../../lib/fish';
+import { seas } from '../../lib/seaNames';
+
+const meta = articleBySlug('fishing-bait-guide');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+
+// Species anglers actually target (protected or non-target species have no fishing method)
+const targets = fish.filter(f => f.methods.length > 0);
+const kinds: FishKind[] = ['reef', 'bottom', 'pelagic', 'cephalopod', 'crustacean', 'shark'];
+const byKind = kinds.map(k => ({ k, list: targets.filter(f => f.kind === k) })).filter(g => g.list.length);
+// How many target species mention each bait family in their bait note
+const families = [
+  { key: 'ربيان', label: 'الربيان (الجمبري)', re: /ربيان/ },
+  { key: 'حبار', label: 'الحبار والخثاق', re: /حبار|خثاق/ },
+  { key: 'سردين', label: 'السردين', re: /سردين/ },
+  { key: 'ديدان', label: 'الديدان', re: /ديدان/ },
+  { key: 'حي', label: 'السمك الحي', re: /(سمك|سمكة|سردين|بوري|ميد)[^،.]*\sحي($|[\s،.])/ },
+  { key: 'سرطان', label: 'السرطان', re: /سرطان/ },
+  { key: 'عجين', label: 'العجين والطحالب', re: /عجين|طحالب/ },
+];
+const counts = families.map(b => ({ ...b, n: targets.filter(f => b.re.test(f.bait)).length })).sort((a, b) => b.n - a.n);
+const maxN = Math.max(...counts.map(c => c.n));
+
+const toc = [
+  { id: 'rank', label: 'أكثر الطعوم فائدة' },
+  { id: 'shrimp', label: 'الربيان: الطعم الذي يأكله الجميع' },
+  { id: 'fish', label: 'السمك طعماً: حي وميت' },
+  { id: 'squid', label: 'الحبار والخثاق' },
+  { id: 'worms', label: 'الديدان والعجين' },
+  { id: 'table', label: 'جدول: أي طعم لأي سمكة؟' },
+  { id: 'care', label: 'كيف تحفظ الطعم طازجاً' },
+];
+const takeaways = [
+  `<strong>${counts[0].label}</strong> أكثر طعم مشترك بين الأسماك في دليلنا: يُذكر في طعوم <strong>${counts[0].n}</strong> نوعاً من ${targets.length}.`,
+  'الأسماك المفترسة (الكنعد، الضلعة، الليشة) تفضل <strong>السمك الحي</strong>، وأسماك القاع تفضل الربيان والحبار والديدان.',
+  'السيجان والشلبة والبوري <strong>نباتية</strong>: تُصطاد بالعجين والطحالب وخطاف صغير.',
+  'الطعم الطازج المبرد أفضل دائماً من الطعم المجمد مرات عدة.',
+];
+const faq = [
+  { q: 'ما أفضل طعم للمبتدئ؟', a: 'الربيان الطازج المقشر. تأخذه أسماك كثيرة في الخليج والمتوسط والبحر الأحمر، ويُشترى بسهولة من سوق السمك، ويثبت على الخطاف بسهولة.' },
+  { q: 'هل الطعم الحي أفضل من الميت؟', a: 'للأسماك المفترسة مثل الكنعد والضلعة والهامور، نعم غالباً: حركة السمكة الحية تجذبها. أما أسماك القاع مثل النقرور والشعم فتعتمد على الرائحة، فيكفيها الطعم الميت الطازج.' },
+  { q: 'كم أعيد تجميد الطعم؟', a: 'الأفضل ألا تعيد تجميده. كل مرة يذوب فيها ويتجمد يفقد قوامه ورائحته، ويصبح طرياً يسقط من الخطاف. جمّده في أكياس صغيرة تكفي رحلة واحدة.' },
+  { q: 'ما الطعم الصناعي الذي أبدأ به؟', a: 'طعم معدني لامع متوسط الوزن (20 إلى 40 غراماً) للرمي من الشاطئ، وطعم مطاطي صغير على رأس رصاص للقاع. هذان يغطيان أنواعاً كثيرة.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    <path d="M150 30 v120 a40 40 0 1 1 -40 -40" fill="none" stroke="#e2e8f0" stroke-width="9" stroke-linecap="round"/>
+    <path d="M105 105 l-12 6 l12 6" fill="none" stroke="#e2e8f0" stroke-width="7" stroke-linecap="round"/>
+    <path d="M180 120 q30 -30 60 0 q-10 8 -20 10 q-25 10 -40 -10z" fill="#fda4af"/>
+    <circle cx="150" cy="30" r="8" fill="#fde68a"/>
+  </svg>
+
+  <p>الصياد الذي يعرف ماذا تأكل السمكة يسبق غيره بخطوة. فالسمكة لا تأخذ أي شيء يُرمى لها: لكل نوع غذاؤه الطبيعي، وأفضل طعم هو ما يشبه ذلك الغذاء أو تفوح رائحته. في هذا الدليل جمعنا الطعوم المناسبة لكل الأنواع التي يستهدفها الصيادون في <a href={`${BASE}fish`}>دليل الأسماك</a>، ورتبناها حسب فائدتها.</p>
+
+  <h2 id="rank">أكثر الطعوم فائدة</h2>
+  <p>عددنا كم نوعاً من الأنواع التي يستهدفها الصيادون في دليلنا (<span class="latin">{targets.length}</span> نوعاً) يُذكر كل طعم بين طعومه المناسبة:</p>
+  <figure class="figure">
+    <div class="space-y-3">
+      {counts.map(c => (
+        <div>
+          <div class="flex justify-between text-sm"><span class="font-semibold">{c.label}</span><span>{speciesCount(c.n)}</span></div>
+          <div class="h-3 rounded-full bg-[#eef2f6] mt-1"><div class="h-3 rounded-full" style={`width:${(c.n / maxN) * 100}%;background:#0d9488`}></div></div>
+        </div>
+      ))}
+    </div>
+    <figcaption>محسوب من بيانات الطعم لكل نوع في دليل ArabTides للأسماك.</figcaption>
+  </figure>
+
+  <h2 id="shrimp">الربيان: الطعم الذي يأكله الجميع</h2>
+  <p>إن كان عليك أن تختار طعماً واحداً، فاختر الربيان. تأكله أسماك الشعاب مثل <a href={`${BASE}fish/shaem`}>الشعم</a> و<a href={`${BASE}fish/faskar`}>الفسكر</a>، وأسماك القاع مثل <a href={`${BASE}fish/nagroor`}>النقرور</a> و<a href={`${BASE}fish/nuwaibi`}>النويبي</a>، وحتى <a href={`${BASE}fish/hamour`}>الهامور</a> يأخذ الربيانة الكبيرة.</p>
+  <ul>
+    <li><strong>الربيان الحي</strong> أفضل الجميع لأسماك حذرة مثل <a href={`${BASE}fish/sobaity`}>السبيطي</a>. ثبّت الخطاف في الذيل أو تحت القرن الصلب على الرأس كي يبقى حياً يتحرك.</li>
+    <li><strong>الربيان الطازج المقشر</strong> يناسب الأسماك الصغيرة والمتوسطة، ويثبت أكثر على الخطاف إذا أدخلته من الذيل إلى الرأس.</li>
+    <li><strong>رأس الربيان</strong> وحده طعم ممتاز لرائحته القوية، ويصلح لنثره في الماء لجذب الأسماك.</li>
+  </ul>
+
+  <h2 id="fish">السمك طعماً: حي وميت</h2>
+  <p>الأسماك المفترسة تبحث عن الحركة. <a href={`${BASE}fish/kanad`}>الكنعد</a> و<a href={`${BASE}fish/queenfish`}>الضلعة</a> و<a href={`${BASE}fish/leerfish`}>الليشة</a> و<a href={`${BASE}fish/meagre`}>الكوربين</a> كلها تهاجم <strong>البوري الصغير أو السردين الحي</strong>. ويُرمى الطعم الحي عادة بلا ثقل أو بثقل خفيف ليسبح بحرية.</p>
+  <p>أما <strong>شرائح السمك</strong> من السردين أو الإسقمري، فرائحتها الزيتية القوية تجذب أسماك القاع والنهاش والشعري. قطّع الشريحة بشكل مائل طويل، بحيث تتحرك في التيار كذيل سمكة.</p>
+  <div class="callout tip"><span class="ic">🎣</span><div>اصطد طعمك بنفسك: سلسلة خطافات صغيرة لامعة (سابيكي) من رصيف الميناء في الصباح تعطيك سردين وإسقمري طازجاً للرحلة.</div></div>
+
+  <h2 id="squid">الحبار والخثاق</h2>
+  <p>لحم الحبار والخثاق متماسك لا يسقط من الخطاف بسهولة، ولذلك يتحمل الرمي البعيد والتيار القوي ونقر الأسماك الصغيرة. وهو من أحب الطعوم إلى <a href={`${BASE}fish/sheri`}>الشعري</a> و<a href={`${BASE}fish/hamra`}>الحمرا</a> و<a href={`${BASE}fish/dentex`}>الدنتكس</a>. قطّعه شرائح بعرض إصبع، واتركه أطول قليلاً من الخطاف.</p>
+
+  <h2 id="worms">الديدان والعجين</h2>
+  <p>في المتوسط والأطلسي، <strong>الديدان الرملية</strong> طعم أساسي لأسماك الشاطئ مثل <a href={`${BASE}fish/marmar`}>المرمار</a> و<a href={`${BASE}fish/sar`}>الشرغوش</a> و<a href={`${BASE}fish/redmullet`}>سلطان إبراهيم</a> و<a href={`${BASE}fish/sole`}>سمك موسى</a>. تُشترى من محلات الصيد أو تُجمع من الرمل عند الجزر.</p>
+  <p>وبعض الأسماك نباتية لا تهتم باللحم: <a href={`${BASE}fish/safi`}>السيجان</a> و<a href={`${BASE}fish/salema`}>الشلبة</a> و<a href={`${BASE}fish/boori`}>البوري</a>. لهذه استخدم <strong>عجين الخبز</strong> المعجون بقليل من الماء، أو الطحالب الخضراء من الصخور، على خطاف صغير جداً تحت عوامة.</p>
+
+  <h2 id="table">جدول: أي طعم لأي سمكة؟</h2>
+  {byKind.map(g => (
+    <>
+      <h3>{kindNames[g.k]}</h3>
+      <div class="overflow-x-auto">
+        <table class="data-table">
+          <thead><tr><th>السمكة</th><th>البحار</th><th>الطعم المناسب</th></tr></thead>
+          <tbody>
+            {g.list.map(f => (
+              <tr>
+                <td><a href={`${BASE}fish/${f.id}`} class="text-[var(--accent)] underline">{f.ar}</a></td>
+                <td class="text-sm">{f.seas.map(s => seas[s].name.split(' ').slice(0, 2).join(' ')).join('، ')}</td>
+                <td class="text-sm">{f.bait}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  ))}
+
+  <h2 id="care">كيف تحفظ الطعم طازجاً</h2>
+  <ul>
+    <li>احمل الطعم في <strong>صندوق مبرد</strong> مع الثلج، ولا تتركه تحت الشمس؛ الربيان والحبار يفسدان في ساعات قليلة من حر الخليج.</li>
+    <li>لا تجعل الثلج الذائب يغمر الطعم مباشرة، فالماء العذب يجعله طرياً. ضعه في كيس أو علبة.</li>
+    <li>الطعم الحي يحتاج إلى ماء بحر متجدد أو مضخة هواء صغيرة.</li>
+    <li>جمّد الطعم الزائد في أكياس صغيرة تكفي رحلة واحدة، ولا تعِد تجميده.</li>
+  </ul>
+  <p>والطعم وحده لا يكفي: اختر الوقت أيضاً. افتح صفحة <a href={`${BASE}#ports`}>ميناءك</a> لتعرف أوقات المد وتقييم الصيد اليوم، واقرأ <a href={`${BASE}articles/solunar-fishing-hours`}>ساعات الصيد الذهبية</a>.</p>
+</ArticleLayout>

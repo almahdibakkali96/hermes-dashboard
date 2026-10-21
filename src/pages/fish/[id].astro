@@ -6,6 +6,8 @@ import { seas } from '../../lib/seaNames';
 import { countryName } from '../../lib/countries';
 import { dayExtremes, formatTime, getTimezoneOffset, classifySpringNeap } from '../../lib/tides';
 import { moonPhase } from '../../lib/astronomy';
+import { fishText1 } from '../../data/fish-text-1';
+import { fishText2 } from '../../data/fish-text-2';
 
 export function getStaticPaths() {
   return fish.map(f => ({ params: { id: f.id } }));
@@ -31,6 +33,7 @@ const ports = await Promise.all(portsForFish(f).map(async p => {
 }));
 const countries = [...new Set(ports.map(p => p.country))];
 
+const text = fishText1[f.id] || fishText2[f.id] || [];
 const others = fish.filter(x => x.id !== f.id && x.seas.some(s => f.seas.includes(s))).slice(0, 4);
 const localLine = f.local.map(l => `${l.name} (${l.where})`).join('، ');
 const description = `${f.ar} (${f.sci}): ${localLine}. أين يعيش، وأفضل وقت ومد لصيده، والطعم المناسب، ومواقيت المد اليوم في موانئ ${f.seas.map(s => seas[s].name).join(' و')}.`;
@@ -95,6 +98,13 @@ const jsonLd = [
         </dl>
       </div>
     </div>
+
+    {text.length > 0 && (
+      <section class="mt-8 max-w-3xl" aria-labelledby="about-title">
+        <h2 id="about-title" class="text-xl font-bold display">عن {f.ar}</h2>
+        {text.map(p => <p class="mt-3 leading-loose text-[var(--text-secondary)]" set:html={p} />)}
+      </section>
+    )}
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
       <section class="card p-5" aria-labelledby="tide-title">
