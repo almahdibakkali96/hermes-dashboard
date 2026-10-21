@@ -19,7 +19,8 @@ const ENV_FILE = 'C:/Users/ULTRAPC/Documents/arabtides-videos/arabtides-video/.e
 // Scene starts and end as designed in src/<name>.html (its `var DESIGN = [...]` line, seconds)
 const html = readFileSync(resolve(here, 'src', `${name}.html`), 'utf8');
 const DESIGN = JSON.parse(html.match(/var DESIGN = (\[[^\]]*\])/)[1]);
-const LEAD = [0.5, 0.35, 0.35, 0.35, 0.45]; // voice starts this long after each scene starts
+// Voice starts this long after each scene starts: first scene 0.5 s, end card 0.45 s, the rest 0.35 s
+const LEAD = Array.from({ length: DESIGN.length - 1 }, (_, i) => i === 0 ? 0.5 : i === DESIGN.length - 2 ? 0.45 : 0.35);
 const TAIL = 0.45;                          // silence after a line before the next scene
 
 function apiKey() {

@@ -17,6 +17,7 @@
 | "Strongest tides in the Arab world" Reel, 38 s, voice + music | `video/video-04-strongest-tides.mp4` (cover `video/video-04-cover.png`) |
 | "How to read a tide table" Reel, 34 s, voice + music | `video/video-05-tide-table.mp4` (cover `video/video-05-cover.png`) |
 | "Where to fish by tide" Reel (beach, port, rocks), 39 s, voice + music | `video/video-06-where-to-fish.mp4` (cover `video/video-06-cover.png`, caption `video/video-06-caption.txt`) |
+| "Fish of the week" Reel: 6 fish, local names with flags, facts, comment prompt; 48 s, voice + music | `video/video-07-fish-of-week.mp4` (cover `video/video-07-cover.png`, caption `video/video-07-caption.txt`) |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours
