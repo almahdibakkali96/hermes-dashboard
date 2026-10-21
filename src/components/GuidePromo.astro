@@ -1,23 +1,67 @@
 ---
-// Funnel promo for the paid guide: 'banner' (homepage), 'card' (port sidebar), 'strip' (inline, articles)
+// Funnel promo for the paid guide: 'banner' (homepage), 'card' (port sidebar), 'strip' (inline, articles).
+// While sales are closed it offers the free cheat sheet instead, so no page advertises something
+// visitors can't get yet ("coming soon" across the site reads as an unfinished site, e.g. to AdSense review).
 import { GUIDE, SALES_OPEN } from '../lib/shop';
 
 export interface Props { variant?: 'banner' | 'card' | 'strip'; }
 const { variant = 'card' } = Astro.props;
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const cover = `${BASE}guide/cover.jpg`;
+const sheet = `${BASE}guide/cheat-sheet.jpg`;
 ---
 
-{variant === 'banner' && (
+{!SALES_OPEN && variant === 'banner' && (
+  <section class="guide-banner" aria-labelledby="guide-banner-title">
+    <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-center">
+      <a href={`${BASE}guide#free`} class="guide-cover mx-auto md:mx-0" aria-hidden="true" tabindex="-1"><img src={sheet} alt="" width="180" height="255" loading="lazy" /></a>
+      <div>
+        <span class="hero-chip text-xs">🎁 مجاناً من ArabTides</span>
+        <h2 id="guide-banner-title" class="mt-3 text-2xl sm:text-3xl font-bold display leading-snug">القمر والمد والصيد في صفحة واحدة</h2>
+        <p class="mt-2 text-slate-300 leading-relaxed max-w-xl">ورقة مختصرة بصيغة PDF: أطوار القمر، أفضل ساعات الصيد، فترات السولونار، و4 خطوات تراجعها قبل كل رحلة. اطبعها أو احفظها في هاتفك.</p>
+        <div class="mt-5 flex flex-wrap items-center gap-3">
+          <a href={`${BASE}guide#free`} class="btn-primary">حمّلها مجاناً</a>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+{!SALES_OPEN && variant === 'card' && (
+  <section class="card p-5 guide-card" aria-labelledby="guide-card-title">
+    <div class="flex gap-4 items-start">
+      <a href={`${BASE}guide#free`} class="guide-cover shrink-0" aria-hidden="true" tabindex="-1"><img src={sheet} alt="" width="76" height="108" loading="lazy" /></a>
+      <div class="min-w-0">
+        <div class="text-xs font-semibold text-[var(--accent)]">مجاناً</div>
+        <h2 id="guide-card-title" class="font-semibold leading-snug mt-0.5">كيف تختار أفضل يوم للصيد؟</h2>
+        <p class="text-sm text-[var(--text-muted)] mt-1">القمر والمد والسولونار في ورقة واحدة.</p>
+      </div>
+    </div>
+    <a href={`${BASE}guide#free`} class="btn-primary w-full justify-center mt-4">حمّل الورقة المختصرة</a>
+  </section>
+)}
+
+{!SALES_OPEN && variant === 'strip' && (
+  <a href={`${BASE}guide#free`} class="guide-strip group">
+    <img src={sheet} alt="" width="56" height="79" loading="lazy" class="rounded-md shadow" />
+    <span class="min-w-0">
+      <span class="block font-semibold group-hover:text-[var(--accent)]">القمر والمد والصيد في صفحة واحدة</span>
+      <span class="block text-sm text-[var(--text-muted)]">ورقة PDF مختصرة · مجاناً</span>
+    </span>
+    <span class="ms-auto text-[var(--accent)] font-semibold shrink-0">حمّلها ←</span>
+  </a>
+)}
+
+{SALES_OPEN && variant === 'banner' && (
   <section class="guide-banner" aria-labelledby="guide-banner-title">
     <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-center">
       <a href={`${BASE}guide`} class="guide-cover mx-auto md:mx-0" aria-hidden="true" tabindex="-1"><img src={cover} alt="" width="180" height="255" loading="lazy" /></a>
       <div>
-        <span class="hero-chip text-xs">{SALES_OPEN ? '🎣 جديد من ArabTides' : '🎣 قريباً من ArabTides'}</span>
+        <span class="hero-chip text-xs">🎣 جديد من ArabTides</span>
         <h2 id="guide-banner-title" class="mt-3 text-2xl sm:text-3xl font-bold display leading-snug">{GUIDE.title}</h2>
         <p class="mt-2 text-slate-300 leading-relaxed max-w-xl">تعلّم كيف تختار أفضل يوم وأفضل ساعة للصيد: أطوار القمر، المد الربيعي، جداول المد وفترات السولونار — في <span class="latin">{GUIDE.pages}</span> صفحة برسوم واضحة وأمثلة من موانئنا.</p>
         <div class="mt-5 flex flex-wrap items-center gap-3">
-          <a href={`${BASE}guide`} class="btn-primary">{SALES_OPEN ? <>اكتشف الدليل · <span class="latin">{GUIDE.priceLabel}</span></> : 'اكتشف الدليل'}</a>
+          <a href={`${BASE}guide`} class="btn-primary">اكتشف الدليل · <span class="latin">{GUIDE.priceLabel}</span></a>
           <a href={`${BASE}guide#free`} class="btn-ghost">الورقة المختصرة مجاناً</a>
         </div>
       </div>
@@ -25,7 +69,7 @@ const cover = `${BASE}guide/cover.jpg`;
   </section>
 )}
 
-{variant === 'card' && (
+{SALES_OPEN && variant === 'card' && (
   <section class="card p-5 guide-card" aria-labelledby="guide-card-title">
     <div class="flex gap-4 items-start">
       <a href={`${BASE}guide`} class="guide-cover shrink-0" aria-hidden="true" tabindex="-1"><img src={cover} alt="" width="76" height="108" loading="lazy" /></a>
@@ -35,17 +79,17 @@ const cover = `${BASE}guide/cover.jpg`;
         <p class="text-sm text-[var(--text-muted)] mt-1">القمر والمد والسولونار في <span class="latin">{GUIDE.pages}</span> صفحة.</p>
       </div>
     </div>
-    <a href={`${BASE}guide`} class="btn-primary w-full justify-center mt-4">{SALES_OPEN ? <>احصل على الدليل · <span class="latin">{GUIDE.priceLabel}</span></> : 'اكتشف الدليل'}</a>
+    <a href={`${BASE}guide`} class="btn-primary w-full justify-center mt-4">احصل على الدليل · <span class="latin">{GUIDE.priceLabel}</span></a>
     <a href={`${BASE}guide#free`} class="block text-center text-sm text-[var(--accent)] hover:underline mt-2">أو الورقة المختصرة مجاناً</a>
   </section>
 )}
 
-{variant === 'strip' && (
+{SALES_OPEN && variant === 'strip' && (
   <a href={`${BASE}guide`} class="guide-strip group">
     <img src={cover} alt="" width="56" height="79" loading="lazy" class="rounded-md shadow" />
     <span class="min-w-0">
       <span class="block font-semibold group-hover:text-[var(--accent)]">{GUIDE.title}</span>
-      <span class="block text-sm text-[var(--text-muted)]">دليل عملي من <span class="latin">{GUIDE.pages}</span> صفحة · {SALES_OPEN ? <span class="latin">{GUIDE.priceLabel}</span> : 'قريباً'}</span>
+      <span class="block text-sm text-[var(--text-muted)]">دليل عملي من <span class="latin">{GUIDE.pages}</span> صفحة · <span class="latin">{GUIDE.priceLabel}</span></span>
     </span>
     <span class="ms-auto text-[var(--accent)] font-semibold shrink-0">اكتشفه ←</span>
   </a>

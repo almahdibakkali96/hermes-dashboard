@@ -19,8 +19,13 @@ const { title, description, jsonLd, ogType = 'website', ogImage, noindex = false
 const fullTitle = `${title} — ArabTides`;
 const desc = description || 'مواقيت المد والجزر والحسابات الفلكية للموانئ العربية';
 const gaId = import.meta.env.PUBLIC_GA_ID || null;
+// The GitHub Pages build (docs/, base /hermes-dashboard) is a mirror: it points search engines to
+// the production page and keeps itself out of the index, so Google never sees two copies of the site.
+const PRODUCTION = 'https://www.arabtides.com';
+const isMirror = import.meta.env.BASE_URL !== '/';
+const path = Astro.url.pathname.slice(isMirror ? import.meta.env.BASE_URL.replace(/\/$/, '').length : 0) || '/';
 // No trailing slash, matching the sitemap and internal links
-const canonical = new URL(Astro.url.pathname.replace(/(.)\/$/, '$1'), Astro.site).href;
+const canonical = new URL(path.replace(/(.)\/$/, '$1'), isMirror ? PRODUCTION : Astro.site).href;
 const siteUrl = new URL(import.meta.env.BASE_URL, Astro.site).href;
 const image = new URL(ogImage || `${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/og-default.png`, Astro.site).href;
 
@@ -56,7 +61,7 @@ const graph = [...siteGraph, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jso
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
-    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : isMirror ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
     <meta name="theme-color" content="#0b2540" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />

@@ -2,7 +2,7 @@
  * ArabTides shop settings — the two URLs to paste are here.
  *
  * 1. STRIPE_GUIDE_URL: your Stripe Payment Link (fixed price, 2.99 USD), e.g.
- *    'https://buy.stripe.com/xxxxxxxx'. While empty, Buy buttons show "قريباً".
+ *    'https://buy.stripe.com/xxxxxxxx'. While empty, promos offer the free cheat sheet instead and /guide collects interest.
  *    One link is shared by every 2.99 product: each Buy button appends
  *    ?client_reference_id=<product id>, which Stripe stores on the payment, so the
  *    dashboard shows which product was bought. Set the link's "After payment"

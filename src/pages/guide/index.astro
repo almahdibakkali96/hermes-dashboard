@@ -40,13 +40,13 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`${GUIDE.title} — PDF`} description={`${GUIDE.subtitle}. دليل عربي من ${GUIDE.pages} صفحة: أطوار القمر، المد الربيعي، جداول المد وفترات السولونار. ${SALES_OPEN ? `السعر ${GUIDE.priceLabel}.` : 'قريباً — والورقة المختصرة مجاناً الآن.'}`} jsonLd={jsonLd} ogImage={img('cover.jpg')}>
+<BaseLayout title={`${GUIDE.title} — PDF`} description={`${GUIDE.subtitle}. دليل عربي من ${GUIDE.pages} صفحة: أطوار القمر، المد الربيعي، جداول المد وفترات السولونار. ${SALES_OPEN ? `السعر ${GUIDE.priceLabel}.` : 'حمّل الورقة المختصرة مجاناً الآن.'}`} jsonLd={jsonLd} ogImage={img('cover.jpg')}>
   <!-- Hero -->
   <section class="hero">
     <div class="max-w-6xl mx-auto px-4 pt-10 pb-24 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center">
       <div>
         <nav class="breadcrumb breadcrumb-light" aria-label="مسار التنقل"><a href={BASE}>الرئيسية</a><span class="sep">/</span><span aria-current="page">دليل الصياد</span></nav>
-        <span class="hero-chip mt-5 text-xs">📘 دليل PDF · <span class="latin">{GUIDE.pages}</span> صفحة{!SALES_OPEN && ' · قريباً'}</span>
+        <span class="hero-chip mt-5 text-xs">📘 دليل PDF · <span class="latin">{GUIDE.pages}</span> صفحة{!SALES_OPEN && ' · سجّل اهتمامك'}</span>
         <h1 class="mt-4 text-3xl sm:text-5xl font-bold display leading-snug">{GUIDE.title}</h1>
         <p class="mt-4 text-lg text-slate-300 leading-relaxed max-w-xl">{GUIDE.subtitle}.</p>
         <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-slate-200">
@@ -154,7 +154,7 @@ const jsonLd = [
           </>
         ) : (
           <>
-            <div class="text-2xl font-bold mt-2 text-[var(--accent)]">قريباً</div>
+            <div class="text-lg font-bold mt-2 text-[var(--accent)]">سجّل اهتمامك</div>
             <a href="#free" class="btn-primary w-full justify-center mt-4" style="background:var(--accent);color:#fff">أخبرني عند صدوره</a>
           </>
         )}

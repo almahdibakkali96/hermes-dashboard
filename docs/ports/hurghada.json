@@ -10,7 +10,7 @@
     "timezone": "Africa/Cairo"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/hurghada",
-  "generated_utc": "2026-10-21T12:07:19.152Z",
+  "generated_utc": "2026-10-21T12:34:48.025Z",
   "tide_type_ar": "نصف يومي",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",

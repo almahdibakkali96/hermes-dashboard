@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 ---
-<BaseLayout title="سياسة الخصوصية" description="كيف يتعامل ArabTides مع بياناتك: البريد الإلكتروني، الدفع، والإحصاءات.">
+<BaseLayout title="سياسة الخصوصية" description="كيف يتعامل ArabTides مع بياناتك: البريد الإلكتروني، الدفع، الإحصاءات، ملفات تعريف الارتباط والإعلانات.">
   <div class="page-head">
     <div class="max-w-2xl mx-auto px-4 py-8">
       <nav class="breadcrumb" aria-label="مسار التنقل"><a href={BASE}>الرئيسية</a><span class="sep">/</span><span aria-current="page">الخصوصية</span></nav>
@@ -19,6 +19,14 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
       <p>تتم عمليات الشراء عبر Stripe. بيانات بطاقتك تذهب مباشرة إلى Stripe ولا نراها ولا نحفظها. نستلم من Stripe اسمك وبريدك الإلكتروني لإرسال المنتج إليك.</p>
       <h2 class="text-lg font-semibold text-[var(--text-primary)]">الإحصاءات</h2>
       <p>نستخدم إحصاءات زيارات مجمّعة ومجهولة الهوية لمعرفة الصفحات الأكثر فائدة. لا نستخدم هذه الإحصاءات لتتبعك شخصياً.</p>
+      <h2 class="text-lg font-semibold text-[var(--text-primary)]">ملفات تعريف الارتباط (الكوكيز)</h2>
+      <p>ملفات تعريف الارتباط ملفات نصية صغيرة يحفظها المتصفح على جهازك. قد يستخدمها الموقع أو شركاؤنا لقياس الزيارات وعرض الإعلانات وقياس أدائها. يمكنك حذفها أو منعها من إعدادات متصفحك، ويبقى الموقع يعمل بشكل طبيعي.</p>
+      <h2 class="text-lg font-semibold text-[var(--text-primary)]">الإعلانات</h2>
+      <p>قد يعرض الموقع إعلانات من Google AdSense. يستخدم مزوّدون خارجيون، منهم Google، ملفات تعريف الارتباط لعرض إعلانات بناءً على زياراتك السابقة لهذا الموقع أو لمواقع أخرى. وتتيح ملفات تعريف الارتباط الإعلانية لـGoogle وشركائها عرض إعلانات لك بناءً على زياراتك لهذا الموقع ومواقع أخرى على الإنترنت.</p>
+      <p>يمكنك إيقاف الإعلانات المخصّصة من <a href="https://adssettings.google.com" rel="noopener" class="text-[var(--accent)] underline">إعدادات الإعلانات في Google</a>، أو إيقاف ملفات تعريف الارتباط التي يستخدمها مزوّدون آخرون للإعلانات المخصّصة من <a href="https://www.aboutads.info/choices" rel="noopener" class="text-[var(--accent)] underline" lang="en">aboutads.info</a>. ولمعرفة المزيد: <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" class="text-[var(--accent)] underline">كيف تستخدم Google المعلومات من المواقع التي تستخدم خدماتها</a>.</p>
+      <p>إذا كنت تزور الموقع من المنطقة الاقتصادية الأوروبية أو المملكة المتحدة أو سويسرا، نطلب موافقتك قبل استخدام ملفات تعريف الارتباط الإعلانية.</p>
+      <h2 class="text-lg font-semibold text-[var(--text-primary)]">خدمات خارجية</h2>
+      <p>تُحمَّل بعض أجزاء الصفحة من خدمات خارجية تستقبل عنوان IP الخاص بمتصفحك كأي موقع تزوره: الخطوط من Google Fonts، والخرائط من OpenStreetMap، ومكتبة الخريطة من unpkg. ونحفظ عناوين البريد المسجّلة ورسائل صفحة الاتصال في جدول خاص على Google Sheets.</p>
       <h2 class="text-lg font-semibold text-[var(--text-primary)]">بيانات المد والجزر</h2>
       <p>كل الحسابات تتم على خوادمنا من نموذج EOT20 (CC BY 4.0). لا نحتاج موقعك الجغرافي ولا نطلبه.</p>
     </div>
