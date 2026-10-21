@@ -10,47 +10,12 @@
     "timezone": "Africa/Nouakchott"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/nouakchott",
-  "generated_utc": "2026-10-20T12:35:43.376Z",
+  "generated_utc": "2026-10-21T10:48:24.542Z",
   "tide_type_ar": "نصف يومي",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
   "disclaimer": "Astronomical estimate. Not official harbour predictions. Not for navigation.",
   "days": [
-    {
-      "date": "2026-10-20",
-      "utc_offset_minutes": 0,
-      "tides": [
-        {
-          "type": "high",
-          "time_local": "05:33",
-          "time_utc": "2026-10-20T05:33:01.176Z",
-          "height_cm": 32
-        },
-        {
-          "type": "low",
-          "time_local": "12:11",
-          "time_utc": "2026-10-20T12:11:18.515Z",
-          "height_cm": -16
-        },
-        {
-          "type": "high",
-          "time_local": "18:28",
-          "time_utc": "2026-10-20T18:28:04.198Z",
-          "height_cm": 19
-        },
-        {
-          "type": "low",
-          "time_local": "23:47",
-          "time_utc": "2026-10-20T23:46:56.719Z",
-          "height_cm": -13
-        }
-      ],
-      "moon": {
-        "phase_ar": "أحدب متزايد",
-        "phase_en": "Waxing Gibbous",
-        "illumination": 0.7
-      }
-    },
     {
       "date": "2026-10-21",
       "utc_offset_minutes": 0,
@@ -77,7 +42,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.79
+        "illumination": 0.78
       }
     },
     {
@@ -112,7 +77,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.87
+        "illumination": 0.86
       }
     },
     {
@@ -182,7 +147,7 @@
       "moon": {
         "phase_ar": "أحدب متزايد",
         "phase_en": "Waxing Gibbous",
-        "illumination": 0.98
+        "illumination": 0.97
       }
     },
     {
@@ -253,6 +218,41 @@
         "phase_ar": "بدر",
         "phase_en": "Full Moon",
         "illumination": 1
+      }
+    },
+    {
+      "date": "2026-10-27",
+      "utc_offset_minutes": 0,
+      "tides": [
+        {
+          "type": "low",
+          "time_local": "04:09",
+          "time_utc": "2026-10-27T04:09:15.493Z",
+          "height_cm": -58
+        },
+        {
+          "type": "high",
+          "time_local": "10:29",
+          "time_utc": "2026-10-27T10:28:48.788Z",
+          "height_cm": 64
+        },
+        {
+          "type": "low",
+          "time_local": "16:27",
+          "time_utc": "2026-10-27T16:26:57.473Z",
+          "height_cm": -60
+        },
+        {
+          "type": "high",
+          "time_local": "22:48",
+          "time_utc": "2026-10-27T22:48:25.480Z",
+          "height_cm": 65
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متناقص",
+        "phase_en": "Waning Gibbous",
+        "illumination": 0.98
       }
     }
   ]
