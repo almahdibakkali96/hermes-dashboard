@@ -23,6 +23,7 @@
 | "Fish of the week 2" Reel: 6 more fish, local names with flags, facts, where and when to fish each; 1 min 43 s, voice + music | `video/video-10-fish-of-week-2.mp4` (cover `video/video-10-cover.png`, caption `video/video-10-caption.txt`) |
 | "Dawn and dusk" Reel: light change, tide + dawn/dusk, mosque on the shore; 33 s, voice + music | `video/video-11-dawn-dusk.mp4` (cover `video/video-11-cover.png`, caption `video/video-11-caption.txt`) |
 | "Meet the website" Reel: real arabtides.com screenshots on a phone (36 ports, tides, 7-day and monthly ratings, sun/moon/solunar/prayer, fish guide); 56 s, voice + music | `video/video-12-website.mp4` (cover `video/video-12-cover.png`, caption `video/video-12-caption.txt`; screenshots in `video/video-12-website/shots/`, retake with `MSYS_NO_PATHCONV=1 node brand/site-shots.mjs ...`) |
+| "Which bait for which fish" Reel: shrimp, live fish, squid, worms, dough and weed, each with fish photos (pairs from `bait` in `src/lib/fish.ts`), cool-box tip; 70 s, voice + music | `video/video-13-bait.mp4` (cover `video/video-13-cover.png`, caption `video/video-13-caption.txt`) |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours

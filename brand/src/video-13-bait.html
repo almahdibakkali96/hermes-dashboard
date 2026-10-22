@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو أي طعم لأي سمكة</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480.
+     Bait for each fish follows its `bait` note in src/lib/fish.ts; photos come from the website's public/fish/sm/. */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(900px 600px at 85% 5%, rgba(45, 212, 191, .2), transparent 60%),
+      linear-gradient(180deg, #071a30 0%, #0b2540 45%, #0f3d5c 75%); }
+  .scene { position: absolute; inset: 0; padding: 0 90px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish { position: absolute; left: 0; top: 0; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  #world { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .h1 { text-shadow: 0 4px 24px rgba(6, 22, 42, .7); }
+
+  /* Hook */
+  #s1 .kick { margin-top: 250px; font-size: 58px; color: var(--sand); font-weight: 700; }
+  #s1 .q { margin-top: 10px; font-size: 150px; line-height: 1.12; }
+  #s1 .row { margin-top: 50px; display: flex; gap: 22px; }
+  #s1 .row span { width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 90px;
+    background: rgba(255, 255, 255, .1); border: 3px solid rgba(45, 212, 191, .5); }
+
+  /* Bait scenes */
+  .bait .icon { margin-top: 236px; width: 210px; height: 210px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 130px;
+    background: radial-gradient(circle at 35% 30%, rgba(45, 212, 191, .45), rgba(13, 148, 136, .15)); border: 4px solid var(--lagoon); box-shadow: 0 0 60px rgba(45, 212, 191, .35); }
+  .bait .nm { margin-top: 18px; font-size: 118px; line-height: 1.1; }
+  .bait .tip { margin-top: 18px; padding: 10px 34px; border-radius: 999px; background: rgba(11, 37, 64, .75); border: 2px solid rgba(45, 212, 191, .45); font-size: 46px; font-weight: 700; line-height: 1.35; max-width: 900px; }
+  .bait .for { margin-top: 56px; font-size: 44px; color: var(--sand); font-weight: 700; }
+  .bait .fishes { margin-top: 22px; display: flex; justify-content: center; gap: 26px; }
+  .bait .f { display: flex; flex-direction: column; align-items: center; }
+  .bait .f img { width: 272px; height: 272px; border-radius: 50%; object-fit: cover; border: 6px solid var(--lagoon); box-shadow: 0 16px 40px rgba(0, 0, 0, .45); background: #0b2540; }
+  .bait .f div { margin-top: 12px; font-size: 52px; font-weight: 700; }
+  .bait .lines { margin-top: 50px; font-size: 64px; line-height: 1.5; font-weight: 700; }
+  .bait .lines b { color: var(--sand); }
+
+  #s8 { justify-content: flex-start; padding-top: 260px; }
+  #s8 img { width: 200px; height: 200px; }
+  #s8 .q { margin-top: 34px; font-size: 92px; line-height: 1.2; }
+  #s8 .p { font-size: 54px; margin-top: 22px; color: var(--sand); font-weight: 700; }
+  #s8 .url { font-family: var(--font-num); font-weight: 800; font-size: 92px; color: var(--lagoon); margin-top: 30px; direction: ltr; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="world" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".55"/><stop offset=".25" stop-color="#0d6e7a" stop-opacity=".85"/><stop offset="1" stop-color="#0a3f55"/></linearGradient>
+      <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c88f"/><stop offset="1" stop-color="#b8925a"/></linearGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#64707c"/><stop offset="1" stop-color="#2f3943"/></linearGradient>
+      <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa5ae"/><stop offset="1" stop-color="#6b7681"/></linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fde68a" stop-opacity=".5"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/></linearGradient>
+    </defs>
+    <!-- Shore: rocks on the left, a beach with the angler, the harbour wall and lighthouse on the right -->
+    <path d="M0 1640 C40 1530 90 1490 150 1500 C200 1450 260 1470 300 1540 C320 1580 330 1610 340 1640 Z" fill="url(#rock)"/>
+    <path d="M330 1640 C420 1590 560 1585 700 1640 Z" fill="url(#sand)"/>
+    <rect x="720" y="1560" width="360" height="100" fill="url(#wall)"/>
+    <path d="M965 1560 L975 1350 L1005 1350 L1015 1560 Z" fill="#f4f8f9"/><path d="M969 1485 h42 v28 h-42z M972 1410 h36 v26 h-36z" fill="#f43f5e"/><rect x="965" y="1325" width="50" height="28" rx="6" fill="#fde68a"/>
+    <path id="beam" d="M990 1339 L560 1295 L560 1385 Z" fill="url(#beam)"/>
+    <g id="ang"></g>
+    <path id="wv" fill="url(#sea)"/>
+    <text id="hookBait" font-size="64" text-anchor="middle" dominant-baseline="middle"></text>
+  </svg>
+
+  <div class="layer" id="fishLayer"></div>
+
+  <div class="scene" id="s1">
+    <div class="kick h1">قبل أن ترمي خطّافك</div>
+    <div class="d q h1">أي طُعم<br>لأي سمكة؟</div>
+    <div class="row"><span>🦐</span><span>🐟</span><span>🦑</span><span>🪱</span><span>🍞</span></div>
+  </div>
+  <!-- Scenes 2–6 are built from BAITS below; 7 is the cool-box tip -->
+  <div class="scene bait" id="s7">
+    <div class="icon">🧊</div>
+    <div class="d nm h1">طازج ومبرّد</div>
+    <div class="lines h1">في صندوق مبرّد بالثلج<br>ولا <b>تُعِد تجميده</b> أبداً</div>
+  </div>
+  <div class="scene" id="s8">
+    <img src="../logo/arabtides-mark.svg" alt="">
+    <div class="d q h1">جدول الطُّعم<br>لكل الأسماك</div>
+    <div class="p h1">في دليل الطُّعم على موقعنا</div>
+    <div class="url">arabtides.com</div>
+  </div>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var lerp = function (a, b, p) { return a + (b - a) * p; };
+  var seed = 101, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 5, 11, 17, 23, 29, 35, 40.5, 45];
+
+  var PHOTO = '../../public/fish/sm/';
+  var BAITS = [
+    { icon: '🦐', name: 'الربيان', tip: 'إن اخترت طُعماً واحداً، فاختر الربيان', fish: [['shaem', 'شعم'], ['nagroor', 'نقرور'], ['sheri', 'شعري']] },
+    { icon: '🐟', name: 'السمك الحي', tip: 'سردين أو بوري صغير: حركته تجذب المفترس', fish: [['kanad', 'كنعد'], ['queenfish', 'ضلعة'], ['hamour', 'هامور']] },
+    { icon: '🦑', name: 'الحبار', tip: 'لحمه متماسك لا يسقط من الخطّاف', fish: [['hamra', 'حمرا'], ['dentex', 'دنتكس'], ['sheri', 'شعري']] },
+    { icon: '🪱', name: 'الديدان', tip: 'طُعم أساسي في المتوسط والأطلسي', fish: [['marmar', 'مرمار'], ['sar', 'شرغوش'], ['redmullet', 'سلطان إبراهيم']] },
+    { icon: '🍞', name: 'العجين والطحالب', tip: 'لأسماك نباتية: خطّاف صغير وعوّامة', fish: [['boori', 'بوري'], ['safi', 'صافي'], ['salema', 'شلبة']] },
+  ];
+  BAITS.forEach(function (b, n) {
+    var el = document.createElement('div');
+    el.className = 'scene bait'; el.id = 's' + (n + 2);
+    el.innerHTML = '<div class="icon">' + b.icon + '</div><div class="d nm h1">' + b.name + '</div><div class="tip">' + b.tip + '</div>' +
+      '<div class="for h1">تحبّه:</div><div class="fishes">' +
+      b.fish.map(function (f) { return '<div class="f"><img src="' + PHOTO + f[0] + '.webp" alt=""><div class="h1">' + f[1] + '</div></div>'; }).join('') + '</div>';
+    $('#stage').insertBefore(el, $('#s7'));
+  });
+
+  // --- Fish: a body, a wagging tail, a fin and an eye; faces left in its own coordinates
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#93c5fd', '#60a5fa'], ['#e2e8f0', '#94a3b8'], ['#fda4af', '#fb7185'], ['#2dd4bf', '#14b8a6']];
+  var fish = [];
+  for (var i = 0; i < 6; i++) {
+    var c = COLORS[i], el = document.createElement('div');
+    el.className = 'fish';
+    el.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(el);
+    fish.push({ el: el, tail: el.querySelector('.tail'), ph: rnd() * 6.28, sc: .55 + rnd() * .3 });
+  }
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 6;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+
+  function seaPath(Y, t, amp) {
+    var p = 'M0 1920 L0 ' + Y;
+    for (var x = 0; x <= 1080; x += 20) p += ' L' + x + ' ' + (Y + Math.sin(x / 70 + t * 2.2) * amp + Math.sin(x / 31 - t * 1.4) * amp * .4).toFixed(1);
+    return p + ' L1080 1920 Z';
+  }
+
+  // Angler: feet at (x, y), rod tip up-left, line down to the bait at (lx, ly)
+  function angler(g, x, y, lx, ly, t) {
+    var tipX = x - 120, tipY = y - 210 + Math.sin(t * 1.6) * 4;
+    g.innerHTML =
+      '<line x1="' + x + '" y1="' + (y - 70) + '" x2="' + (x - 14) + '" y2="' + y + '" stroke="#0b2540" stroke-width="13" stroke-linecap="round"/>' +
+      '<line x1="' + x + '" y1="' + (y - 70) + '" x2="' + (x + 14) + '" y2="' + y + '" stroke="#0b2540" stroke-width="13" stroke-linecap="round"/>' +
+      '<line x1="' + x + '" y1="' + (y - 70) + '" x2="' + x + '" y2="' + (y - 150) + '" stroke="#0f3d5c" stroke-width="26" stroke-linecap="round"/>' +
+      '<circle cx="' + x + '" cy="' + (y - 178) + '" r="20" fill="#e8b98a"/>' +
+      '<path d="M' + (x - 26) + ' ' + (y - 186) + ' Q' + x + ' ' + (y - 222) + ' ' + (x + 26) + ' ' + (y - 186) + 'Z" fill="#fde68a"/>' +
+      '<line x1="' + (x - 10) + '" y1="' + (y - 130) + '" x2="' + tipX + '" y2="' + tipY + '" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/>' +
+      '<path d="M' + tipX + ' ' + tipY + ' Q' + ((tipX + lx) / 2) + ' ' + (tipY + 40) + ' ' + lx + ' ' + ly + '" stroke="rgba(255,255,255,.75)" stroke-width="2.5" fill="none"/>';
+  }
+
+  function drawAt(t) {
+    // Scenes
+    for (var n = 1; n <= 8; n++) {
+      var a = DESIGN[n - 1], b = DESIGN[n], sc = $('#s' + n);
+      sc.style.opacity = n === 1 ? 1 - seg(t, b - .4, b) : n === 8 ? seg(t, a, a + .5, out) : vis(t, a, b);
+    }
+    show($('#s1 .kick'), seg(t, .2, .6), 24 * (1 - seg(t, .2, .7, out)));
+    show($('#s1 .q'), seg(t, .7, 1.2), 40 * (1 - seg(t, .7, 1.3, out)));
+    document.querySelectorAll('#s1 .row span').forEach(function (s, k) {
+      var p = seg(t, 2 + k * .25, 2.4 + k * .25, out);
+      s.style.opacity = p; s.style.transform = 'scale(' + (.5 + .5 * p) + ')';
+    });
+    for (var m = 2; m <= 7; m++) {
+      var a2 = DESIGN[m - 1], el = $('#s' + m);
+      var ic = seg(t, a2, a2 + .6, out);
+      el.querySelector('.icon').style.transform = 'scale(' + (.5 + .5 * ic) + ') rotate(' + (Math.sin(t * 2) * 4) + 'deg)';
+      show(el.querySelector('.nm'), seg(t, a2 + .2, a2 + .6), 24 * (1 - seg(t, a2 + .2, a2 + .7, out)));
+      var tip = el.querySelector('.tip, .lines');
+      show(tip, seg(t, a2 + .8, a2 + 1.2), 20 * (1 - seg(t, a2 + .8, a2 + 1.3, out)));
+      var fo = el.querySelector('.for');
+      if (fo) show(fo, seg(t, a2 + 1.6, a2 + 2), 0);
+      el.querySelectorAll('.f').forEach(function (f, k) {
+        var p = seg(t, a2 + 1.9 + k * .45, a2 + 2.4 + k * .45, out);
+        f.style.opacity = p; f.style.transform = 'translateY(' + (40 * (1 - p)) + 'px) scale(' + (.8 + .2 * p) + ')';
+      });
+    }
+
+    // Sea, lighthouse, angler and the bait on the hook (changes with each scene)
+    var Y = 1600 + Math.sin(t * .5) * 10;
+    $('#wv').setAttribute('d', seaPath(Y, t, 8));
+    $('#beam').setAttribute('transform', 'rotate(' + (Math.sin(t * 1.3) * 10) + ' 990 1339)');
+    var bx = 210 + Math.sin(t * .9) * 12, by = 1770 + Math.sin(t * 1.3) * 10;
+    angler($('#ang'), 520, 1600, bx, by - 30, t);
+    var k = t < 5 ? -1 : t < 35 ? Math.floor((t - 5) / 6) : -1;
+    var hb = $('#hookBait');
+    hb.textContent = k >= 0 ? BAITS[k].icon : '';
+    hb.setAttribute('x', bx); hb.setAttribute('y', by);
+    hb.setAttribute('opacity', k >= 0 ? Math.min(seg(t, 5 + k * 6, 5.4 + k * 6), 1 - seg(t, 10.6 + k * 6, 11 + k * 6)) : 0);
+
+    // Fish: cruise in lanes, then gather round the bait in each bait scene
+    var inBait = t >= 5 && t < 35, ph = inBait ? (t - 5) % 6 : 0;
+    var pull = inBait ? Math.min(seg(ph, 1, 3), 1 - seg(ph, 5.2, 6)) : 0;
+    fish.forEach(function (f, i) {
+      var dir = i % 2 ? 1 : -1, ln = t * (60 + i * 9) + i * 230;
+      var x = dir > 0 ? (ln % 1300) - 110 : 1190 - (ln % 1300), y = 1700 + (i % 3) * 75 + (i > 2 ? 30 : 0);
+      var ang = t * .9 + i * 1.05, gx = bx + Math.cos(ang) * (120 + i * 18), gy = by + Math.sin(ang) * 50;
+      var gdir = -Math.sin(ang) > 0 ? 1 : -1;
+      putFish(f, lerp(x, gx, pull), lerp(y, gy, pull), pull > .5 ? gdir : dir, t, pull > .5 ? 14 : 9, clamp(t / .6));
+    });
+
+    // End card
+    $('#s8 img').style.transform = 'scale(' + (.6 + .4 * seg(t, 40.5, 41.3, out)) + ')';
+    show($('#s8 .q'), seg(t, 40.8, 41.2), 24 * (1 - seg(t, 40.8, 41.3, out)));
+    show($('#s8 .p'), seg(t, 41.3, 41.7), 20 * (1 - seg(t, 41.3, 41.8, out)));
+    show($('#s8 .url'), seg(t, 41.7, 42.1), 20 * (1 - seg(t, 41.7, 42.2, out)));
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>
