@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو أفضل أيام الصيد في نوفمبر</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480.
+     Ratings use the port-page formula (moon age + tide range vs the month's max), November 2026.
+     Curves are real predictions from src/lib/tides.ts (brand/video/video-14-november/data.json, Node 22 tz data). */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(900px 600px at 85% 5%, rgba(45, 212, 191, .2), transparent 60%),
+      linear-gradient(180deg, #071a30 0%, #0b2540 45%, #0f3d5c 75%); }
+  .scene { position: absolute; inset: 0; padding: 0 90px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish { position: absolute; left: 0; top: 0; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  #world { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .h1 { text-shadow: 0 4px 24px rgba(6, 22, 42, .7); }
+
+  #s1 .kick { margin-top: 250px; font-size: 60px; color: var(--sand); font-weight: 700; }
+  #s1 .q { margin-top: 10px; font-size: 118px; line-height: 1.12; }
+  #s1 .flags { margin-top: 56px; display: flex; gap: 26px; }
+  #s1 .flags img { width: 132px; height: 96px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 0 3px rgba(255, 255, 255, .3), 0 12px 30px rgba(0, 0, 0, .4); }
+
+  #s2 .h { margin-top: 236px; font-size: 92px; }
+  #cal { margin-top: 30px; display: grid; grid-template-columns: repeat(7, 112px); gap: 10px; direction: rtl; }
+  #cal .wd { font-size: 30px; color: var(--mist); font-weight: 700; padding-bottom: 4px; }
+  #cal .c { height: 92px; border-radius: 18px; background: rgba(255, 255, 255, .07); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 40px; font-weight: 700; position: relative; }
+  #cal .c.g { background: rgba(21, 128, 61, .85); box-shadow: 0 0 0 3px #4ade80 inset; }
+  #cal .c.t { background: rgba(15, 118, 110, .8); box-shadow: 0 0 0 3px #2dd4bf inset; }
+  #cal .c .m { position: absolute; top: -14px; left: -10px; font-size: 40px; }
+  #s2 .sub { margin-top: 26px; font-size: 52px; font-weight: 700; line-height: 1.4; }
+  #s2 .sub b { color: #4ade80; }
+
+  .port .top { margin-top: 236px; display: flex; align-items: center; gap: 26px; }
+  .port .top img { width: 126px; height: 92px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 0 3px rgba(255, 255, 255, .3); }
+  .port .pn { font-size: 84px; }
+  .port .day { margin-top: 10px; font-size: 128px; line-height: 1.05; color: var(--sand); }
+  .port .why { margin-top: 14px; font-size: 48px; font-weight: 700; line-height: 1.35; }
+  .port .chart { margin-top: 30px; width: 900px; height: 430px; border-radius: 34px; background: rgba(6, 22, 42, .72); border: 2px solid rgba(45, 212, 191, .35); position: relative; }
+  .port .rate { margin-top: 18px; font-size: 44px; font-weight: 700; color: #4ade80; }
+
+  #s8 { justify-content: flex-start; padding-top: 270px; }
+  #s8 img { width: 200px; height: 200px; }
+  #s8 .q { margin-top: 34px; font-size: 92px; line-height: 1.2; }
+  #s8 .p { font-size: 54px; margin-top: 22px; color: var(--sand); font-weight: 700; }
+  #s8 .url { font-family: var(--font-num); font-weight: 800; font-size: 92px; color: var(--lagoon); margin-top: 30px; direction: ltr; }
+  #s8 .save { font-size: 50px; margin-top: 26px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="world" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".55"/><stop offset=".25" stop-color="#0d6e7a" stop-opacity=".85"/><stop offset="1" stop-color="#0a3f55"/></linearGradient>
+      <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c88f"/><stop offset="1" stop-color="#b8925a"/></linearGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#64707c"/><stop offset="1" stop-color="#2f3943"/></linearGradient>
+      <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa5ae"/><stop offset="1" stop-color="#6b7681"/></linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fde68a" stop-opacity=".5"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/></linearGradient>
+    </defs>
+    <path d="M0 1640 C40 1530 90 1490 150 1500 C200 1450 260 1470 300 1540 C320 1580 330 1610 340 1640 Z" fill="url(#rock)"/>
+    <path d="M330 1640 C420 1590 560 1585 700 1640 Z" fill="url(#sand)"/>
+    <rect x="720" y="1560" width="360" height="100" fill="url(#wall)"/>
+    <path d="M965 1560 L975 1350 L1005 1350 L1015 1560 Z" fill="#f4f8f9"/><path d="M969 1485 h42 v28 h-42z M972 1410 h36 v26 h-36z" fill="#f43f5e"/><rect x="965" y="1325" width="50" height="28" rx="6" fill="#fde68a"/>
+    <path id="beam" d="M990 1339 L560 1295 L560 1385 Z" fill="url(#beam)"/>
+    <g id="boat"><path d="M-80 0 L80 0 L58 34 L-58 34 Z" fill="#f4f8f9"/><path d="M-80 0 L80 0 L76 9 L-76 9Z" fill="#0d9488"/><line x1="0" y1="0" x2="0" y2="-120" stroke="#e2e8f0" stroke-width="5"/><path d="M5 -112 L58 -14 L5 -14Z" fill="#fde68a" opacity=".9"/></g>
+    <path id="wv" fill="url(#sea)"/>
+  </svg>
+
+  <div class="layer" id="fishLayer"></div>
+
+  <div class="scene" id="s1">
+    <div class="kick h1">احفظ هذا الفيديو 📌</div>
+    <div class="d q h1">أفضل أيام الصيد<br>في نوفمبر</div>
+    <div class="flags"></div>
+  </div>
+  <div class="scene" id="s2">
+    <div class="d h h1">نوفمبر <span class="k">2026</span></div>
+    <div id="cal"></div>
+    <div class="sub h1">نافذتان: <b>من <span class="k">7</span> إلى <span class="k">12</span></b><br>و<b>من <span class="k">22</span> إلى <span class="k">27</span></b> نوفمبر<br>🌑 المحاق و🌕 البدر</div>
+  </div>
+  <!-- Scenes 3–7 are built from PORTS below -->
+  <div class="scene" id="s8">
+    <img src="../logo/arabtides-mark.svg" alt="">
+    <div class="d q h1">تقويم الصيد<br>لمينائك يوماً بيوم</div>
+    <div class="p h1"><span class="k">36</span> ميناءً عربياً، مجاناً</div>
+    <div class="url">arabtides.com</div>
+    <div class="save h1">شاركه مع رفيق الصيد 🎣</div>
+  </div>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var lerp = function (a, b, p) { return a + (b - a) * p; };
+  var seed = 137, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 5, 12, 18, 24, 30, 36, 42, 47];
+
+  var FLAG = '../../public/flags/';
+  var DATA = {"kuwait-city":{"day":25,"tz":180,"sunrise":"06:20","sunset":"16:50","ex":[["L","06:22",-212],["H","13:05",92],["L","18:04",-23],["H","23:45",180]],"curve":[154,143,128,111,91,68,44,18,-8,-35,-62,-89,-114,-137,-158,-176,-191,-202,-209,-212,-210,-204,-194,-180,-163,-144,-122,-99,-74,-50,-27,-4,17,36,52,66,77,85,89,92,91,88,82,75,66,55,44,32,21,10,-1,-9,-16,-21,-23,-22,-18,-11,-1,11,26,43,61,79,98,116,133,148,161,171,177,180,179]},"dammam":{"day":24,"tz":180,"sunrise":"06:05","sunset":"16:47","ex":[["H","04:05",83],["L","10:24",-100],["H","16:49",106],["L","22:59",-64]],"curve":[-35,-25,-14,-1,12,25,38,50,61,70,77,81,83,82,79,73,64,54,41,27,13,-3,-18,-33,-47,-60,-71,-81,-89,-95,-99,-100,-100,-97,-91,-84,-74,-62,-49,-34,-18,-1,16,33,49,64,77,89,97,103,106,106,103,97,89,78,66,53,39,24,10,-4,-17,-29,-39,-48,-55,-60,-63,-64,-63,-60,-54]},"muscat":{"day":23,"tz":240,"sunrise":"06:25","sunset":"17:19","ex":[["L","02:00",-17],["H","07:19",86],["L","14:21",-152],["H","21:18",95]],"curve":[12,4,-3,-9,-13,-16,-17,-16,-13,-8,-2,5,14,23,33,43,53,62,71,77,82,85,86,85,81,75,67,57,45,31,15,-2,-19,-37,-54,-72,-88,-103,-117,-129,-139,-146,-150,-152,-151,-146,-139,-130,-118,-103,-87,-70,-51,-32,-13,5,23,39,54,66,77,85,91,94,95,94,90,85,78,69,60,50,40]},"dubai":{"day":26,"tz":240,"sunrise":"06:44","sunset":"17:28","ex":[["H","01:20",39],["L","06:21",-28],["H","12:41",104],["L","19:49",-102]],"curve":[25,31,36,38,39,39,36,32,28,22,15,8,1,-5,-12,-17,-22,-25,-27,-28,-28,-26,-22,-17,-10,-3,6,16,26,37,48,59,69,79,87,94,99,103,104,103,100,94,87,77,66,53,39,24,9,-6,-21,-36,-49,-62,-73,-83,-90,-96,-100,-102,-102,-100,-96,-90,-83,-74,-64,-53,-42,-30,-19,-7,3]},"casablanca":{"day":26,"tz":0,"sunrise":"07:12","sunset":"17:23","ex":[["H","02:40",156],["L","08:53",-147],["H","15:07",137],["L","21:07",-132]],"curve":[41,65,87,106,124,137,148,154,156,154,148,137,123,105,84,61,37,11,-15,-40,-63,-85,-104,-120,-133,-142,-146,-147,-143,-136,-125,-111,-93,-74,-52,-29,-6,18,41,63,82,100,115,126,133,137,136,132,123,111,95,76,56,33,10,-14,-37,-59,-79,-96,-110,-121,-129,-132,-132,-127,-119,-107,-92,-75,-55,-33,-10]}};
+  // id, flag, Arabic port name, day label, reason, highlighted high tide (time), icon at the marker
+  var PORTS = [
+    ['kuwait-city', 'kw', 'مدينة الكويت', '25 نوفمبر', 'مد عالٍ قوي تحت البدر 🌕', '23:45', '🌕'],
+    ['dammam', 'sa', 'الدمام', '24 نوفمبر', 'المد العالي مع غروب الشمس 🌅', '16:49', '🌅'],
+    ['muscat', 'om', 'مسقط', '23 نوفمبر', 'المد العالي بعد الشروق بأقل من ساعة 🌄', '07:19', '🌄'],
+    ['dubai', 'ae', 'دبي', '26 نوفمبر', 'من أقوى أيام المد في الشهر ☀️', '12:41', '☀️'],
+    ['casablanca', 'ma', 'الدار البيضاء', '26 نوفمبر', 'أقوى مد في الشهر، والمد العالي بعد الظهر', '15:07', '☀️'],
+  ];
+
+  $('#s1 .flags').innerHTML = PORTS.map(function (p) { return '<img src="' + FLAG + p[1] + '.svg" alt="">'; }).join('');
+
+  // November 2026: the 1st is a Sunday; weeks start on Saturday like the site's calendar
+  var cal = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'].map(function (w) { return '<div class="wd">' + w + '</div>'; }).join('');
+  cal += '<div></div>';
+  for (var dd = 1; dd <= 30; dd++) {
+    var five = (dd >= 8 && dd <= 11) || (dd >= 23 && dd <= 26), four = dd === 7 || dd === 12 || dd === 22 || dd === 27;
+    cal += '<div class="c' + (five ? ' g' : four ? ' t' : '') + '" data-d="' + dd + '"><span class="k">' + dd + '</span>' + (dd === 9 ? '<span class="m">🌑</span>' : dd === 24 ? '<span class="m">🌕</span>' : '') + '</div>';
+  }
+  $('#cal').innerHTML = cal;
+
+  // Port scenes with the day's real tide curve: 24 h across (00:00 on the right, RTL), night shaded
+  var CW = 900, CH = 430, PL = 40, PR = 40, PT = 90, PB = 104;
+  var hx = function (h) { return CW - PR - (h / 24) * (CW - PL - PR); };
+  var hrs = function (s) { return +s.slice(0, 2) + +s.slice(3, 5) / 60; };
+  PORTS.forEach(function (p, n) {
+    var d = DATA[p[0]], el = document.createElement('div');
+    var lo = Math.min.apply(null, d.curve), hi = Math.max.apply(null, d.curve);
+    var hy = function (v) { return PT + (1 - (v - lo) / (hi - lo)) * (CH - PT - PB); };
+    var pts = d.curve.map(function (v, i) { return hx(i / 3).toFixed(1) + ',' + hy(v).toFixed(1); }).join(' ');
+    var mark = d.ex.filter(function (e) { return e[1] === p[5]; })[0];
+    var mx = hx(hrs(mark[1])), my = hy(mark[2]);
+    var sr = hx(hrs(d.sunrise)), ss = hx(hrs(d.sunset));
+    var svg = '<svg width="' + CW + '" height="' + CH + '" viewBox="0 0 ' + CW + ' ' + CH + '" style="position:absolute;inset:0">' +
+      '<rect x="' + sr + '" y="' + (PT - 30) + '" width="' + (CW - PR - sr) + '" height="' + (CH - PT - PB + 60) + '" fill="#020a16" opacity=".55"/>' +
+      '<rect x="' + PL + '" y="' + (PT - 30) + '" width="' + (ss - PL) + '" height="' + (CH - PT - PB + 60) + '" fill="#020a16" opacity=".55"/>' +
+      '<polygon class="area" points="' + hx(0) + ',' + (CH - PB) + ' ' + pts + ' ' + hx(24) + ',' + (CH - PB) + '" fill="#2dd4bf" opacity=".18"/>' +
+      '<polyline class="ln" points="' + pts + '" fill="none" stroke="#2dd4bf" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>' +
+      [0, 6, 12, 18, 24].map(function (h) { return '<text x="' + hx(h) + '" y="' + (CH - 18) + '" fill="#94a3b8" font-size="28" font-family="Inter" font-weight="600" text-anchor="middle">' + String(h).padStart(2, '0') + ':00</text>'; }).join('') +
+      '<text x="' + sr + '" y="' + (CH - 58) + '" font-size="34" text-anchor="middle">🌅</text><text x="' + ss + '" y="' + (CH - 58) + '" font-size="34" text-anchor="middle">🌇</text>' +
+      '<g class="mk" transform="translate(' + mx + ' ' + my + ')"><circle r="34" fill="#fde68a" opacity=".25"/><circle r="15" fill="#fde68a" stroke="#0b2540" stroke-width="4"/></g>' +
+      '</svg>' +
+      '<div class="lbl" style="position:absolute;left:' + Math.min(Math.max(mx - 120, 20), CW - 260) + 'px;top:' + Math.max(my - 92, 6) + 'px;width:240px;text-align:center;font-size:40px;font-weight:800;color:#fde68a">' +
+      '<span class="k">' + p[5] + '</span> ' + p[6] + '</div>';
+    el.className = 'scene port'; el.id = 's' + (n + 3);
+    el.innerHTML = '<div class="top"><img src="' + FLAG + p[1] + '.svg" alt=""><div class="d pn h1">' + p[2] + '</div></div>' +
+      '<div class="d day h1">' + p[3].replace(/(\d+)/, '<span class="k">$1</span>') + '</div><div class="why h1">' + p[4] + '</div>' +
+      '<div class="chart">' + svg + '</div><div class="rate h1">تقييم الصيد: ممتاز 🐟🐟🐟🐟🐟</div>';
+    $('#stage').insertBefore(el, $('#s8'));
+    var ln = el.querySelector('.ln'); ln.style.strokeDasharray = ln.getTotalLength ? 3000 : 0;
+  });
+
+  // --- Fish
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#93c5fd', '#60a5fa'], ['#e2e8f0', '#94a3b8'], ['#fda4af', '#fb7185'], ['#2dd4bf', '#14b8a6']];
+  var fish = [];
+  for (var i = 0; i < 6; i++) {
+    var c = COLORS[i], fe = document.createElement('div');
+    fe.className = 'fish';
+    fe.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(fe);
+    fish.push({ el: fe, tail: fe.querySelector('.tail'), ph: rnd() * 6.28, sc: .55 + rnd() * .3 });
+  }
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 6;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+  function seaPath(Y, t, amp) {
+    var p = 'M0 1920 L0 ' + Y;
+    for (var x = 0; x <= 1080; x += 20) p += ' L' + x + ' ' + (Y + Math.sin(x / 70 + t * 2.2) * amp + Math.sin(x / 31 - t * 1.4) * amp * .4).toFixed(1);
+    return p + ' L1080 1920 Z';
+  }
+
+  function drawAt(t) {
+    for (var n = 1; n <= 8; n++) {
+      var a = DESIGN[n - 1], b = DESIGN[n];
+      $('#s' + n).style.opacity = n === 1 ? 1 - seg(t, b - .4, b) : n === 8 ? seg(t, a, a + .5, out) : vis(t, a, b);
+    }
+    show($('#s1 .kick'), seg(t, .2, .6), 24 * (1 - seg(t, .2, .7, out)));
+    show($('#s1 .q'), seg(t, .6, 1.1), 40 * (1 - seg(t, .6, 1.2, out)));
+    document.querySelectorAll('#s1 .flags img').forEach(function (f, k) {
+      var p = seg(t, 1.8 + k * .3, 2.2 + k * .3, out); f.style.opacity = p; f.style.transform = 'translateY(' + (30 * (1 - p)) + 'px)';
+    });
+
+    // Calendar: days pop in, then the two windows light up
+    document.querySelectorAll('#cal .c').forEach(function (c) {
+      var dd = +c.dataset.d, p = seg(t, 5.3 + dd * .03, 5.6 + dd * .03, out);
+      c.style.opacity = p;
+      var on = c.classList.contains('g') || c.classList.contains('t');
+      var lit = dd < 15 ? seg(t, 7, 7.6) : seg(t, 8.4, 9);
+      c.style.filter = on ? 'saturate(' + lit + ') brightness(' + (.55 + .45 * lit) + ')' : '';
+      c.style.transform = 'scale(' + (on ? 1 + .06 * Math.sin(Math.PI * clamp(lit)) : 1) + ')';
+    });
+    show($('#s2 .sub'), seg(t, 9.4, 9.9), 20 * (1 - seg(t, 9.4, 10, out)));
+
+    for (var m = 3; m <= 7; m++) {
+      var a2 = DESIGN[m - 1], el = $('#s' + m);
+      show(el.querySelector('.top'), seg(t, a2, a2 + .4), 24 * (1 - seg(t, a2, a2 + .5, out)));
+      show(el.querySelector('.day'), seg(t, a2 + .3, a2 + .7), 30 * (1 - seg(t, a2 + .3, a2 + .8, out)));
+      show(el.querySelector('.why'), seg(t, a2 + .8, a2 + 1.2), 20 * (1 - seg(t, a2 + .8, a2 + 1.3, out)));
+      show(el.querySelector('.chart'), seg(t, a2 + 1.1, a2 + 1.5), 30 * (1 - seg(t, a2 + 1.1, a2 + 1.6, out)));
+      var ln = el.querySelector('.ln');
+      ln.style.strokeDasharray = '3000'; ln.style.strokeDashoffset = 3000 * (1 - seg(t, a2 + 1.4, a2 + 3, function (x) { return clamp(x); }));
+      var mk = seg(t, a2 + 3, a2 + 3.4, out), pulse = 1 + .15 * Math.sin(t * 5);
+      el.querySelector('.mk circle').setAttribute('r', 34 * pulse);
+      el.querySelector('.mk').style.opacity = mk; el.querySelector('.lbl').style.opacity = mk;
+      show(el.querySelector('.rate'), seg(t, a2 + 3.4, a2 + 3.8), 0);
+    }
+
+    var Y = 1600 + Math.sin(t * .5) * 10;
+    $('#wv').setAttribute('d', seaPath(Y, t, 8));
+    $('#boat').setAttribute('transform', 'translate(' + (130 + ((t * 14) % 900)) + ',' + (Y - 26 + Math.sin(t * 1.8) * 5) + ') rotate(' + (Math.sin(t * 1.5) * 3) + ')');
+    $('#beam').setAttribute('transform', 'rotate(' + (Math.sin(t * 1.3) * 10) + ' 990 1339)');
+    fish.forEach(function (f, i) {
+      var dir = i % 2 ? 1 : -1, ln = t * (60 + i * 9) + i * 230;
+      var x = dir > 0 ? (ln % 1300) - 110 : 1190 - (ln % 1300);
+      putFish(f, x, 1700 + (i % 3) * 75 + (i > 2 ? 30 : 0), dir, t, 9, clamp(t / .6));
+    });
+
+    $('#s8 img').style.transform = 'scale(' + (.6 + .4 * seg(t, 42, 42.8, out)) + ')';
+    show($('#s8 .q'), seg(t, 42.3, 42.7), 24 * (1 - seg(t, 42.3, 42.8, out)));
+    show($('#s8 .p'), seg(t, 42.8, 43.2), 20 * (1 - seg(t, 42.8, 43.3, out)));
+    show($('#s8 .url'), seg(t, 43.2, 43.6), 20 * (1 - seg(t, 43.2, 43.7, out)));
+    show($('#s8 .save'), seg(t, 43.6, 44), 20 * (1 - seg(t, 43.6, 44.1, out)));
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>
