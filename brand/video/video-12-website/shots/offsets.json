@@ -1,0 +1,31 @@
+{
+  "home": {
+    "height": 9581,
+    "#main": 757,
+    "#map-title": 5325,
+    "#ports-map": 5377,
+    "#countries-title": 5886,
+    "#fish-title": 2683,
+    "#features-title": 3417
+  },
+  "port": {
+    "height": 6841,
+    "#summary-title": 645,
+    "#chart-title": 895,
+    "#week-title": 1344,
+    "#cal-title": 2446,
+    "#fish-title": 3260,
+    "#sun-title": 4745,
+    "#solunar-title": 5045,
+    "#prayer-title": 5346,
+    "#map": 5592
+  },
+  "fish": {
+    "height": 9731,
+    "#fish-grid": 436
+  },
+  "hamour": {
+    "height": 4427,
+    "#main": 222
+  }
+}
