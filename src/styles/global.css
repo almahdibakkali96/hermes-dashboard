@@ -312,6 +312,8 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
   padding: 0.35rem 0.1rem 0.4rem;
 }
 .cal-today { outline: 2px solid var(--accent); outline-offset: 1px; background: #f0fdfa; }
+.moon-cell { border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); padding: 0.35rem 0.1rem; }
+.moon-key { background: #fef9c3; border-color: #facc15; }
 button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
 .cal-cell[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--text-primary); }
 .day-step {
@@ -394,6 +396,8 @@ button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
   border: 1px solid rgba(255,255,255,.3); color: #fff; font-weight: 600;
 }
 .btn-ghost:hover { background: rgba(255,255,255,.1); }
+/* Hidden inside the Android app (see BaseLayout): purchases outside Google Play billing */
+[data-app="android"] .web-only { display: none !important; }
 .guide-card .btn-primary { background: var(--accent); color: #fff; }
 .guide-card .btn-primary:hover { background: var(--accent-hover); }
 .guide-banner {

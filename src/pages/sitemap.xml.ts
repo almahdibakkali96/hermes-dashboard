@@ -34,6 +34,9 @@ export async function GET({ site }: { site: URL | undefined }) {
   });
   urls.push({ loc: `${origin}${BASE}/fish/credits`, priority: 0.2, changefreq: 'yearly' });
 
+  // Lunar calendar
+  urls.push({ loc: `${origin}${BASE}/moon`, priority: 0.7, changefreq: 'daily', lastmod: today });
+
   // Shop
   urls.push({ loc: `${origin}${BASE}/guide`, priority: 0.9, changefreq: 'weekly', lastmod: today });
 

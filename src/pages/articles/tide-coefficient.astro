@@ -1,0 +1,133 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import placesIndex from '../../data/places/places_index.json';
+import { dayExtremes, getTimezoneOffset, portDay, tideCoefficient, coefficientLabelAr, type Constituent } from '../../lib/tides';
+import { yearStats } from '../../lib/seas';
+
+const meta = articleBySlug('tide-coefficient');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const now = new Date();
+const stats = await yearStats(now.getUTCFullYear());
+const nameOf = (id: string) => (placesIndex as { id: string; name_ar: string }[]).find(p => p.id === id)!.name_ar;
+
+// Daily range (highest high − lowest low, cm) in a port's local day
+function rangeOn(cons: Record<string, Constituent>, d: Date, tz: number) {
+  const ex = dayExtremes(cons, d, tz);
+  const h = ex.filter(e => e.type === 'high'), l = ex.filter(e => e.type === 'low');
+  return h.length && l.length ? Math.max(...h.map(e => e.height)) - Math.min(...l.map(e => e.height)) : 0;
+}
+
+// Today's coefficient and the strongest day of the next 30, for ports where the coefficient applies
+const TABLE_PORTS = ['casablanca', 'agadir', 'nouadhibou', 'kuwait-city', 'umm-qasr', 'dammam', 'muscat', 'dubai', 'mogadishu', 'moroni'];
+const rows = [];
+for (const id of TABLE_PORTS) {
+  const port = (await import(`../../data/places/${id}.json`)).default;
+  const cons = port.constituents as Record<string, Constituent>;
+  const max = stats.find(s => s.id === id)!.maxRange;
+  const tz = getTimezoneOffset(port.timezone, now), day0 = portDay(now, tz);
+  let peak = { coef: 0, date: day0 };
+  let todayCoef = 0;
+  for (let i = 0; i < 30; i++) {
+    const d = new Date(day0.getTime() + i * 86400000);
+    const c = tideCoefficient(rangeOn(cons, d, tz), max) ?? 0;
+    if (i === 0) todayCoef = c;
+    if (c > peak.coef) peak = { coef: c, date: d };
+  }
+  rows.push({
+    id, name: nameOf(id), today: todayCoef, label: coefficientLabelAr(todayCoef), peak: peak.coef,
+    peakDate: peak.date.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'UTC', day: 'numeric', month: 'long' }),
+  });
+}
+const noCoef = stats.filter(s => tideCoefficient(s.maxRange, s.maxRange) === null).map(s => s.name_ar);
+const casa = rows.find(r => r.id === 'casablanca')!;
+const casaMaxM = (stats.find(s => s.id === 'casablanca')!.maxRange / 100).toFixed(1);
+const scale = [
+  ['20 – 44', 'ضعيف', 'أيام التربيع. تيار هادئ، والجزر لا ينحسر كثيراً.'],
+  ['45 – 69', 'متوسط', 'مد عادي، أغلب أيام الشهر.'],
+  ['70 – 94', 'قوي', 'قرب البدر والمحاق. تيار أوضح وجزر أبعد.'],
+  ['95 – 120', 'قوي جداً', 'أقوى أيام الشهر أو السنة. انحسار كبير وتيارات قوية.'],
+];
+
+const toc = [
+  { id: 'what', label: 'ما هو معامل المد؟' },
+  { id: 'scale', label: 'كيف تقرأ الرقم؟' },
+  { id: 'how', label: 'كيف نحسبه في ArabTides' },
+  { id: 'today', label: 'المعامل اليوم في موانئ عربية' },
+  { id: 'fishing', label: 'المعامل والصيد والسلامة' },
+];
+const takeaways = [
+  'معامل المد رقم من <strong>20 إلى 120</strong> يقيس قوة المد في يوم معين: كلما كبر الرقم ارتفع المد أعلى وانحسر الجزر أبعد.',
+  'نحو <strong>100</strong> في أيام البدر والمحاق المعتادة، ونحو <strong>45</strong> في أيام التربيع، و<strong>120</strong> لأقوى مد في السنة.',
+  'في ArabTides نحسبه لكل ميناء على حدة، فالرقم 120 يعني <strong>أقوى يوم في السنة في ذلك الميناء</strong>.',
+  `معامل المد اليوم في الدار البيضاء: <strong>${casa.today}</strong> (${casa.label}).`,
+];
+const faq = [
+  { q: 'ما الفرق بين معامل المد ومدى المد؟', a: 'المدى هو الفرق الفعلي بالسنتيمتر بين المد العالي والجزر المنخفض. المعامل رقم نسبي من 20 إلى 120 يقارن مد اليوم بمد السنة في الميناء نفسه، فيسهل فهمه دون معرفة الارتفاعات المعتادة في كل ميناء.' },
+  { q: 'هل معامل 100 في الدار البيضاء يساوي معامل 100 في الكويت؟', a: 'يعني الشيء نفسه نسبياً: مداً قوياً قريباً من أقوى أيام السنة في كل ميناء. لكن المدى بالسنتيمتر مختلف، لأن المد في الكويت أكبر بطبيعته. انظر إلى المدى في صفحة الميناء لمعرفة الارتفاع الفعلي.' },
+  { q: 'لماذا لا يظهر المعامل في بعض الموانئ؟', a: 'في موانئ مثل الجزائر وبورتسودان وجدة لا يتجاوز أكبر مدى في السنة بضعة سنتيمترات، فالقول إن المد "قوي جداً" هناك قد يضلل القارئ. لذلك لا نعرض المعامل حين يقل أكبر مدى في السنة عن 50 سم.' },
+  { q: 'هل يأتي أعلى معامل يوم البدر؟', a: 'غالباً بعده بيوم أو يومين، لأن المحيطات تحتاج وقتاً لتستجيب لجذب القمر والشمس. وأعلى المعاملات في السنة تكون عادة قرب الاعتدالين في مارس وسبتمبر.' },
+  { q: 'هل المعامل الكبير أفضل للصيد؟', a: 'المعامل الكبير يعني ماءً يتحرك أكثر وطعاماً أكثر للأسماك، ويكشف الجزر صخوراً وبركاً لا تظهر عادة. لكنه يعني أيضاً تيارات أقوى ومداً يعود بسرعة، فانتبه لطريق العودة من الصخور.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={['casablanca', 'kuwait-city', 'agadir', 'muscat']}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    <rect x="40" y="40" width="220" height="150" rx="16" fill="#0b2540"/>
+    <text x="150" y="130" text-anchor="middle" font-size="64" font-weight="700" fill="#5eead4" font-family="sans-serif">95</text>
+    <path d="M60 165 h180" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+    <path d="M60 165 h140" stroke="#2dd4bf" stroke-width="6" stroke-linecap="round"/>
+    <path d="M0 220 C50 200 100 240 150 220 S250 200 300 220 V260 H0Z" fill="#2dd4bf" opacity=".35"/>
+  </svg>
+
+  <h2 id="what">ما هو معامل المد؟</h2>
+  <p>معامل المد رقم واحد يلخص <strong>قوة المد في يوم معين</strong>. بدلاً من أن تحفظ أن المد في الدار البيضاء يبلغ في أقوى أيامه نحو {casaMaxM} م بين المد والجزر، يكفي أن ترى المعامل: إذا كان قريباً من 100 فالمد قوي، وإذا كان قريباً من 40 فهو ضعيف.</p>
+  <p>نشأ المعامل في فرنسا، وتنشره الهيئة الهيدروغرافية الفرنسية منذ القرن التاسع عشر، ويستخدمه الصيادون في المغرب وموريتانيا على نطاق واسع. وهو يتبع دورة القمر: يرتفع حول البدر والمحاق وينخفض في التربيع.</p>
+
+  <h2 id="scale">كيف تقرأ الرقم؟</h2>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead><tr><th>المعامل</th><th>قوة المد</th><th>ماذا يعني</th></tr></thead>
+      <tbody>{scale.map(r => <tr><td class="latin">{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>)}</tbody>
+    </table>
+  </div>
+  <div class="callout fact"><span class="ic">📏</span><div>المعامل <strong>100</strong> يقابل متوسط المد في أيام البدر والمحاق، و<strong>45</strong> متوسط المد في أيام التربيع. لا ينزل المعامل عملياً تحت 20 ولا يصعد فوق 120.</div></div>
+
+  <h2 id="how">كيف نحسبه في ArabTides</h2>
+  <p>المعامل الفرنسي محسوب لميناء واحد هو بريست، ثم يُطبق على الساحل كله. أما موانئنا فتمتد من المحيط الأطلسي إلى الخليج العربي، والمد فيها مختلف تماماً. لذلك نحسب المعامل <strong>لكل ميناء على حدة</strong>:</p>
+  <ul class="list-disc ps-6 space-y-2 my-4">
+    <li>نحسب مدى المد (الفرق بين أعلى مد وأدنى جزر) لكل يوم من أيام السنة في الميناء.</li>
+    <li>نعطي أكبر مدى في السنة المعامل <strong>120</strong>، وكل يوم آخر معاملاً بنسبة مداه إلى ذلك المدى.</li>
+    <li>في موانئ الأطلسي مثل الدار البيضاء وأكادير تخرج الأرقام نفسها تقريباً التي يعطيها الحساب الفرنسي التقليدي، أي من نحو 40 في التربيع إلى نحو 120.</li>
+  </ul>
+  <div class="callout fact"><span class="ic">🌊</span><div><strong>لا نعرض المعامل حيث المد ضعيف جداً.</strong> إذا كان أكبر مدى في السنة أقل من 50 سم فلا معنى لقول "مد قوي جداً". هذه الموانئ بلا معامل: {noCoef.join('، ')}.</div></div>
+
+  <h2 id="today">المعامل اليوم في موانئ عربية</h2>
+  <p>معامل اليوم في موانئ مدها كبير، وأقوى يوم خلال الثلاثين يوماً القادمة:</p>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead><tr><th>الميناء</th><th>اليوم</th><th>قوة المد</th><th>الأقوى خلال 30 يوماً</th></tr></thead>
+      <tbody>
+        {rows.map(r => (
+          <tr>
+            <td><a href={`${BASE}ports/${r.id}`} class="hover:text-[var(--accent-text)]">{r.name}</a></td>
+            <td class="latin font-semibold">{r.today}</td>
+            <td>{r.label}</td>
+            <td><span class="latin font-semibold">{r.peak}</span> · {r.peakDate}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="text-sm text-[var(--text-muted)]">تتحدث هذه الأرقام يومياً. تجد معامل كل يوم في صفحة الميناء، تحت «مدى اليوم» وفي تقويم الصيد.</p>
+
+  <h2 id="fishing">المعامل والصيد والسلامة</h2>
+  <p>المعامل الكبير يعني أن الماء يتحرك أكثر: يحمل التيار الطعام فتنشط الأسماك، ويكشف الجزر البعيد صخوراً وبركاً لا تظهر في الأيام العادية، وهذا ما يبحث عنه جامعو المحار وصيادو الصخور.</p>
+  <ul class="list-disc ps-6 space-y-2 my-4">
+    <li><strong>معامل فوق 90:</strong> أفضل أيام صيد الصخور واستكشاف الجزر البعيد، لكن المد يعود بسرعة. اعرف موعد المد العالي قبل أن تبتعد.</li>
+    <li><strong>معامل بين 50 و90:</strong> أيام متوازنة لأغلب أنواع الصيد من الشاطئ.</li>
+    <li><strong>معامل تحت 50:</strong> ماء هادئ، مناسب للمبتدئين والقوارب الصغيرة، لكن الأسماك أقل نشاطاً عادة.</li>
+  </ul>
+  <div class="pull">كلما كبر المعامل، أسرع المد في العودة. لا تمشِ على صخور الجزر دون أن تعرف ساعة المد العالي.</div>
+  <p>للتفصيل في سرعة ارتفاع الماء ساعة بساعة اقرأ <a href={`${BASE}articles/tide-safety-rule-of-twelfths`}>قاعدة الاثني عشر ←</a>، ولعلاقة المد بأطوار القمر افتح <a href={`${BASE}moon`}>تقويم القمر ←</a>.</p>
+</ArticleLayout>

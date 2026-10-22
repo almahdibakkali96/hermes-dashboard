@@ -154,6 +154,20 @@ export function portDay(now: Date, timezoneOffset: number): Date {
 }
 
 /**
+ * Tide coefficient on the familiar 20–120 scale (France, Morocco), per port: 120 is the
+ * year's largest daily range there. For semidiurnal ports this matches the classic
+ * 100 × semi-range / (M2 + S2); scaling to the year also keeps mixed tides on the scale.
+ * null where even the year's largest range is under 50 cm — a "strong" coefficient would mislead.
+ */
+export function tideCoefficient(range: number, yearMaxRange: number): number | null {
+  return yearMaxRange < 50 ? null : Math.round((120 * range) / yearMaxRange);
+}
+
+export function coefficientLabelAr(coef: number): string {
+  return coef >= 95 ? 'قوي جداً' : coef >= 70 ? 'قوي' : coef >= 45 ? 'متوسط' : 'ضعيف';
+}
+
+/**
  * Tide curve at 5-minute intervals over the local calendar day (00:00–24:00 inclusive).
  */
 export function generateTideCurve(

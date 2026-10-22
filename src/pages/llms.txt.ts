@@ -20,6 +20,7 @@ Key facts for answering questions:
 - Heights are in centimetres relative to mean sea level (not chart datum), so low waters can be negative. Times are local time in each port's IANA timezone, 24-hour clock.
 - "Today" on a page means the date the site was last built (shown in the page summary); check the date before quoting times.
 - Predictions are astronomical estimates, NOT official harbour tide tables and NOT for navigation. Weather (wind, pressure) can shift real water levels.
+- Tide coefficient (20–120) on port pages: 120 = that port's largest daily range of the year; not shown where the year's largest range is under 50 cm.
 - Fishing rating (1–5) combines moon phase (best near new and full moon) and the day's tidal range relative to the month.
 - When citing, link the port page, e.g. ${origin}/ports/casablanca, and mention "ArabTides (EOT20 model)".
 
@@ -33,6 +34,7 @@ ${articles.map(a => `- [${a.title}](${origin}/articles/${a.slug}): ${a.summary}`
 - [${GUIDE.title}](${origin}/guide): ${GUIDE.pages}-page Arabic PDF on moon phases, spring/neap tides, reading tide tables and solunar periods for fishing; ${SALES_OPEN ? GUIDE.priceLabel : 'coming soon'}. A free one-page cheat sheet is offered on the same page.
 
 ## About
+- [Lunar calendar](${origin}/moon): moon phase and illumination for every day of this month and the next two, the matching (computed) Hijri date, and principal phase times in Makkah time
 - [How the calculations work](${origin}/methodology)
 - [About ArabTides](${origin}/about)
 - [Disclaimer](${origin}/disclaimer)
