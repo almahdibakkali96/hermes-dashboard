@@ -63,15 +63,14 @@ const forecast = Array.from({ length: 7 }, (_, i) => {
 
 // Monthly calendar — with fish rating
 const year = today.getUTCFullYear(), month = today.getUTCMonth();
-const daysInMonth = new Date(Date.UTC(year, month+1, 0)).getUTCDate();
-const monthDaysRaw = Array.from({length: daysInMonth}, (_,i) => {
-  const d = new Date(Date.UTC(year, month, i+1, 12));
+const monthRaw = (y: number, m: number) => Array.from({ length: new Date(Date.UTC(y, m + 1, 0)).getUTCDate() }, (_, i) => {
+  const d = new Date(Date.UTC(y, m, i + 1, 12));
   const ex = dayExtremes(constituents, d, tzOffset);
   const hs = ex.filter((e: { type: string }) => e.type==='high'), ls = ex.filter((e: { type: string }) => e.type==='low');
   const range = hs.length&&ls.length?Math.max(...hs.map((h: { height: number }) => h.height))-Math.min(...ls.map((l: { height: number }) => l.height)):0;
-  const m = moonPhase(d);
-  return { day: i+1, range, moon: m, isToday: i+1===today.getUTCDate() };
+  return { date: d, day: i + 1, month: m, range, moon: moonPhase(d), extremes: ex };
 });
+const monthDaysRaw = monthRaw(year, month).map(d => ({ ...d, isToday: d.day === today.getUTCDate() }));
 
 // Fish rating: 1-5 scale.
 // Moon score based on lunar age (days since new moon, 0-29.53). Narrow windows around new/full moon.
@@ -97,9 +96,9 @@ const moonScoreFromAge = (age: number) => {
   return 0;
 };
 
-const calcFish = (range: number, moonAge: number) => {
+const calcFish = (range: number, moonAge: number, maxRange = maxMonthRange) => {
   const moonScore = moonScoreFromAge(moonAge);
-  const pct = range / maxMonthRange;
+  const pct = range / maxRange;
   const tideScore = pct >= 0.8 ? 2 : pct >= 0.5 ? 1 : 0;
   // 1-5 scale
   return Math.max(1, Math.min(5, 1 + moonScore + tideScore));
@@ -120,8 +119,27 @@ const forecastWithFish = forecast.map(d => {
   return { ...d, fishRating, fullFish, emptyFish, fishColor: fishColors[fishRating], fishLabel: fishLabels[fishRating], fishAdvice: fishAdvice[fishRating] };
 });
 
-// Best fishing days this month for the conclusion
-const bestDays = monthDays.filter(d => d.fishRating >= 4).slice(0, 6);
+// Best fishing days in the next 30 days (rolling into next month, rated against that month's
+// calendar). The moon is the same for every port, so ties are broken by what differs between
+// ports: a high tide within 1 h of sunrise or sunset, then the day's tide range.
+const nextMonth = monthRaw(month === 11 ? year + 1 : year, (month + 1) % 12);
+const nextMaxRange = Math.max(...nextMonth.map(d => d.range), 1);
+const localHour = (t: Date) => (((t.getTime() + tzOffset * 60000) / 3600000) % 24 + 24) % 24;
+const clockHour = (s: string | null) => s ? Number(s.slice(0, 2)) + Number(s.slice(3, 5)) / 60 : null;
+const tideAtTwilight = (d: { date: Date; extremes: { time: Date; type: string }[] }) => {
+  const sunD = sunTimes(d.date, port.lat, port.lon, tzOffset);
+  const marks = [clockHour(sunD.sunrise), clockHour(sunD.sunset)].filter((h): h is number => h !== null);
+  return d.extremes.some(e => e.type === 'high' && marks.some(h => Math.abs(localHour(e.time) - h) <= 1));
+};
+const bestDays = [
+  ...monthDays.filter(d => d.day >= today.getUTCDate()),
+  ...nextMonth.map(d => ({ ...d, fishRating: calcFish(d.range, d.moon.age, nextMaxRange) })),
+].slice(0, 30)
+  .filter(d => d.fishRating >= 4)
+  .map(d => ({ ...d, twilight: tideAtTwilight(d), fishColor: fishColors[d.fishRating] }))
+  .sort((a, b) => b.fishRating - a.fishRating || Number(b.twilight) - Number(a.twilight) || b.range - a.range)
+  .slice(0, 6)
+  .sort((a, b) => a.date.getTime() - b.date.getTime());
 
 // Today at a glance
 const todayFish = forecastWithFish[0];
@@ -173,8 +191,8 @@ const faq = [
     a: `المد في ${port.name_ar} ${tideClass.typeAr}: ${tideTypeExplain[tideClass.typeAr] ?? ''}. معامل الشكل F = ${tideClass.formFactor}.` },
   { q: `ما أكبر فرق بين المد والجزر في ${port.name_ar}؟`,
     a: `أقصى مدى يومي متوقع في ${port.name_ar} خلال ${year} نحو ${(stats.maxRange / 100).toFixed(2)} م (${maxRangeDateAr})، وأقل مدى نحو ${stats.minRange} سم في أيام المد المحاقي.` },
-  { q: `ما أفضل أيام الصيد في ${port.name_ar} في ${monthNames[month]}؟`,
-    a: bestDays.length ? `حسب تقييم ArabTides (طور القمر وقوة المد): ${bestDays.map(d => `${d.day} ${monthNames[month]}`).join('، ')}.` : `لا توجد أيام بتقييم جيد أو ممتاز في ${monthNames[month]}.` },
+  { q: `ما أفضل أيام الصيد في ${port.name_ar} خلال الأيام القادمة؟`,
+    a: bestDays.length ? `حسب تقييم ArabTides (طور القمر وقوة المد ووقوع المد العالي قرب الشروق أو الغروب): ${bestDays.map(d => `${d.day} ${monthNames[d.month]}`).join('، ')}.` : `لا توجد أيام بتقييم جيد أو ممتاز خلال الثلاثين يوماً القادمة.` },
   { q: 'هل يمكن استخدام هذه الأوقات للملاحة؟',
     a: 'لا. هذه تقديرات فلكية من نموذج EOT20 العالمي، وليست جداول رسمية للميناء. قد يختلف المد الفعلي بسبب الرياح والضغط الجوي. للملاحة استخدم جداول الهيئة الهيدروغرافية الرسمية.' },
 ];
@@ -381,19 +399,21 @@ const pageJsonLd = [
           </div>
 
           <div class="mt-6 rounded-xl bg-[var(--surface-elevated)] p-4">
-            <h3 class="font-semibold text-sm">🎣 أفضل أيام الصيد في {monthNames[month]}</h3>
+            <h3 class="font-semibold text-sm">🎣 أفضل أيام الصيد القادمة</h3>
             {bestDays.length > 0 ? (
               <div class="mt-3 flex flex-wrap gap-2">
                 {bestDays.map(d => (
                   <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white text-sm font-medium border" style={`border-color:${d.fishColor}55;color:${d.fishColor}`}>
-                    <span class="latin">{d.day}</span> {monthNames[month]}
+                    <span class="latin">{d.day}</span> {monthNames[d.month]}
+                    {d.twilight && <span title="مد عالٍ قرب الشروق أو الغروب" aria-label="مد عالٍ قرب الشروق أو الغروب">🌅</span>}
                     <FishRating rating={d.fishRating} color={d.fishColor} size={10} />
                   </span>
                 ))}
               </div>
             ) : (
-              <p class="mt-2 text-sm text-[var(--text-muted)]">لا توجد أيام ممتازة هذا الشهر</p>
+              <p class="mt-2 text-sm text-[var(--text-muted)]">لا توجد أيام ممتازة خلال الثلاثين يوماً القادمة</p>
             )}
+            {bestDays.some(d => d.twilight) && <p class="mt-2 text-xs text-[var(--text-muted)]">🌅 مد عالٍ قرب الشروق أو الغروب، وهو من أنشط أوقات الصيد.</p>}
             <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
               <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">📖 التفسير:</strong> أفضل الصيد قرب اكتمال القمر (بدر) وميلاده (محاق) — يرتفع المد وتتحرك المياه فتنشط الأسماك على التغذي.</p>
               <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">🎯 القاعدة العملية:</strong> انطلق قبل ساعتين من ذروة المد أو بعدها مباشرة. أثناء الجزر تتركز الأسماك في القنوات العميقة.</p>
