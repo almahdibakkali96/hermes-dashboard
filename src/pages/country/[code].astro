@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import placesIndex from '../../data/places/places_index.json';
 import { countryName, formatCoords } from '../../lib/countries';
+import { countryAltName, joinAr, portCountAr } from '../../lib/portNames';
+import { dayExtremes, formatTime, getTimezoneOffset, portDay, type Constituent } from '../../lib/tides';
 
 export function getStaticPaths() {
   const codes = [...new Set(placesIndex.map((p: { country: string }) => p.country))];
@@ -15,7 +17,18 @@ const name = countryName(code!);
 const ports = placesIndex.filter((p: { country: string }) => p.country === code);
 const title = `موانئ ${name}`;
 const pageUrl = new URL(`${BASE}country/${code}`, Astro.site).href;
-const intro = `مواقيت المد والجزر لـ${ports.length === 1 ? 'ميناء واحد' : `${ports.length} موانئ`} في ${name}: ${ports.map((p: { name_ar: string }) => p.name_ar).join('، ')}. لكل ميناء أوقات المد العالي والجزر المنخفض اليوم، وتوقعات 7 أيام، وأفضل أيام الصيد، وطور القمر.`;
+const alt = countryAltName(code!);
+const portNames = joinAr(ports.map((p: { name_ar: string }) => p.name_ar));
+const intro = `في ${name}${alt ? ` (${alt})` : ''} ${portCountAr(ports.length)}: ${portNames}. لكل ميناء أوقات المد العالي والجزر المنخفض اليوم، وتوقعات 7 أيام، وأفضل أيام الصيد، وطور القمر.`;
+// Search snippet with today's high tides per port, in each port's local day (refreshed nightly)
+const now = new Date();
+const todayHighs = await Promise.all(ports.map(async (p: { id: string; name_ar: string }) => {
+  const port = (await import(`../../data/places/${p.id}.json`)).default;
+  const tz = getTimezoneOffset(port.timezone, now);
+  const highs = dayExtremes(port.constituents as Record<string, Constituent>, portDay(now, tz), tz).filter(e => e.type === 'high');
+  return `${p.name_ar} ${highs.map(e => formatTime(e.time, tz)).join(' و') || '—'}`;
+}));
+const metaDescription = `مواقيت المد والجزر في ${name}${alt ? ` (${alt})` : ''}: ${portNames}. المد العالي اليوم في ${todayHighs.join('، وفي ')}. جدول 7 أيام وأفضل أيام الصيد لكل ميناء.`;
 const jsonLd = [
   {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -33,7 +46,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`مواقيت المد والجزر في ${name}`} description={intro} jsonLd={jsonLd}>
+<BaseLayout title={`مواقيت المد والجزر في ${name}: ${portNames}`} description={metaDescription} jsonLd={jsonLd}>
   <div class="page-head">
     <div class="max-w-4xl mx-auto px-4 py-8">
       <nav class="breadcrumb" aria-label="مسار التنقل">

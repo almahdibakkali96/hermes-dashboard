@@ -12,6 +12,7 @@ import FishRating from '../../components/FishRating.astro';
 import { yearStats, seas, portSea } from '../../lib/seas';
 import { fishForPort } from '../../lib/fish';
 import GuidePromo from '../../components/GuidePromo.astro';
+import { altNamesAr, frenchName, nameWithAlts } from '../../lib/portNames';
 
 export function getStaticPaths() {
   return placesIndex.map((p: { id: string }) => ({ params: { id: p.id } }));
@@ -198,6 +199,11 @@ const country = countryName(port.country);
 const dateAr = today.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: port.timezone, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 const fmtList = (xs: { time: Date; height: number }[]) => xs.map(x => `${formatTime(x.time, tzOffset)} (${x.height.toFixed(0)} سم)`).join('، ');
 const todayHighs = extremes.filter(e => e.type === 'high'), todayLows = extremes.filter(e => e.type === 'low');
+// Search snippet: other spellings people search with, and today's times (refreshed nightly)
+const altAr = altNamesAr(port.id, port.name_ar);
+const frName = frenchName(port.id);
+const timesAr = (xs: { time: Date }[]) => xs.map(x => formatTime(x.time, tzOffset)).join(' و') || '—';
+const metaDescription = `مواقيت المد والجزر في ${nameWithAlts(port.name_ar, [...altAr, port.name_en.replace(/\s*\(.*\)$/, '')])} اليوم: المد العالي ${timesAr(todayHighs)}، والجزر المنخفض ${timesAr(todayLows)}. جدول 7 أيام ومعامل المد وأفضل أيام الصيد في ${country}.`;
 const tideTypeExplain: Record<string, string> = {
   'نصف يومي': 'مدّان عاليان وجزران منخفضان كل يوم تقريباً، بارتفاعات متقاربة',
   'مختلط، نصف يومي غالباً': 'مدّان وجزران في معظم الأيام، لكن بارتفاعات مختلفة بوضوح',
@@ -245,7 +251,7 @@ const pageJsonLd = [
 ];
 ---
 
-<BaseLayout title={title} jsonLd={pageJsonLd} description={`مواقيت المد والجزر في ${port.name_ar} (${country}) اليوم وتوقعات 7 أيام: أوقات المد العالي والجزر المنخفض، أفضل أيام الصيد، طور القمر وأوقات الصلاة.`}>
+<BaseLayout title={title} jsonLd={pageJsonLd} description={metaDescription}>
   <!-- Hero -->
   <section class="hero">
     <div class="max-w-6xl mx-auto px-4 pt-8 pb-20 sm:pb-24">
@@ -263,6 +269,8 @@ const pageJsonLd = [
             <span class="mx-1.5 opacity-50">·</span>{countryName(port.country)}
             <span class="mx-1.5 opacity-50">·</span><span class="latin" lang="en">{formatCoords(port.lat, port.lon)}</span>
           </p>
+          {altAr.length > 0 && <p class="mt-1 text-xs text-slate-400">يُكتب أيضاً: {altAr.join('، ')}</p>}
+          {frName && <p class="mt-1 text-xs text-slate-400"><span lang="fr" dir="ltr">Marées à {frName} aujourd'hui : horaires de marée haute et marée basse</span></p>}
         </div>
         <div class="ms-auto flex flex-wrap items-center gap-2 text-xs">
           <span class="hero-chip">📅 {hijri.day} {hijri.monthAr} {hijri.year} هـ</span>
