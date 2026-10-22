@@ -83,7 +83,9 @@ lines.forEach((_, i) => {
 });
 const m = lines.length;
 inputs.push('-i', join(outDir, 'music.mp3'));
-filters.push(`[${m}:a]atrim=0:${total},asetpts=N/SR/TB,volume=0.18,afade=t=in:d=1,afade=t=out:st=${(total - 1.5).toFixed(2)}:d=1.5,aresample=44100[mus]`);
+// Fade out before the music runs out if a re-voiced video grew longer than its cached music bed
+const musicEnd = Math.min(total, duration(join(outDir, 'music.mp3')));
+filters.push(`[${m}:a]atrim=0:${musicEnd},asetpts=N/SR/TB,volume=0.18,afade=t=in:d=1,afade=t=out:st=${(musicEnd - 1.5).toFixed(2)}:d=1.5,aresample=44100[mus]`);
 filters.push(`${lines.map((_, i) => `[v${i}]`).join('')}[mus]amix=inputs=${m + 1}:duration=longest:normalize=0,atrim=0:${total},loudnorm=I=-14:TP=-1.5:LRA=11,aresample=44100[out]`); // Instagram-level loudness
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', ...inputs, '-filter_complex', filters.join(';'), '-map', '[out]',
   '-c:a', 'aac', '-b:a', '192k', join(outDir, 'soundtrack.m4a')], { stdio: 'inherit' });

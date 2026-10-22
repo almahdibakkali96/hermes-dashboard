@@ -18,6 +18,10 @@
 | "How to read a tide table" Reel, 34 s, voice + music | `video/video-05-tide-table.mp4` (cover `video/video-05-cover.png`) |
 | "Where to fish by tide" Reel (beach, port, rocks), 39 s, voice + music | `video/video-06-where-to-fish.mp4` (cover `video/video-06-cover.png`, caption `video/video-06-caption.txt`) |
 | "Fish of the week" Reel: 6 fish, local names with flags, facts, comment prompt; 48 s, voice + music | `video/video-07-fish-of-week.mp4` (cover `video/video-07-cover.png`, caption `video/video-07-caption.txt`) |
+| "Full moon night" Reel: moon rises at sunset on 26 Oct, night high tides at Muscat/Kuwait/Dubai/Casablanca, night safety; 43 s, voice + music | `video/video-08-full-moon-night.mp4` (cover `video/video-08-cover.png`, caption `video/video-08-caption.txt`) |
+| "3 shore-fishing mistakes" Reel (beach, port), 39 s, voice + music | `video/video-09-mistakes.mp4` (cover `video/video-09-cover.png`, caption `video/video-09-caption.txt`) |
+| "Fish of the week 2" Reel: 6 more fish, local names with flags, facts, where and when to fish each; 1 min 43 s, voice + music | `video/video-10-fish-of-week-2.mp4` (cover `video/video-10-cover.png`, caption `video/video-10-caption.txt`) |
+| "Dawn and dusk" Reel: light change, tide + dawn/dusk, mosque on the shore; 33 s, voice + music | `video/video-11-dawn-dusk.mp4` (cover `video/video-11-cover.png`, caption `video/video-11-caption.txt`) |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours
