@@ -60,7 +60,7 @@ const faq = [
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5">
     {migrants.map(id => (
       <a href={link(id)} class="card overflow-hidden group block !no-underline">
-        <img src={`${BASE}fish/${id}.webp`} alt={F(id).ar} loading="lazy" class="fish-thumb" />
+        <img src={`${BASE}fish/sm/${id}.webp`} alt={F(id).ar} loading="lazy" class="fish-thumb" />
         <span class="block p-3">
           <span class="block font-semibold group-hover:text-[var(--accent)]">{F(id).ar}</span>
           <span class="block text-xs text-[var(--text-muted)] latin italic" lang="la">{F(id).sci}</span>

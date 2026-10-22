@@ -26,7 +26,7 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
         const p = fishPhotos[f.id];
         return (
           <li class="flex items-center gap-4 p-3">
-            <img src={`${BASE}fish/${f.id}.webp`} alt="" loading="lazy" decoding="async" class="w-20 h-14 rounded-md object-cover shrink-0" />
+            <img src={`${BASE}fish/sm/${f.id}.webp`} alt="" loading="lazy" decoding="async" class="w-20 h-14 rounded-md object-cover shrink-0" />
             <div class="min-w-0 text-sm">
               <a href={`${BASE}fish/${f.id}`} class="font-semibold hover:text-[var(--accent)]">{f.ar}</a>
               <span class="text-xs text-[var(--text-dim)] latin italic ms-1" lang="la">{f.sci}</span>

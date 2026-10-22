@@ -19,6 +19,8 @@ export default defineConfig({
   site,
   base,
   output: 'static',
+  // Inline the CSS so text can paint without waiting on a second request (mobile first paint)
+  build: { inlineStylesheets: 'always' },
   vite: {
     plugins: [tailwindcss()],
   },

@@ -159,7 +159,7 @@ const jsonLd = [
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {others.map(o => (
             <a href={`${BASE}fish/${o.id}`} class="card overflow-hidden group block">
-              <img src={`${BASE}fish/${o.id}.webp`} alt={o.ar} loading="lazy" decoding="async" class="fish-thumb" />
+              <img src={`${BASE}fish/sm/${o.id}.webp`} alt={o.ar} loading="lazy" decoding="async" class="fish-thumb" />
               <span class="block px-3 py-2 font-semibold text-sm group-hover:text-[var(--accent)] transition-colors">{o.ar}</span>
             </a>
           ))}

@@ -88,6 +88,8 @@ const features = [
           id="port-search"
           placeholder="ابحث عن ميناء أو دولة… دبي، جدة، المغرب"
           autocomplete="off"
+          role="combobox"
+          aria-autocomplete="list"
           aria-controls="search-results"
           aria-expanded="false"
           class="w-full ps-5 pe-12 py-4 text-base rounded-2xl
@@ -135,7 +137,7 @@ const features = [
               <div>
                 <div class="text-xs text-[var(--text-muted)]">{port.countryName}</div>
                 <div class="text-lg font-semibold display mt-0.5 group-hover:text-[var(--accent)] transition-colors">{port.name_ar}</div>
-                <div class="text-xs text-[var(--text-dim)] latin" lang="en">{port.name_en}</div>
+                <div class="text-xs text-[var(--text-muted)] latin" lang="en">{port.name_en}</div>
               </div>
               <svg viewBox="0 0 120 32" class="w-28 h-8 chart-ltr shrink-0" aria-hidden="true">
                 <path d={port.spark} fill="none" stroke="#0d9488" stroke-width="1.8" stroke-linejoin="round" />
@@ -179,10 +181,10 @@ const features = [
           const f = fish.find(x => x.id === fid)!;
           return (
             <a href={`${BASE}fish/${f.id}`} class="card overflow-hidden group block">
-              <img src={`${BASE}fish/${f.id}.webp`} alt={f.ar} loading="lazy" decoding="async" class="fish-thumb" />
+              <img src={`${BASE}fish/sm/${f.id}.webp`} alt={f.ar} loading="lazy" decoding="async" class="fish-thumb" />
               <span class="block px-3 py-2">
                 <span class="block font-semibold text-sm group-hover:text-[var(--accent)] transition-colors">{f.ar}</span>
-                <span class="block text-[11px] text-[var(--text-dim)] truncate">{f.local.map(l => l.name).filter(n => n !== f.ar).slice(0, 2).join('، ') || f.en}</span>
+                <span class="block text-[11px] text-[var(--text-muted)] truncate">{f.local.map(l => l.name).filter(n => n !== f.ar).slice(0, 2).join('، ') || f.en}</span>
               </span>
             </a>
           );
@@ -244,7 +246,7 @@ const features = [
         <p>اضغط على أي نقطة لفتح صفحة الميناء</p>
       </div>
       <div id="ports-map" class="port-map w-full border border-[var(--border-subtle)]" style="height:420px"></div>
-      <p class="text-[11px] text-[var(--text-dim)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
+      <p class="text-[11px] text-[var(--text-muted)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
     </section>
 
     <!-- Countries -->
@@ -284,7 +286,7 @@ const features = [
                 <li>
                   <a href={`${BASE}ports/${port.id}`} class="flex items-baseline gap-2 py-1 text-sm hover:text-[var(--accent)] transition-colors">
                     <span>{port.name_ar}</span>
-                    <span class="text-[11px] text-[var(--text-dim)] latin" lang="en">{port.name_en}</span>
+                    <span class="text-[11px] text-[var(--text-muted)] latin" lang="en">{port.name_en}</span>
                   </a>
                 </li>
               ))}
@@ -297,10 +299,28 @@ const features = [
 </BaseLayout>
 
 <!-- Leaflet overview map (client-only, free OSM tiles) -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script is:inline define:vars={{ ports: mapPorts, base: BASE }}>
   (function () {
+    // Leaflet is fetched only when the map nears the viewport, so it never delays the first paint
+    function loadLeaflet(el, cb) {
+      function go() {
+        var left = 2, done = function () { if (--left === 0) cb(); };
+        var css = document.createElement('link');
+        css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = '';
+        css.onload = css.onerror = done;
+        var js = document.createElement('script');
+        js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        js.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; js.crossOrigin = '';
+        js.onload = done;
+        document.head.appendChild(css); document.head.appendChild(js);
+      }
+      if (!('IntersectionObserver' in window)) return go();
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); go(); }
+      }, { rootMargin: '400px' });
+      io.observe(el);
+    }
     function initMap() {
       var el = document.getElementById('ports-map');
       if (!el || typeof L === 'undefined' || !ports.length) return;
@@ -321,9 +341,13 @@ const features = [
       map.on('click', function () { map.scrollWheelZoom.enable(); });
       setTimeout(function () { map.invalidateSize(); }, 200);
     }
+    function start() {
+      var mapEl = document.getElementById('ports-map');
+      if (mapEl) loadLeaflet(mapEl, initMap);
+    }
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMap);
-    } else { initMap(); }
+      document.addEventListener('DOMContentLoaded', start);
+    } else { start(); }
   })();
 </script>
 
@@ -350,14 +374,14 @@ const features = [
       if (txt.indexOf(q) !== -1) matches.push(p);
     }
     if (!matches.length) {
-      dropdown.innerHTML = '<div class="px-4 py-3 text-sm text-[var(--text-dim)]">لا توجد نتائج</div>';
+      dropdown.innerHTML = '<div class="px-4 py-3 text-sm text-[var(--text-muted)]">لا توجد نتائج</div>';
     } else {
       var html = '';
       for (var j=0; j<Math.min(matches.length, 8); j++) {
         var m = matches[j];
-        html += '<a href="' + base + 'ports/' + m.id + '" class="flex items-center gap-3 px-4 py-3 hover:bg-[var(--surface-elevated)] transition-colors text-sm border-b border-[var(--border-subtle)] last:border-0"><span class="font-medium">' + m.name_ar + '</span><span class="text-xs text-[var(--text-dim)]">' + m.countryName + '</span><span class="text-xs text-[var(--text-dim)] latin ms-auto">' + m.name_en + '</span></a>';
+        html += '<a href="' + base + 'ports/' + m.id + '" class="flex items-center gap-3 px-4 py-3 hover:bg-[var(--surface-elevated)] transition-colors text-sm border-b border-[var(--border-subtle)] last:border-0"><span class="font-medium">' + m.name_ar + '</span><span class="text-xs text-[var(--text-muted)]">' + m.countryName + '</span><span class="text-xs text-[var(--text-muted)] latin ms-auto">' + m.name_en + '</span></a>';
       }
-      if (matches.length > 8) html += '<div class="px-4 py-2 text-xs text-[var(--text-dim)]">و ' + (matches.length - 8) + ' ميناء آخر...</div>';
+      if (matches.length > 8) html += '<div class="px-4 py-2 text-xs text-[var(--text-muted)]">و ' + (matches.length - 8) + ' ميناء آخر...</div>';
       dropdown.innerHTML = html;
     }
     dropdown.classList.remove('hidden');

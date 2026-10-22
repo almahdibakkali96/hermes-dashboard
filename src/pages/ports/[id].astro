@@ -409,7 +409,7 @@ const pageJsonLd = [
           <div class="mt-4 grid grid-cols-3 sm:grid-cols-4 gap-2.5">
             {portFish.fish.slice(0, 12).map(f => (
               <a href={`${BASE}fish/${f.id}`} class="rounded-lg overflow-hidden border border-[var(--border-subtle)] group block">
-                <img src={`${BASE}fish/${f.id}.webp`} alt={f.ar} loading="lazy" decoding="async" class="fish-thumb" />
+                <img src={`${BASE}fish/sm/${f.id}.webp`} alt={f.ar} loading="lazy" decoding="async" class="fish-thumb" />
                 <span class="block px-2 py-1.5 text-xs font-semibold truncate group-hover:text-[var(--accent)] transition-colors">
                   {portFish.observed.has(f.id) && <span title="سُجّلت مشاهدته قرب الميناء">📍 </span>}{f.ar}
                 </span>
@@ -548,10 +548,28 @@ const pageJsonLd = [
   </script>
 
   <!-- Leaflet map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script is:inline>
     (function () {
+      // Leaflet is fetched only when the map nears the viewport, so it never delays the first paint
+      function loadLeaflet(el, cb) {
+        function go() {
+          var left = 2, done = function () { if (--left === 0) cb(); };
+          var css = document.createElement('link');
+          css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+          css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = '';
+          css.onload = css.onerror = done;
+          var js = document.createElement('script');
+          js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+          js.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; js.crossOrigin = '';
+          js.onload = done;
+          document.head.appendChild(css); document.head.appendChild(js);
+        }
+        if (!('IntersectionObserver' in window)) return go();
+        var io = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) { io.disconnect(); go(); }
+        }, { rootMargin: '400px' });
+        io.observe(el);
+      }
       function initMap() {
         var el = document.getElementById('map');
         if (!el || typeof L === 'undefined') return;
@@ -566,9 +584,13 @@ const pageJsonLd = [
         map.on('click', function () { map.scrollWheelZoom.enable(); });
         setTimeout(function () { map.invalidateSize(); }, 200);
       }
+      function start() {
+        var mapEl = document.getElementById('map');
+        if (mapEl) loadLeaflet(mapEl, initMap);
+      }
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMap);
-      } else { initMap(); }
+        document.addEventListener('DOMContentLoaded', start);
+      } else { start(); }
     })();
   </script>
 </BaseLayout>
