@@ -144,6 +144,16 @@ export function localMidnight(date: Date, timezoneOffset: number): Date {
 }
 
 /**
+ * Noon UTC of the port's local calendar date at `now`. Builds run just after each
+ * timezone's midnight, so a page shows the port's own "today", not the server's.
+ * Read it with getUTC* — noon keeps every offset from −12 to +12 on the same date.
+ */
+export function portDay(now: Date, timezoneOffset: number): Date {
+  const local = new Date(now.getTime() + timezoneOffset * 60000);
+  return new Date(Date.UTC(local.getUTCFullYear(), local.getUTCMonth(), local.getUTCDate(), 12));
+}
+
+/**
  * Tide curve at 5-minute intervals over the local calendar day (00:00–24:00 inclusive).
  */
 export function generateTideCurve(

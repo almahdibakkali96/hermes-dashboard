@@ -9,7 +9,7 @@ import Flag from '../components/Flag.astro';
 import { fish } from '../lib/fish';
 import {
   generateTideCurve, dayExtremes, formatTime,
-  getTimezoneOffset
+  getTimezoneOffset, portDay
 } from '../lib/tides';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
@@ -23,12 +23,13 @@ const featuredPorts = await Promise.all(
     const m = await import(`../data/places/${pid}.json`);
     const p = m.default;
     const constituents = p.constituents as Record<string, { amp: number; phase: number }>;
-    const today = new Date();
-    const tz = getTimezoneOffset(p.timezone, today);
+    const now = new Date();
+    const tz = getTimezoneOffset(p.timezone, now);
+    const today = portDay(now, tz);
     const curve = generateTideCurve(constituents, today, tz);
     const extremes = dayExtremes(constituents, today, tz);
-    const nextHigh = extremes.find(e => e.type === 'high' && e.time > today) || extremes.find(e => e.type === 'high');
-    const nextLow = extremes.find(e => e.type === 'low' && e.time > today) || extremes.find(e => e.type === 'low');
+    const nextHigh = extremes.find(e => e.type === 'high' && e.time > now) || extremes.find(e => e.type === 'high');
+    const nextLow = extremes.find(e => e.type === 'low' && e.time > now) || extremes.find(e => e.type === 'low');
     // Sparkline of today's curve (120×32 viewBox)
     const hs = curve.map((c: { height: number }) => c.height);
     const lo = Math.min(...hs), hi = Math.max(...hs), span = hi - lo || 1;
@@ -39,7 +40,8 @@ const featuredPorts = await Promise.all(
 );
 
 const moon = moonPhase(new Date());
-const todayAr = new Date().toLocaleDateString('ar-EG-u-nu-latn', { weekday: 'long', day: 'numeric', month: 'long' });
+// Headline date in Makkah time (UTC+3), the middle of the ports' UTC+0…+4 span
+const todayAr = new Date().toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'Asia/Riyadh', weekday: 'long', day: 'numeric', month: 'long' });
 
 // Lightweight port list for the overview map (client-side)
 const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number; lon: number }) => ({

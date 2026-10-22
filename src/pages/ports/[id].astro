@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import placesIndex from '../../data/places/places_index.json';
 import {
   generateTideCurve, dayExtremes, formatTime,
-  classifyTide, classifySpringNeap, getTimezoneOffset
+  classifyTide, classifySpringNeap, getTimezoneOffset, portDay
 } from '../../lib/tides';
 import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
 import { calculatePrayerTimes, gregorianToHijri } from '../../lib/prayer';
@@ -27,8 +27,10 @@ const port = portModule.default;
 const constituents = port.constituents as Record<string, { amp: number; phase: number }>;
 const portFish = fishForPort(id!);
 
-const today = new Date();
-const tzOffset = getTimezoneOffset(port.timezone, today);
+// "Today" is the port's local date; the daily refresh rebuilds just after each timezone's midnight
+const now = new Date();
+const tzOffset = getTimezoneOffset(port.timezone, now);
+const today = portDay(now, tzOffset);
 const curve = generateTideCurve(constituents, today, tzOffset);
 const extremes = dayExtremes(constituents, today, tzOffset);
 const tideClass = classifyTide(constituents);
@@ -44,14 +46,14 @@ const hijri = gregorianToHijri(today);
 // 7-day forecast — simple data, no per-day charts
 const weekDays = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 const forecast = Array.from({ length: 7 }, (_, i) => {
-  const d = new Date(today); d.setDate(d.getDate() + i);
+  const d = new Date(today); d.setUTCDate(d.getUTCDate() + i);
   const ex = dayExtremes(constituents, d, tzOffset);
   const hs = ex.filter((e: { type: string }) => e.type === 'high').sort((a: { height: number }, b: { height: number }) => b.height - a.height);
   const ls = ex.filter((e: { type: string }) => e.type === 'low').sort((a: { height: number }, b: { height: number }) => a.height - b.height);
   const m = moonPhase(d);
   return {
-    label: i===0?'اليوم':weekDays[d.getDay()],
-    dateStr: d.toLocaleDateString('en-GB',{day:'numeric',month:'short'}),
+    label: i===0?'اليوم':weekDays[d.getUTCDay()],
+    dateStr: d.toLocaleDateString('en-GB',{timeZone:'UTC',day:'numeric',month:'short'}),
     highs: hs.slice(0, 3), lows: ls.slice(0, 3),
     range: hs.length&&ls.length?(hs[0].height-ls[0].height).toFixed(0):'—',
     moon: m, moonPct: Math.round(m.illumination*100),
@@ -60,15 +62,15 @@ const forecast = Array.from({ length: 7 }, (_, i) => {
 });
 
 // Monthly calendar — with fish rating
-const year = today.getFullYear(), month = today.getMonth();
-const daysInMonth = new Date(year, month+1, 0).getDate();
+const year = today.getUTCFullYear(), month = today.getUTCMonth();
+const daysInMonth = new Date(Date.UTC(year, month+1, 0)).getUTCDate();
 const monthDaysRaw = Array.from({length: daysInMonth}, (_,i) => {
-  const d = new Date(year, month, i+1);
+  const d = new Date(Date.UTC(year, month, i+1, 12));
   const ex = dayExtremes(constituents, d, tzOffset);
   const hs = ex.filter((e: { type: string }) => e.type==='high'), ls = ex.filter((e: { type: string }) => e.type==='low');
   const range = hs.length&&ls.length?Math.max(...hs.map((h: { height: number }) => h.height))-Math.min(...ls.map((l: { height: number }) => l.height)):0;
   const m = moonPhase(d);
-  return { day: i+1, range, moon: m, isToday: i+1===today.getDate() };
+  return { day: i+1, range, moon: m, isToday: i+1===today.getUTCDate() };
 });
 
 // Fish rating: 1-5 scale.
@@ -124,8 +126,8 @@ const bestDays = monthDays.filter(d => d.fishRating >= 4).slice(0, 6);
 // Today at a glance
 const todayFish = forecastWithFish[0];
 const springNeap = classifySpringNeap(moon.age);
-const nextHigh = extremes.find(e => e.type === 'high' && e.time > today) || extremes.find(e => e.type === 'high');
-const nextLow = extremes.find(e => e.type === 'low' && e.time > today) || extremes.find(e => e.type === 'low');
+const nextHigh = extremes.find(e => e.type === 'high' && e.time > now) || extremes.find(e => e.type === 'high');
+const nextLow = extremes.find(e => e.type === 'low' && e.time > now) || extremes.find(e => e.type === 'low');
 const todayRange = todayFish.range;
 const localDateStr = new Date(today.getTime() + tzOffset * 60000).toISOString().slice(0, 10);
 const prayerLabels: Record<string, string> = { fajr: 'الفجر', sunrise: 'الشروق', dhuhr: 'الظهر', asr: 'العصر', maghrib: 'المغرب', isha: 'العشاء' };
@@ -141,7 +143,7 @@ const pathD = curve.map((p: { height: number; hours: number }, i: number) => `${
 const yTicks = [0, 1 / 3, 2 / 3, 1].map(f => hMin + hRange * f);
 
 // Monthly calendar grid — week starts Saturday; the RTL grid flows right to left
-const firstWeekday = new Date(year, month, 1).getDay();
+const firstWeekday = new Date(Date.UTC(year, month, 1)).getUTCDay();
 const leadingBlanks = (firstWeekday + 1) % 7;
 const calWeekdays = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
 
@@ -187,7 +189,7 @@ const pageJsonLd = [
   },
   {
     '@context': 'https://schema.org', '@type': 'WebPage', url: pageUrl, name: title, inLanguage: 'ar',
-    dateModified: today.toISOString(), description: summary,
+    dateModified: now.toISOString(), description: summary,
     about: {
       '@type': 'Place', name: port.name_ar, alternateName: port.name_en,
       geo: { '@type': 'GeoCoordinates', latitude: port.lat, longitude: port.lon },

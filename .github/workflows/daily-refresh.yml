@@ -1,0 +1,22 @@
+# Rebuild the site on Vercel just after midnight in each port timezone, so every
+# port page switches to its new day within minutes of local midnight.
+# Ports span UTC+0 (Nouakchott) to UTC+4 (Dubai, Muscat):
+#   20:05 UTC → UTC+4   21:05 → UTC+3   22:05 → UTC+2   23:05 → UTC+1   00:05 → UTC+0
+# Needs the repo secret VERCEL_DEPLOY_HOOK (Vercel → Project → Settings → Git → Deploy Hooks, branch main).
+name: Daily refresh
+
+on:
+  schedule:
+    - cron: '5 20,21,22,23,0 * * *'
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy hook
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "::error::VERCEL_DEPLOY_HOOK secret is not set"; exit 1; fi
+          curl -fsS -X POST "$HOOK"
