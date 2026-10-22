@@ -312,6 +312,13 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
   padding: 0.35rem 0.1rem 0.4rem;
 }
 .cal-today { outline: 2px solid var(--accent); outline-offset: 1px; background: #f0fdfa; }
+button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
+.cal-cell[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--text-primary); }
+.day-step {
+  flex-shrink: 0; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  border: 1px solid var(--border-subtle); background: var(--surface-card); font-size: 1.1rem; cursor: pointer;
+}
+.day-step:disabled { opacity: 0.35; cursor: default; }
 
 /* --- Summary card + FAQ accordion --- */
 .summary-card { border-inline-start: 4px solid var(--accent); }
