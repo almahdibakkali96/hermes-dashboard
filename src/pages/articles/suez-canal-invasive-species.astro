@@ -62,7 +62,7 @@ const faq = [
       <a href={link(id)} class="card overflow-hidden group block !no-underline">
         <img src={`${BASE}fish/sm/${id}.webp`} alt={F(id).ar} loading="lazy" class="fish-thumb" />
         <span class="block p-3">
-          <span class="block font-semibold group-hover:text-[var(--accent)]">{F(id).ar}</span>
+          <span class="block font-semibold group-hover:text-[var(--accent-text)]">{F(id).ar}</span>
           <span class="block text-xs text-[var(--text-muted)] latin italic" lang="la">{F(id).sci}</span>
         </span>
       </a>
@@ -83,7 +83,7 @@ const faq = [
       <tbody>
         {sightings.map(s => (
           <tr>
-            <td><a href={link(s.f.id)} class="text-[var(--accent)] underline">{s.f.ar}</a></td>
+            <td><a href={link(s.f.id)} class="text-[var(--accent-text)] underline">{s.f.ar}</a></td>
             <td class="latin">{s.total}</td>
             <td>{s.ports.length ? s.ports.map(p => p.name_ar.includes("(") ? p.name_ar : `${p.name_ar} (${countryName(p.country)})`).join('، ') : 'لا مشاهدات قرب موانئنا بعد'}</td>
           </tr>

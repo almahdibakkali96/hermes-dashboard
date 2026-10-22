@@ -101,7 +101,7 @@ const faq = [
           <tbody>
             {g.list.map(f => (
               <tr>
-                <td><a href={`${BASE}fish/${f.id}`} class="text-[var(--accent)] underline">{f.ar}</a></td>
+                <td><a href={`${BASE}fish/${f.id}`} class="text-[var(--accent-text)] underline">{f.ar}</a></td>
                 <td class="text-sm">{f.seas.map(s => seas[s].name.split(' ').slice(0, 2).join(' ')).join('، ')}</td>
                 <td class="text-sm">{f.bait}</td>
               </tr>

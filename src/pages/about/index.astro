@@ -6,7 +6,7 @@ import { articles } from '../../lib/articles';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const countries = new Set(placesIndex.map((p: { country: string }) => p.country)).size;
 const h2 = 'text-lg font-semibold text-[var(--text-primary)] mt-6';
-const a = 'text-[var(--accent)] underline';
+const a = 'text-[var(--accent-text)] underline';
 ---
 <BaseLayout title="عن الموقع" description="ArabTides مشروع عربي مستقل لمواقيت المد والجزر وأوقات الصيد ودليل الأسماك في الموانئ العربية: ماذا نقدم، ومن أين تأتي بياناتنا، وكيف نكتب محتوانا ونصححه.">
   <div class="page-head">

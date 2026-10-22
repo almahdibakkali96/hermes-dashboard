@@ -83,7 +83,7 @@ const faq = [
         <li>
           <a href={`${BASE}ports/${r.id}`} class="rank-row group">
             <span class="latin text-xs text-[var(--text-muted)] w-6 text-center">{i + 1}</span>
-            <span class="w-28 sm:w-36 truncate text-sm group-hover:text-[var(--accent)]">{r.name_ar}</span>
+            <span class="w-28 sm:w-36 truncate text-sm group-hover:text-[var(--accent-text)]">{r.name_ar}</span>
             <span class="flex-1 h-5 rounded-md bg-[var(--surface-elevated)] overflow-hidden">
               <span class="block h-full rounded-md" style={`width:${Math.max(2, (r.maxRange / maxR) * 100)}%;background:${seas[r.sea].color}`}></span>
             </span>
@@ -126,7 +126,7 @@ const faq = [
         </div>
         <p class="!mt-2 !mb-3 text-[var(--text-secondary)]">{why[s.id]}</p>
         <div class="flex flex-wrap gap-1.5">
-          {s.list.map(r => <a href={`${BASE}ports/${r.id}`} class="text-xs px-2.5 py-1 rounded-full bg-[var(--surface-elevated)] hover:bg-[var(--accent-muted)] hover:text-[var(--accent)]">{r.name_ar}</a>)}
+          {s.list.map(r => <a href={`${BASE}ports/${r.id}`} class="text-xs px-2.5 py-1 rounded-full bg-[var(--surface-elevated)] hover:bg-[var(--accent-muted)] hover:text-[var(--accent-text)]">{r.name_ar}</a>)}
         </div>
       </div>
     ))}

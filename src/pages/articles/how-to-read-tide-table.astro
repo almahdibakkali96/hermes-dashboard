@@ -143,7 +143,7 @@ const faq = [
     {typeExamples.map(t => (
       <a href={`${BASE}ports/${t.port.id}`} class="card p-4 block group">
         <div class="flex items-baseline justify-between gap-2">
-          <span class="font-semibold group-hover:text-[var(--accent)]">{t.type}</span>
+          <span class="font-semibold group-hover:text-[var(--accent-text)]">{t.type}</span>
           <span class="text-xs text-[var(--text-muted)]">{t.port.name_ar}</span>
         </div>
         <svg viewBox="0 0 200 80" class="w-full h-16 mt-2 chart-ltr" aria-hidden="true"><path d={t.d} fill="none" stroke="#0d9488" stroke-width="2.5"/></svg>

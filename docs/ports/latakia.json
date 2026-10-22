@@ -10,7 +10,7 @@
     "timezone": "Asia/Damascus"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/latakia",
-  "generated_utc": "2026-10-22T01:55:46.584Z",
+  "generated_utc": "2026-10-22T02:07:38.568Z",
   "tide_type_ar": "مختلط، نصف يومي غالباً",
   "datum": "mean sea level (heights in cm; negative = below MSL)",
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",

@@ -76,7 +76,7 @@ const monthDaysRaw = Array.from({length: daysInMonth}, (_,i) => {
 // Tide score based on daily range relative to month's max.
 // Colors: 5=green, 4=teal, 3=amber, 2=orange, 1=red
 const maxMonthRange = Math.max(...monthDaysRaw.map(d => d.range), 1);
-const fishColors = ['', '#ef4444', '#f97316', '#f59e0b', '#0d9488', '#16a34a'];
+const fishColors = ['', '#dc2626', '#c2410c', '#b45309', '#0f766e', '#15803d']; // 700 shades: 4.5:1 on white as text
 const fishLabels = ['', 'ضعيف', 'دون المتوسط', 'متوسط', 'جيد', 'ممتاز'];
 const fishAdvice = ['', 'يوم غير مناسب للصيد', 'صيد ضعيف — يفضل التأجيل', 'صيد متوسط — قد تحصل على شيء', 'يوم جيد للصيد', 'يوم ممتاز — أفضل وقت للصيد'];
 
@@ -263,7 +263,7 @@ const pageJsonLd = [
       <div class="lg:col-span-2 space-y-6 min-w-0">
 
         <section class="card p-5 summary-card" aria-labelledby="summary-title">
-          <h2 id="summary-title" class="text-sm font-semibold text-[var(--accent)]">ملخص اليوم</h2>
+          <h2 id="summary-title" class="text-sm font-semibold text-[var(--accent-text)]">ملخص اليوم</h2>
           <p class="mt-2 leading-relaxed text-[var(--text-secondary)]">{summary}</p>
         </section>
 
@@ -404,13 +404,13 @@ const pageJsonLd = [
           <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h2 id="fish-title" class="text-lg font-semibold display">أسماك {port.name_ar}</h2>
             <span class="text-xs text-[var(--text-muted)]">أنواع تعيش في {seas[portSea[id!]].name}</span>
-            <a href={`${BASE}fish`} class="ms-auto text-xs text-[var(--accent)] hover:underline">دليل الأسماك ←</a>
+            <a href={`${BASE}fish`} class="ms-auto text-xs text-[var(--accent-text)] hover:underline">دليل الأسماك ←</a>
           </div>
           <div class="mt-4 grid grid-cols-3 sm:grid-cols-4 gap-2.5">
             {portFish.fish.slice(0, 12).map(f => (
               <a href={`${BASE}fish/${f.id}`} class="rounded-lg overflow-hidden border border-[var(--border-subtle)] group block">
-                <img src={`${BASE}fish/sm/${f.id}.webp`} alt={f.ar} loading="lazy" decoding="async" class="fish-thumb" />
-                <span class="block px-2 py-1.5 text-xs font-semibold truncate group-hover:text-[var(--accent)] transition-colors">
+                <img src={`${BASE}fish/sm/${f.id}.webp`} alt="" loading="lazy" decoding="async" class="fish-thumb" />
+                <span class="block px-2 py-1.5 text-xs font-semibold truncate group-hover:text-[var(--accent-text)] transition-colors">
                   {portFish.observed.has(f.id) && <span title="سُجّلت مشاهدته قرب الميناء">📍 </span>}{f.ar}
                 </span>
               </a>
@@ -420,7 +420,7 @@ const pageJsonLd = [
             {portFish.observed.size > 0
               ? <>📍 <span class="latin">{portFish.observed.size}</span> من هذه الأنواع سجّل الغواصون والصيادون مشاهدتها في نطاق <span class="latin">50</span> كم من {port.name_ar} على منصة iNaturalist.</>
               : <>الأنواع الشائعة في {seas[portSea[id!]].name}.</>}
-            {portFish.fish.length > 12 && <> وأنواع أخرى في <a href={`${BASE}fish`} class="text-[var(--accent)] hover:underline">دليل الأسماك</a>.</>}
+            {portFish.fish.length > 12 && <> وأنواع أخرى في <a href={`${BASE}fish`} class="text-[var(--accent-text)] underline">دليل الأسماك</a>.</>}
           </p>
         </section>
 
@@ -491,7 +491,7 @@ const pageJsonLd = [
 
         <section class="card p-3" aria-label="موقع الميناء على الخريطة">
           <div id="map" class="port-map w-full" data-lat={port.lat} data-lon={port.lon} data-name={port.name_ar}></div>
-          <p class="text-[11px] text-[var(--text-dim)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent)]" lang="en">OpenStreetMap</a></p>
+          <p class="text-[11px] text-[var(--text-dim)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent-text)]" lang="en">OpenStreetMap</a></p>
         </section>
 
         <section class="card p-5 no-print" aria-labelledby="share-title">
@@ -504,7 +504,7 @@ const pageJsonLd = [
         </section>
 
         <section class="card p-5 text-xs text-[var(--text-muted)] leading-relaxed">
-          <p>⚠️ تقديرات فلكية، لا تُستخدم للملاحة. الارتفاعات بالنسبة لمتوسط سطح البحر. <a href={`${BASE}disclaimer`} class="text-[var(--accent)] hover:underline">إخلاء المسؤولية</a> · <a href={`${BASE}methodology`} class="text-[var(--accent)] hover:underline">كيف تعمل الحسابات؟</a></p>
+          <p>⚠️ تقديرات فلكية، لا تُستخدم للملاحة. الارتفاعات بالنسبة لمتوسط سطح البحر. <a href={`${BASE}disclaimer`} class="text-[var(--accent-text)] underline">إخلاء المسؤولية</a> · <a href={`${BASE}methodology`} class="text-[var(--accent-text)] underline">كيف تعمل الحسابات؟</a></p>
           <p class="mt-2 latin" lang="en">{port.source}</p>
           <details class="mt-3">
             <summary class="cursor-pointer select-none hover:text-[var(--text-primary)]">المركبات التوافقية (<span class="latin">{Object.keys(constituents).length}</span>)</summary>

@@ -49,10 +49,10 @@ const jsonLd = [
     <div id="fish-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       {fish.map(f => (
         <a href={`${BASE}fish/${f.id}`} class="card overflow-hidden group block" data-seas={f.seas.join(' ')}>
-          <img src={`${BASE}fish/sm/${f.id}.webp`} alt={f.ar} loading="lazy" decoding="async" class="fish-thumb" />
+          <img src={`${BASE}fish/sm/${f.id}.webp`} alt="" loading="lazy" decoding="async" class="fish-thumb" />
           <span class="block p-3">
             <span class="block text-[11px] text-[var(--text-muted)]">{kindNames[f.kind]}</span>
-            <span class="block font-semibold display text-lg leading-snug group-hover:text-[var(--accent)] transition-colors">{f.ar}</span>
+            <span class="block font-semibold display text-lg leading-snug group-hover:text-[var(--accent-text)] transition-colors">{f.ar}</span>
             <span class="block text-xs text-[var(--text-secondary)] mt-1 leading-relaxed">
               {f.local.filter(l => l.name !== f.ar).slice(0, 2).map(l => l.name).join('، ')}
             </span>
@@ -65,9 +65,9 @@ const jsonLd = [
 
     <p class="mt-10 text-xs text-[var(--text-muted)] leading-relaxed">
       الصور من ويكيميديا كومنز بتراخيص مفتوحة.
-      <a href={`${BASE}fish/credits`} class="text-[var(--accent)] hover:underline">مصادر الصور وتراخيصها</a>.
+      <a href={`${BASE}fish/credits`} class="text-[var(--accent-text)] hover:underline">مصادر الصور وتراخيصها</a>.
       الأسماء المحلية تختلف من مدينة إلى أخرى داخل البلد الواحد؛ إن كان لديك اسم آخر شائع في منطقتك
-      <a href={`${BASE}contact`} class="text-[var(--accent)] hover:underline">راسلنا</a>.
+      <a href={`${BASE}contact`} class="text-[var(--accent-text)] hover:underline">راسلنا</a>.
     </p>
   </main>
 </BaseLayout>

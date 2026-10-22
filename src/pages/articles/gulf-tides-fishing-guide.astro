@@ -66,7 +66,7 @@ const faq = [
     <div class="space-y-3">
       {gulf.map(r => (
         <a href={`${BASE}ports/${r.id}`} class="block group">
-          <div class="flex justify-between text-sm"><span class="font-semibold group-hover:text-[var(--accent)]">{r.name_ar} <span class="text-[var(--text-muted)] font-normal">· {countryName(r.country)}</span></span><span><span class="latin">{m(r.maxRange)}</span> م</span></div>
+          <div class="flex justify-between text-sm"><span class="font-semibold group-hover:text-[var(--accent-text)]">{r.name_ar} <span class="text-[var(--text-muted)] font-normal">· {countryName(r.country)}</span></span><span><span class="latin">{m(r.maxRange)}</span> م</span></div>
           <div class="h-3 rounded-full bg-[#eef2f6] mt-1"><div class="h-3 rounded-full" style={`width:${(r.maxRange / maxR) * 100}%;background:#0d9488`}></div></div>
         </a>
       ))}
@@ -97,7 +97,7 @@ const faq = [
       <tbody>
         {rows.map(r => (
           <tr>
-            <td><a href={`${BASE}ports/${r.id}`} class="text-[var(--accent)] underline">{r.name_ar}</a></td>
+            <td><a href={`${BASE}ports/${r.id}`} class="text-[var(--accent-text)] underline">{r.name_ar}</a></td>
             <td class="latin">{r.highs.map(s => <div>{s}</div>)}</td>
             <td class="latin">{r.lows.map(s => <div>{s}</div>)}</td>
             <td><span class="latin">{r.todayRange}</span> سم</td>
@@ -112,7 +112,7 @@ const faq = [
     <div class="card p-4"><div class="font-semibold">🌅 الفجر والليل</div><p class="text-sm text-[var(--text-secondary)] !my-1">حرارة الصيف ترفع حرارة المياه الضحلة نهاراً فتقل حركة الأسماك. الصيد في الفجر والمساء والليل أنشط غالباً.</p></div>
     <div class="card p-4"><div class="font-semibold">📈 المد القوي أولاً</div><p class="text-sm text-[var(--text-secondary)] !my-1">اختر الساعتين قبل المد العالي الأقوى في اليوم، لا الأضعف.</p></div>
     <div class="card p-4"><div class="font-semibold">🪸 الشعاب والقنوات</div><p class="text-sm text-[var(--text-secondary)] !my-1">عند الجزر تتجمع الأسماك حول الشعاب والقنوات الأعمق، مثل الهامور والشعري حول الصخور.</p></div>
-    <div class="card p-4"><div class="font-semibold">⚠️ السهول المكشوفة</div><p class="text-sm text-[var(--text-secondary)] !my-1">في الكويت وشمال الخليج ينكشف قاع واسع عند الجزر ويعود الماء بسرعة. <a href={`${BASE}articles/tide-safety-rule-of-twelfths`} class="text-[var(--accent)] underline">اقرأ قاعدة الاثني عشر</a>.</p></div>
+    <div class="card p-4"><div class="font-semibold">⚠️ السهول المكشوفة</div><p class="text-sm text-[var(--text-secondary)] !my-1">في الكويت وشمال الخليج ينكشف قاع واسع عند الجزر ويعود الماء بسرعة. <a href={`${BASE}articles/tide-safety-rule-of-twelfths`} class="text-[var(--accent-text)] underline">اقرأ قاعدة الاثني عشر</a>.</p></div>
   </div>
   <p>وانتبه: في معظم البحار يأتي أقوى مد قرب <strong>البدر والمحاق</strong>، أما في الخليج فالمد المختلط يتأثر أيضاً بـ<strong>ميل القمر</strong>، فقد يأتي أكبر مد في أيام أخرى. لذلك اعتمد على تقويم ميناءك لا على طور القمر وحده. <a href={`${BASE}articles/moon-phases-fishing`}>أطوار القمر والصيد ←</a></p>
 </ArticleLayout>

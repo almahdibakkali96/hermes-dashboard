@@ -69,7 +69,7 @@ const faq = [
       <tbody>
         {multi.map(f => (
           <tr>
-            <td><a href={link(f.id)} class="text-[var(--accent)] underline font-semibold">{f.ar}</a></td>
+            <td><a href={link(f.id)} class="text-[var(--accent-text)] underline font-semibold">{f.ar}</a></td>
             <td class="text-sm">{f.local.map(l => <div><strong>{l.name}</strong> <span class="text-[var(--text-muted)]">· {l.where}</span></div>)}</td>
             <td class="text-xs latin italic" lang="la">{f.sci}</td>
           </tr>
@@ -85,7 +85,7 @@ const faq = [
       <thead><tr><th>الاسم</th><th>أين يُستخدم</th><th>الأصل</th></tr></thead>
       <tbody>
         {loans.map(l => (
-          <tr><td><a href={link(l.id)} class="text-[var(--accent)] underline">{l.name}</a></td><td class="text-sm">{l.where}</td><td class="text-sm">{l.from}</td></tr>
+          <tr><td><a href={link(l.id)} class="text-[var(--accent-text)] underline">{l.name}</a></td><td class="text-sm">{l.where}</td><td class="text-sm">{l.from}</td></tr>
         ))}
       </tbody>
     </table>

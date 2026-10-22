@@ -91,7 +91,7 @@ const faq = [
       <tbody>
         {rows.map(r => (
           <tr>
-            <td><a href={`${BASE}ports/${r.id}`} class="text-[var(--accent)] underline">{r.name}</a></td>
+            <td><a href={`${BASE}ports/${r.id}`} class="text-[var(--accent-text)] underline">{r.name}</a></td>
             <td class="latin">{r.major.map(s => <div>{s}</div>)}</td>
             <td class="latin">{r.minor.length ? r.minor.map(s => <div>{s}</div>) : '—'}</td>
             <td class="latin">{r.highs.map(s => <div>{s}</div>)}</td>

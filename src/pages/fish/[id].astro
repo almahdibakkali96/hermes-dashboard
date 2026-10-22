@@ -71,8 +71,8 @@ const jsonLd = [
         <img src={`${BASE}fish/${f.id}.webp`} alt={`سمك ${f.ar}`} width={photo.w} height={photo.h} class="w-full h-auto block" />
         <figcaption class="px-4 py-2 text-[11px] text-[var(--text-dim)]">
           الصورة: <span lang="en">{photo.artist}</span> ·
-          {photo.licenseUrl ? <a href={photo.licenseUrl} rel="license noopener" class="underline hover:text-[var(--accent)]" lang="en">{photo.license}</a> : <span lang="en">{photo.license}</span>} ·
-          <a href={photo.source} rel="noopener" class="underline hover:text-[var(--accent)]">ويكيميديا كومنز</a>
+          {photo.licenseUrl ? <a href={photo.licenseUrl} rel="license noopener" class="underline hover:text-[var(--accent-text)]" lang="en">{photo.license}</a> : <span lang="en">{photo.license}</span>} ·
+          <a href={photo.source} rel="noopener" class="underline hover:text-[var(--accent-text)]">ويكيميديا كومنز</a>
         </figcaption>
       </figure>
 
@@ -136,7 +136,7 @@ const jsonLd = [
             <ul class="mt-1.5 space-y-0.5">
               {ports.filter(p => p.country === code).map(p => (
                 <li>
-                  <a href={`${BASE}ports/${p.id}`} class="flex items-baseline gap-2 py-1 text-sm hover:text-[var(--accent)] transition-colors">
+                  <a href={`${BASE}ports/${p.id}`} class="flex items-baseline gap-2 py-1 text-sm hover:text-[var(--accent-text)] transition-colors">
                     <span>{p.seen && <span title="سُجّلت مشاهدته قرب الميناء">📍 </span>}{p.name_ar}</span>
                     <span class="ms-auto text-[11px] text-[var(--text-dim)]">
                       {/* inline-block keeps each time atomic so RTL lists them earliest-first */}
@@ -159,8 +159,8 @@ const jsonLd = [
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {others.map(o => (
             <a href={`${BASE}fish/${o.id}`} class="card overflow-hidden group block">
-              <img src={`${BASE}fish/sm/${o.id}.webp`} alt={o.ar} loading="lazy" decoding="async" class="fish-thumb" />
-              <span class="block px-3 py-2 font-semibold text-sm group-hover:text-[var(--accent)] transition-colors">{o.ar}</span>
+              <img src={`${BASE}fish/sm/${o.id}.webp`} alt="" loading="lazy" decoding="async" class="fish-thumb" />
+              <span class="block px-3 py-2 font-semibold text-sm group-hover:text-[var(--accent-text)] transition-colors">{o.ar}</span>
             </a>
           ))}
         </div>
@@ -168,8 +168,8 @@ const jsonLd = [
     )}
 
     <p class="mt-10 text-xs text-[var(--text-muted)]">
-      <a href={`${BASE}fish`} class="text-[var(--accent)] hover:underline">← كل الأسماك</a> ·
-      <a href={`${BASE}fish/credits`} class="text-[var(--accent)] hover:underline">مصادر الصور</a>
+      <a href={`${BASE}fish`} class="text-[var(--accent-text)] hover:underline">← كل الأسماك</a> ·
+      <a href={`${BASE}fish/credits`} class="text-[var(--accent-text)] hover:underline">مصادر الصور</a>
     </p>
   </main>
 </BaseLayout>
