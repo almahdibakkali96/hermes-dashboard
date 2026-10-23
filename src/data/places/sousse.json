@@ -1,0 +1,89 @@
+{
+ "id": "sousse",
+ "name_en": "Sousse",
+ "name_ar": "سوسة",
+ "country": "TN",
+ "lat": 35.82,
+ "lon": 10.65,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 35.875,
+  "lon": 10.625,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.08485,
+   "phase": 31.025
+  },
+  "J1": {
+   "amp": 0.71829,
+   "phase": -82.099
+  },
+  "K1": {
+   "amp": 0.11636,
+   "phase": 156.24
+  },
+  "K2": {
+   "amp": 1.34646,
+   "phase": 15.084
+  },
+  "M2": {
+   "amp": 5.61941,
+   "phase": 2.805
+  },
+  "M4": {
+   "amp": 0.2075,
+   "phase": -96.388
+  },
+  "MF": {
+   "amp": 0.41179,
+   "phase": -6.981
+  },
+  "MM": {
+   "amp": 0.88863,
+   "phase": -86.669
+  },
+  "N2": {
+   "amp": 0.62349,
+   "phase": 2.186
+  },
+  "O1": {
+   "amp": 0.84665,
+   "phase": 52.765
+  },
+  "P1": {
+   "amp": 0.20251,
+   "phase": -53.211
+  },
+  "Q1": {
+   "amp": 0.3652,
+   "phase": -1.421
+  },
+  "S1": {
+   "amp": 1.59176,
+   "phase": 10.003
+  },
+  "S2": {
+   "amp": 4.83909,
+   "phase": 30.358
+  },
+  "SA": {
+   "amp": 3.97766,
+   "phase": -64.282
+  },
+  "SSA": {
+   "amp": 0.22462,
+   "phase": -152.142
+  },
+  "T2": {
+   "amp": 0.46717,
+   "phase": 34.48
+  }
+ }
+}

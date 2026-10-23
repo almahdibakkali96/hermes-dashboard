@@ -1,0 +1,89 @@
+{
+ "id": "misrata",
+ "name_en": "Misrata",
+ "name_ar": "مصراتة",
+ "country": "LY",
+ "lat": 32.37,
+ "lon": 15.21,
+ "timezone": "Africa/Tripoli",
+ "grid": {
+  "lat": 32.375,
+  "lon": 15.25,
+  "distance_km": 3.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.17768,
+   "phase": 46.913
+  },
+  "J1": {
+   "amp": 0.39766,
+   "phase": -55.093
+  },
+  "K1": {
+   "amp": 1.57367,
+   "phase": 31.89
+  },
+  "K2": {
+   "amp": 1.02592,
+   "phase": 79.964
+  },
+  "M2": {
+   "amp": 7.82625,
+   "phase": 50.981
+  },
+  "M4": {
+   "amp": 0.16049,
+   "phase": -45.274
+  },
+  "MF": {
+   "amp": 0.27828,
+   "phase": -18.973
+  },
+  "MM": {
+   "amp": 0.39831,
+   "phase": -79.749
+  },
+  "N2": {
+   "amp": 1.44776,
+   "phase": 43.988
+  },
+  "O1": {
+   "amp": 0.65775,
+   "phase": 75.398
+  },
+  "P1": {
+   "amp": 0.31697,
+   "phase": 20.299
+  },
+  "Q1": {
+   "amp": 0.32852,
+   "phase": -10.742
+  },
+  "S1": {
+   "amp": 0.60497,
+   "phase": 10.622
+  },
+  "S2": {
+   "amp": 3.9595,
+   "phase": 72.214
+  },
+  "SA": {
+   "amp": 4.07894,
+   "phase": -67.641
+  },
+  "SSA": {
+   "amp": 0.06192,
+   "phase": -137.929
+  },
+  "T2": {
+   "amp": 0.49306,
+   "phase": -32.55
+  }
+ }
+}

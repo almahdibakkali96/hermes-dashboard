@@ -1,0 +1,89 @@
+{
+ "id": "zuwara",
+ "name_en": "Zuwara",
+ "name_ar": "زوارة",
+ "country": "LY",
+ "lat": 32.93,
+ "lon": 12.08,
+ "timezone": "Africa/Tripoli",
+ "grid": {
+  "lat": 33.0,
+  "lon": 12.125,
+  "distance_km": 8.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.41497,
+   "phase": 53.49
+  },
+  "J1": {
+   "amp": 0.16983,
+   "phase": -32.848
+  },
+  "K1": {
+   "amp": 1.67961,
+   "phase": 11.418
+  },
+  "K2": {
+   "amp": 2.55564,
+   "phase": 84.893
+  },
+  "M2": {
+   "amp": 15.16563,
+   "phase": 71.357
+  },
+  "M4": {
+   "amp": 0.41368,
+   "phase": -48.766
+  },
+  "MF": {
+   "amp": 0.38084,
+   "phase": -52.684
+  },
+  "MM": {
+   "amp": 0.70226,
+   "phase": -91.514
+  },
+  "N2": {
+   "amp": 2.63859,
+   "phase": 64.342
+  },
+  "O1": {
+   "amp": 0.72543,
+   "phase": 113.997
+  },
+  "P1": {
+   "amp": 0.42798,
+   "phase": -8.468
+  },
+  "Q1": {
+   "amp": 0.39165,
+   "phase": 70.041
+  },
+  "S1": {
+   "amp": 1.33443,
+   "phase": 32.244
+  },
+  "S2": {
+   "amp": 8.96924,
+   "phase": 91.293
+  },
+  "SA": {
+   "amp": 4.27403,
+   "phase": -69.692
+  },
+  "SSA": {
+   "amp": 0.10455,
+   "phase": -126.985
+  },
+  "T2": {
+   "amp": 0.53685,
+   "phase": 56.555
+  }
+ }
+}

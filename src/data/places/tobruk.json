@@ -1,0 +1,89 @@
+{
+ "id": "tobruk",
+ "name_en": "Tobruk",
+ "name_ar": "طبرق",
+ "country": "LY",
+ "lat": 32.08,
+ "lon": 23.98,
+ "timezone": "Africa/Tripoli",
+ "grid": {
+  "lat": 32.125,
+  "lon": 24.0,
+  "distance_km": 5.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.18606,
+   "phase": -157.812
+  },
+  "J1": {
+   "amp": 0.26885,
+   "phase": -61.335
+  },
+  "K1": {
+   "amp": 1.20686,
+   "phase": -44.137
+  },
+  "K2": {
+   "amp": 0.48694,
+   "phase": -132.376
+  },
+  "M2": {
+   "amp": 1.90671,
+   "phase": -91.864
+  },
+  "M4": {
+   "amp": 0.22669,
+   "phase": -142.243
+  },
+  "MF": {
+   "amp": 0.41076,
+   "phase": -40.271
+  },
+  "MM": {
+   "amp": 0.42281,
+   "phase": -113.644
+  },
+  "N2": {
+   "amp": 0.43494,
+   "phase": -50.129
+  },
+  "O1": {
+   "amp": 0.36167,
+   "phase": -73.529
+  },
+  "P1": {
+   "amp": 0.31353,
+   "phase": -79.844
+  },
+  "Q1": {
+   "amp": 0.10641,
+   "phase": -95.828
+  },
+  "S1": {
+   "amp": 0.98405,
+   "phase": 0.415
+  },
+  "S2": {
+   "amp": 1.21614,
+   "phase": -110.631
+  },
+  "SA": {
+   "amp": 3.88716,
+   "phase": -68.246
+  },
+  "SSA": {
+   "amp": 0.12655,
+   "phase": -85.394
+  },
+  "T2": {
+   "amp": 0.2416,
+   "phase": -83.525
+  }
+ }
+}

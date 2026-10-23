@@ -1,0 +1,89 @@
+{
+ "id": "gabes",
+ "name_en": "Gabès",
+ "name_ar": "قابس",
+ "country": "TN",
+ "lat": 33.89,
+ "lon": 10.12,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 33.875,
+  "lon": 10.25,
+  "distance_km": 12.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.64178,
+   "phase": 94.373
+  },
+  "J1": {
+   "amp": 0.49743,
+   "phase": 27.952
+  },
+  "K1": {
+   "amp": 2.12917,
+   "phase": 10.84
+  },
+  "K2": {
+   "amp": 10.73824,
+   "phase": 94.452
+  },
+  "M2": {
+   "amp": 51.20961,
+   "phase": 73.819
+  },
+  "M4": {
+   "amp": 1.35849,
+   "phase": 100.511
+  },
+  "MF": {
+   "amp": 0.54135,
+   "phase": 3.603
+  },
+  "MM": {
+   "amp": 0.3625,
+   "phase": -118.225
+  },
+  "N2": {
+   "amp": 6.97318,
+   "phase": 72.366
+  },
+  "O1": {
+   "amp": 0.77424,
+   "phase": 107.412
+  },
+  "P1": {
+   "amp": 0.83504,
+   "phase": -26.921
+  },
+  "Q1": {
+   "amp": 0.97957,
+   "phase": 59.185
+  },
+  "S1": {
+   "amp": 1.47019,
+   "phase": 63.6
+  },
+  "S2": {
+   "amp": 35.24041,
+   "phase": 101.248
+  },
+  "SA": {
+   "amp": 3.97048,
+   "phase": -86.497
+  },
+  "SSA": {
+   "amp": 0.09175,
+   "phase": -162.144
+  },
+  "T2": {
+   "amp": 1.65903,
+   "phase": 125.355
+  }
+ }
+}

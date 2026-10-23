@@ -1,0 +1,89 @@
+{
+ "id": "ras-al-khaimah",
+ "name_en": "Ras Al Khaimah",
+ "name_ar": "رأس الخيمة",
+ "country": "AE",
+ "lat": 25.79,
+ "lon": 55.94,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 25.75,
+  "lon": 55.875,
+  "distance_km": 7.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.5502,
+   "phase": 152.421
+  },
+  "J1": {
+   "amp": 0.93605,
+   "phase": 31.82
+  },
+  "K1": {
+   "amp": 16.31405,
+   "phase": 61.749
+  },
+  "K2": {
+   "amp": 5.94694,
+   "phase": -118.355
+  },
+  "M2": {
+   "amp": 58.83186,
+   "phase": -144.748
+  },
+  "M4": {
+   "amp": 1.54235,
+   "phase": -4.978
+  },
+  "MF": {
+   "amp": 0.5315,
+   "phase": 22.43
+  },
+  "MM": {
+   "amp": 0.64601,
+   "phase": 56.503
+  },
+  "N2": {
+   "amp": 13.68107,
+   "phase": -166.899
+  },
+  "O1": {
+   "amp": 16.08345,
+   "phase": 30.933
+  },
+  "P1": {
+   "amp": 5.56364,
+   "phase": 51.042
+  },
+  "Q1": {
+   "amp": 3.00144,
+   "phase": 9.849
+  },
+  "S1": {
+   "amp": 0.84722,
+   "phase": -81.026
+  },
+  "S2": {
+   "amp": 21.60909,
+   "phase": -108.092
+  },
+  "SA": {
+   "amp": 1.65232,
+   "phase": -34.893
+  },
+  "SSA": {
+   "amp": 0.20584,
+   "phase": -149.066
+  },
+  "T2": {
+   "amp": 1.07098,
+   "phase": -105.213
+  }
+ }
+}

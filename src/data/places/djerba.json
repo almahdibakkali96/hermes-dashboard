@@ -1,0 +1,89 @@
+{
+ "id": "djerba",
+ "name_en": "Djerba (Houmt Souk)",
+ "name_ar": "جربة (حومة السوق)",
+ "country": "TN",
+ "lat": 33.88,
+ "lon": 10.86,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 33.875,
+  "lon": 11.0,
+  "distance_km": 12.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.53064,
+   "phase": 55.957
+  },
+  "J1": {
+   "amp": 0.33317,
+   "phase": 32.965
+  },
+  "K1": {
+   "amp": 1.92955,
+   "phase": 12.213
+  },
+  "K2": {
+   "amp": 5.93858,
+   "phase": 93.44
+  },
+  "M2": {
+   "amp": 30.96951,
+   "phase": 75.415
+  },
+  "M4": {
+   "amp": 0.55409,
+   "phase": 90.136
+  },
+  "MF": {
+   "amp": 0.46423,
+   "phase": -14.668
+  },
+  "MM": {
+   "amp": 0.44988,
+   "phase": -76.952
+  },
+  "N2": {
+   "amp": 4.41184,
+   "phase": 70.935
+  },
+  "O1": {
+   "amp": 0.57403,
+   "phase": 105.492
+  },
+  "P1": {
+   "amp": 0.75804,
+   "phase": -26.228
+  },
+  "Q1": {
+   "amp": 0.731,
+   "phase": 63.733
+  },
+  "S1": {
+   "amp": 0.93999,
+   "phase": 58.049
+  },
+  "S2": {
+   "amp": 19.3456,
+   "phase": 101.127
+  },
+  "SA": {
+   "amp": 3.98853,
+   "phase": -80.757
+  },
+  "SSA": {
+   "amp": 0.13553,
+   "phase": -168.23
+  },
+  "T2": {
+   "amp": 0.49909,
+   "phase": 153.028
+  }
+ }
+}

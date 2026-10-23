@@ -72,6 +72,38 @@
   "lon": 10.77
  },
  {
+  "id": "bizerte",
+  "name_en": "Bizerte",
+  "name_ar": "بنزرت",
+  "country": "TN",
+  "lat": 37.27,
+  "lon": 9.88
+ },
+ {
+  "id": "sousse",
+  "name_en": "Sousse",
+  "name_ar": "سوسة",
+  "country": "TN",
+  "lat": 35.82,
+  "lon": 10.65
+ },
+ {
+  "id": "gabes",
+  "name_en": "Gabès",
+  "name_ar": "قابس",
+  "country": "TN",
+  "lat": 33.89,
+  "lon": 10.12
+ },
+ {
+  "id": "djerba",
+  "name_en": "Djerba (Houmt Souk)",
+  "name_ar": "جربة (حومة السوق)",
+  "country": "TN",
+  "lat": 33.88,
+  "lon": 10.86
+ },
+ {
   "id": "tripoli-ly",
   "name_en": "Tripoli (Libya)",
   "name_ar": "طرابلس (ليبيا)",
@@ -86,6 +118,38 @@
   "country": "LY",
   "lat": 32.12,
   "lon": 20.07
+ },
+ {
+  "id": "zuwara",
+  "name_en": "Zuwara",
+  "name_ar": "زوارة",
+  "country": "LY",
+  "lat": 32.93,
+  "lon": 12.08
+ },
+ {
+  "id": "misrata",
+  "name_en": "Misrata",
+  "name_ar": "مصراتة",
+  "country": "LY",
+  "lat": 32.37,
+  "lon": 15.21
+ },
+ {
+  "id": "sirte",
+  "name_en": "Sirte",
+  "name_ar": "سرت",
+  "country": "LY",
+  "lat": 31.21,
+  "lon": 16.59
+ },
+ {
+  "id": "tobruk",
+  "name_en": "Tobruk",
+  "name_ar": "طبرق",
+  "country": "LY",
+  "lat": 32.08,
+  "lon": 23.98
  },
  {
   "id": "alexandria",
@@ -168,6 +232,14 @@
   "lon": 58.59
  },
  {
+  "id": "abu-dhabi",
+  "name_en": "Abu Dhabi",
+  "name_ar": "أبوظبي",
+  "country": "AE",
+  "lat": 24.52,
+  "lon": 54.37
+ },
+ {
   "id": "dubai",
   "name_en": "Dubai",
   "name_ar": "دبي",
@@ -182,6 +254,14 @@
   "country": "AE",
   "lat": 25.12,
   "lon": 56.36
+ },
+ {
+  "id": "ras-al-khaimah",
+  "name_en": "Ras Al Khaimah",
+  "name_ar": "رأس الخيمة",
+  "country": "AE",
+  "lat": 25.79,
+  "lon": 55.94
  },
  {
   "id": "doha",

@@ -1,0 +1,89 @@
+{
+ "id": "bizerte",
+ "name_en": "Bizerte",
+ "name_ar": "بنزرت",
+ "country": "TN",
+ "lat": 37.27,
+ "lon": 9.88,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 37.375,
+  "lon": 9.875,
+  "distance_km": 11.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.1791,
+   "phase": -152.565
+  },
+  "J1": {
+   "amp": 0.22392,
+   "phase": -82.142
+  },
+  "K1": {
+   "amp": 3.38703,
+   "phase": -162.33
+  },
+  "K2": {
+   "amp": 1.03064,
+   "phase": -92.915
+  },
+  "M2": {
+   "amp": 8.32112,
+   "phase": -121.443
+  },
+  "M4": {
+   "amp": 0.09923,
+   "phase": -62.331
+  },
+  "MF": {
+   "amp": 0.21255,
+   "phase": -28.764
+  },
+  "MM": {
+   "amp": 0.42553,
+   "phase": -83.677
+  },
+  "N2": {
+   "amp": 1.78425,
+   "phase": -138.009
+  },
+  "O1": {
+   "amp": 1.38373,
+   "phase": 113.681
+  },
+  "P1": {
+   "amp": 0.98957,
+   "phase": -164.927
+  },
+  "Q1": {
+   "amp": 0.21591,
+   "phase": -3.583
+  },
+  "S1": {
+   "amp": 1.06902,
+   "phase": 5.479
+  },
+  "S2": {
+   "amp": 2.76583,
+   "phase": -94.182
+  },
+  "SA": {
+   "amp": 2.94578,
+   "phase": -71.316
+  },
+  "SSA": {
+   "amp": 0.21656,
+   "phase": -163.991
+  },
+  "T2": {
+   "amp": 0.36871,
+   "phase": -49.92
+  }
+ }
+}

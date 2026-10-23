@@ -1,0 +1,89 @@
+{
+ "id": "sirte",
+ "name_en": "Sirte",
+ "name_ar": "سرت",
+ "country": "LY",
+ "lat": 31.21,
+ "lon": 16.59,
+ "timezone": "Africa/Tripoli",
+ "grid": {
+  "lat": 31.25,
+  "lon": 16.625,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.32094,
+   "phase": 117.379
+  },
+  "J1": {
+   "amp": 0.13227,
+   "phase": 24.815
+  },
+  "K1": {
+   "amp": 1.17415,
+   "phase": 43.403
+  },
+  "K2": {
+   "amp": 0.8894,
+   "phase": 60.693
+  },
+  "M2": {
+   "amp": 6.65663,
+   "phase": 47.776
+  },
+  "M4": {
+   "amp": 0.15709,
+   "phase": 22.45
+  },
+  "MF": {
+   "amp": 0.69939,
+   "phase": 23.238
+  },
+  "MM": {
+   "amp": 0.29441,
+   "phase": -40.509
+  },
+  "N2": {
+   "amp": 1.31212,
+   "phase": 48.222
+  },
+  "O1": {
+   "amp": 0.76089,
+   "phase": 64.157
+  },
+  "P1": {
+   "amp": 0.54389,
+   "phase": 76.734
+  },
+  "Q1": {
+   "amp": 0.23033,
+   "phase": -26.665
+  },
+  "S1": {
+   "amp": 1.0501,
+   "phase": 26.979
+  },
+  "S2": {
+   "amp": 3.92868,
+   "phase": 66.252
+  },
+  "SA": {
+   "amp": 4.43062,
+   "phase": -67.237
+  },
+  "SSA": {
+   "amp": 0.0758,
+   "phase": -65.282
+  },
+  "T2": {
+   "amp": 0.32979,
+   "phase": 45.447
+  }
+ }
+}

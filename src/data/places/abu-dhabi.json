@@ -1,0 +1,89 @@
+{
+ "id": "abu-dhabi",
+ "name_en": "Abu Dhabi",
+ "name_ar": "أبوظبي",
+ "country": "AE",
+ "lat": 24.52,
+ "lon": 54.37,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 24.625,
+  "lon": 54.375,
+  "distance_km": 11.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.07667,
+   "phase": -149.08
+  },
+  "J1": {
+   "amp": 0.91457,
+   "phase": 98.743
+  },
+  "K1": {
+   "amp": 34.05431,
+   "phase": 102.571
+  },
+  "K2": {
+   "amp": 4.95016,
+   "phase": -60.522
+  },
+  "M2": {
+   "amp": 43.93601,
+   "phase": -96.324
+  },
+  "M4": {
+   "amp": 1.0177,
+   "phase": 167.858
+  },
+  "MF": {
+   "amp": 0.53154,
+   "phase": -3.027
+  },
+  "MM": {
+   "amp": 0.76055,
+   "phase": 35.817
+  },
+  "N2": {
+   "amp": 9.10612,
+   "phase": -116.636
+  },
+  "O1": {
+   "amp": 19.03922,
+   "phase": 51.889
+  },
+  "P1": {
+   "amp": 8.94765,
+   "phase": 89.991
+  },
+  "Q1": {
+   "amp": 3.0081,
+   "phase": 32.635
+  },
+  "S1": {
+   "amp": 0.63392,
+   "phase": 16.041
+  },
+  "S2": {
+   "amp": 18.8303,
+   "phase": -48.909
+  },
+  "SA": {
+   "amp": 2.18843,
+   "phase": -66.549
+  },
+  "SSA": {
+   "amp": 0.39551,
+   "phase": -175.504
+  },
+  "T2": {
+   "amp": 1.68293,
+   "phase": -30.769
+  }
+ }
+}

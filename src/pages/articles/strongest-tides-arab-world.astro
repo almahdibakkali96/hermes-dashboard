@@ -24,14 +24,14 @@ const med = seaStats.find(s => s.id === 'med')!, red = seaStats.find(s => s.id =
 const gulf = seaStats.find(s => s.id === 'gulf')!, ind = seaStats.find(s => s.id === 'indian')!;
 const overOneM = rows.filter(r => r.maxRange >= 100).length;
 const underHalfM = rows.filter(r => r.maxRange < 50).length;
-const sfax = byId('sfax'), jeddah = byId('jeddah'), portSudan = byId('port-sudan'), alex = byId('alexandria');
+const gabes = byId('gabes'), jeddah = byId('jeddah'), portSudan = byId('port-sudan'), alex = byId('alexandria');
 
 const why: Record<SeaId, string> = {
   gulf: `موجة المد تدخل الخليج من مضيق هرمز وتنعكس داخله. في رأس الخليج، عند الكويت وأم قصر وشط العرب، يتراكم الماء فيصل المدى إلى نحو ${m(gulf.max.maxRange)} م، بينما يقل في الوسط قرب ${gulf.min.name_ar} (${m(gulf.min.maxRange)} م).`,
   indian: `سواحل مفتوحة على المحيط الهندي وبحر العرب. أكبرها في ${ind.max.name_ar} (${m(ind.max.maxRange)} م)، وفي خليج عدن وخليج عُمان يتراوح المدى بين 2 و3 أمتار تقريباً.`,
   atlantic: `ساحل مفتوح مباشرة على المحيط الأطلسي، والمد نصف يومي منتظم. يبلغ المدى نحو ${m(atl.max.maxRange)} م في ${atl.max.name_ar}، ويتناقص جنوباً حتى ${atl.min.name_ar} (${m(atl.min.maxRange)} م).`,
   red: `البحر الأحمر طويل وضيق، ويقع في وسطه تقريباً «نقطة لا مد» (نقطة أمفيدرومية) يكاد المد يختفي حولها: ${portSudan.name_ar} ${portSudan.maxRange} سم و${jeddah.name_ar} ${jeddah.maxRange} سم فقط. ويزداد المدى نحو الطرفين، كما في ${red.max.name_ar} (${red.max.maxRange} سم).`,
-  med: `البحر المتوسط شبه مغلق ويتصل بالمحيط عبر مضيق جبل طارق الضيق، فلا تدخله إلا موجة مد صغيرة: معظم موانئه أقل من نصف متر، مثل ${alex.name_ar} (${alex.maxRange} سم). الاستثناء خليج قابس في تونس، حيث يضخّم الجرف الضحل الواسع المد في ${sfax.name_ar} إلى نحو ${m(sfax.maxRange)} م.`,
+  med: `البحر المتوسط شبه مغلق ويتصل بالمحيط عبر مضيق جبل طارق الضيق، فلا تدخله إلا موجة مد صغيرة: معظم موانئه أقل من نصف متر، مثل ${alex.name_ar} (${alex.maxRange} سم). الاستثناء خليج قابس في تونس، حيث يضخّم الجرف الضحل الواسع المد في ${gabes.name_ar} إلى نحو ${m(gabes.maxRange)} م.`,
 };
 
 const toc = [
@@ -43,13 +43,13 @@ const toc = [
 ];
 const takeaways = [
   `أقوى مد في الموانئ العربية في <strong>${top.name_ar}</strong> (${countryName(top.country)}): يصل الفرق بين المد والجزر إلى نحو <strong>${m(top.maxRange)} م</strong> في ${year}.`,
-  `<strong>${overOneM}</strong> ميناءً من 36 يتجاوز فيها المدى متراً واحداً، و<strong>${underHalfM}</strong> لا يصل فيها إلى نصف متر.`,
+  `<strong>${overOneM}</strong> ميناءً من ${rows.length} يتجاوز فيها المدى متراً واحداً، و<strong>${underHalfM}</strong> لا يصل فيها إلى نصف متر.`,
   `في <strong>البحر المتوسط</strong> و<strong>وسط البحر الأحمر</strong> يكاد المد يختفي: ${bottom.name_ar} ${bottom.maxRange} سم فقط.`,
   `ساحل <strong>المغرب الأطلسي</strong> يشهد مداً منتظماً قرابة 3 أمتار، مرتين يومياً.`,
 ];
 const faq = [
-  { q: 'أين أقوى مد وجزر في العالم العربي؟', a: `حسب حسابات ArabTides لعام ${year}، أكبر مدى يومي بين 36 ميناءً عربياً في ${top.name_ar} (${countryName(top.country)}) بنحو ${m(top.maxRange)} م، تليها ${rows[1].name_ar} (${m(rows[1].maxRange)} م) و${rows[2].name_ar} (${m(rows[2].maxRange)} م).` },
-  { q: 'لماذا لا يوجد مد تقريباً في البحر المتوسط؟', a: `لأنه بحر شبه مغلق يتصل بالمحيط الأطلسي عبر مضيق جبل طارق الضيق، فلا تدخله إلا موجة مد صغيرة. معظم الموانئ العربية على المتوسط مداها أقل من 50 سم، باستثناء خليج قابس (${sfax.name_ar} نحو ${m(sfax.maxRange)} م).` },
+  { q: 'أين أقوى مد وجزر في العالم العربي؟', a: `حسب حسابات ArabTides لعام ${year}، أكبر مدى يومي بين ${rows.length} ميناءً عربياً في ${top.name_ar} (${countryName(top.country)}) بنحو ${m(top.maxRange)} م، تليها ${rows[1].name_ar} (${m(rows[1].maxRange)} م) و${rows[2].name_ar} (${m(rows[2].maxRange)} م).` },
+  { q: 'لماذا لا يوجد مد تقريباً في البحر المتوسط؟', a: `لأنه بحر شبه مغلق يتصل بالمحيط الأطلسي عبر مضيق جبل طارق الضيق، فلا تدخله إلا موجة مد صغيرة. معظم الموانئ العربية على المتوسط مداها أقل من 50 سم، باستثناء خليج قابس (${gabes.name_ar} نحو ${m(gabes.maxRange)} م).` },
   { q: 'كم يبلغ المد والجزر في جدة؟', a: `المد في جدة صغير جداً: أقصى مدى يومي نحو ${jeddah.maxRange} سم في ${year}، لأنها قريبة من نقطة انعدام المد في وسط البحر الأحمر.` },
   { q: 'كم يبلغ المد والجزر في الكويت؟', a: `في مدينة الكويت يصل أقصى مدى يومي إلى نحو ${m(byId('kuwait-city').maxRange)} م (${dateAr(byId('kuwait-city').maxRangeDate)})، وهو من أكبر المديات في المنطقة.` },
   { q: 'ما مصدر هذه الأرقام؟', a: 'حسبها ArabTides من نموذج EOT20 العالمي للمد والجزر (Hart-Davis et al. 2021) لكل يوم من السنة. هي تقديرات فلكية وليست قياسات رسمية، وقد تختلف قليلاً عن جداول الموانئ الرسمية.' },
@@ -64,15 +64,15 @@ const faq = [
     <svg viewBox="0 0 280 90" class="w-full mt-4"><path d="M0 60 C35 60 35 10 70 10 S105 85 140 85 S175 10 210 10 S245 60 280 60" fill="none" stroke="#2dd4bf" stroke-width="5" stroke-linecap="round"/></svg>
   </div>
 
-  <p>بين الدار البيضاء والكويت، يتصرف البحر بطرق مختلفة جداً. في ميناء يرتفع الماء وينخفض قرابة <strong>{m(top.maxRange)} أمتار</strong>، وفي آخر لا يتجاوز الفرق <strong>{bottom.maxRange} سنتيمتراً</strong>. حسبنا أقصى مدى يومي للمد والجزر في كل ميناء من موانئ ArabTides الـ36 لكل يوم من عام {year} — وهذه النتيجة.</p>
+  <p>بين الدار البيضاء والكويت، يتصرف البحر بطرق مختلفة جداً. في ميناء يرتفع الماء وينخفض قرابة <strong>{m(top.maxRange)} أمتار</strong>، وفي آخر لا يتجاوز الفرق <strong>{bottom.maxRange} سنتيمتراً</strong>. حسبنا أقصى مدى يومي للمد والجزر في كل ميناء من موانئ ArabTides الـ{rows.length} لكل يوم من عام {year} — وهذه النتيجة.</p>
 
   <div class="stat-grid">
     <div class="stat"><div class="v">{m(top.maxRange)} م</div><div class="l">أكبر مدى: {top.name_ar}</div></div>
     <div class="stat"><div class="v">{bottom.maxRange} سم</div><div class="l">أصغر مدى: {bottom.name_ar}</div></div>
-    <div class="stat"><div class="v">{overOneM}/36</div><div class="l">موانئ مداها فوق متر</div></div>
+    <div class="stat"><div class="v">{overOneM}/{rows.length}</div><div class="l">موانئ مداها فوق متر</div></div>
   </div>
 
-  <h2 id="ranking">الترتيب الكامل: 36 ميناءً</h2>
+  <h2 id="ranking">الترتيب الكامل: {rows.length} ميناءً</h2>
   <p>أقصى فرق بين أعلى مد وأدنى جزر في يوم واحد خلال {year}. الألوان تمثل البحر:</p>
   <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm my-3">
     {seaOrder.map(id => <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm" style={`background:${seas[id].color}`}></span>{seas[id].name}</span>)}

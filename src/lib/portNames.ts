@@ -16,12 +16,19 @@ const ALT_AR: Record<string, string[]> = {
   latakia: ['اللاذقيه'],
   hurghada: ['الغردقه'],
   gaza: ['غزه'],
+  sousse: ['سوسه'],
+  djerba: ['جربه'],
+  zuwara: ['زواره', 'زوارا'],
+  misrata: ['مصراته'],
+  'abu-dhabi': ['أبو ظبي'],
+  'ras-al-khaimah': ['راس الخيمه'],
 };
 
 const FR: Record<string, string> = {
   casablanca: 'Casablanca', agadir: 'Agadir', tangier: 'Tanger',
   nouadhibou: 'Nouadhibou', nouakchott: 'Nouakchott',
   algiers: 'Alger', oran: 'Oran', tunis: 'La Goulette', sfax: 'Sfax',
+  bizerte: 'Bizerte', sousse: 'Sousse', gabes: 'Gabès', djerba: 'Djerba',
 };
 
 /** How each country is also written in searches */
