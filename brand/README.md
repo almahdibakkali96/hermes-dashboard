@@ -25,6 +25,7 @@
 | "Meet the website" Reel: real arabtides.com screenshots on a phone (36 ports, tides, 7-day and monthly ratings, sun/moon/solunar/prayer, fish guide); 56 s, voice + music | `video/video-12-website.mp4` (cover `video/video-12-cover.png`, caption `video/video-12-caption.txt`; screenshots in `video/video-12-website/shots/`, retake with `MSYS_NO_PATHCONV=1 node brand/site-shots.mjs ...`) |
 | "Which bait for which fish" Reel: shrimp, live fish, squid, worms, dough and weed, each with fish photos (pairs from `bait` in `src/lib/fish.ts`), cool-box tip; 70 s, voice + music | `video/video-13-bait.mp4` (cover `video/video-13-cover.png`, caption `video/video-13-caption.txt`) |
 | "Best fishing days in November" Reel: two windows (new and full moon), then one 5/5 day each for Kuwait City, Dammam, Muscat, Dubai and Casablanca with the real tide curve; 64 s, voice + music | `video/video-14-november.mp4` (cover `video/video-14-cover.png`, caption `video/video-14-caption.txt`; curves in `video/video-14-november/data.json`) |
+| "Don't touch these fish" Reel: a countdown of six dangerous fish (electric ray, stingray, scorpionfish, rabbitfish, lionfish, puffer) with real photos and warning stamps, then first aid for a spine sting; 67 s, voice + music | `video/video-15-dangerous-fish.mp4` (cover `video/video-15-cover.png`, caption `video/video-15-caption.txt`) |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours
