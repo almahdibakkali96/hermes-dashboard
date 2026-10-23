@@ -176,6 +176,14 @@
   "lon": 12.08
  },
  {
+  "id": "al-khoms",
+  "name_en": "Al Khoms",
+  "name_ar": "الخمس",
+  "country": "LY",
+  "lat": 32.65,
+  "lon": 14.27
+ },
+ {
   "id": "misrata",
   "name_en": "Misrata",
   "name_ar": "مصراتة",

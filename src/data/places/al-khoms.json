@@ -1,0 +1,89 @@
+{
+ "id": "al-khoms",
+ "name_en": "Al Khoms",
+ "name_ar": "الخمس",
+ "country": "LY",
+ "lat": 32.65,
+ "lon": 14.27,
+ "timezone": "Africa/Tripoli",
+ "grid": {
+  "lat": 32.625,
+  "lon": 14.375,
+  "distance_km": 10.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.25629,
+   "phase": 74.132
+  },
+  "J1": {
+   "amp": 0.30046,
+   "phase": -13.86
+  },
+  "K1": {
+   "amp": 1.45571,
+   "phase": 25.28
+  },
+  "K2": {
+   "amp": 1.1869,
+   "phase": 85.754
+  },
+  "M2": {
+   "amp": 8.6008,
+   "phase": 55.347
+  },
+  "M4": {
+   "amp": 0.13188,
+   "phase": -59.662
+  },
+  "MF": {
+   "amp": 0.13727,
+   "phase": -1.993
+  },
+  "MM": {
+   "amp": 0.44069,
+   "phase": -82.787
+  },
+  "N2": {
+   "amp": 1.51804,
+   "phase": 46.515
+  },
+  "O1": {
+   "amp": 0.34701,
+   "phase": 96.204
+  },
+  "P1": {
+   "amp": 0.37163,
+   "phase": 21.712
+  },
+  "Q1": {
+   "amp": 0.2106,
+   "phase": 26.056
+  },
+  "S1": {
+   "amp": 0.62779,
+   "phase": 20.571
+  },
+  "S2": {
+   "amp": 4.56308,
+   "phase": 76.146
+  },
+  "SA": {
+   "amp": 3.94907,
+   "phase": -67.141
+  },
+  "SSA": {
+   "amp": 0.05946,
+   "phase": -136.879
+  },
+  "T2": {
+   "amp": 0.24886,
+   "phase": -37.053
+  }
+ }
+}
