@@ -1,0 +1,89 @@
+{
+ "id": "essaouira",
+ "name_en": "Essaouira",
+ "name_ar": "الصويرة",
+ "country": "MA",
+ "lat": 31.51,
+ "lon": -9.77,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 31.5,
+  "lon": -9.875,
+  "distance_km": 10.0
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.93825,
+   "phase": 15.492
+  },
+  "J1": {
+   "amp": 0.30603,
+   "phase": 61.687
+  },
+  "K1": {
+   "amp": 7.12297,
+   "phase": 44.776
+  },
+  "K2": {
+   "amp": 10.07488,
+   "phase": 67.631
+  },
+  "M2": {
+   "amp": 96.86791,
+   "phase": 46.536
+  },
+  "M4": {
+   "amp": 1.57049,
+   "phase": 140.721
+  },
+  "MF": {
+   "amp": 0.28057,
+   "phase": -22.557
+  },
+  "MM": {
+   "amp": 0.32224,
+   "phase": -72.919
+  },
+  "N2": {
+   "amp": 20.47546,
+   "phase": 31.167
+  },
+  "O1": {
+   "amp": 6.19118,
+   "phase": -55.894
+  },
+  "P1": {
+   "amp": 2.41892,
+   "phase": 37.375
+  },
+  "Q1": {
+   "amp": 1.97814,
+   "phase": -110.967
+  },
+  "S1": {
+   "amp": 0.99837,
+   "phase": 12.336
+  },
+  "S2": {
+   "amp": 35.83387,
+   "phase": 70.908
+  },
+  "SA": {
+   "amp": 1.76886,
+   "phase": -57.717
+  },
+  "SSA": {
+   "amp": 0.01856,
+   "phase": 62.262
+  },
+  "T2": {
+   "amp": 2.02315,
+   "phase": 52.691
+  }
+ }
+}

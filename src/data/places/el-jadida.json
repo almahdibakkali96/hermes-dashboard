@@ -1,0 +1,89 @@
+{
+ "id": "el-jadida",
+ "name_en": "El Jadida",
+ "name_ar": "الجديدة",
+ "country": "MA",
+ "lat": 33.26,
+ "lon": -8.51,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 33.25,
+  "lon": -8.625,
+  "distance_km": 10.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.10641,
+   "phase": 24.089
+  },
+  "J1": {
+   "amp": 0.36446,
+   "phase": 61.092
+  },
+  "K1": {
+   "amp": 7.02705,
+   "phase": 48.017
+  },
+  "K2": {
+   "amp": 10.24293,
+   "phase": 74.412
+  },
+  "M2": {
+   "amp": 98.46795,
+   "phase": 51.877
+  },
+  "M4": {
+   "amp": 1.66564,
+   "phase": 149.646
+  },
+  "MF": {
+   "amp": 0.3036,
+   "phase": -35.08
+  },
+  "MM": {
+   "amp": 0.42451,
+   "phase": -92.026
+  },
+  "N2": {
+   "amp": 21.01748,
+   "phase": 36.542
+  },
+  "O1": {
+   "amp": 6.26653,
+   "phase": -53.629
+  },
+  "P1": {
+   "amp": 2.48404,
+   "phase": 38.52
+  },
+  "Q1": {
+   "amp": 1.98883,
+   "phase": -105.652
+  },
+  "S1": {
+   "amp": 0.96896,
+   "phase": -0.315
+  },
+  "S2": {
+   "amp": 36.38426,
+   "phase": 76.857
+  },
+  "SA": {
+   "amp": 2.56188,
+   "phase": -58.337
+  },
+  "SSA": {
+   "amp": 0.09077,
+   "phase": 154.46
+  },
+  "T2": {
+   "amp": 1.95752,
+   "phase": 63.557
+  }
+ }
+}

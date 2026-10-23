@@ -1,0 +1,89 @@
+{
+ "id": "rabat",
+ "name_en": "Rabat (Salé)",
+ "name_ar": "الرباط (سلا)",
+ "country": "MA",
+ "lat": 34.03,
+ "lon": -6.83,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 34.125,
+  "lon": -6.875,
+  "distance_km": 11.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.19942,
+   "phase": 17.404
+  },
+  "J1": {
+   "amp": 0.45481,
+   "phase": 66.206
+  },
+  "K1": {
+   "amp": 6.83924,
+   "phase": 50.449
+  },
+  "K2": {
+   "amp": 10.04883,
+   "phase": 77.398
+  },
+  "M2": {
+   "amp": 99.94587,
+   "phase": 54.232
+  },
+  "M4": {
+   "amp": 1.68751,
+   "phase": 159.222
+  },
+  "MF": {
+   "amp": 0.3001,
+   "phase": 17.029
+  },
+  "MM": {
+   "amp": 0.11483,
+   "phase": -97.937
+  },
+  "N2": {
+   "amp": 21.35254,
+   "phase": 38.264
+  },
+  "O1": {
+   "amp": 6.27034,
+   "phase": -52.2
+  },
+  "P1": {
+   "amp": 2.48036,
+   "phase": 39.006
+  },
+  "Q1": {
+   "amp": 2.03715,
+   "phase": -111.406
+  },
+  "S1": {
+   "amp": 0.63164,
+   "phase": 101.102
+  },
+  "S2": {
+   "amp": 36.2717,
+   "phase": 80.159
+  },
+  "SA": {
+   "amp": 2.55619,
+   "phase": -59.264
+  },
+  "SSA": {
+   "amp": 0.08277,
+   "phase": 177.068
+  },
+  "T2": {
+   "amp": 1.88421,
+   "phase": 74.359
+  }
+ }
+}

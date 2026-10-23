@@ -24,6 +24,54 @@
   "lon": -5.81
  },
  {
+  "id": "al-hoceima",
+  "name_en": "Al Hoceima",
+  "name_ar": "الحسيمة",
+  "country": "MA",
+  "lat": 35.25,
+  "lon": -3.92
+ },
+ {
+  "id": "rabat",
+  "name_en": "Rabat (Salé)",
+  "name_ar": "الرباط (سلا)",
+  "country": "MA",
+  "lat": 34.03,
+  "lon": -6.83
+ },
+ {
+  "id": "el-jadida",
+  "name_en": "El Jadida",
+  "name_ar": "الجديدة",
+  "country": "MA",
+  "lat": 33.26,
+  "lon": -8.51
+ },
+ {
+  "id": "safi",
+  "name_en": "Safi",
+  "name_ar": "آسفي",
+  "country": "MA",
+  "lat": 32.3,
+  "lon": -9.24
+ },
+ {
+  "id": "essaouira",
+  "name_en": "Essaouira",
+  "name_ar": "الصويرة",
+  "country": "MA",
+  "lat": 31.51,
+  "lon": -9.77
+ },
+ {
+  "id": "dakhla",
+  "name_en": "Dakhla",
+  "name_ar": "الداخلة",
+  "country": "MA",
+  "lat": 23.7,
+  "lon": -15.93
+ },
+ {
   "id": "nouadhibou",
   "name_en": "Nouadhibou",
   "name_ar": "نواذيبو",

@@ -13,7 +13,8 @@ export const seas: Record<SeaId, { name: string; color: string }> = {
 };
 
 export const portSea: Record<string, SeaId> = {
-  casablanca: 'atlantic', agadir: 'atlantic', tangier: 'atlantic', nouadhibou: 'atlantic', nouakchott: 'atlantic',
+  casablanca: 'atlantic', agadir: 'atlantic', tangier: 'atlantic', rabat: 'atlantic', 'el-jadida': 'atlantic',
+  safi: 'atlantic', essaouira: 'atlantic', dakhla: 'atlantic', 'al-hoceima': 'med', nouadhibou: 'atlantic', nouakchott: 'atlantic',
   algiers: 'med', oran: 'med', tunis: 'med', sfax: 'med', 'tripoli-ly': 'med', benghazi: 'med', alexandria: 'med',
   bizerte: 'med', sousse: 'med', gabes: 'med', djerba: 'med', zuwara: 'med', misrata: 'med', sirte: 'med', tobruk: 'med',
   gaza: 'med', beirut: 'med', 'tripoli-lb': 'med', latakia: 'med', tartus: 'med',

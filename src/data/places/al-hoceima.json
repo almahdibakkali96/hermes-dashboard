@@ -1,0 +1,89 @@
+{
+ "id": "al-hoceima",
+ "name_en": "Al Hoceima",
+ "name_ar": "الحسيمة",
+ "country": "MA",
+ "lat": 35.25,
+ "lon": -3.92,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 35.25,
+  "lon": -3.875,
+  "distance_km": 4.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.5863,
+   "phase": 67.181
+  },
+  "J1": {
+   "amp": 0.20705,
+   "phase": 89.952
+  },
+  "K1": {
+   "amp": 3.92038,
+   "phase": 139.398
+  },
+  "K2": {
+   "amp": 1.8456,
+   "phase": 78.943
+  },
+  "M2": {
+   "amp": 18.16293,
+   "phase": 58.02
+  },
+  "M4": {
+   "amp": 1.82031,
+   "phase": 171.122
+  },
+  "MF": {
+   "amp": 0.33685,
+   "phase": -96.605
+  },
+  "MM": {
+   "amp": 0.64181,
+   "phase": -87.261
+  },
+  "N2": {
+   "amp": 3.70491,
+   "phase": 52.343
+  },
+  "O1": {
+   "amp": 1.84413,
+   "phase": 105.153
+  },
+  "P1": {
+   "amp": 1.06396,
+   "phase": 111.925
+  },
+  "Q1": {
+   "amp": 0.2446,
+   "phase": -76.535
+  },
+  "S1": {
+   "amp": 1.33209,
+   "phase": -12.983
+  },
+  "S2": {
+   "amp": 7.57691,
+   "phase": 84.702
+  },
+  "SA": {
+   "amp": 2.66652,
+   "phase": -78.292
+  },
+  "SSA": {
+   "amp": 0.19963,
+   "phase": 176.695
+  },
+  "T2": {
+   "amp": 0.54201,
+   "phase": 110.19
+  }
+ }
+}

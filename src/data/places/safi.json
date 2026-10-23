@@ -1,0 +1,89 @@
+{
+ "id": "safi",
+ "name_en": "Safi",
+ "name_ar": "آسفي",
+ "country": "MA",
+ "lat": 32.3,
+ "lon": -9.24,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 32.25,
+  "lon": -9.375,
+  "distance_km": 13.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.18023,
+   "phase": 20.444
+  },
+  "J1": {
+   "amp": 0.27555,
+   "phase": 108.476
+  },
+  "K1": {
+   "amp": 6.93473,
+   "phase": 47.69
+  },
+  "K2": {
+   "amp": 10.1786,
+   "phase": 71.284
+  },
+  "M2": {
+   "amp": 97.84907,
+   "phase": 49.482
+  },
+  "M4": {
+   "amp": 1.49088,
+   "phase": 148.942
+  },
+  "MF": {
+   "amp": 0.29551,
+   "phase": -32.498
+  },
+  "MM": {
+   "amp": 0.51,
+   "phase": -75.347
+  },
+  "N2": {
+   "amp": 20.86465,
+   "phase": 33.778
+  },
+  "O1": {
+   "amp": 6.2899,
+   "phase": -54.885
+  },
+  "P1": {
+   "amp": 2.50226,
+   "phase": 40.339
+  },
+  "Q1": {
+   "amp": 2.17341,
+   "phase": -108.493
+  },
+  "S1": {
+   "amp": 0.83044,
+   "phase": 21.174
+  },
+  "S2": {
+   "amp": 36.40492,
+   "phase": 73.976
+  },
+  "SA": {
+   "amp": 2.44707,
+   "phase": -49.611
+  },
+  "SSA": {
+   "amp": 0.06573,
+   "phase": 150.136
+  },
+  "T2": {
+   "amp": 2.05813,
+   "phase": 61.154
+  }
+ }
+}

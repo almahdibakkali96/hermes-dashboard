@@ -1,0 +1,89 @@
+{
+ "id": "dakhla",
+ "name_en": "Dakhla",
+ "name_ar": "الداخلة",
+ "country": "MA",
+ "lat": 23.7,
+ "lon": -15.93,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 23.75,
+  "lon": -15.875,
+  "distance_km": 7.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.87688,
+   "phase": -25.996
+  },
+  "J1": {
+   "amp": 0.464,
+   "phase": 72.645
+  },
+  "K1": {
+   "amp": 6.7841,
+   "phase": 34.777
+  },
+  "K2": {
+   "amp": 7.29976,
+   "phase": 36.847
+  },
+  "M2": {
+   "amp": 64.78499,
+   "phase": 12.844
+  },
+  "M4": {
+   "amp": 3.23611,
+   "phase": 67.387
+  },
+  "MF": {
+   "amp": 1.25734,
+   "phase": -8.604
+  },
+  "MM": {
+   "amp": 0.65547,
+   "phase": -52.485
+  },
+  "N2": {
+   "amp": 13.76818,
+   "phase": -2.857
+  },
+  "O1": {
+   "amp": 4.61391,
+   "phase": -73.72
+  },
+  "P1": {
+   "amp": 1.64367,
+   "phase": 32.775
+  },
+  "Q1": {
+   "amp": 1.54853,
+   "phase": -131.135
+  },
+  "S1": {
+   "amp": 0.63754,
+   "phase": -15.62
+  },
+  "S2": {
+   "amp": 27.34016,
+   "phase": 36.999
+  },
+  "SA": {
+   "amp": 2.48233,
+   "phase": -77.974
+  },
+  "SSA": {
+   "amp": 0.23051,
+   "phase": -3.799
+  },
+  "T2": {
+   "amp": 1.92086,
+   "phase": 24.215
+  }
+ }
+}

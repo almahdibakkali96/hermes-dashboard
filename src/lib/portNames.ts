@@ -7,6 +7,11 @@
 const ALT_AR: Record<string, string[]> = {
   casablanca: ['كازابلانكا'],
   tangier: ['طنجه'],
+  'al-hoceima': ['الحسيمه'],
+  'el-jadida': ['الجديده'],
+  safi: ['أسفي'],
+  essaouira: ['الصويره'],
+  dakhla: ['الداخله'],
   algiers: ['الجزائر'],
   'tripoli-ly': ['طرابلس الغرب'],
   'port-sudan': ['بور سودان'],
@@ -25,7 +30,8 @@ const ALT_AR: Record<string, string[]> = {
 };
 
 const FR: Record<string, string> = {
-  casablanca: 'Casablanca', agadir: 'Agadir', tangier: 'Tanger',
+  casablanca: 'Casablanca', agadir: 'Agadir', tangier: 'Tanger', rabat: 'Rabat',
+  'el-jadida': 'El Jadida', safi: 'Safi', essaouira: 'Essaouira', dakhla: 'Dakhla', 'al-hoceima': 'Al Hoceïma',
   nouadhibou: 'Nouadhibou', nouakchott: 'Nouakchott',
   algiers: 'Alger', oran: 'Oran', tunis: 'La Goulette', sfax: 'Sfax',
   bizerte: 'Bizerte', sousse: 'Sousse', gabes: 'Gabès', djerba: 'Djerba',
