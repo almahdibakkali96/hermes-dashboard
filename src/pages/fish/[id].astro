@@ -6,6 +6,7 @@ import { seas } from '../../lib/seaNames';
 import { countryName } from '../../lib/countries';
 import { dayExtremes, formatTime, getTimezoneOffset, classifySpringNeap } from '../../lib/tides';
 import { moonPhase } from '../../lib/astronomy';
+import { articleBySlug } from '../../lib/articles';
 import { fishText1 } from '../../data/fish-text-1';
 import { fishText2 } from '../../data/fish-text-2';
 
@@ -34,6 +35,7 @@ const ports = await Promise.all(portsForFish(f).map(async p => {
 const countries = [...new Set(ports.map(p => p.country))];
 
 const text = fishText1[f.id] || fishText2[f.id] || [];
+const article = f.article ? articleBySlug(f.article) : undefined;
 const others = fish.filter(x => x.id !== f.id && x.seas.some(s => f.seas.includes(s))).slice(0, 4);
 const localLine = f.local.map(l => `${l.name} (${l.where})`).join('، ');
 const description = `${f.ar} (${f.sci}): ${localLine}. أين يعيش، وأفضل وقت ومد لصيده، والطعم المناسب، ومواقيت المد اليوم في موانئ ${f.seas.map(s => seas[s].name).join(' و')}.`;
@@ -103,6 +105,12 @@ const jsonLd = [
       <section class="mt-8 max-w-3xl" aria-labelledby="about-title">
         <h2 id="about-title" class="text-xl font-bold display">عن {f.ar}</h2>
         {text.map(p => <p class="mt-3 leading-loose text-[var(--text-secondary)]" set:html={p} />)}
+        {article && (
+          <a href={`${BASE}articles/${article.slug}`} class="card mt-4 p-4 flex items-center gap-3 hover:border-[var(--accent)] transition-colors">
+            <span class="text-2xl" aria-hidden="true">{article.icon}</span>
+            <span><span class="block text-xs text-[var(--text-muted)]">اقرأ المقال</span><span class="font-semibold">{article.title}</span></span>
+          </a>
+        )}
       </section>
     )}
 

@@ -27,6 +27,8 @@ export interface Fish {
   bait: string;
   about: string;
   note?: string;
+  /** Slug of an article about this species */
+  article?: string;
 }
 
 export const kindNames: Record<FishKind, string> = {
@@ -569,6 +571,7 @@ export const fish: Fish[] = [
     bait: 'لا يُصطاد.',
     about: 'الذكر هو الذي يحمل البيض في جيب على بطنه حتى يفقس. يتمسك بالأعشاب بذيله، وتتحرك كل عين من عينيه وحدها.',
     note: 'تجارته مقيدة دولياً؛ أعده إلى الماء إن علق في الشبكة.',
+    article: 'seahorse',
   },
 ];
 

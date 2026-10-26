@@ -397,7 +397,6 @@ button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
 }
 .btn-ghost:hover { background: rgba(255,255,255,.1); }
 /* Hidden inside the Android app (see BaseLayout): purchases outside Google Play billing */
-[data-app="android"] .web-only { display: none !important; }
 .guide-card .btn-primary { background: var(--accent); color: #fff; }
 .guide-card .btn-primary:hover { background: var(--accent-hover); }
 .guide-banner {

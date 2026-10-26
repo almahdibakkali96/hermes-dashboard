@@ -1,0 +1,155 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { fish, fishPhotos } from '../../lib/fish';
+import portSpecies from '../../data/port-species.json';
+import placesIndex from '../../data/places/places_index.json';
+
+const meta = articleBySlug('seahorse');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const F = (id: string) => fish.find(f => f.id === id)!;
+const link = (id: string) => `${BASE}fish/${id}`;
+const kuda = fishPhotos.seahorse;
+
+// Seahorse records within 50 km of our ports (iNaturalist research grade, tools/fish-photos/inat-counts.mjs)
+const SPECIES_AR: Record<string, string> = {
+  'Hippocampus kuda': 'حصان البحر المنقط',
+  'Hippocampus hippocampus': 'حصان البحر قصير الخطم',
+  'Hippocampus guttulatus': 'حصان البحر طويل الخطم',
+  'Hippocampus fuscus': 'حصان البحر الداكن',
+  'Hippocampus jayakari': 'حصان جاياكار',
+  'Hippocampus kelloggi': 'حصان البحر الكبير',
+  'Hippocampus algiricus': 'حصان البحر الأفريقي',
+};
+const portName = (id: string) => (placesIndex as { id: string; name_ar: string }[]).find(p => p.id === id)!.name_ar;
+const records = Object.entries(portSpecies as Record<string, [string, number][]>)
+  .map(([port, list]) => ({ port, species: list.filter(([n]) => n.startsWith('Hippocampus ')) }))
+  .filter(r => r.species.length)
+  .map(r => ({ ...r, total: r.species.reduce((s, [, c]) => s + c, 0) }))
+  .sort((a, b) => b.total - a.total);
+const totalRecords = records.reduce((s, r) => s + r.total, 0);
+
+const toc = [
+  { id: 'fish', label: 'سمكة حقيقية رغم شكلها' },
+  { id: 'father', label: 'الأب الذي يلد' },
+  { id: 'life', label: 'كيف يعيش ويأكل' },
+  { id: 'species', label: 'أنواعه في البحار العربية' },
+  { id: 'records', label: 'أين سُجّل قرب موانئنا' },
+  { id: 'threats', label: 'لماذا يتناقص' },
+  { id: 'meet', label: 'إذا صادفته' },
+  { id: 'sources', label: 'المصادر' },
+];
+const takeaways = [
+  'حصان البحر <strong>سمكة حقيقية</strong> لها خياشيم وزعانف ومثانة هوائية، من فصيلة أسماك الأنابيب.',
+  'الذكر هو الذي <strong>يحمل البيض</strong> في جيب على بطنه أسابيع، ثم يلد الصغار.',
+  `سُجّل قرب <strong>${records.length} ميناءً عربياً</strong> في بياناتنا، من الدار البيضاء والمتوسط إلى البحر الأحمر والخليج.`,
+  'تجارته الدولية مقيدة منذ 2004، وأكبر ما يهدده <strong>شباك الجر</strong> وتجارة الحصان المجفف. إذا علق في شبكتك فأعده إلى الماء فوراً.',
+];
+const faq = [
+  { q: 'هل حصان البحر سمكة؟', a: 'نعم. يتنفس بالخياشيم، وله زعانف ومثانة هوائية، وينتمي إلى فصيلة أسماك الأنابيب (Syngnathidae). شكله المنتصب ورأسه الشبيه برأس الحصان هما ما يجعلان كثيراً من الناس يظنونه حيواناً آخر.' },
+  { q: 'هل صحيح أن الذكر هو الذي يلد؟', a: 'نعم. تضع الأنثى بيضها في جيب حضانة على بطن الذكر، فيخصبه ويحمله نحو أسبوعين إلى أربعة أسابيع بحسب النوع وحرارة الماء، ثم يطلق الصغار في الماء بانقباضات تشبه الولادة.' },
+  { q: 'أين أرى حصان البحر في البلاد العربية؟', a: 'في المياه الهادئة الضحلة بين الأعشاب البحرية وجذور المانغروف وحبال المراسي. سجّله الغواصون كثيراً في خليج العقبة، وفي سواحل الإمارات، وفي طنجة والجزائر ومناطق أخرى من المتوسط والأطلسي.' },
+  { q: 'هل يجوز اصطياد حصان البحر أو الاحتفاظ به؟', a: 'تجارته الدولية خاضعة لاتفاقية سايتس منذ 2004، وتمنع دول كثيرة صيده أو بيعه. وهو لا يعيش طويلاً في أحواض الهواة لأنه يحتاج إلى غذاء حي باستمرار. الأفضل أن تصوره وتتركه في مكانه.' },
+  { q: 'هل حصان البحر المجفف دواء؟', a: 'يُباع في بعض أسواق الطب التقليدي، لكن لا يوجد دليل علمي على فائدته العلاجية. وهذه التجارة تستهلك عشرات الملايين منه كل سنة، وهي من أهم أسباب تناقصه.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={['aqaba', 'dubai', 'tangier', 'algiers']}>
+  <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
+    <g fill="none" stroke="#5eead4" stroke-width="6" stroke-linecap="round" opacity=".55">
+      <path d="M40 250 C30 190 60 150 44 90"/><path d="M62 250 C70 200 52 170 66 120"/><path d="M262 250 C272 200 246 160 258 110"/>
+    </g>
+    <path fill="#fde68a" d="M168 34c-22-6-44 6-48 28l-34-6c-9-1-11 11-2 13l36 9c2 14 14 22 18 34 5 16-12 26-16 46-4 22 6 44 28 52 20 7 38-4 38-22 0-14-12-22-24-18-9 3-10 15-2 17 5 1 7-4 4-6 8 2 10 14 2 18-12 6-28-4-28-20 0-20 20-32 22-54 2-18-10-30-6-44 10 4 22 2 28-6 8-12 4-34-16-41z"/>
+    <circle cx="150" cy="58" r="5" fill="#0b2540"/>
+    <g fill="#e0f2fe" opacity=".7"><circle cx="214" cy="40" r="6"/><circle cx="232" cy="20" r="4"/><circle cx="222" cy="64" r="3"/></g>
+  </svg>
+
+  <p>رأس حصان، وذيل قرد يلتف حول الأعشاب، وعينان تتحركان كعيني الحرباء، وأب يحمل صغاره في جيب على بطنه. حصان البحر، أو فرس البحر كما يسميه كثيرون، من أغرب ما يعيش على سواحلنا. وهو أقرب إلينا مما نظن: سُجّل قرب <strong>{records.length} ميناءً عربياً</strong> من الأطلسي إلى الخليج.</p>
+
+  <h2 id="fish">سمكة حقيقية رغم شكلها</h2>
+  <p>كثيرون لا يعرفون أن حصان البحر سمكة. فهو يتنفس بالخياشيم، وله زعانف ومثانة هوائية تحفظ توازنه في الماء. ينتمي إلى فصيلة <strong>أسماك الأنابيب</strong>، ويضم جنسه <span class="latin" lang="la"><i>Hippocampus</i></span> نحو 46 نوعاً حول العالم. والاسم اللاتيني نفسه يعني «حصان البحر» باليونانية القديمة.</p>
+  <p>لكنه سمكة غير عادية: لا قشور له، بل يغطي جسمه درع من حلقات عظمية تحت الجلد. ويسبح منتصباً بزعنفة ظهرية صغيرة تهتز عشرات المرات في الثانية، فهو من أبطأ الأسماك سباحة. لذلك لا يبتعد كثيراً عن مكانه، ويقضي معظم وقته متمسكاً بذيله بعشبة أو غصن مرجان.</p>
+  <figure class="figure !p-0 overflow-hidden">
+    <img src={`${BASE}fish/seahorse.webp`} alt="حصان البحر المنقط على قاع رملي بجوار طحالب خضراء" width={kuda.w} height={kuda.h} loading="lazy" class="w-full h-auto block" />
+    <figcaption class="px-4 pb-3">
+      <a href={link('seahorse')}>حصان البحر المنقط</a> <span class="latin" lang="la"><i>Hippocampus kuda</i></span>، نوع الخليج والبحر الأحمر. يغيّر لونه ليشبه ما حوله.<br />
+      الصورة: <span lang="en">{kuda.artist}</span> · <a href={kuda.licenseUrl} rel="license noopener" lang="en">{kuda.license}</a> · <a href={kuda.source} rel="noopener">ويكيميديا كومنز</a>
+    </figcaption>
+  </figure>
+
+  <h2 id="father">الأب الذي يلد</h2>
+  <p>أشهر ما في حصان البحر أن <strong>الذكر هو الذي يحمل</strong>. في موسم التكاثر يتقابل الزوجان كل صباح في ما يشبه الرقصة: يلتفان حول عشبة واحدة، ويتغير لونهما، ويسبحان معاً. ثم تضع الأنثى بيضها في جيب الحضانة على بطن الذكر، فيخصبه داخله.</p>
+  <p>يبقى البيض في الجيب نحو أسبوعين إلى أربعة أسابيع بحسب النوع وحرارة الماء. والجيب ليس مجرد كيس: ينظم الذكر فيه الأكسجين والأملاح ويغذي الأجنة. وحين يحين الوقت يطلق الصغار بانقباضات قوية، وقد يخرج منه بضع عشرات أو أكثر من ألف صغير بحسب النوع والحجم.</p>
+  <div class="callout fact"><span class="ic">💡</span><div>يولد صغار حصان البحر مكتملي الشكل بطول سنتيمتر تقريباً، ويعتمدون على أنفسهم من اللحظة الأولى. ولا ينجو منهم إلى البلوغ إلا عدد قليل جداً، لأن الأسماك الأخرى تأكلهم.</div></div>
+
+  <h2 id="life">كيف يعيش ويأكل</h2>
+  <p>ليس لحصان البحر معدة حقيقية، فيمر الطعام في جسمه بسرعة، ولهذا يأكل طوال النهار تقريباً. غذاؤه قشريات صغيرة جداً مثل الربيان الدقيق ويرقات القشريات. ينتظر ساكناً حتى تقترب الفريسة، ثم يمتصها بخطمه الأنبوبي في جزء صغير من الثانية.</p>
+  <ul>
+    <li><strong>عينان مستقلتان:</strong> تتحرك كل عين وحدها، فيراقب الفريسة بعين والخطر بالأخرى.</li>
+    <li><strong>تمويه:</strong> يغيّر لونه ليطابق الأعشاب أو المرجان، وتنمو على جلد بعض الأنواع زوائد تشبه الطحالب.</li>
+    <li><strong>ذيل قابض:</strong> لا زعنفة في ذيله، بل يلفه حول ما حوله ليثبت نفسه أمام التيار.</li>
+    <li><strong>مكان ثابت:</strong> كثير من الأفراد يعيشون شهوراً في مساحة لا تتجاوز بضعة أمتار.</li>
+  </ul>
+  <p>ولأنه سباح ضعيف، يفضل الماء الهادئ: مروج الأعشاب البحرية، وجذور <a href={`${BASE}ports/abu-dhabi`}>المانغروف في أبوظبي</a>، والبحيرات الساحلية، وحتى حبال المراسي وشباك المزارع السمكية داخل الموانئ.</p>
+
+  <h2 id="species">أنواعه في البحار العربية</h2>
+  <p>لا يعيش في بحارنا نوع واحد، بل أنواع تختلف بين بحر وآخر:</p>
+  <ul>
+    <li><strong>الخليج العربي وبحر العرب:</strong> <a href={link('seahorse')}>حصان البحر المنقط</a> (<span class="latin" lang="la"><i>H. kuda</i></span>) في المياه العكرة والمانغروف، و<strong>حصان البحر الكبير</strong> (<span class="latin" lang="la"><i>H. kelloggi</i></span>) في المياه الأعمق على سواحل الفجيرة وعُمان.</li>
+    <li><strong>البحر الأحمر:</strong> <strong>حصان البحر الداكن</strong> (<span class="latin" lang="la"><i>H. fuscus</i></span>) في مروج الأعشاب، وقد عبر <a href={`${BASE}articles/suez-canal-invasive-species`}>قناة السويس</a> إلى شرق المتوسط حتى سُجّل قرب اللاذقية،و<strong>حصان جاياكار</strong> (<span class="latin" lang="la"><i>H. jayakari</i></span>) الذي يكثر في خليج العقبة.</li>
+    <li><strong>البحر المتوسط والأطلسي:</strong> <strong>حصان البحر قصير الخطم</strong> (<span class="latin" lang="la"><i>H. hippocampus</i></span>) و<strong>حصان البحر طويل الخطم</strong> (<span class="latin" lang="la"><i>H. guttulatus</i></span>) ذو الزوائد الشبيهة بالعرف، من طنجة إلى بنزرت والجزائر وصولاً إلى الداخلة.</li>
+  </ul>
+  <figure class="figure !p-0 overflow-hidden">
+    <img src={`${BASE}articles/seahorse-mediterranean.webp`} alt="حصان البحر طويل الخطم بلون أصفر منقط بين الطحالب البنية" width="1000" height="666" loading="lazy" class="w-full h-auto block" />
+    <figcaption class="px-4 pb-3">
+      حصان البحر طويل الخطم <span class="latin" lang="la"><i>Hippocampus guttulatus</i></span>، من أنواع المتوسط والأطلسي. لاحظ الزوائد الجلدية فوق رأسه.<br />
+      الصورة: <span lang="en">prilfish</span> · <a href="https://creativecommons.org/licenses/by/2.0" rel="license noopener" lang="en">CC BY 2.0</a> · <a href="https://commons.wikimedia.org/wiki/File:Hippocampus_guttulatus_-_29410007675.jpg" rel="noopener">ويكيميديا كومنز</a>
+    </figcaption>
+  </figure>
+
+  <h2 id="records">أين سُجّل قرب موانئنا</h2>
+  <p>جمعنا مشاهدات حصان البحر الموثقة في منصة <span lang="en">iNaturalist</span> (مشاهدات بصور راجعها مختصون) ضمن 50 كيلومتراً من كل ميناء في ArabTides. النتيجة <span class="latin">{totalRecords}</span> مشاهدة قرب {records.length} ميناءً:</p>
+  <table class="data-table">
+    <thead><tr><th>الميناء</th><th>الأنواع المسجلة</th><th>المشاهدات</th></tr></thead>
+    <tbody>
+      {records.map(r => (
+        <tr>
+          <td><a href={`${BASE}ports/${r.port}`}>{portName(r.port)}</a></td>
+          <td>{r.species.map(([n]) => SPECIES_AR[n] || n).join('، ')}</td>
+          <td class="latin">{r.total}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p>تتصدر <a href={`${BASE}ports/aqaba`}>العقبة</a> القائمة بفارق كبير، لا لأن حصان البحر أكثر فيها بالضرورة، بل لأن شعابها القريبة من الشاطئ من أشهر أماكن الغوص في المنطقة، فيصوره الغواصون كثيراً. فهذه الأرقام تعكس أين يبحث الناس ويصورون، لا عدد الخيول البحرية الفعلي. وغيابه عن ميناء في الجدول لا يعني أنه غير موجود هناك.</p>
+
+  <h2 id="threats">لماذا يتناقص</h2>
+  <p>يُصنَّف <a href={link('seahorse')}>حصان البحر المنقط</a> «معرضاً للانقراض» في القائمة الحمراء للاتحاد الدولي لحماية الطبيعة، وأعداد أنواع كثيرة غيره في تراجع. والأسباب ثلاثة:</p>
+  <ol>
+    <li><strong>شباك الجر:</strong> أكثر الخيول البحرية تُصاد عرضاً في شباك جر القاع، خاصة شباك <a href={link('shrimp')}>الربيان</a>، فيموت في الشبكة أو على سطح القارب.</li>
+    <li><strong>تجارة الحصان المجفف:</strong> يُباع مجففاً بعشرات الملايين كل سنة لأسواق الطب التقليدي والتذكارات، دون دليل علمي على أي فائدة علاجية.</li>
+    <li><strong>تدمير موطنه:</strong> ردم السواحل وقطع المانغروف وتلوث مروج الأعشاب البحرية تحرمه من المكان الوحيد الذي يستطيع العيش فيه، فهو لا يقدر على الهجرة بعيداً.</li>
+  </ol>
+  <div class="callout fact"><span class="ic">📜</span><div>منذ مايو 2004 أُدرجت كل أنواع حصان البحر في الملحق الثاني من <strong>اتفاقية سايتس</strong> لتنظيم التجارة الدولية بالحيوانات المهددة، فلا يُصدَّر إلا بتصريح يثبت أن صيده لا يضر بأعداده.</div></div>
+
+  <h2 id="meet">إذا صادفته</h2>
+  <p>قد تراه وأنت تغطس قرب الشاطئ، أو تجده عالقاً في شبكتك أو بين الأعشاب على حبل المرساة. في الحالتين:</p>
+  <ul>
+    <li><strong>إذا علق في الشبكة:</strong> أعده إلى الماء فوراً وبرفق، قرب الأعشاب أو الصخور إن أمكن. لا تتركه على سطح القارب ولو دقيقة.</li>
+    <li><strong>في الغطس:</strong> صوّره دون فلاش قريب، ولا تلمسه ولا تفك ذيله عن العشبة، ولا تطارده. فهو سباح بطيء يتعب بسرعة.</li>
+    <li><strong>لا تشترِه مجففاً</strong> ولا تحتفظ به للزينة، ولا تنقله إلى حوض في البيت؛ فهو يحتاج إلى غذاء حي باستمرار ولا يعيش طويلاً في الأحواض المنزلية.</li>
+    <li><strong>شارك مشاهدتك:</strong> صورة على <span lang="en">iNaturalist</span> مع المكان تساعد الباحثين على معرفة أين يعيش في بحارنا، وقد تظهر في هذا الجدول في تحديث قادم.</li>
+  </ul>
+  <div class="pull">أجمل ما تفعله حين تجد حصان البحر: أن تتركه حيث وجدته.</div>
+  <p>تعرّف على أسماك أخرى تشاركه البيئة نفسها في <a href={`${BASE}fish`}>دليل الأسماك</a>، مثل <a href={link('clownfish')}>{F('clownfish').ar}</a> و<a href={link('angelfish')}>{F('angelfish').ar}</a>.</p>
+
+  <h2 id="sources">المصادر</h2>
+  <ul class="text-sm">
+    <li>اتفاقية سايتس: <a href="https://cites.org/eng/app/appendices.php" rel="noopener" lang="en">CITES Appendices</a> (الجنس <i lang="la">Hippocampus</i> في الملحق الثاني منذ 2004).</li>
+    <li>القائمة الحمراء: <a href="https://www.iucnredlist.org/search?query=Hippocampus%20kuda" rel="noopener" lang="en">IUCN Red List — Hippocampus kuda</a>.</li>
+    <li>قاعدة بيانات الأسماك: <a href="https://www.fishbase.se/summary/Hippocampus-kuda.html" rel="noopener" lang="en">FishBase — Hippocampus kuda</a>.</li>
+    <li>مشروع حصان البحر للأبحاث والحماية: <a href="https://www.projectseahorse.org" rel="noopener" lang="en">Project Seahorse</a>.</li>
+    <li>المشاهدات قرب الموانئ: <a href="https://www.inaturalist.org" rel="noopener" lang="en">iNaturalist</a>، مشاهدات بدرجة «بحثية» ضمن 50 كم من كل ميناء.</li>
+    <li>الصور: <span lang="en">{kuda.artist}</span> (<a href={kuda.licenseUrl} rel="license noopener" lang="en">{kuda.license}</a>) و<span lang="en">prilfish</span> (<a href="https://creativecommons.org/licenses/by/2.0" rel="license noopener" lang="en">CC BY 2.0</a>) عبر ويكيميديا كومنز.</li>
+  </ul>
+</ArticleLayout>
