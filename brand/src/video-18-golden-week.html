@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو ساعاتك الذهبية هذا الأسبوع</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480.
+     Data: ArabTides engine, 26 Oct – 1 Nov 2026, local time, current tz data (Morocco UTC+0, Egypt still on
+     summer time until 30 Oct). Periods are the site's solunarPeriods() (rounded to the half hour, as on port pages). */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(800px 500px at 50% 30%, rgba(253, 230, 138, .10), transparent 65%),
+                linear-gradient(180deg, #06162a 0%, #0b2540 45%, #0f3d5c 62%); }
+  .scene { position: absolute; inset: 0; padding: 0 90px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish, .star, .bubble { left: 0; top: 0; }
+  .fish { position: absolute; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  .star { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+  .bubble { position: absolute; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); }
+  #sky, #shore { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #waves { position: absolute; left: -1080px; bottom: 0; width: 3240px; height: 220px; }
+
+  #s1 .q { margin-top: 250px; font-size: 128px; line-height: 1.2; }
+  #s1 .a { margin-top: 34px; font-size: 72px; color: var(--sand); font-weight: 700; }
+  #s1 .dt { margin-top: 18px; font-size: 50px; color: #cbd5e1; }
+  .h { margin-top: 250px; font-size: 96px; line-height: 1.2; }
+  .sub { margin-top: 22px; font-size: 56px; color: var(--sand); font-weight: 700; line-height: 1.4; }
+  .chips { display: flex; flex-direction: column; gap: 26px; margin-top: 60px; width: 100%; align-items: center; }
+  .chip { display: flex; align-items: center; justify-content: center; gap: 26px; width: 760px; padding: 26px 0; border-radius: 34px;
+    background: rgba(45,212,191,.16); border: 3px solid rgba(45,212,191,.6); font-size: 54px; font-weight: 700; }
+  .chip .k { font-size: 76px; font-weight: 800; color: var(--lagoon); }
+
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-top: 56px; width: 100%; direction: rtl; }
+  .day { border-radius: 24px; padding: 20px 0 18px; background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.16); }
+  .day.best { background: rgba(253,230,138,.16); border-color: var(--sand); }
+  .day .n { font-size: 30px; font-weight: 700; } .day .dd { font-size: 46px; font-weight: 800; margin-top: 2px; }
+  .day .st { font-size: 30px; font-weight: 700; color: var(--lagoon); margin-top: 10px; }
+  .day .dots { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 14px; }
+  .day .dots i { width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,.18); }
+  .day .dots i.on { background: var(--sand); }
+  .eg { margin-top: 22px; font-size: 36px; color: #cbd5e1; }
+
+  .eq { display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 90px; }
+  .eq .b { width: 250px; height: 250px; border-radius: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    background: rgba(255,255,255,.08); border: 3px solid rgba(255,255,255,.2); font-size: 40px; font-weight: 700; line-height: 1.25; }
+  .eq .b span { font-size: 96px; line-height: 1; }
+  .eq .op { font-family: var(--font-num); font-size: 90px; font-weight: 800; color: var(--sand); }
+  .eq .or { font-size: 44px; color: #cbd5e1; margin-top: 30px; }
+
+  .city { position: absolute; left: 70px; top: 250px; width: 940px; padding: 44px 40px 40px; border-radius: 44px;
+    background: rgba(6,22,42,.72); border: 3px solid rgba(255,255,255,.16); }
+  .city .top { display: flex; align-items: center; gap: 26px; }
+  .city .top img { width: 110px; height: 82px; border-radius: 12px; box-shadow: 0 0 0 2px rgba(255,255,255,.25); }
+  .city .nm { font-size: 92px; line-height: 1.1; }
+  .city .dy { margin-inline-start: auto; font-size: 46px; color: var(--sand); font-weight: 700; }
+  .city svg { width: 860px; height: 330px; margin-top: 30px; direction: ltr; overflow: visible; }
+  .city .m { margin-top: 18px; font-size: 50px; font-weight: 700; line-height: 1.45; }
+  .city .m .k { color: var(--lagoon); }
+  .legend { display: flex; justify-content: center; gap: 34px; margin-top: 20px; font-size: 32px; color: #cbd5e1; }
+  .legend i { display: inline-block; width: 30px; height: 30px; border-radius: 8px; vertical-align: -5px; margin-inline-end: 10px; }
+
+  #s10 .h { font-size: 88px; }
+  .fac { display: flex; justify-content: center; gap: 22px; margin-top: 50px; }
+  .fac div { width: 190px; padding: 22px 0; border-radius: 28px; background: rgba(255,255,255,.08); border: 2px solid rgba(255,255,255,.18); font-size: 36px; font-weight: 700; }
+  .fac span { display: block; font-size: 76px; margin-bottom: 6px; }
+  .ask { margin-top: 60px; display: flex; flex-direction: column; gap: 22px; align-items: center; }
+  .ask div { font-size: 54px; font-weight: 700; padding: 18px 46px; border-radius: 999px; background: rgba(253,230,138,.16); border: 3px solid var(--sand); }
+
+  #s11 { justify-content: flex-start; padding-top: 290px; }
+  #s11 img { width: 230px; height: 230px; }
+  #s11 .p { font-size: 66px; margin-top: 40px; }
+  #s11 .url { font-family: var(--font-num); font-weight: 800; font-size: 100px; color: var(--lagoon); margin-top: 14px; direction: ltr; }
+  #s11 .path { margin-top: 34px; font-size: 44px; color: #cbd5e1; padding: 16px 36px; border-radius: 24px; background: rgba(255,255,255,.08); }
+  #s11 .cm { margin-top: 40px; font-size: 56px; font-weight: 700; color: var(--sand); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="stars"></div>
+
+  <!-- Sky: moon path over the horizon; the sea hides the moon below it -->
+  <svg id="sky" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <radialGradient id="glow"><stop offset="0" stop-color="#fde68a" stop-opacity=".55"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d4a63"/><stop offset="1" stop-color="#0e5a66"/></linearGradient>
+    </defs>
+    <path id="arc" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-dasharray="4 14" stroke-linecap="round"/>
+    <path id="major" fill="none" stroke="#fde68a" stroke-width="26" stroke-linecap="round" opacity=".55"/>
+    <g id="moon"><circle r="150" fill="url(#glow)"/><circle r="52" fill="#fde68a"/><circle cx="-16" cy="-12" r="10" fill="#f5d36a"/><circle cx="18" cy="14" r="7" fill="#f5d36a"/></g>
+    <rect x="0" y="1180" width="1080" height="740" fill="url(#sea)"/>
+    <line x1="0" x2="1080" y1="1180" y2="1180" stroke="#5eead4" stroke-width="4" opacity=".5"/>
+  </svg>
+
+  <!-- Shore: a sandy beach on the left, a stone jetty with a lighthouse on the right -->
+  <svg id="shore" viewBox="0 0 1080 1920" aria-hidden="true">
+    <path d="M0 1172 C120 1172 250 1190 330 1235 C400 1275 430 1330 470 1420 L0 1420 Z" fill="#c9b27a" opacity=".85"/>
+    <path d="M0 1186 C110 1186 230 1204 300 1244 C360 1280 392 1330 424 1420" fill="none" stroke="#f4f8f9" stroke-width="5" opacity=".5"/>
+    <g fill="#16324a">
+      <rect x="720" y="1150" width="360" height="34" rx="6"/>
+      <path d="M700 1184 l22 -34 h18 v34z"/>
+      <rect x="760" y="1184" width="16" height="70"/><rect x="860" y="1184" width="16" height="70"/><rect x="960" y="1184" width="16" height="70"/>
+      <path d="M985 1150 L995 1068 H1035 L1045 1150 Z"/>
+      <rect x="988" y="1052" width="54" height="18" rx="4"/>
+    </g>
+    <path d="M995 1110 H1035 M992 1130 H1040" stroke="#f43f5e" stroke-width="9" opacity=".8"/>
+    <circle id="lamp" cx="1015" cy="1044" r="12" fill="#fde68a"/>
+  </svg>
+
+  <div class="layer" id="bubbles"></div>
+
+  <div class="scene" id="s1">
+    <div class="d q">متى تصطاد<br>هذا الأسبوع؟</div>
+    <div class="a">ساعاتك الذهبية 🌙</div>
+    <div class="dt"><span class="k">26</span> أكتوبر – <span class="k">1</span> نوفمبر</div>
+  </div>
+
+  <div class="scene" id="s2">
+    <div class="d h">الإثنين <span class="k">26</span> · بدر</div>
+    <div class="sub">الفترتان الكبريان</div>
+    <div class="chips">
+      <div class="chip"><span>☀️ ظهراً</span><span class="k">11:00–13:00</span></div>
+      <div class="chip"><span>🌙 ليلاً</span><span class="k">23:00–01:00</span></div>
+    </div>
+  </div>
+
+  <div class="scene" id="s3">
+    <div class="d h" style="font-size:84px">كل يوم<br>تتأخر نحو ساعة</div>
+    <div class="week" id="week"></div>
+    <div class="eg">بداية الفترة الكبرى نهاراً، مثال: دبي</div>
+  </div>
+
+  <div class="scene" id="s4">
+    <div class="d h">أفضل لحظة؟</div>
+    <div class="eq">
+      <div class="b"><span>🌙</span>ساعة<br>ذهبية</div>
+      <div class="op">+</div>
+      <div class="b"><span>🌊</span>مد<br>عالٍ</div>
+    </div>
+    <div class="or">أو 🌅 الغروب</div>
+  </div>
+
+  <div class="scene" id="s5"></div>
+  <div class="scene" id="s6"></div>
+  <div class="scene" id="s7"></div>
+  <div class="scene" id="s8"></div>
+  <div class="scene" id="s9"></div>
+
+  <div class="scene" id="s10">
+    <div class="d h">القمر عامل واحد</div>
+    <div class="fac">
+      <div><span>🌊</span>المد</div>
+      <div><span>🌬️</span>الطقس</div>
+      <div><span>〰️</span>التيارات</div>
+    </div>
+    <div class="ask"><div>🔖 احفظ الفيديو</div><div>📤 أرسله لصديقك الصياد</div></div>
+  </div>
+
+  <div class="scene" id="s11">
+    <img src="../logo/arabtides-mark.svg" alt="">
+    <div class="p">ساعات ميناءك كل يوم</div>
+    <div class="url">arabtides.com</div>
+    <div class="path">صفحة ميناءك ← 🎣 أوقات الصيد</div>
+    <div class="cm">اكتب اسم ميناءك 👇</div>
+  </div>
+
+  <div class="layer" id="fishLayer"></div>
+
+  <svg id="waves" viewBox="0 0 3240 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 90c135-45 270-45 405 0s270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0 270-45 405 0 270 45 405 0v130H0z" fill="rgba(45,212,191,.10)"/>
+    <path id="w2" d="M0 140c135-36 270-36 405 0s270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0 270-36 405 0 270 36 405 0v80H0z" fill="rgba(45,212,191,.16)"/>
+  </svg>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var lerp = function (a, b, p) { return a + (b - a) * p; };
+  var seed = 11, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 3.5, 9, 13, 17.5, 23, 28, 33, 38, 42.5, 48, 53];
+  var D = DESIGN;
+
+  // Week strip (Dubai): day, date, start of the daytime major period, site fish rating 1–5
+  var WEEK = [['الإثنين', 26, '11:00', 5], ['الثلاثاء', 27, '11:00', 5], ['الأربعاء', 28, '12:00', 4], ['الخميس', 29, '13:00', 3],
+              ['الجمعة', 30, '14:00', 3], ['السبت', 31, '15:00', 3], ['الأحد', 1, '16:00', 2]];
+  $('#week').innerHTML = WEEK.map(function (w, i) {
+    var dots = ''; for (var k = 5; k >= 1; k--) dots += '<i class="' + (k <= w[3] ? 'on' : '') + '"></i>';
+    return '<div class="day' + (i < 2 ? ' best' : '') + '"><div class="n">' + w[0] + '</div><div class="dd k">' + w[1] + '</div><div class="st k">' + w[2] + '</div><div class="dots">' + dots + '</div></div>';
+  }).join('');
+
+  // City scenes. blocks: [start h, end h, 'a' major | 'i' minor]; marks: ['h' high tide | 's' sunset, hour, label]
+  var CITIES = [
+    { el: '#s5', flag: 'kw', name: 'الكويت', day: 'الإثنين <span class="k">26</span>',
+      blocks: [[0, 1, 'a'], [5.5, 6.5, 'i'], [11, 13, 'a'], [16.5, 17.5, 'i'], [23, 24, 'a']],
+      marks: [['h', 12.25, '12:15'], ['h', 23.78, '23:47']],
+      m: 'المد العالي داخل الفترتين الكبريين' },
+    { el: '#s6', flag: 'ae', name: 'دبي', day: 'الإثنين <span class="k">26</span>',
+      blocks: [[0, 1, 'a'], [5.5, 6.5, 'i'], [11, 13, 'a'], [16.5, 17.5, 'i'], [23, 24, 'a']],
+      marks: [['h', 11.92, '11:55']],
+      m: 'فترة كبرى <span class="k">11:00–13:00</span><br>ومد عالٍ <span class="k">11:55</span>' },
+    { el: '#s7', flag: 'sa', name: 'جدة', day: 'الثلاثاء <span class="k">27</span>',
+      blocks: [[0, 1, 'a'], [6.5, 7.5, 'i'], [11, 13, 'a'], [17.5, 18.5, 'i'], [23, 24, 'a']],
+      marks: [['h', 7.07, '07:04'], ['s', 17.83, '17:50'], ['h', 18.37, '18:22']],
+      m: 'فترة صغرى + الغروب <span class="k">17:50</span><br>+ مد عالٍ <span class="k">18:22</span>' },
+    { el: '#s8', flag: 'eg', name: 'الإسكندرية', day: 'الإثنين <span class="k">26</span>',
+      blocks: [[0, 1, 'a'], [6.5, 7.5, 'i'], [11, 13, 'a'], [17.5, 18.5, 'i'], [23, 24, 'a']],
+      marks: [['h', 11.02, '11:01'], ['h', 23.12, '23:07']],
+      m: 'مد عالٍ <span class="k">23:07</span><br>داخل الفترة الكبرى' },
+    { el: '#s9', flag: 'ma', name: 'الدار البيضاء', day: 'الثلاثاء <span class="k">27</span>',
+      blocks: [[0, 1, 'a'], [7.5, 8.5, 'i'], [11, 13, 'a'], [17.5, 18.5, 'i'], [23, 24, 'a']],
+      marks: [['h', 2.2, '02:12'], ['h', 14.53, '14:32'], ['s', 17.72, '17:43']],
+      m: 'فترة صغرى <span class="k">17:30–18:30</span><br>مع الغروب <span class="k">17:43</span>' }
+  ];
+  var W = 860, HX = W / 24;
+  CITIES.forEach(function (c) {
+    var svg = '<rect x="0" y="120" width="' + W + '" height="90" rx="20" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.25)" stroke-width="3"/>';
+    c.blocks.forEach(function (b, n) {
+      svg += '<rect class="blk" data-w="' + ((b[1] - b[0]) * HX) + '" x="' + (b[0] * HX) + '" y="130" height="70" rx="12" width="0" fill="' + (b[2] == 'a' ? '#2dd4bf' : '#fde68a') + '"/>';
+    });
+    c.marks.forEach(function (k, n) {
+      // Marks less than 1.5 h apart push their icon and label apart
+      var x = k[1] * HX, col = k[0] == 'h' ? '#5eead4' : '#fdba74', icon = k[0] == 'h' ? '🌊' : '🌅';
+      var prev = c.marks[n - 1], next = c.marks[n + 1], dx = 0;
+      if (next && next[1] - k[1] < 1.5) dx = -48; else if (prev && k[1] - prev[1] < 1.5) dx = 48;
+      svg += '<g class="mk" opacity="0"><line x1="' + x + '" x2="' + x + '" y1="78" y2="222" stroke="' + col + '" stroke-width="6" stroke-linecap="round"/>' +
+        '<text x="' + (x + dx) + '" y="54" text-anchor="middle" font-size="40">' + icon + '</text>' +
+        '<text x="' + Math.min(Math.max(x + dx, 50), W - 50) + '" y="268" text-anchor="middle" font-family="Inter" font-weight="800" font-size="34" fill="' + col + '">' + k[2] + '</text></g>';
+    });
+    svg += '<g font-family="Inter" font-size="28" font-weight="600" fill="#94a3b8" text-anchor="middle"><text x="0" y="320">00</text><text x="' + 6 * HX + '" y="320">06</text><text x="' + 12 * HX + '" y="320">12</text><text x="' + 18 * HX + '" y="320">18</text><text x="' + W + '" y="320">24</text></g>';
+    $(c.el).innerHTML = '<div class="city"><div class="top"><img src="../../public/flags/' + c.flag + '.svg" alt=""><span class="d nm">' + c.name + '</span><span class="dy">' + c.day + '</span></div>' +
+      '<svg viewBox="0 0 ' + W + ' 330">' + svg + '</svg>' +
+      '<div class="legend"><span><i style="background:#2dd4bf"></i>فترة كبرى</span><span><i style="background:#fde68a"></i>فترة صغرى</span></div>' +
+      '<div class="m">' + c.m + '</div></div>';
+    c.blks = [].slice.call(document.querySelectorAll(c.el + ' .blk'));
+    c.mks = [].slice.call(document.querySelectorAll(c.el + ' .mk'));
+    c.card = $(c.el + ' .city'); c.line = $(c.el + ' .m');
+  });
+
+  // --- Fish: a body, a wagging tail, a fin and an eye; faces left in its own coordinates
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#5eead4', '#0d9488'], ['#fca5a5', '#f87171'], ['#93c5fd', '#60a5fa']];
+  var fish = [];
+  for (var i = 0; i < 8; i++) {
+    var c = COLORS[i % COLORS.length], el = document.createElement('div');
+    el.className = 'fish';
+    el.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(el);
+    fish.push({ el: el, tail: el.querySelector('.tail'), ph: rnd() * 6.28, sc: .65 + rnd() * .4 });
+  }
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 8;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+
+  var stars = [], bubbles = [];
+  for (var j = 0; j < 60; j++) { var s = document.createElement('div'); s.className = 'star'; $('#stars').appendChild(s); var r = .5 + rnd(); s.style.transform = 'translate(' + (rnd() * 1080) + 'px,' + (rnd() * 1120) + 'px) scale(' + r + ')'; stars.push({ el: s, ph: rnd() * 6.28, sp: 1 + rnd() * 2 }); }
+  for (var b = 0; b < 12; b++) { var e = document.createElement('div'); e.className = 'bubble'; var sz = 10 + rnd() * 20; e.style.width = e.style.height = sz + 'px'; $('#bubbles').appendChild(e); bubbles.push({ el: e, x: 480 + rnd() * 560, y0: rnd() * 600, v: 50 + rnd() * 60 }); }
+
+  // Moon path: half circle over the horizon; 90° is the transit (top)
+  var CX = 540, CY = 1180, R = 420, rad = Math.PI / 180;
+  var arcPt = function (deg) { return [CX + R * Math.cos(deg * rad), CY - R * Math.sin(deg * rad)]; };
+  var arcD = function (a, b) { var p = [], st = a > b ? -1 : 1; for (var d = a; st * (b - d) >= 0; d += st) p.push(arcPt(d).map(function (v) { return v.toFixed(1); }).join(',')); return 'M' + p.join(' L'); };
+  $('#arc').setAttribute('d', arcD(180, 0));
+  $('#major').setAttribute('d', arcD(105, 75));
+  var moveMoon = function (g, x, y, o) { g.setAttribute('transform', 'translate(' + x + ',' + y + ')'); g.style.opacity = o; };
+
+  function drawAt(t) {
+    $('#waves').style.transform = 'translateX(' + ((t * 50) % 810) + 'px)';
+    $('#w2').style.transform = 'translateX(' + (-(t * 35) % 810) + 'px)';
+    bubbles.forEach(function (q) { var y = 1260 + ((q.y0 - t * q.v) % 600 + 600) % 600; q.el.style.transform = 'translate(' + (q.x + Math.sin(t * 1.5 + q.y0) * 12) + 'px,' + y + 'px)'; q.el.style.opacity = .45; });
+    stars.forEach(function (q) { q.el.style.opacity = .35 + .45 * (.5 + .5 * Math.sin(t * q.sp + q.ph)); });
+    var lampOn = .6 + .4 * Math.sin(t * 3); $('#lamp').style.opacity = lampOn;
+
+    var sv = [1 - seg(t, D[1] - .4, D[1])];
+    for (var n = 1; n < 10; n++) sv.push(vis(t, D[n], D[n + 1]));
+    sv.push(seg(t, D[10], D[10] + .5, out));
+    sv.forEach(function (o, n) { $('#s' + (n + 1)).style.opacity = o; });
+
+    // Scene 1: hook is up at frame 1, then the date slides in
+    show($('#s1 .q'), 1, 0);
+    show($('#s1 .a'), seg(t, .6, 1.1), 30 * (1 - seg(t, .6, 1.2, out)));
+    show($('#s1 .dt'), seg(t, 1.2, 1.7), 30 * (1 - seg(t, 1.2, 1.8, out)));
+
+    // Moon: high in scenes 1–4 (the major period glows at its top in scene 2), hidden behind the city cards
+    var moonO = Math.max(sv[0], sv[1], sv[2] * .6);
+    var m = t < D[1] ? arcPt(lerp(150, 90, seg(t, 0, 3, out))) : arcPt(90);
+    moveMoon($('#moon'), m[0], m[1] + 230 + Math.sin(t) * 6, moonO);
+    $('#arc').style.opacity = 0; $('#arc').style.strokeDashoffset = -t * 20;
+    var maj = seg(t, D[1] + .6, D[1] + 1.6);
+    $('#major').style.strokeDasharray = '230'; $('#major').style.strokeDashoffset = 230 * (1 - maj);
+    $('#major').style.opacity = 0;
+    document.querySelectorAll('#s2 .chip').forEach(function (el, k) { show(el, seg(t, D[1] + 1.4 + k * .9, D[1] + 1.9 + k * .9), 30 * (1 - seg(t, D[1] + 1.4 + k * .9, D[1] + 2 + k * .9, out))); });
+
+    // Scene 3: days drop in one by one
+    document.querySelectorAll('#s3 .day').forEach(function (el, k) { show(el, seg(t, D[2] + .5 + k * .25, D[2] + .9 + k * .25), 40 * (1 - seg(t, D[2] + .5 + k * .25, D[2] + 1 + k * .25, out))); });
+    // Scene 4: the equation builds
+    var eqs = document.querySelectorAll('#s4 .b, #s4 .op');
+    [0, 2, 1].forEach(function (idx, k) { var a = D[3] + .8 + k * .6; eqs[idx].style.opacity = seg(t, a, a + .4); eqs[idx].style.transform = 'scale(' + (.7 + .3 * seg(t, a, a + .5, out)) + ')'; });
+    $('#s4 .or').style.opacity = seg(t, D[3] + 2.6, D[3] + 3);
+
+    // City scenes: card rises, periods fill the day bar, then tide/sunset markers, then the match line
+    CITIES.forEach(function (c, n) {
+      var a = D[4 + n];
+      c.card.style.transform = 'translateY(' + (60 * (1 - seg(t, a, a + .6, out))) + 'px)';
+      c.blks.forEach(function (r, k) { r.setAttribute('width', r.dataset.w * seg(t, a + .5 + k * .15, a + .9 + k * .15, out)); });
+      c.mks.forEach(function (g, k) { g.setAttribute('opacity', seg(t, a + 1.4 + k * .3, a + 1.7 + k * .3)); });
+      show(c.line, seg(t, a + 2, a + 2.4), 20 * (1 - seg(t, a + 2, a + 2.5, out)));
+    });
+
+    // Scene 10: factors, then the two asks
+    document.querySelectorAll('#s10 .fac div').forEach(function (el, k) { show(el, seg(t, D[9] + .6 + k * .3, D[9] + 1 + k * .3), 30 * (1 - seg(t, D[9] + .6 + k * .3, D[9] + 1.1 + k * .3, out))); });
+    document.querySelectorAll('#s10 .ask div').forEach(function (el, k) { var a = D[9] + 2.6 + k * .8; el.style.opacity = seg(t, a, a + .4); el.style.transform = 'scale(' + (.85 + .15 * seg(t, a, a + .5, out)) + ')'; });
+
+    // Scene 11: end card
+    $('#s11 img').style.transform = 'scale(' + (.6 + .4 * seg(t, D[10], D[10] + .8, out)) + ')';
+    show($('#s11 .p'), seg(t, D[10] + .5, D[10] + .9), 20 * (1 - seg(t, D[10] + .5, D[10] + 1, out)));
+    show($('#s11 .url'), seg(t, D[10] + .8, D[10] + 1.2), 20 * (1 - seg(t, D[10] + .8, D[10] + 1.3, out)));
+    show($('#s11 .path'), seg(t, D[10] + 1.3, D[10] + 1.7), 0);
+    show($('#s11 .cm'), seg(t, D[10] + 2.4, D[10] + 2.8), 20 * (1 - seg(t, D[10] + 2.4, D[10] + 2.9, out)));
+
+    // Fish: lazy lanes in open water; in scene 2 they gather under the moon, in scene 4 they speed up
+    var gather = seg(t, D[1] + .8, D[1] + 2.6) * (1 - seg(t, D[2] - .3, D[2] + .6));
+    fish.forEach(function (f, i) {
+      var dir = i % 2 ? 1 : -1, sp = 45 + i * 8 + (t > D[3] && t < D[4] ? 60 : 0);
+      var lane = t * sp + i * 210, x = dir > 0 ? 480 + (lane % 700) - 60 : 1140 - (lane % 700);
+      var y = 1290 + (i % 4) * 62;
+      var gx = 540 + ((i % 3) - 1) * 120 + Math.sin(t * 2 + i) * 18, gy = 1280 + Math.floor(i / 3) * 70;
+      x = lerp(x, gx, gather); y = lerp(y, gy, gather);
+      if (gather > .95) dir = Math.sin(t * 1.4 + i) > 0 ? 1 : -1;
+      putFish(f, x, y, dir, t, 8 + gather * 10, clamp(t / .5));
+    });
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>

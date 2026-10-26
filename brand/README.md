@@ -10,6 +10,9 @@
 | Instagram profile picture 1080×1080 | `instagram/00-profile-picture.png` |
 | Launch carousel, 7 slides 1080×1350 | `instagram/01-launch/` |
 | Full-moon carousel, 7 slides 1080×1350 | `instagram/02-full-moon/` |
+| "Three types of tide" carousel, 8 slides 1080×1350 (real curves: Casablanca, Dubai, Algiers) | `instagram/03-tide-types/` |
+| "Where is your port?" carousel: all 53 ports ranked by the full-moon week range (25–31 Oct 2026), 8 slides | `instagram/04-port-ranking/` |
+| Full-moon week Stories, 7 frames 1080×1920 (countdown, poll, moonrise at sunset, night high tides, quiz + answer, link); sticker guide in `captions.md` | `instagram/05-stories/` |
 | Full-moon Reel, 1080×1920, 29 s, Arabic voiceover + music | `video/video-01-full-moon.mp4` |
 | Reel cover image | `video/video-01-cover.png` |
 | "How tides affect fishing" Reel, 29 s, voice + music | `video/video-02-tides-fishing.mp4` (cover `video/video-02-cover.png`) |
@@ -26,6 +29,10 @@
 | "Which bait for which fish" Reel: shrimp, live fish, squid, worms, dough and weed, each with fish photos (pairs from `bait` in `src/lib/fish.ts`), cool-box tip; 70 s, voice + music | `video/video-13-bait.mp4` (cover `video/video-13-cover.png`, caption `video/video-13-caption.txt`) |
 | "Best fishing days in November" Reel: two windows (new and full moon), then one 5/5 day each for Kuwait City, Dammam, Muscat, Dubai and Casablanca with the real tide curve; 64 s, voice + music | `video/video-14-november.mp4` (cover `video/video-14-cover.png`, caption `video/video-14-caption.txt`; curves in `video/video-14-november/data.json`) |
 | "Don't touch these fish" Reel: a countdown of six dangerous fish (electric ray, stingray, scorpionfish, rabbitfish, lionfish, puffer) with real photos and warning stamps, then first aid for a spine sting; 67 s, voice + music | `video/video-15-dangerous-fish.mp4` (cover `video/video-15-cover.png`, caption `video/video-15-caption.txt`) |
+| "True or false" quiz Reel: five statements about the sea (Mediterranean tide, daily delay, full moon, rule of twelfths, one tide a day), each with a 3-second timer then the answer with real numbers from the tide model (Alexandria/Sfax, Dubai, Muscat, Algiers); 60 s, voice + music | `video/video-16-true-false.mp4` (cover `video/video-16-cover.png`, caption `video/video-16-caption.txt`) |
+| "16 new ports" Reel (builds #050 and #051): a real map (Natural Earth 1:50m, projected into `video/video-17-new-ports/map.js`) drops the sixteen new pins, zooms to Morocco, Tunisia, Libya and the UAE with names, then Gabès (1.71 m, the biggest Mediterranean tide) vs Tobruk (8 cm); 57 s, voice + music | `video/video-17-new-ports.mp4` (cover `video/video-17-cover.png`, caption `video/video-17-caption.txt`) |
+| "Golden hours this week" Reel (series ep. 1, full-moon week 26 Oct–1 Nov 2026): Monday's major periods, the daily one-hour shift (Dubai week strip with ratings), then golden hour + high tide or sunset in Kuwait, Dubai, Jeddah, Alexandria and Casablanca, with shore scenery; 60 s, voice + music | `video/video-18-golden-week.mp4` (cover `video/video-18-cover.png`, caption `video/video-18-caption.txt`) |
+| "Where do our numbers come from?" trust Reel: answers "nonsense / it's AI" comments: voice is synthetic but the numbers aren't; EOT20 satellite model, 17 waves (M2, S2, smaller), Casablanca Tue 27 Oct high tide 14:32, astronomical sun/moon, checked against an independent library (< 2 mm), what we don't promise, try it yourself, /methodology; 74 s, voice + music | `video/video-19-trust.mp4` (cover `video/video-19-cover.png`, caption `video/video-19-caption.txt`; curve in `video/video-19-trust/data.json`) |
 | Captions, alt text, bio | `instagram/captions.md` |
 
 ## Colours

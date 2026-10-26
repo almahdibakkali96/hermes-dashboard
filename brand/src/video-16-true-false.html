@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو صح أم خطأ</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480.
+     A true-or-false quiz: five statements, each a question scene then an answer scene.
+     Every number comes from the site's tide model (src/lib/tides.ts, EOT20 constituents), November 2026. */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(900px 700px at 50% 25%, rgba(45, 212, 191, .18), transparent 65%),
+      linear-gradient(180deg, #071a2e 0%, #0b2540 45%, #0f3d5c 80%); }
+  .scene { position: absolute; inset: 0; padding: 0 90px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish { position: absolute; left: 0; top: 0; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  #world { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .h1 { text-shadow: 0 4px 24px rgba(6, 12, 30, .8); }
+
+  /* Progress: five dots that turn green (true) or red (false) as each answer lands */
+  #dots { position: absolute; top: 236px; left: 0; right: 0; display: flex; justify-content: center; gap: 22px; direction: ltr; }
+  #dots i { width: 34px; height: 34px; border-radius: 50%; border: 4px solid rgba(255, 255, 255, .35); background: transparent; }
+
+  /* Hook */
+  #s1 .kick { margin-top: 330px; font-size: 60px; color: var(--sand); font-weight: 700; }
+  #s1 .q { margin-top: 10px; font-size: 124px; line-height: 1.15; }
+  #s1 .big { display: flex; gap: 40px; margin-top: 50px; }
+  #s1 .tf { width: 380px; height: 220px; border-radius: 40px; display: flex; align-items: center; justify-content: center; font-size: 110px; }
+  #s1 .tf.t { background: rgba(34, 197, 94, .2); border: 6px solid #22c55e; }
+  #s1 .tf.f { background: rgba(244, 63, 94, .2); border: 6px solid #f43f5e; }
+  #s1 .sub { margin-top: 56px; font-size: 64px; font-weight: 700; line-height: 1.4; }
+  #s1 .sub b { color: #fb7185; font-size: 84px; }
+
+  /* Question scenes */
+  .qs .pill, .as .pill { margin-top: 310px; padding: 10px 36px; border-radius: 999px; background: rgba(255, 255, 255, .1); border: 2px solid rgba(255, 255, 255, .2);
+    font-size: 44px; font-weight: 700; color: var(--lagoon); }
+  .qs .card { margin-top: 40px; width: 900px; min-height: 420px; padding: 50px 50px; border-radius: 44px; display: flex; align-items: center; justify-content: center;
+    background: rgba(11, 37, 64, .85); border: 4px solid rgba(45, 212, 191, .45); box-shadow: 0 30px 80px rgba(0, 0, 0, .45); }
+  .qs .card div { font-size: 92px; line-height: 1.3; }
+  .qs .btns { margin-top: 50px; display: flex; gap: 40px; }
+  .qs .b { width: 400px; height: 150px; border-radius: 34px; display: flex; align-items: center; justify-content: center; gap: 18px; font-size: 66px; font-weight: 800; }
+  .qs .b.t { background: #16a34a; } .qs .b.f { background: #e11d48; }
+  .qs .timer { margin-top: 50px; position: relative; width: 170px; height: 170px; }
+  .qs .timer svg { position: absolute; inset: 0; }
+  .qs .timer span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 84px; font-weight: 800; }
+
+  /* Answer scenes */
+  .as .stmt { position: relative; margin-top: 60px; width: 900px; padding: 26px 40px; border-radius: 32px; background: rgba(11, 37, 64, .8); border: 3px solid rgba(255, 255, 255, .15); }
+  .as .stmt div { font-size: 52px; line-height: 1.35; font-weight: 700; color: rgba(255, 255, 255, .85); }
+  .as .stamp { position: absolute; top: -78px; left: -24px; padding: 8px 34px; border-radius: 20px; font-size: 74px; font-weight: 800; white-space: nowrap; border: 7px solid #fff; }
+  .as .stamp.t { background: #16a34a; } .as .stamp.f { background: #e11d48; }
+  .as .viz { margin-top: 40px; width: 900px; height: 560px; border-radius: 40px; background: rgba(7, 26, 46, .78); border: 3px solid rgba(45, 212, 191, .3); position: relative; overflow: hidden; }
+  .as .vh { position: absolute; top: 26px; left: 0; right: 0; font-size: 40px; font-weight: 700; color: var(--mist); }
+  .as .line { margin-top: 34px; font-size: 56px; line-height: 1.35; font-weight: 700; }
+  .as .line b { color: var(--sand); }
+
+  /* 1: two water tanks */
+  .tanks { position: absolute; left: 0; right: 0; bottom: 30px; display: flex; justify-content: center; gap: 120px; }
+  .tank { display: flex; flex-direction: column; align-items: center; }
+  .tank .glass { position: relative; width: 200px; height: 240px; border: 5px solid rgba(255, 255, 255, .6); border-top: none; border-radius: 0 0 26px 26px; overflow: hidden; }
+  .tank .water { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, #2dd4bf, #0d6e7a); }
+  .tank .cm { font-size: 56px; line-height: 1.2; font-weight: 800; margin-top: 6px; color: var(--lagoon); }
+  .tank .who { display: flex; align-items: center; gap: 14px; font-size: 44px; font-weight: 700; margin-bottom: 10px; }
+  .tank .who img { width: 56px; height: 40px; border-radius: 6px; }
+  .meter { position: absolute; left: 60px; right: 60px; border-top: 4px dashed rgba(253, 230, 138, .7); }
+  .meter span { position: absolute; left: 0; top: -54px; font-size: 36px; color: var(--sand); font-weight: 700; }
+
+  /* 2: Dubai high tides, day by day */
+  .rows { position: absolute; top: 100px; left: 50px; right: 50px; display: flex; flex-direction: column; gap: 18px; }
+  .row { display: flex; align-items: center; gap: 26px; padding: 12px 26px; border-radius: 24px; background: rgba(255, 255, 255, .06); }
+  .row .day { width: 220px; font-size: 42px; font-weight: 700; text-align: start; }
+  .row svg { flex: none; }
+  .row .tm { font-size: 60px; font-weight: 800; color: var(--lagoon); }
+  .row .dl { margin-inline-start: auto; padding: 4px 20px; border-radius: 999px; background: rgba(253, 230, 138, .15); color: var(--sand); font-size: 38px; font-weight: 700; }
+
+  /* 3: Muscat range, full moon vs quarter */
+  .bars { position: absolute; top: 100px; left: 50px; right: 50px; display: flex; flex-direction: column; gap: 30px; }
+  .bar { text-align: start; }
+  .bar .lab { display: flex; align-items: center; gap: 16px; font-size: 44px; font-weight: 700; }
+  .bar .lab .em { font-size: 64px; }
+  .bar .track { margin-top: 10px; height: 76px; border-radius: 22px; background: rgba(255, 255, 255, .07); position: relative; overflow: hidden; }
+  .bar .fill { position: absolute; top: 0; bottom: 0; right: 0; border-radius: 22px; display: flex; align-items: center; justify-content: flex-start; padding-inline-start: 24px; font-size: 52px; font-weight: 800; color: #0b2540; }
+
+  /* 4: rule of twelfths */
+  .tw { position: absolute; left: 70px; right: 70px; bottom: 70px; height: 360px; display: flex; align-items: flex-end; justify-content: center; gap: 22px; direction: ltr; }
+  .tw .c { width: 100px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+  .tw .col { width: 100%; border-radius: 16px 16px 6px 6px; background: rgba(148, 163, 184, .45); position: relative; }
+  .tw .c.mid .col { background: linear-gradient(180deg, #2dd4bf, #0d9488); box-shadow: 0 0 30px rgba(45, 212, 191, .5); }
+  .tw .fr { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+  .tw .hr { margin-top: 10px; font-size: 30px; color: var(--mist); font-weight: 700; }
+  .half { position: absolute; top: 92px; left: 0; right: 0; font-size: 46px; font-weight: 800; color: var(--lagoon); }
+  .viz .fishph { position: absolute; top: 170px; left: 40px; width: 130px; height: 130px; border-radius: 50%; overflow: hidden; border: 4px solid var(--lagoon); }
+  .viz .fishph img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* 5: one tide vs two */
+  .curves { position: absolute; inset: 90px 40px 30px; }
+  .curves .lab { position: absolute; right: 0; display: flex; align-items: center; gap: 12px; font-size: 40px; font-weight: 700; }
+  .curves .lab img { width: 50px; height: 36px; border-radius: 5px; }
+  .curves .lab b { color: var(--sand); }
+
+  #s12 { justify-content: flex-start; padding-top: 300px; }
+  #s12 img.logo { width: 180px; height: 180px; }
+  #s12 .q { margin-top: 30px; font-size: 120px; line-height: 1.15; }
+  #s12 .score { margin-top: 30px; display: flex; align-items: center; gap: 24px; padding: 20px 50px; border-radius: 999px; background: #fbbf24; color: #111827; font-size: 60px; font-weight: 800; }
+  #s12 .score .k { font-size: 76px; }
+  #s12 .p { font-size: 52px; margin-top: 50px; color: var(--sand); font-weight: 700; }
+  #s12 .url { font-family: var(--font-num); font-weight: 800; font-size: 92px; color: var(--lagoon); margin-top: 16px; direction: ltr; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="world" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".55"/><stop offset=".25" stop-color="#0d6e7a" stop-opacity=".85"/><stop offset="1" stop-color="#0a3f55"/></linearGradient>
+      <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c88f"/><stop offset="1" stop-color="#b8925a"/></linearGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#64707c"/><stop offset="1" stop-color="#2f3943"/></linearGradient>
+      <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa5ae"/><stop offset="1" stop-color="#6b7681"/></linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fde68a" stop-opacity=".5"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/></linearGradient>
+    </defs>
+    <!-- Shore: rocks on the left, a beach with an angler's rod, the harbour wall and lighthouse on the right -->
+    <path d="M0 1640 C40 1530 90 1490 150 1500 C200 1450 260 1470 300 1540 C320 1580 330 1610 340 1640 Z" fill="url(#rock)"/>
+    <path d="M330 1640 C420 1590 560 1585 700 1640 Z" fill="url(#sand)"/>
+    <g id="rod"><path d="M520 1610 L470 1470" stroke="#3f2d1c" stroke-width="7" stroke-linecap="round"/><path id="lineR" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"/></g>
+    <rect x="720" y="1560" width="360" height="100" fill="url(#wall)"/>
+    <path d="M965 1560 L975 1350 L1005 1350 L1015 1560 Z" fill="#f4f8f9"/><path d="M969 1485 h42 v28 h-42z M972 1410 h36 v26 h-36z" fill="#f43f5e"/><rect x="965" y="1325" width="50" height="28" rx="6" fill="#fde68a"/>
+    <path id="beam" d="M990 1339 L560 1295 L560 1385 Z" fill="url(#beam)"/>
+    <path id="wv" fill="url(#sea)"/>
+  </svg>
+
+  <div class="layer" id="fishLayer"></div>
+  <div id="dots"><i></i><i></i><i></i><i></i><i></i></div>
+
+  <div class="scene" id="s1">
+    <div class="kick h1">اختبر نفسك</div>
+    <div class="d q h1">5 معلومات<br>تصدّقها عن البحر</div>
+    <div class="big"><div class="tf t">✅</div><div class="tf f">❌</div></div>
+    <div class="sub h1"><b>3</b> منها خطأ</div>
+  </div>
+  <!-- Scenes 2–11 (question + answer for each statement) are built from QUIZ below; 12 is the end card -->
+  <div class="scene" id="s12">
+    <img class="logo" src="../logo/arabtides-mark.svg" alt="">
+    <div class="d q h1">كم عرفت؟</div>
+    <div class="score">اكتب نتيجتك <span class="k">?/5</span> 👇</div>
+    <div class="p h1">مواعيد المدّ لميناءك كل يوم</div>
+    <div class="url">arabtides.com</div>
+  </div>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var rise = function (el, t, a) { show(el, seg(t, a, a + .4), 24 * (1 - seg(t, a, a + .5, out))); };
+  var seed = 161, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 4, 8, 13, 17, 22, 26, 31, 35, 40, 44, 49, 54.5];
+
+  var FLAG = '../../public/flags/';
+  var hh = function (m) { return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); };
+  // Dubai high tides 1–4 Nov 2026 (morning tide), minutes after midnight
+  var DUBAI = [['1 نوفمبر', 300], ['2 نوفمبر', 377], ['3 نوفمبر', 456], ['4 نوفمبر', 520]];
+  // Tide height every 15 min on 1 Nov 2026, local time (cm)
+  var ALG = [-0.1,-0.6,-1.1,-1.6,-2.1,-2.5,-2.9,-3.3,-3.7,-4,-4.3,-4.5,-4.7,-4.9,-5,-5.1,-5.1,-5.1,-5.1,-5,-4.9,-4.7,-4.5,-4.2,-3.9,-3.4,-3,-2.4,-1.8,-1.1,-0.4,0.4,1.3,2.2,3.1,4,4.9,5.8,6.7,7.5,8.3,9.1,9.7,10.4,10.9,11.3,11.7,12,12.3,12.4,12.6,12.6,12.6,12.6,12.6,12.4,12.3,12.2,12,11.7,11.5,11.2,10.9,10.6,10.2,9.8,9.4,8.9,8.5,8,7.5,7,6.5,6.1,5.6,5.2,4.8,4.5,4.1,3.9,3.6,3.4,3.3,3.1,3,2.9,2.8,2.7,2.6,2.5,2.3,2.2,1.9,1.7,1.4,1.1,0.7];
+  var DXB = [-68.3,-63.7,-58.6,-53,-47.1,-41,-34.7,-28.3,-22,-15.8,-9.8,-4.1,1.1,6,10.2,13.9,16.9,19.3,20.9,21.9,22.3,22,21.1,19.7,17.8,15.5,13,10.2,7.3,4.4,1.6,-1.1,-3.6,-5.9,-7.7,-9.2,-10.2,-10.8,-10.9,-10.5,-9.5,-8.1,-6.1,-3.7,-0.7,2.6,6.4,10.5,15,19.8,24.8,30,35.3,40.6,45.9,51.1,56.1,60.8,65.2,69.1,72.5,75.3,77.5,78.9,79.5,79.3,78.2,76.3,73.6,70,65.6,60.4,54.6,48.1,41.1,33.7,25.9,17.9,9.7,1.5,-6.7,-14.7,-22.4,-29.8,-36.8,-43.4,-49.4,-54.8,-59.6,-63.8,-67.3,-70,-72.1,-73.5,-74.1,-74.1,-73.3];
+
+  function clock(min) {
+    var a = (min % 720) / 720 * 360, m = (min % 60) / 60 * 360;
+    return '<svg width="72" height="72" viewBox="-36 -36 72 72"><circle r="32" fill="none" stroke="#2dd4bf" stroke-width="5"/>' +
+      '<line y2="-17" stroke="#fff" stroke-width="6" stroke-linecap="round" transform="rotate(' + a + ')"/>' +
+      '<line y2="-25" stroke="#fde68a" stroke-width="4" stroke-linecap="round" transform="rotate(' + m + ')"/></svg>';
+  }
+  function curveSvg(id, data, y0, h, highs) {
+    var min = Math.min.apply(null, data), max = Math.max.apply(null, data), p = '';
+    data.forEach(function (v, i) { p += (i ? ' L' : 'M') + (i / (data.length - 1) * 820).toFixed(1) + ' ' + (y0 + h - (v - min) / (max - min) * h).toFixed(1); });
+    return '<path id="' + id + '" d="' + p + '" fill="none" stroke="#2dd4bf" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>' +
+      highs.map(function (m) { var i = Math.round(m / 15), x = i / (data.length - 1) * 820, y = y0 + h - (data[i] - min) / (max - min) * h;
+        return '<g class="hi" data-at="' + (i / (data.length - 1)) + '"><circle cx="' + x + '" cy="' + y + '" r="14" fill="#fde68a"/>' +
+          '<text x="' + x + '" y="' + (y - 26) + '" fill="#fde68a" font-size="34" font-weight="800" text-anchor="middle" font-family="Inter, sans-serif">' + hh(m) + '</text></g>'; }).join('');
+  }
+
+  var QUIZ = [
+    { q: 'البحر المتوسط<br>ليس فيه مدّ وجزر', ans: false, line: 'في صفاقس يقترب من <b>متر</b>',
+      head: 'أكبر فرق بين المدّ والجزر في نوفمبر',
+      viz: '<div class="meter" style="top:166px"><span>1 متر</span></div><div class="tanks">' +
+        [['eg', 'الإسكندرية', 29], ['tn', 'صفاقس', 89]].map(function (c) {
+          return '<div class="tank"><div class="who"><img src="' + FLAG + c[0] + '.svg" alt="">' + c[1] + '</div><div class="glass"><div class="water" data-cm="' + c[2] + '"></div></div><div class="cm"><span class="k n" data-v="' + c[2] + '">0</span> سم</div></div>';
+        }).join('') + '</div>' },
+    { q: 'المدّ يأتي في الساعة<br>نفسها كل يوم', ans: false, line: 'يتأخّر كل يوم <b>قرابة ساعة</b>',
+      head: 'المدّ العالي الصباحي في دبي',
+      viz: '<div class="rows">' + DUBAI.map(function (r, i) {
+        return '<div class="row"><span class="day">' + r[0] + '</span>' + clock(r[1]) + '<span class="tm k">' + hh(r[1]) + '</span>' +
+          (i ? '<span class="dl">+<span class="k">' + (r[1] - DUBAI[i - 1][1]) + '</span> دقيقة</span>' : '') + '</div>';
+      }).join('') + '</div>' },
+    { q: 'البدر يجعل<br>المدّ أقوى', ans: true, line: 'و<b>المحاق</b> أيضاً، والتربيع يُضعفه',
+      head: 'الفرق بين المدّ والجزر في مسقط',
+      viz: '<div class="bars">' + [['🌕', 'قرب البدر', '25 نوفمبر', 293, '2.9 م', '#fde68a'], ['🌓', 'قرب التربيع', '18 نوفمبر', 99, '1 م', '#94a3b8']].map(function (b) {
+        return '<div class="bar"><div class="lab"><span class="em">' + b[0] + '</span>' + b[1] + ' · <span class="k">' + b[2].split(' ')[0] + '</span> ' + b[2].split(' ')[1] + '</div>' +
+          '<div class="track"><div class="fill" data-w="' + (b[3] / 300) + '" style="background:' + b[5] + '"><span class="k">' + b[4] + '</span></div></div></div>';
+      }).join('') + '</div>' },
+    { q: 'الماء يرتفع بالسرعة<br>نفسها طوال المدّ', ans: false, line: 'في الساعتين الوسطيين يرتفع <b>نصف المدّ</b>',
+      head: 'كم يرتفع الماء في كل ساعة من المدّ',
+      viz: '<div class="half">نصف المدّ في ساعتين: تيار أقوى</div><div class="fishph"><img src="../../public/fish/sm/seabass.webp" alt=""></div><div class="tw">' +
+        [1, 2, 3, 3, 2, 1].map(function (n, i) {
+          return '<div class="c' + (i === 2 || i === 3 ? ' mid' : '') + '"><span class="fr k">' + n + '/12</span><div class="col" data-h="' + (n * 70) + '"></div><span class="hr">' + (i + 1) + '</span></div>';
+        }).join('') + '</div>' },
+    { q: 'في بعض موانئنا مدّ<br>واحد فقط في اليوم', ans: true, line: 'الجزائر: مدّ واحد في <b><span class="k">16</span> يوماً</b> من نوفمبر',
+      head: 'المدّ يوم 1 نوفمبر',
+      viz: '<div class="curves"><div class="lab" style="top:0"><img src="' + FLAG + 'dz.svg" alt="">الجزائر: <b>مدّ واحد</b></div>' +
+        '<div class="lab" style="top:250px"><img src="' + FLAG + 'ae.svg" alt="">دبي: <b>مدّان</b></div>' +
+        '<svg width="820" height="440" viewBox="0 0 820 440" style="position:absolute;left:0;top:0;overflow:visible">' +
+        curveSvg('cA', ALG, 130, 85, [778]) + curveSvg('cD', DXB, 355, 80, [300, 964]) + '</svg></div>' },
+  ];
+  QUIZ.forEach(function (f, n) {
+    var pill = '<div class="pill">السؤال <span class="k">' + (n + 1) + '</span> من <span class="k">5</span></div>';
+    var q = document.createElement('div');
+    q.className = 'scene qs'; q.id = 's' + (2 * n + 2);
+    q.innerHTML = pill + '<div class="card"><div class="d h1">' + f.q + '</div></div>' +
+      '<div class="btns"><div class="b t">صح ✅</div><div class="b f">خطأ ❌</div></div>' +
+      '<div class="timer"><svg viewBox="0 0 170 170"><circle cx="85" cy="85" r="74" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="12"/>' +
+      '<circle class="ring" cx="85" cy="85" r="74" fill="none" stroke="#fbbf24" stroke-width="12" stroke-linecap="round" stroke-dasharray="465" transform="rotate(-90 85 85)"/></svg><span class="k">3</span></div>';
+    var a = document.createElement('div');
+    a.className = 'scene as'; a.id = 's' + (2 * n + 3);
+    a.innerHTML = pill + '<div class="stmt"><div>' + f.q.replace('<br>', ' ') + '</div><div class="stamp ' + (f.ans ? 't' : 'f') + '">' + (f.ans ? 'صح ✅' : 'خطأ ❌') + '</div></div>' +
+      '<div class="viz"><div class="vh">' + f.head + '</div>' + f.viz + '</div><div class="line h1">' + f.line + '</div>';
+    $('#stage').insertBefore(q, $('#s12'));
+    $('#stage').insertBefore(a, $('#s12'));
+  });
+  // The 1 m line sits at the top of the tanks (they are 1 m tall); path lengths for the drawn curves
+  var gl = $('.glass'), vz0 = gl.closest('.viz');
+  vz0.querySelector('.meter').style.top = (gl.getBoundingClientRect().top - vz0.getBoundingClientRect().top) + 'px';
+  document.querySelectorAll('#cA, #cD').forEach(function (p) { var L = p.getTotalLength(); p.style.strokeDasharray = L; p.dataset.len = L; });
+
+  // --- Fish: a body, a wagging tail, a fin and an eye; faces left in its own coordinates
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#93c5fd', '#60a5fa'], ['#e2e8f0', '#94a3b8'], ['#fda4af', '#fb7185'], ['#2dd4bf', '#14b8a6']];
+  var fish = [];
+  for (var i = 0; i < 6; i++) {
+    var c = COLORS[i], el = document.createElement('div');
+    el.className = 'fish';
+    el.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(el);
+    fish.push({ el: el, tail: el.querySelector('.tail'), ph: rnd() * 6.28, sc: .55 + rnd() * .3 });
+  }
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 6;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+
+  function seaPath(Y, t, amp) {
+    var p = 'M0 1920 L0 ' + Y;
+    for (var x = 0; x <= 1080; x += 20) p += ' L' + x + ' ' + (Y + Math.sin(x / 70 + t * 2.2) * amp + Math.sin(x / 31 - t * 1.4) * amp * .4).toFixed(1);
+    return p + ' L1080 1920 Z';
+  }
+
+  function drawAt(t) {
+    var last = DESIGN.length - 1;
+    for (var n = 1; n <= last; n++) {
+      var a = DESIGN[n - 1], b = DESIGN[n], sc = $('#s' + n);
+      sc.style.opacity = n === 1 ? 1 - seg(t, b - .4, b) : n === last ? seg(t, a, a + .5, out) : vis(t, a, b, .3);
+    }
+
+    // Hook
+    rise($('#s1 .kick'), t, .1);
+    var pop = seg(t, .3, .8, out);
+    $('#s1 .q').style.opacity = pop; $('#s1 .q').style.transform = 'scale(' + (1.3 - .3 * pop) + ')';
+    document.querySelectorAll('#s1 .tf').forEach(function (e, k) {
+      var p = seg(t, 1 + k * .25, 1.4 + k * .25, out);
+      e.style.opacity = p; e.style.transform = 'scale(' + (.5 + .5 * p) * (1 + .04 * Math.sin(t * 6 + k * 3)) + ')';
+    });
+    var s3 = seg(t, 2, 2.4, out);
+    $('#s1 .sub').style.opacity = s3; $('#s1 .sub').style.transform = 'scale(' + (1.8 - .8 * s3) + ') rotate(' + (Math.sin(t * 30) * 2 * (1 - seg(t, 2.4, 3))) + 'deg)';
+
+    // Progress dots: lit once each answer stamp lands
+    $('#dots').style.opacity = seg(t, DESIGN[1], DESIGN[1] + .4) * (1 - seg(t, DESIGN[11] - .3, DESIGN[11]));
+    document.querySelectorAll('#dots i').forEach(function (d, k) {
+      var on = seg(t, DESIGN[2 * k + 2] + .9, DESIGN[2 * k + 2] + 1.2, out), cur = t >= DESIGN[2 * k + 1] && t < DESIGN[2 * k + 3];
+      d.style.background = on > 0 ? (QUIZ[k].ans ? '#22c55e' : '#f43f5e') : 'transparent';
+      d.style.borderColor = on > 0 ? '#fff' : cur ? '#fbbf24' : 'rgba(255,255,255,.35)';
+      d.style.transform = 'scale(' + (1 + .4 * on * (1 - on) * 4 + (cur && !on ? .15 * Math.abs(Math.sin(t * 4)) : 0)) + ')';
+    });
+
+    QUIZ.forEach(function (f, k) {
+      // Question: card pops, buttons pulse, a 3-second ring runs out at the scene end
+      var qa = DESIGN[2 * k + 1], qb = DESIGN[2 * k + 2], q = $('#s' + (2 * k + 2));
+      rise(q.querySelector('.pill'), t, qa);
+      var cp = seg(t, qa + .1, qa + .6, out), card = q.querySelector('.card');
+      card.style.opacity = cp; card.style.transform = 'scale(' + (.85 + .15 * cp) + ')';
+      q.querySelectorAll('.b').forEach(function (e, j) {
+        var p = seg(t, qa + .7 + j * .15, qa + 1.1 + j * .15, out);
+        e.style.opacity = p; e.style.transform = 'translateY(' + 40 * (1 - p) + 'px) scale(' + (1 + .04 * Math.sin(t * 7 + j * 3)) + ')';
+      });
+      var left = Math.max(0, Math.min(3, qb - t)), tp = seg(t, qa + 1, qa + 1.3);
+      q.querySelector('.timer').style.opacity = tp;
+      q.querySelector('.ring').style.strokeDashoffset = 465 * (1 - left / 3);
+      q.querySelector('.timer span').textContent = Math.max(1, Math.ceil(left));
+
+      // Answer: stamp slams onto the statement, then the evidence animates
+      var aa = DESIGN[2 * k + 2], a = $('#s' + (2 * k + 3));
+      a.querySelector('.pill').style.opacity = 1;
+      var st = seg(t, aa + .2, aa + .5, out), stamp = a.querySelector('.stamp');
+      stamp.style.opacity = st; stamp.style.transform = 'scale(' + (2.4 - 1.4 * st) + ') rotate(-8deg)';
+      var vz = a.querySelector('.viz'), vp = seg(t, aa + .5, aa + .9, out);
+      vz.style.opacity = vp; vz.style.transform = 'translateY(' + 40 * (1 - vp) + 'px)';
+      rise(a.querySelector('.line'), t, aa + 1.6);
+      var g = function (d, l) { return seg(t, aa + d, aa + d + (l || 1.2)); };
+      if (k === 0) {
+        a.querySelectorAll('.water').forEach(function (w, j) {
+          var p = g(1 + j * .5, 1.4), cm = +w.dataset.cm;
+          w.style.height = (cm / 100 * 240 * p) + 'px';
+          a.querySelectorAll('.n')[j].textContent = Math.round(cm * p);
+        });
+        a.querySelector('.meter').style.opacity = g(.9, .4);
+      } else if (k === 1) {
+        a.querySelectorAll('.row').forEach(function (r, j) {
+          var p = g(.9 + j * .45, .4); r.style.opacity = p; r.style.transform = 'translateX(' + 50 * (1 - p) + 'px)';
+        });
+      } else if (k === 2) {
+        a.querySelectorAll('.fill').forEach(function (e, j) { e.style.width = (+e.dataset.w * 100 * g(1 + j * .5, 1.2)) + '%'; });
+      } else if (k === 3) {
+        a.querySelectorAll('.tw .c').forEach(function (c, j) {
+          var p = g(.9 + j * .3, .4), col = c.querySelector('.col');
+          col.style.height = (+col.dataset.h * p) + 'px'; c.querySelector('.fr').style.opacity = p;
+        });
+        a.querySelector('.half').style.opacity = g(2.6, .4);
+        var fp = g(3, .4); a.querySelector('.fishph').style.opacity = fp;
+        a.querySelector('.fishph').style.transform = 'scale(' + (.5 + .5 * fp) + ')';
+      } else {
+        [['#cA', 1], ['#cD', 1.6]].forEach(function (c, j) {
+          var p = g(c[1], 1.6), path = a.querySelector(c[0]);
+          path.style.strokeDashoffset = +path.dataset.len * (1 - p);
+          a.querySelectorAll('.lab')[j].style.opacity = g(c[1] - .2, .4);
+        });
+        a.querySelectorAll('.hi').forEach(function (h, j) {
+          var start = j === 0 ? 1 : 1.6;
+          h.style.opacity = g(start + 1.6 * +h.dataset.at, .3);
+        });
+      }
+    });
+
+    // Sea, lighthouse and the angler's line in the water
+    var Y = 1600 + Math.sin(t * .5) * 10;
+    $('#wv').setAttribute('d', seaPath(Y, t, 8));
+    $('#beam').setAttribute('transform', 'rotate(' + (Math.sin(t * 1.3) * 10) + ' 990 1339)');
+    var tip = Math.sin(t * 1.6) * 4;
+    $('#rod').setAttribute('transform', 'rotate(' + tip + ' 520 1610)');
+    $('#lineR').setAttribute('d', 'M470 1470 Q360 ' + (1560 + tip * 4) + ' 300 ' + (Y + 30));
+
+    fish.forEach(function (f, i) {
+      var dir = i % 2 ? 1 : -1, ln = t * (60 + i * 9) + i * 230;
+      var x = dir > 0 ? (ln % 1300) - 110 : 1190 - (ln % 1300), y = 1700 + (i % 3) * 75 + (i > 2 ? 30 : 0);
+      putFish(f, x, y, dir, t, 9, clamp(t / .6));
+    });
+
+    var a12 = DESIGN[11];
+    $('#s12 .logo').style.transform = 'scale(' + (.6 + .4 * seg(t, a12, a12 + .8, out)) + ')';
+    rise($('#s12 .q'), t, a12 + .3);
+    var sp = seg(t, a12 + .8, a12 + 1.2, out);
+    $('#s12 .score').style.opacity = sp;
+    $('#s12 .score').style.transform = 'scale(' + ((.8 + .2 * sp) * (1 + .03 * Math.sin(t * 5))) + ')';
+    rise($('#s12 .p'), t, a12 + 1.5);
+    rise($('#s12 .url'), t, a12 + 1.9);
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>

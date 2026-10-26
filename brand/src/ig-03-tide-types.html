@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — أنواع المد الثلاثة</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* Data: ArabTides engine (EOT20). Curves: Casablanca 26 Oct 2026, Dubai and Algiers 1 Nov 2026,
+     local time, 15-min steps. Types from classifyTide() (form factor), as shown on each port page. */
+  .curve { margin-top: 44px; padding: 34px 36px 26px; }
+  .curve svg { width: 100%; height: 330px; display: block; direction: ltr; overflow: visible; }
+  .curve .axis { display: flex; justify-content: space-between; direction: ltr; font-family: var(--font-num); font-size: 26px; color: #64748b; margin-top: 8px; }
+  .curve .cap { font-size: 30px; color: #475569; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline; }
+  .curve .cap b { font-family: var(--font-display); color: var(--ink); font-size: 38px; word-spacing: .3em; }
+  .tags { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+  .tags span { font-size: 32px; padding: 8px 24px; border-radius: 999px; background: rgba(13,148,136,.1); color: #115e59; }
+  .mini { display: flex; flex-direction: column; gap: 30px; margin-top: auto; margin-bottom: 40px; }
+  .mini .row { display: grid; grid-template-columns: 280px 1fr; align-items: center; gap: 24px; }
+  .mini .row span { font-family: var(--font-display); font-size: 42px; color: #e2e8f0; }
+  .mini svg { width: 100%; height: 100px; direction: ltr; overflow: visible; }
+  .recap li { font-size: 46px; line-height: 1.5; margin-bottom: 64px; list-style: none; display: grid; grid-template-columns: 180px 1fr; gap: 30px; align-items: center; }
+  .recap li svg { width: 180px; height: 70px; direction: ltr; overflow: visible; }
+  .recap li b { color: var(--lagoon); font-family: var(--font-display); }
+  .url { font-family: var(--font-num); font-weight: 800; font-size: 84px; direction: ltr; color: var(--lagoon); }
+</style>
+</head>
+<body>
+
+<!-- 1 COVER -->
+<section class="slide dark">
+  <span class="eyebrow">المد والجزر ببساطة</span>
+  <h1 style="margin-top:56px">مدّ واحد<br>أم <span class="accent-dark">مدّان؟</span></h1>
+  <p class="lead" style="font-size:50px">ثلاثة أنواع للمد في موانئنا.<br>أيّها في ميناءك؟</p>
+  <div class="mini">
+    <div class="row"><span>نصف يومي</span><svg data-c="casablanca" data-mini viewBox="0 0 600 100"></svg></div>
+    <div class="row"><span>مختلط</span><svg data-c="dubai" data-mini viewBox="0 0 600 100"></svg></div>
+    <div class="row"><span>يومي غالباً</span><svg data-c="algiers" data-mini viewBox="0 0 600 100"></svg></div>
+  </div>
+</section>
+
+<!-- 2 STAKE -->
+<section class="slide light">
+  <span class="eyebrow">ليست كل البحار سواء</span>
+  <h2 style="margin-top:56px">البحر لا يرتفع<br>بالطريقة نفسها<br>في <span class="accent-light">كل ميناء</span></h2>
+  <p class="lead">في الدار البيضاء يرتفع مرتين كل يوم بقوة متقاربة. وفي الجزائر العاصمة قد يرتفع <b>مرة واحدة فقط</b>.</p>
+  <p class="lead">ومن يعرف نوع المد في ميناءه يعرف كم فرصة صيد عنده كل يوم.</p>
+</section>
+
+<!-- 3 SEMIDIURNAL -->
+<section class="slide light">
+  <span class="eyebrow">النوع الأول</span>
+  <h2 style="margin-top:40px">نصف يومي</h2>
+  <p class="lead" style="margin-top:20px">مدّان وجزران كل يوم، متقاربان في الارتفاع، وبين المدّين نحو <span class="num">12</span> ساعة و<span class="num">25</span> دقيقة.</p>
+  <div class="card curve"><div class="cap"><b>الدار البيضاء</b><span>الإثنين <span class="num">26</span> أكتوبر</span></div><svg data-c="casablanca" viewBox="0 0 900 330"></svg><div class="axis"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></div>
+  <div class="tags"><span>الدار البيضاء</span><span>أكادير</span><span>نواكشوط</span><span>صفاقس</span><span>العقبة</span></div>
+</section>
+
+<!-- 4 MIXED -->
+<section class="slide light">
+  <span class="eyebrow">النوع الثاني</span>
+  <h2 style="margin-top:40px">مختلط</h2>
+  <p class="lead" style="margin-top:20px">مدّان في اليوم، لكن أحدهما أقوى بكثير من الآخر. وهو الغالب في الخليج.</p>
+  <div class="card curve"><div class="cap"><b>دبي</b><span>الأحد <span class="num">1</span> نوفمبر</span></div><svg data-c="dubai" viewBox="0 0 900 330"></svg><div class="axis"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></div>
+  <div class="tags"><span>الكويت</span><span>دبي</span><span>مسقط</span><span>الدمام</span><span>عدن</span><span>جدة</span></div>
+</section>
+
+<!-- 5 MAINLY DIURNAL -->
+<section class="slide light">
+  <span class="eyebrow">النوع الثالث</span>
+  <h2 style="margin-top:40px">يومي غالباً</h2>
+  <p class="lead" style="margin-top:20px">مدّ واحد وجزر واحد في كثير من الأيام. في الجزائر العاصمة: مدّ واحد فقط في <span class="num">16</span> يوماً من نوفمبر.</p>
+  <div class="card curve"><div class="cap"><b>الجزائر العاصمة</b><span>الأحد <span class="num">1</span> نوفمبر</span></div><svg data-c="algiers" viewBox="0 0 900 330"></svg><div class="axis"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></div>
+  <div class="tags"><span>الجزائر العاصمة</span><span>بورتسودان</span></div>
+</section>
+
+<!-- 6 WHY -->
+<section class="slide light">
+  <span class="eyebrow">لماذا يختلف؟</span>
+  <h2 style="margin-top:56px">القمر<br>وشكل <span class="accent-light">البحر</span></h2>
+  <p class="lead">القمر لا يبقى فوق خط الاستواء، بل يميل شمالاً وجنوباً، فيقوى أحد المدّين ويضعف الآخر.</p>
+  <p class="lead">وشكل البحر وعمقه يكبّران نوعاً ويخفيان آخر. لذلك يختلف المد من ميناء لآخر، حتى في البلد نفسه.</p>
+</section>
+
+<!-- 7 RECAP -->
+<section class="slide dark">
+  <h2 style="font-size:84px">الخلاصة</h2>
+  <ul class="recap" style="margin-top:90px">
+    <li><svg data-c="casablanca" data-mini viewBox="0 0 600 100"></svg><span><b>نصف يومي:</b> مدّان متقاربان كل يوم</span></li>
+    <li><svg data-c="dubai" data-mini viewBox="0 0 600 100"></svg><span><b>مختلط:</b> مدّان، أحدهما أقوى</span></li>
+    <li><svg data-c="algiers" data-mini viewBox="0 0 600 100"></svg><span><b>يومي غالباً:</b> مدّ واحد في كثير من الأيام</span></li>
+  </ul>
+  <p class="lead" style="margin-top:auto;margin-bottom:18px">نوع المد مكتوب أعلى صفحة كل ميناء:</p>
+  <div class="url">arabtides.com</div>
+</section>
+
+<!-- 8 CTA -->
+<section class="slide dark">
+  <span class="eyebrow">سؤال لك</span>
+  <h2 style="margin-top:56px">اكتب اسم<br>ميناءك في<br><span class="accent-dark">التعليقات</span></h2>
+  <p class="lead">ونخبرك بنوع المد فيه، وكم مرة يرتفع البحر عندك اليوم. 🌊</p>
+</section>
+
+<script>
+var CURVES = {"casablanca":{"pts":[96.8,109.4,120.2,129.1,135.9,140.5,142.8,142.7,140.3,135.5,128.4,119.1,107.8,94.8,80.1,64,46.9,29.1,10.7,-7.7,-26,-43.8,-60.8,-76.7,-91.3,-104.3,-115.5,-124.7,-131.9,-136.9,-139.5,-139.9,-138,-133.9,-127.5,-119.1,-108.7,-96.6,-82.8,-67.7,-51.4,-34.3,-16.4,1.8,20.1,38.2,55.8,72.7,88.6,103.2,116.3,127.6,136.9,144.2,149.1,151.7,151.9,149.7,145,138,128.7,117.3,104,89,72.6,55,36.5,17.5,-1.7,-20.8,-39.5,-57.4,-74.3,-89.9,-103.9,-116.1,-126.3,-134.4,-140.2,-143.8,-144.9,-143.7,-140.2,-134.4,-126.4,-116.4,-104.6,-91.1,-76.1,-59.9,-42.7,-24.8,-6.5,12,30.4,48.4,65.7],"ext":[["high","01:37",143],["low","07:40",-140],["high","13:54",152],["low","20:00",-145]]},"dubai":{"pts":[-68.3,-63.7,-58.6,-53,-47.1,-41,-34.7,-28.3,-22,-15.8,-9.8,-4.1,1.1,6,10.2,13.9,16.9,19.3,20.9,21.9,22.3,22,21.1,19.7,17.8,15.5,13,10.2,7.3,4.4,1.6,-1.1,-3.6,-5.9,-7.7,-9.2,-10.2,-10.8,-10.9,-10.5,-9.5,-8.1,-6.1,-3.7,-0.8,2.6,6.4,10.5,15,19.8,24.8,30,35.3,40.6,45.9,51.1,56.1,60.8,65.2,69.1,72.5,75.3,77.5,78.9,79.5,79.3,78.2,76.3,73.6,70,65.6,60.4,54.6,48.1,41.1,33.7,25.9,17.9,9.7,1.5,-6.7,-14.7,-22.4,-29.8,-36.8,-43.4,-49.4,-54.8,-59.6,-63.8,-67.3,-70,-72.1,-73.5,-74.1,-74.1,-73.3],"ext":[["high","05:00",22],["low","09:25",-11],["high","16:04",80],["low","23:36",-74]]},"algiers":{"pts":[-0.1,-0.6,-1.1,-1.6,-2.1,-2.5,-2.9,-3.3,-3.7,-4,-4.3,-4.5,-4.7,-4.9,-5,-5.1,-5.1,-5.1,-5.1,-5,-4.9,-4.7,-4.5,-4.2,-3.9,-3.4,-3,-2.4,-1.8,-1.1,-0.4,0.4,1.3,2.2,3.1,4,4.9,5.8,6.7,7.5,8.3,9.1,9.7,10.4,10.9,11.3,11.7,12,12.3,12.4,12.6,12.6,12.6,12.6,12.6,12.4,12.3,12.2,12,11.7,11.5,11.2,10.9,10.6,10.2,9.8,9.4,8.9,8.5,8,7.5,7,6.5,6.1,5.6,5.2,4.8,4.5,4.1,3.9,3.6,3.4,3.3,3.1,3,2.9,2.8,2.7,2.6,2.5,2.3,2.2,1.9,1.7,1.4,1.1,0.7],"ext":[["low","04:11",-5],["high","12:58",13]]}};
+  // Draws a tide curve into each svg[data-c]; data-mini = line only, otherwise filled, with high/low times.
+  document.querySelectorAll('svg[data-c]').forEach(function (svg) {
+    var c = CURVES[svg.dataset.c], pts = c.pts, mini = svg.hasAttribute('data-mini');
+    var vb = svg.viewBox.baseVal, W = vb.width, H = vb.height, pad = mini ? 8 : 56;
+    var lo = Math.min.apply(null, pts), hi = Math.max.apply(null, pts), span = Math.max(hi - lo, 1);
+    var X = function (i) { return i / (pts.length - 1) * W; };
+    var Y = function (v) { return pad + (hi - v) / span * (H - 2 * pad); };
+    var d = pts.map(function (v, i) { return (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1); }).join('');
+    var line = svg.closest('.dark') ? '#2dd4bf' : '#0d9488';
+    var html = mini ? '' : '<path d="' + d + 'L' + W + ' ' + H + 'L0 ' + H + 'Z" fill="rgba(13,148,136,.12)"/>';
+    html += '<path d="' + d + '" fill="none" stroke="' + line + '" stroke-width="' + 6 + '" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>';
+    if (!mini) c.ext.forEach(function (e) {
+      var hm = e[1].split(':'), x = X((+hm[0] * 60 + +hm[1]) / 15), y = Y(e[2]), high = e[0] == 'high';
+      var col = high ? '#0d9488' : '#f43f5e';
+      html += '<circle cx="' + x + '" cy="' + y + '" r="12" fill="' + col + '" stroke="#fff" stroke-width="4"/>' +
+        '<text x="' + Math.min(Math.max(x, 50), W - 50) + '" y="' + (high ? y - 24 : y + 46) + '" text-anchor="middle" font-family="Inter" font-weight="700" font-size="28" fill="' + col + '">' + e[1] + '</text>';
+    });
+    svg.innerHTML = html;
+  });
+</script>
+<script src="slides.js"></script>
+</body>
+</html>

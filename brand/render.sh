@@ -22,6 +22,20 @@ if [ -f src/ig-02-full-moon.html ]; then
   for i in 1 2 3 4 5 6 7; do shot ig-02-full-moon.html "s=$i" 1080 1350 "instagram/02-full-moon/slide-$i.png"; done
 fi
 
+for p in 03-tide-types 04-port-ranking; do
+  if [ -f src/ig-$p.html ]; then
+    echo "Instagram — $p carousel"
+    mkdir -p "instagram/$p"
+    for i in 1 2 3 4 5 6 7 8; do shot ig-$p.html "s=$i" 1080 1350 "instagram/$p/slide-$i.png"; done
+  fi
+done
+
+if [ -f src/ig-05-stories.html ]; then
+  echo "Instagram — full-moon week stories"
+  mkdir -p instagram/05-stories
+  for i in 1 2 3 4 5 6 7; do shot ig-05-stories.html "s=$i" 1080 1920 "instagram/05-stories/story-$i.png"; done
+fi
+
 if [ -f src/profile.html ]; then
   echo "Profile picture"
   shot profile.html "" 1080 1080 "instagram/00-profile-picture.png"

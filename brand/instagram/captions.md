@@ -182,3 +182,70 @@ Voice script: `../src/video-05-tide-table.voice.txt`
 **Alt text (cover):** أسماك ملوّنة تحت الماء مع عنوان «كيف تقرأ جدول المد؟ في 30 ثانية».
 
 **Data source:** Casablanca, 19 Oct 2026, from the ArabTides tide engine (the example in the article `/articles/how-to-read-tide-table`). Spring/neap ranges: 300 cm on 9 Oct, 89 cm on 19 Oct.
+
+---
+
+## Post 3 — Three types of tide carousel (`03-tide-types/slide-1.png` … `slide-8.png`)
+
+Evergreen: post any time. Real curves from the tide model (Casablanca 26 Oct, Dubai and Algiers 1 Nov 2026). The type shown for each port is the same one printed at the top of its port page.
+
+**Caption:**
+
+هل يرتفع البحر في ميناءك مرتين في اليوم، أم مرة واحدة؟ 🌊
+
+في موانئنا العربية ثلاثة أنواع للمد:
+▫️ نصف يومي: مدّان متقاربان كل يوم، كما في الدار البيضاء وأكادير.
+▫️ مختلط: مدّان، أحدهما أقوى بكثير من الآخر، وهو الغالب في الخليج.
+▫️ يومي غالباً: مدّ واحد في كثير من الأيام، كما في الجزائر العاصمة وبورتسودان.
+
+ونوع المد يحدد عدد فرص الصيد عندك كل يوم 🎣
+
+اكتب اسم ميناءك في التعليقات ونخبرك بنوع المد فيه 👇
+
+#المد_والجزر #صيد_السمك #البحر
+
+**Alt text (cover):** غلاف كحلي بعنوان «مدّ واحد أم مدّان؟» وتحته ثلاثة منحنيات للمد: نصف يومي، مختلط، ويومي غالباً.
+
+---
+
+## Post 4 — 53-port ranking carousel (`04-port-ranking/slide-1.png` … `slide-8.png`)
+
+Date-sensitive: post during the full-moon week, **25–31 October 2026**, and before story 6 (which points to it). Numbers: the largest daily range (highest high minus lowest low on one local day) for each port between 25 and 31 Oct 2026.
+
+**Caption:**
+
+في الأسبوع نفسه: قرابة 4 أمتار في الكويت، و7 سنتيمترات فقط في طبرق 🌕
+
+رتّبنا 53 ميناءً عربياً حسب قوة المد في أسبوع البدر، من الأقوى إلى الأهدأ:
+🥇 الكويت 3.97 م
+🥈 موروني 3.86 م
+🥉 أم قصر 3.80 م
+… وفي آخر القائمة بنغازي وبورتسودان (16 سم) وطبرق (7 سم).
+
+اسحب لترى ترتيب ميناءك، واكتب رقمه في التعليقات 👇
+
+أوقات المد في ميناءك اليوم على arabtides.com، والرابط في البايو.
+
+#المد_والجزر #صيد_السمك #البدر
+
+**Alt text (cover):** غلاف كحلي بعنوان «أين ميناؤك؟ ترتيب 53 ميناءً عربياً من أقوى مد إلى أهدئه»، مع عمود طويل للكويت (3.97 م) وخط رفيع لطبرق (7 سم).
+
+---
+
+## Stories — Full-moon week (`05-stories/story-1.png` … `story-7.png`)
+
+Post as one sequence on **Sunday 25 October 2026** (the day before the full moon), after Post 4 is live. Add the stickers in the Instagram app, in the empty area on each frame:
+
+| Frame | What it is | Sticker |
+|---|---|---|
+| 1 | The full moon is coming, Monday 26 Oct | **Countdown**: «البدر 🌕», ends Mon 26 Oct 05:00 |
+| 2 | "Full-moon night: will you go fishing?" | **Poll**: «نعم، أكيد 🎣» / «لا، أفضّل النهار» |
+| 3 | Moonrise at sunset, 26 Oct (Kuwait, Dammam, Muscat, Dubai, Casablanca, Jeddah) | none |
+| 4 | Night high tides on 26 Oct + a safety tip | none (optional: **Question** «اسألنا عن ميناءك») |
+| 5 | "Where is the biggest tide this week?" | **Quiz**: الكويت ✓ / الدار البيضاء / جدة |
+| 6 | The answer: Kuwait 3.97 m, Casablanca 2.98 m, Jeddah 29 cm | **Mention / post share**: share Post 4 on this frame |
+| 7 | 53 ports, arabtides.com | **Link**: https://www.arabtides.com |
+
+Then save the sequence as a **Highlight** called «البدر» (or «المد»).
+
+Times are local and come from the ArabTides engine with current time-zone data (Morocco on UTC+0).

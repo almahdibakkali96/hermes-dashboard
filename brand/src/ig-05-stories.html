@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — قصص أسبوع البدر</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* Stories 1080×1920. Instagram covers the top ~250 px (progress bar, name) and the bottom ~300 px
+     (reply bar), so content sits between. Empty .sticker boxes are where the in-app sticker goes.
+     Data: ArabTides engine, 26 Oct 2026 (بدر 04:12 UTC), times local, computed with current tz data
+     (Morocco UTC+0). Ranking: largest daily range 25–31 Oct. */
+  .slide.story { width: 1080px; height: 1920px; padding: 300px 110px 420px; }
+  .story .foot { bottom: 330px; inset-inline: 110px; }
+  .story .foot .count { display: none; }
+  .story .waves { bottom: 0; height: 260px; }
+  .story h1 { font-size: 138px; }
+  .story h2 { font-size: 100px; }
+  .story .lead { font-size: 50px; }
+  .sticker { margin-top: auto; margin-bottom: 40px; height: 330px; }
+  .moon { position: absolute; inset-inline-start: 50%; translate: 50% 0; width: 460px; height: 460px; border-radius: 50%;
+    background: radial-gradient(circle at 38% 35%, #fff7d6 0%, #fde68a 45%, #f5c94a 100%);
+    box-shadow: 0 0 160px 40px rgba(253, 230, 138, .35); }
+  .moon::before, .moon::after { content: ''; position: absolute; border-radius: 50%; background: rgba(214, 170, 60, .28); }
+  .moon::before { width: 96px; height: 96px; top: 110px; left: 120px; }
+  .moon::after { width: 62px; height: 62px; top: 270px; left: 270px; }
+  .date { font-family: var(--font-display); font-size: 64px; color: var(--sand); margin-top: 30px; }
+  .tbl { margin-top: 40px; display: flex; flex-direction: column; gap: 18px; }
+  .tbl .r { display: grid; grid-template-columns: 1fr 190px 190px; align-items: center; padding: 16px 36px; border-radius: 26px; font-size: 42px; }
+  .tbl .r.h { padding-block: 0; font-size: 32px; color: var(--mist); }
+  .tbl .r:not(.h) { background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.12); }
+  .tbl .t { font-family: var(--font-num); font-weight: 800; text-align: center; }
+  .tbl .r.h span { text-align: center; } .tbl .r.h span:first-child { text-align: start; }
+  .sun { color: #fdba74; } .mo { color: var(--sand); }
+  .night .r { grid-template-columns: 1fr 250px; }
+  .night .t { color: var(--lagoon); font-size: 60px; }
+  .night small { display: block; font-size: 28px; line-height: 1.2; color: var(--mist); }
+  .tip { margin-top: 36px; display: flex; gap: 24px; align-items: flex-start; font-size: 36px; line-height: 1.55; color: #e2e8f0; }
+  .tip .ic { font-size: 60px; line-height: 1; }
+  .ans { margin-top: 60px; display: flex; flex-direction: column; gap: 22px; }
+  .ans .r { display: grid; grid-template-columns: 64px 1fr auto; gap: 24px; align-items: center; padding: 30px 38px; border-radius: 30px; font-size: 50px; background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.12); }
+  .ans .r.win { background: rgba(45,212,191,.18); border-color: var(--lagoon); }
+  .ans .r img { width: 64px; height: 48px; border-radius: 6px; }
+  .ans .v { font-family: var(--font-num); font-weight: 800; color: var(--lagoon); }
+  .ans .v small { font-family: var(--font-body); font-size: 34px; }
+  .big { font-family: var(--font-num); font-weight: 800; font-size: 260px; line-height: 1; color: var(--lagoon); margin-top: 70px; }
+  .url { font-family: var(--font-num); font-weight: 800; font-size: 92px; direction: ltr; color: var(--lagoon); text-align: center; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<!-- 1 COUNTDOWN (add the countdown sticker in the empty area) -->
+<section class="slide story dark">
+  <span class="eyebrow">هذا الأسبوع</span>
+  <h1 style="margin-top:50px">البدر<br><span class="sand">قادم</span></h1>
+  <div class="date">الإثنين <span class="num">26</span> أكتوبر</div>
+  <p class="lead">أقوى مد في الشهر، وأفضل أيام الصيد من <span class="num">25</span> إلى <span class="num">28</span> أكتوبر.</p>
+  <div class="moon" style="top:1080px"></div>
+</section>
+
+<!-- 2 POLL (poll sticker: «نعم، أكيد» / «لا، أفضّل النهار») -->
+<section class="slide story dark">
+  <span class="eyebrow">سؤال سريع</span>
+  <h2 style="margin-top:60px">ليلة البدر…<br>هل تخرج<br><span class="accent-dark">للصيد؟</span></h2>
+  <p class="lead">القمر يضيء الشاطئ طوال الليل، والمد في أعلى مستوياته.</p>
+  <div class="sticker"></div>
+</section>
+
+<!-- 3 MOONRISE = SUNSET -->
+<section class="slide story dark">
+  <span class="eyebrow">الإثنين <span class="num">26</span> أكتوبر</span>
+  <h2 style="margin-top:50px">القمر يشرق<br>مع <span class="sand">الغروب</span></h2>
+  <div class="tbl">
+    <div class="r h"><span>الميناء</span><span>🌅 الغروب</span><span>🌕 الشروق</span></div>
+    <div class="r"><span>الكويت</span><span class="t sun">17:07</span><span class="t mo">17:02</span></div>
+    <div class="r"><span>الدمام</span><span class="t sun">17:02</span><span class="t mo">16:59</span></div>
+    <div class="r"><span>مسقط</span><span class="t sun">17:31</span><span class="t mo">17:29</span></div>
+    <div class="r"><span>دبي</span><span class="t sun">17:42</span><span class="t mo">17:39</span></div>
+    <div class="r"><span>الدار البيضاء</span><span class="t sun">17:44</span><span class="t mo">17:42</span></div>
+    <div class="r"><span>جدة</span><span class="t sun">17:51</span><span class="t mo">17:52</span></div>
+  </div>
+</section>
+
+<!-- 4 NIGHT HIGH TIDES -->
+<section class="slide story dark">
+  <span class="eyebrow">الإثنين <span class="num">26</span> أكتوبر</span>
+  <h2 style="margin-top:50px">مدّ الليل<br><span class="accent-dark">العالي</span></h2>
+  <div class="tbl night">
+    <div class="r"><span>الكويت<small>مساء الإثنين</small></span><span class="t">23:47</span></div>
+    <div class="r"><span>مسقط<small>مساء الإثنين</small></span><span class="t">22:02</span></div>
+    <div class="r"><span>عدن<small>مساء الإثنين</small></span><span class="t">20:15</span></div>
+    <div class="r"><span>الدار البيضاء<small>الإثنين بعد منتصف الليل</small></span><span class="t">01:37</span></div>
+  </div>
+  <div class="tip"><span class="ic">⚠️</span><span>لا تصطد وحدك ليلاً، وراقب الماء خلفك: في المد الربيعي يرتفع أسرع مما تتوقع.</span></div>
+</section>
+
+<!-- 5 QUIZ (quiz sticker: الكويت ✓ / الدار البيضاء / جدة) -->
+<section class="slide story dark">
+  <span class="eyebrow">اختبر نفسك</span>
+  <h2 style="margin-top:60px">أين أكبر مد<br><span class="accent-dark">هذا الأسبوع؟</span></h2>
+  <p class="lead">الفرق بين المد والجزر في يوم واحد.</p>
+  <div class="sticker" style="height:520px"></div>
+</section>
+
+<!-- 6 ANSWER -->
+<section class="slide story dark">
+  <span class="eyebrow">الجواب</span>
+  <h2 style="margin-top:60px">الكويت 🏆</h2>
+  <div class="ans">
+    <div class="r win"><img src="../../public/flags/kw.svg" alt=""><span>الكويت</span><span class="v">3.97 <small>م</small></span></div>
+    <div class="r"><img src="../../public/flags/ma.svg" alt=""><span>الدار البيضاء</span><span class="v">2.98 <small>م</small></span></div>
+    <div class="r"><img src="../../public/flags/sa.svg" alt=""><span>جدة</span><span class="v">29 <small>سم</small></span></div>
+  </div>
+  <p class="lead">والترتيب الكامل لـ<span class="num">53</span> ميناءً في منشورنا الجديد 👆</p>
+</section>
+
+<!-- 7 LINK (link sticker → arabtides.com) -->
+<section class="slide story dark">
+  <span class="eyebrow">مجاناً وبدون تسجيل</span>
+  <div class="big" style="text-align:center">53</div>
+  <h2 style="text-align:center">ميناءً عربياً</h2>
+  <p class="lead" style="text-align:center">أوقات المد والجزر بالدقيقة،<br>وأفضل أيام الصيد في ميناءك.</p>
+  <div class="url">arabtides.com</div>
+  <div class="sticker" style="height:200px"></div>
+</section>
+
+<script src="slides.js"></script>
+</body>
+</html>

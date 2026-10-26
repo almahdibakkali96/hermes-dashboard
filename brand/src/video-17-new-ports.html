@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ArabTides — فيديو الموانئ الجديدة</title>
+<link rel="stylesheet" href="brand.css">
+<script src="../video/video-17-new-ports/map.js"></script>
+<style>
+  /* 1080×1920 Reel. Frames are rendered by calling window.renderAt(seconds).
+     Reels safe area: keep text inside x 90–930, y 230–1480.
+     The sixteen ports added after the first 36: a real map (Natural Earth, in map.js) zooms to each country,
+     then Gabès and Tobruk compare. 16 ports were added in builds #050 and #051. Tide ranges are November 2026 maxima from src/lib/tides.ts. */
+  html, body { background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
+    background: radial-gradient(900px 700px at 50% 25%, rgba(45, 212, 191, .18), transparent 65%),
+      linear-gradient(180deg, #071a2e 0%, #0b2540 45%, #0f3d5c 80%); }
+  .scene { position: absolute; inset: 0; padding: 0 90px; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; }
+  .k { font-family: var(--font-num); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+  .d { font-family: var(--font-display); font-weight: 700; word-spacing: .12em; }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+  /* left/top 0: in RTL an unanchored absolute box starts at the right edge */
+  .fish { position: absolute; left: 0; top: 0; width: 150px; height: 75px; margin: -37px 0 0 -75px; will-change: transform; }
+  #world { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .h1 { text-shadow: 0 4px 24px rgba(6, 12, 30, .8); }
+  .flag { width: 84px; height: 60px; border-radius: 8px; box-shadow: 0 4px 14px rgba(0, 0, 0, .4); }
+
+  /* Map card, shared by scenes 1–5 */
+  #card { position: absolute; left: 90px; top: 590px; width: 900px; height: 600px; border-radius: 40px; overflow: hidden;
+    border: 4px solid rgba(45, 212, 191, .5); box-shadow: 0 30px 80px rgba(0, 0, 0, .5); background: #0a3350; }
+  #card svg { position: absolute; inset: 0; }
+  #pins { position: absolute; inset: 0; direction: ltr; }
+  .pin { position: absolute; left: 0; top: 0; border-radius: 50%; }
+  .pin.old { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: rgba(255, 255, 255, .75); }
+  .pin.new { width: 26px; height: 26px; margin: -13px 0 0 -13px; background: #fde68a; border: 4px solid #0b2540; box-shadow: 0 0 0 0 rgba(253, 230, 138, .6); }
+  .ring { position: absolute; left: 0; top: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; border: 4px solid #fde68a; }
+  .tag { position: absolute; left: 0; top: 0; padding: 4px 18px; border-radius: 14px; background: rgba(11, 37, 64, .92); border: 2px solid #fde68a;
+    font-size: 40px; font-weight: 700; white-space: nowrap; direction: rtl; }
+
+  /* 1: hook */
+  #s1 .kick { margin-top: 250px; font-size: 54px; color: var(--sand); font-weight: 700; }
+  #s1 .q { margin-top: 0; font-size: 124px; line-height: 1.1; white-space: nowrap; }
+  #s1 .q .k { color: #fde68a; }
+  #s1 .count { margin-top: 760px; display: flex; align-items: center; gap: 22px; font-size: 58px; font-weight: 700; }
+  #s1 .count .k { font-size: 92px; font-weight: 800; }
+  #s1 .count .was { color: var(--mist); text-decoration: line-through; text-decoration-thickness: 6px; }
+  #s1 .count .now { color: var(--lagoon); }
+
+  /* 2–5: country scenes */
+  .cs .head { margin-top: 290px; display: flex; align-items: center; gap: 26px; }
+  .cs .head .d { font-size: 120px; line-height: 1.1; }
+  .cs .head .n { padding: 6px 26px; border-radius: 999px; background: #fde68a; color: #0b2540; font-size: 46px; font-weight: 800; }
+  .cs .note { margin-top: 790px; font-size: 54px; font-weight: 700; line-height: 1.4; }
+  .cs .note b { color: var(--sand); }
+
+  /* 6: Mediterranean ranges */
+  #s6 .t { margin-top: 260px; font-size: 92px; line-height: 1.15; }
+  #s6 .sub { margin-top: 12px; font-size: 42px; color: var(--mist); font-weight: 700; }
+  #s6 .bars { margin-top: 36px; width: 900px; display: flex; flex-direction: column; gap: 16px; }
+  .bar .lab { display: flex; align-items: center; gap: 16px; font-size: 48px; font-weight: 700; }
+  .bar .lab img { width: 60px; height: 43px; border-radius: 6px; }
+  .bar .lab .nw { padding: 2px 16px; border-radius: 999px; background: #fde68a; color: #0b2540; font-size: 32px; font-weight: 800; }
+  .bar .track { margin-top: 8px; height: 70px; border-radius: 22px; background: rgba(255, 255, 255, .07); position: relative; overflow: hidden; }
+  .bar .fill { position: absolute; top: 0; bottom: 0; right: 0; border-radius: 22px; display: flex; align-items: center; padding-inline-start: 24px; font-size: 52px; font-weight: 800; color: #0b2540; white-space: nowrap; }
+
+  /* 7: Gabès vs Tobruk tanks */
+  #s7 .t { margin-top: 270px; font-size: 100px; line-height: 1.15; }
+  #s7 .t b { color: #fb7185; }
+  #s7 .tanks { margin-top: 44px; display: flex; justify-content: center; gap: 140px; }
+  .tank { display: flex; flex-direction: column; align-items: center; }
+  .tank .who { display: flex; align-items: center; gap: 14px; font-size: 54px; font-weight: 700; margin-bottom: 14px; }
+  .tank .who img { width: 64px; height: 46px; border-radius: 6px; }
+  .tank .glass { position: relative; width: 230px; height: 420px; border: 6px solid rgba(255, 255, 255, .6); border-top: none; border-radius: 0 0 30px 30px; overflow: hidden; }
+  .tank .water { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, #2dd4bf, #0d6e7a); }
+  .tank .cm { font-size: 70px; font-weight: 800; margin-top: 10px; color: var(--lagoon); }
+  #s7 .line { margin-top: 30px; font-size: 52px; font-weight: 700; }
+
+  #s8 { justify-content: flex-start; padding-top: 290px; }
+  #s8 img.logo { width: 180px; height: 180px; }
+  #s8 .q { margin-top: 30px; font-size: 112px; line-height: 1.2; }
+  #s8 .ask { margin-top: 40px; padding: 22px 46px; border-radius: 999px; background: #fbbf24; color: #111827; font-size: 58px; font-weight: 800; }
+  #s8 .p { font-size: 52px; margin-top: 56px; color: var(--sand); font-weight: 700; }
+  #s8 .url { font-family: var(--font-num); font-weight: 800; font-size: 92px; color: var(--lagoon); margin-top: 16px; direction: ltr; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="world" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf" stop-opacity=".55"/><stop offset=".25" stop-color="#0d6e7a" stop-opacity=".85"/><stop offset="1" stop-color="#0a3f55"/></linearGradient>
+      <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c88f"/><stop offset="1" stop-color="#b8925a"/></linearGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#64707c"/><stop offset="1" stop-color="#2f3943"/></linearGradient>
+      <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa5ae"/><stop offset="1" stop-color="#6b7681"/></linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fde68a" stop-opacity=".5"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/></linearGradient>
+    </defs>
+    <!-- Shore: rocks on the left, a beach with an angler's rod, the harbour wall and lighthouse on the right -->
+    <path d="M0 1640 C40 1530 90 1490 150 1500 C200 1450 260 1470 300 1540 C320 1580 330 1610 340 1640 Z" fill="url(#rock)"/>
+    <path d="M330 1640 C420 1590 560 1585 700 1640 Z" fill="url(#sand)"/>
+    <g id="rod"><path d="M520 1610 L470 1470" stroke="#3f2d1c" stroke-width="7" stroke-linecap="round"/><path id="lineR" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"/></g>
+    <rect x="720" y="1560" width="360" height="100" fill="url(#wall)"/>
+    <path d="M965 1560 L975 1350 L1005 1350 L1015 1560 Z" fill="#f4f8f9"/><path d="M969 1485 h42 v28 h-42z M972 1410 h36 v26 h-36z" fill="#f43f5e"/><rect x="965" y="1325" width="50" height="28" rx="6" fill="#fde68a"/>
+    <path id="beam" d="M990 1339 L560 1295 L560 1385 Z" fill="url(#beam)"/>
+    <path id="wv" fill="url(#sea)"/>
+  </svg>
+
+  <div class="layer" id="fishLayer"></div>
+
+  <div id="card">
+    <svg id="map" width="900" height="600" preserveAspectRatio="none"><path id="other" fill="#1e4a5e"/><path id="arab" fill="#2f6f73" stroke="#7dd3c8" stroke-opacity=".5"/></svg>
+    <div id="pins"></div>
+  </div>
+
+  <div class="scene" id="s1">
+    <div class="kick h1">على عرب تايدز</div>
+    <div class="d q h1"><span class="k">16</span> ميناءً جديداً</div>
+    <div class="count h1"><span class="k was">36</span> ← <span class="k now">52</span> ميناءً</div>
+  </div>
+  <div class="scene cs" id="s2" data-c="MA">
+    <div class="head"><img class="flag" src="../../public/flags/ma.svg" alt=""><div class="d h1">المغرب</div><span class="n k">+6</span></div>
+    <div class="note h1">الرباط · الجديدة · آسفي<br>الصويرة · الداخلة · الحسيمة</div>
+  </div>
+  <div class="scene cs" id="s3" data-c="TN">
+    <div class="head"><img class="flag" src="../../public/flags/tn.svg" alt=""><div class="d h1">تونس</div><span class="n k">+4</span></div>
+    <div class="note h1">بنزرت · سوسة · <b>قابس</b> · جربة</div>
+  </div>
+  <div class="scene cs" id="s4" data-c="LY">
+    <div class="head"><img class="flag" src="../../public/flags/ly.svg" alt=""><div class="d h1">ليبيا</div><span class="n k">+4</span></div>
+    <div class="note h1">زوارة · مصراتة · سرت · <b>طبرق</b></div>
+  </div>
+  <div class="scene cs" id="s5" data-c="AE">
+    <div class="head"><img class="flag" src="../../public/flags/ae.svg" alt=""><div class="d h1">الإمارات</div><span class="n k">+2</span></div>
+    <div class="note h1">أبوظبي · رأس الخيمة<br>مدّ يصل إلى <b><span class="k">2.3</span> متر</b></div>
+  </div>
+  <div class="scene" id="s6">
+    <div class="d t h1">أكبر مدّ في<br>البحر المتوسط</div>
+    <div class="sub">أكبر فرق بين المدّ والجزر في نوفمبر</div>
+    <div class="bars"></div>
+  </div>
+  <div class="scene" id="s7">
+    <div class="d t h1">وفي طبرق؟<br><b><span class="k">8</span> سم فقط</b></div>
+    <div class="tanks"></div>
+    <div class="line h1">البحر هناك يكاد لا يتحرّك</div>
+  </div>
+  <div class="scene" id="s8">
+    <img class="logo" src="../logo/arabtides-mark.svg" alt="">
+    <div class="d q h1">ميناؤك<br>ليس هنا؟</div>
+    <div class="ask">اكتب اسمه في التعليقات 👇</div>
+    <div class="p h1">كل الموانئ الـ<span class="k">52</span> على موقعنا</div>
+    <div class="url">arabtides.com</div>
+  </div>
+</div>
+
+<script>
+  var $ = function (s) { return document.querySelector(s); };
+  var clamp = function (x) { return Math.max(0, Math.min(1, x)); };
+  var ease = function (x) { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var out = function (x) { x = clamp(x); return 1 - Math.pow(1 - x, 3); };
+  var seg = function (t, a, b, f) { return (f || ease)((t - a) / (b - a)); };
+  var vis = function (t, a, b, d) { d = d || .4; return Math.min(seg(t, a, a + d, out), 1 - seg(t, b - d, b)); };
+  var show = function (el, o, dy) { el.style.opacity = o; el.style.transform = 'translateY(' + (dy || 0) + 'px)'; };
+  var rise = function (el, t, a) { show(el, seg(t, a, a + .4), 24 * (1 - seg(t, a, a + .5, out))); };
+  var lerp = function (a, b, p) { return a + (b - a) * p; };
+  var seed = 171, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // Scene boundaries in design seconds (voiceover.mjs reads this line)
+  var DESIGN = [0, 5, 10.5, 15.5, 20.5, 27, 33.5, 39, 45.5];
+
+  var FLAG = '../../public/flags/';
+  var M = window.MAP, CW = 900, CH = 600;
+  $('#arab').setAttribute('d', M.arab); $('#other').setAttribute('d', M.other);
+  var px = function (lon) { return (lon - M.L0) * M.K * M.C; }, py = function (lat) { return (M.B1 - lat) * M.K; };
+  // Map views: centre lon, lat and width in degrees
+  var VIEWS = { all: [20, 24, 84], ma: [-9.3, 29.6, 27], maghreb: [2, 32, 36], tn: [12.4, 34.6, 12], ly: [18.2, 31.6, 18], ae: [55.1, 24.9, 6] };
+  // Which side of its pin each new port's name sits on: r(ight), l(eft), u(p), d(own); lu / ld are left and raised / lowered
+  var SIDE = { rabat: 'r', 'el-jadida': 'lu', safi: 'r', essaouira: 'ld', dakhla: 'r', 'al-hoceima': 'u', bizerte: 'r', sousse: 'r', gabes: 'l', djerba: 'd', zuwara: 'u', misrata: 'u', sirte: 'd', tobruk: 'u', 'abu-dhabi': 'd', 'ras-al-khaimah': 'u' };
+  var NAME = { djerba: 'جربة', rabat: 'الرباط' };
+  var newOrder = 0, perCountry = {};
+  M.ports.forEach(function (p) {
+    p.el = document.createElement('div'); p.el.className = 'pin ' + (p.new ? 'new' : 'old');
+    if (p.new) {
+      p.order = newOrder++; p.k = perCountry[p.c] = (perCountry[p.c] || 0) + 1;
+      p.ring = document.createElement('div'); p.ring.className = 'ring'; $('#pins').appendChild(p.ring);
+      p.tag = document.createElement('div'); p.tag.className = 'tag'; p.tag.textContent = NAME[p.id] || p.ar; $('#pins').appendChild(p.tag);
+    }
+    $('#pins').appendChild(p.el);
+  });
+
+  var MED = [['tn', 'قابس', 171, '1.71 م', true], ['tn', 'جربة', 100, '1.00 م', true], ['tn', 'صفاقس', 89, '89 سم', false], ['eg', 'الإسكندرية', 29, '29 سم', false]];
+  $('#s6 .bars').innerHTML = MED.map(function (b, i) {
+    return '<div class="bar"><div class="lab"><img src="' + FLAG + b[0] + '.svg" alt="">' + b[1] + (b[4] ? '<span class="nw">جديد</span>' : '') + '</div>' +
+      '<div class="track"><div class="fill" data-w="' + (b[2] / 180) + '" style="background:' + (i ? '#94a3b8' : '#fde68a') + '"><span class="k">' + b[3] + '</span></div></div></div>';
+  }).join('');
+  $('#s7 .tanks').innerHTML = [['tn', 'قابس', 171], ['ly', 'طبرق', 8]].map(function (c) {
+    return '<div class="tank"><div class="who"><img src="' + FLAG + c[0] + '.svg" alt="">' + c[1] + '</div><div class="glass"><div class="water" data-cm="' + c[2] + '"></div></div><div class="cm"><span class="k n">0</span> سم</div></div>';
+  }).join('');
+
+  // --- Fish: a body, a wagging tail, a fin and an eye; faces left in its own coordinates
+  var COLORS = [['#2dd4bf', '#14b8a6'], ['#fde68a', '#f5c94a'], ['#93c5fd', '#60a5fa'], ['#e2e8f0', '#94a3b8'], ['#fda4af', '#fb7185'], ['#2dd4bf', '#14b8a6']];
+  var fish = [];
+  for (var i = 0; i < 6; i++) {
+    var c = COLORS[i], el = document.createElement('div');
+    el.className = 'fish';
+    el.innerHTML = '<svg viewBox="0 0 150 75" width="150" height="75">' +
+      '<path class="tail" d="M108 37 L146 12 L138 37 L146 62 Z" fill="' + c[1] + '"/>' +
+      '<path d="M58 14 Q72 -2 88 16 Z" fill="' + c[1] + '"/>' +
+      '<ellipse cx="62" cy="37" rx="54" ry="25" fill="' + c[0] + '"/>' +
+      '<path d="M70 40 Q82 50 92 42" fill="none" stroke="' + c[1] + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="28" cy="31" r="6.5" fill="#0b2540"/><circle cx="26" cy="29" r="2" fill="#fff"/></svg>';
+    $('#fishLayer').appendChild(el);
+    fish.push({ el: el, tail: el.querySelector('.tail'), ph: rnd() * 6.28, sc: .55 + rnd() * .3 });
+  }
+  function putFish(f, x, y, dir, t, w, o) {
+    var bob = Math.sin(t * 2.2 + f.ph) * 6;
+    f.el.style.transform = 'translate(' + x + 'px,' + (y + bob) + 'px) scale(' + (dir > 0 ? -f.sc : f.sc) + ',' + f.sc + ')';
+    f.el.style.opacity = o;
+    f.tail.setAttribute('transform', 'rotate(' + (Math.sin(t * w + f.ph) * 14) + ' 108 37)');
+  }
+  function seaPath(Y, t, amp) {
+    var p = 'M0 1920 L0 ' + Y;
+    for (var x = 0; x <= 1080; x += 20) p += ' L' + x + ' ' + (Y + Math.sin(x / 70 + t * 2.2) * amp + Math.sin(x / 31 - t * 1.4) * amp * .4).toFixed(1);
+    return p + ' L1080 1920 Z';
+  }
+
+  // Camera between two views: centre eased linearly, width geometrically so the zoom feels even
+  function camera(a, b, p) {
+    var A = VIEWS[a], B = VIEWS[b], w = Math.exp(lerp(Math.log(A[2]), Math.log(B[2]), p));
+    return [lerp(A[0], B[0], p), lerp(A[1], B[1], p), w];
+  }
+
+  function drawAt(t) {
+    var D = DESIGN, last = D.length - 1;
+    for (var n = 1; n <= last; n++) {
+      var a = D[n - 1], b = D[n], sc = $('#s' + n);
+      sc.style.opacity = n === 1 ? 1 - seg(t, b - .4, b) : n === last ? seg(t, a, a + .5, out) : vis(t, a, b, .35);
+    }
+
+    // Camera: whole Arab world → Morocco → out over the Maghreb into Tunisia → Libya → back out and into the UAE
+    var via = function (a, m, b, p) { return p < .5 ? camera(a, m, p * 2) : camera(m, b, p * 2 - 1); };
+    var cam;
+    if (t < D[1]) cam = VIEWS.all;
+    else if (t < D[2]) cam = camera('all', 'ma', seg(t, D[1], D[1] + 1.6));
+    else if (t < D[3]) cam = via('ma', 'maghreb', 'tn', seg(t, D[2], D[2] + 2));
+    else if (t < D[4]) cam = camera('tn', 'ly', seg(t, D[3], D[3] + 1.4));
+    else cam = via('ly', 'all', 'ae', seg(t, D[4], D[4] + 2.2));
+    var W = cam[2] * M.K * M.C, H = W * CH / CW, vx = px(cam[0]) - W / 2, vy = py(cam[1]) - H / 2;
+    $('#map').setAttribute('viewBox', vx + ' ' + vy + ' ' + W + ' ' + H);
+    $('#arab').setAttribute('stroke-width', W / CW * 1.5);
+    var cardO = (1 - seg(t, D[5] - .4, D[5])), cardIn = seg(t, .1, .6, out);
+    $('#card').style.opacity = Math.min(cardO, cardIn);
+    $('#card').style.transform = 'scale(' + (.92 + .08 * cardIn) + ')';
+
+    // Which country is in focus, and so which names show
+    var FOCUS = ['MA', 'TN', 'LY', 'AE'], START = [1.4, 1.8, 1.2, 2];
+    var focus = '', fStart = 0;
+    FOCUS.forEach(function (c, j) { if (t >= D[j + 1] && t < D[j + 2]) { focus = c; fStart = D[j + 1] + START[j]; } });
+    M.ports.forEach(function (p) {
+      var x = (px(p.lon) - vx) / W * CW, y = (py(p.lat) - vy) / H * CH;
+      if (!p.new) { p.el.style.transform = 'translate(' + x + 'px,' + y + 'px)'; p.el.style.opacity = seg(t, .3, .8); return; }
+      var drop = seg(t, 1.3 + p.order * .11, 1.65 + p.order * .11, out);
+      var lit = focus === p.c ? 1 : 0;
+      p.el.style.transform = 'translate(' + x + 'px,' + (y - 60 * (1 - drop)) + 'px) scale(' + (1 + .25 * lit) + ')';
+      p.el.style.opacity = drop;
+      var rp = ((t * .8 + p.order * .1) % 1);
+      p.ring.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + (1 + 2.2 * rp) + ')';
+      p.ring.style.opacity = drop * (1 - rp) * .9;
+      var k = p.k - 1, tg = focus === p.c ? seg(t, fStart + k * .25, fStart + .3 + k * .25, out) : 0;
+      var s = SIDE[p.id], w = p.tag.offsetWidth, h = p.tag.offsetHeight;
+      var tx = s === 'r' ? x + 26 : s[0] === 'l' ? x - 26 - w : x - w / 2;
+      var ty = s === 'u' ? y - 26 - h : s === 'd' ? y + 26 : s === 'lu' ? y - h - 4 : s === 'ld' ? y + 4 : y - h / 2;
+      p.tag.style.transform = 'translate(' + tx + 'px,' + (ty + 14 * (1 - tg)) + 'px)';
+      p.tag.style.opacity = tg;
+    });
+
+    // Hook
+    rise($('#s1 .kick'), t, .1);
+    var pop = seg(t, .3, .8, out);
+    $('#s1 .q').style.opacity = pop; $('#s1 .q').style.transform = 'scale(' + (1.3 - .3 * pop) + ')';
+    var cnt = seg(t, 1.3, 3.1, function (x) { return clamp(x); });
+    $('#s1 .count').style.opacity = seg(t, 1.1, 1.5);
+    $('#s1 .now').textContent = 36 + Math.round(16 * cnt);
+
+    for (var m = 2; m <= 5; m++) {
+      var a2 = D[m - 1], el = $('#s' + m);
+      var hp = seg(t, a2 + .1, a2 + .6, out);
+      el.querySelector('.head').style.opacity = hp; el.querySelector('.head').style.transform = 'scale(' + (.8 + .2 * hp) + ')';
+      rise(el.querySelector('.note'), t, a2 + (m === 5 ? 2.4 : m === 3 ? 2.2 : 1.8));
+    }
+
+    var a5 = D[5];
+    rise($('#s6 .t'), t, a5 + .1); rise($('#s6 .sub'), t, a5 + .5);
+    document.querySelectorAll('#s6 .bar').forEach(function (b, j) {
+      var p = seg(t, a5 + .9 + j * .35, a5 + 1.9 + j * .35);
+      b.style.opacity = seg(t, a5 + .8 + j * .35, a5 + 1.1 + j * .35);
+      b.querySelector('.fill').style.width = (+b.querySelector('.fill').dataset.w * 100 * p) + '%';
+    });
+    var a6 = D[6];
+    rise($('#s7 .t'), t, a6 + .1);
+    document.querySelectorAll('#s7 .tank').forEach(function (tk, j) {
+      var p = seg(t, a6 + .8 + j * .7, a6 + 2 + j * .7), w = tk.querySelector('.water'), cm = +w.dataset.cm;
+      tk.style.opacity = seg(t, a6 + .5 + j * .3, a6 + .9 + j * .3);
+      w.style.height = (cm / 180 * 420 * p) + 'px';
+      tk.querySelector('.n').textContent = Math.round(cm * p);
+    });
+    rise($('#s7 .line'), t, a6 + 2.6);
+
+    // Sea, lighthouse and the angler's line in the water
+    var Y = 1600 + Math.sin(t * .5) * 10;
+    $('#wv').setAttribute('d', seaPath(Y, t, 8));
+    $('#beam').setAttribute('transform', 'rotate(' + (Math.sin(t * 1.3) * 10) + ' 990 1339)');
+    var tip = Math.sin(t * 1.6) * 4;
+    $('#rod').setAttribute('transform', 'rotate(' + tip + ' 520 1610)');
+    $('#lineR').setAttribute('d', 'M470 1470 Q360 ' + (1560 + tip * 4) + ' 300 ' + (Y + 30));
+    fish.forEach(function (f, i) {
+      var dir = i % 2 ? 1 : -1, ln = t * (60 + i * 9) + i * 230;
+      var x = dir > 0 ? (ln % 1300) - 110 : 1190 - (ln % 1300), y = 1700 + (i % 3) * 75 + (i > 2 ? 30 : 0);
+      putFish(f, x, y, dir, t, 9, clamp(t / .6));
+    });
+
+    var a7 = D[7];
+    $('#s8 .logo').style.transform = 'scale(' + (.6 + .4 * seg(t, a7, a7 + .8, out)) + ')';
+    rise($('#s8 .q'), t, a7 + .3);
+    var sp = seg(t, a7 + .8, a7 + 1.2, out);
+    $('#s8 .ask').style.opacity = sp;
+    $('#s8 .ask').style.transform = 'scale(' + ((.8 + .2 * sp) * (1 + .03 * Math.sin(t * 5))) + ')';
+    rise($('#s8 .p'), t, a7 + 1.5);
+    rise($('#s8 .url'), t, a7 + 1.9);
+  }
+
+  // Timeline remap: scenes designed on DESIGN; a voiceover can stretch them to REAL.
+  var REAL = DESIGN.slice();
+  window.setTimeline = function (real) { REAL = real; window.DURATION = real[real.length - 1]; };
+  window.renderAt = function (t) {
+    var i = 0;
+    while (i < REAL.length - 2 && t >= REAL[i + 1]) i++;
+    var p = Math.min(1, (t - REAL[i]) / (REAL[i + 1] - REAL[i]));
+    drawAt(DESIGN[i] + p * (DESIGN[i + 1] - DESIGN[i]) + Math.max(0, t - REAL[REAL.length - 1]));
+  };
+  window.DURATION = DESIGN[DESIGN.length - 1];
+  var q = new URLSearchParams(location.search);
+  window.renderAt(q.has('t') ? +q.get('t') : 0);
+</script>
+</body>
+</html>
