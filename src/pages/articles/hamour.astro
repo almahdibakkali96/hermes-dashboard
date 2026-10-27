@@ -1,0 +1,133 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { fish, fishPhotos } from '../../lib/fish';
+import portSpecies from '../../data/port-species.json';
+import placesIndex from '../../data/places/places_index.json';
+
+const meta = articleBySlug('hamour');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const F = (id: string) => fish.find(f => f.id === id)!;
+const link = (id: string) => `${BASE}fish/${id}`;
+const port = (id: string) => `${BASE}ports/${id}`;
+const photo = fishPhotos.hamour;
+
+// Orange-spotted grouper records within 50 km of our ports (iNaturalist research grade, tools/fish-photos/inat-counts.mjs)
+const portName = (id: string) => (placesIndex as { id: string; name_ar: string }[]).find(p => p.id === id)!.name_ar;
+const records = Object.entries(portSpecies as Record<string, [string, number][]>)
+  .map(([p, list]) => ({ port: p, count: list.find(([n]) => n === 'Epinephelus coioides')?.[1] || 0 }))
+  .filter(r => r.count)
+  .sort((a, b) => b.count - a.count);
+
+const toc = [
+  { id: 'fish', label: 'أي سمكة نقصد بالهامور' },
+  { id: 'life', label: 'يولد أنثى ويصير ذكراً' },
+  { id: 'decline', label: 'لماذا قلّ الهامور في الخليج' },
+  { id: 'rules', label: 'الحجم المسموح والأنظمة' },
+  { id: 'tide', label: 'أفضل مد ووقت لصيده' },
+  { id: 'gear', label: 'العدة والطعم' },
+  { id: 'records', label: 'أين سُجّل قرب موانئنا' },
+  { id: 'sources', label: 'المصادر' },
+];
+const takeaways = [
+  'الهامور الذي يقصده أهل الخليج هو <strong>الهامور البرتقالي المنقط</strong> <span class="latin" lang="la"><i>Epinephelus coioides</i></span>، ويسمى في مصر والبحر الأحمر <strong>وقار</strong>.',
+  'يبدأ حياته <strong>أنثى</strong> ثم يتحول إلى ذكر حين يكبر، فصيد الكبار يعني نقص الذكور، وصيد الصغار يعني أسماكاً لم تتكاثر بعد.',
+  'يعدّه الاتحاد الدولي لحماية الطبيعة <strong>مستنزفاً في الخليج وعُمان</strong>، مع تراجع نحو 51% في أعداده في الخليج. وفي البحرين يُمنع صيد الهامور الذي يقل طوله عن <strong>42 سم</strong>.',
+  'على عكس الكنعد، ينشط الهامور حين <strong>يهدأ التيار</strong>: الدقائق قبل انقلاب المد وبعده، وفي الفجر والغروب.',
+];
+const faq = [
+  { q: 'ما الاسم العلمي للهامور؟', a: 'الهامور الشائع في الخليج هو الهامور البرتقالي المنقط Epinephelus coioides (Orange-spotted grouper). ويستعمل الناس كلمة هامور أيضاً لأنواع أخرى من الجنس نفسه، مثل الهامور الأحمر المنقط في البحر الأحمر، والوقار في البحر المتوسط.' },
+  { q: 'ما الحد الأدنى لطول الهامور المسموح بصيده؟', a: 'في البحرين حدد قرار المجلس الأعلى للبيئة رقم 3 لسنة 2025 الحد الأدنى للهامور بـ42 سم. وتختلف الأنظمة في بقية دول الخليج، فراجع الجهة المختصة في بلدك قبل أن تحتفظ بسمكة صغيرة.' },
+  { q: 'هل الهامور مهدد بالانقراض؟', a: 'عالمياً يصنفه الاتحاد الدولي لحماية الطبيعة «غير مهدد»، لكنه يعدّه مستنزفاً في الخليج العربي وعُمان، مع تراجع نحو 51% في أعداده في الخليج خلال ثلاثة أجيال. وقدّرت هيئة البيئة في أبوظبي سنة 2019 أن أعداد الهامور البالغ تراجعت بنحو 90%.' },
+  { q: 'ما أفضل وقت لصيد الهامور؟', a: 'حين يهدأ التيار: في الدقائق التي تسبق انقلاب المد وتليه، خاصة إذا وافقت الفجر أو الغروب. وفي أيام المد الصغير (التربيع) يبقى الماء هادئاً مدة أطول.' },
+  { q: 'لماذا يعلق الهامور في الصخر بعد أن يأكل الطعم؟', a: 'لأنه يعيش قرب جحر أو كهف، وحين يشعر بالخطاف يندفع إليه ويثبت نفسه بزعانفه. لذلك يرفعه الصيادون بقوة وسرعة في الثواني الأولى، قبل أن يصل إلى مخبئه.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={['dubai', 'abu-dhabi', 'doha', 'manama']}>
+  <svg slot="art" viewBox="0 0 300 200" class="w-full h-auto">
+    <path fill="#a8a29e" opacity=".5" d="M0 190c30-30 60-40 90-30s50 20 80 10 70-30 130-10v40H0z"/>
+    <path fill="#78716c" d="M40 104c10-40 70-62 140-52 30 4 56 18 70 34l26-22c4-3 9 0 8 5l-8 34 8 34c1 5-4 8-8 5l-26-22c-14 16-40 30-70 34-70 10-130-12-140-50z"/>
+    <path fill="#57534e" d="M40 104c4 6 14 10 26 10l-4 10c-12-2-20-10-22-20z"/>
+    <g fill="#fb923c"><circle cx="100" cy="86" r="4"/><circle cx="124" cy="78" r="4"/><circle cx="148" cy="84" r="4"/><circle cx="172" cy="78" r="4"/><circle cx="112" cy="104" r="4"/><circle cx="138" cy="100" r="4"/><circle cx="164" cy="98" r="4"/><circle cx="190" cy="94" r="4"/><circle cx="126" cy="122" r="4"/><circle cx="152" cy="118" r="4"/><circle cx="178" cy="114" r="4"/><circle cx="206" cy="110" r="4"/></g>
+    <circle cx="66" cy="92" r="5" fill="#0b2540"/>
+  </svg>
+
+  <p>لا يكاد يخلو بيت في الخليج من ذكريات الهامور: مشوياً على الفحم، أو في المكبوس، أو على مائدة العيد. وهو عند الصياد غنيمة كبيرة، يعلق ثم يندفع إلى الصخر بكل قوته. لكن هذه السمكة المحبوبة صارت أقل بكثير مما كانت، لأسباب تتعلق بطريقة حياتها نفسها.</p>
+
+  <h2 id="fish">أي سمكة نقصد بالهامور</h2>
+  <p>كلمة «هامور» تُطلق على أكثر من نوع من أسماك الهامور، لكن الهامور الذي يقصده أهل الخليج غالباً هو <strong>الهامور البرتقالي المنقط</strong> <span class="latin" lang="la"><i>Epinephelus coioides</i></span>. ويسمى في مصر والبحر الأحمر <strong>وقار</strong>. أما في البحر المتوسط فيعيش نوع آخر هو <a href={link('wagar')}>{F('wagar').ar}</a>، ويسميه كثيرون «هامور المتوسط». وقد جمعنا قصة هذه الأسماء في مقال <a href={`${BASE}articles/arab-fish-names`}>أسماء الأسماك في البلاد العربية</a>.</p>
+  <p>جسمه ممتلئ بني رمادي، تغطيه نقاط برتقالية صغيرة، وفمه واسع جداً. طوله الشائع بين <strong>40 و80 سم</strong>، وقد يتجاوز <strong>120 سم</strong> و<strong>15 كغ</strong>، ويعيش أكثر من 20 سنة.</p>
+  <figure class="figure !p-0 overflow-hidden">
+    <img src={`${BASE}fish/hamour.webp`} alt="سمك هامور بني رمادي تغطيه نقاط برتقالية صغيرة" width={photo.w} height={photo.h} loading="lazy" class="w-full h-auto block" />
+    <figcaption class="px-4 pb-3">
+      <a href={link('hamour')}>الهامور البرتقالي المنقط</a> <span class="latin" lang="la"><i>Epinephelus coioides</i></span>. النقاط البرتقالية هي ما يميزه عن أنواع الهامور الأخرى.<br />
+      الصورة: <span lang="en">{photo.artist}</span> · <a href={photo.licenseUrl} rel="license noopener" lang="en">{photo.license}</a> · <a href={photo.source} rel="noopener">ويكيميديا كومنز</a>
+    </figcaption>
+  </figure>
+
+  <h2 id="life">يولد أنثى ويصير ذكراً</h2>
+  <p>من أغرب ما في الهامور أنه <strong>يبدأ حياته أنثى</strong>. تنضج الإناث حين يبلغ طولها نحو 25 إلى 30 سم، في سنتها الثانية أو الثالثة، ثم يتحول بعضها إلى ذكور حين تكبر، غالباً بين 55 و75 سم. ويسمي العلماء ذلك «الخنوثة المتعاقبة».</p>
+  <ul>
+    <li><strong>الصغار في الأخوار:</strong> يعيش الهامور الصغير في المياه الضحلة قليلة الملوحة، بين جذور <a href={port('abu-dhabi')}>المانغروف</a> وعلى القيعان الطينية والحصوية.</li>
+    <li><strong>الكبار عند الصخور:</strong> ينتقل مع نموه إلى الشعاب الصخرية والحطام والكهوف، على أعماق تصل إلى 100 متر.</li>
+    <li><strong>صياد ينتظر:</strong> يبقى ساكناً قرب مخبئه، ويبتلع السمك الصغير والربيان والسرطانات دفعة واحدة بفمه الواسع.</li>
+    <li><strong>تجمعات للتكاثر:</strong> يتجمع في أماكن محددة في موسم التكاثر، فيسهل صيده بأعداد كبيرة في هذا الوقت.</li>
+  </ul>
+
+  <h2 id="decline">لماذا قلّ الهامور في الخليج</h2>
+  <p>عالمياً يصنف الاتحاد الدولي لحماية الطبيعة الهامور البرتقالي المنقط «غير مهدد» لأنه منتشر من البحر الأحمر إلى المحيط الهادئ. لكنه يعدّه <strong>مستنزفاً في الخليج العربي وعُمان</strong>، ويقدّر أن أعداده في الخليج تراجعت نحو <strong>51%</strong> خلال ثلاثة أجيال. وفي أبوظبي قدّرت هيئة البيئة سنة 2019 أن أعداد الهامور البالغ تراجعت بنحو <strong>90%</strong>.</p>
+  <p>والسبب في طريقة حياته: ينمو ببطء، ولا يتكاثر قبل سنوات، ويتجمع في أماكن معروفة. فإذا صيد الصغير لم يتكاثر أبداً، وإذا صيد الكبير قلّ عدد الذكور. ويلاحظ الاتحاد الدولي لحماية الطبيعة أن معظم ما يُنزل منه إلى الأسواق في الخليج أسماك صغيرة لم تتكاثر بعد.</p>
+  <div class="callout fact"><span class="ic">💡</span><div>أفضل ما يقدمه الهاوي: <strong>أطلق الهامور الصغير</strong> فوراً، حتى لو كان القانون يسمح بأخذه. وإذا اصطدت من عمق، فارفعه ببطء نسبي أو أعده سريعاً، لأن تغيّر الضغط يؤذي مثانته الهوائية.</div></div>
+
+  <h2 id="rules">الحجم المسموح والأنظمة</h2>
+  <table class="data-table">
+    <thead><tr><th>البلد</th><th>القاعدة</th></tr></thead>
+    <tbody>
+      <tr><td>البحرين</td><td>يُمنع صيد الهامور أو بيعه إذا قل طوله عن <strong>42 سم</strong> (قرار المجلس الأعلى للبيئة رقم 3 لسنة 2025)</td></tr>
+      <tr><td>الإمارات والسعودية والكويت وقطر وعُمان</td><td>توجد أنظمة لأدوات الصيد ومواسمه وأحجامه تختلف من بلد إلى آخر؛ راجع الجهة المختصة قبل الخروج</td></tr>
+    </tbody>
+  </table>
+  <p>لم نجد مصدراً رسمياً حديثاً بحد أدنى للهامور في بقية دول الخليج، فلم نضع رقماً لا نستطيع التحقق منه. وإذا كنت تعرف القرار المعمول به في بلدك، <a href={`${BASE}contact`}>أرسله لنا</a> لنضيفه.</p>
+
+  <h2 id="tide">أفضل مد ووقت لصيده</h2>
+  <p>هنا يختلف الهامور عن <a href={`${BASE}articles/kanad`}>الكنعد</a> تماماً. الكنعد يحب التيار القوي، أما الهامور فيقل نشاطه حين يشتد التيار، ثم <strong>ينشط حين يهدأ الماء</strong>.</p>
+  <ul>
+    <li><strong>وقفة المد:</strong> الدقائق التي يتوقف فيها التيار قبل انقلاب المد وبعده، عند قمة المد العالي وعند أدنى الجزر.</li>
+    <li><strong>أيام المد الصغير:</strong> في أيام التربيع يكون التيار أضعف ويبقى الماء هادئاً مدة أطول. اقرأ عن ذلك في <a href={`${BASE}articles/tide-coefficient`}>معامل المد</a>.</li>
+    <li><strong>الفجر والغروب:</strong> إذا وافقت وقفة المد الفجر أو الغروب، فهذه أفضل ساعة.</li>
+  </ul>
+  <p>افتح صفحة ميناءك لترى أوقات المد العالي والجزر المنخفض هذا الأسبوع: <a href={port('dubai')}>دبي</a>، <a href={port('abu-dhabi')}>أبوظبي</a>، <a href={port('doha')}>الدوحة</a>، <a href={port('manama')}>المنامة</a>، <a href={port('dammam')}>الدمام</a>، <a href={port('kuwait-city')}>الكويت</a>، <a href={port('muscat')}>مسقط</a>.</p>
+
+  <h2 id="gear">العدة والطعم</h2>
+  <ul>
+    <li><strong>الطعم:</strong> سمكة صغيرة حية أو شرائح سمك طازج، والحبار والربيان الكبير. اقرأ <a href={`${BASE}articles/fishing-bait-guide`}>دليل الطعم</a>.</li>
+    <li><strong>قرب القاع:</strong> أنزل الطعم إلى جوار الصخر أو الحطام، فالهامور لا يطارد الطعم بعيداً عن مخبئه.</li>
+    <li><strong>خيط قوي:</strong> ارفعه بقوة وسرعة في الثواني الأولى، وإلا دخل الصخر وقطع الخيط عليه.</li>
+    <li><strong>كماشة:</strong> لإخراج الخطاف من فمه الواسع، ولا تُدخل يدك بين خياشيمه.</li>
+  </ul>
+
+  <h2 id="records">أين سُجّل قرب موانئنا</h2>
+  <p>في منصة <span lang="en">iNaturalist</span> (مشاهدات بصور راجعها مختصون) سُجّل الهامور البرتقالي المنقط ضمن 50 كيلومتراً من هذه الموانئ:</p>
+  <table class="data-table">
+    <thead><tr><th>الميناء</th><th>المشاهدات</th></tr></thead>
+    <tbody>
+      {records.map(r => (
+        <tr><td><a href={port(r.port)}>{portName(r.port)}</a></td><td class="latin">{r.count}</td></tr>
+      ))}
+    </tbody>
+  </table>
+  <p>معظم المشاهدات من غواصين صوّروه قرب الشعاب والحطام، وأغلب ما يصاده الصيادون لا يُسجَّل في المنصة. فغيابه عن ميناء في الجدول لا يعني أنه غير موجود هناك.</p>
+  <div class="pull">هامور صغير تطلقه اليوم قد يصير هاموراً كبيراً بعد سنوات.</div>
+  <p>تعرّف على أسماك تشاركه الشعاب نفسها في <a href={`${BASE}fish`}>دليل الأسماك</a>، مثل <a href={link('sheri')}>{F('sheri').ar}</a> و<a href={link('safi')}>{F('safi').ar}</a>.</p>
+
+  <h2 id="sources">المصادر</h2>
+  <ul class="text-sm">
+    <li>القائمة الحمراء: <a href="https://www.iucnredlist.org/species/44674/2999451" rel="noopener" lang="en">IUCN Red List — Epinephelus coioides</a> (2018): «مستنزف في عُمان والخليج العربي»، وتراجع 51% في الخليج، والخنوثة المتعاقبة.</li>
+    <li>البحرين: <a href="https://www.lloc.gov.bh/Legislation/HTM/RSCE0325" rel="noopener">قرار رئيس المجلس الأعلى للبيئة رقم 3 لسنة 2025</a> بحظر صيد صغار الأسماك والقشريات.</li>
+    <li>أبوظبي: <a href="https://www.thenationalnews.com/uae/environment/spearfishing-for-hammour-set-to-be-banned-in-landmark-new-regulations-1.841096" rel="noopener" lang="en">The National</a> (2019)، تقدير هيئة البيئة لتراجع أعداد الهامور البالغ.</li>
+    <li>قاعدة بيانات الأسماك: <a href="https://www.fishbase.se/summary/Epinephelus-coioides.html" rel="noopener" lang="en">FishBase — Epinephelus coioides</a> (الحجم والعمر والموطن والنضج).</li>
+    <li>المشاهدات قرب الموانئ: <a href="https://www.inaturalist.org" rel="noopener" lang="en">iNaturalist</a>، مشاهدات بدرجة «بحثية» ضمن 50 كم من كل ميناء.</li>
+    <li>الصورة: <span lang="en">{photo.artist}</span> (<a href={photo.licenseUrl} rel="license noopener" lang="en">{photo.license}</a>) عبر ويكيميديا كومنز.</li>
+  </ul>
+</ArticleLayout>
