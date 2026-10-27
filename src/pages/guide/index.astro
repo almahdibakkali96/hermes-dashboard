@@ -66,7 +66,11 @@ const jsonLd = [
               <div class="leading-none"><span class="latin text-5xl font-extrabold text-white">{GUIDE.priceLabel}</span></div>
               <a href={BUY} class="btn-primary text-lg" rel="noopener">اشترِ الدليل الآن</a>
             </div>
-            <p class="mt-3 text-sm text-slate-400">🔒 دفع آمن عبر Stripe · يصلك ملف PDF على بريدك الإلكتروني</p>
+            <ul class="mt-4 flex flex-wrap gap-2 text-xs text-slate-200" aria-label="ضمانات الشراء">
+              <li class="hero-chip">🔒 دفع آمن ومشفّر عبر <span class="latin font-semibold">Stripe</span></li>
+              <li class="hero-chip">💳 بطاقة · <span class="latin">Apple Pay</span> · <span class="latin">Google Pay</span></li>
+              <li class="hero-chip">↩️ ضمان استرداد المبلغ</li>
+            </ul>
           </>
         ) : (
           <>
@@ -123,6 +127,20 @@ const jsonLd = [
       </div>
     </section>
 
+    <!-- Secure payment (only once sales are open) -->
+    {SALES_OPEN && (
+      <section class="mb-16" aria-labelledby="secure-title">
+        <div class="section-title"><h2 id="secure-title">دفع آمن وتسليم مضمون</h2><p>الدفع يتم عبر <span class="latin">Stripe</span>، لا عبر موقعنا</p></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="card p-5"><div class="text-3xl" aria-hidden="true">🔒</div><h3 class="mt-2 font-semibold">مزوّد دفع عالمي</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">نستخدم <span class="latin">Stripe</span>، مزوّد الدفع الذي تعتمد عليه ملايين الشركات حول العالم، والحاصل على أعلى شهادة أمان في صناعة البطاقات (<span class="latin">PCI DSS</span> المستوى الأول).</p></div>
+          <div class="card p-5"><div class="text-3xl" aria-hidden="true">🛡️</div><h3 class="mt-2 font-semibold">لا نرى بيانات بطاقتك</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">تُدخل بطاقتك في صفحة <span class="latin">Stripe</span> المشفّرة على <span class="latin" dir="ltr">buy.stripe.com</span>. لا تمر بموقعنا، ولا نراها ولا نحفظها.</p></div>
+          <div class="card p-5"><div class="text-3xl" aria-hidden="true">📧</div><h3 class="mt-2 font-semibold">إيصال فوري وتسليم خلال 24 ساعة</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">يصلك إيصال الدفع من <span class="latin">Stripe</span> فور الشراء، ثم ملف الدليل على بريدك الإلكتروني خلال <span class="latin">24</span> ساعة.</p></div>
+          <div class="card p-5"><div class="text-3xl" aria-hidden="true">↩️</div><h3 class="mt-2 font-semibold">ضمان استرداد المبلغ</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">إذا لم يصلك الدليل، أو كان في الملف خلل يمنع قراءته، نرسل لك نسخة سليمة أو نعيد لك المبلغ كاملاً.</p></div>
+        </div>
+        <p class="mt-4 text-sm text-[var(--text-muted)] text-center">طرق الدفع: <span class="latin">Visa</span> · <span class="latin">Mastercard</span> · <span class="latin">Apple Pay</span> · <span class="latin">Google Pay</span>. السعر بالدولار الأمريكي، ويحوّله بنكك إلى عملتك.</p>
+      </section>
+    )}
+
     <!-- Free cheat sheet -->
     <section id="free" class="mb-16 scroll-mt-20" aria-labelledby="free-title">
       <div class="card p-6 sm:p-8 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center" style="background:linear-gradient(135deg,#ecfdf5,#f0fdfa);border-color:#99f6e4">
@@ -156,6 +174,7 @@ const jsonLd = [
           <>
             <div class="latin text-4xl font-extrabold mt-2 text-[var(--accent-text)]">{GUIDE.priceLabel}</div>
             <a href={BUY} class="btn-primary w-full justify-center mt-4" style="background:var(--accent);color:#fff" rel="noopener">اشترِ الدليل الآن</a>
+            <p class="mt-3 text-xs text-[var(--text-secondary)]">🔒 دفع آمن عبر <span class="latin">Stripe</span> · ↩️ ضمان الاسترداد</p>
           </>
         ) : (
           <>
