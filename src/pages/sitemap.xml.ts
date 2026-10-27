@@ -14,7 +14,7 @@ export async function GET({ site }: { site: URL | undefined }) {
 
   const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))];
   countries.forEach((code) => {
-    urls.push({ loc: `${origin}${BASE}/country/${code}`, priority: 0.7, changefreq: 'weekly' });
+    urls.push({ loc: `${origin}${BASE}/country/${code}`, priority: 0.7, changefreq: 'daily', lastmod: today });
   });
 
   placesIndex.forEach((p: { id: string }) => {

@@ -4,6 +4,9 @@ import placesIndex from '../../data/places/places_index.json';
 import { countryName, formatCoords } from '../../lib/countries';
 import { countryAltName, joinAr, portCountAr } from '../../lib/portNames';
 import { dayExtremes, formatTime, getTimezoneOffset, portDay, type Constituent } from '../../lib/tides';
+import { yearStats, seas, portSea, type SeaId } from '../../lib/seas';
+import { fish, observedNear, fishLabel, speciesCount, notTargeted } from '../../lib/fish';
+import { articleBySlug } from '../../lib/articles';
 
 export function getStaticPaths() {
   const codes = [...new Set(placesIndex.map((p: { country: string }) => p.country))];
@@ -19,18 +22,76 @@ const title = `موانئ ${name}`;
 const pageUrl = new URL(`${BASE}country/${code}`, Astro.site).href;
 const alt = countryAltName(code!);
 const portNames = joinAr(ports.map((p: { name_ar: string }) => p.name_ar));
+// Titles and descriptions name at most three ports, so Google doesn't cut them (Morocco has nine)
+const extra = ports.length - 3;
+const shortNames = extra <= 0 ? portNames
+  : `${ports.slice(0, 3).map((p: { name_ar: string }) => p.name_ar).join(' و')} و${extra === 1 ? 'ميناء آخر' : extra === 2 ? 'ميناءان آخران' : `${extra} موانئ أخرى`}`;
 // Kuwait has one port whose page is titled "…في الكويت"; keep this page off that search so the two don't compete
-const pageTitle = code === 'KW' ? `موانئ ${name}: ${portNames}` : `مواقيت المد والجزر في ${name}: ${portNames}`;
+const pageTitle = code === 'KW' ? `موانئ ${name}: ${shortNames}` : `مواقيت المد والجزر في ${name}: ${shortNames}`;
 const intro = `في ${name}${alt ? ` (${alt})` : ''} ${portCountAr(ports.length)}: ${portNames}. لكل ميناء أوقات المد العالي والجزر المنخفض اليوم، وتوقعات 7 أيام، وأفضل أيام الصيد، وطور القمر.`;
-// Search snippet with today's high tides per port, in each port's local day (refreshed nightly)
+
+// Today's tides per port, in each port's local day (refreshed nightly), plus year-long stats
 const now = new Date();
-const todayHighs = await Promise.all(ports.map(async (p: { id: string; name_ar: string }) => {
+const year = now.getUTCFullYear();
+const stats = (await yearStats(year)).filter(r => r.country === code);
+const monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const dateAr = (iso: string) => `${Number(iso.slice(8, 10))} ${monthNames[Number(iso.slice(5, 7)) - 1]}`;
+const heightAr = (cm: number) => cm >= 100 ? `${(cm / 100).toFixed(1)} م` : `${cm} سم`;
+const rows = await Promise.all(ports.map(async (p: { id: string; name_ar: string; name_en: string; lat: number; lon: number }) => {
   const port = (await import(`../../data/places/${p.id}.json`)).default;
   const tz = getTimezoneOffset(port.timezone, now);
-  const highs = dayExtremes(port.constituents as Record<string, Constituent>, portDay(now, tz), tz).filter(e => e.type === 'high');
-  return `${p.name_ar} ${highs.map(e => formatTime(e.time, tz)).join(' و') || '—'}`;
+  const ex = dayExtremes(port.constituents as Record<string, Constituent>, portDay(now, tz), tz);
+  const hs = ex.filter(e => e.type === 'high'), ls = ex.filter(e => e.type === 'low');
+  const range = hs.length && ls.length ? Math.round(Math.max(...hs.map(e => e.height)) - Math.min(...ls.map(e => e.height))) : null;
+  return { ...p, highs: hs.map(e => formatTime(e.time, tz)), range, stat: stats.find(s => s.id === p.id)! };
 }));
-const metaDescription = `مواقيت المد والجزر في ${name}${alt ? ` (${alt})` : ''}: ${portNames}. المد العالي اليوم في ${todayHighs.join('، وفي ')}. جدول 7 أيام وأفضل أيام الصيد لكل ميناء.`;
+const metaDescription = `مواقيت المد والجزر في ${name}${alt ? ` (${alt})` : ''}: المد العالي اليوم في ${rows.slice(0, 3).map(r => `${r.name_ar} ${r.highs.join(' و') || '—'}`).join('، وفي ')}${rows.length > 3 ? '، وموانئ أخرى' : ''}. جدول 7 أيام وأفضل أيام الصيد.`;
+
+// Country facts for the summary and FAQ
+const countrySeas = [...new Set(ports.map((p: { id: string }) => portSea[p.id]))] as SeaId[];
+const seaList = joinAr(countrySeas.map(s => seas[s].name));
+const biggest = [...rows].sort((a, b) => b.stat.maxRange - a.stat.maxRange)[0];
+const smallest = [...rows].sort((a, b) => a.stat.maxRange - b.stat.maxRange)[0];
+const tideTypes = [...new Set(rows.map(r => r.stat.tideTypeAr))];
+const microTidal = biggest.stat.maxRange < 50;
+const countryFish = fish.filter(f => f.seas.some(s => countrySeas.includes(s)));
+// Species recorded near this country's ports on iNaturalist: ones people fish for first (divers photograph
+// sharks and reef fish far more than anglers log their catch), then most-recorded first
+const seenFish = countryFish
+  .map(f => ({ f, n: rows.reduce((s, r) => s + observedNear(f, r.id), 0) }))
+  .filter(x => x.n > 0)
+  .sort((a, b) => Number(notTargeted(a.f)) - Number(notTargeted(b.f)) || b.n - a.n).map(x => x.f);
+const featured = [...seenFish, ...countryFish.filter(f => !seenFish.includes(f))].slice(0, 6);
+
+const related = [
+  countrySeas.includes('gulf') && 'gulf-tides-fishing-guide',
+  'strongest-tides-arab-world',
+  'how-to-read-tide-table',
+  countrySeas.includes('med') && 'suez-canal-invasive-species',
+  'solunar-fishing-hours',
+].filter(Boolean).slice(0, 3).map(s => articleBySlug(s as string));
+
+const faq = [
+  {
+    q: `أين أكبر مد وجزر في ${name}؟`,
+    a: ports.length === 1
+      ? `في ${biggest.name_ar} يصل الفرق بين المد العالي والجزر المنخفض إلى نحو ${heightAr(biggest.stat.maxRange)} في أكبر أيام السنة (${dateAr(biggest.stat.maxRangeDate)} ${year})، وينزل إلى ${heightAr(biggest.stat.minRange)} في أيام المد الصغير.`
+      : `في ${biggest.name_ar}، حيث يصل الفرق بين المد العالي والجزر المنخفض إلى نحو ${heightAr(biggest.stat.maxRange)} في أكبر أيام السنة (${dateAr(biggest.stat.maxRangeDate)} ${year}). وأصغر مد بين موانئ ${name} في ${smallest.name_ar}: نحو ${heightAr(smallest.stat.maxRange)} في أقصاه.`,
+  },
+  {
+    q: `ما نوع المد في ${name}؟`,
+    a: `${tideTypes.length === 1 ? `المد في ${ports.length === 1 ? biggest.name_ar : `موانئ ${name}`} ${tideTypes[0]}` : `يختلف بين الموانئ: ${rows.map(r => `${r.name_ar} ${r.stat.tideTypeAr}`).join('، و')}`}. ${microTidal ? 'والمد هنا صغير، فالريح والضغط الجوي قد يغيّران مستوى الماء أكثر من المد نفسه.' : 'ويكبر المد حول البدر والمحاق ويصغر في التربيعين.'}`,
+  },
+  {
+    q: `ما أشهر الأسماك قرب سواحل ${name}؟`,
+    a: `يضم دليلنا ${speciesCount(countryFish.length)} تعيش في ${seaList}${seenFish.length ? `، أكثرها تسجيلاً قرب موانئ ${name}: ${joinAr(seenFish.slice(0, 4).map(f => f.ar))}` : ''}.`,
+  },
+  {
+    q: `متى أفضل وقت للصيد في ${name}؟`,
+    a: 'تختلف الأيام من ميناء إلى آخر بحسب المد وطور القمر. افتح صفحة الميناء لترى تقييم الصيد لكل يوم في الشهر، والفترتين الكبريين والصغريين، وأوقات المد العالي اليوم.',
+  },
+];
+
 const jsonLd = [
   {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -44,6 +105,10 @@ const jsonLd = [
     itemListElement: ports.map((p: { id: string; name_ar: string }, i: number) => ({
       '@type': 'ListItem', position: i + 1, name: p.name_ar, url: new URL(`${BASE}ports/${p.id}`, Astro.site).href,
     })),
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   },
 ];
 ---
@@ -61,20 +126,78 @@ const jsonLd = [
     </div>
   </div>
 
-  <main id="main" class="max-w-4xl mx-auto px-4 py-8 w-full">
+  <main id="main" class="max-w-4xl mx-auto px-4 py-8 w-full space-y-10">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {ports.map((port: { id: string; name_ar: string; name_en: string; lat: number; lon: number }) => (
-        <a href={`${BASE}ports/${port.id}`} class="card group flex items-center gap-4 p-5">
-          <span class="w-11 h-11 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-lg shrink-0" aria-hidden="true">⚓</span>
-          <div class="min-w-0">
-            <div class="text-lg font-semibold display group-hover:text-[var(--accent-text)] transition-colors">{port.name_ar}</div>
-            <div class="text-xs text-[var(--text-muted)] latin mt-0.5" lang="en">
-              {port.name_en} · {formatCoords(port.lat, port.lon)}
+      {rows.map(port => (
+        <a href={`${BASE}ports/${port.id}`} class="card group flex flex-col gap-3 p-5">
+          <div class="flex items-center gap-4">
+            <span class="w-11 h-11 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-lg shrink-0" aria-hidden="true">⚓</span>
+            <div class="min-w-0">
+              <div class="text-lg font-semibold display group-hover:text-[var(--accent-text)] transition-colors">{port.name_ar}</div>
+              <div class="text-xs text-[var(--text-muted)] latin mt-0.5" lang="en">
+                {port.name_en} · {formatCoords(port.lat, port.lon)}
+              </div>
             </div>
+            <span class="ms-auto text-[var(--text-dim)] group-hover:text-[var(--accent-text)] transition-colors" aria-hidden="true">&larr;</span>
           </div>
-          <span class="ms-auto text-[var(--text-dim)] group-hover:text-[var(--accent-text)] transition-colors" aria-hidden="true">&larr;</span>
+          <dl class="grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-[var(--text-secondary)]">
+            <dt class="text-[var(--text-muted)]">المد العالي اليوم</dt><dd class="latin">{port.highs.join(' · ') || '—'}</dd>
+            <dt class="text-[var(--text-muted)]">مدى المد اليوم</dt><dd>{port.range !== null ? heightAr(port.range) : '—'}</dd>
+            <dt class="text-[var(--text-muted)]">أكبر مد في السنة</dt><dd>{heightAr(port.stat.maxRange)} · {dateAr(port.stat.maxRangeDate)}</dd>
+            <dt class="text-[var(--text-muted)]">نوع المد</dt><dd>{port.stat.tideTypeAr}</dd>
+          </dl>
         </a>
       ))}
     </div>
+
+    <section aria-labelledby="summary-title">
+      <h2 id="summary-title" class="text-xl font-bold display">المد والجزر في {name}</h2>
+      <p class="mt-3 leading-loose text-[var(--text-secondary)]">
+        {ports.length > 1 ? `تطل موانئ ${name} في ArabTides على ${seaList}.` : `تطل ${biggest.name_ar} على ${seaList}.`}{' '}
+        {ports.length > 1
+          ? <>أكبر مد بينها في <a href={`${BASE}ports/${biggest.id}`} class="underline">{biggest.name_ar}</a> بنحو {heightAr(biggest.stat.maxRange)} في أقصاه، وأصغره في <a href={`${BASE}ports/${smallest.id}`} class="underline">{smallest.name_ar}</a> بنحو {heightAr(smallest.stat.maxRange)}.</>
+          : <>يصل المد في <a href={`${BASE}ports/${biggest.id}`} class="underline">{biggest.name_ar}</a> إلى نحو {heightAr(biggest.stat.maxRange)} في أكبر أيام السنة ({dateAr(biggest.stat.maxRangeDate)}).</>}{' '}
+        {microTidal
+          ? ' المد هنا صغير، فقد تغيّر الريح والضغط الجوي مستوى الماء أكثر من المد نفسه، والأهم للصياد ساعات القمر والفجر والغروب.'
+          : ' ويكبر المد في أيام البدر والمحاق ويصغر في التربيعين، وتتأخر أوقاته نحو 50 دقيقة كل يوم.'}{' '}
+        الأرقام محسوبة من نموذج <a href={`${BASE}methodology`} class="underline">EOT20</a> لكل ميناء، وهي تقديرات لا تُستخدم للملاحة.
+      </p>
+    </section>
+
+    <section aria-labelledby="fish-title">
+      <h2 id="fish-title" class="text-xl font-bold display">أسماك سواحل {name}</h2>
+      <p class="mt-2 text-sm text-[var(--text-secondary)]">{speciesCount(countryFish.length)} في <a href={`${BASE}fish`} class="underline">دليل الأسماك</a> تعيش في {seaList}{seenFish.length ? '، وهذه أكثرها تسجيلاً قرب الموانئ:' : ':'}</p>
+      <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {featured.map(f => (
+          <a href={`${BASE}fish/${f.id}`} class="card overflow-hidden group block">
+            <img src={`${BASE}fish/sm/${f.id}.webp`} alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
+            <span class="block px-3 py-2 font-semibold text-sm group-hover:text-[var(--accent-text)] transition-colors">{f.ar}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="card p-5" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="text-lg font-semibold display">أسئلة شائعة عن المد والجزر في {name}</h2>
+      <div class="mt-3 divide-y divide-[var(--border-subtle)]">
+        {faq.map((f, i) => (
+          <details class="faq py-3" open={i === 0}>
+            <summary class="flex items-center gap-3 cursor-pointer font-medium list-none">
+              <span class="faq-icon" aria-hidden="true">+</span>{f.q}
+            </summary>
+            <p class="mt-2 ps-9 text-sm leading-relaxed text-[var(--text-secondary)]">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="read-title">
+      <h2 id="read-title" class="text-xl font-bold display">اقرأ أيضاً</h2>
+      <ul class="mt-3 space-y-2">
+        {related.map(a => (
+          <li><a href={`${BASE}articles/${a.slug}`} class="underline">{a.icon} {a.title}</a></li>
+        ))}
+      </ul>
+    </section>
   </main>
 </BaseLayout>

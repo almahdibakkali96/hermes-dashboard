@@ -600,10 +600,14 @@ export function fishAltName(f: Fish): string | undefined {
 
 /** Page title: fishing guide for species we fish for, a field guide for the rest */
 export function fishTitle(f: Fish): string {
-  const alt = fishAltName(f);
-  const name = `${fishLabel(f)}${alt ? ` (${alt})` : ''}`;
-  if (notTargeted(f)) return `${name} في البحار العربية: الأسماء والموطن والحماية`;
-  return f.ar.startsWith('سمكة') ? `${name}: أسماؤها المحلية وأفضل وقت لصيدها` : `${name}: أسماؤه المحلية وأفضل وقت لصيده`;
+  const make = (alt?: string) => {
+    const name = `${fishLabel(f)}${alt ? ` (${alt})` : ''}`;
+    if (notTargeted(f)) return `${name} في البحار العربية: الأسماء والموطن والحماية`;
+    return f.ar.startsWith('سمكة') ? `${name}: أسماؤها المحلية وأفضل وقت لصيدها` : `${name}: أسماؤه المحلية وأفضل وقت لصيده`;
+  };
+  // Over ~58 characters (plus " — ArabTides") Google cuts the title, so drop the bracketed name
+  const full = make(fishAltName(f));
+  return full.length > 58 ? make() : full;
 }
 
 // iNaturalist research-grade observations within 50 km of each port (tools/fish-photos/inat-counts.mjs)

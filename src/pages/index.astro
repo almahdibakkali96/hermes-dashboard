@@ -6,7 +6,7 @@ import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
 import GuidePromo from '../components/GuidePromo.astro';
 import Flag from '../components/Flag.astro';
-import { fish } from '../lib/fish';
+import { fish, fishLabel } from '../lib/fish';
 import {
   generateTideCurve, dayExtremes, formatTime,
   getTimezoneOffset, portDay
@@ -63,8 +63,8 @@ const features = [
 ---
 
 <BaseLayout
-  title="مواقيت المد والجزر للموانئ العربية"
-  description="مواقيت المد والجزر، أوقات الصيد، أطوار القمر، أوقات الصلاة والتاريخ الهجري لـ٣٦ ميناءً عربياً"
+  title="جدول المد والجزر اليوم وأوقات الصيد في الموانئ العربية"
+  description={`جدول المد والجزر اليوم في ${placesIndex.length} ميناءً عربياً من المغرب إلى الخليج: أوقات المد العالي والجزر المنخفض، وأفضل أوقات الصيد، وأطوار القمر ومواقيت الصلاة.`}
 >
   <!-- Hero -->
   <section class="hero">
@@ -185,7 +185,7 @@ const features = [
           const f = fish.find(x => x.id === fid)!;
           return (
             <a href={`${BASE}fish/${f.id}`} class="card overflow-hidden group block">
-              <img src={`${BASE}fish/sm/${f.id}.webp`} alt="" loading="lazy" decoding="async" class="fish-thumb" />
+              <img src={`${BASE}fish/sm/${f.id}.webp`} alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
               <span class="block px-3 py-2">
                 <span class="block font-semibold text-sm group-hover:text-[var(--accent-text)] transition-colors">{f.ar}</span>
                 <span class="block text-[11px] text-[var(--text-muted)] truncate">{f.local.map(l => l.name).filter(n => n !== f.ar).slice(0, 2).join('، ') || f.en}</span>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import placesIndex from '../data/places/places_index.json';
+
+// Served by Vercel for any missing URL: point people back to the pages they most likely wanted
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const popular = ['casablanca', 'dubai', 'jeddah', 'alexandria', 'kuwait-city', 'muscat', 'doha', 'dammam']
+  .map(id => placesIndex.find((p: { id: string }) => p.id === id)!)
+  .filter(Boolean);
+---
+
+<BaseLayout title="الصفحة غير موجودة" description="الصفحة التي تبحث عنها غير موجودة في ArabTides." noindex>
+  <main id="main" class="max-w-3xl mx-auto px-4 py-16 w-full text-center">
+    <div class="text-6xl" aria-hidden="true">🌊</div>
+    <h1 class="mt-4 text-3xl font-bold display">الصفحة غير موجودة</h1>
+    <p class="mt-3 text-[var(--text-secondary)] leading-relaxed">ربما تغيّر الرابط أو كُتب خطأً. جرّب أحد الموانئ الأكثر زيارة، أو ابدأ من الصفحة الرئيسية.</p>
+
+    <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {popular.map((p: { id: string; name_ar: string }) => (
+        <a href={`${BASE}ports/${p.id}`} class="card p-3 font-semibold hover:text-[var(--accent-text)] transition-colors">{p.name_ar}</a>
+      ))}
+    </div>
+
+    <p class="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
+      <a href={BASE} class="text-[var(--accent-text)] hover:underline">الصفحة الرئيسية</a>
+      <a href={`${BASE}#countries`} class="text-[var(--accent-text)] hover:underline">كل الدول</a>
+      <a href={`${BASE}fish`} class="text-[var(--accent-text)] hover:underline">دليل الأسماك</a>
+      <a href={`${BASE}articles`} class="text-[var(--accent-text)] hover:underline">المقالات</a>
+    </p>
+  </main>
+</BaseLayout>

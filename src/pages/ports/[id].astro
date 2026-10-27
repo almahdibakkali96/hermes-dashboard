@@ -10,7 +10,7 @@ import { calculatePrayerTimes, gregorianToHijri } from '../../lib/prayer';
 import { countryName, formatCoords } from '../../lib/countries';
 import FishRating from '../../components/FishRating.astro';
 import { yearStats, seas, portSea } from '../../lib/seas';
-import { fishForPort } from '../../lib/fish';
+import { fishForPort, fishLabel } from '../../lib/fish';
 import GuidePromo from '../../components/GuidePromo.astro';
 import { altNamesAr, frenchName, nameWithAlts } from '../../lib/portNames';
 
@@ -485,7 +485,7 @@ const pageJsonLd = [
           <div class="mt-4 grid grid-cols-3 sm:grid-cols-4 gap-2.5">
             {portFish.fish.slice(0, 12).map(f => (
               <a href={`${BASE}fish/${f.id}`} class="rounded-lg overflow-hidden border border-[var(--border-subtle)] group block">
-                <img src={`${BASE}fish/sm/${f.id}.webp`} alt="" loading="lazy" decoding="async" class="fish-thumb" />
+                <img src={`${BASE}fish/sm/${f.id}.webp`} alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
                 <span class="block px-2 py-1.5 text-xs font-semibold truncate group-hover:text-[var(--accent-text)] transition-colors">
                   {portFish.observed.has(f.id) && <span title="سُجّلت مشاهدته قرب الميناء">📍 </span>}{f.ar}
                 </span>

@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fish, kindNames } from '../../lib/fish';
+import { fish, kindNames, fishLabel } from '../../lib/fish';
 import { seas, type SeaId } from '../../lib/seaNames';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const pageUrl = new URL(`${BASE}fish`, Astro.site).href;
 const seaIds = Object.keys(seas) as SeaId[];
-const description = `دليل ${fish.length} نوعاً من أسماك البحار العربية بالصور: الاسم الفصيح والأسماء المحلية في كل بلد، والبحار التي تعيش فيها، وأفضل وقت ومد لصيدها.`;
+const description = `أسماء الأسماك البحرية (الحوت في المغرب العربي) بالصور: ${fish.length} نوعاً من البحار العربية، مع الاسم الفصيح والأسماء المحلية في كل بلد، وأفضل وقت ومد لصيدها.`;
 const jsonLd = [
   {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -24,7 +24,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title="دليل الأسماك: أسماء أسماك البحار العربية وصورها" description={description} jsonLd={jsonLd}>
+<BaseLayout title="دليل الأسماك البحرية: أسماء الحوت في البلاد العربية بالصور" description={description} jsonLd={jsonLd}>
   <div class="page-head">
     <div class="max-w-6xl mx-auto px-4 py-8">
       <nav class="breadcrumb" aria-label="مسار التنقل">
@@ -49,7 +49,7 @@ const jsonLd = [
     <div id="fish-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       {fish.map(f => (
         <a href={`${BASE}fish/${f.id}`} class="card overflow-hidden group block" data-seas={f.seas.join(' ')}>
-          <img src={`${BASE}fish/sm/${f.id}.webp`} alt="" loading="lazy" decoding="async" class="fish-thumb" />
+          <img src={`${BASE}fish/sm/${f.id}.webp`} alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
           <span class="block p-3">
             <span class="block text-[11px] text-[var(--text-muted)]">{kindNames[f.kind]}</span>
             <span class="block font-semibold display text-lg leading-snug group-hover:text-[var(--accent-text)] transition-colors">{f.ar}</span>
