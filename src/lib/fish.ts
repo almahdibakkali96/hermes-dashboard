@@ -582,6 +582,30 @@ export const fishPhotos = photos as Record<string, FishPhoto>;
 /** "N species" in Arabic: 3–10 take the plural أنواع, other numbers the accusative singular نوعاً */
 export const speciesCount = (n: number) => (n >= 3 && n <= 10 ? `${n} أنواع` : `${n} نوعاً`);
 
+/** Species nobody targets (protected, or released if caught): their pages are about the animal, not fishing it */
+export const notTargeted = (f: Fish) => f.bait.startsWith('لا ');
+
+/** Name as people search it: "سمك" before true fish we fish for, never before squid, crabs, sharks or "سمكة …" */
+export function fishLabel(f: Fish): string {
+  const bare = notTargeted(f) || f.kind === 'cephalopod' || f.kind === 'crustacean' || f.kind === 'shark' || f.ar.startsWith('سمك');
+  return bare ? f.ar : `سمك ${f.ar}`;
+}
+
+/** The first other local name (e.g. فرس البحر, درّاك, استاكوزا), for titles */
+export function fishAltName(f: Fish): string | undefined {
+  if (f.ar.includes('(')) return undefined;
+  const plain = (s: string) => s.replace(/^ال/, '');
+  return f.local.flatMap(l => l.name.split(' / ')).find(n => !f.ar.includes(plain(n)) && !plain(n).includes(plain(f.ar)));
+}
+
+/** Page title: fishing guide for species we fish for, a field guide for the rest */
+export function fishTitle(f: Fish): string {
+  const alt = fishAltName(f);
+  const name = `${fishLabel(f)}${alt ? ` (${alt})` : ''}`;
+  if (notTargeted(f)) return `${name} في البحار العربية: الأسماء والموطن والحماية`;
+  return f.ar.startsWith('سمكة') ? `${name}: أسماؤها المحلية وأفضل وقت لصيدها` : `${name}: أسماؤه المحلية وأفضل وقت لصيده`;
+}
+
 // iNaturalist research-grade observations within 50 km of each port (tools/fish-photos/inat-counts.mjs)
 const observations = portSpecies as Record<string, [string, number][]>;
 // Our names → the name iNaturalist files the species under, where they differ

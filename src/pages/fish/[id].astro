@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Flag from '../../components/Flag.astro';
-import { fish, fishPhotos, kindNames, methodNames, portsForFish, observedNear } from '../../lib/fish';
+import { fish, fishPhotos, kindNames, methodNames, portsForFish, observedNear, fishTitle, fishLabel, notTargeted } from '../../lib/fish';
 import { seas } from '../../lib/seaNames';
 import { countryName } from '../../lib/countries';
 import { dayExtremes, formatTime, getTimezoneOffset, classifySpringNeap } from '../../lib/tides';
@@ -37,8 +37,12 @@ const countries = [...new Set(ports.map(p => p.country))];
 const text = fishText1[f.id] || fishText2[f.id] || [];
 const article = f.article ? articleBySlug(f.article) : undefined;
 const others = fish.filter(x => x.id !== f.id && x.seas.some(s => f.seas.includes(s))).slice(0, 4);
-const localLine = f.local.map(l => `${l.name} (${l.where})`).join('، ');
-const description = `${f.ar} (${f.sci}): ${localLine}. أين يعيش، وأفضل وقت ومد لصيده، والطعم المناسب، ومواقيت المد اليوم في موانئ ${f.seas.map(s => seas[s].name).join(' و')}.`;
+// Other names only: skip the page name itself and the uninformative "تسمية عامة"
+const localLine = f.local.filter(l => l.name !== f.ar).map(l => l.where === 'تسمية عامة' ? l.name : `${l.name} (${l.where})`).join('، ');
+const seaList = f.seas.map(s => seas[s].name).join(' و');
+const description = notTargeted(f)
+  ? `${f.ar} (${f.sci})${localLine ? `، ويسمى أيضاً ${localLine}` : ''}. الموطن والسلوك وطرق الحماية، وما تفعله إن صادفته، ومواقيت المد اليوم في موانئ ${seaList}.`
+  : `${f.ar} (${f.sci})${localLine ? `: ${localLine}` : ''}. أين يعيش، وأفضل وقت ومد لصيده، والطعم المناسب، ومواقيت المد اليوم في موانئ ${seaList}.`;
 const jsonLd = [
   {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -48,10 +52,21 @@ const jsonLd = [
       { '@type': 'ListItem', position: 3, name: f.ar, item: pageUrl },
     ],
   },
+  // Photo credit and license, so the photo can show in Google Images with its license
+  {
+    '@context': 'https://schema.org', '@type': 'ImageObject',
+    contentUrl: new URL(`${BASE}fish/${f.id}.webp`, Astro.site).href,
+    name: `${fishLabel(f)} (${f.sci})`,
+    creator: { '@type': 'Person', name: photo.artist },
+    creditText: photo.artist,
+    copyrightNotice: photo.artist,
+    license: photo.licenseUrl || photo.source,
+    acquireLicensePage: photo.source,
+  },
 ];
 ---
 
-<BaseLayout title={`سمك ${f.ar}: أسماؤه المحلية وأفضل وقت لصيده`} description={description} jsonLd={jsonLd}
+<BaseLayout title={fishTitle(f)} description={description} jsonLd={jsonLd}
   ogImage={`${BASE}fish/${f.id}.webp`}>
   <div class="page-head">
     <div class="max-w-5xl mx-auto px-4 py-8">
@@ -70,7 +85,7 @@ const jsonLd = [
   <main id="main" class="max-w-5xl mx-auto px-4 py-8 w-full">
     <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-6 items-start">
       <figure class="card overflow-hidden">
-        <img src={`${BASE}fish/${f.id}.webp`} alt={`سمك ${f.ar}`} width={photo.w} height={photo.h} class="w-full h-auto block" />
+        <img src={`${BASE}fish/${f.id}.webp`} alt={fishLabel(f)} width={photo.w} height={photo.h} class="w-full h-auto block" />
         <figcaption class="px-4 py-2 text-[11px] text-[var(--text-dim)]">
           الصورة: <span lang="en">{photo.artist}</span> ·
           {photo.licenseUrl ? <a href={photo.licenseUrl} rel="license noopener" class="underline hover:text-[var(--accent-text)]" lang="en">{photo.license}</a> : <span lang="en">{photo.license}</span>} ·

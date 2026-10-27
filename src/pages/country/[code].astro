@@ -19,6 +19,8 @@ const title = `موانئ ${name}`;
 const pageUrl = new URL(`${BASE}country/${code}`, Astro.site).href;
 const alt = countryAltName(code!);
 const portNames = joinAr(ports.map((p: { name_ar: string }) => p.name_ar));
+// Kuwait has one port whose page is titled "…في الكويت"; keep this page off that search so the two don't compete
+const pageTitle = code === 'KW' ? `موانئ ${name}: ${portNames}` : `مواقيت المد والجزر في ${name}: ${portNames}`;
 const intro = `في ${name}${alt ? ` (${alt})` : ''} ${portCountAr(ports.length)}: ${portNames}. لكل ميناء أوقات المد العالي والجزر المنخفض اليوم، وتوقعات 7 أيام، وأفضل أيام الصيد، وطور القمر.`;
 // Search snippet with today's high tides per port, in each port's local day (refreshed nightly)
 const now = new Date();
@@ -46,7 +48,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`مواقيت المد والجزر في ${name}: ${portNames}`} description={metaDescription} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle} description={metaDescription} jsonLd={jsonLd}>
   <div class="page-head">
     <div class="max-w-4xl mx-auto px-4 py-8">
       <nav class="breadcrumb" aria-label="مسار التنقل">

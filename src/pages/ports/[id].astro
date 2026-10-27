@@ -167,7 +167,9 @@ const firstWeekday = new Date(Date.UTC(year, month, 1)).getUTCDay();
 const leadingBlanks = (firstWeekday + 1) % 7;
 const calWeekdays = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
 
-const title = `مواقيت المد والجزر في ${port.name_ar} اليوم — جدول 7 أيام وأوقات الصيد`;
+// Name in the title as people search it (Search Console: "المد والجزر الكويت", never "مدينة الكويت")
+const TITLE_NAME: Record<string, string> = { 'kuwait-city': 'الكويت' };
+const title = `مواقيت المد والجزر في ${TITLE_NAME[port.id] || port.name_ar} اليوم — جدول 7 أيام وأوقات الصيد`;
 const pageUrl = new URL(`${BASE}ports/${port.id}`, Astro.site).href;
 const monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 
