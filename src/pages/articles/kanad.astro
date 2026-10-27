@@ -1,0 +1,140 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import { articleBySlug } from '../../lib/articles';
+import { fish, fishPhotos } from '../../lib/fish';
+import portSpecies from '../../data/port-species.json';
+import placesIndex from '../../data/places/places_index.json';
+
+const meta = articleBySlug('kanad');
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const F = (id: string) => fish.find(f => f.id === id)!;
+const link = (id: string) => `${BASE}fish/${id}`;
+const port = (id: string) => `${BASE}ports/${id}`;
+const photo = fishPhotos.kanad;
+
+// Kanad records within 50 km of our ports (iNaturalist research grade, tools/fish-photos/inat-counts.mjs)
+const portName = (id: string) => (placesIndex as { id: string; name_ar: string }[]).find(p => p.id === id)!.name_ar;
+const records = Object.entries(portSpecies as Record<string, [string, number][]>)
+  .map(([p, list]) => ({ port: p, count: list.find(([n]) => n === 'Scomberomorus commerson')?.[1] || 0 }))
+  .filter(r => r.count)
+  .sort((a, b) => b.count - a.count);
+
+const toc = [
+  { id: 'fish', label: 'سمكة واحدة بأسماء كثيرة' },
+  { id: 'life', label: 'كيف يعيش ويصطاد' },
+  { id: 'ban', label: 'موسم المنع في الخليج وعُمان' },
+  { id: 'season', label: 'متى يكون موسمه' },
+  { id: 'tide', label: 'أفضل مد ووقت لصيده' },
+  { id: 'gear', label: 'العدة والطعم' },
+  { id: 'records', label: 'أين سُجّل قرب موانئنا' },
+  { id: 'sources', label: 'المصادر' },
+];
+const takeaways = [
+  'الكنعد في الخليج وعُمان هو <strong>الدراك</strong> في مصر والبحر الأحمر: سمكة واحدة اسمها العلمي <span class="latin" lang="la"><i>Scomberomorus commerson</i></span>.',
+  'تمنع دول الخليج صيده <strong>بالشباك</strong> في موسم تكاثره من 15 أغسطس، ويختلف المنع من بلد إلى آخر: في عُمان منع كامل، وفي قطر 2026 منع للشباك حتى <strong>31 أكتوبر</strong> مع السماح بالخيط.',
+  'أفضل وقته <strong>المد المتحرك بقوة</strong> والساعات الأولى بعد الفجر، حين تتجمع أسراب السردين التي يتبعها.',
+  'أسنانه تقطع الخيط العادي، فاستعمل <strong>سلكاً معدنياً قصيراً</strong> أمام الخطاف، وأمسكه بكماشة لا بأصابعك.',
+];
+const faq = [
+  { q: 'هل الكنعد والدراك سمكة واحدة؟', a: 'نعم. الكنعد (أو الجنعد) اسمه في الخليج العربي وعُمان، والدراك اسمه في مصر والبحر الأحمر، والاسم العلمي واحد: Scomberomorus commerson. ويسمى بالإنجليزية Narrow-barred Spanish mackerel أو Kingfish.' },
+  { q: 'متى يُمنع صيد الكنعد؟', a: 'اتفقت دول مجلس التعاون منذ 2015 على منع صيده بالشباك من 15 أغسطس إلى 15 أكتوبر. وفي 2026 منعت عُمان صيده وحيازته وبيعه كلياً في هذه المدة، ومنعت قطر شباك المنصب حتى 31 أكتوبر مع السماح بالخيط. راجع إعلان الجهة المختصة في بلدك كل سنة لأن التواريخ والتفاصيل قد تتغير.' },
+  { q: 'ما الحجم المسموح بصيده؟', a: 'في السعودية حدد إعلان وزارة البيئة والمياه والزراعة لساحل الخليج ألا يقل طول الكنعد المصيد عن 65 سم. وتختلف الحدود بين الدول، فاسأل الجهة المختصة قبل أن تحتفظ بسمكة صغيرة.' },
+  { q: 'ما أفضل وقت لصيد الكنعد؟', a: 'حين يتحرك المد بقوة، خاصة في أيام المد الكبير حول البدر والمحاق، وفي الساعات الأولى بعد الفجر. وعلامته فوق الماء طيور تغطس وأسماك صغيرة تقفز هاربة.' },
+  { q: 'لماذا يقطع الكنعد الخيط؟', a: 'لأن أسنانه حادة كالشفرات. يستخدم الصيادون سلكاً معدنياً قصيراً (وصلة أو «ليدر» معدني) بطول 20 إلى 30 سم بين الخيط والخطاف حتى لا يقطعه.' },
+];
+---
+
+<ArticleLayout meta={meta} toc={toc} takeaways={takeaways} faq={faq} relatedPorts={['muscat', 'doha', 'dubai', 'dammam']}>
+  <svg slot="art" viewBox="0 0 300 200" class="w-full h-auto">
+    <g fill="#e0f2fe" opacity=".35"><circle cx="40" cy="40" r="5"/><circle cx="62" cy="58" r="3"/><circle cx="250" cy="36" r="4"/></g>
+    <path fill="#cbd5e1" d="M30 104c40-30 120-40 190-18l30-26c4-3 9 0 7 5l-12 35 12 35c2 5-3 8-7 5l-30-26c-70 22-150 12-190-10z"/>
+    <path fill="#64748b" d="M60 92c50-18 110-20 160-6l-4 8c-50-10-104-8-152 6z"/>
+    <g stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"><path d="M90 88q4 10 0 20"/><path d="M112 85q4 11 0 22"/><path d="M134 84q4 11 0 22"/><path d="M156 84q4 11 0 22"/><path d="M178 86q4 10 0 20"/></g>
+    <circle cx="48" cy="100" r="4" fill="#0b2540"/>
+    <path d="M30 106l14 2" stroke="#0b2540" stroke-width="2"/>
+  </svg>
+
+  <p>إذا رأيت طيوراً تغطس فوق البحر وسطحاً يغلي بأسماك صغيرة هاربة، فغالباً تحتها كنعد. هذه السمكة الفضية السريعة من أغلى أسماك المائدة في الخليج وعُمان، ومن أحب الأسماك إلى صيادي القوارب. لكن صيدها مقيد بمواسم منع تختلف من بلد إلى آخر، وتوقيتها مرتبط بالمد أكثر مما يظن كثيرون.</p>
+
+  <h2 id="fish">سمكة واحدة بأسماء كثيرة</h2>
+  <p>في الكويت والسعودية والإمارات وعُمان اسمها <strong>الكنعد</strong>، وينطقها كثيرون <strong>الجنعد</strong>. وفي مصر والبحر الأحمر اسمها <strong>الدراك</strong>. والسمكة واحدة: <span class="latin" lang="la"><i>Scomberomorus commerson</i></span>، من عائلة الماكريل والتونة. وقد جمعنا قصة هذه الأسماء وغيرها في مقال <a href={`${BASE}articles/arab-fish-names`}>أسماء الأسماك في البلاد العربية</a>.</p>
+  <p>جسمها طويل فضي، تقطعه خطوط عمودية متموجة رمادية على الجانبين، وذيلها هلالي يمنحها سرعة كبيرة. طولها الشائع نحو <strong>120 سم</strong>، وأكبر ما سُجّل منها <strong>240 سم</strong> ونحو <strong>70 كغ</strong>، وقد تعيش أكثر من 20 سنة.</p>
+  <figure class="figure !p-0 overflow-hidden">
+    <img src={`${BASE}fish/kanad.webp`} alt="سمكة كنعد فضية طويلة بخطوط عمودية متموجة على جانبها" width={photo.w} height={photo.h} loading="lazy" class="w-full h-auto block" />
+    <figcaption class="px-4 pb-3">
+      <a href={link('kanad')}>الكنعد</a> <span class="latin" lang="la"><i>Scomberomorus commerson</i></span>. لاحظ الخطوط العمودية المتموجة والذيل الهلالي.<br />
+      الصورة: <span lang="en">{photo.artist}</span> · <a href={photo.licenseUrl} rel="license noopener" lang="en">{photo.license}</a> · <a href={photo.source} rel="noopener">ويكيميديا كومنز</a>
+    </figcaption>
+  </figure>
+
+  <h2 id="life">كيف يعيش ويصطاد</h2>
+  <p>الكنعد سمكة مفترسة تعيش في المياه الساحلية المفتوحة على أعماق بين 10 و70 متراً تقريباً، قرب حواف الشعاب والمنحدرات. يأكل الأسماك الصغيرة، خاصة <a href={link('sardine')}>السردين</a> والأنشوفة وصغار الحمام، ومعها الحبار والربيان.</p>
+  <ul>
+    <li><strong>يتبع الطعم:</strong> يقترب من الساحل حين تقترب أسراب السردين، ويبتعد حين تبتعد. فأين الطعم، هناك الكنعد.</li>
+    <li><strong>يهاجر على طول الساحل:</strong> تتنقل أعداد منه مسافات طويلة مع الفصول، وتبقى أعداد أخرى مقيمة في مكانها.</li>
+    <li><strong>يتجمع للتكاثر:</strong> يتجمع في أماكن محددة قرب الشعاب في موسم التكاثر، وهذا ما يجعله سهل الصيد بالشباك في هذا الموسم، ولهذا جاء المنع.</li>
+  </ul>
+  <p>ويصنفه الاتحاد الدولي لحماية الطبيعة <strong>«قريباً من التهديد»</strong>، لأن صيده الكثيف قلّل أعداده في مناطق عدة.</p>
+
+  <h2 id="ban">موسم المنع في الخليج وعُمان</h2>
+  <p>اتفقت دول مجلس التعاون منذ 2015 على منع صيد الكنعد <strong>بالشباك</strong> من 15 أغسطس إلى 15 أكتوبر كل سنة، لحمايته في موسم تكاثره. لكن كل دولة تصدر قرارها، وتختلف التفاصيل:</p>
+  <table class="data-table">
+    <thead><tr><th>البلد</th><th>المدة</th><th>ما يُمنع</th></tr></thead>
+    <tbody>
+      <tr><td>عُمان</td><td>15 أغسطس – 15 أكتوبر 2026</td><td>منع كامل: صيده وحيازته ونقله وبيعه وتخزينه وتصديره</td></tr>
+      <tr><td>قطر</td><td>15 أغسطس – 31 أكتوبر 2026</td><td>شباك المنصب، ويُسمح بالصيد بالخيط فقط</td></tr>
+      <tr><td>السعودية (ساحل الخليج)</td><td>15 أغسطس – 15 أكتوبر</td><td>الشباك الخيشومية (المناصب والغزول)، ويُسمح بالحداق، ولا يقل طول السمكة عن 65 سم</td></tr>
+      <tr><td>الإمارات والكويت والبحرين</td><td>ضمن الاتفاق الخليجي</td><td>راجع إعلان الجهة المختصة كل سنة</td></tr>
+    </tbody>
+  </table>
+  <div class="callout fact"><span class="ic">📜</span><div>المنع في أكثر الدول على <strong>الشباك</strong>، لأنها تصطاد التجمعات كلها دفعة واحدة. أما الهاوي بالخيط فيبقى مسؤولاً عن الحجم: <strong>أطلق الكنعد الصغير</strong> حتى لو سمح القانون بأخذه، فهو لم يتكاثر بعد.</div></div>
+  <p>هذه المعلومات من إعلانات رسمية منشورة في المصادر أدناه، وقد تتغير من سنة إلى أخرى. وما ورد عن السعودية من إعلان 2021. تحقق دائماً من الجهة المختصة في بلدك قبل الخروج.</p>
+
+  <h2 id="season">متى يكون موسمه</h2>
+  <p>بعد انتهاء المنع في الخريف يعود الكنعد إلى الأسواق ومراكب الصيد، ويمتد موسمه في الخليج خلال الشتاء حين تبرد المياه وتكثر أسراب السردين قرب السواحل. ولهذا تقام في أبوظبي بطولات الكنعد في الظفرة بين يناير ومارس.</p>
+  <p>أما في البحر الأحمر فيُصطاد الدراك أكثر أيام السنة قرب الشعاب، ويكثر حين تكثر أسماك الطعم. ويوجد أيضاً في شرق المتوسط، فهو من الأسماك التي عبرت <a href={`${BASE}articles/suez-canal-invasive-species`}>قناة السويس</a>، وقد سُجّل قرب <a href={port('alexandria')}>الإسكندرية</a>.</p>
+
+  <h2 id="tide">أفضل مد ووقت لصيده</h2>
+  <p>على عكس <a href={link('hamour')}>{F('hamour').ar}</a> الذي ينشط حين يهدأ الماء، يحب الكنعد <strong>الماء المتحرك</strong>. فالتيار القوي يجمع أسماك الطعم عند رؤوس الشعاب ومداخل الأخوار والقنوات، والكنعد يصطادها هناك.</p>
+  <ul>
+    <li><strong>منتصف المد الصاعد أو النازل:</strong> حين يكون التيار في أقوى حالاته، لا عند قمة المد أو أدناه.</li>
+    <li><strong>أيام المد الكبير:</strong> حول البدر والمحاق يكون الفرق بين المد والجزر أكبر والتيار أقوى. اقرأ عن ذلك في <a href={`${BASE}articles/tide-coefficient`}>معامل المد</a>.</li>
+    <li><strong>بعد الفجر:</strong> الساعات الأولى من النهار هي وقت تجمع الطعم قرب السطح، ويعود النشاط قبيل الغروب.</li>
+    <li><strong>علامات فوق الماء:</strong> طيور تغطس، وماء يغلي بأسماك صغيرة. اتجه إليها بهدوء من جانب السرب لا من وسطه.</li>
+  </ul>
+  <p>افتح صفحة ميناءك لترى أوقات المد العالي والمنخفض وساعات الصيد هذا الأسبوع: <a href={port('muscat')}>مسقط</a>، <a href={port('doha')}>الدوحة</a>، <a href={port('dubai')}>دبي</a>، <a href={port('dammam')}>الدمام</a>، <a href={port('kuwait-city')}>الكويت</a>، <a href={port('abu-dhabi')}>أبوظبي</a>، <a href={port('jeddah')}>جدة</a>.</p>
+
+  <h2 id="gear">العدة والطعم</h2>
+  <ul>
+    <li><strong>السحب خلف القارب (التروّل):</strong> أشهر طريقة لصيده. اسحب طعماً صناعياً لامعاً أو سمكة صناعية غاطسة بسرعة متوسطة قرب حواف الشعاب.</li>
+    <li><strong>الطعم الحي:</strong> سردينة أو بورية صغيرة حية تُرمى بلا ثقل قرب السرب، فتسبح بحرية وتجذبه. اقرأ <a href={`${BASE}articles/fishing-bait-guide`}>دليل الطعم</a>.</li>
+    <li><strong>سلك معدني:</strong> وصلة معدنية بطول 20 إلى 30 سم أمام الخطاف، وإلا قطع الخيط في لحظة.</li>
+    <li><strong>بكرة بفرامل جيدة:</strong> ينطلق الكنعد بسرعة كبيرة بعد أن يعلق، فاترك له الخيط في الاندفاعة الأولى ولا تشد بقوة.</li>
+  </ul>
+  <div class="callout fact"><span class="ic">⚠️</span><div>لا تُدخل أصابعك في فمه لإخراج الخطاف؛ أسنانه تجرح بعمق. استعمل كماشة طويلة، وأمسكه من خلف الرأس. وفي مقال <a href={`${BASE}articles/dangerous-fish-arab-coasts`}>الأسماك الخطرة</a> أسماك أخرى تحتاج الحذر نفسه.</div></div>
+
+  <h2 id="records">أين سُجّل قرب موانئنا</h2>
+  <p>في منصة <span lang="en">iNaturalist</span> (مشاهدات بصور راجعها مختصون) سُجّل الكنعد ضمن 50 كيلومتراً من هذه الموانئ:</p>
+  <table class="data-table">
+    <thead><tr><th>الميناء</th><th>المشاهدات</th></tr></thead>
+    <tbody>
+      {records.map(r => (
+        <tr><td><a href={port(r.port)}>{portName(r.port)}</a></td><td class="latin">{r.count}</td></tr>
+      ))}
+    </tbody>
+  </table>
+  <p>الأرقام قليلة لأن الكنعد يعيش في المياه المفتوحة، فلا يصوره الغواصون كما يصورون أسماك الشعاب، ومعظم ما يُصاد منه لا يُسجَّل في هذه المنصة. فغيابه عن ميناء في الجدول لا يعني أنه غير موجود هناك.</p>
+  <div class="pull">حيث يغلي الماء بالسردين والتيار قوي، هناك يبحث الكنعد عن طعامه.</div>
+  <p>تعرّف على أسماك تشاركه البحر نفسه في <a href={`${BASE}fish`}>دليل الأسماك</a>، مثل <a href={link('queenfish')}>{F('queenfish').ar}</a> و<a href={link('hamour')}>{F('hamour').ar}</a>.</p>
+
+  <h2 id="sources">المصادر</h2>
+  <ul class="text-sm">
+    <li>عُمان: <a href="https://www.omandaily.om/article/1208262" rel="noopener">جريدة عُمان</a>، إعلان وزارة الثروة الزراعية والسمكية وموارد المياه عن منع صيد الكنعد من 15 أغسطس إلى 15 أكتوبر 2026.</li>
+    <li>قطر: <a href="https://qna.org.qa/ar-QA/News-Area/News/2026-8/4/وزارة-البلدية-تعلن-حظر-صيد-اسماك-الكنعد-خلال-الفترة-الممتدة-بين-15-اغسطس-الجاري-و31-اكتوبر-المقبل" rel="noopener">وكالة الأنباء القطرية</a>، إعلان وزارة البلدية (2026).</li>
+    <li>السعودية: <a href="https://www.mewa.gov.sa/ar/MediaCenter/News/Pages/News3002020.aspx" rel="noopener">وزارة البيئة والمياه والزراعة</a>، منع الشباك الخيشومية على ساحل الخليج والحد الأدنى 65 سم (2021).</li>
+    <li>الاتفاق الخليجي منذ 2015: <a href="https://www.raya.com/2024/08/11/حظر-صيد-الكنعد-اعتبارًا-من-الخميس" rel="noopener">صحيفة الراية</a>.</li>
+    <li>قاعدة بيانات الأسماك: <a href="https://www.fishbase.se/summary/Scomberomorus-commerson.html" rel="noopener" lang="en">FishBase — Scomberomorus commerson</a> (الحجم والعمر والغذاء وتصنيف الاتحاد الدولي لحماية الطبيعة).</li>
+    <li>المشاهدات قرب الموانئ: <a href="https://www.inaturalist.org" rel="noopener" lang="en">iNaturalist</a>، مشاهدات بدرجة «بحثية» ضمن 50 كم من كل ميناء.</li>
+    <li>الصورة: <span lang="en">{photo.artist}</span> (<a href={photo.licenseUrl} rel="license noopener" lang="en">{photo.license}</a>) عبر ويكيميديا كومنز.</li>
+  </ul>
+</ArticleLayout>
