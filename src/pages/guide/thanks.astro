@@ -3,18 +3,35 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { GUIDE, CHEAT_SHEET_PDF } from '../../lib/shop';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const steps = [
+  { icon: '🧾', title: 'إيصال الدفع الآن', text: 'يصلك من Stripe على بريدك فور الشراء، وفيه رقم العملية.' },
+  { icon: '📘', title: 'الدليل خلال 24 ساعة', text: `نرسل لك ملف ${GUIDE.title} (PDF) على البريد نفسه الذي دفعت به.` },
+  { icon: '📥', title: 'لم يصلك؟', text: 'تحقق من مجلد الرسائل غير المرغوب فيها والعروض، ثم راسلنا من صفحة الاتصال بالبريد الذي دفعت به.' },
+];
 ---
 
 <BaseLayout title="شكراً لشرائك" description="تأكيد شراء دليل ArabTides" noindex>
   <main id="main" class="max-w-2xl mx-auto px-4 py-16 w-full text-center">
     <div class="text-6xl" aria-hidden="true">🎉</div>
     <h1 class="mt-4 text-3xl font-bold display">شكراً لشرائك!</h1>
-    <p class="mt-4 text-lg text-[var(--text-secondary)] leading-relaxed">تم الدفع بنجاح. سيصلك <strong>{GUIDE.title}</strong> (PDF) على البريد الإلكتروني الذي استخدمته عند الدفع خلال <strong>24 ساعة</strong>. إن لم تجده، تحقق من مجلد الرسائل غير المرغوب فيها.</p>
+    <p class="mt-4 text-lg text-[var(--text-secondary)] leading-relaxed">تم الدفع بنجاح عبر <span class="latin">Stripe</span>. هذا ما سيحدث الآن:</p>
+    <ol class="mt-8 grid gap-3 text-start">
+      {steps.map((s, i) => (
+        <li class="card p-4 flex gap-4 items-start">
+          <span class="text-2xl shrink-0" aria-hidden="true">{s.icon}</span>
+          <span><span class="block font-semibold"><span class="latin text-[var(--accent-text)]">{i + 1}.</span> {s.title}</span><span class="block text-sm text-[var(--text-secondary)] mt-1 leading-relaxed">{s.text}</span></span>
+        </li>
+      ))}
+    </ol>
     <div class="card p-6 mt-8 text-start">
       <h2 class="font-semibold">في الأثناء: ورقتك المختصرة جاهزة</h2>
-      <p class="text-sm text-[var(--text-secondary)] mt-1">كل الدليل في صفحة واحدة.</p>
+      <p class="text-sm text-[var(--text-secondary)] mt-1">كل الدليل في صفحة واحدة، تطبعها أو تحفظها في هاتفك.</p>
       <a href={`${BASE}${CHEAT_SHEET_PDF}`} class="signup-btn inline-flex mt-3" download>⬇️ تحميل الورقة المختصرة</a>
     </div>
-    <a href={BASE} class="inline-block mt-8 text-[var(--accent-text)] hover:underline">← ابحث عن أوقات المد في ميناءك</a>
+    <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-[var(--accent-text)]">
+      <a href={BASE} class="hover:underline">← أوقات المد في ميناءك</a>
+      <a href={`${BASE}contact`} class="hover:underline">صفحة الاتصال</a>
+      <a href="https://www.instagram.com/arabtides/" rel="noopener" target="_blank" class="hover:underline">تابعنا على إنستغرام <span class="latin">@arabtides</span></a>
+    </div>
   </main>
 </BaseLayout>

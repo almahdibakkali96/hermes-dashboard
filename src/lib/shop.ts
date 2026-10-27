@@ -16,7 +16,7 @@
  * PUBLIC_SIGNUP_URL), which overrides the value here.
  */
 // ▼▼▼ Paste your URLs between the quotes ▼▼▼
-const STRIPE_LINK = '';
+const STRIPE_LINK = 'https://buy.stripe.com/5kQcN52Gp09CaFj3wT7Zu00';
 const SHEET_WEBAPP = 'https://script.google.com/macros/s/AKfycbxaf_1RR9Iuvavu0QPvdTLPvIvNnoKf8B8Jcn6VYF9NwGLuRoO9lNbSAWXojAPoXyij/exec';
 // ▲▲▲
 
