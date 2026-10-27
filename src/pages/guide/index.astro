@@ -13,6 +13,8 @@ const samples = [
   { f: 'sample-spring-neap.jpg', cap: 'المد الربيعي والمحاقي — ببيانات حقيقية' },
   { f: 'sample-worked-example.jpg', cap: 'مثال محلول: نوافذ الصيد في الدار البيضاء' },
   { f: 'sample-arab-seas.jpg', cap: 'البحار العربية: أين يقوى المد وأين يختفي' },
+  { f: 'sample-fish.jpg', cap: 'متى يأكل كل سمك: المد والساعة والطعم' },
+  { f: 'sample-calendar.jpg', cap: 'تقويم الصيد: المد القوي ومواسم المنع' },
 ];
 const faq = [
   { q: 'ما صيغة الدليل؟', a: `ملف PDF من ${GUIDE.pages} صفحة بحجم A4، باللغة العربية، يُقرأ على الهاتف أو الحاسوب ويمكن طباعته.` },
@@ -41,7 +43,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`${GUIDE.title} — PDF`} description={`${GUIDE.subtitle}. دليل عربي من ${GUIDE.pages} صفحة: أطوار القمر، المد الربيعي، جداول المد وفترات السولونار. ${SALES_OPEN ? `السعر ${GUIDE.priceLabel}.` : 'حمّل الورقة المختصرة مجاناً الآن.'}`} jsonLd={jsonLd} ogImage={img('cover.jpg')}>
+<BaseLayout title={`${GUIDE.title} — PDF`} description={`${GUIDE.subtitle}. دليل عربي من ${GUIDE.pages} صفحة: أطوار القمر، المد الربيعي، جداول المد، السولونار، و52 نوعاً من الأسماك، وتقويم صيد لـ12 شهراً. ${SALES_OPEN ? `السعر ${GUIDE.priceLabel}.` : 'حمّل الورقة المختصرة مجاناً الآن.'}`} jsonLd={jsonLd} ogImage={img('cover.jpg')}>
   <!-- Hero -->
   <section class="hero">
     <div class="max-w-6xl mx-auto px-4 pt-10 pb-24 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center">
@@ -51,8 +53,10 @@ const jsonLd = [
         <h1 class="mt-4 text-3xl sm:text-5xl font-bold display leading-snug">{GUIDE.title}</h1>
         <p class="mt-4 text-lg text-slate-300 leading-relaxed max-w-xl">{GUIDE.subtitle}.</p>
         <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-slate-200">
-          <li>✓ <span class="latin">8</span> فصول برسوم توضيحية واضحة</li>
+          <li>✓ <span class="latin">10</span> فصول برسوم توضيحية واضحة</li>
           <li>✓ أمثلة حقيقية من موانئ عربية</li>
+          <li>✓ <span class="latin">52</span> نوعاً من الأسماك: متى تأكل وبماذا</li>
+          <li>✓ تقويم صيد لـ<span class="latin">12</span> شهراً مع مواسم المنع</li>
           <li>✓ طريقة من 4 خطوات قبل كل رحلة</li>
           <li>✓ ورقة مختصرة للطباعة والهاتف</li>
         </ul>
@@ -84,8 +88,8 @@ const jsonLd = [
   <main id="main" class="max-w-6xl mx-auto px-4 w-full mt-4">
     <!-- What you'll learn -->
     <section class="mb-16" aria-labelledby="learn-title">
-      <div class="section-title"><h2 id="learn-title">ماذا ستتعلم؟</h2><p>ثمانية فصول، من القمر إلى قرار الخروج للصيد</p></div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="section-title"><h2 id="learn-title">ماذا ستتعلم؟</h2><p>عشرة فصول، من القمر إلى قرار الخروج للصيد</p></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {GUIDE.chapters.map((c, i) => (
           <div class="card p-5">
             <div class="flex items-center gap-3"><span class="w-10 h-10 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-xl" aria-hidden="true">{c.icon}</span><span class="latin text-sm text-[var(--text-dim)]">{String(i + 1).padStart(2, '0')}</span></div>
@@ -99,7 +103,7 @@ const jsonLd = [
     <!-- Sample pages -->
     <section class="mb-16" aria-labelledby="samples-title">
       <div class="section-title"><h2 id="samples-title">صفحات من الدليل</h2><p>رسوم مرسومة بدقة وأرقام من محرك ArabTides</p></div>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {samples.map(s => (
           <figure class="card p-2">
             <img src={img(s.f)} alt={s.cap} width="827" height="1170" loading="lazy" class="w-full h-auto rounded-lg border border-[var(--border-subtle)]" />
