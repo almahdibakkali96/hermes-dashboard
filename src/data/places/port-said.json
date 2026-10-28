@@ -1,0 +1,89 @@
+{
+ "id": "port-said",
+ "name_en": "Port Said",
+ "name_ar": "بورسعيد",
+ "country": "EG",
+ "lat": 31.26,
+ "lon": 32.31,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 31.25,
+  "lon": 32.25,
+  "distance_km": 5.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.26175,
+   "phase": -121.238
+  },
+  "J1": {
+   "amp": 0.12308,
+   "phase": -164.971
+  },
+  "K1": {
+   "amp": 2.51478,
+   "phase": -82.944
+  },
+  "K2": {
+   "amp": 1.96987,
+   "phase": -106.373
+  },
+  "M2": {
+   "amp": 11.57466,
+   "phase": -121.397
+  },
+  "M4": {
+   "amp": 0.54264,
+   "phase": -113.765
+  },
+  "MF": {
+   "amp": 0.21757,
+   "phase": -11.246
+  },
+  "MM": {
+   "amp": 0.03546,
+   "phase": -108.416
+  },
+  "N2": {
+   "amp": 2.00869,
+   "phase": -121.013
+  },
+  "O1": {
+   "amp": 1.48127,
+   "phase": -110.335
+  },
+  "P1": {
+   "amp": 0.67228,
+   "phase": -77.488
+  },
+  "Q1": {
+   "amp": 0.57864,
+   "phase": -116.787
+  },
+  "S1": {
+   "amp": 0.85699,
+   "phase": 47.901
+  },
+  "S2": {
+   "amp": 6.21398,
+   "phase": -108.948
+  },
+  "SA": {
+   "amp": 3.87432,
+   "phase": -75.182
+  },
+  "SSA": {
+   "amp": 0.21455,
+   "phase": -40.07
+  },
+  "T2": {
+   "amp": 0.41582,
+   "phase": -67.237
+  }
+ }
+}

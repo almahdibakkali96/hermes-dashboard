@@ -1,0 +1,89 @@
+{
+ "id": "kaec",
+ "name_en": "King Abdullah Economic City",
+ "name_ar": "مدينة الملك عبدالله الاقتصادية",
+ "country": "SA",
+ "lat": 22.45,
+ "lon": 39.09,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 22.375,
+  "lon": 39.125,
+  "distance_km": 9.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.61744,
+   "phase": 73.422
+  },
+  "J1": {
+   "amp": 0.68418,
+   "phase": 176.609
+  },
+  "K1": {
+   "amp": 3.39956,
+   "phase": 170.966
+  },
+  "K2": {
+   "amp": 1.4003,
+   "phase": 127.566
+  },
+  "M2": {
+   "amp": 11.57398,
+   "phase": 112.828
+  },
+  "M4": {
+   "amp": 1.10263,
+   "phase": 72.13
+  },
+  "MF": {
+   "amp": 0.87948,
+   "phase": 20.722
+  },
+  "MM": {
+   "amp": 0.24329,
+   "phase": -17.468
+  },
+  "N2": {
+   "amp": 3.16985,
+   "phase": 84.461
+  },
+  "O1": {
+   "amp": 2.06315,
+   "phase": 164.759
+  },
+  "P1": {
+   "amp": 1.39349,
+   "phase": 127.83
+  },
+  "Q1": {
+   "amp": 0.77771,
+   "phase": 164.354
+  },
+  "S1": {
+   "amp": 1.44945,
+   "phase": -33.344
+  },
+  "S2": {
+   "amp": 3.69854,
+   "phase": 134.583
+  },
+  "SA": {
+   "amp": 9.49419,
+   "phase": 21.607
+  },
+  "SSA": {
+   "amp": 0.35266,
+   "phase": -145.339
+  },
+  "T2": {
+   "amp": 1.12359,
+   "phase": 137.068
+  }
+ }
+}

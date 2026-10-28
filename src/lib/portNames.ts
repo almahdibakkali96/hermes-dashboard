@@ -27,6 +27,10 @@ const ALT_AR: Record<string, string[]> = {
   misrata: ['مصراته'],
   'abu-dhabi': ['أبو ظبي'],
   'ras-al-khaimah': ['راس الخيمه'],
+  mahdia: ['المهديه'],
+  'port-said': ['بور سعيد'],
+  'umm-al-quwain': ['أم القوين'],
+  kaec: ['مدينة الملك عبد الله الاقتصادية'],
 };
 
 const FR: Record<string, string> = {
@@ -34,7 +38,7 @@ const FR: Record<string, string> = {
   'el-jadida': 'El Jadida', safi: 'Safi', essaouira: 'Essaouira', dakhla: 'Dakhla', 'al-hoceima': 'Al Hoceïma',
   nouadhibou: 'Nouadhibou', nouakchott: 'Nouakchott',
   algiers: 'Alger', oran: 'Oran', tunis: 'La Goulette', sfax: 'Sfax',
-  bizerte: 'Bizerte', sousse: 'Sousse', gabes: 'Gabès', djerba: 'Djerba',
+  bizerte: 'Bizerte', sousse: 'Sousse', gabes: 'Gabès', djerba: 'Djerba', mahdia: 'Mahdia',
 };
 
 /** How each country is also written in searches */

@@ -13,7 +13,8 @@ import xarray as xr
 ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
 PLACES = os.path.join(ROOT, 'src', 'data', 'places')
 CONSTITUENTS = ['2N2', 'J1', 'K1', 'K2', 'M2', 'M4', 'MF', 'MM', 'N2', 'O1', 'P1', 'Q1', 'S1', 'S2', 'SA', 'SSA', 'T2']
-TIMEZONES = {'MA': 'Africa/Casablanca', 'TN': 'Africa/Tunis', 'LY': 'Africa/Tripoli', 'AE': 'Asia/Dubai'}
+TIMEZONES = {'MA': 'Africa/Casablanca', 'TN': 'Africa/Tunis', 'LY': 'Africa/Tripoli', 'AE': 'Asia/Dubai',
+             'OM': 'Asia/Muscat', 'YE': 'Asia/Aden', 'EG': 'Africa/Cairo', 'SA': 'Asia/Riyadh'}
 WINDOW = 0.75  # degrees searched around the port for the nearest water cell
 
 

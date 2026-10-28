@@ -1,0 +1,89 @@
+{
+ "id": "khobar",
+ "name_en": "Al Khobar",
+ "name_ar": "الخبر",
+ "country": "SA",
+ "lat": 26.29,
+ "lon": 50.22,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 26.25,
+  "lon": 50.25,
+  "distance_km": 5.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.17934,
+   "phase": 2.833
+  },
+  "J1": {
+   "amp": 0.32484,
+   "phase": 61.143
+  },
+  "K1": {
+   "amp": 9.30833,
+   "phase": -18.86
+  },
+  "K2": {
+   "amp": 4.50816,
+   "phase": 119.881
+  },
+  "M2": {
+   "amp": 38.10296,
+   "phase": 71.07
+  },
+  "M4": {
+   "amp": 2.41107,
+   "phase": 105.87
+  },
+  "MF": {
+   "amp": 0.70623,
+   "phase": 21.991
+  },
+  "MM": {
+   "amp": 1.12534,
+   "phase": 32.854
+  },
+  "N2": {
+   "amp": 8.01828,
+   "phase": 50.703
+  },
+  "O1": {
+   "amp": 8.86813,
+   "phase": -87.656
+  },
+  "P1": {
+   "amp": 3.27845,
+   "phase": -19.302
+  },
+  "Q1": {
+   "amp": 2.20967,
+   "phase": -101.667
+  },
+  "S1": {
+   "amp": 3.12462,
+   "phase": 80.542
+  },
+  "S2": {
+   "amp": 14.16661,
+   "phase": 130.293
+  },
+  "SA": {
+   "amp": 2.8423,
+   "phase": -76.737
+  },
+  "SSA": {
+   "amp": 0.34711,
+   "phase": -179.772
+  },
+  "T2": {
+   "amp": 1.27032,
+   "phase": 150.994
+  }
+ }
+}

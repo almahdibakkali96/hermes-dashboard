@@ -1,0 +1,89 @@
+{
+ "id": "mahdia",
+ "name_en": "Mahdia",
+ "name_ar": "المهدية",
+ "country": "TN",
+ "lat": 35.5,
+ "lon": 11.07,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 35.5,
+  "lon": 11.125,
+  "distance_km": 5.0
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.12033,
+   "phase": -1.431
+  },
+  "J1": {
+   "amp": 0.45976,
+   "phase": -85.762
+  },
+  "K1": {
+   "amp": 0.29518,
+   "phase": -84.213
+  },
+  "K2": {
+   "amp": 1.68767,
+   "phase": 21.348
+  },
+  "M2": {
+   "amp": 7.92655,
+   "phase": 8.356
+  },
+  "M4": {
+   "amp": 0.27255,
+   "phase": -136.971
+  },
+  "MF": {
+   "amp": 0.40708,
+   "phase": -6.059
+  },
+  "MM": {
+   "amp": 0.90514,
+   "phase": -84.857
+  },
+  "N2": {
+   "amp": 1.12473,
+   "phase": 15.877
+  },
+  "O1": {
+   "amp": 0.60412,
+   "phase": 76.435
+  },
+  "P1": {
+   "amp": 0.21872,
+   "phase": -70.726
+  },
+  "Q1": {
+   "amp": 0.34431,
+   "phase": 25.829
+  },
+  "S1": {
+   "amp": 1.46836,
+   "phase": 4.269
+  },
+  "S2": {
+   "amp": 6.20656,
+   "phase": 33.515
+  },
+  "SA": {
+   "amp": 3.9596,
+   "phase": -67.32
+  },
+  "SSA": {
+   "amp": 0.19873,
+   "phase": -149.238
+  },
+  "T2": {
+   "amp": 0.2633,
+   "phase": -3.574
+  }
+ }
+}

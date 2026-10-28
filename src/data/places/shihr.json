@@ -1,0 +1,89 @@
+{
+ "id": "shihr",
+ "name_en": "Ash Shihr",
+ "name_ar": "الشحر",
+ "country": "YE",
+ "lat": 14.74,
+ "lon": 49.59,
+ "timezone": "Asia/Aden",
+ "grid": {
+  "lat": 14.75,
+  "lon": 49.625,
+  "distance_km": 3.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.87531,
+   "phase": 94.179
+  },
+  "J1": {
+   "amp": 2.49084,
+   "phase": -5.898
+  },
+  "K1": {
+   "amp": 37.94317,
+   "phase": -12.7
+  },
+  "K2": {
+   "amp": 4.98299,
+   "phase": 146.707
+  },
+  "M2": {
+   "amp": 37.29238,
+   "phase": 135.745
+  },
+  "M4": {
+   "amp": 0.36533,
+   "phase": -24.572
+  },
+  "MF": {
+   "amp": 1.37491,
+   "phase": 15.978
+  },
+  "MM": {
+   "amp": 0.64003,
+   "phase": 29.795
+  },
+  "N2": {
+   "amp": 10.39289,
+   "phase": 127.722
+  },
+  "O1": {
+   "amp": 19.13572,
+   "phase": -10.031
+  },
+  "P1": {
+   "amp": 11.64204,
+   "phase": -12.338
+  },
+  "Q1": {
+   "amp": 4.59436,
+   "phase": -13.977
+  },
+  "S1": {
+   "amp": 2.55955,
+   "phase": 102.691
+  },
+  "S2": {
+   "amp": 15.3991,
+   "phase": 156.209
+  },
+  "SA": {
+   "amp": 7.20778,
+   "phase": 51.913
+  },
+  "SSA": {
+   "amp": 0.38048,
+   "phase": -72.047
+  },
+  "T2": {
+   "amp": 1.44407,
+   "phase": 140.085
+  }
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "mukalla",
+ "name_en": "Mukalla",
+ "name_ar": "المكلا",
+ "country": "YE",
+ "lat": 14.52,
+ "lon": 49.13,
+ "timezone": "Asia/Aden",
+ "grid": {
+  "lat": 14.5,
+  "lon": 49.125,
+  "distance_km": 2.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.07839,
+   "phase": 96.274
+  },
+  "J1": {
+   "amp": 2.33038,
+   "phase": -0.877
+  },
+  "K1": {
+   "amp": 37.99575,
+   "phase": -12.468
+  },
+  "K2": {
+   "amp": 4.95253,
+   "phase": 148.058
+  },
+  "M2": {
+   "amp": 38.32828,
+   "phase": 135.307
+  },
+  "M4": {
+   "amp": 0.31972,
+   "phase": -13.272
+  },
+  "MF": {
+   "amp": 1.10266,
+   "phase": 12.087
+  },
+  "MM": {
+   "amp": 0.24668,
+   "phase": 22.287
+  },
+  "N2": {
+   "amp": 10.6567,
+   "phase": 129.254
+  },
+  "O1": {
+   "amp": 19.15405,
+   "phase": -9.29
+  },
+  "P1": {
+   "amp": 11.37134,
+   "phase": -11.304
+  },
+  "Q1": {
+   "amp": 4.28684,
+   "phase": -7.348
+  },
+  "S1": {
+   "amp": 2.81158,
+   "phase": 102.386
+  },
+  "S2": {
+   "amp": 16.24167,
+   "phase": 155.669
+  },
+  "SA": {
+   "amp": 7.19642,
+   "phase": 54.517
+  },
+  "SSA": {
+   "amp": 0.36218,
+   "phase": -52.543
+  },
+  "T2": {
+   "amp": 1.30681,
+   "phase": 149.585
+  }
+ }
+}

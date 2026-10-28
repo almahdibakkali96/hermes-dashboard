@@ -1,0 +1,89 @@
+{
+ "id": "al-uqair",
+ "name_en": "Al Uqair",
+ "name_ar": "العقير",
+ "country": "SA",
+ "lat": 25.65,
+ "lon": 50.22,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 25.625,
+  "lon": 50.25,
+  "distance_km": 4.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.83081,
+   "phase": 24.928
+  },
+  "J1": {
+   "amp": 0.44442,
+   "phase": -9.741
+  },
+  "K1": {
+   "amp": 7.58031,
+   "phase": 33.148
+  },
+  "K2": {
+   "amp": 1.34918,
+   "phase": -156.65
+  },
+  "M2": {
+   "amp": 20.21966,
+   "phase": 164.983
+  },
+  "M4": {
+   "amp": 2.72279,
+   "phase": 172.002
+  },
+  "MF": {
+   "amp": 1.72688,
+   "phase": 19.523
+  },
+  "MM": {
+   "amp": 1.83886,
+   "phase": 37.611
+  },
+  "N2": {
+   "amp": 4.78855,
+   "phase": 133.317
+  },
+  "O1": {
+   "amp": 6.18989,
+   "phase": -51.454
+  },
+  "P1": {
+   "amp": 3.16389,
+   "phase": 25.137
+  },
+  "Q1": {
+   "amp": 2.02371,
+   "phase": -67.182
+  },
+  "S1": {
+   "amp": 7.88892,
+   "phase": 92.413
+  },
+  "S2": {
+   "amp": 7.43027,
+   "phase": -144.858
+  },
+  "SA": {
+   "amp": 2.52448,
+   "phase": -72.99
+  },
+  "SSA": {
+   "amp": 0.31958,
+   "phase": 169.303
+  },
+  "T2": {
+   "amp": 1.34256,
+   "phase": -153.382
+  }
+ }
+}

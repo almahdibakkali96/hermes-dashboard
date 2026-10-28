@@ -1,0 +1,89 @@
+{
+ "id": "sur",
+ "name_en": "Sur",
+ "name_ar": "صور (عُمان)",
+ "country": "OM",
+ "lat": 22.57,
+ "lon": 59.53,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 22.625,
+  "lon": 59.5,
+  "distance_km": 6.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.34552,
+   "phase": 94.727
+  },
+  "J1": {
+   "amp": 2.22122,
+   "phase": 0.124
+  },
+  "K1": {
+   "amp": 39.23807,
+   "phase": -19.035
+  },
+  "K2": {
+   "amp": 6.44956,
+   "phase": -177.495
+  },
+  "M2": {
+   "amp": 62.27484,
+   "phase": 158.085
+  },
+  "M4": {
+   "amp": 0.60039,
+   "phase": -149.885
+  },
+  "MF": {
+   "amp": 0.82251,
+   "phase": 12.011
+  },
+  "MM": {
+   "amp": 0.59678,
+   "phase": 26.221
+  },
+  "N2": {
+   "amp": 15.45052,
+   "phase": 141.153
+  },
+  "O1": {
+   "amp": 19.74072,
+   "phase": -17.746
+  },
+  "P1": {
+   "amp": 11.57472,
+   "phase": -17.791
+  },
+  "Q1": {
+   "amp": 4.10714,
+   "phase": -15.899
+  },
+  "S1": {
+   "amp": 2.10431,
+   "phase": 129.962
+  },
+  "S2": {
+   "amp": 23.93033,
+   "phase": -170.233
+  },
+  "SA": {
+   "amp": 2.77272,
+   "phase": 68.331
+  },
+  "SSA": {
+   "amp": 0.20484,
+   "phase": -30.196
+  },
+  "T2": {
+   "amp": 1.83315,
+   "phase": -178.656
+  }
+ }
+}

@@ -15,11 +15,11 @@ export const seas: Record<SeaId, { name: string; color: string }> = {
 export const portSea: Record<string, SeaId> = {
   casablanca: 'atlantic', agadir: 'atlantic', tangier: 'atlantic', rabat: 'atlantic', 'el-jadida': 'atlantic',
   safi: 'atlantic', essaouira: 'atlantic', dakhla: 'atlantic', 'al-hoceima': 'med', nouadhibou: 'atlantic', nouakchott: 'atlantic',
-  algiers: 'med', oran: 'med', tunis: 'med', sfax: 'med', 'tripoli-ly': 'med', benghazi: 'med', alexandria: 'med',
-  bizerte: 'med', sousse: 'med', gabes: 'med', djerba: 'med', zuwara: 'med', 'al-khoms': 'med', misrata: 'med', sirte: 'med', tobruk: 'med',
+  algiers: 'med', oran: 'med', tunis: 'med', sfax: 'med', 'tripoli-ly': 'med', benghazi: 'med', alexandria: 'med', 'port-said': 'med',
+  bizerte: 'med', sousse: 'med', gabes: 'med', djerba: 'med', mahdia: 'med', zuwara: 'med', 'al-khoms': 'med', misrata: 'med', sirte: 'med', tobruk: 'med',
   gaza: 'med', beirut: 'med', 'tripoli-lb': 'med', latakia: 'med', tartus: 'med',
-  hurghada: 'red', 'port-sudan': 'red', aqaba: 'red', jeddah: 'red', hodeidah: 'red',
-  dammam: 'gulf', dubai: 'gulf', 'abu-dhabi': 'gulf', 'ras-al-khaimah': 'gulf', doha: 'gulf', manama: 'gulf', 'kuwait-city': 'gulf', 'umm-qasr': 'gulf',
-  aden: 'indian', muscat: 'indian', salalah: 'indian', fujairah: 'indian', djibouti: 'indian',
+  hurghada: 'red', 'port-sudan': 'red', aqaba: 'red', jeddah: 'red', kaec: 'red', hodeidah: 'red',
+  dammam: 'gulf', khobar: 'gulf', 'al-uqair': 'gulf', dubai: 'gulf', 'umm-al-quwain': 'gulf', 'abu-dhabi': 'gulf', 'ras-al-khaimah': 'gulf', doha: 'gulf', manama: 'gulf', 'kuwait-city': 'gulf', 'umm-qasr': 'gulf',
+  aden: 'indian', mukalla: 'indian', shihr: 'indian', muscat: 'indian', sohar: 'indian', sur: 'indian', salalah: 'indian', fujairah: 'indian', djibouti: 'indian',
   berbera: 'indian', mogadishu: 'indian', moroni: 'indian',
 };

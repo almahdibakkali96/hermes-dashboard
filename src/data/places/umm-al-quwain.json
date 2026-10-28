@@ -1,0 +1,89 @@
+{
+ "id": "umm-al-quwain",
+ "name_en": "Umm Al Quwain",
+ "name_ar": "أم القيوين",
+ "country": "AE",
+ "lat": 25.57,
+ "lon": 55.55,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 25.625,
+  "lon": 55.5,
+  "distance_km": 7.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.3606,
+   "phase": 177.187
+  },
+  "J1": {
+   "amp": 0.89783,
+   "phase": 52.602
+  },
+  "K1": {
+   "amp": 18.97871,
+   "phase": 77.626
+  },
+  "K2": {
+   "amp": 5.21029,
+   "phase": -107.762
+  },
+  "M2": {
+   "amp": 51.49171,
+   "phase": -135.286
+  },
+  "M4": {
+   "amp": 0.96711,
+   "phase": 34.444
+  },
+  "MF": {
+   "amp": 0.55775,
+   "phase": 26.486
+  },
+  "MM": {
+   "amp": 0.84887,
+   "phase": 36.518
+  },
+  "N2": {
+   "amp": 11.80912,
+   "phase": -158.082
+  },
+  "O1": {
+   "amp": 16.4075,
+   "phase": 36.014
+  },
+  "P1": {
+   "amp": 5.76104,
+   "phase": 64.124
+  },
+  "Q1": {
+   "amp": 3.25527,
+   "phase": 13.924
+  },
+  "S1": {
+   "amp": 0.55483,
+   "phase": -69.918
+  },
+  "S2": {
+   "amp": 19.13155,
+   "phase": -96.724
+  },
+  "SA": {
+   "amp": 1.85957,
+   "phase": -49.518
+  },
+  "SSA": {
+   "amp": 0.28577,
+   "phase": -169.873
+  },
+  "T2": {
+   "amp": 0.98575,
+   "phase": -75.559
+  }
+ }
+}

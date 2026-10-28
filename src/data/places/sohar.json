@@ -1,0 +1,89 @@
+{
+ "id": "sohar",
+ "name_en": "Sohar",
+ "name_ar": "صحار",
+ "country": "OM",
+ "lat": 24.36,
+ "lon": 56.75,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 24.375,
+  "lon": 56.75,
+  "distance_km": 1.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.39593,
+   "phase": 104.647
+  },
+  "J1": {
+   "amp": 2.21512,
+   "phase": -12.195
+  },
+  "K1": {
+   "amp": 39.68437,
+   "phase": -17.98
+  },
+  "K2": {
+   "amp": 7.28611,
+   "phase": -175.879
+  },
+  "M2": {
+   "amp": 68.69838,
+   "phase": 159.768
+  },
+  "M4": {
+   "amp": 0.70152,
+   "phase": -139.118
+  },
+  "MF": {
+   "amp": 0.86052,
+   "phase": 19.278
+  },
+  "MM": {
+   "amp": 0.54436,
+   "phase": 22.799
+  },
+  "N2": {
+   "amp": 16.72451,
+   "phase": 142.086
+  },
+  "O1": {
+   "amp": 20.36936,
+   "phase": -16.901
+  },
+  "P1": {
+   "amp": 12.51585,
+   "phase": -21.274
+  },
+  "Q1": {
+   "amp": 4.16905,
+   "phase": -14.627
+  },
+  "S1": {
+   "amp": 2.01381,
+   "phase": 113.732
+  },
+  "S2": {
+   "amp": 27.05724,
+   "phase": -169.562
+  },
+  "SA": {
+   "amp": 1.28634,
+   "phase": 27.353
+  },
+  "SSA": {
+   "amp": 0.30637,
+   "phase": -46.126
+  },
+  "T2": {
+   "amp": 1.54213,
+   "phase": -171.868
+  }
+ }
+}

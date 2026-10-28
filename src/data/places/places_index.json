@@ -152,6 +152,14 @@
   "lon": 10.86
  },
  {
+  "id": "mahdia",
+  "name_en": "Mahdia",
+  "name_ar": "المهدية",
+  "country": "TN",
+  "lat": 35.5,
+  "lon": 11.07
+ },
+ {
   "id": "tripoli-ly",
   "name_en": "Tripoli (Libya)",
   "name_ar": "طرابلس (ليبيا)",
@@ -216,6 +224,14 @@
   "lon": 29.88
  },
  {
+  "id": "port-said",
+  "name_en": "Port Said",
+  "name_ar": "بورسعيد",
+  "country": "EG",
+  "lat": 31.26,
+  "lon": 32.31
+ },
+ {
   "id": "hurghada",
   "name_en": "Hurghada",
   "name_ar": "الغردقة",
@@ -272,6 +288,22 @@
   "lon": 42.95
  },
  {
+  "id": "mukalla",
+  "name_en": "Mukalla",
+  "name_ar": "المكلا",
+  "country": "YE",
+  "lat": 14.52,
+  "lon": 49.13
+ },
+ {
+  "id": "shihr",
+  "name_en": "Ash Shihr",
+  "name_ar": "الشحر",
+  "country": "YE",
+  "lat": 14.74,
+  "lon": 49.59
+ },
+ {
   "id": "salalah",
   "name_en": "Salalah",
   "name_ar": "صلالة",
@@ -286,6 +318,22 @@
   "country": "OM",
   "lat": 23.62,
   "lon": 58.59
+ },
+ {
+  "id": "sohar",
+  "name_en": "Sohar",
+  "name_ar": "صحار",
+  "country": "OM",
+  "lat": 24.36,
+  "lon": 56.75
+ },
+ {
+  "id": "sur",
+  "name_en": "Sur",
+  "name_ar": "صور (عُمان)",
+  "country": "OM",
+  "lat": 22.57,
+  "lon": 59.53
  },
  {
   "id": "abu-dhabi",
@@ -320,6 +368,14 @@
   "lon": 55.94
  },
  {
+  "id": "umm-al-quwain",
+  "name_en": "Umm Al Quwain",
+  "name_ar": "أم القيوين",
+  "country": "AE",
+  "lat": 25.57,
+  "lon": 55.55
+ },
+ {
   "id": "doha",
   "name_en": "Doha",
   "name_ar": "الدوحة",
@@ -352,12 +408,36 @@
   "lon": 39.17
  },
  {
+  "id": "kaec",
+  "name_en": "King Abdullah Economic City",
+  "name_ar": "مدينة الملك عبدالله الاقتصادية",
+  "country": "SA",
+  "lat": 22.45,
+  "lon": 39.09
+ },
+ {
   "id": "dammam",
   "name_en": "Dammam",
   "name_ar": "الدمام",
   "country": "SA",
   "lat": 26.43,
   "lon": 50.1
+ },
+ {
+  "id": "khobar",
+  "name_en": "Al Khobar",
+  "name_ar": "الخبر",
+  "country": "SA",
+  "lat": 26.29,
+  "lon": 50.22
+ },
+ {
+  "id": "al-uqair",
+  "name_en": "Al Uqair",
+  "name_ar": "العقير",
+  "country": "SA",
+  "lat": 25.65,
+  "lon": 50.22
  },
  {
   "id": "aqaba",
