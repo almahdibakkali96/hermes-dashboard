@@ -19,7 +19,7 @@ export const portSea: Record<string, SeaId> = {
   bizerte: 'med', sousse: 'med', gabes: 'med', djerba: 'med', mahdia: 'med', zuwara: 'med', 'al-khoms': 'med', misrata: 'med', sirte: 'med', tobruk: 'med',
   gaza: 'med', beirut: 'med', 'tripoli-lb': 'med', latakia: 'med', tartus: 'med',
   hurghada: 'red', 'port-sudan': 'red', aqaba: 'red', jeddah: 'red', kaec: 'red', hodeidah: 'red',
-  dammam: 'gulf', khobar: 'gulf', 'al-uqair': 'gulf', dubai: 'gulf', 'umm-al-quwain': 'gulf', 'abu-dhabi': 'gulf', 'ras-al-khaimah': 'gulf', doha: 'gulf', manama: 'gulf', 'kuwait-city': 'gulf', 'umm-qasr': 'gulf',
+  dammam: 'gulf', khobar: 'gulf', 'al-uqair': 'gulf', dubai: 'gulf', 'umm-al-quwain': 'gulf', 'abu-dhabi': 'gulf', 'ras-al-khaimah': 'gulf', doha: 'gulf', manama: 'gulf', 'kuwait-city': 'gulf', 'umm-qasr': 'gulf', bushehr: 'gulf', 'bandar-abbas': 'gulf',
   aden: 'indian', mukalla: 'indian', shihr: 'indian', muscat: 'indian', sohar: 'indian', sur: 'indian', salalah: 'indian', fujairah: 'indian', djibouti: 'indian',
   berbera: 'indian', mogadishu: 'indian', moroni: 'indian',
 };

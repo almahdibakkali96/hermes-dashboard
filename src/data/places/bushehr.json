@@ -1,0 +1,89 @@
+{
+ "id": "bushehr",
+ "name_en": "Bushehr",
+ "name_ar": "بوشهر",
+ "country": "IR",
+ "lat": 28.97,
+ "lon": 50.83,
+ "timezone": "Asia/Tehran",
+ "grid": {
+  "lat": 29.0,
+  "lon": 50.875,
+  "distance_km": 5.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.29083,
+   "phase": 45.057
+  },
+  "J1": {
+   "amp": 1.22358,
+   "phase": -136.986
+  },
+  "K1": {
+   "amp": 35.66581,
+   "phase": -132.387
+  },
+  "K2": {
+   "amp": 4.88344,
+   "phase": 156.376
+  },
+  "M2": {
+   "amp": 40.98543,
+   "phase": 119.614
+  },
+  "M4": {
+   "amp": 0.9208,
+   "phase": 109.51
+  },
+  "MF": {
+   "amp": 0.43627,
+   "phase": 20.668
+  },
+  "MM": {
+   "amp": 0.70964,
+   "phase": 10.263
+  },
+  "N2": {
+   "amp": 8.55519,
+   "phase": 92.875
+  },
+  "O1": {
+   "amp": 23.418,
+   "phase": -172.989
+  },
+  "P1": {
+   "amp": 10.00586,
+   "phase": -138.832
+  },
+  "Q1": {
+   "amp": 4.12443,
+   "phase": 169.253
+  },
+  "S1": {
+   "amp": 1.97947,
+   "phase": -27.972
+  },
+  "S2": {
+   "amp": 15.52445,
+   "phase": 164.888
+  },
+  "SA": {
+   "amp": 2.89181,
+   "phase": -82.126
+  },
+  "SSA": {
+   "amp": 0.57405,
+   "phase": 171.256
+  },
+  "T2": {
+   "amp": 1.15755,
+   "phase": 163.053
+  }
+ }
+}

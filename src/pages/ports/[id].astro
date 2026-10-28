@@ -272,6 +272,7 @@ const pageJsonLd = [
             <span class="mx-1.5 opacity-50">·</span><span class="latin" lang="en">{formatCoords(port.lat, port.lon)}</span>
           </p>
           {altAr.length > 0 && <p class="mt-1 text-xs text-slate-400">يُكتب أيضاً: {altAr.join('، ')}</p>}
+          {port.country === 'IR' && <p class="mt-1 text-xs text-slate-400">على الساحل الإيراني للخليج العربي.</p>}
           {frName && <p class="mt-1 text-xs text-slate-400"><span lang="fr" dir="ltr">Marées à {frName} aujourd'hui : horaires de marée haute et marée basse</span></p>}
         </div>
         <div class="ms-auto flex flex-wrap items-center gap-2 text-xs">

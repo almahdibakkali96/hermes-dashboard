@@ -1,0 +1,89 @@
+{
+ "id": "bandar-abbas",
+ "name_en": "Bandar Abbas",
+ "name_ar": "بندر عباس",
+ "country": "IR",
+ "lat": 27.18,
+ "lon": 56.27,
+ "timezone": "Asia/Tehran",
+ "grid": {
+  "lat": 27.125,
+  "lon": 56.25,
+  "distance_km": 6.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.33795,
+   "phase": 130.532
+  },
+  "J1": {
+   "amp": 1.81195,
+   "phase": 4.867
+  },
+  "K1": {
+   "amp": 34.37524,
+   "phase": 13.843
+  },
+  "K2": {
+   "amp": 10.20794,
+   "phase": -138.983
+  },
+  "M2": {
+   "amp": 99.40087,
+   "phase": -164.692
+  },
+  "M4": {
+   "amp": 4.46109,
+   "phase": -34.913
+  },
+  "MF": {
+   "amp": 0.4425,
+   "phase": 96.216
+  },
+  "MM": {
+   "amp": 0.49921,
+   "phase": 51.441
+  },
+  "N2": {
+   "amp": 23.92486,
+   "phase": 175.49
+  },
+  "O1": {
+   "amp": 22.79825,
+   "phase": 7.482
+  },
+  "P1": {
+   "amp": 11.02367,
+   "phase": 12.976
+  },
+  "Q1": {
+   "amp": 4.67783,
+   "phase": 2.463
+  },
+  "S1": {
+   "amp": 2.35571,
+   "phase": 116.31
+  },
+  "S2": {
+   "amp": 36.60079,
+   "phase": -132.182
+  },
+  "SA": {
+   "amp": 1.52226,
+   "phase": -40.545
+  },
+  "SSA": {
+   "amp": 0.14596,
+   "phase": -91.006
+  },
+  "T2": {
+   "amp": 2.87354,
+   "phase": -137.592
+  }
+ }
+}

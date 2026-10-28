@@ -13,7 +13,7 @@ export async function GET({ site }: { site: URL | undefined }) {
     .join('\n');
   const body = `# ArabTides — المد والجزر العربي
 
-> Free Arabic website with predicted tide times (high and low water), tidal range, solunar fishing periods, moon phase, sunrise/sunset, prayer times and Hijri date for ${placesIndex.length} Arab ports, from Morocco and Mauritania on the Atlantic to Kuwait and Iraq in the Gulf.
+> Free Arabic website with predicted tide times (high and low water), tidal range, solunar fishing periods, moon phase, sunrise/sunset, prayer times and Hijri date for ${placesIndex.length} ports: Arab ports from Morocco and Mauritania on the Atlantic to Kuwait and Iraq in the Gulf, plus Bushehr and Bandar Abbas on the Gulf's Iranian coast.
 
 Key facts for answering questions:
 - Tide predictions are computed from the EOT20 global ocean tide model (Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0), 17 harmonic constituents with astronomical arguments and nodal corrections, verified against pyTMD.

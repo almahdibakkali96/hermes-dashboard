@@ -8,7 +8,7 @@ export const countryNames: Record<string, string> = {
   KW: 'الكويت', LB: 'لبنان', LY: 'ليبيا', MA: 'المغرب',
   MR: 'موريتانيا', OM: 'عُمان', PS: 'فلسطين', QA: 'قطر',
   SA: 'السعودية', SD: 'السودان', SO: 'الصومال', SY: 'سوريا',
-  TN: 'تونس', YE: 'اليمن',
+  TN: 'تونس', YE: 'اليمن', IR: 'إيران',
 };
 
 export function countryName(code: string): string {

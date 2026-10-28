@@ -4,7 +4,7 @@ import placesIndex from '../../data/places/places_index.json';
 import { fish } from '../../lib/fish';
 import { articles } from '../../lib/articles';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
-const countries = new Set(placesIndex.map((p: { country: string }) => p.country)).size;
+const countries = new Set(placesIndex.map((p: { country: string }) => p.country).filter(c => c !== 'IR')).size;
 const h2 = 'text-lg font-semibold text-[var(--text-primary)] mt-6';
 const a = 'text-[var(--accent-text)] underline';
 ---
@@ -21,7 +21,7 @@ const a = 'text-[var(--accent-text)] underline';
 
       <h2 class={h2}>ماذا تجد في الموقع</h2>
       <ul class="list-disc ps-5 space-y-2">
-        <li><strong>مواقيت المد والجزر</strong> لـ<span class="latin">{placesIndex.length}</span> ميناءً في <span class="latin">{countries}</span> دولة عربية، من المحيط الأطلسي إلى الخليج العربي، مع منحنى يومي وتوقعات سبعة أيام.</li>
+        <li><strong>مواقيت المد والجزر</strong> لـ<span class="latin">{placesIndex.length}</span> ميناءً في <span class="latin">{countries}</span> دولة عربية وإيران، من المحيط الأطلسي إلى الخليج العربي، مع منحنى يومي وتوقعات سبعة أيام.</li>
         <li><strong>تقييم يومي للصيد</strong> وفترات السولونار وتقويم شهري لأفضل الأيام، مبني على المد وأطوار القمر.</li>
         <li><strong>الشمس والقمر والصلاة</strong>: أوقات الشروق والغروب وطور القمر، وأوقات الصلاة بطريقة أم القرى، والتاريخ الهجري التقديري.</li>
         <li><a href={`${BASE}fish`} class={a}><strong>دليل الأسماك</strong></a>: <span class="latin">{fish.length}</span> نوعاً بالصور وأسمائها المحلية في كل بلد، مع الأنواع المسجّلة قرب كل ميناء.</li>

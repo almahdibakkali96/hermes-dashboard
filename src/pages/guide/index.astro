@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SignupForm from '../../components/SignupForm.astro';
 import { GUIDE, buyUrl, SALES_OPEN } from '../../lib/shop';
-import placesIndex from '../../data/places/places_index.json';
 
 const BUY = buyUrl(GUIDE.id);
 
@@ -22,7 +21,7 @@ const stats = [
   { n: GUIDE.chapters.length, label: 'فصول' },
   { n: 52, label: 'نوعاً من الأسماك' },
   { n: 12, label: 'شهراً في تقويم الصيد' },
-  { n: placesIndex.length, label: 'ميناءً عربياً في الأمثلة' },
+  { n: 53, label: 'ميناءً عربياً في الأمثلة' },  // ports covered by the PDF, not the site's current count
 ];
 const faq = [
   { q: 'ما صيغة الدليل؟', a: `ملف PDF من ${GUIDE.pages} صفحة بحجم A4، باللغة العربية، يُقرأ على الهاتف أو الحاسوب ويمكن طباعته.` },

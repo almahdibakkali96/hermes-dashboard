@@ -31,6 +31,7 @@ const ALT_AR: Record<string, string[]> = {
   'port-said': ['بور سعيد'],
   'umm-al-quwain': ['أم القوين'],
   kaec: ['مدينة الملك عبد الله الاقتصادية'],
+  'bandar-abbas': ['بندرعباس'],
 };
 
 const FR: Record<string, string> = {

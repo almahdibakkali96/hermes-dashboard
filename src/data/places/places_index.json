@@ -456,6 +456,22 @@
   "lon": 47.93
  },
  {
+  "id": "bushehr",
+  "name_en": "Bushehr",
+  "name_ar": "بوشهر",
+  "country": "IR",
+  "lat": 28.97,
+  "lon": 50.83
+ },
+ {
+  "id": "bandar-abbas",
+  "name_en": "Bandar Abbas",
+  "name_ar": "بندر عباس",
+  "country": "IR",
+  "lat": 27.18,
+  "lon": 56.27
+ },
+ {
   "id": "latakia",
   "name_en": "Latakia",
   "name_ar": "اللاذقية",
