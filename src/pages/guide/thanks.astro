@@ -4,9 +4,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { GUIDE, CHEAT_SHEET_PDF } from '../../lib/shop';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const steps = [
-  { icon: '🧾', title: 'إيصال الدفع الآن', text: 'يصلك من Stripe على بريدك فور الشراء، وفيه رقم العملية.' },
-  { icon: '📘', title: 'الدليل خلال 24 ساعة', text: `نرسل لك ملف ${GUIDE.title} (PDF) على البريد نفسه الذي دفعت به.` },
-  { icon: '📥', title: 'لم يصلك؟', text: 'تحقق من مجلد الرسائل غير المرغوب فيها والعروض، ثم راسلنا من صفحة الاتصال بالبريد الذي دفعت به.' },
+  { icon: '📘', title: 'حمّل الدليل الآن', text: `رابط تحميل ${GUIDE.title} (PDF) يظهر في صفحة التأكيد بعد الدفع مباشرة. احفظ الملف في هاتفك.` },
+  { icon: '🧾', title: 'إيصال الدفع', text: 'يصلك من Stripe على بريدك فور الشراء، وفيه رقم العملية.' },
+  { icon: '📥', title: 'لم تحمّله؟', text: 'إن أغلقت صفحة التأكيد قبل التحميل، فراسلنا من صفحة الاتصال بالبريد الذي دفعت به ونرسل إليك الدليل.' },
 ];
 ---
 

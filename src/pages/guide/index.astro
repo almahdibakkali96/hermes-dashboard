@@ -27,7 +27,7 @@ const faq = [
   { q: 'ما صيغة الدليل؟', a: `ملف PDF من ${GUIDE.pages} صفحة بحجم A4، باللغة العربية، يُقرأ على الهاتف أو الحاسوب ويمكن طباعته.` },
   ...(SALES_OPEN ? [
     { q: 'كيف أدفع؟', a: 'الدفع آمن على صفحة Stripe بالبطاقة البنكية أو Apple Pay أو Google Pay. لا تمر بيانات بطاقتك بموقعنا، ولا نراها ولا نحفظها.' },
-    { q: 'متى يصلني الدليل؟', a: 'يصلك ملف الدليل (PDF) على البريد الإلكتروني الذي تستخدمه عند الدفع خلال 24 ساعة. إن لم تجده فتحقق من مجلد الرسائل غير المرغوب فيها، أو راسلنا من صفحة الاتصال.' },
+    { q: 'متى يصلني الدليل؟', a: 'فوراً. بعد الدفع تظهر لك صفحة فيها رابط تحميل الدليل (PDF)، فتحفظه في هاتفك مباشرة. وإن أغلقت الصفحة قبل التحميل، فراسلنا من صفحة الاتصال بالبريد الذي دفعت به ونرسله إليك.' },
     { q: 'هل هو اشتراك؟', a: 'لا. تدفع مرة واحدة ويبقى الملف لك، تقرؤه على هاتفك أو تطبعه متى شئت.' },
     { q: 'هل يمكن استرداد المبلغ؟', a: 'نعم. إذا لم يصلك الدليل، أو كان في الملف خلل يمنع قراءته، راسلنا من صفحة الاتصال بالبريد الذي دفعت به، فنرسل لك نسخة سليمة أو نعيد لك المبلغ كاملاً.' },
   ] : [
@@ -147,7 +147,7 @@ const jsonLd = [
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="card p-5"><div class="text-3xl" aria-hidden="true">🔒</div><h3 class="mt-2 font-semibold">مزوّد دفع عالمي</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">نستخدم <span class="latin">Stripe</span>، مزوّد الدفع الذي تعتمد عليه ملايين الشركات حول العالم، والحاصل على أعلى شهادة أمان في صناعة البطاقات (<span class="latin">PCI DSS</span> المستوى الأول).</p></div>
           <div class="card p-5"><div class="text-3xl" aria-hidden="true">🛡️</div><h3 class="mt-2 font-semibold">لا نرى بيانات بطاقتك</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">تُدخل بطاقتك في صفحة <span class="latin">Stripe</span> المشفّرة على <span class="latin" dir="ltr">buy.stripe.com</span>. لا تمر بموقعنا، ولا نراها ولا نحفظها.</p></div>
-          <div class="card p-5"><div class="text-3xl" aria-hidden="true">📧</div><h3 class="mt-2 font-semibold">إيصال فوري وتسليم خلال 24 ساعة</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">يصلك إيصال الدفع من <span class="latin">Stripe</span> فور الشراء، ثم ملف الدليل على بريدك الإلكتروني خلال <span class="latin">24</span> ساعة.</p></div>
+          <div class="card p-5"><div class="text-3xl" aria-hidden="true">📧</div><h3 class="mt-2 font-semibold">تحميل فوري بعد الدفع</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">بعد الدفع مباشرة تظهر لك صفحة فيها رابط تحميل الدليل، ويصلك إيصال الدفع من <span class="latin">Stripe</span> على بريدك.</p></div>
           <div class="card p-5"><div class="text-3xl" aria-hidden="true">↩️</div><h3 class="mt-2 font-semibold">ضمان استرداد المبلغ</h3><p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">إذا لم يصلك الدليل، أو كان في الملف خلل يمنع قراءته، نرسل لك نسخة سليمة أو نعيد لك المبلغ كاملاً.</p></div>
         </div>
         <p class="mt-4 text-sm text-[var(--text-muted)] text-center">طرق الدفع: <span class="latin">Visa</span> · <span class="latin">Mastercard</span> · <span class="latin">Apple Pay</span> · <span class="latin">Google Pay</span>. السعر بالدولار الأمريكي، ويحوّله بنكك إلى عملتك.</p>
