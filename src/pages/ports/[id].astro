@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import placesIndex from '../../data/places/places_index.json';
 import {
-  generateTideCurve, dayExtremes, formatTime, localMidnight,
+  generateTideCurve, dayExtremes, formatTime, localMidnight, DATUM_KEY,
   classifyTide, classifySpringNeap, getTimezoneOffset, portDay, tideCoefficient, coefficientLabelAr
 } from '../../lib/tides';
 import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
@@ -28,6 +28,9 @@ const port = portModule.default;
 
 
 const constituents = port.constituents as Record<string, { amp: number; phase: number }>;
+// Z0 (mean sea level above LAT) is the chart datum, not a wave: listed apart from the constituents
+const waves = Object.entries(constituents).filter(([name]) => name !== DATUM_KEY);
+const datumCm = Math.round(constituents[DATUM_KEY]?.amp ?? 0);
 const portFish = fishForPort(id!);
 
 // "Today" is the port's local date; the daily refresh rebuilds just after each timezone's midnight
@@ -135,7 +138,7 @@ const localDateStr = new Date(today.getTime() + tzOffset * 60000).toISOString().
 const prayerLabels: Record<string, string> = { fajr: 'الفجر', sunrise: 'الشروق', dhuhr: 'الظهر', asr: 'العصر', maghrib: 'المغرب', isha: 'العشاء' };
 
 // Today's chart
-const CHART_W = 600, CHART_H = 300, PAD_L = 52, PAD_R = 18, PAD_T = 40, PAD_B = 36;
+const CHART_W = 600, CHART_H = 310, PAD_L = 52, PAD_R = 18, PAD_T = 40, PAD_B = 58;
 const plotW = CHART_W - PAD_L - PAD_R, plotH = CHART_H - PAD_T - PAD_B;
 const heights = curve.map((p: { height: number }) => p.height);
 const hMin = Math.min(...heights), hMax = Math.max(...heights), hRange = hMax - hMin || 1;
@@ -329,8 +332,8 @@ const pageJsonLd = [
                   <text x={PAD_L - 8} y={yScale(v) + 4} text-anchor="end" class="tick">{v.toFixed(0)}</text>
                 </>
               ))}
-              {[0, 3, 6, 9, 12, 15, 18, 21, 24].map(h => (
-                <text x={xHours(h)} y={CHART_H - 10} text-anchor="middle" class={h % 6 ? 'tick tick-minor' : 'tick'}>{String(h).padStart(2, '0')}:00</text>
+              {[0, 3, 6, 9, 12, 15, 18, 21].map(h => (
+                <text x={xHours(h)} y={CHART_H - 8} text-anchor="middle" class={h % 6 ? 'tick tick-minor' : 'tick'}>{String(h).padStart(2, '0')}:00</text>
               ))}
               <path d={`${pathD} L${xHours(24).toFixed(1)},${PAD_T + plotH} L${xHours(0).toFixed(1)},${PAD_T + plotH} Z`} fill="url(#tideFill)" />
               <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round" />
@@ -575,14 +578,14 @@ const pageJsonLd = [
         </section>
 
         <section class="card p-5 text-xs text-[var(--text-muted)] leading-relaxed">
-          <p>⚠️ تقديرات فلكية، لا تُستخدم للملاحة. الارتفاعات بالنسبة لمتوسط سطح البحر. <a href={`${BASE}disclaimer`} class="text-[var(--accent-text)] underline">إخلاء المسؤولية</a> · <a href={`${BASE}methodology`} class="text-[var(--accent-text)] underline">كيف تعمل الحسابات؟</a></p>
+          <p>⚠️ تقديرات فلكية، لا تُستخدم للملاحة. الارتفاعات فوق أدنى جزر فلكي (<span class="latin">LAT</span>)، وهو صفر جداول المد الرسمية، ومتوسط سطح البحر هنا على <span class="latin">{datumCm}</span> سم فوقه. <a href={`${BASE}disclaimer`} class="text-[var(--accent-text)] underline">إخلاء المسؤولية</a> · <a href={`${BASE}methodology`} class="text-[var(--accent-text)] underline">كيف تعمل الحسابات؟</a></p>
           <p class="mt-2 latin" lang="en">{port.source}</p>
           <details class="mt-3">
-            <summary class="cursor-pointer select-none hover:text-[var(--text-primary)]">المركبات التوافقية (<span class="latin">{Object.keys(constituents).length}</span>)</summary>
+            <summary class="cursor-pointer select-none hover:text-[var(--text-primary)]">المركبات التوافقية (<span class="latin">{waves.length}</span>)</summary>
             <table class="mt-2 w-full">
               <thead><tr class="text-[var(--text-secondary)]"><th class="text-start py-1">المركبة</th><th class="text-start py-1">السعة (سم)</th><th class="text-start py-1">الطور (°)</th></tr></thead>
               <tbody class="latin">
-                {Object.entries(constituents).map(([name, c]) => <tr class="border-t border-[var(--border-subtle)]"><td class="py-1 font-medium">{name}</td><td class="py-1">{c.amp.toFixed(2)}</td><td class="py-1">{c.phase.toFixed(1)}</td></tr>)}
+                {waves.map(([name, c]) => <tr class="border-t border-[var(--border-subtle)]"><td class="py-1 font-medium">{name}</td><td class="py-1">{c.amp.toFixed(2)}</td><td class="py-1">{c.phase.toFixed(1)}</td></tr>)}
               </tbody>
             </table>
           </details>

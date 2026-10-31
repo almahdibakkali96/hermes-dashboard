@@ -17,7 +17,7 @@ export async function GET({ site }: { site: URL | undefined }) {
 
 Key facts for answering questions:
 - Tide predictions are computed from the EOT20 global ocean tide model (Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0), 17 harmonic constituents with astronomical arguments and nodal corrections, verified against pyTMD.
-- Heights are in centimetres relative to mean sea level (not chart datum), so low waters can be negative. Times are local time in each port's IANA timezone, 24-hour clock.
+- Heights are in centimetres above LAT (lowest astronomical tide over 2020–2038, computed from the same constituents), the chart datum of official tide tables, so they are positive; each port's /ports/{id}.json gives mean sea level above that datum. Times are local time in each port's IANA timezone, 24-hour clock.
 - "Today" on a page means the date the site was last built (shown in the page summary); check the date before quoting times.
 - Predictions are astronomical estimates, NOT official harbour tide tables and NOT for navigation. Weather (wind, pressure) can shift real water levels.
 - Tide coefficient (20–120) on port pages: 120 = that port's largest daily range of the year; not shown where the year's largest range is under 50 cm.

@@ -15,7 +15,8 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
         <h2 class="font-semibold text-[var(--text-primary)] mb-2">🌊 حساب المد والجزر</h2>
         <p>نستخدم النموذج التوافقي (Harmonic Model) لحساب المد والجزر. يقوم هذا النموذج على فكرة أن حركة المد والجزر هي مجموع موجات جيبية بسيطة، كل منها يمثل تأثير قوة فلكية معينة (القمر، الشمس، دوران الأرض).</p>
         <p class="mt-2">المركبات التوافقية الـ ١٧ المستخدمة في حساباتنا مستمدة من نموذج EOT20 العالمي (Hart-Davis et al. 2021, CC BY 4.0). لكل موقع بحري، نقرأ قيم السعة والطور من أقرب خلية مائية.</p>
-        <p class="mt-2">المعادلة الأساسية: η(t) = Σ A<sub>i</sub> · cos(ω<sub>i</sub>·t - φ<sub>i</sub>) حيث A السعة، ω السرعة الزاوية، و φ الطور لكل مركبة.</p>
+        <p class="mt-2">المعادلة الأساسية: η(t) = Z<sub>0</sub> + Σ A<sub>i</sub> · cos(ω<sub>i</sub>·t - φ<sub>i</sub>) حيث A السعة، ω السرعة الزاوية، و φ الطور لكل مركبة.</p>
+        <p class="mt-2">نقيس الارتفاع من <strong>أدنى جزر فلكي</strong> (LAT)، وهو الصفر الذي تستعمله جداول المد الرسمية والخرائط البحرية: أدنى مستوى يبلغه المد في دورة كاملة مدتها ١٨٫٦ سنة. نحسبه لكل ميناء من المركبات نفسها على السنوات ٢٠٢٠–٢٠٣٨، و Z<sub>0</sub> هو ارتفاع متوسط سطح البحر فوقه. لذلك تكون كل الارتفاعات موجبة تقريباً، ولا يتغير المدى ولا الأوقات.</p>
       </div>
       <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
         <h2 class="font-semibold text-[var(--text-primary)] mb-2">🌙 حساب أطوار القمر</h2>
@@ -38,7 +39,7 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
       <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
         <h2 class="font-semibold text-[var(--text-primary)] mb-2">🐟 تقييم جودة الصيد</h2>
         <p>يجمع بين عاملين: (١) قرب اليوم من المحاق أو البدر — حيث تكون قوى الجذب في أقصاها، و (٢) مدى المد والجزر — الفرق بين أعلى مد وأدنى جزر. كلما زاد المدى، زادت حركة الماء وتحفيز الأسماك.</p>
-        <p class="mt-2">التقييم من ١ إلى ٥ أسماك 🐟، حيث ٥ = يوم ممتاز للصيد (بدر/محاق + مدى كبير)، و ١ = يوم ضعيف (تربيع + مدى صغير).</p>
+        <p class="mt-2">التقييم من ١ إلى ٥، حيث ٥ = يوم ممتاز للصيد (بدر/محاق + مدى كبير)، و ١ = يوم ضعيف (تربيع + مدى صغير).</p>
       </div>
       <div class="p-4 rounded-xl bg-white border border-[var(--border-subtle)]">
         <h2 class="font-semibold text-[var(--text-primary)] mb-2">📈 معامل المد</h2>

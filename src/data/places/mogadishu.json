@@ -7,14 +7,15 @@
  "lon": 45.34,
  "timezone": "Africa/Mogadishu",
  "grid": {
-  "lat": 2.0,
+  "lat": 2,
   "lon": 45.375,
   "distance_km": 5.9
  },
  "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
  "units": {
   "amplitude": "cm",
-  "phase": "degrees"
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
  },
  "constituents": {
   "2N2": {
@@ -84,6 +85,10 @@
   "T2": {
    "amp": 2.03126,
    "phase": 77.175
+  },
+  "Z0": {
+   "amp": 139.5,
+   "phase": 0
   }
  }
 }

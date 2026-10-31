@@ -75,10 +75,17 @@ export interface Constituent {
   phase: number; // Greenwich phase lag in degrees (g)
 }
 
+/**
+ * Z0 is not a wave: its `amp` is mean sea level above the port's chart datum (LAT, the lowest
+ * astronomical tide over a nodal cycle, from tools/datum/lat.mjs), added to every height so the
+ * numbers read like official tide tables, all positive.
+ */
+export const DATUM_KEY = 'Z0';
+
 export interface TidePoint {
   time: Date;
   hours: number;     // hours from local midnight
-  height: number;    // tide height in cm relative to mean sea level
+  height: number;    // tide height in cm above chart datum (LAT)
 }
 
 export interface TideExtreme {
@@ -89,12 +96,12 @@ export interface TideExtreme {
 }
 
 /**
- * Predict tide height (cm, relative to mean sea level) at an absolute time.
+ * Predict tide height (cm above chart datum, or above mean sea level without Z0) at an absolute time.
  */
 export function predictHeight(constituents: Record<string, Constituent>, time: Date): number {
   const a = astroArgs(time);
   const args = [a.tau, a.s, a.h, a.p, -a.N, a.p1]; // N' = −N
-  let height = 0;
+  let height = constituents[DATUM_KEY]?.amp ?? 0;
   for (const [name, c] of Object.entries(constituents)) {
     const d = DOODSON[name];
     if (!d) continue;
@@ -130,8 +137,9 @@ function harmonicsAt(constituents: Record<string, Constituent>, t0: Date) {
     const { f, u } = nodal(name, a.N, a.p);
     terms.push({ amp: f * c.amp, phase0: (V + u - c.phase) * RAD, speed: speed * RAD });
   }
+  const z0 = constituents[DATUM_KEY]?.amp ?? 0;
   return (hoursFromT0: number) => {
-    let h = 0;
+    let h = z0;
     for (const t of terms) h += t.amp * Math.cos(t.phase0 + t.speed * hoursFromT0);
     return h;
   };
