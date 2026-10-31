@@ -3,7 +3,9 @@
 // first tide. Each [data-tides] box carries the day's and the next day's extremes as
 // [type 'h'|'l', UTC ms, 'HH:MM' local, height cm] and its port's UTC offset (data-tz, minutes);
 // this script fills [data-next="h|l"] (time) and [data-next-h="h|l"] (height, and "غداً" when
-// the tide falls on the port's next calendar day). Include once per page.
+// the tide falls on the port's next calendar day). A box may also carry data-periods, the major
+// solunar periods as [start ms, end ms, 'HH:MM', 'HH:MM'], filling [data-period] and
+// [data-period-when] ("الآن" during one). Include once per page.
 ---
 <script is:inline>
   (function () {
@@ -14,6 +16,22 @@
       try { list = JSON.parse(box.getAttribute('data-tides')); } catch (e) { continue; }
       var tz = parseFloat(box.getAttribute('data-tz')) || 0;
       var today = new Date(now + tz * 60000).toISOString().slice(0, 10);
+      var periods = box.getAttribute('data-periods');
+      if (periods) {
+        try { periods = JSON.parse(periods); } catch (e) { periods = []; }
+        for (var k = 0; k < periods.length; k++) {
+          var p = periods[k];
+          if (p[1] <= now) continue;
+          var start = box.querySelector('[data-period]'), when = box.querySelector('[data-period-when]');
+          if (start) start.textContent = p[2];
+          if (when) {
+            var until = 'حتى <span class="latin">' + p[3] + '</span>';
+            var dayOf = new Date(p[0] + tz * 60000).toISOString().slice(0, 10);
+            when.innerHTML = p[0] <= now ? 'الآن، ' + until : dayOf !== today ? 'غداً، ' + until : until;
+          }
+          break;
+        }
+      }
       ['h', 'l'].forEach(function (type) {
         var next = null;
         for (var j = 0; j < list.length; j++) if (list[j][0] === type && list[j][1] > now) { next = list[j]; break; }

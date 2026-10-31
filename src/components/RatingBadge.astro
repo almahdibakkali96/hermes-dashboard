@@ -1,0 +1,20 @@
+---
+// Fishing rating as one readable badge: "4/5 · جيد" in the rating's colour.
+import { fishColors, fishLabels } from '../lib/fishing';
+
+export interface Props {
+  rating: number;
+  size?: 'sm' | 'md' | 'lg';
+  /** show the word (جيد، ممتاز…) next to the number */
+  label?: boolean;
+  dark?: boolean;
+}
+const { rating, size = 'md', label = true, dark = false } = Astro.props;
+const color = fishColors[rating];
+---
+
+<span class:list={['rating-badge', `rating-${size}`, { 'rating-dark': dark }]} style={`--rating:${color}`}
+      aria-label={`تقييم الصيد ${rating} من 5، ${fishLabels[rating]}`} role="img">
+  <span class="rating-num latin" aria-hidden="true">{rating}<span class="rating-of">/5</span></span>
+  {label && <span class="rating-word" aria-hidden="true">{fishLabels[rating]}</span>}
+</span>

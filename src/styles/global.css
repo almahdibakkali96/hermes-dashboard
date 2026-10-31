@@ -312,7 +312,61 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
   background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15);
   color: #e2e8f0;
 }
-.fish-on-dark svg path[fill="none"] { stroke: rgba(255, 255, 255, 0.3); }
+/* Port hero buttons: save as my port, share */
+.hero-action {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.45rem 0.95rem; border-radius: var(--radius-pill); font-size: 0.85rem; cursor: pointer;
+  background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.18); color: #e2e8f0;
+  transition: background-color 0.15s ease;
+}
+.hero-action:hover { background: rgba(255, 255, 255, 0.18); }
+.hero-action[aria-pressed="true"] { background: rgba(253, 230, 138, 0.16); border-color: rgba(253, 230, 138, 0.45); color: #fde68a; font-weight: 600; }
+
+/* Fishing rating badge: "4/5 · جيد" */
+.rating-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; line-height: 1.2;
+  padding: 0.2rem 0.65rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.85rem;
+  color: var(--rating); background: color-mix(in srgb, var(--rating) 10%, white);
+  border: 1px solid color-mix(in srgb, var(--rating) 28%, transparent);
+}
+.rating-num { font-weight: 800; }
+.rating-of { font-weight: 500; opacity: 0.65; font-size: 0.8em; }
+.rating-sm { font-size: 0.75rem; padding: 0.1rem 0.5rem; gap: 0.3rem; }
+.rating-lg { font-size: 1rem; padding: 0.3rem 0.85rem 0.3rem 0.95rem; }
+.rating-lg .rating-num { font-size: 1.5rem; }
+.rating-dark {
+  color: color-mix(in srgb, var(--rating) 40%, white);
+  background: color-mix(in srgb, var(--rating) 28%, transparent);
+  border-color: color-mix(in srgb, var(--rating) 55%, transparent);
+}
+.rating-key { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; margin-top: 0.75rem; font-size: 0.75rem; color: var(--text-secondary); }
+.rating-key li { display: inline-flex; align-items: center; gap: 0.3rem; }
+.rating-key li > span:first-child { width: 1rem; height: 0.4rem; border-radius: 9999px; }
+
+/* Today's tide chart: labels sized for the screen (the SVG scales with the card) */
+.tide-chart text { font-family: var(--font-latin); font-size: 13px; }
+.tide-chart .tick { fill: #64748b; }
+.tide-chart .ex-label { font-size: 14px; font-weight: 700; }
+.tide-chart .now-label { font-family: var(--font-arabic); font-size: 13px; font-weight: 700; fill: #b45309; }
+@media (max-width: 639px) {
+  .tide-chart text { font-size: 21px; }
+  .tide-chart .ex-label { font-size: 22px; }
+  .tide-chart .now-label { font-size: 20px; }
+  .tide-chart .tick-minor { display: none; }
+}
+
+/* Solunar periods */
+.solunar-row {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-lg); background: var(--surface-elevated);
+}
+.solunar-row.is-major { background: #f0fdfa; box-shadow: inset 0 0 0 1px #99f6e4; }
+.solunar-q { margin-inline-start: auto; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem; }
+.solunar-q::before { content: ''; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: currentColor; }
+.q-excellent { color: #15803d; }
+.q-good { color: #0f766e; }
+.q-fair { color: #b45309; }
+.q-poor { color: #64748b; }
 .info-tile { border-radius: var(--radius-lg); background: var(--surface-elevated); padding: 0.55rem 0.75rem; }
 .info-tile dt { font-size: 0.7rem; color: var(--text-muted); }
 .info-tile dd { font-size: 1rem; font-weight: 600; margin-top: 0.1rem; }
@@ -334,6 +388,7 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
 .week-row > :nth-child(2) { grid-area: fish; text-align: end; }
 .week-row > :nth-child(3) { grid-area: high; }
 .week-row > :nth-child(4) { grid-area: low; }
+.week-tide { display: inline-flex; flex-direction: column; line-height: 1.25; }
 @media (min-width: 640px) {
   .week-row { grid-template-columns: 9rem 1fr 1fr 8rem; grid-template-areas: "day high low fish"; }
 }
@@ -341,9 +396,9 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
   border-radius: var(--radius-lg);
   background: var(--surface-card);
   border: 1px solid var(--border-subtle);
-  border-bottom: 3px solid var(--rating);
-  padding: 0.35rem 0.1rem 0.4rem;
+  padding: 0.35rem 0.1rem 0.45rem;
 }
+.cal-bar { height: 0.35rem; border-radius: 9999px; margin: 0.15rem 0.3rem 0; }
 .cal-today { outline: 2px solid var(--accent); outline-offset: 1px; background: #f0fdfa; }
 .moon-cell { border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); padding: 0.35rem 0.1rem; }
 .moon-key { background: #fef9c3; border-color: #facc15; }

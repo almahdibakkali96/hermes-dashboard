@@ -2,13 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import placesIndex from '../../data/places/places_index.json';
 import {
-  generateTideCurve, dayExtremes, formatTime,
+  generateTideCurve, dayExtremes, formatTime, localMidnight,
   classifyTide, classifySpringNeap, getTimezoneOffset, portDay, tideCoefficient, coefficientLabelAr
 } from '../../lib/tides';
 import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
 import { calculatePrayerTimes, gregorianToHijri } from '../../lib/prayer';
 import { countryName, formatCoords } from '../../lib/countries';
-import FishRating from '../../components/FishRating.astro';
+import RatingBadge from '../../components/RatingBadge.astro';
+import { calcFish, fishColors, fishLabels, monthDays as monthDaysOf, maxRangeOf, ratingsFrom } from '../../lib/fishing';
 import { yearStats, seas, portSea } from '../../lib/seas';
 import { fishForPort, fishLabel } from '../../lib/fish';
 import GuidePromo from '../../components/GuidePromo.astro';
@@ -45,87 +46,42 @@ const solunar = solunarPeriods(moonT.moonrise, moonT.moonset, moonT.lunarTransit
 const prayers = calculatePrayerTimes(today, port.lat, port.lon, tzOffset, 'UmmAlQura');
 const hijri = gregorianToHijri(today);
 
-// 7-day forecast — simple data, no per-day charts
+// 7-day forecast — simple data, no per-day charts; each day rated against its own month
 const weekDays = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-const forecast = Array.from({ length: 7 }, (_, i) => {
+const weekRatings = ratingsFrom(constituents, today, 7, tzOffset);
+const forecastWithFish = Array.from({ length: 7 }, (_, i) => {
   const d = new Date(today); d.setUTCDate(d.getUTCDate() + i);
   const ex = dayExtremes(constituents, d, tzOffset);
   const hs = ex.filter((e: { type: string }) => e.type === 'high').sort((a: { height: number }, b: { height: number }) => b.height - a.height);
   const ls = ex.filter((e: { type: string }) => e.type === 'low').sort((a: { height: number }, b: { height: number }) => a.height - b.height);
   const m = moonPhase(d);
+  const fishRating = weekRatings[i].rating;
   return {
     label: i===0?'اليوم':weekDays[d.getUTCDay()],
     dateStr: d.toLocaleDateString('en-GB',{timeZone:'UTC',day:'numeric',month:'short'}),
     highs: hs.slice(0, 3), lows: ls.slice(0, 3),
     range: hs.length&&ls.length?(hs[0].height-ls[0].height).toFixed(0):'—',
     moon: m, moonPct: Math.round(m.illumination*100),
-    isToday: i===0
+    isToday: i===0,
+    fishRating, fishColor: fishColors[fishRating], fishLabel: fishLabels[fishRating],
   };
 });
 
-// Monthly calendar — with fish rating
+// Monthly calendar with the fishing rating (src/lib/fishing.ts): moon age + the day's range
+// relative to the month's largest range at this port
 const year = today.getUTCFullYear(), month = today.getUTCMonth();
-const monthRaw = (y: number, m: number) => Array.from({ length: new Date(Date.UTC(y, m + 1, 0)).getUTCDate() }, (_, i) => {
-  const d = new Date(Date.UTC(y, m, i + 1, 12));
-  const ex = dayExtremes(constituents, d, tzOffset);
-  const hs = ex.filter((e: { type: string }) => e.type==='high'), ls = ex.filter((e: { type: string }) => e.type==='low');
-  const range = hs.length&&ls.length?Math.max(...hs.map((h: { height: number }) => h.height))-Math.min(...ls.map((l: { height: number }) => l.height)):0;
-  return { date: d, day: i + 1, month: m, range, moon: moonPhase(d), extremes: ex };
-});
-const monthDaysRaw = monthRaw(year, month).map(d => ({ ...d, isToday: d.day === today.getUTCDate() }));
-
-// Fish rating: 1-5 scale.
-// Moon score based on lunar age (days since new moon, 0-29.53). Narrow windows around new/full moon.
-// Tide score based on daily range relative to month's max.
-// Colors: 5=green, 4=teal, 3=amber, 2=orange, 1=red
-const maxMonthRange = Math.max(...monthDaysRaw.map(d => d.range), 1);
-const fishColors = ['', '#dc2626', '#c2410c', '#b45309', '#0f766e', '#15803d']; // 700 shades: 4.5:1 on white as text
-const fishLabels = ['', 'ضعيف', 'دون المتوسط', 'متوسط', 'جيد', 'ممتاز'];
-const fishAdvice = ['', 'يوم غير مناسب للصيد', 'صيد ضعيف — يفضل التأجيل', 'صيد متوسط — قد تحصل على شيء', 'يوم جيد للصيد', 'يوم ممتاز — أفضل وقت للصيد'];
-
-// Moon score: narrow windows around new moon (age 0-1.5 or 28-29.5) and full moon (age 13.5-16)
-const moonScoreFromAge = (age: number) => {
-  // Normalize age to 0-29.53
-  const a = ((age % 29.53) + 29.53) % 29.53;
-  // New moon window: 0-2 or 28-29.53 → score 3
-  if (a <= 2 || a >= 28.0) return 3;
-  if (a <= 3.5 || a >= 27.0) return 2;
-  if (a <= 5 || a >= 25.5) return 1;
-  // Full moon window: 13.5-16.5
-  if (a >= 13.5 && a <= 16.0) return 3;
-  if (a >= 12.5 && a <= 17.0) return 2;
-  if (a >= 11.5 && a <= 18.0) return 1;
-  return 0;
-};
-
-const calcFish = (range: number, moonAge: number, maxRange = maxMonthRange) => {
-  const moonScore = moonScoreFromAge(moonAge);
-  const pct = range / maxRange;
-  const tideScore = pct >= 0.8 ? 2 : pct >= 0.5 ? 1 : 0;
-  // 1-5 scale
-  return Math.max(1, Math.min(5, 1 + moonScore + tideScore));
-};
-
+const monthDaysRaw = monthDaysOf(constituents, year, month, tzOffset).map(d => ({ ...d, isToday: d.day === today.getUTCDate() }));
+const maxMonthRange = maxRangeOf(monthDaysRaw);
 const monthDays = monthDaysRaw.map(d => {
-  const fishRating = calcFish(d.range, d.moon.age);
-  const emptyFish = '🐟'.repeat(5 - fishRating);
-  const fullFish = '🐟'.repeat(fishRating);
-  return { ...d, fishRating, fullFish, emptyFish, fishColor: fishColors[fishRating], fishLabel: fishLabels[fishRating], fishAdvice: fishAdvice[fishRating] };
-});
-
-// Add fish rating to 7-day forecast
-const forecastWithFish = forecast.map(d => {
-  const fishRating = calcFish(parseFloat(String(d.range)), d.moon.age);
-  const emptyFish = '🐟'.repeat(5 - fishRating);
-  const fullFish = '🐟'.repeat(fishRating);
-  return { ...d, fishRating, fullFish, emptyFish, fishColor: fishColors[fishRating], fishLabel: fishLabels[fishRating], fishAdvice: fishAdvice[fishRating] };
+  const fishRating = calcFish(d.range, d.moon.age, maxMonthRange);
+  return { ...d, fishRating, fishColor: fishColors[fishRating], fishLabel: fishLabels[fishRating] };
 });
 
 // Best fishing days in the next 30 days (rolling into next month, rated against that month's
 // calendar). The moon is the same for every port, so ties are broken by what differs between
 // ports: a high tide within 1 h of sunrise or sunset, then the day's tide range.
-const nextMonth = monthRaw(month === 11 ? year + 1 : year, (month + 1) % 12);
-const nextMaxRange = Math.max(...nextMonth.map(d => d.range), 1);
+const nextMonth = monthDaysOf(constituents, month === 11 ? year + 1 : year, (month + 1) % 12, tzOffset);
+const nextMaxRange = maxRangeOf(nextMonth);
 const nextMonthRated = nextMonth.map(d => ({ ...d, fishRating: calcFish(d.range, d.moon.age, nextMaxRange) }));
 const localHour = (t: Date) => (((t.getTime() + tzOffset * 60000) / 3600000) % 24 + 24) % 24;
 const clockHour = (s: string | null) => s ? Number(s.slice(0, 2)) + Number(s.slice(3, 5)) / 60 : null;
@@ -144,6 +100,28 @@ const bestDays = [
   .slice(0, 6)
   .sort((a, b) => a.date.getTime() - b.date.getTime());
 
+// Solunar periods as absolute times. The strings are clock times rounded to the half hour; a
+// period around midnight wraps (23:30–01:30): its centre tells which side of midnight it starts.
+const DAY_MS = 86400000;
+const periodsAt = (periods: typeof solunar.periods, midnight: number) => periods.map(p => {
+  const at = (hhmm: string) => midnight + (Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5))) * 60000;
+  let s = at(p.start), e = at(p.end);
+  if (e <= s) {
+    const centre = (s + e + DAY_MS) / 2;
+    if (centre >= midnight + DAY_MS) s -= DAY_MS; else e += DAY_MS;
+  }
+  return { ...p, s, e };
+}).sort((a, b) => a.s - b.s);
+const midnightToday = localMidnight(today, tzOffset).getTime();
+const tomorrowDay = new Date(today.getTime() + DAY_MS);
+const moonTomorrow = moonTimes(tomorrowDay, port.lat, port.lon, tzOffset);
+const solunarTomorrow = solunarPeriods(moonTomorrow.moonrise, moonTomorrow.moonset, moonTomorrow.lunarTransit, moonPhase(tomorrowDay).phase, tomorrowDay);
+const todayPeriods = periodsAt(solunar.periods, midnightToday);
+const majorPeriods = [...todayPeriods, ...periodsAt(solunarTomorrow.periods, midnightToday + DAY_MS)].filter(p => p.type === 'major');
+const liveMajors = JSON.stringify(majorPeriods.map(p => [p.s, p.e, p.start, p.end]));
+const nextMajor = majorPeriods.find(p => p.e > now.getTime()) ?? majorPeriods[0];
+const qualityAr: Record<string, string> = { excellent: 'قوية جداً', good: 'قوية', fair: 'متوسطة', poor: 'ضعيفة' };
+
 // Today at a glance
 const todayFish = forecastWithFish[0];
 const springNeap = classifySpringNeap(moon.age);
@@ -157,7 +135,7 @@ const localDateStr = new Date(today.getTime() + tzOffset * 60000).toISOString().
 const prayerLabels: Record<string, string> = { fajr: 'الفجر', sunrise: 'الشروق', dhuhr: 'الظهر', asr: 'العصر', maghrib: 'المغرب', isha: 'العشاء' };
 
 // Today's chart
-const CHART_W = 760, CHART_H = 280, PAD_L = 44, PAD_R = 14, PAD_T = 30, PAD_B = 30;
+const CHART_W = 600, CHART_H = 300, PAD_L = 52, PAD_R = 18, PAD_T = 40, PAD_B = 36;
 const plotW = CHART_W - PAD_L - PAD_R, plotH = CHART_H - PAD_T - PAD_B;
 const heights = curve.map((p: { height: number }) => p.height);
 const hMin = Math.min(...heights), hMax = Math.max(...heights), hRange = hMax - hMin || 1;
@@ -286,8 +264,8 @@ const pageJsonLd = [
         </div>
       </div>
 
-      <!-- Today at a glance -->
-      <dl class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3" data-tides={liveTides} data-tz={tzOffset}>
+      <!-- Today at a glance: next tides and the next major solunar period stay current (LiveTides) -->
+      <dl class="mt-7 grid grid-cols-2 lg:grid-cols-4 gap-3" data-tides={liveTides} data-tz={tzOffset} data-periods={liveMajors}>
         <div class="hero-stat">
           <dt class="text-xs text-slate-400">▲ المد القادم</dt>
           <dd class="mt-1 text-3xl font-bold latin text-teal-300" data-next="h">{nextHigh ? formatTime(nextHigh.time, tzOffset) : '—'}</dd>
@@ -299,16 +277,23 @@ const pageJsonLd = [
           <dd class="text-xs text-slate-400" data-next-h="l">{nextLow && <><span class="latin">{nextLow.height.toFixed(0)}</span> سم</>}</dd>
         </div>
         <div class="hero-stat">
-          <dt class="text-xs text-slate-400">مدى اليوم</dt>
-          <dd class="mt-1 text-3xl font-bold"><span class="latin">{todayRange}</span> <span class="text-base font-normal text-slate-300">سم</span></dd>
-          <dd class="text-xs text-slate-400">{springNeap.conditionAr}{todayCoef !== null && <> · <a href={`${BASE}articles/tide-coefficient`} class="hover:text-teal-300">معامل <span class="latin">{todayCoef}</span></a></>}</dd>
+          <dt class="text-xs text-slate-400">تقييم الصيد اليوم</dt>
+          <dd class="mt-2"><RatingBadge rating={todayFish.fishRating} size="lg" dark /></dd>
+          <dd class="mt-2 text-xs text-slate-400">المدى <span class="latin">{todayRange}</span> سم{todayCoef !== null && <> · <a href={`${BASE}articles/tide-coefficient`} class="hover:text-teal-300">معامل <span class="latin">{todayCoef}</span></a></>}</dd>
         </div>
         <div class="hero-stat">
-          <dt class="text-xs text-slate-400">تقييم الصيد اليوم</dt>
-          <dd class="mt-2"><span class="fish-on-dark"><FishRating rating={todayFish.fishRating} color={todayFish.fishColor} size={20} /></span></dd>
-          <dd class="mt-1 text-sm font-semibold" style={`color:${todayFish.fishColor}`}>{todayFish.fishLabel}</dd>
+          <dt class="text-xs text-slate-400">أفضل وقت للصيد</dt>
+          <dd class="mt-1 text-3xl font-bold latin text-amber-200" data-period>{nextMajor ? nextMajor.start : '—'}</dd>
+          <dd class="text-xs text-slate-400"><span data-period-when>{nextMajor && <>حتى <span class="latin">{nextMajor.end}</span></>}</span> · <a href="#solunar-title" class="hover:text-teal-300">فترة كبرى</a></dd>
         </div>
       </dl>
+
+      <div class="mt-4 flex flex-wrap gap-2 no-print">
+        <button type="button" class="hero-action" id="my-port" data-id={port.id} data-name={port.name_ar} aria-pressed="false" title="يظهر أولاً في الصفحة الرئيسية">
+          <span data-star aria-hidden="true">☆</span> <span data-label>اجعله ميناءي</span>
+        </button>
+        <a class="hero-action" href={`https://wa.me/?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}`} target="_blank" rel="noopener">💬 أرسله في واتساب</a>
+      </div>
     </div>
     <svg class="hero-waves" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0 40c120-20 240-30 360-18s240 40 360 36 240-34 360-38 240 18 360 26v26H0z" fill="currentColor" />
@@ -321,11 +306,6 @@ const pageJsonLd = [
       <!-- Main column -->
       <div class="lg:col-span-2 space-y-6 min-w-0">
 
-        <section class="card p-5 summary-card" aria-labelledby="summary-title">
-          <h2 id="summary-title" class="text-sm font-semibold text-[var(--accent-text)]">ملخص اليوم</h2>
-          <p class="mt-2 leading-relaxed text-[var(--text-secondary)]">{summary}</p>
-        </section>
-
         <!-- Today's tide chart -->
         <section class="card p-5" aria-labelledby="chart-title">
           <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -334,7 +314,7 @@ const pageJsonLd = [
             <span class="ms-auto text-xs text-[var(--text-muted)]">بالتوقيت المحلي · الارتفاع بالسنتيمتر</span>
           </div>
           <div class="chart-ltr mt-3">
-            <svg id="tide-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="w-full h-auto" role="img"
+            <svg id="tide-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="tide-chart w-full h-auto" role="img"
                  aria-label={`منحنى المد والجزر لـ${port.name_ar} اليوم`}
                  data-tz={tzOffset} data-date={localDateStr} data-padl={PAD_L} data-plotw={plotW}>
               <defs>
@@ -346,24 +326,24 @@ const pageJsonLd = [
               {yTicks.map(v => (
                 <>
                   <line x1={PAD_L} y1={yScale(v)} x2={CHART_W - PAD_R} y2={yScale(v)} stroke="#e8ecf0" stroke-width="1" />
-                  <text x={PAD_L - 8} y={yScale(v) + 4} text-anchor="end" font-size="11" fill="#94a3b8" font-family="Inter,sans-serif">{v.toFixed(0)}</text>
+                  <text x={PAD_L - 8} y={yScale(v) + 4} text-anchor="end" class="tick">{v.toFixed(0)}</text>
                 </>
               ))}
               {[0, 3, 6, 9, 12, 15, 18, 21, 24].map(h => (
-                <text x={xHours(h)} y={CHART_H - 8} text-anchor="middle" font-size="11" fill="#94a3b8" font-family="Inter,sans-serif">{String(h).padStart(2, '0')}:00</text>
+                <text x={xHours(h)} y={CHART_H - 10} text-anchor="middle" class={h % 6 ? 'tick tick-minor' : 'tick'}>{String(h).padStart(2, '0')}:00</text>
               ))}
               <path d={`${pathD} L${xHours(24).toFixed(1)},${PAD_T + plotH} L${xHours(0).toFixed(1)},${PAD_T + plotH} Z`} fill="url(#tideFill)" />
               <path d={pathD} fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round" />
               <g id="now-marker" style="display:none">
                 <line y1={PAD_T - 6} y2={PAD_T + plotH} stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 3" />
-                <text y={PAD_T - 10} text-anchor="middle" font-size="11" font-weight="600" fill="#d97706" font-family="Noto Naskh Arabic,serif">الآن</text>
+                <text y={PAD_T - 12} text-anchor="middle" class="now-label">الآن</text>
               </g>
               {extremes.map(ex => {
                 const cx = xHours(ex.hours), cy = yScale(ex.height), hi = ex.type === 'high';
                 return (
                   <>
                     <circle cx={cx} cy={cy} r="5" fill={hi ? '#0d9488' : '#e11d48'} stroke="#fff" stroke-width="2" />
-                    <text x={cx} y={hi ? cy - 12 : cy + 20} text-anchor="middle" font-size="12" font-weight="600" fill={hi ? '#0f766e' : '#be123c'} font-family="Inter,sans-serif">{formatTime(ex.time, tzOffset)}</text>
+                    <text x={cx} y={hi ? cy - 13 : cy + 24} text-anchor={cx > CHART_W - PAD_R - 40 ? 'end' : cx < PAD_L + 40 ? 'start' : 'middle'} class="ex-label" fill={hi ? '#0f766e' : '#be123c'}>{formatTime(ex.time, tzOffset)}</text>
                   </>
                 );
               })}
@@ -380,6 +360,26 @@ const pageJsonLd = [
           </div>
         </section>
 
+        <!-- Solunar periods: the hours the hero's "best time" comes from -->
+        <section class="card p-5" aria-labelledby="solunar-title">
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 id="solunar-title" class="text-lg font-semibold display scroll-mt-24">أوقات الصيد اليوم</h2>
+            <span class="text-xs text-[var(--text-muted)]">فترات السولونار · بالتوقيت المحلي</span>
+          </div>
+          {todayPeriods.length > 0 ? (
+            <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {todayPeriods.map(p => (
+                <li class:list={['solunar-row', { 'is-major': p.type === 'major' }]}>
+                  <span class="latin text-lg font-bold">{p.start} – {p.end}</span>
+                  <span class="text-sm">{p.typeAr}</span>
+                  <span class={`solunar-q q-${p.quality}`}>{qualityAr[p.quality]}</span>
+                </li>
+              ))}
+            </ul>
+          ) : <p class="mt-3 text-sm text-[var(--text-muted)]">لا توجد بيانات</p>}
+          <p class="mt-3 text-xs text-[var(--text-muted)] leading-relaxed">الفترة الكبرى ساعتان حول عبور القمر فوق الميناء أو تحته، والصغرى ساعة حول شروقه أو غروبه. وتقوى قرب البدر والمحاق، وإذا وافقت الشروق أو الغروب أو تغيّر المد. <a href={`${BASE}articles/solunar-fishing-hours`} class="text-[var(--accent-text)] underline">كيف تُحسب؟</a></p>
+        </section>
+
         <!-- 7-day forecast -->
         <section class="card overflow-hidden" aria-labelledby="week-title">
           <div class="px-5 pt-5 pb-3 flex flex-wrap items-baseline gap-x-3">
@@ -388,7 +388,7 @@ const pageJsonLd = [
           </div>
           <ul class="divide-y divide-[var(--border-subtle)]">
             {forecastWithFish.map(day => (
-              <li class={`week-row px-5 py-4 ${day.isToday ? 'bg-teal-50/50' : ''}`}>
+              <li class:list={['week-row px-5 py-4', { 'bg-teal-50/50': day.isToday }]}>
                 <div class="flex items-center gap-3">
                   <span class="text-2xl" aria-hidden="true">{day.moon.emoji}</span>
                   <div>
@@ -397,22 +397,19 @@ const pageJsonLd = [
                   </div>
                 </div>
                 <div class="week-fish">
-                  <FishRating rating={day.fishRating} color={day.fishColor} />
-                  <div class="text-xs font-medium mt-0.5" style={`color:${day.fishColor}`}>{day.fishLabel}</div>
-                  <div class="text-[11px] text-[var(--text-muted)]">المدى <span class="latin">{day.range}</span> سم</div>
+                  <RatingBadge rating={day.fishRating} size="sm" />
+                  <div class="text-[11px] text-[var(--text-muted)] mt-1">المدى <span class="latin">{day.range}</span> سم</div>
                 </div>
-                <div class="text-sm">
-                  <div class="text-[11px] text-teal-700 font-medium mb-1">▲ مد</div>
-                  <div class="flex flex-wrap gap-x-3 gap-y-0.5">
-                    {[...day.highs].sort((a, b) => a.time.getTime() - b.time.getTime()).map(h => <span class="latin font-semibold">{formatTime(h.time, tzOffset)} <span class="font-normal text-[var(--text-muted)] text-xs">{h.height.toFixed(0)}</span></span>)}
+                {[{ label: '▲ مد', cls: 'text-teal-700', list: day.highs }, { label: '▼ جزر', cls: 'text-rose-700', list: day.lows }].map(col => (
+                  <div>
+                    <div class={`text-xs font-medium mb-1 ${col.cls}`}>{col.label}</div>
+                    <div class="flex flex-wrap gap-x-4 gap-y-1">
+                      {[...col.list].sort((a, b) => a.time.getTime() - b.time.getTime()).map(e => (
+                        <span class="week-tide"><span class="latin font-semibold">{formatTime(e.time, tzOffset)}</span><span class="text-[11px] text-[var(--text-muted)]"><span class="latin">{e.height.toFixed(0)}</span> سم</span></span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div class="text-sm">
-                  <div class="text-[11px] text-rose-700 font-medium mb-1">▼ جزر</div>
-                  <div class="flex flex-wrap gap-x-3 gap-y-0.5">
-                    {[...day.lows].sort((a, b) => a.time.getTime() - b.time.getTime()).map(l => <span class="latin font-semibold">{formatTime(l.time, tzOffset)} <span class="font-normal text-[var(--text-muted)] text-xs">{l.height.toFixed(0)}</span></span>)}
-                  </div>
-                </div>
+                ))}
               </li>
             ))}
           </ul>
@@ -431,11 +428,14 @@ const pageJsonLd = [
               <button type="button" class={`cal-cell ${d.isToday ? 'cal-today' : ''}`} style={`--rating:${d.fishColor}`} data-day={d.date.toISOString().slice(0, 10)} aria-pressed={d.isToday ? 'true' : 'false'} title={`${d.day} ${monthNames[month]} — ${d.fishLabel}`}>
                 <div class="text-xs sm:text-sm font-semibold latin">{d.day}</div>
                 <div class="text-sm sm:text-base leading-none my-0.5" aria-hidden="true">{d.moon.emoji}</div>
-                <div class="hidden sm:block"><FishRating rating={d.fishRating} color={d.fishColor} size={8} /></div>
-                <div class="sm:hidden h-1.5 rounded-full mx-1" style={`background:${d.fishColor};opacity:${0.25 + d.fishRating * 0.15}`}></div>
+                <div class="cal-bar" style={`background:${d.fishColor};opacity:${0.25 + d.fishRating * 0.15}`}></div>
               </button>
             ))}
           </div>
+
+          <ul class="rating-key" aria-label="ألوان التقييم">
+            {[5, 4, 3, 2, 1].map(r => <li><span style={`background:${fishColors[r]};opacity:${0.25 + r * 0.15}`}></span><span class="latin">{r}</span> {fishLabels[r]}</li>)}
+          </ul>
 
           <div id="day-detail" class="mt-4 rounded-xl border border-[var(--border-subtle)] p-4" data-today={localDateStr} aria-live="polite" hidden>
             <div class="flex items-center gap-2">
@@ -465,7 +465,7 @@ const pageJsonLd = [
                   <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white text-sm font-medium border" style={`border-color:${d.fishColor}55;color:${d.fishColor}`}>
                     <span class="latin">{d.day}</span> {monthNames[d.month]}
                     {d.twilight && <span title="مد عالٍ قرب الشروق أو الغروب" aria-label="مد عالٍ قرب الشروق أو الغروب">🌅</span>}
-                    <FishRating rating={d.fishRating} color={d.fishColor} size={10} />
+                    <RatingBadge rating={d.fishRating} size="sm" label={false} />
                   </span>
                 ))}
               </div>
@@ -505,7 +505,13 @@ const pageJsonLd = [
           </p>
         </section>
 
-        <GuidePromo variant="strip" />
+        <div class="lg:hidden"><GuidePromo variant="strip" /></div>
+
+        <section class="card p-5 summary-card" aria-labelledby="summary-title">
+          <h2 id="summary-title" class="text-sm font-semibold text-[var(--accent-text)]">ملخص اليوم</h2>
+          <p class="mt-2 leading-relaxed text-[var(--text-secondary)]">{summary}</p>
+        </section>
+
 
         <!-- FAQ -->
         <section class="card p-5" aria-labelledby="faq-title">
@@ -525,7 +531,7 @@ const pageJsonLd = [
 
       <!-- Sidebar -->
       <aside class="space-y-6 min-w-0">
-        <GuidePromo variant="card" />
+        <div class="hidden lg:block"><GuidePromo variant="card" /></div>
 
         <section class="card p-5" aria-labelledby="sun-title">
           <h2 id="sun-title" class="font-semibold">☀️ الشمس والقمر</h2>
@@ -542,22 +548,6 @@ const pageJsonLd = [
               <div class="text-xs text-[var(--text-muted)]">الإضاءة <span class="latin">{Math.round(moon.illumination * 100)}%</span> · عمر القمر <span class="latin">{moon.age.toFixed(1)}</span> يوم</div>
             </div>
           </div>
-        </section>
-
-        <section class="card p-5" aria-labelledby="solunar-title">
-          <h2 id="solunar-title" class="font-semibold">🎣 أوقات الصيد (سولونار)</h2>
-          {solunar.periods.length > 0 ? (
-            <ul class="mt-3 space-y-2 text-sm">
-              {solunar.periods.map(p => (
-                <li class={`flex items-center gap-2 rounded-lg px-3 py-2 ${p.type === 'major' ? 'bg-teal-50' : 'bg-[var(--surface-elevated)]'}`}>
-                  <span class={`w-2 h-2 rounded-full shrink-0 ${p.quality === 'excellent' ? 'bg-green-500' : p.quality === 'good' ? 'bg-teal-500' : 'bg-amber-400'}`}></span>
-                  <span class="font-medium">{p.typeAr}</span>
-                  <span class="latin ms-auto text-[var(--text-secondary)]">{p.start} – {p.end}</span>
-                </li>
-              ))}
-            </ul>
-          ) : <p class="mt-3 text-sm text-[var(--text-muted)]">لا توجد بيانات</p>}
-          <p class="mt-3 text-xs text-[var(--text-muted)] leading-relaxed">الفترات الكبرى حول عبور القمر، والصغرى حول شروقه وغروبه.</p>
         </section>
 
         <section class="card p-5" aria-labelledby="prayer-title">
@@ -603,6 +593,30 @@ const pageJsonLd = [
 
   <LiveTides />
 
+  <!-- "My port": remembered in this browser; the homepage shows it first -->
+  <script is:inline>
+    (function () {
+      var b = document.getElementById('my-port');
+      if (!b) return;
+      var KEY = 'arabtides.myPort', saved = null;
+      try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+      function paint(on) {
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.querySelector('[data-star]').textContent = on ? '★' : '☆';
+        b.querySelector('[data-label]').textContent = on ? 'ميناءي' : 'اجعله ميناءي';
+      }
+      paint(!!saved && saved.id === b.dataset.id);
+      b.addEventListener('click', function () {
+        var on = b.getAttribute('aria-pressed') !== 'true';
+        try {
+          if (on) localStorage.setItem(KEY, JSON.stringify({ id: b.dataset.id, name: b.dataset.name }));
+          else localStorage.removeItem(KEY);
+        } catch (e) {}
+        paint(on);
+      });
+    })();
+  </script>
+
   <!-- "Now" marker on today's chart, in the port's local time; copy-link button -->
   <script is:inline>
     (function () {
@@ -636,7 +650,7 @@ const pageJsonLd = [
         cur = Math.max(0, Math.min(days.length - 1, i));
         var d = days[cur], r = f('rating');
         f('title').textContent = d.title;
-        r.textContent = '🐟'.repeat(d.rating) + ' ' + d.label; r.style.color = d.color;
+        r.textContent = d.rating + '/5 · ' + d.label; r.style.color = d.color;
         f('highs').innerHTML = tides(d.highs);
         f('lows').innerHTML = tides(d.lows);
         f('sun').textContent = d.sun;
