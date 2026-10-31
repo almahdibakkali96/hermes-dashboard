@@ -183,11 +183,39 @@ body {
 }
 .site-nav-link:hover { background: var(--accent-muted); color: var(--accent); }
 .site-nav-link.active { background: var(--accent-muted); color: var(--accent-hover); font-weight: 600; }
-@media (max-width: 480px) {
-  .site-nav-link { padding: 0.35rem 0.55rem; font-size: 0.8rem; }
+/* The guide button: always visible; on narrow screens the other links move into the menu */
+.nav-cta {
+  flex-shrink: 0; margin-inline-start: auto;
+  display: inline-flex; align-items: center; gap: 0.3rem; white-space: nowrap;
+  padding: 0.45rem 0.85rem; border-radius: var(--radius-pill); font-size: 0.875rem; font-weight: 600;
+  background: #0b2540; color: #5eead4; transition: background-color 0.15s ease, color 0.15s ease;
 }
-@media (max-width: 420px) {
-  .site-nav-link.hide-xs { display: none; }
+.nav-cta:hover, .nav-cta.active { background: #0f3d5c; color: #99f6e4; }
+.nav-cta-long { display: none; }
+@media (min-width: 640px) { .nav-cta-short { display: none; } .nav-cta-long { display: inline; } }
+.nav-menu { flex-shrink: 0; }
+.nav-menu summary {
+  list-style: none; cursor: pointer; width: 2.5rem; height: 2.5rem; border-radius: var(--radius-pill);
+  display: flex; align-items: center; justify-content: center; color: var(--text-secondary);
+  border: 1px solid var(--border-standard); background: var(--surface-card);
+}
+.nav-menu summary::-webkit-details-marker { display: none; }
+.nav-menu[open] summary { background: var(--accent-muted); color: var(--accent-hover); border-color: var(--accent-border); }
+.nav-menu-panel {
+  position: absolute; top: calc(100% + 0.25rem); inset-inline-end: 1rem; z-index: 40;
+  width: min(15rem, calc(100vw - 2rem)); padding: 0.4rem;
+  display: flex; flex-direction: column; background: var(--surface-card);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-xl);
+  box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.25);
+}
+.nav-menu-link { padding: 0.65rem 0.9rem; border-radius: var(--radius-lg); color: var(--text-secondary); }
+.nav-menu-link:hover, .nav-menu-link.active { background: var(--accent-muted); color: var(--accent-hover); }
+.nav-menu-link.active { font-weight: 600; }
+.site-nav { display: none; }
+@media (min-width: 1024px) {
+  .site-nav { display: flex; }
+  .nav-menu { display: none; }
+  .nav-cta { margin-inline-start: 0; }
 }
 
 /* --- Site footer --- */
@@ -242,6 +270,11 @@ body {
   color: var(--text-primary);
 }
 .section-title p { font-size: 0.8rem; color: var(--text-muted); }
+.section-title > a { white-space: nowrap; }
+@media (max-width: 639px) {
+  .section-title { flex-wrap: wrap; row-gap: 0.15rem; }
+  .section-title p { order: 3; flex-basis: 100%; }
+}
 
 /* --- Card --- */
 .card {
@@ -429,9 +462,6 @@ button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
 .signup-dark .signup-btn:hover { background: #5eead4; }
 .signup-dark .signup-note { color: #94a3b8; }
 
-/* Guide link in the header */
-.site-nav-link.nav-guide { background: #0b2540; color: #5eead4; font-weight: 600; }
-.site-nav-link.nav-guide:hover, .site-nav-link.nav-guide.active { background: #0f3d5c; color: #99f6e4; }
 
 /* --- Flags and fish photos --- */
 .flag {

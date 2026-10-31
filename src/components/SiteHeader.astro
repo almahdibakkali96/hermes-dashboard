@@ -4,18 +4,18 @@ const path = Astro.url.pathname.replace(/\/$/, '');
 
 const links = [
   { href: `${BASE}#ports`, label: 'الموانئ', match: '/ports' },
-  { href: `${BASE}#countries`, label: 'الدول', match: '/country', extra: 'hide-xs' },
+  { href: `${BASE}#countries`, label: 'الدول', match: '/country' },
   { href: `${BASE}fish`, label: 'الأسماك', match: '/fish' },
   { href: `${BASE}articles`, label: 'مقالات', match: '/articles' },
-  { href: `${BASE}moon`, label: 'القمر', match: '/moon', extra: 'hide-xs' },
-  { href: `${BASE}methodology`, label: 'المنهجية', match: '/methodology', extra: 'hide-xs' },
-  { href: `${BASE}about`, label: 'عن الموقع', match: '/about', extra: 'hide-xs' },
-  { href: `${BASE}guide`, label: '📘 دليل الصياد', match: '/guide', extra: 'nav-guide' },
+  { href: `${BASE}moon`, label: 'القمر', match: '/moon' },
+  { href: `${BASE}methodology`, label: 'المنهجية', match: '/methodology' },
+  { href: `${BASE}about`, label: 'عن الموقع', match: '/about' },
 ];
+const guideActive = path.includes('/guide');
 ---
 
 <header class="site-header">
-  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-6">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center gap-3 lg:gap-6 relative">
     <a href={BASE} class="flex items-center gap-2.5 shrink-0" aria-label="ArabTides — الصفحة الرئيسية">
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 64 64" width="36" height="36">
@@ -35,11 +35,41 @@ const links = [
       </span>
     </a>
 
+    <!-- Wide screens: the links inline -->
     <nav class="site-nav" aria-label="التنقّل الرئيسي">
       {links.map(l => (
-        <a href={l.href} class:list={['site-nav-link', l.extra, { active: path.includes(l.match) }]}
+        <a href={l.href} class:list={['site-nav-link', { active: path.includes(l.match) }]}
            aria-current={path.includes(l.match) ? 'page' : undefined}>{l.label}</a>
       ))}
     </nav>
+
+    <!-- The paid guide stays visible at every width -->
+    <a href={`${BASE}guide`} class:list={['nav-cta', { active: guideActive }]} aria-current={guideActive ? 'page' : undefined}>
+      <span aria-hidden="true">📘</span> <span class="nav-cta-short">الدليل</span><span class="nav-cta-long">دليل الصياد</span>
+    </a>
+
+    <!-- Narrow screens: the links in a menu -->
+    <details class="nav-menu" id="nav-menu">
+      <summary aria-label="القائمة">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </summary>
+      <nav class="nav-menu-panel" aria-label="القائمة">
+        {links.map(l => (
+          <a href={l.href} class:list={['nav-menu-link', { active: path.includes(l.match) }]}
+             aria-current={path.includes(l.match) ? 'page' : undefined}>{l.label}</a>
+        ))}
+      </nav>
+    </details>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    // Close the menu on a tap outside it, on Escape, and when a link inside it (e.g. #ports) is followed
+    var m = document.getElementById('nav-menu');
+    if (!m) return;
+    document.addEventListener('click', function (e) { if (m.open && !m.contains(e.target)) m.open = false; });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') m.open = false; });
+    m.querySelector('.nav-menu-panel').addEventListener('click', function (e) { if (e.target.closest('a')) m.open = false; });
+  })();
+</script>

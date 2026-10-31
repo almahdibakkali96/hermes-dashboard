@@ -5,6 +5,7 @@ import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
 import GuidePromo from '../components/GuidePromo.astro';
+import LiveTides from '../components/LiveTides.astro';
 import Flag from '../components/Flag.astro';
 import { fish, fishLabel } from '../lib/fish';
 import {
@@ -15,6 +16,8 @@ import {
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))]
   .sort((a, b) => countryName(a).localeCompare(countryName(b), 'ar'));
+// Bushehr and Bandar Abbas are on the Gulf's Iranian coast: Iran is listed but isn't counted as Arab
+const arabCountries = countries.filter(c => c !== 'IR').length;
 
 // Featured ports — popular destinations
 const featuredIds = ['dubai', 'jeddah', 'casablanca', 'alexandria', 'muscat', 'tunis'];
@@ -30,12 +33,16 @@ const featuredPorts = await Promise.all(
     const extremes = dayExtremes(constituents, today, tz);
     const nextHigh = extremes.find(e => e.type === 'high' && e.time > now) || extremes.find(e => e.type === 'high');
     const nextLow = extremes.find(e => e.type === 'low' && e.time > now) || extremes.find(e => e.type === 'low');
+    // Today's and tomorrow's tides for the live "next" pick (see LiveTides)
+    const tomorrow = new Date(today.getTime() + 86400000);
+    const liveTides = JSON.stringify([...extremes, ...dayExtremes(constituents, tomorrow, tz)]
+      .map(e => [e.type === 'high' ? 'h' : 'l', e.time.getTime(), formatTime(e.time, tz), Math.round(e.height)]));
     // Sparkline of today's curve (120×32 viewBox)
     const hs = curve.map((c: { height: number }) => c.height);
     const lo = Math.min(...hs), hi = Math.max(...hs), span = hi - lo || 1;
     const spark = curve.map((c: { height: number }, i: number) =>
       `${i === 0 ? 'M' : 'L'}${(i / (curve.length - 1) * 120).toFixed(1)},${(30 - (c.height - lo) / span * 28).toFixed(1)}`).join(' ');
-    return { ...p, nextHigh, nextLow, tz, spark, range: Math.round(span), countryName: countryName(p.country) };
+    return { ...p, nextHigh, nextLow, liveTides, tz, spark, range: Math.round(span), countryName: countryName(p.country) };
   })
 );
 
@@ -116,7 +123,7 @@ const features = [
       <!-- Stats -->
       <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl">
         <div class="hero-stat"><dt class="text-xs text-slate-400">موانئ</dt><dd class="text-2xl font-bold latin mt-0.5">{placesIndex.length}</dd></div>
-        <div class="hero-stat"><dt class="text-xs text-slate-400">دولة عربية</dt><dd class="text-2xl font-bold latin mt-0.5">{countries.length}</dd></div>
+        <div class="hero-stat"><dt class="text-xs text-slate-400">دولة عربية</dt><dd class="text-2xl font-bold latin mt-0.5">{arabCountries}</dd></div>
         <div class="hero-stat"><dt class="text-xs text-slate-400">أيام توقعات</dt><dd class="text-2xl font-bold latin mt-0.5">7</dd></div>
         <div class="hero-stat"><dt class="text-xs text-slate-400">مركبة توافقية</dt><dd class="text-2xl font-bold latin mt-0.5">17</dd></div>
       </dl>
@@ -147,17 +154,17 @@ const features = [
                 <path d={port.spark} fill="none" stroke="#0d9488" stroke-width="1.8" stroke-linejoin="round" />
               </svg>
             </div>
-            <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-[var(--border-subtle)] text-xs">
+            <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-[var(--border-subtle)] text-xs" data-tides={port.liveTides} data-tz={port.tz}>
               {port.nextHigh && (
                 <div>
                   <div class="text-[var(--text-muted)]">▲ المد القادم</div>
-                  <div class="text-base font-semibold text-teal-700 latin mt-0.5">{formatTime(port.nextHigh.time, port.tz)}</div>
+                  <div class="text-base font-semibold text-teal-700 latin mt-0.5" data-next="h">{formatTime(port.nextHigh.time, port.tz)}</div>
                 </div>
               )}
               {port.nextLow && (
                 <div>
                   <div class="text-[var(--text-muted)]">▼ الجزر القادم</div>
-                  <div class="text-base font-semibold text-rose-600 latin mt-0.5">{formatTime(port.nextLow.time, port.tz)}</div>
+                  <div class="text-base font-semibold text-rose-600 latin mt-0.5" data-next="l">{formatTime(port.nextLow.time, port.tz)}</div>
                 </div>
               )}
               <div>
@@ -354,6 +361,8 @@ const features = [
     } else { start(); }
   })();
 </script>
+
+<LiveTides />
 
 <script type="application/json" id="search-data" set:html={searchPortsJSON}></script>
 <script is:inline define:vars={{ base: BASE }}>

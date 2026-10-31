@@ -1,0 +1,30 @@
+---
+// Pages are built once a day, so "next high/low" chosen at build time goes stale after the
+// first tide. Each [data-tides] box carries the day's and the next day's extremes as
+// [type 'h'|'l', UTC ms, 'HH:MM' local, height cm] and its port's UTC offset (data-tz, minutes);
+// this script fills [data-next="h|l"] (time) and [data-next-h="h|l"] (height, and "غداً" when
+// the tide falls on the port's next calendar day). Include once per page.
+---
+<script is:inline>
+  (function () {
+    var now = Date.now();
+    var boxes = document.querySelectorAll('[data-tides]');
+    for (var i = 0; i < boxes.length; i++) {
+      var box = boxes[i], list;
+      try { list = JSON.parse(box.getAttribute('data-tides')); } catch (e) { continue; }
+      var tz = parseFloat(box.getAttribute('data-tz')) || 0;
+      var today = new Date(now + tz * 60000).toISOString().slice(0, 10);
+      ['h', 'l'].forEach(function (type) {
+        var next = null;
+        for (var j = 0; j < list.length; j++) if (list[j][0] === type && list[j][1] > now) { next = list[j]; break; }
+        if (!next) return;
+        var t = box.querySelector('[data-next="' + type + '"]'), h = box.querySelector('[data-next-h="' + type + '"]');
+        if (t) t.textContent = next[2];
+        if (h) {
+          var later = new Date(next[1] + tz * 60000).toISOString().slice(0, 10) !== today;
+          h.innerHTML = '<span class="latin">' + next[3] + '</span> سم' + (later ? ' · غداً' : '');
+        }
+      });
+    }
+  })();
+</script>

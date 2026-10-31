@@ -12,6 +12,7 @@ import FishRating from '../../components/FishRating.astro';
 import { yearStats, seas, portSea } from '../../lib/seas';
 import { fishForPort, fishLabel } from '../../lib/fish';
 import GuidePromo from '../../components/GuidePromo.astro';
+import LiveTides from '../../components/LiveTides.astro';
 import { altNamesAr, frenchName, nameWithAlts } from '../../lib/portNames';
 
 export function getStaticPaths() {
@@ -148,6 +149,9 @@ const todayFish = forecastWithFish[0];
 const springNeap = classifySpringNeap(moon.age);
 const nextHigh = extremes.find(e => e.type === 'high' && e.time > now) || extremes.find(e => e.type === 'high');
 const nextLow = extremes.find(e => e.type === 'low' && e.time > now) || extremes.find(e => e.type === 'low');
+// Today's and tomorrow's tides: the page is built at midnight, the browser picks the next ones (LiveTides)
+const liveTides = JSON.stringify([...extremes, ...dayExtremes(constituents, new Date(today.getTime() + 86400000), tzOffset)]
+  .map(e => [e.type === 'high' ? 'h' : 'l', e.time.getTime(), formatTime(e.time, tzOffset), Math.round(e.height)]));
 const todayRange = todayFish.range;
 const localDateStr = new Date(today.getTime() + tzOffset * 60000).toISOString().slice(0, 10);
 const prayerLabels: Record<string, string> = { fajr: 'الفجر', sunrise: 'الشروق', dhuhr: 'الظهر', asr: 'العصر', maghrib: 'المغرب', isha: 'العشاء' };
@@ -283,16 +287,16 @@ const pageJsonLd = [
       </div>
 
       <!-- Today at a glance -->
-      <dl class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <dl class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3" data-tides={liveTides} data-tz={tzOffset}>
         <div class="hero-stat">
           <dt class="text-xs text-slate-400">▲ المد القادم</dt>
-          <dd class="mt-1 text-3xl font-bold latin text-teal-300">{nextHigh ? formatTime(nextHigh.time, tzOffset) : '—'}</dd>
-          <dd class="text-xs text-slate-400">{nextHigh && <><span class="latin">{nextHigh.height.toFixed(0)}</span> سم</>}</dd>
+          <dd class="mt-1 text-3xl font-bold latin text-teal-300" data-next="h">{nextHigh ? formatTime(nextHigh.time, tzOffset) : '—'}</dd>
+          <dd class="text-xs text-slate-400" data-next-h="h">{nextHigh && <><span class="latin">{nextHigh.height.toFixed(0)}</span> سم</>}</dd>
         </div>
         <div class="hero-stat">
           <dt class="text-xs text-slate-400">▼ الجزر القادم</dt>
-          <dd class="mt-1 text-3xl font-bold latin text-rose-300">{nextLow ? formatTime(nextLow.time, tzOffset) : '—'}</dd>
-          <dd class="text-xs text-slate-400">{nextLow && <><span class="latin">{nextLow.height.toFixed(0)}</span> سم</>}</dd>
+          <dd class="mt-1 text-3xl font-bold latin text-rose-300" data-next="l">{nextLow ? formatTime(nextLow.time, tzOffset) : '—'}</dd>
+          <dd class="text-xs text-slate-400" data-next-h="l">{nextLow && <><span class="latin">{nextLow.height.toFixed(0)}</span> سم</>}</dd>
         </div>
         <div class="hero-stat">
           <dt class="text-xs text-slate-400">مدى اليوم</dt>
@@ -596,6 +600,8 @@ const pageJsonLd = [
       </aside>
     </div>
   </main>
+
+  <LiveTides />
 
   <!-- "Now" marker on today's chart, in the port's local time; copy-link button -->
   <script is:inline>
