@@ -9,7 +9,7 @@
 /* --- Design Tokens --- */
 :root {
   /* Surfaces — light stacking */
-  --surface-page:     #f8fafb;
+  --surface-page:     #f4f8f9; /* Sea Foam (brand kit) */
   --surface-card:     #ffffff;
   --surface-elevated: #f1f5f7;
   --surface-input:    #f1f5f7;
@@ -255,6 +255,45 @@ body {
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
+
+/* Homepage: the visitor's saved port */
+.my-port-card {
+  margin-top: 1.25rem; display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.8rem 1.1rem; border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.09); border: 1px solid rgba(253, 230, 138, 0.35);
+  transition: background-color 0.15s ease;
+}
+.my-port-card:hover { background: rgba(255, 255, 255, 0.15); }
+.my-port-card[hidden] { display: none; }
+
+/* Week of fishing ratings: one row per port, one cell per day */
+.week-grid-head, .week-grid-row {
+  display: grid; align-items: center; gap: 0.25rem;
+  grid-template-columns: minmax(4.75rem, 1fr) repeat(var(--days), minmax(1.9rem, 2.9rem));
+}
+.week-grid-head { font-size: 0.7rem; line-height: 1.35; color: var(--text-muted); text-align: center; padding: 0 0.25rem 0.35rem; }
+.week-grid-head .is-weekend { color: var(--accent-text); font-weight: 600; }
+.week-grid-row { padding: 0.3rem 0.25rem; border-radius: var(--radius-lg); }
+.week-grid-row:hover { background: var(--surface-elevated); }
+.week-cell {
+  display: flex; align-items: center; justify-content: center; height: 2rem; border-radius: 0.5rem;
+  font-size: 0.85rem; font-weight: 700; color: var(--rating);
+  background: color-mix(in srgb, var(--rating) 13%, white);
+}
+.week-cell[data-r="5"] { background: var(--rating); color: #fff; }
+.rating-key li > .week-cell-key { width: 1.35rem; height: 1.35rem; font-size: 0.7rem; border-radius: 0.35rem; }
+
+/* Homepage port list: folded on phones */
+.all-ports-toggle {
+  list-style: none; cursor: pointer; padding: 0.9rem 1.25rem; font-weight: 600; color: var(--accent-text);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.all-ports-toggle::-webkit-details-marker { display: none; }
+.all-ports-toggle::after { content: '+'; font-size: 1.25rem; line-height: 1; }
+.all-ports[open] .all-ports-toggle { border-bottom: 1px solid var(--border-subtle); }
+.all-ports[open] .all-ports-toggle::after { content: '−'; }
+.ports-map { height: 320px; }
+@media (min-width: 640px) { .ports-map { height: 420px; } }
 
 /* --- Section headings --- */
 .section-title {

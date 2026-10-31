@@ -7,6 +7,9 @@ import { articles } from '../lib/articles';
 import GuidePromo from '../components/GuidePromo.astro';
 import LiveTides from '../components/LiveTides.astro';
 import Flag from '../components/Flag.astro';
+import RatingBadge from '../components/RatingBadge.astro';
+import WeekRatings from '../components/WeekRatings.astro';
+import { ratingsFrom } from '../lib/fishing';
 import { fish, fishLabel } from '../lib/fish';
 import {
   generateTideCurve, dayExtremes, formatTime,
@@ -16,8 +19,6 @@ import {
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))]
   .sort((a, b) => countryName(a).localeCompare(countryName(b), 'ar'));
-// Bushehr and Bandar Abbas are on the Gulf's Iranian coast: Iran is listed but isn't counted as Arab
-const arabCountries = countries.filter(c => c !== 'IR').length;
 
 // Featured ports — popular destinations
 const featuredIds = ['dubai', 'jeddah', 'casablanca', 'alexandria', 'muscat', 'tunis'];
@@ -42,9 +43,22 @@ const featuredPorts = await Promise.all(
     const lo = Math.min(...hs), hi = Math.max(...hs), span = hi - lo || 1;
     const spark = curve.map((c: { height: number }, i: number) =>
       `${i === 0 ? 'M' : 'L'}${(i / (curve.length - 1) * 120).toFixed(1)},${(30 - (c.height - lo) / span * 28).toFixed(1)}`).join(' ');
-    return { ...p, nextHigh, nextLow, liveTides, tz, spark, range: Math.round(span), countryName: countryName(p.country) };
+    const rating = ratingsFrom(constituents, today, 1, tz)[0].rating;
+    return { ...p, nextHigh, nextLow, liveTides, tz, spark, rating, countryName: countryName(p.country) };
   })
 );
+
+// This week's fishing days at one well-known port per sea: the moon is shared, the tide range differs
+const weekStart = portDay(new Date(), 180); // Makkah date, as the headline
+const seaPorts = [
+  ['الخليج العربي', 'dubai'], ['بحر العرب', 'muscat'], ['البحر الأحمر', 'jeddah'],
+  ['المتوسط', 'alexandria'], ['الأطلسي', 'casablanca'],
+];
+const weekRows = await Promise.all(seaPorts.map(async ([sea, pid]) => {
+  const p = (await import(`../data/places/${pid}.json`)).default;
+  const tz = getTimezoneOffset(p.timezone, weekStart);
+  return { name: sea, sub: p.name_ar, href: `${BASE}ports/${pid}`, ratings: ratingsFrom(p.constituents, weekStart, 7, tz).map(r => r.rating) };
+}));
 
 const moon = moonPhase(new Date());
 // Headline date in Makkah time (UTC+3), the middle of the ports' UTC+0…+4 span
@@ -120,13 +134,18 @@ const features = [
         ))}
       </div>
 
-      <!-- Stats -->
-      <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl">
-        <div class="hero-stat"><dt class="text-xs text-slate-400">موانئ</dt><dd class="text-2xl font-bold latin mt-0.5">{placesIndex.length}</dd></div>
-        <div class="hero-stat"><dt class="text-xs text-slate-400">دولة عربية</dt><dd class="text-2xl font-bold latin mt-0.5">{arabCountries}</dd></div>
-        <div class="hero-stat"><dt class="text-xs text-slate-400">أيام توقعات</dt><dd class="text-2xl font-bold latin mt-0.5">7</dd></div>
-        <div class="hero-stat"><dt class="text-xs text-slate-400">مركبة توافقية</dt><dd class="text-2xl font-bold latin mt-0.5">17</dd></div>
-      </dl>
+      <!-- The port saved with "اجعله ميناءي" on a port page: shown here with its next tides -->
+      <a id="my-port-card" href={`${BASE}#ports`} class="my-port-card max-w-xl" hidden>
+        <span class="text-2xl text-amber-200" aria-hidden="true">★</span>
+        <span class="min-w-0">
+          <span class="block text-xs text-slate-300">ميناؤك</span>
+          <span class="block text-lg font-semibold display truncate" data-name></span>
+        </span>
+        <span class="ms-auto text-sm text-end leading-relaxed">
+          <span class="block">▲ <span class="latin font-semibold text-teal-300" data-h>—</span></span>
+          <span class="block">▼ <span class="latin font-semibold text-rose-300" data-l>—</span></span>
+        </span>
+      </a>
     </div>
     <svg class="hero-waves" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0 40c120-20 240-30 360-18s240 40 360 36 240-34 360-38 240 18 360 26v26H0z" fill="currentColor" />
@@ -135,42 +154,50 @@ const features = [
 
   <main id="main" class="max-w-6xl mx-auto px-4 w-full">
 
+    <!-- This week's best fishing days, one port per sea -->
+    <section class="mt-6 mb-14" aria-labelledby="week-title">
+      <div class="section-title">
+        <h2 id="week-title">أفضل أيام الصيد هذا الأسبوع</h2>
+        <p>تقييم الصيد من <span class="latin">1</span> إلى <span class="latin">5</span> لكل يوم: طور القمر وقوة المد</p>
+      </div>
+      <div class="card p-4 sm:p-5">
+        <WeekRatings start={weekStart} rows={weekRows} />
+        <p class="mt-3 text-xs text-[var(--text-muted)] leading-relaxed">التقييم لميناء واحد في كل بحر. يختلف قليلاً بين الموانئ بحسب قوة المد، فافتح صفحة ميناءك أو <a href={`${BASE}#countries`} class="text-[var(--accent-text)] underline">صفحة بلدك</a> لترى أيامه.</p>
+      </div>
+    </section>
+
     <!-- Featured ports -->
-    <section class="mt-6 mb-16" aria-labelledby="featured-title">
+    <section class="mb-14" aria-labelledby="featured-title">
       <div class="section-title">
         <h2 id="featured-title">موانئ مميزة</h2>
-        <p>المد والجزر القادم — بالتوقيت المحلي</p>
+        <p>المد والجزر القادم بالتوقيت المحلي، وتقييم الصيد اليوم</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {featuredPorts.map(port => (
-          <a href={`${BASE}ports/${port.id}`} class="card group block p-5">
+          <a href={`${BASE}ports/${port.id}`} class="card group block p-4">
             <div class="flex items-start justify-between gap-3">
-              <div>
-                <div class="text-xs text-[var(--text-muted)]">{port.countryName}</div>
-                <div class="text-lg font-semibold display mt-0.5 group-hover:text-[var(--accent-text)] transition-colors">{port.name_ar}</div>
-                <div class="text-xs text-[var(--text-muted)] latin" lang="en">{port.name_en}</div>
+              <div class="min-w-0">
+                <div class="text-lg font-semibold display leading-snug group-hover:text-[var(--accent-text)] transition-colors">{port.name_ar}</div>
+                <div class="text-xs text-[var(--text-muted)]">{port.countryName} · <span class="latin" lang="en">{port.name_en}</span></div>
               </div>
-              <svg viewBox="0 0 120 32" class="w-28 h-8 chart-ltr shrink-0" aria-hidden="true">
-                <path d={port.spark} fill="none" stroke="#0d9488" stroke-width="1.8" stroke-linejoin="round" />
-              </svg>
+              <RatingBadge rating={port.rating} size="sm" />
             </div>
-            <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-[var(--border-subtle)] text-xs" data-tides={port.liveTides} data-tz={port.tz}>
+            <div class="mt-3 flex items-end gap-5 text-xs" data-tides={port.liveTides} data-tz={port.tz}>
               {port.nextHigh && (
                 <div>
                   <div class="text-[var(--text-muted)]">▲ المد القادم</div>
-                  <div class="text-base font-semibold text-teal-700 latin mt-0.5" data-next="h">{formatTime(port.nextHigh.time, port.tz)}</div>
+                  <div class="text-lg font-bold text-teal-700 latin leading-tight" data-next="h">{formatTime(port.nextHigh.time, port.tz)}</div>
                 </div>
               )}
               {port.nextLow && (
                 <div>
                   <div class="text-[var(--text-muted)]">▼ الجزر القادم</div>
-                  <div class="text-base font-semibold text-rose-600 latin mt-0.5" data-next="l">{formatTime(port.nextLow.time, port.tz)}</div>
+                  <div class="text-lg font-bold text-rose-600 latin leading-tight" data-next="l">{formatTime(port.nextLow.time, port.tz)}</div>
                 </div>
               )}
-              <div>
-                <div class="text-[var(--text-muted)]">مدى اليوم</div>
-                <div class="text-base font-semibold latin mt-0.5">{port.range} <span class="text-xs font-normal text-[var(--text-muted)]">سم</span></div>
-              </div>
+              <svg viewBox="0 0 120 32" class="ms-auto w-24 h-8 chart-ltr shrink-0" aria-hidden="true">
+                <path d={port.spark} fill="none" stroke="#0d9488" stroke-width="1.8" stroke-linejoin="round" />
+              </svg>
             </div>
           </a>
         ))}
@@ -178,10 +205,10 @@ const features = [
     </section>
 
     <!-- Paid guide -->
-    <div class="mb-16"><GuidePromo variant="banner" /></div>
+    <div class="mb-14"><GuidePromo variant="banner" /></div>
 
     <!-- Fish guide teaser -->
-    <section class="mb-16" aria-labelledby="fish-title">
+    <section class="mb-14" aria-labelledby="fish-title">
       <div class="section-title">
         <h2 id="fish-title">دليل الأسماك</h2>
         <p><span class="latin">{fish.length}</span> نوعاً بأسمائها المحلية في كل بلد</p>
@@ -195,7 +222,7 @@ const features = [
               <img src={`${BASE}fish/sm/${f.id}.webp`} alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
               <span class="block px-3 py-2">
                 <span class="block font-semibold text-sm group-hover:text-[var(--accent-text)] transition-colors">{f.ar}</span>
-                <span class="block text-[11px] text-[var(--text-muted)] truncate">{f.local.map(l => l.name).filter(n => n !== f.ar).slice(0, 2).join('، ') || f.en}</span>
+                <span class="block text-xs text-[var(--text-muted)] truncate">{f.local.map(l => l.name).filter(n => n !== f.ar).slice(0, 2).join('، ') || f.en}</span>
               </span>
             </a>
           );
@@ -204,13 +231,13 @@ const features = [
     </section>
 
     <!-- What each port page offers -->
-    <section class="mb-16" aria-labelledby="features-title">
+    <section class="mb-14" aria-labelledby="features-title">
       <div class="section-title">
         <h2 id="features-title">ماذا تجد في صفحة كل ميناء؟</h2>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {features.map(f => (
-          <div class="card p-5">
+          <div class="card p-4 sm:p-5">
             <div class="w-10 h-10 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-xl" aria-hidden="true">{f.icon}</div>
             <h3 class="mt-3 font-semibold">{f.title}</h3>
             <p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">{f.text}</p>
@@ -219,27 +246,23 @@ const features = [
       </div>
       <div class="card p-5 mt-4 flex flex-col sm:flex-row sm:items-center gap-3 text-sm">
         <span class="font-semibold shrink-0">مقياس جودة الصيد:</span>
-        <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs">
-          <span style="color:#15803d">🐟🐟🐟🐟🐟 ممتاز</span>
-          <span style="color:#0f766e">🐟🐟🐟🐟 جيد</span>
-          <span style="color:#b45309">🐟🐟🐟 متوسط</span>
-          <span style="color:#c2410c">🐟🐟 دون المتوسط</span>
-          <span style="color:#dc2626">🐟 ضعيف</span>
+        <div class="flex flex-wrap gap-2">
+          {[5, 4, 3, 2, 1].map(r => <RatingBadge rating={r} size="sm" />)}
         </div>
         <a href={`${BASE}methodology`} class="sm:ms-auto text-xs text-[var(--accent-text)] hover:underline shrink-0">كيف نحسبه؟</a>
       </div>
     </section>
 
     <!-- Articles -->
-    <section class="mb-16" aria-labelledby="articles-title">
+    <section class="mb-14" aria-labelledby="articles-title">
       <div class="section-title">
         <h2 id="articles-title">مقالات</h2>
         <p>أدلة وأرقام من بياناتنا</p>
         <a href={`${BASE}articles`} class="ms-auto text-sm text-[var(--accent-text)] hover:underline">كل المقالات ←</a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {articles.slice(0, 6).map(a => (
-          <a href={`${BASE}articles/${a.slug}`} class="card p-5 flex gap-4 items-start group">
+        {articles.slice(0, 6).map((a, i) => (
+          <a href={`${BASE}articles/${a.slug}`} class:list={['card p-5 gap-4 items-start group', i < 4 ? 'flex' : 'hidden md:flex']}>
             <span class="w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center text-2xl" style="background:linear-gradient(160deg,#0b2540,#0f3d5c)" aria-hidden="true">{a.icon}</span>
             <span>
               <span class="block font-semibold leading-snug group-hover:text-[var(--accent-text)] transition-colors">{a.title}</span>
@@ -251,17 +274,17 @@ const features = [
     </section>
 
     <!-- Ports overview map -->
-    <section class="mb-16" aria-labelledby="map-title">
+    <section class="mb-14" aria-labelledby="map-title">
       <div class="section-title">
         <h2 id="map-title">خريطة الموانئ</h2>
         <p>اضغط على أي نقطة لفتح صفحة الميناء</p>
       </div>
-      <div id="ports-map" class="port-map w-full border border-[var(--border-subtle)]" style="height:420px"></div>
+      <div id="ports-map" class="port-map ports-map w-full border border-[var(--border-subtle)]"></div>
       <p class="text-[11px] text-[var(--text-muted)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent-text)]" lang="en">OpenStreetMap</a></p>
     </section>
 
     <!-- Countries -->
-    <section id="countries" class="mb-16 scroll-mt-20" aria-labelledby="countries-title">
+    <section id="countries" class="mb-14 scroll-mt-20" aria-labelledby="countries-title">
       <div class="section-title">
         <h2 id="countries-title">تصفح حسب الدولة</h2>
         <p><span class="latin">{countries.length}</span> دولة</p>
@@ -288,7 +311,9 @@ const features = [
         <h2 id="ports-title">جميع الموانئ</h2>
         <p><span class="latin">{placesIndex.length}</span> ميناءً</p>
       </div>
-      <div class="card p-5 sm:p-6 columns-1 sm:columns-2 lg:columns-3 gap-8">
+      <details class="all-ports card" id="all-ports">
+        <summary class="all-ports-toggle">عرض الموانئ الـ<span class="latin">{placesIndex.length}</span> حسب الدولة</summary>
+        <div class="p-5 sm:p-6 columns-1 sm:columns-2 lg:columns-3 gap-8">
         {countries.map((code: string) => (
           <div class="break-inside-avoid mb-5">
             <a href={`${BASE}country/${code}`} class="inline-flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--accent-text)]"><Flag code={code} size={18} />{countryName(code)}</a>
@@ -304,7 +329,8 @@ const features = [
             </ul>
           </div>
         ))}
-      </div>
+        </div>
+      </details>
     </section>
   </main>
 </BaseLayout>
@@ -363,6 +389,35 @@ const features = [
 </script>
 
 <LiveTides />
+
+<script is:inline define:vars={{ base: BASE }}>
+  (function () {
+    // Wide screens show the full port list open; a link to #ports opens it on phones too
+    var all = document.getElementById('all-ports');
+    function openList() { if (all && location.hash === '#ports') all.open = true; }
+    if (all && window.matchMedia('(min-width: 640px)').matches) all.open = true;
+    openList(); window.addEventListener('hashchange', openList);
+
+    var card = document.getElementById('my-port-card'), saved = null;
+    try { saved = JSON.parse(localStorage.getItem('arabtides.myPort') || 'null'); } catch (e) {}
+    if (!card || !saved || !/^[a-z0-9-]+$/.test(saved.id || '')) return;
+    card.href = base + 'ports/' + saved.id;
+    card.querySelector('[data-name]').textContent = saved.name || saved.id;
+    card.hidden = false;
+    fetch(base + 'ports/' + saved.id + '.json').then(function (r) { return r.json(); }).then(function (j) {
+      var now = Date.now(), tides = [];
+      j.days.forEach(function (d) { tides = tides.concat(d.tides); });
+      ['high', 'low'].forEach(function (type) {
+        for (var i = 0; i < tides.length; i++) {
+          if (tides[i].type === type && Date.parse(tides[i].time_utc) > now) {
+            card.querySelector(type === 'high' ? '[data-h]' : '[data-l]').textContent = tides[i].time_local;
+            return;
+          }
+        }
+      });
+    }).catch(function () {});
+  })();
+</script>
 
 <script type="application/json" id="search-data" set:html={searchPortsJSON}></script>
 <script is:inline define:vars={{ base: BASE }}>

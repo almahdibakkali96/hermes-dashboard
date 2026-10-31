@@ -1,4 +1,5 @@
-// Makes the small card images: public/fish/sm/<id>.webp (480 px wide) from the full photos
+// Makes the small card images: public/fish/sm/<id>.webp (480 px wide) and public/fish/xs/<id>.webp
+// (240 px, for the three-column grid on port pages and the credits list) from the full photos
 // in public/fish/, and a small WebP of the free cheat sheet used by the promo banners.
 // Cards show photos at ~300 px, so loading the full files wasted hundreds of KiB per page.
 //
@@ -8,16 +9,18 @@ import { existsSync } from 'node:fs';
 import sharp from 'sharp';
 
 const SRC = 'public/fish';
-const OUT = 'public/fish/sm';
-await mkdir(OUT, { recursive: true });
+const SIZES = { sm: 480, xs: 240 };
 
 let made = 0;
-for (const f of await readdir(SRC)) {
-  if (!f.endsWith('.webp')) continue;
-  const out = `${OUT}/${f}`;
-  if (existsSync(out)) continue;
-  await sharp(`${SRC}/${f}`).resize({ width: 480, withoutEnlargement: true }).webp({ quality: 72 }).toFile(out);
-  made++;
+for (const [dir, width] of Object.entries(SIZES)) {
+  await mkdir(`${SRC}/${dir}`, { recursive: true });
+  for (const f of await readdir(SRC)) {
+    if (!f.endsWith('.webp')) continue;
+    const out = `${SRC}/${dir}/${f}`;
+    if (existsSync(out)) continue;
+    await sharp(`${SRC}/${f}`).resize({ width, withoutEnlargement: true }).webp({ quality: 72 }).toFile(out);
+    made++;
+  }
 }
 console.log(`fish thumbnails: ${made} new`);
 

@@ -398,14 +398,14 @@ const pageJsonLd = [
                 </div>
                 <div class="week-fish">
                   <RatingBadge rating={day.fishRating} size="sm" />
-                  <div class="text-[11px] text-[var(--text-muted)] mt-1">المدى <span class="latin">{day.range}</span> سم</div>
+                  <div class="text-xs text-[var(--text-muted)] mt-1">المدى <span class="latin">{day.range}</span> سم</div>
                 </div>
                 {[{ label: '▲ مد', cls: 'text-teal-700', list: day.highs }, { label: '▼ جزر', cls: 'text-rose-700', list: day.lows }].map(col => (
                   <div>
                     <div class={`text-xs font-medium mb-1 ${col.cls}`}>{col.label}</div>
                     <div class="flex flex-wrap gap-x-4 gap-y-1">
                       {[...col.list].sort((a, b) => a.time.getTime() - b.time.getTime()).map(e => (
-                        <span class="week-tide"><span class="latin font-semibold">{formatTime(e.time, tzOffset)}</span><span class="text-[11px] text-[var(--text-muted)]"><span class="latin">{e.height.toFixed(0)}</span> سم</span></span>
+                        <span class="week-tide"><span class="latin font-semibold">{formatTime(e.time, tzOffset)}</span><span class="text-xs text-[var(--text-muted)]"><span class="latin">{e.height.toFixed(0)}</span> سم</span></span>
                       ))}
                     </div>
                   </div>
@@ -490,7 +490,7 @@ const pageJsonLd = [
           <div class="mt-4 grid grid-cols-3 sm:grid-cols-4 gap-2.5">
             {portFish.fish.slice(0, 12).map(f => (
               <a href={`${BASE}fish/${f.id}`} class="rounded-lg overflow-hidden border border-[var(--border-subtle)] group block">
-                <img src={`${BASE}fish/sm/${f.id}.webp`} alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
+                <img src={`${BASE}fish/sm/${f.id}.webp`} srcset={`${BASE}fish/xs/${f.id}.webp 240w, ${BASE}fish/sm/${f.id}.webp 480w`} sizes="(min-width: 1024px) 170px, (min-width: 640px) 25vw, 33vw" alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
                 <span class="block px-2 py-1.5 text-xs font-semibold truncate group-hover:text-[var(--accent-text)] transition-colors">
                   {portFish.observed.has(f.id) && <span title="سُجّلت مشاهدته قرب الميناء">📍 </span>}{f.ar}
                 </span>

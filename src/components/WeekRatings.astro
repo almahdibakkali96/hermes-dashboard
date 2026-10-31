@@ -1,0 +1,44 @@
+---
+// The week's fishing ratings as a grid: one row per port, one coloured cell per day (1–5).
+// Used on the homepage (one port per sea) and country pages (every port of the country).
+import { fishColors, fishLabels } from '../lib/fishing';
+
+export interface Props {
+  /** first day (noon UTC of the local date) */
+  start: Date;
+  rows: { name: string; sub?: string; href: string; ratings: number[] }[];
+}
+const { start, rows } = Astro.props;
+const weekdayShort = ['أحد', 'إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'];
+const monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const days = rows[0].ratings.map((_, i) => new Date(start.getTime() + i * 86400000));
+---
+
+<div class="week-grid" style={`--days:${days.length}`}>
+  <div class="week-grid-head" aria-hidden="true">
+    <span></span>
+    {days.map((d, i) => (
+      <span class:list={{ 'is-weekend': d.getUTCDay() === 5 || d.getUTCDay() === 6 }}>
+        <span class="block">{i === 0 ? 'اليوم' : weekdayShort[d.getUTCDay()]}</span>
+        <span class="block latin">{d.getUTCDate()}</span>
+      </span>
+    ))}
+  </div>
+  {rows.map(r => (
+    <a href={r.href} class="week-grid-row group">
+      <span class="min-w-0">
+        <span class="block font-semibold text-sm truncate group-hover:text-[var(--accent-text)]">{r.name}</span>
+        {r.sub && <span class="block text-xs text-[var(--text-muted)] truncate">{r.sub}</span>}
+      </span>
+      {r.ratings.map((rating, i) => (
+        <span class="week-cell latin" data-r={rating} style={`--rating:${fishColors[rating]}`}
+              title={`${days[i].getUTCDate()} ${monthNames[days[i].getUTCMonth()]}: ${rating}/5 ${fishLabels[rating]}`}>
+          {rating}<span class="sr-only"> من 5، {fishLabels[rating]}، {days[i].getUTCDate()} {monthNames[days[i].getUTCMonth()]}</span>
+        </span>
+      ))}
+    </a>
+  ))}
+  <ul class="rating-key">
+    {[5, 4, 3, 2, 1].map(r => <li><span class="week-cell week-cell-key latin" data-r={r} style={`--rating:${fishColors[r]}`}>{r}</span>{fishLabels[r]}</li>)}
+  </ul>
+</div>

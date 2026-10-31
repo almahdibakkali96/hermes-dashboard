@@ -7,6 +7,8 @@ import { dayExtremes, formatTime, getTimezoneOffset, portDay, type Constituent }
 import { yearStats, seas, portSea, type SeaId } from '../../lib/seas';
 import { fish, observedNear, fishLabel, speciesCount, notTargeted } from '../../lib/fish';
 import { articleBySlug } from '../../lib/articles';
+import { ratingsFrom } from '../../lib/fishing';
+import WeekRatings from '../../components/WeekRatings.astro';
 
 export function getStaticPaths() {
   const codes = [...new Set(placesIndex.map((p: { country: string }) => p.country))];
@@ -43,8 +45,11 @@ const rows = await Promise.all(ports.map(async (p: { id: string; name_ar: string
   const ex = dayExtremes(port.constituents as Record<string, Constituent>, portDay(now, tz), tz);
   const hs = ex.filter(e => e.type === 'high'), ls = ex.filter(e => e.type === 'low');
   const range = hs.length && ls.length ? Math.round(Math.max(...hs.map(e => e.height)) - Math.min(...ls.map(e => e.height))) : null;
-  return { ...p, highs: hs.map(e => formatTime(e.time, tz)), range, stat: stats.find(s => s.id === p.id)! };
+  return { ...p, highs: hs.map(e => formatTime(e.time, tz)), range, stat: stats.find(s => s.id === p.id)!,
+    week: ratingsFrom(port.constituents as Record<string, Constituent>, portDay(now, tz), 7, tz).map(r => r.rating) };
 }));
+// A country's ports share one time zone: the week grid starts on the first port's local day
+const weekStart = portDay(now, getTimezoneOffset((await import(`../../data/places/${ports[0].id}.json`)).default.timezone, now));
 const metaDescription = `مواقيت المد والجزر في ${name}${alt ? ` (${alt})` : ''}: المد العالي اليوم في ${rows.slice(0, 3).map(r => `${r.name_ar} ${r.highs.join(' و') || '—'}`).join('، وفي ')}${rows.length > 3 ? '، وموانئ أخرى' : ''}. جدول 7 أيام وأفضل أيام الصيد.`;
 
 // Country facts for the summary and FAQ
@@ -149,6 +154,14 @@ const jsonLd = [
         </a>
       ))}
     </div>
+
+    <section aria-labelledby="week-title">
+      <h2 id="week-title" class="text-xl font-bold display">أفضل أيام الصيد هذا الأسبوع في {name}</h2>
+      <p class="mt-2 text-sm text-[var(--text-secondary)]">تقييم الصيد من <span class="latin">1</span> إلى <span class="latin">5</span> لكل يوم في كل ميناء، من طور القمر وقوة المد. اضغط على الميناء لترى أوقات المد وساعات الصيد.</p>
+      <div class="card p-4 sm:p-5 mt-4">
+        <WeekRatings start={weekStart} rows={rows.map(r => ({ name: r.name_ar, href: `${BASE}ports/${r.id}`, ratings: r.week }))} />
+      </div>
+    </section>
 
     <section aria-labelledby="summary-title">
       <h2 id="summary-title" class="text-xl font-bold display">المد والجزر في {name}</h2>

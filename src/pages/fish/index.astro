@@ -51,7 +51,7 @@ const jsonLd = [
         <a href={`${BASE}fish/${f.id}`} class="card overflow-hidden group block" data-seas={f.seas.join(' ')}>
           <img src={`${BASE}fish/sm/${f.id}.webp`} alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
           <span class="block p-3">
-            <span class="block text-[11px] text-[var(--text-muted)]">{kindNames[f.kind]}</span>
+            <span class="block text-xs text-[var(--text-muted)]">{kindNames[f.kind]}</span>
             <span class="block font-semibold display text-lg leading-snug group-hover:text-[var(--accent-text)] transition-colors">{f.ar}</span>
             <span class="block text-xs text-[var(--text-secondary)] mt-1 leading-relaxed">
               {f.local.filter(l => l.name !== f.ar).slice(0, 2).map(l => l.name).join('، ')}
