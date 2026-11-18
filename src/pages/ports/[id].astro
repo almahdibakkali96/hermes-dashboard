@@ -9,7 +9,7 @@ import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astron
 import { calculatePrayerTimes, gregorianToHijri } from '../../lib/prayer';
 import { countryName, formatCoords } from '../../lib/countries';
 import RatingBadge from '../../components/RatingBadge.astro';
-import { calcFish, fishColors, fishLabels, monthDays as monthDaysOf, maxRangeOf, ratingsFrom } from '../../lib/fishing';
+import { calcFish, fishColors, fishLabels, fishAdvice, monthDays as monthDaysOf, maxRangeOf, ratingsFrom } from '../../lib/fishing';
 import { yearStats, seas, portSea } from '../../lib/seas';
 import { fishForPort, fishLabel } from '../../lib/fish';
 import GuidePromo from '../../components/GuidePromo.astro';
@@ -154,7 +154,8 @@ const calWeekdays = ['السبت', 'الأحد', 'الإثنين', 'الثلاث
 
 // Name in the title as people search it (Search Console: "المد والجزر الكويت", never "مدينة الكويت")
 const TITLE_NAME: Record<string, string> = { 'kuwait-city': 'الكويت' };
-const title = `مواقيت المد والجزر في ${TITLE_NAME[port.id] || port.name_ar} اليوم — جدول 7 أيام وأوقات الصيد`;
+// Leads with the words people type ("المد والجزر الدار البيضاء", "جدول المد والجزر في …", "حالة الصيد اليوم")
+const title = `المد والجزر في ${TITLE_NAME[port.id] || port.name_ar} اليوم — جدول 7 أيام وحالة الصيد`;
 const pageUrl = new URL(`${BASE}ports/${port.id}`, Astro.site).href;
 const monthNames = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 
@@ -190,7 +191,10 @@ const todayHighs = extremes.filter(e => e.type === 'high'), todayLows = extremes
 const altAr = altNamesAr(port.id, port.name_ar);
 const frName = frenchName(port.id);
 const timesAr = (xs: { time: Date }[]) => xs.map(x => formatTime(x.time, tzOffset)).join(' و') || '—';
-const metaDescription = `مواقيت المد والجزر في ${nameWithAlts(port.name_ar, [...altAr, port.name_en.replace(/\s*\(.*\)$/, '')])} اليوم: المد العالي ${timesAr(todayHighs)}، والجزر المنخفض ${timesAr(todayLows)}. جدول 7 أيام ومعامل المد وأفضل أيام الصيد في ${country}.`;
+const fishTodayAr = `حالة الصيد اليوم: ${fishLabels[todayFish.fishRating]}`;
+const metaDescription = `المد والجزر في ${nameWithAlts(port.name_ar, [...altAr, port.name_en.replace(/\s*\(.*\)$/, '')])} اليوم: المد العالي ${timesAr(todayHighs)}، والجزر المنخفض ${timesAr(todayLows)}. ${fishTodayAr}. جدول 7 أيام ومعامل المد وأفضل أيام الصيد في ${country}.`;
+// Today's major solunar periods, for the summary sentence
+const majorsToday = todayPeriods.filter(p => p.type === 'major').map(p => `${p.start}–${p.end}`);
 const tideTypeExplain: Record<string, string> = {
   'نصف يومي': 'مدّان عاليان وجزران منخفضان كل يوم تقريباً، بارتفاعات متقاربة',
   'مختلط، نصف يومي غالباً': 'مدّان وجزران في معظم الأيام، لكن بارتفاعات مختلفة بوضوح',
@@ -198,10 +202,12 @@ const tideTypeExplain: Record<string, string> = {
   'يومي': 'مد عالٍ واحد وجزر منخفض واحد كل يوم',
 };
 const maxRangeDateAr = new Date(stats.maxRangeDate + 'T12:00:00Z').toLocaleDateString('ar-EG-u-nu-latn', { day: 'numeric', month: 'long' });
-const summary = `${dateAr} في ${port.name_ar} (${country}): المد العالي عند ${fmtList(todayHighs) || '—'}، والجزر المنخفض عند ${fmtList(todayLows) || '—'} بالتوقيت المحلي. المد هنا ${tideClass.typeAr}، ومدى اليوم ${todayRange} سم (${springNeap.conditionAr}). أقصى مدى متوقع خلال ${year} نحو ${(stats.maxRange / 100).toFixed(1)} م في ${maxRangeDateAr}.`;
+const summary = `${dateAr} في ${port.name_ar} (${country}): المد العالي عند ${fmtList(todayHighs) || '—'}، والجزر المنخفض عند ${fmtList(todayLows) || '—'} بالتوقيت المحلي. حالة الصيد اليوم ${fishLabels[todayFish.fishRating]} (${todayFish.fishRating} من 5)${majorsToday.length ? `، وأفضل أوقاته ${majorsToday.join(' و')}` : ''}. المد هنا ${tideClass.typeAr}، ومدى اليوم ${todayRange} سم (${springNeap.conditionAr}). أقصى مدى متوقع خلال ${year} نحو ${(stats.maxRange / 100).toFixed(1)} م في ${maxRangeDateAr}.`;
 const faq = [
-  { q: `متى المد العالي اليوم في ${port.name_ar}؟`,
+  { q: `متى المد والجزر اليوم في ${port.name_ar}؟`,
     a: todayHighs.length ? `اليوم (${dateAr}) المد العالي في ${port.name_ar} عند ${fmtList(todayHighs)}، والجزر المنخفض عند ${fmtList(todayLows)} بالتوقيت المحلي (${port.timezone}).` : 'لا يوجد مد عالٍ اليوم.' },
+  { q: `ما حالة الصيد اليوم في ${port.name_ar}؟`,
+    a: `تقييم الصيد اليوم (${dateAr}) في ${port.name_ar}: ${fishLabels[todayFish.fishRating]} (${todayFish.fishRating} من 5)، ${fishAdvice[todayFish.fishRating]}.${majorsToday.length ? ` أفضل أوقات الصيد (الفترات الكبرى): ${majorsToday.join(' و')} بالتوقيت المحلي.` : ''} يجمع التقييم طور القمر وقوة المد في ذلك اليوم.` },
   { q: `ما نوع المد والجزر في ${port.name_ar}؟`,
     a: `المد في ${port.name_ar} ${tideClass.typeAr}: ${tideTypeExplain[tideClass.typeAr] ?? ''}. معامل الشكل F = ${tideClass.formFactor}.` },
   { q: `ما أكبر فرق بين المد والجزر في ${port.name_ar}؟`,
@@ -309,6 +315,12 @@ const pageJsonLd = [
       <!-- Main column -->
       <div class="lg:col-span-2 space-y-6 min-w-0">
 
+        <!-- Plain-text answer first: the sentence search snippets and AI answers quote -->
+        <section class="card p-5 summary-card" aria-labelledby="summary-title">
+          <h2 id="summary-title" class="text-sm font-semibold text-[var(--accent-text)]">المد والجزر وحالة الصيد اليوم في {port.name_ar}</h2>
+          <p class="mt-2 leading-relaxed text-[var(--text-secondary)]">{summary}</p>
+        </section>
+
         <!-- Today's tide chart -->
         <section class="card p-5" aria-labelledby="chart-title">
           <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -386,7 +398,7 @@ const pageJsonLd = [
         <!-- 7-day forecast -->
         <section class="card overflow-hidden" aria-labelledby="week-title">
           <div class="px-5 pt-5 pb-3 flex flex-wrap items-baseline gap-x-3">
-            <h2 id="week-title" class="text-lg font-semibold display">توقعات ٧ أيام</h2>
+            <h2 id="week-title" class="text-lg font-semibold display">جدول المد والجزر — <span class="latin">7</span> أيام</h2>
             <span class="text-xs text-[var(--text-muted)]">المد والجزر وتقييم الصيد</span>
           </div>
           <ul class="divide-y divide-[var(--border-subtle)]">
@@ -509,12 +521,6 @@ const pageJsonLd = [
         </section>
 
         <div class="lg:hidden"><GuidePromo variant="strip" /></div>
-
-        <section class="card p-5 summary-card" aria-labelledby="summary-title">
-          <h2 id="summary-title" class="text-sm font-semibold text-[var(--accent-text)]">ملخص اليوم</h2>
-          <p class="mt-2 leading-relaxed text-[var(--text-secondary)]">{summary}</p>
-        </section>
-
 
         <!-- FAQ -->
         <section class="card p-5" aria-labelledby="faq-title">

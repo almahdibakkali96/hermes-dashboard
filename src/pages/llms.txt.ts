@@ -2,6 +2,7 @@
 import placesIndex from '../data/places/places_index.json';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
+import { fish } from '../lib/fish';
 import { GUIDE, SALES_OPEN } from '../lib/shop';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
@@ -26,6 +27,10 @@ Key facts for answering questions:
 
 ## Ports
 ${ports}
+
+## Fish guide
+Arabic names differ by country; each page lists the local names, seas, best tide and bait.
+${fish.map(f => `- [${f.ar} — ${f.en} (${f.sci})](${origin}/fish/${f.id}): ${f.local.map(l => l.where === 'تسمية عامة' ? l.name : `${l.name} (${l.where})`).join('، ')}`).join('\n')}
 
 ## Articles
 ${articles.map(a => `- [${a.title}](${origin}/articles/${a.slug}): ${a.summary}`).join('\n')}

@@ -48,8 +48,23 @@ const description = makeDescription(`موانئ ${seaList}`).length <= 165 ? mak
 
 // Questions answered from the species data; shown on the page and as FAQPage data
 const allNames = f.local.map(l => l.where === 'تسمية عامة' ? l.name : `${l.name} (${l.where})`).join('، ');
+// One-sentence answer under the heading, worded without gendered verbs so it fits every species.
+// Search Console: "ما هو سمك الزبيدي"، "اسم سمك الكنعد في مصر" — Google's AI answers quote these pages.
+const leadKind: Record<string, string> = {
+  reef: 'أسماك الشعاب والصخور', bottom: 'أسماك القاع', pelagic: 'أسماك المياه المفتوحة',
+  shark: 'القروش واللخم', cephalopod: 'رأسيات الأرجل (الحبار والأخطبوط)', crustacean: 'القشريات',
+};
+const lead = `${fishLabel(f)} (${f.sci}): من ${leadKind[f.kind]} في ${seaList}، والطول المعتاد ${f.size}.`;
+const leadNames = `الأسماء المحلية: ${allNames}. الاسم بالإنجليزية: ${f.en}.`;
+// "What is it called in Egypt?": one question per regional name that differs from the page name
+const regionQs = f.local
+  .filter(l => l.name !== f.ar && !['تسمية عامة', 'الفصحى', 'شائع'].includes(l.where) && !l.where.includes('('))
+  .slice(0, 3)
+  .map(l => ({ q: `ما اسم ${fishLabel(f)} في ${l.where}؟`, a: `من الأسماء المستخدمة في ${l.where}: «${l.name}». الاسم العلمي ${f.sci}.` }));
 const faq = [
+  { q: `${f.ar.startsWith('سمكة') ? 'ما هي' : 'ما هو'} ${fishLabel(f)}؟`, a: `${lead} ${f.about}` },
   { q: `ما أسماء ${fishLabel(f)} في البلاد العربية؟`, a: `${allNames}. والاسم العلمي ${f.sci}، وبالإنجليزية ${f.en}.` },
+  ...regionQs,
   { q: `في أي البحار نجد ${fishLabel(f)}؟`, a: `في ${seaList}، ضمن ${kindNames[f.kind]}، وطوله المعتاد ${f.size}.` },
   ...(notTargeted(f)
     ? [{ q: `هل يجوز صيد ${fishLabel(f)}؟`, a: `${f.bait}${f.note ? ` ${f.note}` : ''}` }]
@@ -98,6 +113,7 @@ const jsonLd = [
       <p class="mt-1 text-sm text-[var(--text-muted)]">
         <span class="latin italic" lang="la">{f.sci}</span> · <span class="latin" lang="en">{f.en}</span>
       </p>
+      <p class="mt-3 max-w-3xl leading-relaxed text-[var(--text-secondary)]">{lead} {leadNames}</p>
     </div>
   </div>
 
