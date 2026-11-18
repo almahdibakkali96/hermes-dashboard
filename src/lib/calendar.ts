@@ -38,6 +38,9 @@ export function calendarBuyUrl(link: string, portId?: string): string {
   return `${link}${link.includes('?') ? '&' : '?'}client_reference_id=${encodeURIComponent(ref.replace(/[^A-Za-z0-9_-]/g, '_'))}`;
 }
 
+/** "for <port>": ل attached to the name, and ل + ال → لل (للدار البيضاء, لدبي). */
+export const forPort = (name: string) => (name.startsWith('ال') ? 'لل' + name.slice(2) : 'ل' + name);
+
 export const monthsAr = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
 
 export interface YearSummary {

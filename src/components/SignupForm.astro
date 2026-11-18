@@ -1,5 +1,7 @@
 ---
-// Email capture → Google Sheet (SIGNUP_URL), then reveals the free cheat sheet download.
+// Email capture → Google Sheet (SIGNUP_URL). With gift on (default) it then reveals the free cheat sheet download;
+// waitlists use gift={false}. Extra fields (e.g. a required port <select name="port">) go in the "fields" slot,
+// shown above the email; they replace the hidden port input.
 import { SIGNUP_URL, CHEAT_SHEET_PDF } from '../lib/shop';
 
 export interface Props {
@@ -9,31 +11,40 @@ export interface Props {
   compact?: boolean;
   product?: string;        // what the sign-up is for (e.g. 'tide-calendar-2027'); stored in the Sheet's product column
   cta?: string;            // button text
-  done?: string;           // line shown after sign-up (above the free download when gift is on)
+  done?: string;           // line shown after sign-up; "{port}" is replaced by the chosen port's name
   gift?: boolean;          // false: waitlist only, no cheat sheet download after sign-up
+  emailLabel?: string;     // visible label above the email field (otherwise screen-reader only)
+  note?: string;           // small print under the button
 }
-const { source, port = '', dark = false, compact = false, product = '', gift = true, cta = 'احصل على الورقة المختصرة مجاناً', done = '✓ شكراً! هذه ورقتك المختصرة:' } = Astro.props;
+const {
+  source, port = '', dark = false, compact = false, product = '', gift = true,
+  cta = 'احصل على الورقة المختصرة مجاناً', done = '✓ شكراً! هذه ورقتك المختصرة:', emailLabel = '',
+  note = 'نرسل لك أحياناً نصائح الصيد وتوقعات المد. لا رسائل مزعجة، ويمكنك إلغاء الاشتراك متى شئت.',
+} = Astro.props;
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const hasFields = Astro.slots.has('fields');
 ---
 
-<form class:list={['signup', { 'signup-dark': dark }]} data-endpoint={SIGNUP_URL} data-pdf={gift ? `${BASE}${CHEAT_SHEET_PDF}` : ''} novalidate>
+<form class:list={['signup', { 'signup-dark': dark }]} data-endpoint={SIGNUP_URL} data-pdf={gift ? `${BASE}${CHEAT_SHEET_PDF}` : ''} data-done={done} data-source={source} novalidate>
   <input type="hidden" name="source" value={source} />
-  <input type="hidden" name="port" value={port} />
+  {!hasFields && <input type="hidden" name="port" value={port} />}
   <input type="hidden" name="product" value={product} />
   <input type="hidden" name="utm_source" value="" />
   <input type="hidden" name="utm_content" value="" />
   <!-- Honeypot: bots fill it, people never see it -->
   <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
-  <div class:list={['flex gap-2', compact ? 'flex-col' : 'flex-col sm:flex-row']}>
-    <label class="sr-only" for={`email-${source}`}>بريدك الإلكتروني</label>
+  {hasFields && <div class="signup-fields"><slot name="fields" /></div>}
+  {emailLabel && <label class="signup-label" for={`email-${source}`}>{emailLabel}</label>}
+  <div class:list={['signup-row flex gap-2', compact ? 'flex-col' : 'flex-col sm:flex-row']}>
+    {!emailLabel && <label class="sr-only" for={`email-${source}`}>بريدك الإلكتروني</label>}
     <input id={`email-${source}`} type="email" name="email" required inputmode="email" autocomplete="email" dir="ltr"
            placeholder="your@email.com" class="signup-input" />
     <button type="submit" class="signup-btn">{cta}</button>
   </div>
-  <p class="signup-note">نرسل لك أحياناً نصائح الصيد وتوقعات المد. لا رسائل مزعجة، ويمكنك إلغاء الاشتراك متى شئت. <a href={`${BASE}privacy`}>الخصوصية</a></p>
-  <p class="signup-error" role="alert" hidden>أدخل بريداً إلكترونياً صحيحاً.</p>
+  <p class="signup-error" role="alert" hidden></p>
+  <p class="signup-note">{note} <a href={`${BASE}privacy`}>الخصوصية</a></p>
   <div class="signup-done" hidden>
-    <p class="font-semibold">{done}</p>
+    <p class="font-semibold"></p>
     {gift && <a class="signup-btn inline-flex mt-2" download>⬇️ تحميل الورقة المختصرة (PDF)</a>}
   </div>
 </form>
@@ -45,12 +56,15 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
       const el = form.querySelector<HTMLInputElement>(`input[name=${k}]`);
       if (el) el.value = (utm.get(k) || '').slice(0, 60);
     });
+    const err = form.querySelector<HTMLElement>('.signup-error')!;
+    const fail = (msg: string, el: HTMLElement) => { err.textContent = msg; err.hidden = false; el.focus(); };
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(form);
+      const portSel = form.querySelector<HTMLSelectElement>('select[name=port]');
+      if (portSel && !portSel.value) return fail('اختر ميناءك أولاً.', portSel);
       const email = String(data.get('email') || '').trim();
-      const err = form.querySelector<HTMLElement>('.signup-error')!;
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.hidden = false; return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail('أدخل بريداً إلكترونياً صحيحاً.', form.querySelector<HTMLElement>('input[name=email]')!);
       err.hidden = true;
       const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
       btn.disabled = true; btn.textContent = '...';
@@ -60,14 +74,19 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
         try {
           // Apps Script answers with a redirect; no-cors keeps the browser happy, the row is written either way
           await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data as unknown as Record<string, string>) });
-        } catch { /* network hiccup: still give the free PDF */ }
+        } catch { /* network hiccup: still confirm */ }
       }
-      form.querySelector('.flex')!.remove();
-      form.querySelector('.signup-note')!.remove();
+      const portName = portSel ? portSel.options[portSel.selectedIndex].text : '';
+      form.querySelectorAll('.signup-fields, .signup-label, .signup-row, .signup-note').forEach((el) => el.remove());
       const done = form.querySelector<HTMLElement>('.signup-done')!;
+      done.querySelector('p')!.textContent = (form.dataset.done || '').replace('{port}', portName);
       const pdf = done.querySelector('a');
       if (pdf && form.dataset.pdf) pdf.setAttribute('href', form.dataset.pdf);
       done.hidden = false;
+      const port = String(data.get('port') || ''), product = String(data.get('product') || '');
+      try { (window as any).va?.('event', { name: 'signup', data: { source: form.dataset.source, product, port } }); } catch { /* analytics optional */ }
+      try { (window as any).gtag?.('event', 'sign_up', { method: form.dataset.source, product, port }); } catch { /* analytics optional */ }
+      form.dispatchEvent(new CustomEvent('signup:done', { bubbles: true, detail: { port, portName } }));
     });
   });
 </script>

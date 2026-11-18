@@ -1,16 +1,16 @@
 ---
 // /calendar — the 2027 fishing & tide calendar (one PDF per port). Waitlist mode until a Stripe link is set in
-// src/lib/calendar.ts; noindex and out of the sitemap until CAL.public is true. Nothing links here yet.
+// src/lib/calendar.ts (then the same card sells). The port is chosen once, in the sign-up/buy card at the top;
+// the "your port in 2027" numbers, the buy link and the sign-up all follow that choice.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SignupForm from '../../components/SignupForm.astro';
-import Flag from '../../components/Flag.astro';
+import CalendarPortSelect from '../../components/CalendarPortSelect.astro';
 import placesIndex from '../../data/places/places_index.json';
-import { countryName } from '../../lib/countries';
 import { CAL, CAL_SALES_OPEN, calendarBuyUrl, monthsAr, yearSummary } from '../../lib/calendar';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const img = (f: string) => `${BASE}calendar/${f}`;
-const DEFAULT_PORT = 'dubai';
+const EXAMPLE_PORT = 'dubai';   // shown (marked as an example) until a port is chosen; the sample pages are Dubai's
 
 type Place = { id: string; name_ar: string; name_en: string; country: string };
 const places = placesIndex as Place[];
@@ -22,13 +22,12 @@ for (const p of places) {
   const s = yearSummary(data.constituents, data.timezone);
   stats[p.id] = [p.name_ar, p.country.toLowerCase(), s.yearMax, s.maxMonth, s.n5, s.n4, s.bestMonth, s.tideType, s.microTidal];
 }
-const countries = [...new Set(places.map(p => p.country))];
-const def = stats[DEFAULT_PORT];
+const ex = stats[EXAMPLE_PORT];
 const metres = (cm: number) => (cm / 100).toFixed(2);
 
 // Sales mode: launch link until the full moon, then the full-price link (switched client-side at the exact minute)
-const launchUrl = calendarBuyUrl(CAL.launchLink, DEFAULT_PORT);
-const fullUrl = calendarBuyUrl(CAL.link, DEFAULT_PORT);
+const launchUrl = calendarBuyUrl(CAL.launchLink, EXAMPLE_PORT);
+const fullUrl = calendarBuyUrl(CAL.link, EXAMPLE_PORT);
 const priceLabel = (n: number | null) => (n == null ? '' : `${n.toFixed(2)}$`);
 
 const features = [
@@ -41,21 +40,32 @@ const features = [
 ];
 const pages = [
   { f: 'port-year.webp', w: 900, cap: 'ميناؤك في 2027: أكبر مدّ، والأيام الممتازة، وأفضل شهر' },
+  { f: 'month.webp', w: 1100, cap: 'صفحة لكل شهر: المد والقمر وأفضل الساعات لكل يوم' },
   { f: 'year.webp', w: 900, cap: 'السنة في صفحة: كل يوم بلون تقييمه' },
   { f: 'best-days.webp', w: 900, cap: 'أفضل 12 يوماً للصيد في السنة', lock: true },
-  { f: 'month.webp', w: 1100, cap: 'صفحة لكل شهر: المد والقمر وأفضل الساعات لكل يوم' },
   { f: 'fish.webp', w: 900, cap: 'عشرة أسماك من ميناءك: متى تأكل وبماذا' },
   { f: 'catch-log.webp', w: 900, cap: 'سجلّ صيدك للطباعة' },
 ];
+const steps = CAL_SALES_OPEN ? [
+  { n: 1, title: 'اختر ميناءك', text: `واحد من ${CAL.ports} ميناءً عربياً.` },
+  { n: 2, title: 'ادفع مرة واحدة', text: 'بأمان عبر Stripe: بطاقة أو Apple Pay أو Google Pay.' },
+  { n: 3, title: 'حمّل تقويمك فوراً', text: 'ملف PDF لميناءك، يعمل دون إنترنت ويُطبع.' },
+] : [
+  { n: 1, title: 'سجّل ميناءك وبريدك', text: 'الآن، في أقل من دقيقة، ودون دفع.' },
+  { n: 2, title: 'تصلك رسالة يوم الإطلاق', text: 'بسعر الإطلاق، قبل الجميع بيوم.' },
+  { n: 3, title: 'حمّل تقويم ميناءك', text: 'ملف PDF يعمل دون إنترنت ويُطبع.' },
+];
 const faq = [
   { q: 'ما هو التقويم؟', a: `ملف PDF من ${CAL.pages} صفحة بحجم A4 لميناء واحد تختاره، باللغة العربية، يغطي كل أيام سنة ${CAL.year}. تقرؤه على هاتفك دون إنترنت أو تطبعه وتعلّقه.` },
-  { q: 'ما الموانئ المتوفرة؟', a: `${CAL.ports} ميناءً عربياً من المغرب إلى عُمان، على الأطلسي والمتوسط والبحر الأحمر والخليج العربي والمحيط الهندي. اختر ميناءك في الأعلى لترى أرقامه في ${CAL.year}.` },
-  { q: 'بماذا يختلف عن الموقع المجاني؟', a: 'الموقع يعرض أياماً قليلة قادمة. التقويم يجمع السنة كلها لميناءك في ملف واحد، فتخطط رحلاتك وإجازاتك قبل أشهر، وتحجز أفضل الأيام من الآن، حتى دون إنترنت في البحر.' },
   ...(CAL_SALES_OPEN ? [
     { q: 'كيف أدفع ومتى يصلني؟', a: 'الدفع آمن على صفحة Stripe بالبطاقة أو Apple Pay أو Google Pay. بعد الدفع مباشرة تعود إلى صفحة شكر على موقعنا فيها زر تحميل تقويم ميناءك (PDF)، ويصلك إيصال الدفع على بريدك.' },
   ] : [
-    { q: 'متى يصدر؟', a: 'قريباً جداً. سجّل بريدك في قائمة الانتظار لتصلك رسالة يوم الإطلاق، ويصلك سعر الإطلاق قبل الجميع بيوم.' },
+    { q: 'لماذا أختار ميناءً عند التسجيل؟', a: 'لكل ميناء تقويمه الخاص: أوقات مدّه وارتفاعاته وأفضل أيامه تختلف عن غيره. نسجّل ميناءك لنرسل لك يوم الإطلاق رابط تقويمه هو. وإن أردت أكثر من ميناء، سجّل مرة لكل ميناء.' },
+    { q: 'هل التسجيل التزام بالشراء؟', a: 'لا. التسجيل مجاني ولا يلزمك بشيء. تصلك رسالة يوم الإطلاق بسعر الإطلاق، وتقرر حينها.' },
+    { q: 'متى يصدر؟', a: 'قريباً جداً. المسجّلون في قائمة الانتظار يعرفون أولاً، ويصلهم سعر الإطلاق قبل الجميع بيوم.' },
   ]),
+  { q: 'ما الموانئ المتوفرة؟', a: `${CAL.ports} ميناءً عربياً من المغرب إلى عُمان، على الأطلسي والمتوسط والبحر الأحمر والخليج العربي والمحيط الهندي.` },
+  { q: 'بماذا يختلف عن الموقع المجاني؟', a: 'الموقع يعرض أياماً قليلة قادمة. التقويم يجمع السنة كلها لميناءك في ملف واحد، فتخطط رحلاتك وإجازاتك قبل أشهر، وتحجز أفضل الأيام من الآن، حتى دون إنترنت في البحر.' },
   { q: 'من أين تأتي الأرقام؟', a: 'من محرك ArabTides نفسه: نموذج المد العالمي EOT20 وحسابات فلكية للقمر والشمس، مع التوقيت المحلي لكل يوم. الارتفاعات من أدنى مستوى فلكي للجزر، كما في الجداول الرسمية.' },
   { q: 'هل يصلح للملاحة؟', a: 'لا. التقويم للصيد والنزهات. أرقام المد تقديرات فلكية، وقد يغيّرها الطقس والرياح، فراجع الجداول الرسمية لميناءك قبل الملاحة.' },
 ];
@@ -66,42 +76,62 @@ const jsonLd = [
 
 <BaseLayout title={`${CAL.title} لميناءك — PDF`} description={`${CAL.title}: سنة كاملة يوماً بيوم لميناءك. المد والجزر بالساعة، القمر، الشروق والغروب، أفضل ساعات الصيد وتقييم كل يوم، لـ${CAL.ports} ميناءً عربياً.`} jsonLd={jsonLd} ogImage={img('cover.webp')} noindex={!CAL.public}>
   <section class="hero">
-    <div class="max-w-6xl mx-auto px-4 pt-10 pb-24 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center">
-      <div>
+    <div class="cal-hero max-w-6xl mx-auto px-4 pt-10 pb-24">
+      <div class="cal-intro">
         <nav class="breadcrumb breadcrumb-light" aria-label="مسار التنقل"><a href={BASE}>الرئيسية</a><span class="sep">/</span><span aria-current="page">تقويم <span class="latin">{CAL.year}</span></span></nav>
-        <span class="hero-chip mt-5 text-xs">📅 تقويم PDF · <span class="latin">{CAL.pages}</span> صفحة · <span class="latin">{CAL.ports}</span> ميناءً عربياً</span>
+        <span class="hero-chip mt-5 text-xs">📅 {CAL_SALES_OPEN ? 'متوفر الآن' : 'قريباً · قائمة الانتظار مفتوحة'}</span>
         <h1 class="mt-4 text-3xl sm:text-5xl font-bold display leading-snug">تقويم الصيد والمد والجزر <span class="latin">{CAL.year}</span> لميناءك</h1>
-        <p class="mt-4 text-lg text-slate-300 leading-relaxed max-w-xl">سنة كاملة، يوماً بيوم، في ملف واحد.</p>
-        <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-slate-200">
+        <p class="mt-4 text-lg text-slate-300 leading-relaxed max-w-xl">سنة كاملة، يوماً بيوم، في ملف واحد: متى يرتفع الماء، ومتى يأكل السمك، وأفضل أيام السنة لتحجزها من الآن.</p>
+      </div>
+      <div class="cal-extras">
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-slate-200">
           <li>✓ المد والجزر لكل يوم بالساعة والارتفاع</li>
           <li>✓ تقييم الصيد من <span class="latin">1</span> إلى <span class="latin">5</span> لكل يوم</li>
-          <li>✓ أفضل ساعات الصيد والقمر والشروق</li>
           <li>✓ أفضل <span class="latin">12</span> يوماً في السنة</li>
-          <li>✓ أسماك ميناءك ومواسم المنع</li>
           <li>✓ يُقرأ دون إنترنت ويُطبع</li>
         </ul>
-        {CAL_SALES_OPEN ? (
-          <div class="mt-7 flex flex-wrap items-center gap-4" id="buy">
-            <div class="leading-none" data-cal-price>
-              {CAL.launchPrice != null && CAL.launchLink && <span class="price-launch"><span class="latin text-5xl font-extrabold text-white">{priceLabel(CAL.launchPrice)}</span>{CAL.price != null && <s class="latin ms-2 text-slate-400">{priceLabel(CAL.price)}</s>}<span class="block mt-1.5 text-xs text-amber-300">سعر الإطلاق حتى ليلة البدر</span></span>}
-              {CAL.price != null && CAL.link && <span class="price-full" hidden={Boolean(CAL.launchLink)}><span class="latin text-5xl font-extrabold text-white">{priceLabel(CAL.price)}</span><span class="block mt-1.5 text-xs text-slate-300">دفعة واحدة · بلا اشتراك</span></span>}
-            </div>
-            <a href={launchUrl || fullUrl} data-launch={launchUrl} data-full={fullUrl} class="btn-primary text-lg cal-buy" rel="noopener"><span>اشترِ تقويم <span class="cal-port-name">{def[0]}</span></span></a>
-          </div>
-        ) : (
-          <>
-            <div class="mt-7 flex flex-wrap items-center gap-3">
-              <a href="#waitlist" class="btn-primary text-lg">سجّلني في قائمة الانتظار</a>
-              <a href="#port" class="btn-ghost"><span>ميناؤك في <span class="latin">{CAL.year}</span></span></a>
-            </div>
-            <p class="mt-3 text-sm text-slate-400">✉️ سجّل، ويصلك سعر الإطلاق قبل الجميع بيوم</p>
-          </>
-        )}
+        <ul class="cal-facts mt-6" aria-label="التقويم بالأرقام">
+          <li><span class="latin">365</span>يوماً</li>
+          <li><span class="latin">{CAL.pages}</span>صفحة</li>
+          <li><span class="latin">{CAL.ports}</span>ميناءً عربياً</li>
+        </ul>
       </div>
-      <div class="cal-covers mx-auto" aria-hidden="true">
-        <img src={img('cover-kuwait.webp')} alt="" width="400" height="566" class="c-side c-a" />
-        <img src={img('cover-casablanca.webp')} alt="" width="400" height="566" class="c-side c-b" />
-        <img src={img('cover.webp')} alt="" width="640" height="905" class="c-main" />
+
+      <!-- The one place where the port is chosen: sign-up (waitlist) or buy (sales) -->
+      <div id="waitlist" class="cal-card scroll-mt-24">
+        <div class="flex items-start gap-4">
+          <img src={img('cover.webp')} alt="" width="640" height="905" class="cal-card-cover" />
+          <div class="min-w-0">
+            <span class="cal-pill">{CAL_SALES_OPEN ? '🎣 متوفر الآن' : '⏳ قائمة الانتظار'}</span>
+            <h2 class="mt-2 text-xl font-bold display leading-snug">احجز تقويم ميناءك</h2>
+            <p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">{CAL_SALES_OPEN ? 'اختر ميناءك، وادفع مرة واحدة، وحمّله فوراً.' : 'سجّل الآن، ويصلك سعر الإطلاق قبل الجميع بيوم.'}</p>
+          </div>
+        </div>
+        <div class="mt-5">
+          {CAL_SALES_OPEN ? (
+            <div id="buy">
+              <CalendarPortSelect id="cal-port" label="اختر ميناءك" />
+              <p class="cal-preview" data-preview hidden></p>
+              <div class="mt-4 flex items-end justify-between gap-3" data-cal-price>
+                {CAL.launchPrice != null && CAL.launchLink && <span class="price-launch leading-none"><span class="latin text-4xl font-extrabold">{priceLabel(CAL.launchPrice)}</span>{CAL.price != null && <s class="latin ms-2 text-[var(--text-muted)]">{priceLabel(CAL.price)}</s>}<span class="block mt-1.5 text-xs text-amber-700">سعر الإطلاق حتى ليلة البدر</span></span>}
+                {CAL.price != null && CAL.link && <span class="price-full leading-none" hidden={Boolean(CAL.launchLink)}><span class="latin text-4xl font-extrabold">{priceLabel(CAL.price)}</span><span class="block mt-1.5 text-xs text-[var(--text-muted)]">دفعة واحدة · بلا اشتراك</span></span>}
+              </div>
+              <a href={launchUrl || fullUrl} data-launch={launchUrl} data-full={fullUrl} class="signup-btn cal-buy mt-4 w-full flex justify-center" rel="noopener" aria-disabled="true"><span>اشترِ تقويم <span class="cal-port-name">ميناءك</span></span></a>
+              <p class="signup-error" data-buy-error role="alert" hidden>اختر ميناءك أولاً.</p>
+              <p class="signup-note">🔒 دفع آمن عبر <span class="latin">Stripe</span> · تحميل فوري بعد الدفع</p>
+            </div>
+          ) : (
+            <SignupForm source="calendar" product={CAL.id} gift={false} compact
+              emailLabel="بريدك الإلكتروني" cta="سجّلني في قائمة الانتظار"
+              done="✓ سجّلناك! سنراسلك يوم إطلاق تقويم {port}، بسعر الإطلاق قبل الجميع بيوم."
+              note="رسالة يوم الإطلاق فقط، ولا رسائل مزعجة. التسجيل مجاني ولا يلزمك بالشراء.">
+              <Fragment slot="fields">
+                <CalendarPortSelect id="cal-port" label="اختر ميناءك" />
+                <p class="cal-preview" data-preview hidden></p>
+              </Fragment>
+            </SignupForm>
+          )}
+        </div>
       </div>
     </div>
     <svg class="hero-waves" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
@@ -110,28 +140,43 @@ const jsonLd = [
   </section>
 
   <main id="main" class="max-w-6xl mx-auto px-4 w-full mt-4">
-    <!-- Your port in 2027 -->
+    <!-- How it works -->
+    <section class="mb-14" aria-labelledby="how-title">
+      <h2 id="how-title" class="sr-only">كيف يعمل؟</h2>
+      <ol class="cal-steps">
+        {steps.map(s => (
+          <li class="card p-5 flex gap-4 items-start">
+            <span class="cal-step-n latin" aria-hidden="true">{s.n}</span>
+            <span><span class="block font-semibold">{s.title}</span><span class="block mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">{s.text}</span></span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- Your port in 2027: follows the port chosen in the card -->
     <section id="port" class="mb-16 scroll-mt-20" aria-labelledby="port-title">
-      <div class="section-title"><h2 id="port-title">ميناؤك في <span class="latin">{CAL.year}</span></h2><p>اختر ميناءك لترى أرقام سنته، كما في الصفحة الثانية من التقويم</p></div>
-      <div class="card p-5 sm:p-6">
-        <div class="flex flex-wrap items-center gap-3">
-          <span class="cal-flag"><Flag code={def[1] as string} /></span>
-          <label class="sr-only" for="cal-port">الميناء</label>
-          <select id="cal-port" class="cal-select">
-            {countries.map(cc => (
-              <optgroup label={countryName(cc)}>
-                {places.filter(p => p.country === cc).map(p => <option value={p.id} selected={p.id === DEFAULT_PORT}>{p.name_ar}</option>)}
-              </optgroup>
-            ))}
-          </select>
+      <div class="section-title">
+        <h2 id="port-title"><span class="cal-port-name" data-example-name>{ex[0]}</span> في <span class="latin">{CAL.year}</span></h2>
+        <p><span data-example-note>مثال. اختر ميناءك في الأعلى لترى أرقامه.</span><span data-chosen-note hidden>كما في الصفحة الثانية من تقويم ميناءك.</span></p>
+      </div>
+      <div class="card p-5 sm:p-6 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 items-center">
+        <div class="cal-covers mx-auto" aria-hidden="true">
+          <img src={img('cover-kuwait.webp')} alt="" width="400" height="566" class="c-side c-a" loading="lazy" />
+          <img src={img('cover-casablanca.webp')} alt="" width="400" height="566" class="c-side c-b" loading="lazy" />
+          <img src={img('cover.webp')} alt="" width="640" height="905" class="c-main" loading="lazy" />
         </div>
-        <ul class="cal-stats mt-5" aria-live="polite">
-          <li><span class="latin" data-k="max">{metres(def[2] as number)} م</span>أكبر مدّ في السنة<small data-k="maxm">في {monthsAr[def[3] as number]}</small></li>
-          <li><span class="latin" data-k="n5">{def[4]}</span>يوماً ممتازاً للصيد<small>تقييم <span class="latin">5/5</span>، و<span class="latin" data-k="n4">{def[5]}</span> يوماً جيداً</small></li>
-          <li><span data-k="best">{monthsAr[def[6] as number]}</span>أفضل شهر للصيد<small>أكثر الأيام الممتازة والجيدة</small></li>
-          <li><span class="cal-type" data-k="type">{def[7]}</span>نوع المد<small data-k="micro" hidden={!def[8]}>مدّ ضعيف: التقييم يعتمد أكثر على القمر</small></li>
-        </ul>
-        <p class="mt-4 text-sm text-[var(--text-muted)]">كل أيام السنة، بالساعة، في تقويم <span class="font-semibold text-[var(--text-secondary)] cal-port-name">{def[0]}</span>. <a href={`${BASE}ports/${DEFAULT_PORT}`} class="cal-port-link underline">صفحة الميناء اليوم ←</a></p>
+        <div>
+          <ul class="cal-stats" aria-live="polite">
+            <li><span class="latin" data-k="max">{metres(ex[2] as number)} م</span>أكبر مدّ في السنة<small data-k="maxm">في {monthsAr[ex[3] as number]}</small></li>
+            <li><span class="latin" data-k="n5">{ex[4]}</span>يوماً ممتازاً للصيد<small>تقييم <span class="latin">5/5</span>، و<span class="latin" data-k="n4">{ex[5]}</span> يوماً جيداً</small></li>
+            <li><span data-k="best">{monthsAr[ex[6] as number]}</span>أفضل شهر للصيد<small>أكثر الأيام الممتازة والجيدة</small></li>
+            <li><span class="cal-type" data-k="type">{ex[7]}</span>نوع المد<small data-k="micro" hidden={!ex[8]}>مدّ ضعيف: التقييم يعتمد أكثر على القمر</small></li>
+          </ul>
+          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a href="#waitlist" class="signup-btn inline-flex" data-focus-port><span>{CAL_SALES_OPEN ? 'اشترِ' : 'احجز'} تقويم <span class="cal-port-name">ميناءك</span></span></a>
+            <a href={`${BASE}ports/${EXAMPLE_PORT}`} class="cal-port-link text-sm text-[var(--accent-text)] underline"><span>المد اليوم في <span class="cal-port-name" data-example-name>{ex[0]}</span> ←</span></a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -149,43 +194,31 @@ const jsonLd = [
       </div>
     </section>
 
-    <!-- Sample pages -->
+    <!-- Sample pages: swipe on phones, grid on desktop; tap to enlarge (except the locked one) -->
     <section class="mb-16" aria-labelledby="pages-title">
-      <div class="section-title"><h2 id="pages-title">صفحات من التقويم</h2><p>مثال: تقويم دبي <span class="latin">{CAL.year}</span></p></div>
-      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="section-title"><h2 id="pages-title">صفحات من التقويم</h2><p>مثال: تقويم دبي <span class="latin">{CAL.year}</span> · اضغط على الصفحة لتكبيرها</p></div>
+      <div class="cal-gallery">
         {pages.map(p => (
           <figure class="card p-2">
-            <div class:list={['cal-page', { 'cal-lock': p.lock }]}>
-              <img src={img(p.f)} alt={p.cap} width={p.w} height={Math.round(p.w * 2246 / 1588)} loading="lazy" class="w-full h-auto rounded-lg border border-[var(--border-subtle)]" />
-              {p.lock && <span class="cal-lock-label">🔒 في التقويم</span>}
-            </div>
+            {p.lock ? (
+              <div class="cal-page cal-lock">
+                <img src={img(p.f)} alt={p.cap} width={p.w} height={Math.round(p.w * 2246 / 1588)} loading="lazy" class="w-full h-auto rounded-lg border border-[var(--border-subtle)]" />
+                <span class="cal-lock-label">🔒 في التقويم</span>
+              </div>
+            ) : (
+              <button type="button" class="cal-page cal-zoom" data-src={img(p.f)} data-cap={p.cap} aria-label={`تكبير: ${p.cap}`}>
+                <img src={img(p.f)} alt={p.cap} width={p.w} height={Math.round(p.w * 2246 / 1588)} loading="lazy" class="w-full h-auto rounded-lg border border-[var(--border-subtle)]" />
+                <span class="cal-zoom-icon" aria-hidden="true">⤢</span>
+              </button>
+            )}
             <figcaption class="text-xs text-[var(--text-muted)] text-center mt-2 leading-relaxed">{p.cap}</figcaption>
           </figure>
         ))}
       </div>
     </section>
 
-    <!-- Waitlist (until sales open): email + port, no gift -->
-    {!CAL_SALES_OPEN && (
-    <section id="waitlist" class="mb-16 scroll-mt-20" aria-labelledby="waitlist-title">
-      <div class="card p-6 sm:p-8 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center" style="background:linear-gradient(135deg,#ecfdf5,#f0fdfa);border-color:#99f6e4">
-        <div>
-          <span class="text-xs font-semibold text-[var(--accent-text)] bg-white rounded-full px-3 py-1">قائمة الانتظار</span>
-          <h2 id="waitlist-title" class="mt-3 text-2xl font-bold display">كن أول من يعرف</h2>
-          <p class="mt-2 text-[var(--text-secondary)] leading-relaxed">سجّل بريدك، ويصلك سعر الإطلاق قبل الجميع بيوم، مع رابط تقويم ميناءك: <span class="font-semibold cal-port-name">{def[0]}</span>.</p>
-          <ul class="mt-3 text-sm text-[var(--text-secondary)] space-y-1">
-            <li>✓ رسالة واحدة يوم الإطلاق، لا رسائل مزعجة</li>
-            <li>✓ سعر الإطلاق قبل الجميع بيوم</li>
-          </ul>
-          <div class="mt-5 max-w-xl"><SignupForm source="calendar" port={DEFAULT_PORT} product={CAL.id} gift={false} cta="سجّلني في قائمة الانتظار" done="✓ سجّلناك! سنراسلك بسعر الإطلاق قبل الجميع بيوم." /></div>
-        </div>
-        <img src={img('cover.webp')} alt="" width="640" height="905" loading="lazy" class="w-44 h-auto rounded-lg shadow-lg mx-auto -rotate-2" />
-      </div>
-    </section>
-    )}
-
     <!-- FAQ -->
-    <section class="mb-16" aria-labelledby="faq-title">
+    <section class="mb-14" aria-labelledby="faq-title">
       <h2 id="faq-title" class="text-2xl font-bold display">أسئلة شائعة</h2>
       <div class="card mt-4 px-5 divide-y divide-[var(--border-subtle)]">
         {faq.map((f, i) => (
@@ -195,80 +228,236 @@ const jsonLd = [
           </details>
         ))}
       </div>
-      <p class="mt-4 text-xs text-[var(--text-muted)] text-center">تقديرات فلكية — ليست للملاحة. <a href={`${BASE}methodology`} class="underline">كيف نحسب</a></p>
     </section>
+
+    <!-- Final call -->
+    <section class="cal-final mb-16" aria-labelledby="final-title">
+      <img src={img('cover.webp')} alt="" width="640" height="905" loading="lazy" class="cal-final-cover" />
+      <div>
+        <h2 id="final-title" class="text-2xl sm:text-3xl font-bold display leading-snug">خطّط لسنة <span class="latin">{CAL.year}</span> من الآن</h2>
+        <p class="mt-2 text-slate-300 leading-relaxed">{CAL_SALES_OPEN ? 'اختر ميناءك واحصل على تقويمه فوراً.' : 'سجّل ميناءك، ويصلك سعر الإطلاق قبل الجميع بيوم.'}</p>
+        <a href="#waitlist" class="btn-primary mt-5" data-focus-port>{CAL_SALES_OPEN ? 'احصل على تقويم ميناءك' : 'سجّل ميناءك في قائمة الانتظار'}</a>
+      </div>
+    </section>
+    <p class="mb-10 text-xs text-[var(--text-muted)] text-center">تقديرات فلكية — ليست للملاحة. <a href={`${BASE}methodology`} class="underline">كيف نحسب</a></p>
+    <div class="h-16 sm:hidden" aria-hidden="true"></div>
   </main>
 
-  <script type="application/json" id="cal-data" set:html={JSON.stringify({ stats, months: monthsAr, base: BASE, flags: `${BASE}flags/`, end: CAL.launchPriceEnd, ref: CAL.id })} />
+  <!-- Phones: a bar that brings the card back once it has scrolled away -->
+  <div class="cal-bar sm:hidden" id="cal-bar" hidden>
+    <span class="min-w-0 leading-tight"><span class="block text-sm font-semibold truncate">تقويم <span class="latin">{CAL.year}</span> <span class="cal-port-for">لميناءك</span></span><span class="block text-xs text-[var(--text-muted)]">{CAL_SALES_OPEN ? 'تحميل فوري بعد الدفع' : 'سعر الإطلاق قبل الجميع بيوم'}</span></span>
+    <a href="#waitlist" class="signup-btn ms-auto shrink-0" data-focus-port>{CAL_SALES_OPEN ? 'اشترِ' : 'سجّل'}</a>
+  </div>
+
+  <dialog class="cal-lightbox" id="cal-lightbox" aria-label="صفحة من التقويم">
+    <button type="button" class="cal-lightbox-close" aria-label="إغلاق">✕</button>
+    <img alt="" />
+    <p class="text-sm text-center mt-2 text-slate-200"></p>
+  </dialog>
+
+  <script type="application/json" id="cal-data" set:html={JSON.stringify({ stats, months: monthsAr, base: BASE, flags: `${BASE}flags/`, end: CAL.launchPriceEnd, ref: CAL.id, example: EXAMPLE_PORT })} />
   <script is:inline>
     (function () {
-      var D = JSON.parse(document.getElementById('cal-data').textContent), sel = document.getElementById('cal-port');
-      var q = new URLSearchParams(location.search).get('port'), saved = null;
-      try { saved = JSON.parse(localStorage.getItem('arabtides.myPort') || 'null'); } catch (e) {}
-      var start = (q && D.stats[q]) ? q : (saved && D.stats[saved.id]) ? saved.id : null;
-      var $ = function (k) { return document.querySelector('[data-k="' + k + '"]'); };
+      var D = JSON.parse(document.getElementById('cal-data').textContent);
+      var sel = document.getElementById('cal-port');
+      var all = function (s) { return document.querySelectorAll(s); };
+      var k = function (key) { return document.querySelector('[data-k="' + key + '"]'); };
       var launch = Date.now() < Date.parse(D.end);
 
       // Sales mode: launch price until the full moon, then the full-price link
-      document.querySelectorAll('.price-launch').forEach(function (el) { if (!launch) el.hidden = true; });
-      document.querySelectorAll('.price-full').forEach(function (el) { el.hidden = launch && !!document.querySelector('.price-launch'); });
+      all('.price-launch').forEach(function (el) { if (!launch) el.hidden = true; });
+      all('.price-full').forEach(function (el) { el.hidden = launch && !!document.querySelector('.price-launch'); });
 
-      function show(id, fromUser) {
+      function stats(id) {
         var s = D.stats[id];
-        if (!s) return;
-        $('max').textContent = (s[2] / 100).toFixed(2) + ' م';
-        $('maxm').textContent = 'في ' + D.months[s[3]];
-        $('n5').textContent = s[4]; $('n4').textContent = s[5];
-        $('best').textContent = D.months[s[6]];
-        $('type').textContent = s[7];
-        $('micro').hidden = !s[8];
-        var flag = document.querySelector('.cal-flag img');
-        if (flag) { flag.src = D.flags + s[1] + '.svg'; flag.alt = ''; }
-        document.querySelectorAll('.cal-port-name').forEach(function (el) { el.textContent = s[0]; });
-        document.querySelectorAll('.cal-port-link').forEach(function (el) { el.href = D.base + 'ports/' + id; });
-        document.querySelectorAll('form.signup input[name=port]').forEach(function (el) { el.value = id; });
-        document.querySelectorAll('.cal-buy').forEach(function (a) {
+        k('max').textContent = (s[2] / 100).toFixed(2) + ' م';
+        k('maxm').textContent = 'في ' + D.months[s[3]];
+        k('n5').textContent = s[4]; k('n4').textContent = s[5];
+        k('best').textContent = D.months[s[6]];
+        k('type').textContent = s[7];
+        k('micro').hidden = !s[8];
+      }
+
+      function choose(id, fromUser) {
+        var s = id && D.stats[id];
+        var flag = document.querySelector('.cal-port-flag'), preview = document.querySelector('[data-preview]');
+        if (!s) {
+          if (flag) flag.hidden = true;
+          if (preview) preview.hidden = true;
+          return;
+        }
+        if (flag) { flag.src = D.flags + s[1] + '.svg'; flag.hidden = false; }
+        if (preview) {
+          preview.innerHTML = '';
+          var b = document.createElement('b'); b.textContent = 'تقويم ' + s[0] + ' 2027: ';
+          preview.appendChild(b);
+          preview.appendChild(document.createTextNode(s[4] + ' يوماً ممتازاً للصيد، وأفضل شهر ' + D.months[s[6]] + '. '));
+          var a = document.createElement('a'); a.href = '#port'; a.textContent = 'كل الأرقام ↓';
+          preview.appendChild(a);
+          preview.hidden = false;
+        }
+        all('.cal-port-name').forEach(function (el) { el.textContent = s[0]; });
+        all('.cal-port-for').forEach(function (el) { el.textContent = s[0].indexOf('ال') === 0 ? 'لل' + s[0].slice(2) : 'ل' + s[0]; });
+        all('[data-example-note]').forEach(function (el) { el.hidden = true; });
+        all('[data-chosen-note]').forEach(function (el) { el.hidden = false; });
+        all('.cal-port-link').forEach(function (el) { el.href = D.base + 'ports/' + id; });
+        stats(id);
+        all('.cal-buy').forEach(function (a) {
           var link = (launch && a.dataset.launch) || a.dataset.full || a.dataset.launch;
           if (link) a.href = link.replace(/client_reference_id=[^&]*/, 'client_reference_id=' + D.ref + '-' + id.replace(/[^A-Za-z0-9_-]/g, '_'));
+          a.removeAttribute('aria-disabled');
         });
         if (fromUser) {
           try { if (window.va) window.va('event', { name: 'port_select', data: { port: id } }); } catch (e) {}
           try { if (window.gtag) window.gtag('event', 'port_select', { port: id }); } catch (e) {}
         }
       }
-      if (start) { sel.value = start; show(start); } else show(sel.value);
-      sel.addEventListener('change', function () { show(sel.value, true); });
+
+      // Start from ?port=… (links from port pages and Instagram), then the visitor's saved port
+      var q = new URLSearchParams(location.search).get('port'), saved = null;
+      try { saved = JSON.parse(localStorage.getItem('arabtides.myPort') || 'null'); } catch (e) {}
+      var start = (q && D.stats[q]) ? q : (saved && D.stats[saved.id]) ? saved.id : '';
+      if (sel) { sel.value = start; choose(start); sel.addEventListener('change', function () { choose(sel.value, true); }); }
+
+      // Buttons that lead to the card focus the port picker (or the email once a port is chosen)
+      all('[data-focus-port]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var card = document.getElementById('waitlist');
+          if (!card) return;
+          e.preventDefault();
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var target = sel && !sel.value ? sel : card.querySelector('input[name=email]') || sel;
+          if (target) setTimeout(function () { target.focus({ preventScroll: true }); }, 450);
+        });
+      });
+
+      // Sales mode: no Buy without a port
+      all('.cal-buy').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          if (sel && !sel.value) { e.preventDefault(); var err = document.querySelector('[data-buy-error]'); if (err) err.hidden = false; sel.focus(); }
+        });
+      });
+
+      // Phones: bottom bar while the card is out of view; gone after sign-up
+      var bar = document.getElementById('cal-bar'), card = document.getElementById('waitlist'), signed = false;
+      if (bar && card && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (e) { bar.hidden = signed || e[0].isIntersecting; }).observe(card);
+      }
+      document.addEventListener('signup:done', function () { signed = true; if (bar) bar.hidden = true; });
+
+      // Lightbox for the sample pages
+      var box = document.getElementById('cal-lightbox');
+      if (box && box.showModal) {
+        all('.cal-zoom').forEach(function (b) {
+          b.addEventListener('click', function () {
+            box.querySelector('img').src = b.dataset.src;
+            box.querySelector('img').alt = b.dataset.cap;
+            box.querySelector('p').textContent = b.dataset.cap;
+            box.showModal();
+          });
+        });
+        box.addEventListener('click', function (e) { if (e.target === box || e.target.closest('.cal-lightbox-close')) box.close(); });
+      } else {
+        all('.cal-zoom').forEach(function (b) { b.addEventListener('click', function () { window.open(b.dataset.src, '_blank'); }); });
+      }
     })();
   </script>
 </BaseLayout>
 
 <style>
-  .cal-covers { position: relative; width: 17rem; height: 23rem; }
-  .cal-covers img { position: absolute; top: 0; border-radius: 0.6rem; box-shadow: 0 24px 50px -12px rgba(0,0,0,.55); }
-  .cal-covers .c-main { width: 15rem; inset-inline-start: 1rem; z-index: 2; }
-  .cal-covers .c-side { width: 12rem; top: 2rem; opacity: .9; }
-  .cal-covers .c-a { inset-inline-start: -2.5rem; rotate: 8deg; }
-  .cal-covers .c-b { inset-inline-end: -2.5rem; rotate: -8deg; }
-  @media (max-width: 639px) {
-    .cal-covers { width: 13rem; height: 17rem; }
-    .cal-covers .c-main { width: 11rem; }
-    .cal-covers .c-side { width: 8.5rem; }
-    .cal-covers .c-a { inset-inline-start: -1.25rem; }
-    .cal-covers .c-b { inset-inline-end: -1.25rem; }
+  /* Hero: intro, then the card, then the extras on phones; intro + extras beside the card from 1024 px */
+  .cal-hero { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: 'intro' 'card' 'extras'; gap: 1.75rem; }
+  .cal-intro { grid-area: intro; } .cal-extras { grid-area: extras; } #waitlist { grid-area: card; }
+  @media (min-width: 1024px) {
+    .cal-hero { grid-template-columns: minmax(0, 1fr) 27rem; grid-template-areas: 'intro card' 'extras card'; column-gap: 3rem; row-gap: 0; align-items: start; }
+    .cal-extras { margin-top: 1.25rem; }
+    #waitlist { align-self: center; }
   }
-  .cal-flag :global(img) { width: 2.25rem; height: auto; border-radius: 0.2rem; box-shadow: 0 0 0 1px var(--border-subtle); }
-  .cal-select { flex: 1 1 14rem; min-width: 0; padding: 0.65rem 0.9rem; border-radius: 0.75rem; border: 1px solid var(--border-subtle);
-    background: var(--surface-card); color: var(--text-primary); font-size: 1.05rem; font-weight: 600; }
+  /* Hero facts */
+  .cal-facts { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .cal-facts li { display: flex; align-items: baseline; gap: 0.35rem; padding: 0.45rem 0.9rem; border-radius: 999px;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); color: #cbd5e1; font-size: 0.85rem; }
+  .cal-facts li .latin { color: #fff; font-weight: 800; font-size: 1.05rem; }
+
+  /* The sign-up / buy card */
+  .cal-card { position: relative; z-index: 1; background: var(--surface-card, #fff); color: var(--text-primary); border-radius: 1.25rem;
+    padding: 1.25rem; box-shadow: 0 30px 60px -20px rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.4); }
+  @media (min-width: 640px) { .cal-card { padding: 1.6rem; } }
+  .cal-card-cover { width: 4.5rem; height: auto; border-radius: 0.4rem; box-shadow: 0 10px 22px -8px rgba(11,37,64,.5); rotate: -3deg; flex-shrink: 0; }
+  .cal-pill { display: inline-block; padding: 0.15rem 0.7rem; border-radius: 999px; background: var(--accent-muted); color: var(--accent-text);
+    font-size: 0.75rem; font-weight: 700; }
+  /* numbered steps drawn as badges (a typed "1." flips in RTL) */
+  .cal-card :global(form) { counter-reset: field; }
+  .cal-card :global(.signup-label) { display: flex; align-items: center; gap: 0.5rem; margin-block: 0.9rem 0.4rem; font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
+  .cal-card :global(.signup-label)::before { counter-increment: field; content: counter(field); display: grid; place-items: center; width: 1.4rem; height: 1.4rem;
+    border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-num, Inter, sans-serif); font-size: 0.75rem; font-weight: 800; }
+  .cal-card :global(.signup-fields .signup-label) { margin-top: 0; }
+  .cal-card :global(.signup-btn) { padding-block: 0.85rem; font-size: 1.05rem; }
+  .cal-card :global(.signup-done) { padding: 1rem; border-radius: 0.9rem; background: var(--accent-muted); color: var(--accent-text); line-height: 1.7; }
+  :global(.cal-port-field) { display: flex; align-items: center; gap: 0.6rem; }
+  :global(.cal-port-flag) { width: 1.9rem; height: auto; border-radius: 0.2rem; box-shadow: 0 0 0 1px var(--border-subtle); flex-shrink: 0; }
+  :global(.cal-select) { flex: 1 1 0; width: 100%; min-width: 0; padding: 0.75rem 0.9rem; border-radius: 0.8rem; border: 1px solid var(--border-standard);
+    background: #fff; color: var(--text-primary); font-size: 1rem; font-weight: 600; }
+  :global(.cal-select:focus) { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(13,148,136,.15); }
+  .cal-card :global(.signup-input) { font-size: 1rem; }
+  :global(.cal-preview) { margin-top: 0.6rem; padding: 0.55rem 0.8rem; border-radius: 0.7rem; background: #f0fdfa; border: 1px solid #99f6e4;
+    font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); }
+  :global(.cal-preview b) { color: var(--accent-text); }
+  :global(.cal-preview a) { color: var(--accent-text); text-decoration: underline; white-space: nowrap; }
+  .cal-buy[aria-disabled="true"] { opacity: .75; }
+
+  /* How it works */
+  .cal-steps { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+  @media (min-width: 768px) { .cal-steps { grid-template-columns: repeat(3, 1fr); } }
+  .cal-step-n { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; flex-shrink: 0; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 800; }
+
+  /* Your port in 2027 */
+  .cal-covers { position: relative; width: 13rem; height: 16rem; }
+  .cal-covers img { position: absolute; top: 0; border-radius: 0.5rem; box-shadow: 0 20px 40px -14px rgba(11,37,64,.5); }
+  .cal-covers .c-main { width: 10.5rem; inset-inline-start: 1.25rem; z-index: 2; }
+  .cal-covers .c-side { width: 8rem; top: 1.5rem; opacity: .95; }
+  .cal-covers .c-a { inset-inline-start: -0.5rem; rotate: 8deg; }
+  .cal-covers .c-b { inset-inline-end: -0.5rem; rotate: -8deg; }
   .cal-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-  @media (min-width: 768px) { .cal-stats { grid-template-columns: repeat(4, 1fr); } }
-  .cal-stats li { padding: 1rem; border-radius: 0.9rem; background: var(--accent-muted); text-align: center; font-size: 0.9rem; color: var(--text-secondary); }
-  .cal-stats li > span:first-child { display: block; font-size: 1.75rem; font-weight: 800; color: var(--accent-text); line-height: 1.3; }
-  .cal-stats li .cal-type { font-size: 1.05rem; line-height: 1.5; padding-block: 0.3rem; }
+  @media (min-width: 1024px) { .cal-stats { grid-template-columns: repeat(4, 1fr); } }
+  .cal-stats li { padding: 1rem 0.75rem; border-radius: 0.9rem; background: var(--accent-muted); text-align: center; font-size: 0.9rem; color: var(--text-secondary); }
+  .cal-stats li > span:first-child { display: block; font-size: 1.6rem; font-weight: 800; color: var(--accent-text); line-height: 1.3; }
+  .cal-stats li > span.cal-type { font-size: 1rem; line-height: 1.5; padding-block: 0.3rem; }
   .cal-stats small { display: block; margin-top: 0.25rem; font-size: 0.75rem; color: var(--text-muted); }
-  .cal-page { position: relative; overflow: hidden; border-radius: 0.5rem; }
+
+  /* Sample pages: a swipe row on phones, a grid from 1024 px */
+  .cal-gallery { display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: 0.9rem; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; padding-bottom: 0.5rem; }
+  .cal-gallery > figure { scroll-snap-align: start; }
+  @media (min-width: 640px) { .cal-gallery { grid-auto-columns: 42%; } }
+  @media (min-width: 1024px) { .cal-gallery { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow: visible; } }
+  .cal-page { position: relative; display: block; width: 100%; overflow: hidden; border-radius: 0.5rem; }
+  .cal-zoom { cursor: zoom-in; }
+  .cal-zoom-icon { position: absolute; bottom: 0.5rem; inset-inline-end: 0.5rem; display: grid; place-items: center; width: 2rem; height: 2rem;
+    border-radius: 50%; background: rgba(11,37,64,.8); color: #fff; font-size: 1rem; }
   /* best 12 days: the first rows readable, the rest blurred, so the page shows the idea without giving the year away */
   .cal-lock::after { content: ''; position: absolute; inset-inline: 0; bottom: 0; top: 28%; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
     background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 12%); }
   .cal-lock-label { position: absolute; z-index: 1; inset-inline: 0; top: 55%; margin-inline: auto; width: max-content; padding: 0.3rem 0.9rem;
     border-radius: 999px; background: #0b2540; color: #fff; font-size: 0.8rem; font-weight: 700; }
+  .cal-lightbox { max-width: min(56rem, 94vw); max-height: 94vh; padding: 0.75rem; border: 0; border-radius: 1rem; background: #0b2540; }
+  .cal-lightbox::backdrop { background: rgba(2,12,24,.8); }
+  .cal-lightbox img { display: block; max-width: 100%; max-height: calc(94vh - 5rem); margin-inline: auto; border-radius: 0.5rem; }
+  .cal-lightbox-close { position: absolute; top: 0.5rem; inset-inline-start: 0.5rem; width: 2.25rem; height: 2.25rem; border-radius: 50%;
+    background: rgba(255,255,255,.15); color: #fff; font-size: 1rem; }
+
+  /* Final call */
+  .cal-final { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center; padding: 1.75rem; border-radius: 1.25rem; color: #fff;
+    background: linear-gradient(135deg, #0b2540, #0f3d5c 60%, #115e59); }
+  .cal-final-cover { width: 6.5rem; height: auto; border-radius: 0.5rem; box-shadow: 0 20px 40px -12px rgba(0,0,0,.6); rotate: -4deg; }
+  @media (max-width: 479px) { .cal-final { grid-template-columns: 1fr; text-align: center; } .cal-final-cover { margin-inline: auto; width: 5.5rem; } }
+
+  /* Phones: bottom bar */
+  .cal-bar { position: fixed; inset-inline: 0; bottom: 0; z-index: 40; display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.6rem 1rem calc(0.6rem + env(safe-area-inset-bottom)); background: var(--surface-card, #fff); border-top: 1px solid var(--border-subtle);
+    box-shadow: 0 -8px 24px -12px rgba(0,0,0,.25); }
+  .cal-bar[hidden] { display: none; }
+  @media (min-width: 640px) { .cal-bar { display: none; } }
+  .cal-bar .signup-btn { padding: 0.55rem 1.1rem; }
 </style>

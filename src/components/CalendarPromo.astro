@@ -2,7 +2,7 @@
 // Funnel promo for the 2027 calendar, in the places the guide used: 'banner' (homepage), 'card' (port sidebar),
 // 'strip' (inline: port pages on phones, articles). With a port, the link opens /calendar on that port.
 // Reuses GuidePromo's classes (guide-banner, guide-card, guide-strip, guide-cover in global.css).
-import { CAL, CAL_SALES_OPEN } from '../lib/calendar';
+import { CAL, CAL_SALES_OPEN, forPort } from '../lib/calendar';
 
 export interface Props { variant?: 'banner' | 'card' | 'strip'; port?: { id: string; name: string } }
 const { variant = 'card', port } = Astro.props;
@@ -35,7 +35,7 @@ const cta = CAL_SALES_OPEN ? 'اكتشف التقويم' : 'سجّل في قائ
       <a href={href} class="guide-cover shrink-0" aria-hidden="true" tabindex="-1"><img src={cover} alt="" width="76" height="108" loading="lazy" /></a>
       <div class="min-w-0">
         <div class="text-xs font-semibold text-[var(--accent-text)]">📅 تقويم <span class="latin">{CAL.year}</span>{!CAL_SALES_OPEN && ' · قريباً'}</div>
-        <h2 id="cal-card-title" class="font-semibold leading-snug mt-0.5">{port ? <>تقويم <span class="latin">{CAL.year}</span> لـ{port.name}</> : <>تقويم <span class="latin">{CAL.year}</span> لميناءك</>}</h2>
+        <h2 id="cal-card-title" class="font-semibold leading-snug mt-0.5">{port ? <>تقويم <span class="latin">{CAL.year}</span> {forPort(port.name)}</> : <>تقويم <span class="latin">{CAL.year}</span> لميناءك</>}</h2>
         <p class="text-sm text-[var(--text-muted)] mt-1">كل أيام السنة في ملف واحد: المد، والقمر، وأفضل أيام الصيد.</p>
       </div>
     </div>
@@ -47,7 +47,7 @@ const cta = CAL_SALES_OPEN ? 'اكتشف التقويم' : 'سجّل في قائ
   <a href={href} class="guide-strip group">
     <img src={cover} alt="" width="56" height="79" loading="lazy" class="rounded-md shadow" />
     <span class="min-w-0">
-      <span class="block font-semibold group-hover:text-[var(--accent-text)]">{port ? <>تقويم <span class="latin">{CAL.year}</span> لـ{port.name}</> : <>تقويم الصيد والمد والجزر <span class="latin">{CAL.year}</span></>}</span>
+      <span class="block font-semibold group-hover:text-[var(--accent-text)]">{port ? <>تقويم <span class="latin">{CAL.year}</span> {forPort(port.name)}</> : <>تقويم الصيد والمد والجزر <span class="latin">{CAL.year}</span></>}</span>
       <span class="block text-sm text-[var(--text-muted)]">كل أيام السنة في ملف PDF · {CAL_SALES_OPEN ? <><span class="latin">{CAL.pages}</span> صفحة</> : 'قريباً'}</span>
     </span>
     <span class="ms-auto text-[var(--accent-text)] font-semibold shrink-0">{CAL_SALES_OPEN ? 'اكتشفه ←' : 'سجّل ←'}</span>

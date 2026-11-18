@@ -71,7 +71,7 @@ const names = Object.fromEntries((placesIndex as { id: string; name_ar: string; 
             if (x.status === 402 && tries++ < 5) { setTimeout(ask, 2000); return; }
             if (!x.j.ok) { show('st-err'); return; }
             var n = D.names[x.j.port];
-            document.getElementById('ok-port').textContent = n ? 'لـ' + n[0] : '';
+            document.getElementById('ok-port').textContent = n ? (n[0].indexOf('ال') === 0 ? 'لل' + n[0].slice(2) : 'ل' + n[0]) : '';
             // Each click asks the function again, which re-checks the payment and redirects to a fresh signed link
             document.getElementById('ok-link').href = D.api + '?session_id=' + encodeURIComponent(sid) + '&file=1';
             document.getElementById('ok-file').textContent = 'ArabTides-2027-' + x.j.port + '.pdf';
