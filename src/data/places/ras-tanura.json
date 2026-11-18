@@ -1,0 +1,94 @@
+{
+ "id": "ras-tanura",
+ "name_en": "Ras Tanura",
+ "name_ar": "رأس تنورة",
+ "country": "SA",
+ "lat": 26.64,
+ "lon": 50.16,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 26.625,
+  "lon": 50.125,
+  "distance_km": 3.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.50715,
+   "phase": -24.049
+  },
+  "J1": {
+   "amp": 0.26373,
+   "phase": 138.393
+  },
+  "K1": {
+   "amp": 13.65151,
+   "phase": -61.348
+  },
+  "K2": {
+   "amp": 7.58057,
+   "phase": 96.917
+  },
+  "M2": {
+   "amp": 67.5135,
+   "phase": 46.071
+  },
+  "M4": {
+   "amp": 3.18938,
+   "phase": 86.319
+  },
+  "MF": {
+   "amp": 0.31544,
+   "phase": 35.084
+  },
+  "MM": {
+   "amp": 1.07363,
+   "phase": 26.366
+  },
+  "N2": {
+   "amp": 13.47827,
+   "phase": 21.874
+  },
+  "O1": {
+   "amp": 11.35948,
+   "phase": -116.066
+  },
+  "P1": {
+   "amp": 3.80621,
+   "phase": -65.91
+  },
+  "Q1": {
+   "amp": 2.49686,
+   "phase": -130.948
+  },
+  "S1": {
+   "amp": 1.27293,
+   "phase": 49.404
+  },
+  "S2": {
+   "amp": 23.32537,
+   "phase": 101.92
+  },
+  "SA": {
+   "amp": 2.8781,
+   "phase": -72.621
+  },
+  "SSA": {
+   "amp": 0.42951,
+   "phase": 176.902
+  },
+  "T2": {
+   "amp": 1.44958,
+   "phase": 123.651
+  },
+  "Z0": {
+   "amp": 124.7,
+   "phase": 0
+  }
+ }
+}

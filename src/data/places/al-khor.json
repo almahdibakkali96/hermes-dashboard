@@ -1,0 +1,94 @@
+{
+ "id": "al-khor",
+ "name_en": "Al Khor",
+ "name_ar": "الخور",
+ "country": "QA",
+ "lat": 25.69,
+ "lon": 51.51,
+ "timezone": "Asia/Qatar",
+ "grid": {
+  "lat": 25.75,
+  "lon": 51.625,
+  "distance_km": 13.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.29816,
+   "phase": -29.727
+  },
+  "J1": {
+   "amp": 1.61386,
+   "phase": 91.413
+  },
+  "K1": {
+   "amp": 28.66701,
+   "phase": 64.229
+  },
+  "K2": {
+   "amp": 3.47204,
+   "phase": 70.068
+  },
+  "M2": {
+   "amp": 36.87169,
+   "phase": 37.004
+  },
+  "M4": {
+   "amp": 2.96776,
+   "phase": -52.025
+  },
+  "MF": {
+   "amp": 0.66258,
+   "phase": 5.084
+  },
+  "MM": {
+   "amp": 0.86228,
+   "phase": 25.193
+  },
+  "N2": {
+   "amp": 9.80782,
+   "phase": 7.321
+  },
+  "O1": {
+   "amp": 12.68264,
+   "phase": 15.193
+  },
+  "P1": {
+   "amp": 8.31501,
+   "phase": 54.474
+  },
+  "Q1": {
+   "amp": 2.07606,
+   "phase": -7.93
+  },
+  "S1": {
+   "amp": 0.56877,
+   "phase": 16.366
+  },
+  "S2": {
+   "amp": 11.86266,
+   "phase": 73.231
+  },
+  "SA": {
+   "amp": 2.74569,
+   "phase": -71.062
+  },
+  "SSA": {
+   "amp": 0.31922,
+   "phase": 176.74
+  },
+  "T2": {
+   "amp": 1.0425,
+   "phase": 97.534
+  },
+  "Z0": {
+   "amp": 84.4,
+   "phase": 0
+  }
+ }
+}

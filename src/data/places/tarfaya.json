@@ -1,0 +1,94 @@
+{
+ "id": "tarfaya",
+ "name_en": "Tarfaya",
+ "name_ar": "طرفاية",
+ "country": "MA",
+ "lat": 27.94,
+ "lon": -12.93,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 28,
+  "lon": -12.875,
+  "distance_km": 8.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.48773,
+   "phase": -4.556
+  },
+  "J1": {
+   "amp": 0.21313,
+   "phase": 47.306
+  },
+  "K1": {
+   "amp": 6.95927,
+   "phase": 39.237
+  },
+  "K2": {
+   "amp": 9.60394,
+   "phase": 49.886
+  },
+  "M2": {
+   "amp": 87.85471,
+   "phase": 29.917
+  },
+  "M4": {
+   "amp": 1.37491,
+   "phase": 115.621
+  },
+  "MF": {
+   "amp": 0.61044,
+   "phase": 2.293
+  },
+  "MM": {
+   "amp": 0.4883,
+   "phase": -67.119
+  },
+  "N2": {
+   "amp": 18.42581,
+   "phase": 15.7
+  },
+  "O1": {
+   "amp": 5.52868,
+   "phase": -69.309
+  },
+  "P1": {
+   "amp": 2.11744,
+   "phase": 32.351
+  },
+  "Q1": {
+   "amp": 1.63348,
+   "phase": -121.498
+  },
+  "S1": {
+   "amp": 0.80417,
+   "phase": 8.36
+  },
+  "S2": {
+   "amp": 33.94752,
+   "phase": 54.118
+  },
+  "SA": {
+   "amp": 2.14326,
+   "phase": -58.65
+  },
+  "SSA": {
+   "amp": 0.06175,
+   "phase": -33.7
+  },
+  "T2": {
+   "amp": 1.97558,
+   "phase": 46.193
+  },
+  "Z0": {
+   "amp": 157.1,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "khor-fakkan",
+ "name_en": "Khor Fakkan",
+ "name_ar": "خورفكان",
+ "country": "AE",
+ "lat": 25.34,
+ "lon": 56.36,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 25.375,
+  "lon": 56.375,
+  "distance_km": 4.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.57685,
+   "phase": 106.419
+  },
+  "J1": {
+   "amp": 2.165,
+   "phase": -7.91
+  },
+  "K1": {
+   "amp": 38.08014,
+   "phase": -20.507
+  },
+  "K2": {
+   "amp": 7.29398,
+   "phase": -174.274
+  },
+  "M2": {
+   "amp": 68.54492,
+   "phase": 162.261
+  },
+  "M4": {
+   "amp": 0.5321,
+   "phase": -112.448
+  },
+  "MF": {
+   "amp": 0.95615,
+   "phase": 26.1
+  },
+  "MM": {
+   "amp": 0.35719,
+   "phase": 84.885
+  },
+  "N2": {
+   "amp": 16.83044,
+   "phase": 143.876
+  },
+  "O1": {
+   "amp": 20.14335,
+   "phase": -17.037
+  },
+  "P1": {
+   "amp": 11.46732,
+   "phase": -21.665
+  },
+  "Q1": {
+   "amp": 4.16651,
+   "phase": -22.179
+  },
+  "S1": {
+   "amp": 0.44476,
+   "phase": 135.194
+  },
+  "S2": {
+   "amp": 26.35006,
+   "phase": -166.833
+  },
+  "SA": {
+   "amp": 1.3111,
+   "phase": -12.384
+  },
+  "SSA": {
+   "amp": 0.21988,
+   "phase": -58.595
+  },
+  "T2": {
+   "amp": 1.32256,
+   "phase": -179.506
+  },
+  "Z0": {
+   "amp": 185.2,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "byblos",
+ "name_en": "Byblos",
+ "name_ar": "جبيل",
+ "country": "LB",
+ "lat": 34.12,
+ "lon": 35.64,
+ "timezone": "Asia/Beirut",
+ "grid": {
+  "lat": 34.125,
+  "lon": 35.625,
+  "distance_km": 1.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.42099,
+   "phase": 151.744
+  },
+  "J1": {
+   "amp": 0.24191,
+   "phase": 52.523
+  },
+  "K1": {
+   "amp": 2.90196,
+   "phase": -83.716
+  },
+  "K2": {
+   "amp": 1.91555,
+   "phase": -116.87
+  },
+  "M2": {
+   "amp": 11.85491,
+   "phase": -123.642
+  },
+  "M4": {
+   "amp": 0.28657,
+   "phase": -102.052
+  },
+  "MF": {
+   "amp": 0.32905,
+   "phase": 9.776
+  },
+  "MM": {
+   "amp": 0.17968,
+   "phase": -26.905
+  },
+  "N2": {
+   "amp": 2.21313,
+   "phase": -118.983
+  },
+  "O1": {
+   "amp": 2.29162,
+   "phase": -105.285
+  },
+  "P1": {
+   "amp": 0.92004,
+   "phase": -56.189
+  },
+  "Q1": {
+   "amp": 0.55056,
+   "phase": -140.757
+  },
+  "S1": {
+   "amp": 0.80061,
+   "phase": 31.676
+  },
+  "S2": {
+   "amp": 6.79174,
+   "phase": -110.232
+  },
+  "SA": {
+   "amp": 3.75974,
+   "phase": -80.751
+  },
+  "SSA": {
+   "amp": 0.04763,
+   "phase": -130.966
+  },
+  "T2": {
+   "amp": 0.28977,
+   "phase": -105.702
+  },
+  "Z0": {
+   "amp": 27.2,
+   "phase": 0
+  }
+ }
+}

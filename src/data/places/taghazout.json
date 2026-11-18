@@ -1,0 +1,94 @@
+{
+ "id": "taghazout",
+ "name_en": "Taghazout",
+ "name_ar": "تغازوت",
+ "country": "MA",
+ "lat": 30.545,
+ "lon": -9.71,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 30.5,
+  "lon": -9.75,
+  "distance_km": 6.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.7722,
+   "phase": 14.843
+  },
+  "J1": {
+   "amp": 0.2396,
+   "phase": 56.036
+  },
+  "K1": {
+   "amp": 7.0211,
+   "phase": 42.266
+  },
+  "K2": {
+   "amp": 9.9675,
+   "phase": 62.988
+  },
+  "M2": {
+   "amp": 94.44667,
+   "phase": 43.107
+  },
+  "M4": {
+   "amp": 1.56187,
+   "phase": 139.646
+  },
+  "MF": {
+   "amp": 0.20097,
+   "phase": -9.696
+  },
+  "MM": {
+   "amp": 0.20274,
+   "phase": -53.692
+  },
+  "N2": {
+   "amp": 19.88336,
+   "phase": 28.31
+  },
+  "O1": {
+   "amp": 6.1936,
+   "phase": -57.811
+  },
+  "P1": {
+   "amp": 2.45854,
+   "phase": 38.721
+  },
+  "Q1": {
+   "amp": 1.77818,
+   "phase": -112.214
+  },
+  "S1": {
+   "amp": 0.41516,
+   "phase": 43.495
+  },
+  "S2": {
+   "amp": 35.13982,
+   "phase": 67.404
+  },
+  "SA": {
+   "amp": 2.04226,
+   "phase": -44.628
+  },
+  "SSA": {
+   "amp": 0.00523,
+   "phase": 17.16
+  },
+  "T2": {
+   "amp": 2.08082,
+   "phase": 53.198
+  },
+  "Z0": {
+   "amp": 166.9,
+   "phase": 0
+  }
+ }
+}

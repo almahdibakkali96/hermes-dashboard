@@ -1,0 +1,94 @@
+{
+ "id": "kenitra",
+ "name_en": "Kenitra (Mehdia)",
+ "name_ar": "القنيطرة (المهدية)",
+ "country": "MA",
+ "lat": 34.26,
+ "lon": -6.68,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 34.25,
+  "lon": -6.75,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.18008,
+   "phase": 17.56
+  },
+  "J1": {
+   "amp": 0.43505,
+   "phase": 69.051
+  },
+  "K1": {
+   "amp": 6.86799,
+   "phase": 50.32
+  },
+  "K2": {
+   "amp": 10.01128,
+   "phase": 77.506
+  },
+  "M2": {
+   "amp": 99.90575,
+   "phase": 54.317
+  },
+  "M4": {
+   "amp": 1.69072,
+   "phase": 160.864
+  },
+  "MF": {
+   "amp": 0.28118,
+   "phase": 12.516
+  },
+  "MM": {
+   "amp": 0.10966,
+   "phase": -106.802
+  },
+  "N2": {
+   "amp": 21.3808,
+   "phase": 38.337
+  },
+  "O1": {
+   "amp": 6.27431,
+   "phase": -51.969
+  },
+  "P1": {
+   "amp": 2.50584,
+   "phase": 39.734
+  },
+  "Q1": {
+   "amp": 1.97991,
+   "phase": -110.225
+  },
+  "S1": {
+   "amp": 0.68066,
+   "phase": 109.188
+  },
+  "S2": {
+   "amp": 36.15587,
+   "phase": 80.222
+  },
+  "SA": {
+   "amp": 2.54085,
+   "phase": -59.943
+  },
+  "SSA": {
+   "amp": 0.08812,
+   "phase": 177.048
+  },
+  "T2": {
+   "amp": 1.88888,
+   "phase": 73.917
+  },
+  "Z0": {
+   "amp": 176.2,
+   "phase": 0
+  }
+ }
+}

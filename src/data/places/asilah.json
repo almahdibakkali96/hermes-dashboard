@@ -1,0 +1,94 @@
+{
+ "id": "asilah",
+ "name_en": "Asilah",
+ "name_ar": "أصيلة",
+ "country": "MA",
+ "lat": 35.47,
+ "lon": -6.04,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 35.5,
+  "lon": -6.125,
+  "distance_km": 8.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.09426,
+   "phase": 25.164
+  },
+  "J1": {
+   "amp": 0.45043,
+   "phase": 73.114
+  },
+  "K1": {
+   "amp": 7.39185,
+   "phase": 54.004
+  },
+  "K2": {
+   "amp": 9.85719,
+   "phase": 80.612
+  },
+  "M2": {
+   "amp": 95.69082,
+   "phase": 57.884
+  },
+  "M4": {
+   "amp": 1.94238,
+   "phase": 159.625
+  },
+  "MF": {
+   "amp": 0.06872,
+   "phase": 62.021
+  },
+  "MM": {
+   "amp": 0.20634,
+   "phase": -82.995
+  },
+  "N2": {
+   "amp": 20.57496,
+   "phase": 42.696
+  },
+  "O1": {
+   "amp": 6.44042,
+   "phase": -44.36
+  },
+  "P1": {
+   "amp": 2.52229,
+   "phase": 45.983
+  },
+  "Q1": {
+   "amp": 2.05586,
+   "phase": -95.643
+  },
+  "S1": {
+   "amp": 0.96059,
+   "phase": 41.081
+  },
+  "S2": {
+   "amp": 34.75056,
+   "phase": 84.129
+  },
+  "SA": {
+   "amp": 2.38198,
+   "phase": -67.237
+  },
+  "SSA": {
+   "amp": 0.15286,
+   "phase": -179.258
+  },
+  "T2": {
+   "amp": 1.8813,
+   "phase": 79.177
+  },
+  "Z0": {
+   "amp": 168.3,
+   "phase": 0
+  }
+ }
+}

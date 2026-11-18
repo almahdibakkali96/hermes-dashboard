@@ -1,0 +1,94 @@
+{
+ "id": "umluj",
+ "name_en": "Umluj",
+ "name_ar": "أملج",
+ "country": "SA",
+ "lat": 25.02,
+ "lon": 37.27,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 25,
+  "lon": 37.25,
+  "distance_km": 3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.94141,
+   "phase": 54.729
+  },
+  "J1": {
+   "amp": 0.11103,
+   "phase": -61.645
+  },
+  "K1": {
+   "amp": 2.81249,
+   "phase": 166.722
+  },
+  "K2": {
+   "amp": 2.53545,
+   "phase": 136.036
+  },
+  "M2": {
+   "amp": 21.38622,
+   "phase": 118.045
+  },
+  "M4": {
+   "amp": 0.53829,
+   "phase": 1.029
+  },
+  "MF": {
+   "amp": 0.92519,
+   "phase": 50.396
+  },
+  "MM": {
+   "amp": 0.41074,
+   "phase": -53.192
+  },
+  "N2": {
+   "amp": 6.67071,
+   "phase": 86.548
+  },
+  "O1": {
+   "amp": 1.86731,
+   "phase": 176.458
+  },
+  "P1": {
+   "amp": 0.40354,
+   "phase": 125.442
+  },
+  "Q1": {
+   "amp": 0.25607,
+   "phase": 143.827
+  },
+  "S1": {
+   "amp": 1.05155,
+   "phase": -92.281
+  },
+  "S2": {
+   "amp": 6.71462,
+   "phase": 141.828
+  },
+  "SA": {
+   "amp": 8.53894,
+   "phase": 22.739
+  },
+  "SSA": {
+   "amp": 0.35245,
+   "phase": -148.77
+  },
+  "T2": {
+   "amp": 0.56457,
+   "phase": 157.819
+  },
+  "Z0": {
+   "amp": 47.6,
+   "phase": 0
+  }
+ }
+}

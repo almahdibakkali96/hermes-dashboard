@@ -1,0 +1,94 @@
+{
+ "id": "kerkennah",
+ "name_en": "Kerkennah",
+ "name_ar": "قرقنة",
+ "country": "TN",
+ "lat": 34.71,
+ "lon": 11.19,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 34.75,
+  "lon": 11.125,
+  "distance_km": 7.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.24288,
+   "phase": 49.469
+  },
+  "J1": {
+   "amp": 0.27237,
+   "phase": 32.441
+  },
+  "K1": {
+   "amp": 1.36029,
+   "phase": 0.549
+  },
+  "K2": {
+   "amp": 4.91059,
+   "phase": 78.803
+  },
+  "M2": {
+   "amp": 22.05041,
+   "phase": 74.867
+  },
+  "M4": {
+   "amp": 0.3731,
+   "phase": 163.995
+  },
+  "MF": {
+   "amp": 0.41405,
+   "phase": -17.495
+  },
+  "MM": {
+   "amp": 0.42626,
+   "phase": -83.69
+  },
+  "N2": {
+   "amp": 3.73384,
+   "phase": 63.046
+  },
+  "O1": {
+   "amp": 0.72875,
+   "phase": 92.407
+  },
+  "P1": {
+   "amp": 0.47239,
+   "phase": -32.45
+  },
+  "Q1": {
+   "amp": 0.64863,
+   "phase": 37.52
+  },
+  "S1": {
+   "amp": 0.75848,
+   "phase": 37.091
+  },
+  "S2": {
+   "amp": 15.12002,
+   "phase": 83.615
+  },
+  "SA": {
+   "amp": 3.81912,
+   "phase": -79.464
+  },
+  "SSA": {
+   "amp": 0.09977,
+   "phase": -155.003
+  },
+  "T2": {
+   "amp": 0.17361,
+   "phase": 106.068
+  },
+  "Z0": {
+   "amp": 49,
+   "phase": 0
+  }
+ }
+}

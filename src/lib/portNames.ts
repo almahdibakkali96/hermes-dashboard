@@ -32,6 +32,19 @@ const ALT_AR: Record<string, string[]> = {
   'umm-al-quwain': ['أم القوين'],
   kaec: ['مدينة الملك عبد الله الاقتصادية'],
   'bandar-abbas': ['بندرعباس'],
+  // #077
+  mdiq: ['المضيق الفنيدق', 'مضيق'], martil: ['مارتيل'], 'cabo-negro': ['كابونيغرو', 'كابو نيكرو', 'الرأس الأسود'],
+  nador: ['الناضور'], saidia: ['السعيديه'], asilah: ['أصيله', 'اصيلا'], 'moulay-bousselham': ['مولاي بوسلهام'],
+  kenitra: ['مهدية القنيطرة', 'المهدية القنيطرة'], temara: ['هرهورة', 'الهرهوره'], mohammedia: ['المحمديه'], 'dar-bouazza': ['طماريس'],
+  oualidia: ['الوليديه'], taghazout: ['تاغازوت', 'تامري'], 'sidi-ifni': ['ميرلفت', 'افني'], 'tan-tan': ['الوطيه', 'طنطان'],
+  tarfaya: ['طرفايه'], laayoune: ['فم الواد'], bejaia: ['بجايه'], tipaza: ['تيبازه'], skikda: ['سكيكده'], annaba: ['عنابه'],
+  tabarka: ['طبرقه'], kelibia: ['قليبيه'], zarzis: ['الزارات', 'جرجيس الزارات'], kerkennah: ['قرقنه'], derna: ['درنه'],
+  'marsa-matruh': ['مطروح', 'الساحل الشمالي'], 'el-alamein': ['الساحل الشمالي'], 'ras-el-bar': ['رأس البر', 'دمياط'],
+  'ain-sokhna': ['السخنة', 'العين السخنه'], 'ras-sudr': ['راس سدر'], zafarana: ['الزعفرانه'], 'ras-gharib': ['راس غارب', 'غارب'],
+  'sharm-el-sheikh': ['شرم'], safaga: ['سفاجه'], jazan: ['جيزان'], qunfudhah: ['القنفذه'], 'ras-tanura': ['راس تنوره'],
+  qatif: ['سيهات', 'تاروت'], 'al-ruwais-qa': ['الرويس'], 'al-wakrah': ['الوكره'], 'khor-al-udaid': ['العديد'],
+  sharjah: ['الشارقه'], 'ruwais-ae': ['الرويس'], dibba: ['دبا الفجيرة'], quriyat: ['طيوي'], 'ras-al-hadd': ['راس الحد'],
+  masirah: ['جزيرة مصيرة'], socotra: ['سقطره'],
 };
 
 const FR: Record<string, string> = {
@@ -40,6 +53,14 @@ const FR: Record<string, string> = {
   nouadhibou: 'Nouadhibou', nouakchott: 'Nouakchott',
   algiers: 'Alger', oran: 'Oran', tunis: 'La Goulette', sfax: 'Sfax',
   bizerte: 'Bizerte', sousse: 'Sousse', gabes: 'Gabès', djerba: 'Djerba', mahdia: 'Mahdia',
+  mdiq: "M'diq", martil: 'Martil', 'cabo-negro': 'Cabo Negro', fnideq: 'Fnideq', nador: 'Nador', saidia: 'Saïdia',
+  asilah: 'Asilah', larache: 'Larache', 'moulay-bousselham': 'Moulay Bousselham', kenitra: 'Kénitra (Mehdia)',
+  temara: 'Témara (Harhoura)', skhirat: 'Skhirat', bouznika: 'Bouznika', mohammedia: 'Mohammedia', 'dar-bouazza': 'Dar Bouazza',
+  'sidi-rahal': 'Sidi Rahal', oualidia: 'Oualidia', imsouane: 'Imsouane', taghazout: 'Taghazout', 'sidi-ifni': 'Sidi Ifni',
+  'tan-tan': 'Tan-Tan', tarfaya: 'Tarfaya', laayoune: 'Laâyoune', boujdour: 'Boujdour',
+  ghazaouet: 'Ghazaouet', mostaganem: 'Mostaganem', tipaza: 'Tipaza', bejaia: 'Béjaïa', jijel: 'Jijel', skikda: 'Skikda', annaba: 'Annaba',
+  tabarka: 'Tabarka', kelibia: 'Kélibia', hammamet: 'Hammamet', monastir: 'Monastir', chebba: 'Chebba', kerkennah: 'Kerkennah',
+  skhira: 'Skhira', zarzis: 'Zarzis',
 };
 
 /** How each country is also written in searches */

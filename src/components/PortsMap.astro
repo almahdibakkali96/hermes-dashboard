@@ -76,7 +76,7 @@ const seaLabels = [
   { t: 'المحيط الأطلسي', lon: -20, lat: -20, rot: 0 },
 ].map(l => { const [x, y] = project(l.lon, l.lat); return { ...l, x: +x.toFixed(1), y: +y.toFixed(1) }; });
 
-const cfg = { ports, regions, base: BASE };
+const cfg = { ports, regions, base: BASE, size: [PROJ.W, PROJ.H] };
 ---
 
 <div class="pmap" data-ports-map>
@@ -117,6 +117,11 @@ const cfg = { ports, regions, base: BASE };
         ))}
       </g>
     </svg>
+    <div class="pmap-zoom" role="group" aria-label="تكبير الخريطة">
+      <button type="button" data-zoom="in" aria-label="تكبير">+</button>
+      <button type="button" data-zoom="out" aria-label="تصغير">−</button>
+      <button type="button" data-zoom="fit" aria-label="العودة إلى المنطقة المختارة" title="العودة إلى المنطقة المختارة">⤢</button>
+    </div>
     <div class="pmap-legend" aria-hidden="true">
       <span data-legend="tide"><i style="background:#2dd4bf"></i>يرتفع <i style="background:#fb7185"></i>ينخفض</span>
       <span data-legend="fish" hidden>{[5, 4, 3, 2, 1].map(r => <><i class={`r${r}`}></i><b class="latin">{r}</b></>)}</span>
@@ -124,7 +129,7 @@ const cfg = { ports, regions, base: BASE };
   </div>
 
   <div class="pmap-card" aria-live="polite">
-    <p class="pmap-hint">اضغط على أي ميناء لترى هل يرتفع الماء فيه الآن، وموعد المد والجزر القادمين، وتقييم الصيد اليوم.</p>
+    <p class="pmap-hint">اسحب الخريطة لتحريكها وقرّبها بإصبعين أو بالزرين، ثم اضغط على أي ميناء لترى هل يرتفع الماء فيه الآن، وموعد المد والجزر القادمين، وتقييم الصيد اليوم.</p>
   </div>
   <script type="application/json" set:html={JSON.stringify(cfg)} />
 </div>

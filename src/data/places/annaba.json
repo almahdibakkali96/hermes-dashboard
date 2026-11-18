@@ -1,0 +1,94 @@
+{
+ "id": "annaba",
+ "name_en": "Annaba",
+ "name_ar": "عنابة",
+ "country": "DZ",
+ "lat": 36.9,
+ "lon": 7.77,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 36.875,
+  "lon": 7.875,
+  "distance_km": 9.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.42319,
+   "phase": -74.789
+  },
+  "J1": {
+   "amp": 0.2102,
+   "phase": 101.966
+  },
+  "K1": {
+   "amp": 3.6402,
+   "phase": -175.551
+  },
+  "K2": {
+   "amp": 1.22068,
+   "phase": -108.866
+  },
+  "M2": {
+   "amp": 5.88381,
+   "phase": -129.552
+  },
+  "M4": {
+   "amp": 0.44297,
+   "phase": -12.582
+  },
+  "MF": {
+   "amp": 0.17671,
+   "phase": -14.663
+  },
+  "MM": {
+   "amp": 0.45008,
+   "phase": -144.119
+  },
+  "N2": {
+   "amp": 1.05595,
+   "phase": -149.55
+  },
+  "O1": {
+   "amp": 1.52772,
+   "phase": 117.397
+  },
+  "P1": {
+   "amp": 0.79205,
+   "phase": 157.488
+  },
+  "Q1": {
+   "amp": 0.38352,
+   "phase": 82.688
+  },
+  "S1": {
+   "amp": 1.34781,
+   "phase": 28.626
+  },
+  "S2": {
+   "amp": 1.99155,
+   "phase": -109.901
+  },
+  "SA": {
+   "amp": 3.70342,
+   "phase": -61.363
+  },
+  "SSA": {
+   "amp": 0.2064,
+   "phase": -159.207
+  },
+  "T2": {
+   "amp": 0.39825,
+   "phase": -50.439
+  },
+  "Z0": {
+   "amp": 15.5,
+   "phase": 0
+  }
+ }
+}

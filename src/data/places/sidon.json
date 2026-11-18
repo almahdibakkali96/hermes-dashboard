@@ -1,0 +1,94 @@
+{
+ "id": "sidon",
+ "name_en": "Sidon",
+ "name_ar": "صيدا",
+ "country": "LB",
+ "lat": 33.56,
+ "lon": 35.37,
+ "timezone": "Asia/Beirut",
+ "grid": {
+  "lat": 33.625,
+  "lon": 35.375,
+  "distance_km": 7.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.28545,
+   "phase": 128.374
+  },
+  "J1": {
+   "amp": 0.22005,
+   "phase": -25.429
+  },
+  "K1": {
+   "amp": 2.89422,
+   "phase": -79.164
+  },
+  "K2": {
+   "amp": 1.82126,
+   "phase": -117.077
+  },
+  "M2": {
+   "amp": 11.73216,
+   "phase": -122.775
+  },
+  "M4": {
+   "amp": 0.31705,
+   "phase": -73.053
+  },
+  "MF": {
+   "amp": 0.47232,
+   "phase": 5.057
+  },
+  "MM": {
+   "amp": 0.38877,
+   "phase": -25.088
+  },
+  "N2": {
+   "amp": 2.19188,
+   "phase": -120.687
+  },
+  "O1": {
+   "amp": 2.06271,
+   "phase": -107.707
+  },
+  "P1": {
+   "amp": 0.91568,
+   "phase": -68.633
+  },
+  "Q1": {
+   "amp": 0.59749,
+   "phase": -120.704
+  },
+  "S1": {
+   "amp": 1.03541,
+   "phase": -17.738
+  },
+  "S2": {
+   "amp": 6.75094,
+   "phase": -107.488
+  },
+  "SA": {
+   "amp": 3.97138,
+   "phase": -82.591
+  },
+  "SSA": {
+   "amp": 0.00653,
+   "phase": 173.192
+  },
+  "T2": {
+   "amp": 0.53518,
+   "phase": -79.392
+  },
+  "Z0": {
+   "amp": 27,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "manifa",
+ "name_en": "Manifa",
+ "name_ar": "منيفة",
+ "country": "SA",
+ "lat": 27.62,
+ "lon": 48.98,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 27.625,
+  "lon": 49,
+  "distance_km": 2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.78095,
+   "phase": -145.808
+  },
+  "J1": {
+   "amp": 1.43388,
+   "phase": -106.786
+  },
+  "K1": {
+   "amp": 34.74554,
+   "phase": -89.743
+  },
+  "K2": {
+   "amp": 3.38869,
+   "phase": 44.609
+  },
+  "M2": {
+   "amp": 25.09606,
+   "phase": -0.492
+  },
+  "M4": {
+   "amp": 5.06637,
+   "phase": -121.207
+  },
+  "MF": {
+   "amp": 0.13109,
+   "phase": -161.719
+  },
+  "MM": {
+   "amp": 1.23222,
+   "phase": 42.348
+  },
+  "N2": {
+   "amp": 4.84408,
+   "phase": -27.174
+  },
+  "O1": {
+   "amp": 21.89082,
+   "phase": -133.779
+  },
+  "P1": {
+   "amp": 10.35908,
+   "phase": -100.561
+  },
+  "Q1": {
+   "amp": 4.24031,
+   "phase": -149.517
+  },
+  "S1": {
+   "amp": 1.87603,
+   "phase": 22.762
+  },
+  "S2": {
+   "amp": 9.49183,
+   "phase": 61.333
+  },
+  "SA": {
+   "amp": 2.98055,
+   "phase": -81.184
+  },
+  "SSA": {
+   "amp": 0.48909,
+   "phase": 170.148
+  },
+  "T2": {
+   "amp": 0.43596,
+   "phase": 85.249
+  },
+  "Z0": {
+   "amp": 109,
+   "phase": 0
+  }
+ }
+}

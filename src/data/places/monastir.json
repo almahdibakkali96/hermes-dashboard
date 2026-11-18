@@ -1,0 +1,94 @@
+{
+ "id": "monastir",
+ "name_en": "Monastir",
+ "name_ar": "المنستير",
+ "country": "TN",
+ "lat": 35.78,
+ "lon": 10.83,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 35.75,
+  "lon": 10.875,
+  "distance_km": 5.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.08711,
+   "phase": 11.845
+  },
+  "J1": {
+   "amp": 0.62257,
+   "phase": -85.149
+  },
+  "K1": {
+   "amp": 0.09072,
+   "phase": -152.42
+  },
+  "K2": {
+   "amp": 1.33824,
+   "phase": 15.802
+  },
+  "M2": {
+   "amp": 5.84523,
+   "phase": 2.052
+  },
+  "M4": {
+   "amp": 0.22242,
+   "phase": -117.507
+  },
+  "MF": {
+   "amp": 0.41531,
+   "phase": -8.317
+  },
+  "MM": {
+   "amp": 0.91134,
+   "phase": -86.202
+  },
+  "N2": {
+   "amp": 0.70079,
+   "phase": 3.892
+  },
+  "O1": {
+   "amp": 0.73874,
+   "phase": 57.722
+  },
+  "P1": {
+   "amp": 0.2101,
+   "phase": -66.18
+  },
+  "Q1": {
+   "amp": 0.31217,
+   "phase": 4.214
+  },
+  "S1": {
+   "amp": 1.56878,
+   "phase": 5.53
+  },
+  "S2": {
+   "amp": 4.9654,
+   "phase": 29.525
+  },
+  "SA": {
+   "amp": 3.97415,
+   "phase": -65.739
+  },
+  "SSA": {
+   "amp": 0.21271,
+   "phase": -151.398
+  },
+  "T2": {
+   "amp": 0.35974,
+   "phase": 20.227
+  },
+  "Z0": {
+   "amp": 18.2,
+   "phase": 0
+  }
+ }
+}

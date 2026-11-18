@@ -1,0 +1,94 @@
+{
+ "id": "safaga",
+ "name_en": "Safaga",
+ "name_ar": "سفاجا",
+ "country": "EG",
+ "lat": 26.74,
+ "lon": 33.94,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 26.75,
+  "lon": 34,
+  "distance_km": 6.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.61366,
+   "phase": 28.868
+  },
+  "J1": {
+   "amp": 0.43734,
+   "phase": 140.97
+  },
+  "K1": {
+   "amp": 2.18434,
+   "phase": 143.703
+  },
+  "K2": {
+   "amp": 2.49431,
+   "phase": 133.053
+  },
+  "M2": {
+   "amp": 24.78302,
+   "phase": 115.368
+  },
+  "M4": {
+   "amp": 0.18592,
+   "phase": -56.427
+  },
+  "MF": {
+   "amp": 1.03087,
+   "phase": 33.897
+  },
+  "MM": {
+   "amp": 0.17654,
+   "phase": -74.884
+  },
+  "N2": {
+   "amp": 8.17888,
+   "phase": 92.456
+  },
+  "O1": {
+   "amp": 0.86981,
+   "phase": 139.082
+  },
+  "P1": {
+   "amp": 0.57932,
+   "phase": 154.913
+  },
+  "Q1": {
+   "amp": 0.33425,
+   "phase": 103.464
+  },
+  "S1": {
+   "amp": 1.65707,
+   "phase": -33.077
+  },
+  "S2": {
+   "amp": 7.9707,
+   "phase": 144.057
+  },
+  "SA": {
+   "amp": 8.79054,
+   "phase": 23.12
+  },
+  "SSA": {
+   "amp": 0.42793,
+   "phase": -149.438
+  },
+  "T2": {
+   "amp": 1.0152,
+   "phase": 147.039
+  },
+  "Z0": {
+   "amp": 52.7,
+   "phase": 0
+  }
+ }
+}

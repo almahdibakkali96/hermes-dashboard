@@ -1,0 +1,94 @@
+{
+ "id": "khafji",
+ "name_en": "Khafji",
+ "name_ar": "الخفجي",
+ "country": "SA",
+ "lat": 28.42,
+ "lon": 48.5,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 28.5,
+  "lon": 48.5,
+  "distance_km": 8.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.0959,
+   "phase": -173.267
+  },
+  "J1": {
+   "amp": 1.9433,
+   "phase": -107.433
+  },
+  "K1": {
+   "amp": 43.21924,
+   "phase": -98.097
+  },
+  "K2": {
+   "amp": 4.32506,
+   "phase": -56.158
+  },
+  "M2": {
+   "amp": 35.8279,
+   "phase": -107.33
+  },
+  "M4": {
+   "amp": 3.38112,
+   "phase": -156.67
+  },
+  "MF": {
+   "amp": 0.18259,
+   "phase": -93.697
+  },
+  "MM": {
+   "amp": 0.94036,
+   "phase": 46.82
+  },
+  "N2": {
+   "amp": 7.89516,
+   "phase": -135.471
+  },
+  "O1": {
+   "amp": 26.09248,
+   "phase": -140.481
+  },
+  "P1": {
+   "amp": 12.62333,
+   "phase": -106.592
+  },
+  "Q1": {
+   "amp": 5.01975,
+   "phase": -155.468
+  },
+  "S1": {
+   "amp": 2.36452,
+   "phase": 27.815
+  },
+  "S2": {
+   "amp": 12.40453,
+   "phase": -50.743
+  },
+  "SA": {
+   "amp": 3.01202,
+   "phase": -86.194
+  },
+  "SSA": {
+   "amp": 0.54226,
+   "phase": 171.933
+  },
+  "T2": {
+   "amp": 0.64181,
+   "phase": -70.358
+  },
+  "Z0": {
+   "amp": 139.1,
+   "phase": 0
+  }
+ }
+}

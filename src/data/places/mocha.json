@@ -1,0 +1,94 @@
+{
+ "id": "mocha",
+ "name_en": "Mocha",
+ "name_ar": "المخا",
+ "country": "YE",
+ "lat": 13.32,
+ "lon": 43.25,
+ "timezone": "Asia/Aden",
+ "grid": {
+  "lat": 13.375,
+  "lon": 43.25,
+  "distance_km": 6.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.7932,
+   "phase": 156.763
+  },
+  "J1": {
+   "amp": 0.87378,
+   "phase": 15.183
+  },
+  "K1": {
+   "amp": 16.59701,
+   "phase": -2.629
+  },
+  "K2": {
+   "amp": 0.85962,
+   "phase": 154.738
+  },
+  "M2": {
+   "amp": 10.08201,
+   "phase": -121.381
+  },
+  "M4": {
+   "amp": 0.2409,
+   "phase": -137.339
+  },
+  "MF": {
+   "amp": 1.25076,
+   "phase": 6.501
+  },
+  "MM": {
+   "amp": 0.41552,
+   "phase": -53.439
+  },
+  "N2": {
+   "amp": 6.56369,
+   "phase": -136.97
+  },
+  "O1": {
+   "amp": 8.18129,
+   "phase": 1.977
+  },
+  "P1": {
+   "amp": 4.52125,
+   "phase": -10.536
+  },
+  "Q1": {
+   "amp": 1.54303,
+   "phase": -3.217
+  },
+  "S1": {
+   "amp": 1.96325,
+   "phase": 51.207
+  },
+  "S2": {
+   "amp": 2.98115,
+   "phase": -169.936
+  },
+  "SA": {
+   "amp": 5.92141,
+   "phase": 43.817
+  },
+  "SSA": {
+   "amp": 0.24437,
+   "phase": -31.904
+  },
+  "T2": {
+   "amp": 0.6466,
+   "phase": 107.356
+  },
+  "Z0": {
+   "amp": 59.6,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "tipaza",
+ "name_en": "Tipaza",
+ "name_ar": "تيبازة",
+ "country": "DZ",
+ "lat": 36.6,
+ "lon": 2.45,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 36.625,
+  "lon": 2.5,
+  "distance_km": 5.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.44094,
+   "phase": 112.165
+  },
+  "J1": {
+   "amp": 0.28428,
+   "phase": -170.869
+  },
+  "K1": {
+   "amp": 3.7893,
+   "phase": 168.052
+  },
+  "K2": {
+   "amp": 0.08482,
+   "phase": 84.881
+  },
+  "M2": {
+   "amp": 1.71364,
+   "phase": 162.62
+  },
+  "M4": {
+   "amp": 0.57489,
+   "phase": -95.554
+  },
+  "MF": {
+   "amp": 0.14419,
+   "phase": -40.262
+  },
+  "MM": {
+   "amp": 0.53198,
+   "phase": -53.214
+  },
+  "N2": {
+   "amp": 0.62136,
+   "phase": 126.962
+  },
+  "O1": {
+   "amp": 1.90458,
+   "phase": 110.77
+  },
+  "P1": {
+   "amp": 1.41953,
+   "phase": 164.658
+  },
+  "Q1": {
+   "amp": 0.18954,
+   "phase": 51.755
+  },
+  "S1": {
+   "amp": 1.28379,
+   "phase": 21.91
+  },
+  "S2": {
+   "amp": 0.66448,
+   "phase": 135.6
+  },
+  "SA": {
+   "amp": 3.50053,
+   "phase": -75.93
+  },
+  "SSA": {
+   "amp": 0.19491,
+   "phase": 177.934
+  },
+  "T2": {
+   "amp": 0.30446,
+   "phase": -48.879
+  },
+  "Z0": {
+   "amp": 11.6,
+   "phase": 0
+  }
+ }
+}

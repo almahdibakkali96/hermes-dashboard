@@ -1,0 +1,94 @@
+{
+ "id": "shinas",
+ "name_en": "Shinas",
+ "name_ar": "شناص",
+ "country": "OM",
+ "lat": 24.74,
+ "lon": 56.47,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 24.75,
+  "lon": 56.5,
+  "distance_km": 3.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.49797,
+   "phase": 106.135
+  },
+  "J1": {
+   "amp": 2.12452,
+   "phase": -10.76
+  },
+  "K1": {
+   "amp": 39.60417,
+   "phase": -18.605
+  },
+  "K2": {
+   "amp": 7.35652,
+   "phase": -176.388
+  },
+  "M2": {
+   "amp": 68.72961,
+   "phase": 160.119
+  },
+  "M4": {
+   "amp": 0.62579,
+   "phase": -136.369
+  },
+  "MF": {
+   "amp": 1.01909,
+   "phase": 17.458
+  },
+  "MM": {
+   "amp": 0.37422,
+   "phase": 44.172
+  },
+  "N2": {
+   "amp": 16.66298,
+   "phase": 142.132
+  },
+  "O1": {
+   "amp": 20.48795,
+   "phase": -17.091
+  },
+  "P1": {
+   "amp": 12.35982,
+   "phase": -23
+  },
+  "Q1": {
+   "amp": 4.1212,
+   "phase": -17.767
+  },
+  "S1": {
+   "amp": 1.18948,
+   "phase": 115.812
+  },
+  "S2": {
+   "amp": 26.77018,
+   "phase": -169.06
+  },
+  "SA": {
+   "amp": 1.19135,
+   "phase": 11.083
+  },
+  "SSA": {
+   "amp": 0.28489,
+   "phase": -53.134
+  },
+  "T2": {
+   "amp": 1.50944,
+   "phase": 179.122
+  },
+  "Z0": {
+   "amp": 189.4,
+   "phase": 0
+  }
+ }
+}

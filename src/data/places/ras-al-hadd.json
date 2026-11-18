@@ -1,0 +1,94 @@
+{
+ "id": "ras-al-hadd",
+ "name_en": "Ras Al Hadd",
+ "name_ar": "رأس الحد",
+ "country": "OM",
+ "lat": 22.53,
+ "lon": 59.8,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 22.5,
+  "lon": 59.875,
+  "distance_km": 8.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.29572,
+   "phase": 97.445
+  },
+  "J1": {
+   "amp": 2.23294,
+   "phase": -1.113
+  },
+  "K1": {
+   "amp": 39.23923,
+   "phase": -19.444
+  },
+  "K2": {
+   "amp": 6.23563,
+   "phase": 179.067
+  },
+  "M2": {
+   "amp": 60.81766,
+   "phase": 157.687
+  },
+  "M4": {
+   "amp": 0.53857,
+   "phase": -151.592
+  },
+  "MF": {
+   "amp": 0.87694,
+   "phase": 17.031
+  },
+  "MM": {
+   "amp": 0.57825,
+   "phase": 23.345
+  },
+  "N2": {
+   "amp": 15.00585,
+   "phase": 140.262
+  },
+  "O1": {
+   "amp": 19.74469,
+   "phase": -18.748
+  },
+  "P1": {
+   "amp": 11.63674,
+   "phase": -18.117
+  },
+  "Q1": {
+   "amp": 4.18432,
+   "phase": -16.658
+  },
+  "S1": {
+   "amp": 2.35818,
+   "phase": 137.08
+  },
+  "S2": {
+   "amp": 23.47319,
+   "phase": -170.951
+  },
+  "SA": {
+   "amp": 2.43259,
+   "phase": 75.501
+  },
+  "SSA": {
+   "amp": 0.17435,
+   "phase": -22.788
+  },
+  "T2": {
+   "amp": 1.77369,
+   "phase": -172.152
+  },
+  "Z0": {
+   "amp": 179.3,
+   "phase": 0
+  }
+ }
+}

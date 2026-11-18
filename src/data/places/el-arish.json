@@ -1,0 +1,94 @@
+{
+ "id": "el-arish",
+ "name_en": "El Arish",
+ "name_ar": "العريش",
+ "country": "EG",
+ "lat": 31.13,
+ "lon": 33.8,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 31.25,
+  "lon": 33.75,
+  "distance_km": 14.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.2452,
+   "phase": -126.07
+  },
+  "J1": {
+   "amp": 0.13019,
+   "phase": 157.046
+  },
+  "K1": {
+   "amp": 2.33615,
+   "phase": -85.935
+  },
+  "K2": {
+   "amp": 1.9981,
+   "phase": -108.616
+  },
+  "M2": {
+   "amp": 11.62264,
+   "phase": -119.295
+  },
+  "M4": {
+   "amp": 0.43209,
+   "phase": -156.165
+  },
+  "MF": {
+   "amp": 0.85938,
+   "phase": 6.73
+  },
+  "MM": {
+   "amp": 0.20967,
+   "phase": -24.598
+  },
+  "N2": {
+   "amp": 2.05081,
+   "phase": -121.172
+  },
+  "O1": {
+   "amp": 1.4583,
+   "phase": -115.357
+  },
+  "P1": {
+   "amp": 0.72717,
+   "phase": -85.354
+  },
+  "Q1": {
+   "amp": 0.37875,
+   "phase": -27.947
+  },
+  "S1": {
+   "amp": 0.96358,
+   "phase": 35.533
+  },
+  "S2": {
+   "amp": 6.26599,
+   "phase": -108.203
+  },
+  "SA": {
+   "amp": 4.22304,
+   "phase": -79.928
+  },
+  "SSA": {
+   "amp": 0.13711,
+   "phase": -29.518
+  },
+  "T2": {
+   "amp": 0.54349,
+   "phase": -63.396
+  },
+  "Z0": {
+   "amp": 25.8,
+   "phase": 0
+  }
+ }
+}

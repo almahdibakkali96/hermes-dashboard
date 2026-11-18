@@ -1,0 +1,94 @@
+{
+ "id": "al-ruwais-qa",
+ "name_en": "Al Ruwais (Qatar)",
+ "name_ar": "الرويس (قطر)",
+ "country": "QA",
+ "lat": 26.14,
+ "lon": 51.21,
+ "timezone": "Asia/Qatar",
+ "grid": {
+  "lat": 26.125,
+  "lon": 51.125,
+  "distance_km": 8.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.18561,
+   "phase": -22.076
+  },
+  "J1": {
+   "amp": 0.76967,
+   "phase": 96.412
+  },
+  "K1": {
+   "amp": 12.62875,
+   "phase": 18.085
+  },
+  "K2": {
+   "amp": 4.54017,
+   "phase": 103.04
+  },
+  "M2": {
+   "amp": 49.756,
+   "phase": 53.031
+  },
+  "M4": {
+   "amp": 0.94728,
+   "phase": 2.817
+  },
+  "MF": {
+   "amp": 0.3765,
+   "phase": 14.515
+  },
+  "MM": {
+   "amp": 0.77246,
+   "phase": 32.73
+  },
+  "N2": {
+   "amp": 9.11035,
+   "phase": 25.771
+  },
+  "O1": {
+   "amp": 7.99139,
+   "phase": -56.721
+  },
+  "P1": {
+   "amp": 4.01124,
+   "phase": 5.406
+  },
+  "Q1": {
+   "amp": 1.75131,
+   "phase": -79.464
+  },
+  "S1": {
+   "amp": 1.60009,
+   "phase": 68.702
+  },
+  "S2": {
+   "amp": 14.51983,
+   "phase": 105.749
+  },
+  "SA": {
+   "amp": 2.84026,
+   "phase": -71.324
+  },
+  "SSA": {
+   "amp": 0.40213,
+   "phase": 175.305
+  },
+  "T2": {
+   "amp": 1.27233,
+   "phase": 129.865
+  },
+  "Z0": {
+   "amp": 91.6,
+   "phase": 0
+  }
+ }
+}

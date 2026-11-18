@@ -1,0 +1,94 @@
+{
+ "id": "al-lith",
+ "name_en": "Al Lith",
+ "name_ar": "الليث",
+ "country": "SA",
+ "lat": 20.15,
+ "lon": 40.27,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 20.125,
+  "lon": 40.25,
+  "distance_km": 3.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.41569,
+   "phase": -127.695
+  },
+  "J1": {
+   "amp": 0.24701,
+   "phase": -87.618
+  },
+  "K1": {
+   "amp": 3.16951,
+   "phase": 161.652
+  },
+  "K2": {
+   "amp": 0.25021,
+   "phase": 45.293
+  },
+  "M2": {
+   "amp": 3.10118,
+   "phase": -27.384
+  },
+  "M4": {
+   "amp": 0.2661,
+   "phase": -86.611
+  },
+  "MF": {
+   "amp": 1.0907,
+   "phase": 23.522
+  },
+  "MM": {
+   "amp": 0.20939,
+   "phase": -22.325
+  },
+  "N2": {
+   "amp": 1.19068,
+   "phase": -40.48
+  },
+  "O1": {
+   "amp": 1.82608,
+   "phase": 168.594
+  },
+  "P1": {
+   "amp": 1.27229,
+   "phase": 137.456
+  },
+  "Q1": {
+   "amp": 0.0787,
+   "phase": 75.755
+  },
+  "S1": {
+   "amp": 1.34904,
+   "phase": -53.195
+  },
+  "S2": {
+   "amp": 1.04203,
+   "phase": 2.336
+  },
+  "SA": {
+   "amp": 9.23356,
+   "phase": 27.385
+  },
+  "SSA": {
+   "amp": 0.26628,
+   "phase": -137.922
+  },
+  "T2": {
+   "amp": 0.69022,
+   "phase": 81.364
+  },
+  "Z0": {
+   "amp": 17.1,
+   "phase": 0
+  }
+ }
+}

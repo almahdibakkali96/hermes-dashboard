@@ -1,0 +1,94 @@
+{
+ "id": "laayoune",
+ "name_en": "Laayoune (Foum El Oued)",
+ "name_ar": "العيون (فم الواد)",
+ "country": "MA",
+ "lat": 27.17,
+ "lon": -13.4,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 27.25,
+  "lon": -13.375,
+  "distance_km": 9.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.19144,
+   "phase": -7.329
+  },
+  "J1": {
+   "amp": 0.2343,
+   "phase": 34.003
+  },
+  "K1": {
+   "amp": 6.58979,
+   "phase": 36.232
+  },
+  "K2": {
+   "amp": 8.38041,
+   "phase": 43.447
+  },
+  "M2": {
+   "amp": 76.06018,
+   "phase": 23.911
+  },
+  "M4": {
+   "amp": 0.99449,
+   "phase": 80.913
+  },
+  "MF": {
+   "amp": 0.79862,
+   "phase": -5.681
+  },
+  "MM": {
+   "amp": 0.5456,
+   "phase": -51.77
+  },
+  "N2": {
+   "amp": 15.7177,
+   "phase": 10.712
+  },
+  "O1": {
+   "amp": 5.13406,
+   "phase": -73.103
+  },
+  "P1": {
+   "amp": 1.90234,
+   "phase": 30.162
+  },
+  "Q1": {
+   "amp": 1.72406,
+   "phase": -117.512
+  },
+  "S1": {
+   "amp": 0.936,
+   "phase": 13.636
+  },
+  "S2": {
+   "amp": 29.90065,
+   "phase": 48.256
+  },
+  "SA": {
+   "amp": 2.21723,
+   "phase": -55.992
+  },
+  "SSA": {
+   "amp": 0.05859,
+   "phase": -35
+  },
+  "T2": {
+   "amp": 1.83022,
+   "phase": 44.204
+  },
+  "Z0": {
+   "amp": 136.5,
+   "phase": 0
+  }
+ }
+}

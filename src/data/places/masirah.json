@@ -1,0 +1,94 @@
+{
+ "id": "masirah",
+ "name_en": "Masirah",
+ "name_ar": "مصيرة",
+ "country": "OM",
+ "lat": 20.68,
+ "lon": 58.87,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 20.75,
+  "lon": 58.875,
+  "distance_km": 7.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.03457,
+   "phase": 106.852
+  },
+  "J1": {
+   "amp": 2.12893,
+   "phase": -7.392
+  },
+  "K1": {
+   "amp": 38.50733,
+   "phase": -17.254
+  },
+  "K2": {
+   "amp": 5.67763,
+   "phase": -178.308
+  },
+  "M2": {
+   "amp": 54.76609,
+   "phase": 159.216
+  },
+  "M4": {
+   "amp": 0.5752,
+   "phase": -156.42
+  },
+  "MF": {
+   "amp": 1.0695,
+   "phase": 17.731
+  },
+  "MM": {
+   "amp": 0.56539,
+   "phase": 11.262
+  },
+  "N2": {
+   "amp": 13.75753,
+   "phase": 141.515
+  },
+  "O1": {
+   "amp": 19.72747,
+   "phase": -16.938
+  },
+  "P1": {
+   "amp": 11.82126,
+   "phase": -17.082
+  },
+  "Q1": {
+   "amp": 4.18042,
+   "phase": -12.884
+  },
+  "S1": {
+   "amp": 3.08762,
+   "phase": 109.841
+  },
+  "S2": {
+   "amp": 20.7895,
+   "phase": -171.551
+  },
+  "SA": {
+   "amp": 2.42687,
+   "phase": 71.998
+  },
+  "SSA": {
+   "amp": 0.19196,
+   "phase": -51.82
+  },
+  "T2": {
+   "amp": 1.70845,
+   "phase": -157.659
+  },
+  "Z0": {
+   "amp": 169.4,
+   "phase": 0
+  }
+ }
+}

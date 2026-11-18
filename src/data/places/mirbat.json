@@ -1,0 +1,94 @@
+{
+ "id": "mirbat",
+ "name_en": "Mirbat",
+ "name_ar": "مرباط",
+ "country": "OM",
+ "lat": 16.99,
+ "lon": 54.69,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 17,
+  "lon": 54.625,
+  "distance_km": 7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.58734,
+   "phase": 98.284
+  },
+  "J1": {
+   "amp": 2.06134,
+   "phase": -0.117
+  },
+  "K1": {
+   "amp": 35.7446,
+   "phase": -15.583
+  },
+  "K2": {
+   "amp": 3.35727,
+   "phase": 160.889
+  },
+  "M2": {
+   "amp": 31.45062,
+   "phase": 144.595
+  },
+  "M4": {
+   "amp": 0.12036,
+   "phase": 168.532
+  },
+  "MF": {
+   "amp": 1.41086,
+   "phase": 15.665
+  },
+  "MM": {
+   "amp": 0.40007,
+   "phase": 57.734
+  },
+  "N2": {
+   "amp": 8.50951,
+   "phase": 132.429
+  },
+  "O1": {
+   "amp": 18.26176,
+   "phase": -13.894
+  },
+  "P1": {
+   "amp": 10.89943,
+   "phase": -16.255
+  },
+  "Q1": {
+   "amp": 4.27197,
+   "phase": -8.467
+  },
+  "S1": {
+   "amp": 2.38863,
+   "phase": 109.699
+  },
+  "S2": {
+   "amp": 11.83961,
+   "phase": 170.552
+  },
+  "SA": {
+   "amp": 6.32915,
+   "phase": 52.194
+  },
+  "SSA": {
+   "amp": 0.19965,
+   "phase": -76.506
+  },
+  "T2": {
+   "amp": 0.67365,
+   "phase": 148.69
+  },
+  "Z0": {
+   "amp": 127.9,
+   "phase": 0
+  }
+ }
+}

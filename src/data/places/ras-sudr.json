@@ -1,0 +1,94 @@
+{
+ "id": "ras-sudr",
+ "name_en": "Ras Sudr",
+ "name_ar": "رأس سدر",
+ "country": "EG",
+ "lat": 29.59,
+ "lon": 32.7,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 29.625,
+  "lon": 32.625,
+  "distance_km": 8.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.62967,
+   "phase": -168.906
+  },
+  "J1": {
+   "amp": 1.2282,
+   "phase": -31.888
+  },
+  "K1": {
+   "amp": 4.74014,
+   "phase": 153.731
+  },
+  "K2": {
+   "amp": 2.65723,
+   "phase": -45.156
+  },
+  "M2": {
+   "amp": 55.76772,
+   "phase": -85.641
+  },
+  "M4": {
+   "amp": 2.01802,
+   "phase": -21.227
+  },
+  "MF": {
+   "amp": 0.72293,
+   "phase": 52.613
+  },
+  "MM": {
+   "amp": 1.28017,
+   "phase": -7.572
+  },
+  "N2": {
+   "amp": 19.13015,
+   "phase": -116.25
+  },
+  "O1": {
+   "amp": 1.17073,
+   "phase": 174.927
+  },
+  "P1": {
+   "amp": 0.89737,
+   "phase": 163.219
+  },
+  "Q1": {
+   "amp": 0.92104,
+   "phase": -108.016
+  },
+  "S1": {
+   "amp": 1.68678,
+   "phase": -10.489
+  },
+  "S2": {
+   "amp": 14.68429,
+   "phase": -61.8
+  },
+  "SA": {
+   "amp": 9.02942,
+   "phase": 18.232
+  },
+  "SSA": {
+   "amp": 0.5137,
+   "phase": -155.446
+  },
+  "T2": {
+   "amp": 1.91073,
+   "phase": -16.122
+  },
+  "Z0": {
+   "amp": 106.3,
+   "phase": 0
+  }
+ }
+}

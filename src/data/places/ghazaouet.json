@@ -1,0 +1,94 @@
+{
+ "id": "ghazaouet",
+ "name_en": "Ghazaouet",
+ "name_ar": "الغزوات",
+ "country": "DZ",
+ "lat": 35.1,
+ "lon": -1.86,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 35.125,
+  "lon": -1.875,
+  "distance_km": 3.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.09592,
+   "phase": -122.889
+  },
+  "J1": {
+   "amp": 0.23893,
+   "phase": 139.79
+  },
+  "K1": {
+   "amp": 4.12691,
+   "phase": 155.832
+  },
+  "K2": {
+   "amp": 0.81368,
+   "phase": 111.059
+  },
+  "M2": {
+   "amp": 9.99005,
+   "phase": 66.279
+  },
+  "M4": {
+   "amp": 0.89196,
+   "phase": -178.638
+  },
+  "MF": {
+   "amp": 0.17863,
+   "phase": -134.031
+  },
+  "MM": {
+   "amp": 0.64258,
+   "phase": -76.96
+  },
+  "N2": {
+   "amp": 2.0044,
+   "phase": 44.687
+  },
+  "O1": {
+   "amp": 2.11952,
+   "phase": 103.915
+  },
+  "P1": {
+   "amp": 1.02679,
+   "phase": 148.54
+  },
+  "Q1": {
+   "amp": 0.37427,
+   "phase": 21.946
+  },
+  "S1": {
+   "amp": 1.53643,
+   "phase": 16.438
+  },
+  "S2": {
+   "amp": 4.27126,
+   "phase": 88.509
+  },
+  "SA": {
+   "amp": 4.12347,
+   "phase": -88.665
+  },
+  "SSA": {
+   "amp": 0.19666,
+   "phase": -161.572
+  },
+  "T2": {
+   "amp": 0.39223,
+   "phase": -107.308
+  },
+  "Z0": {
+   "amp": 25,
+   "phase": 0
+  }
+ }
+}

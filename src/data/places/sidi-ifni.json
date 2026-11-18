@@ -1,0 +1,94 @@
+{
+ "id": "sidi-ifni",
+ "name_en": "Sidi Ifni",
+ "name_ar": "سيدي إفني",
+ "country": "MA",
+ "lat": 29.38,
+ "lon": -10.18,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 29.375,
+  "lon": -10.25,
+  "distance_km": 6.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.83234,
+   "phase": 12.39
+  },
+  "J1": {
+   "amp": 0.28312,
+   "phase": 60.86
+  },
+  "K1": {
+   "amp": 6.79392,
+   "phase": 45.055
+  },
+  "K2": {
+   "amp": 10.05719,
+   "phase": 62.874
+  },
+  "M2": {
+   "amp": 94.80714,
+   "phase": 42.001
+  },
+  "M4": {
+   "amp": 1.79427,
+   "phase": 140.578
+  },
+  "MF": {
+   "amp": 0.23463,
+   "phase": -22.356
+  },
+  "MM": {
+   "amp": 0.18722,
+   "phase": -45.948
+  },
+  "N2": {
+   "amp": 19.95921,
+   "phase": 27.04
+  },
+  "O1": {
+   "amp": 6.01977,
+   "phase": -58.937
+  },
+  "P1": {
+   "amp": 2.23504,
+   "phase": 38.533
+  },
+  "Q1": {
+   "amp": 1.72925,
+   "phase": -108.812
+  },
+  "S1": {
+   "amp": 0.41189,
+   "phase": 139.876
+  },
+  "S2": {
+   "amp": 35.72922,
+   "phase": 66.52
+  },
+  "SA": {
+   "amp": 2.34895,
+   "phase": -43.474
+  },
+  "SSA": {
+   "amp": 0.03192,
+   "phase": -21.789
+  },
+  "T2": {
+   "amp": 2.25103,
+   "phase": 57.826
+  },
+  "Z0": {
+   "amp": 168.1,
+   "phase": 0
+  }
+ }
+}

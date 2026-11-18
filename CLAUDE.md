@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-**ArabTides** (repo name `hermes-dashboard`, package `arab-tides`): an Arabic-first, RTL, fully static Astro 7 + Tailwind 4 site showing computed tides, sun/moon times, solunar/fishing ratings, Hijri dates and prayer times for ~36 Arab ports. `SPRINT.md` is the original product spec (design direction, required features, Arabic language rules) — consult it for intent.
+**ArabTides** (repo name `hermes-dashboard`, package `arab-tides`): an Arabic-first, RTL, fully static Astro 7 + Tailwind 4 site showing computed tides, sun/moon times, solunar/fishing ratings, Hijri dates and prayer times for ~165 Arab ports and beaches, plus ~224 places worldwide. `SPRINT.md` is the original product spec (design direction, required features, Arabic language rules) — consult it for intent.
 
 ## Commands
 

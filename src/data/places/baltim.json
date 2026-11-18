@@ -1,0 +1,94 @@
+{
+ "id": "baltim",
+ "name_en": "Baltim",
+ "name_ar": "بلطيم",
+ "country": "EG",
+ "lat": 31.6,
+ "lon": 31.09,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 31.625,
+  "lon": 31.125,
+  "distance_km": 4.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.29314,
+   "phase": -153.776
+  },
+  "J1": {
+   "amp": 0.10005,
+   "phase": -98.55
+  },
+  "K1": {
+   "amp": 2.32188,
+   "phase": -79.476
+  },
+  "K2": {
+   "amp": 1.57634,
+   "phase": -112.869
+  },
+  "M2": {
+   "amp": 9.20245,
+   "phase": -119.989
+  },
+  "M4": {
+   "amp": 0.06856,
+   "phase": 75.873
+  },
+  "MF": {
+   "amp": 0.32554,
+   "phase": -56.564
+  },
+  "MM": {
+   "amp": 0.23317,
+   "phase": -129.247
+  },
+  "N2": {
+   "amp": 1.49313,
+   "phase": -112.295
+  },
+  "O1": {
+   "amp": 1.57149,
+   "phase": -115.988
+  },
+  "P1": {
+   "amp": 0.83465,
+   "phase": -77.632
+  },
+  "Q1": {
+   "amp": 0.32617,
+   "phase": -169.472
+  },
+  "S1": {
+   "amp": 0.67123,
+   "phase": 41.744
+  },
+  "S2": {
+   "amp": 5.23309,
+   "phase": -111.021
+  },
+  "SA": {
+   "amp": 3.80795,
+   "phase": -71.697
+  },
+  "SSA": {
+   "amp": 0.16498,
+   "phase": -50.349
+  },
+  "T2": {
+   "amp": 0.66701,
+   "phase": -71.126
+  },
+  "Z0": {
+   "amp": 22,
+   "phase": 0
+  }
+ }
+}

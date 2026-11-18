@@ -1,0 +1,94 @@
+{
+ "id": "yanbu",
+ "name_en": "Yanbu",
+ "name_ar": "ينبع",
+ "country": "SA",
+ "lat": 24.09,
+ "lon": 38.05,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 24,
+  "lon": 38,
+  "distance_km": 11.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.79563,
+   "phase": 43.4
+  },
+  "J1": {
+   "amp": 0.28267,
+   "phase": -0.508
+  },
+  "K1": {
+   "amp": 2.85129,
+   "phase": 164.051
+  },
+  "K2": {
+   "amp": 2.26668,
+   "phase": 134.914
+  },
+  "M2": {
+   "amp": 16.29738,
+   "phase": 115.112
+  },
+  "M4": {
+   "amp": 0.47597,
+   "phase": -59.468
+  },
+  "MF": {
+   "amp": 0.85492,
+   "phase": 47.014
+  },
+  "MM": {
+   "amp": 0.30305,
+   "phase": -37.812
+  },
+  "N2": {
+   "amp": 5.33723,
+   "phase": 81.681
+  },
+  "O1": {
+   "amp": 2.28446,
+   "phase": 179.174
+  },
+  "P1": {
+   "amp": 0.75466,
+   "phase": 130.377
+  },
+  "Q1": {
+   "amp": 0.25668,
+   "phase": -164.183
+  },
+  "S1": {
+   "amp": 0.71613,
+   "phase": -111.231
+  },
+  "S2": {
+   "amp": 5.2832,
+   "phase": 141.036
+  },
+  "SA": {
+   "amp": 8.72583,
+   "phase": 24.152
+  },
+  "SSA": {
+   "amp": 0.32049,
+   "phase": -149.256
+  },
+  "T2": {
+   "amp": 0.93179,
+   "phase": 120.631
+  },
+  "Z0": {
+   "amp": 38.8,
+   "phase": 0
+  }
+ }
+}

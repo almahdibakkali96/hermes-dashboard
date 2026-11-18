@@ -1,0 +1,94 @@
+{
+ "id": "sharjah",
+ "name_en": "Sharjah",
+ "name_ar": "الشارقة",
+ "country": "AE",
+ "lat": 25.36,
+ "lon": 55.38,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 25.375,
+  "lon": 55.375,
+  "distance_km": 1.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.2883,
+   "phase": -176.719
+  },
+  "J1": {
+   "amp": 0.89408,
+   "phase": 61.561
+  },
+  "K1": {
+   "amp": 21.32968,
+   "phase": 90.823
+  },
+  "K2": {
+   "amp": 4.70586,
+   "phase": -98.53
+  },
+  "M2": {
+   "amp": 47.02482,
+   "phase": -126.411
+  },
+  "M4": {
+   "amp": 0.97363,
+   "phase": 79.596
+  },
+  "MF": {
+   "amp": 0.58098,
+   "phase": 19.147
+  },
+  "MM": {
+   "amp": 1.02377,
+   "phase": 32.146
+  },
+  "N2": {
+   "amp": 10.31932,
+   "phase": -149.111
+  },
+  "O1": {
+   "amp": 16.43391,
+   "phase": 42.215
+  },
+  "P1": {
+   "amp": 6.02007,
+   "phase": 75.92
+  },
+  "Q1": {
+   "amp": 3.02532,
+   "phase": 20.061
+  },
+  "S1": {
+   "amp": 0.84854,
+   "phase": -47.451
+  },
+  "S2": {
+   "amp": 17.4945,
+   "phase": -85.613
+  },
+  "SA": {
+   "amp": 1.98699,
+   "phase": -51.311
+  },
+  "SSA": {
+   "amp": 0.3133,
+   "phase": -169.617
+  },
+  "T2": {
+   "amp": 0.98439,
+   "phase": -61.838
+  },
+  "Z0": {
+   "amp": 111.3,
+   "phase": 0
+  }
+ }
+}

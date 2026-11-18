@@ -1,0 +1,94 @@
+{
+ "id": "suez",
+ "name_en": "Suez",
+ "name_ar": "السويس",
+ "country": "EG",
+ "lat": 29.94,
+ "lon": 32.56,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 29.875,
+  "lon": 32.5,
+  "distance_km": 9.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.28724,
+   "phase": -175.371
+  },
+  "J1": {
+   "amp": 0.99084,
+   "phase": -47.379
+  },
+  "K1": {
+   "amp": 4.28279,
+   "phase": 160.949
+  },
+  "K2": {
+   "amp": 2.99783,
+   "phase": -49.489
+  },
+  "M2": {
+   "amp": 56.45657,
+   "phase": -85.238
+  },
+  "M4": {
+   "amp": 1.71346,
+   "phase": -19.794
+  },
+  "MF": {
+   "amp": 0.8715,
+   "phase": 32.582
+  },
+  "MM": {
+   "amp": 1.0301,
+   "phase": -1.667
+  },
+  "N2": {
+   "amp": 18.71179,
+   "phase": -114.572
+  },
+  "O1": {
+   "amp": 1.26384,
+   "phase": 168.204
+  },
+  "P1": {
+   "amp": 0.6308,
+   "phase": -176.917
+  },
+  "Q1": {
+   "amp": 0.88093,
+   "phase": -117.745
+  },
+  "S1": {
+   "amp": 1.36737,
+   "phase": -7.073
+  },
+  "S2": {
+   "amp": 14.64798,
+   "phase": -59.992
+  },
+  "SA": {
+   "amp": 6.95293,
+   "phase": 11.002
+  },
+  "SSA": {
+   "amp": 0.38132,
+   "phase": -140.835
+  },
+  "T2": {
+   "amp": 1.94095,
+   "phase": -16.54
+  },
+  "Z0": {
+   "amp": 103.9,
+   "phase": 0
+  }
+ }
+}

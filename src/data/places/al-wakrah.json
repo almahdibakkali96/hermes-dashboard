@@ -1,0 +1,94 @@
+{
+ "id": "al-wakrah",
+ "name_en": "Al Wakrah",
+ "name_ar": "الوكرة",
+ "country": "QA",
+ "lat": 25.17,
+ "lon": 51.61,
+ "timezone": "Asia/Qatar",
+ "grid": {
+  "lat": 25.125,
+  "lon": 51.625,
+  "distance_km": 5.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.19546,
+   "phase": -11.697
+  },
+  "J1": {
+   "amp": 1.69152,
+   "phase": 97.531
+  },
+  "K1": {
+   "amp": 39.53694,
+   "phase": 78.962
+  },
+  "K2": {
+   "amp": 3.14431,
+   "phase": 78.631
+  },
+  "M2": {
+   "amp": 31.20167,
+   "phase": 58.786
+  },
+  "M4": {
+   "amp": 2.55766,
+   "phase": -14.641
+  },
+  "MF": {
+   "amp": 0.83568,
+   "phase": -5.909
+  },
+  "MM": {
+   "amp": 1.0726,
+   "phase": 20.832
+  },
+  "N2": {
+   "amp": 8.6441,
+   "phase": 35.595
+  },
+  "O1": {
+   "amp": 18.00632,
+   "phase": 31.402
+  },
+  "P1": {
+   "amp": 10.92905,
+   "phase": 70.859
+  },
+  "Q1": {
+   "amp": 2.76516,
+   "phase": 11.117
+  },
+  "S1": {
+   "amp": 0.9864,
+   "phase": 7.773
+  },
+  "S2": {
+   "amp": 12.09309,
+   "phase": 83.924
+  },
+  "SA": {
+   "amp": 2.61892,
+   "phase": -68.207
+  },
+  "SSA": {
+   "amp": 0.26179,
+   "phase": 168.488
+  },
+  "T2": {
+   "amp": 1.21633,
+   "phase": 90.366
+  },
+  "Z0": {
+   "amp": 96.4,
+   "phase": 0
+  }
+ }
+}

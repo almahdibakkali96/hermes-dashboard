@@ -1,0 +1,94 @@
+{
+ "id": "quriyat",
+ "name_en": "Quriyat",
+ "name_ar": "قريات",
+ "country": "OM",
+ "lat": 23.26,
+ "lon": 58.92,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 23.25,
+  "lon": 59,
+  "distance_km": 8.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.52561,
+   "phase": 97.3
+  },
+  "J1": {
+   "amp": 2.30407,
+   "phase": -4.044
+  },
+  "K1": {
+   "amp": 39.46726,
+   "phase": -19.01
+  },
+  "K2": {
+   "amp": 6.68335,
+   "phase": -173.036
+  },
+  "M2": {
+   "amp": 63.58342,
+   "phase": 158.222
+  },
+  "M4": {
+   "amp": 0.80374,
+   "phase": -162.117
+  },
+  "MF": {
+   "amp": 0.65106,
+   "phase": 3.032
+  },
+  "MM": {
+   "amp": 0.60552,
+   "phase": 35.021
+  },
+  "N2": {
+   "amp": 15.46903,
+   "phase": 142.206
+  },
+  "O1": {
+   "amp": 19.77776,
+   "phase": -18.022
+  },
+  "P1": {
+   "amp": 12.10157,
+   "phase": -19.526
+  },
+  "Q1": {
+   "amp": 3.92579,
+   "phase": -15.381
+  },
+  "S1": {
+   "amp": 2.13062,
+   "phase": 117.724
+  },
+  "S2": {
+   "amp": 24.53622,
+   "phase": -170.377
+  },
+  "SA": {
+   "amp": 2.30125,
+   "phase": 57.531
+  },
+  "SSA": {
+   "amp": 0.28274,
+   "phase": -40.313
+  },
+  "T2": {
+   "amp": 1.69067,
+   "phase": 157.957
+  },
+  "Z0": {
+   "amp": 182.6,
+   "phase": 0
+  }
+ }
+}

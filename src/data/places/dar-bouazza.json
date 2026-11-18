@@ -1,0 +1,94 @@
+{
+ "id": "dar-bouazza",
+ "name_en": "Dar Bouazza (Tamaris)",
+ "name_ar": "دار بوعزة (طماريس)",
+ "country": "MA",
+ "lat": 33.52,
+ "lon": -7.82,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 33.625,
+  "lon": -7.875,
+  "distance_km": 12.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.20817,
+   "phase": 19.538
+  },
+  "J1": {
+   "amp": 0.53235,
+   "phase": 74.919
+  },
+  "K1": {
+   "amp": 6.98549,
+   "phase": 48.437
+  },
+  "K2": {
+   "amp": 10.19491,
+   "phase": 75.23
+  },
+  "M2": {
+   "amp": 99.84215,
+   "phase": 53.299
+  },
+  "M4": {
+   "amp": 1.58637,
+   "phase": 145.336
+  },
+  "MF": {
+   "amp": 0.31046,
+   "phase": -31.325
+  },
+  "MM": {
+   "amp": 0.12899,
+   "phase": -38.202
+  },
+  "N2": {
+   "amp": 21.35469,
+   "phase": 37.437
+  },
+  "O1": {
+   "amp": 6.19654,
+   "phase": -51.756
+  },
+  "P1": {
+   "amp": 2.54896,
+   "phase": 36.66
+  },
+  "Q1": {
+   "amp": 2.23093,
+   "phase": -107.186
+  },
+  "S1": {
+   "amp": 1.17277,
+   "phase": 27.2
+  },
+  "S2": {
+   "amp": 36.96079,
+   "phase": 78.696
+  },
+  "SA": {
+   "amp": 2.67173,
+   "phase": -52.466
+  },
+  "SSA": {
+   "amp": 0.07796,
+   "phase": 159.844
+  },
+  "T2": {
+   "amp": 2.04154,
+   "phase": 73.614
+  },
+  "Z0": {
+   "amp": 176,
+   "phase": 0
+  }
+ }
+}

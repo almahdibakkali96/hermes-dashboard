@@ -1,0 +1,94 @@
+{
+ "id": "dibba",
+ "name_en": "Dibba",
+ "name_ar": "دبا",
+ "country": "AE",
+ "lat": 25.62,
+ "lon": 56.28,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 25.625,
+  "lon": 56.375,
+  "distance_km": 9.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.70053,
+   "phase": 107.153
+  },
+  "J1": {
+   "amp": 2.0006,
+   "phase": -7.223
+  },
+  "K1": {
+   "amp": 36.70977,
+   "phase": -19.772
+  },
+  "K2": {
+   "amp": 7.29527,
+   "phase": -171.992
+  },
+  "M2": {
+   "amp": 69.54962,
+   "phase": 164.699
+  },
+  "M4": {
+   "amp": 0.73997,
+   "phase": -89.808
+  },
+  "MF": {
+   "amp": 1.00483,
+   "phase": 29.024
+  },
+  "MM": {
+   "amp": 0.39206,
+   "phase": 77.355
+  },
+  "N2": {
+   "amp": 17.09216,
+   "phase": 146.093
+  },
+  "O1": {
+   "amp": 19.82098,
+   "phase": -15.665
+  },
+  "P1": {
+   "amp": 11.02266,
+   "phase": -19.085
+  },
+  "Q1": {
+   "amp": 4.15709,
+   "phase": -23.185
+  },
+  "S1": {
+   "amp": 0.24732,
+   "phase": -155.156
+  },
+  "S2": {
+   "amp": 26.63363,
+   "phase": -164.222
+  },
+  "SA": {
+   "amp": 1.48131,
+   "phase": -21.603
+  },
+  "SSA": {
+   "amp": 0.19722,
+   "phase": -61.392
+  },
+  "T2": {
+   "amp": 1.37762,
+   "phase": -175.457
+  },
+  "Z0": {
+   "amp": 183.8,
+   "phase": 0
+  }
+ }
+}

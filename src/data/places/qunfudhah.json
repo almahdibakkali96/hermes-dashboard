@@ -1,0 +1,94 @@
+{
+ "id": "qunfudhah",
+ "name_en": "Al Qunfudhah",
+ "name_ar": "القنفذة",
+ "country": "SA",
+ "lat": 19.13,
+ "lon": 41.08,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 19.125,
+  "lon": 41,
+  "distance_km": 8.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.59472,
+   "phase": -132.205
+  },
+  "J1": {
+   "amp": 0.1474,
+   "phase": -52.346
+  },
+  "K1": {
+   "amp": 2.94666,
+   "phase": 163.314
+  },
+  "K2": {
+   "amp": 1.3128,
+   "phase": -27.788
+  },
+  "M2": {
+   "amp": 9.27976,
+   "phase": -47.468
+  },
+  "M4": {
+   "amp": 1.23179,
+   "phase": 63.175
+  },
+  "MF": {
+   "amp": 1.62506,
+   "phase": 16.217
+  },
+  "MM": {
+   "amp": 0.45988,
+   "phase": -88.662
+  },
+  "N2": {
+   "amp": 3.22839,
+   "phase": -61.806
+  },
+  "O1": {
+   "amp": 2.03461,
+   "phase": 165.456
+  },
+  "P1": {
+   "amp": 1.56775,
+   "phase": 141.628
+  },
+  "Q1": {
+   "amp": 0.54098,
+   "phase": 149.878
+  },
+  "S1": {
+   "amp": 1.0364,
+   "phase": 4.179
+  },
+  "S2": {
+   "amp": 2.81171,
+   "phase": -15.149
+  },
+  "SA": {
+   "amp": 9.33391,
+   "phase": 29.41
+  },
+  "SSA": {
+   "amp": 0.2384,
+   "phase": -137.371
+  },
+  "T2": {
+   "amp": 1.12164,
+   "phase": 88.363
+  },
+  "Z0": {
+   "amp": 28,
+   "phase": 0
+  }
+ }
+}

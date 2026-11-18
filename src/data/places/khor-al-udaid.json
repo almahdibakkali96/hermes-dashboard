@@ -1,0 +1,94 @@
+{
+ "id": "khor-al-udaid",
+ "name_en": "Khor Al Udaid",
+ "name_ar": "خور العديد",
+ "country": "QA",
+ "lat": 24.63,
+ "lon": 51.4,
+ "timezone": "Asia/Qatar",
+ "grid": {
+  "lat": 24.625,
+  "lon": 51.5,
+  "distance_km": 10.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.11513,
+   "phase": 32.885
+  },
+  "J1": {
+   "amp": 1.73905,
+   "phase": 108.736
+  },
+  "K1": {
+   "amp": 48.71214,
+   "phase": 94.572
+  },
+  "K2": {
+   "amp": 3.2662,
+   "phase": 115.332
+  },
+  "M2": {
+   "amp": 33.01466,
+   "phase": 94.606
+  },
+  "M4": {
+   "amp": 2.84454,
+   "phase": 103.871
+  },
+  "MF": {
+   "amp": 0.8844,
+   "phase": -18.114
+  },
+  "MM": {
+   "amp": 1.20152,
+   "phase": 19.439
+  },
+  "N2": {
+   "amp": 9.3901,
+   "phase": 78.662
+  },
+  "O1": {
+   "amp": 22.56765,
+   "phase": 45.933
+  },
+  "P1": {
+   "amp": 13.20949,
+   "phase": 84.606
+  },
+  "Q1": {
+   "amp": 3.18018,
+   "phase": 26.034
+  },
+  "S1": {
+   "amp": 1.31125,
+   "phase": 2.765
+  },
+  "S2": {
+   "amp": 15.23771,
+   "phase": 110.461
+  },
+  "SA": {
+   "amp": 2.48548,
+   "phase": -64.419
+  },
+  "SSA": {
+   "amp": 0.19956,
+   "phase": 165.394
+  },
+  "T2": {
+   "amp": 1.12862,
+   "phase": 101.861
+  },
+  "Z0": {
+   "amp": 109.3,
+   "phase": 0
+  }
+ }
+}

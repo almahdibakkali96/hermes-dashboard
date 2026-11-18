@@ -1,0 +1,94 @@
+{
+ "id": "skikda",
+ "name_en": "Skikda",
+ "name_ar": "سكيكدة",
+ "country": "DZ",
+ "lat": 36.88,
+ "lon": 6.91,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 37,
+  "lon": 6.875,
+  "distance_km": 13.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.369,
+   "phase": -118.459
+  },
+  "J1": {
+   "amp": 0.28988,
+   "phase": 92.77
+  },
+  "K1": {
+   "amp": 3.87825,
+   "phase": -178.686
+  },
+  "K2": {
+   "amp": 0.98727,
+   "phase": -110.727
+  },
+  "M2": {
+   "amp": 5.03242,
+   "phase": -132.696
+  },
+  "M4": {
+   "amp": 0.54701,
+   "phase": -35.354
+  },
+  "MF": {
+   "amp": 0.09987,
+   "phase": -50.376
+  },
+  "MM": {
+   "amp": 0.31045,
+   "phase": -85.783
+  },
+  "N2": {
+   "amp": 0.86331,
+   "phase": -154.809
+  },
+  "O1": {
+   "amp": 1.73201,
+   "phase": 112.583
+  },
+  "P1": {
+   "amp": 0.89254,
+   "phase": 157.767
+  },
+  "Q1": {
+   "amp": 0.39411,
+   "phase": 65.596
+  },
+  "S1": {
+   "amp": 0.88234,
+   "phase": 11.723
+  },
+  "S2": {
+   "amp": 1.73776,
+   "phase": -117.72
+  },
+  "SA": {
+   "amp": 4.14411,
+   "phase": -71.528
+  },
+  "SSA": {
+   "amp": 0.23068,
+   "phase": -164.554
+  },
+  "T2": {
+   "amp": 0.649,
+   "phase": -66.633
+  },
+  "Z0": {
+   "amp": 14.4,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,107 @@
+# Arab places added after the first 65 (build #077): id|name_en|name_ar|country|lat|lon|sea
+# Added to places_index.json by tools/tides/add-arab.py; sea goes into portSea (src/lib/seaNames.ts).
+# Left out on purpose: Shatt al-Arab / Faw (river mouth, EOT20 unreliable), Ceuta and Melilla.
+mdiq|M'diq|المضيق|MA|35.685|-5.315|med
+martil|Martil|مرتيل|MA|35.625|-5.27|med
+cabo-negro|Cabo Negro|كابو نيغرو|MA|35.66|-5.28|med
+fnideq|Fnideq|الفنيدق|MA|35.85|-5.35|med
+nador|Nador|الناظور|MA|35.2|-2.9|med
+saidia|Saïdia|السعيدية|MA|35.11|-2.3|med
+asilah|Asilah|أصيلة|MA|35.47|-6.04|atlantic
+larache|Larache|العرائش|MA|35.2|-6.16|atlantic
+moulay-bousselham|Moulay Bousselham|مولاي بوسلهام|MA|34.88|-6.29|atlantic
+kenitra|Kenitra (Mehdia)|القنيطرة (المهدية)|MA|34.26|-6.68|atlantic
+temara|Temara (Harhoura)|تمارة (الهرهورة)|MA|33.95|-6.94|atlantic
+skhirat|Skhirat|الصخيرات|MA|33.87|-7.05|atlantic
+bouznika|Bouznika|بوزنيقة|MA|33.8|-7.16|atlantic
+mohammedia|Mohammedia|المحمدية|MA|33.71|-7.4|atlantic
+dar-bouazza|Dar Bouazza (Tamaris)|دار بوعزة (طماريس)|MA|33.52|-7.82|atlantic
+sidi-rahal|Sidi Rahal|سيدي رحال|MA|33.47|-7.95|atlantic
+oualidia|Oualidia|الوليدية|MA|32.73|-9.04|atlantic
+imsouane|Imsouane|إمسوان|MA|30.84|-9.82|atlantic
+taghazout|Taghazout|تغازوت|MA|30.545|-9.71|atlantic
+sidi-ifni|Sidi Ifni|سيدي إفني|MA|29.38|-10.18|atlantic
+tan-tan|Tan-Tan (El Ouatia)|طانطان (الوطية)|MA|28.49|-11.34|atlantic
+tarfaya|Tarfaya|طرفاية|MA|27.94|-12.93|atlantic
+laayoune|Laayoune (Foum El Oued)|العيون (فم الواد)|MA|27.17|-13.4|atlantic
+boujdour|Boujdour|بوجدور|MA|26.13|-14.49|atlantic
+ghazaouet|Ghazaouet|الغزوات|DZ|35.1|-1.86|med
+mostaganem|Mostaganem|مستغانم|DZ|35.94|0.08|med
+tipaza|Tipaza|تيبازة|DZ|36.6|2.45|med
+bejaia|Béjaïa|بجاية|DZ|36.75|5.09|med
+jijel|Jijel|جيجل|DZ|36.82|5.77|med
+skikda|Skikda|سكيكدة|DZ|36.88|6.91|med
+annaba|Annaba|عنابة|DZ|36.9|7.77|med
+tabarka|Tabarka|طبرقة|TN|36.96|8.76|med
+kelibia|Kelibia|قليبية|TN|36.85|11.1|med
+hammamet|Hammamet|الحمامات|TN|36.4|10.61|med
+monastir|Monastir|المنستير|TN|35.78|10.83|med
+chebba|Chebba|الشابة|TN|35.24|11.12|med
+kerkennah|Kerkennah|قرقنة|TN|34.71|11.19|med
+skhira|Skhira|الصخيرة|TN|34.29|10.07|med
+zarzis|Zarzis|جرجيس|TN|33.5|11.12|med
+derna|Derna|درنة|LY|32.77|22.64|med
+marsa-matruh|Marsa Matruh|مرسى مطروح|EG|31.35|27.24|med
+el-alamein|El Alamein|العلمين|EG|30.83|28.95|med
+baltim|Baltim|بلطيم|EG|31.6|31.09|med
+ras-el-bar|Damietta (Ras El Bar)|دمياط (رأس البر)|EG|31.52|31.83|med
+el-arish|El Arish|العريش|EG|31.13|33.8|med
+sidon|Sidon|صيدا|LB|33.56|35.37|med
+tyre|Tyre|صور (لبنان)|LB|33.27|35.19|med
+byblos|Byblos|جبيل|LB|34.12|35.64|med
+suez|Suez|السويس|EG|29.94|32.56|red
+ain-sokhna|Ain Sokhna|العين السخنة|EG|29.6|32.35|red
+ras-sudr|Ras Sudr|رأس سدر|EG|29.59|32.7|red
+zafarana|Zafarana|الزعفرانة|EG|29.11|32.66|red
+ras-gharib|Ras Gharib|رأس غارب|EG|28.36|33.1|red
+el-tor|El Tor|الطور|EG|28.24|33.62|red
+sharm-el-sheikh|Sharm El Sheikh|شرم الشيخ|EG|27.86|34.3|red
+dahab|Dahab|دهب|EG|28.5|34.52|red
+safaga|Safaga|سفاجا|EG|26.74|33.94|red
+marsa-alam|Marsa Alam|مرسى علم|EG|25.07|34.9|red
+# dropped: nearest EOT20 water cell 17 km away (reef coast)
+# suakin|Suakin|سواكن|SD|19.1|37.33|red
+duba|Duba|ضباء|SA|27.35|35.69|red
+al-wajh|Al Wajh|الوجه|SA|26.23|36.47|red
+umluj|Umluj|أملج|SA|25.02|37.27|red
+yanbu|Yanbu|ينبع|SA|24.09|38.05|red
+# dropped: nearest EOT20 water cell 17 km away (reef coast)
+# rabigh|Rabigh|رابغ|SA|22.8|39.03|red
+al-lith|Al Lith|الليث|SA|20.15|40.27|red
+qunfudhah|Al Qunfudhah|القنفذة|SA|19.13|41.08|red
+jazan|Jazan|جازان|SA|16.89|42.55|red
+farasan|Farasan|فرسان|SA|16.7|41.98|red
+mocha|Mocha|المخا|YE|13.32|43.25|red
+khafji|Khafji|الخفجي|SA|28.42|48.5|gulf
+manifa|Manifa|منيفة|SA|27.62|48.98|gulf
+jubail|Jubail|الجبيل|SA|27.01|49.66|gulf
+ras-tanura|Ras Tanura|رأس تنورة|SA|26.64|50.16|gulf
+qatif|Qatif (Saihat, Tarout)|القطيف (سيهات، تاروت)|SA|26.56|50.01|gulf
+al-khiran|Al Khiran|الخيران|KW|28.66|48.38|gulf
+salmiya|Salmiya|السالمية|KW|29.34|48.08|gulf
+failaka|Failaka|فيلكا|KW|29.44|48.33|gulf
+al-ruwais-qa|Al Ruwais (Qatar)|الرويس (قطر)|QA|26.14|51.21|gulf
+al-khor|Al Khor|الخور|QA|25.69|51.51|gulf
+al-wakrah|Al Wakrah|الوكرة|QA|25.17|51.61|gulf
+khor-al-udaid|Khor Al Udaid|خور العديد|QA|24.63|51.4|gulf
+dukhan|Dukhan|دخان|QA|25.43|50.78|gulf
+sharjah|Sharjah|الشارقة|AE|25.36|55.38|gulf
+ajman|Ajman|عجمان|AE|25.41|55.43|gulf
+ruwais-ae|Al Ruwais (Abu Dhabi)|الرويس (أبوظبي)|AE|24.12|52.73|gulf
+mirfa|Al Mirfa|المرفأ|AE|24.12|53.44|gulf
+khasab|Khasab|خصب|OM|26.18|56.25|gulf
+dibba|Dibba|دبا|AE|25.62|56.28|indian
+khor-fakkan|Khor Fakkan|خورفكان|AE|25.34|56.36|indian
+shinas|Shinas|شناص|OM|24.74|56.47|indian
+saham|Saham|صحم|OM|24.17|56.89|indian
+barka|Barka|بركاء|OM|23.71|57.89|indian
+quriyat|Quriyat|قريات|OM|23.26|58.92|indian
+ras-al-hadd|Ras Al Hadd|رأس الحد|OM|22.53|59.8|indian
+masirah|Masirah|مصيرة|OM|20.68|58.87|indian
+duqm|Duqm|الدقم|OM|19.66|57.7|indian
+mirbat|Mirbat|مرباط|OM|16.99|54.69|indian
+socotra|Socotra (Hadibu)|سقطرى (حديبو)|YE|12.65|54.02|indian
+tadjoura|Tadjoura|تاجورة|DJ|11.79|42.88|indian
+bosaso|Bosaso|بوصاصو|SO|11.28|49.18|indian
+kismayo|Kismayo|كيسمايو|SO|-0.36|42.55|indian
+mutsamudu|Mutsamudu|موتسامودو|KM|-12.17|44.4|indian

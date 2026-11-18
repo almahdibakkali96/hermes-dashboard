@@ -700,7 +700,16 @@ button.sea-chip[aria-pressed="true"] { background: var(--accent-muted); border-c
 .pmap-mode[aria-pressed="true"] { background: rgba(255, 255, 255, 0.16); color: #fff; }
 .pmap-stage { position: relative; aspect-ratio: 4 / 3; }
 @media (min-width: 640px) { .pmap-stage { aspect-ratio: 16 / 7; } }
-.pmap-svg { display: block; width: 100%; height: 100%; direction: ltr; font-family: var(--font-arabic); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.pmap-svg { display: block; width: 100%; height: 100%; direction: ltr; font-family: var(--font-arabic); cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.pmap-svg.is-dragging { cursor: grabbing; }
+/* Inline land (ports-map.ts): the same widths as in land.svg at the first view, kept on screen at any zoom */
+.pmap-land path { vector-effect: non-scaling-stroke; }
+.pmap-land > path { stroke-width: 0.5px; }
+.pmap-land > g { stroke-width: 0.8px; }
+.pmap-zoom { position: absolute; inset-inline-end: 0.6rem; top: 0.6rem; display: flex; flex-direction: column; border-radius: 0.75rem; overflow: hidden; background: rgba(11, 37, 64, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); }
+.pmap-zoom button { width: 2.25rem; height: 2.25rem; font-size: 1.15rem; line-height: 1; color: #e2e8f0; background: transparent; border: 0; cursor: pointer; }
+.pmap-zoom button + button { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.pmap-zoom button:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
 .pmap-grat { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .pmap-sea { font-size: 11px; font-weight: 500; fill: rgba(153, 246, 228, 0.4); }
 .pmap-dot .pmap-halo { fill: rgba(11, 37, 64, 0.5); }

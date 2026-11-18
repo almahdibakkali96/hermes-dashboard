@@ -1,0 +1,94 @@
+{
+ "id": "ras-gharib",
+ "name_en": "Ras Gharib",
+ "name_ar": "رأس غارب",
+ "country": "EG",
+ "lat": 28.36,
+ "lon": 33.1,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 28.375,
+  "lon": 33.125,
+  "distance_km": 3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.18827,
+   "phase": 155.058
+  },
+  "J1": {
+   "amp": 1.29493,
+   "phase": -147.941
+  },
+  "K1": {
+   "amp": 3.05141,
+   "phase": 164.319
+  },
+  "K2": {
+   "amp": 1.77739,
+   "phase": -55.617
+  },
+  "M2": {
+   "amp": 21.15944,
+   "phase": -89.884
+  },
+  "M4": {
+   "amp": 0.4962,
+   "phase": 152.263
+  },
+  "MF": {
+   "amp": 1.35371,
+   "phase": 108.932
+  },
+  "MM": {
+   "amp": 0.2859,
+   "phase": 19.608
+  },
+  "N2": {
+   "amp": 8.07744,
+   "phase": -130.673
+  },
+  "O1": {
+   "amp": 0.77687,
+   "phase": 151.535
+  },
+  "P1": {
+   "amp": 1.74155,
+   "phase": 167.263
+  },
+  "Q1": {
+   "amp": 0.95752,
+   "phase": -175.71
+  },
+  "S1": {
+   "amp": 4.07952,
+   "phase": -35.697
+  },
+  "S2": {
+   "amp": 6.1951,
+   "phase": -72.705
+  },
+  "SA": {
+   "amp": 1.24962,
+   "phase": -11.293
+  },
+  "SSA": {
+   "amp": 0.23061,
+   "phase": -43.45
+  },
+  "T2": {
+   "amp": 0.65595,
+   "phase": -106.599
+  },
+  "Z0": {
+   "amp": 41.7,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "jijel",
+ "name_en": "Jijel",
+ "name_ar": "جيجل",
+ "country": "DZ",
+ "lat": 36.82,
+ "lon": 5.77,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 36.875,
+  "lon": 5.75,
+  "distance_km": 6.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.49682,
+   "phase": -168.084
+  },
+  "J1": {
+   "amp": 0.34667,
+   "phase": 155.594
+  },
+  "K1": {
+   "amp": 3.81337,
+   "phase": 177.357
+  },
+  "K2": {
+   "amp": 0.81534,
+   "phase": -113.328
+  },
+  "M2": {
+   "amp": 4.19799,
+   "phase": -133.29
+  },
+  "M4": {
+   "amp": 0.53046,
+   "phase": -31.17
+  },
+  "MF": {
+   "amp": 0.07789,
+   "phase": 167.421
+  },
+  "MM": {
+   "amp": 0.50811,
+   "phase": -80.228
+  },
+  "N2": {
+   "amp": 0.81563,
+   "phase": -149.656
+  },
+  "O1": {
+   "amp": 1.90644,
+   "phase": 108.242
+  },
+  "P1": {
+   "amp": 1.1169,
+   "phase": 156.087
+  },
+  "Q1": {
+   "amp": 0.36258,
+   "phase": 35.443
+  },
+  "S1": {
+   "amp": 0.97715,
+   "phase": -11.939
+  },
+  "S2": {
+   "amp": 1.3031,
+   "phase": -121.311
+  },
+  "SA": {
+   "amp": 4.42015,
+   "phase": -74.637
+  },
+  "SSA": {
+   "amp": 0.21785,
+   "phase": -162.717
+  },
+  "T2": {
+   "amp": 0.58266,
+   "phase": -61.315
+  },
+  "Z0": {
+   "amp": 13.7,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "dahab",
+ "name_en": "Dahab",
+ "name_ar": "دهب",
+ "country": "EG",
+ "lat": 28.5,
+ "lon": 34.52,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 28.5,
+  "lon": 34.625,
+  "distance_km": 10.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.61031,
+   "phase": 56.597
+  },
+  "J1": {
+   "amp": 0.9191,
+   "phase": 123.1
+  },
+  "K1": {
+   "amp": 2.92598,
+   "phase": 164.415
+  },
+  "K2": {
+   "amp": 2.86961,
+   "phase": 154.849
+  },
+  "M2": {
+   "amp": 26.90641,
+   "phase": 118.715
+  },
+  "M4": {
+   "amp": 0.92194,
+   "phase": -49.942
+  },
+  "MF": {
+   "amp": 1.11257,
+   "phase": 54.295
+  },
+  "MM": {
+   "amp": 0.25413,
+   "phase": 98.452
+  },
+  "N2": {
+   "amp": 8.19045,
+   "phase": 106.694
+  },
+  "O1": {
+   "amp": 1.98315,
+   "phase": 134.398
+  },
+  "P1": {
+   "amp": 1.52105,
+   "phase": -141.744
+  },
+  "Q1": {
+   "amp": 1.05267,
+   "phase": -144.232
+  },
+  "S1": {
+   "amp": 3.4782,
+   "phase": 93.653
+  },
+  "S2": {
+   "amp": 8.71615,
+   "phase": 148.324
+  },
+  "SA": {
+   "amp": 7.03129,
+   "phase": 24.567
+  },
+  "SSA": {
+   "amp": 0.36287,
+   "phase": -143.358
+  },
+  "T2": {
+   "amp": 1.69783,
+   "phase": 105.519
+  },
+  "Z0": {
+   "amp": 54.8,
+   "phase": 0
+  }
+ }
+}

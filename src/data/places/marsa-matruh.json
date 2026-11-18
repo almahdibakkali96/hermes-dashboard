@@ -1,0 +1,94 @@
+{
+ "id": "marsa-matruh",
+ "name_en": "Marsa Matruh",
+ "name_ar": "مرسى مطروح",
+ "country": "EG",
+ "lat": 31.35,
+ "lon": 27.24,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 31.375,
+  "lon": 27.25,
+  "distance_km": 2.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.21538,
+   "phase": -58.784
+  },
+  "J1": {
+   "amp": 0.06286,
+   "phase": -142.785
+  },
+  "K1": {
+   "amp": 1.30021,
+   "phase": -58.17
+  },
+  "K2": {
+   "amp": 0.93327,
+   "phase": -120.773
+  },
+  "M2": {
+   "amp": 5.88517,
+   "phase": -113.119
+  },
+  "M4": {
+   "amp": 0.22411,
+   "phase": 3.392
+  },
+  "MF": {
+   "amp": 0.47686,
+   "phase": 2.298
+  },
+  "MM": {
+   "amp": 0.47587,
+   "phase": -43.866
+  },
+  "N2": {
+   "amp": 0.96729,
+   "phase": -114.852
+  },
+  "O1": {
+   "amp": 0.75753,
+   "phase": -115.95
+  },
+  "P1": {
+   "amp": 0.68706,
+   "phase": -42.508
+  },
+  "Q1": {
+   "amp": 0.28476,
+   "phase": 175.49
+  },
+  "S1": {
+   "amp": 0.59949,
+   "phase": 8.952
+  },
+  "S2": {
+   "amp": 3.27036,
+   "phase": -98.971
+  },
+  "SA": {
+   "amp": 3.96807,
+   "phase": -73.438
+  },
+  "SSA": {
+   "amp": 0.08304,
+   "phase": -38.529
+  },
+  "T2": {
+   "amp": 0.19077,
+   "phase": -55.072
+  },
+  "Z0": {
+   "amp": 15.1,
+   "phase": 0
+  }
+ }
+}

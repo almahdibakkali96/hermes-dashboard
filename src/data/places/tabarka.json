@@ -1,0 +1,94 @@
+{
+ "id": "tabarka",
+ "name_en": "Tabarka",
+ "name_ar": "طبرقة",
+ "country": "TN",
+ "lat": 36.96,
+ "lon": 8.76,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 37,
+  "lon": 8.75,
+  "distance_km": 4.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.02291,
+   "phase": 34.256
+  },
+  "J1": {
+   "amp": 0.10647,
+   "phase": -41.527
+  },
+  "K1": {
+   "amp": 3.68939,
+   "phase": -170.991
+  },
+  "K2": {
+   "amp": 1.06783,
+   "phase": -98.622
+  },
+  "M2": {
+   "amp": 6.71532,
+   "phase": -127.819
+  },
+  "M4": {
+   "amp": 0.48884,
+   "phase": -4.135
+  },
+  "MF": {
+   "amp": 0.1746,
+   "phase": -35.384
+  },
+  "MM": {
+   "amp": 0.25683,
+   "phase": -98.28
+  },
+  "N2": {
+   "amp": 1.3039,
+   "phase": -149.442
+  },
+  "O1": {
+   "amp": 1.48397,
+   "phase": 116.412
+  },
+  "P1": {
+   "amp": 0.90458,
+   "phase": 169.487
+  },
+  "Q1": {
+   "amp": 0.15923,
+   "phase": 57.698
+  },
+  "S1": {
+   "amp": 1.36829,
+   "phase": 17.012
+  },
+  "S2": {
+   "amp": 2.20571,
+   "phase": -106.493
+  },
+  "SA": {
+   "amp": 3.29974,
+   "phase": -60.591
+  },
+  "SSA": {
+   "amp": 0.20969,
+   "phase": -153.484
+  },
+  "T2": {
+   "amp": 0.44002,
+   "phase": -53.532
+  },
+  "Z0": {
+   "amp": 16.2,
+   "phase": 0
+  }
+ }
+}

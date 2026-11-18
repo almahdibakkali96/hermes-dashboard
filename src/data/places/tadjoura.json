@@ -1,0 +1,94 @@
+{
+ "id": "tadjoura",
+ "name_en": "Tadjoura",
+ "name_ar": "تاجورة",
+ "country": "DJ",
+ "lat": 11.79,
+ "lon": 42.88,
+ "timezone": "Africa/Djibouti",
+ "grid": {
+  "lat": 11.75,
+  "lon": 42.875,
+  "distance_km": 4.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.24786,
+   "phase": 92.424
+  },
+  "J1": {
+   "amp": 2.69922,
+   "phase": 8.364
+  },
+  "K1": {
+   "amp": 40.91162,
+   "phase": -9.794
+  },
+  "K2": {
+   "amp": 6.43965,
+   "phase": 148.117
+  },
+  "M2": {
+   "amp": 48.02922,
+   "phase": 135.2
+  },
+  "M4": {
+   "amp": 1.39398,
+   "phase": 100.428
+  },
+  "MF": {
+   "amp": 0.56871,
+   "phase": -0.893
+  },
+  "MM": {
+   "amp": 1.20334,
+   "phase": -34.269
+  },
+  "N2": {
+   "amp": 13.02231,
+   "phase": 136.421
+  },
+  "O1": {
+   "amp": 20.5642,
+   "phase": -7.123
+  },
+  "P1": {
+   "amp": 12.56992,
+   "phase": -12.243
+  },
+  "Q1": {
+   "amp": 4.21528,
+   "phase": -9.389
+  },
+  "S1": {
+   "amp": 4.76283,
+   "phase": 91.97
+  },
+  "S2": {
+   "amp": 21.80677,
+   "phase": 153.307
+  },
+  "SA": {
+   "amp": 6.09623,
+   "phase": 49.317
+  },
+  "SSA": {
+   "amp": 0.46236,
+   "phase": -49.878
+  },
+  "T2": {
+   "amp": 2.04541,
+   "phase": 174.92
+  },
+  "Z0": {
+   "amp": 166.5,
+   "phase": 0
+  }
+ }
+}

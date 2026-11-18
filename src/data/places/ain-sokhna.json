@@ -1,0 +1,94 @@
+{
+ "id": "ain-sokhna",
+ "name_en": "Ain Sokhna",
+ "name_ar": "العين السخنة",
+ "country": "EG",
+ "lat": 29.6,
+ "lon": 32.35,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 29.625,
+  "lon": 32.375,
+  "distance_km": 3.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.43189,
+   "phase": -170.031
+  },
+  "J1": {
+   "amp": 1.10181,
+   "phase": -37.49
+  },
+  "K1": {
+   "amp": 4.45462,
+   "phase": 155.008
+  },
+  "K2": {
+   "amp": 2.86399,
+   "phase": -46.475
+  },
+  "M2": {
+   "amp": 55.30244,
+   "phase": -84.881
+  },
+  "M4": {
+   "amp": 1.74163,
+   "phase": -19.675
+  },
+  "MF": {
+   "amp": 0.78178,
+   "phase": 53.94
+  },
+  "MM": {
+   "amp": 1.22904,
+   "phase": -5.144
+  },
+  "N2": {
+   "amp": 18.78976,
+   "phase": -115.335
+  },
+  "O1": {
+   "amp": 1.30469,
+   "phase": 174.186
+  },
+  "P1": {
+   "amp": 0.77747,
+   "phase": 174.15
+  },
+  "Q1": {
+   "amp": 0.98625,
+   "phase": -112.153
+  },
+  "S1": {
+   "amp": 1.77083,
+   "phase": -17.748
+  },
+  "S2": {
+   "amp": 14.53648,
+   "phase": -60.317
+  },
+  "SA": {
+   "amp": 8.0029,
+   "phase": 15.569
+  },
+  "SSA": {
+   "amp": 0.45361,
+   "phase": -148.809
+  },
+  "T2": {
+   "amp": 2.07952,
+   "phase": -11.282
+  },
+  "Z0": {
+   "amp": 104,
+   "phase": 0
+  }
+ }
+}

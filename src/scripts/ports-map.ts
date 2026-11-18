@@ -2,9 +2,11 @@
  * The homepage ports map (src/components/PortsMap.astro), in the browser: fits and animates the view to a sea, keeps the
  * dots and labels a constant size on screen, places port names so they never overlap, colours each dot by the tide right
  * now (rising/falling, from each port's extremes) or by today's fishing rating, and shows a card for the tapped port.
+ * The view can be dragged (mouse or one finger), zoomed with two fingers, the +/− buttons, a double click, or the wheel
+ * (once the map has been clicked, or with Ctrl, so the page still scrolls past it).
  */
 interface Port { id: string; name: string; country: string; sea: string; x: number; y: number; r: number; pr: number; ex: [number, number, string][] }
-interface Cfg { ports: Port[]; regions: Record<string, number[]>; base: string }
+interface Cfg { ports: Port[]; regions: Record<string, number[]>; base: string; size: [number, number] }
 
 const RISE = '#2dd4bf', FALL = '#fb7185';
 // Rating colours, lighter than the site's 700 shades so they read on the dark map
@@ -59,6 +61,24 @@ function init(root: HTMLElement) {
   }
   function setView(v: number[]) { vb = v; svg.setAttribute('viewBox', v.map(n => n.toFixed(2)).join(' ')); sizeMarks(); }
 
+  // Free view: never wider than the world, never closer than ~2.5° across (the coastline's detail), centre on the map
+  const [MW, MH] = cfg.size;
+  const widthIn = (w: number, aspect: number) => Math.min(Math.max(MW, MH * aspect) * 1.05, Math.max(24, w));
+  function clampView([x, y, w, h]: number[]) {
+    const aspect = w / h, cx0 = x + w / 2, cy0 = y + h / 2;
+    w = widthIn(w, aspect); h = w / aspect;
+    const cx = Math.min(MW, Math.max(0, cx0)), cy = Math.min(MH, Math.max(0, cy0));
+    return [cx - w / 2, cy - h / 2, w, h];
+  }
+  // Zoom by f (< 1 closer) keeping the map point under screen point (sx, sy) in place
+  function zoomedAt(v: number[], sx: number, sy: number, f: number) {
+    const s = v[2] / px(), mx = v[0] + sx * s, my = v[1] + sy * s, aspect = v[2] / v[3];
+    const w = widthIn(v[2] * f, aspect), s2 = w / px();
+    return clampView([mx - sx * s2, my - sy * s2, w, w / aspect]);
+  }
+  let relabel = 0;
+  const relabelSoon = () => { clearTimeout(relabel); relabel = window.setTimeout(placeLabels, 120); };
+
   function zoomTo(target: number[], animate = true) {
     cancelAnimationFrame(anim);
     labels.textContent = '';
@@ -84,6 +104,9 @@ function init(root: HTMLElement) {
     const dotsAt: number[][] = visible.map(p => { const [x, y] = scr(p); return [x - d, y - d, x + d, y + d]; });
     // Very crowded (zoomed far out): names only where nothing is underneath
     const taken: number[][] = [];
+    // No names under the zoom buttons
+    const zb = root.querySelector('.pmap-zoom')?.getBoundingClientRect(), sb = svg.getBoundingClientRect();
+    if (zb) taken.push([zb.left - sb.left - 4, zb.top - sb.top - 4, zb.right - sb.left + 4, zb.bottom - sb.top + 4]);
     const over = (b: number[], list: number[][]) => list.some(t => b[0] < t[2] && b[2] > t[0] && b[1] < t[3] && b[3] > t[1]);
     // Names sit under the dots, so a main port's name may cross a neighbour's dot when no spot is free; never another name
     const hit = (b: number[], major: boolean) => over(b, taken) || (!major && over(b, dotsAt));
@@ -163,10 +186,67 @@ function init(root: HTMLElement) {
     if (how !== 'saved') track('map_port', { port: id, how });
   }
 
+  // --- Drag, pinch, wheel and buttons ---
+  const pointers = new Map<number, [number, number]>();
+  let dragged = false, travel = 0, engaged = false, moved = false; // moved: the visitor's own view, not a tab's
+  svg.addEventListener('dragstart', e => e.preventDefault()); // no native drag of the links or the land image
+  const local = (e: { clientX: number; clientY: number }): [number, number] => { const r = svg.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  svg.addEventListener('pointerdown', e => {
+    if (e.button > 0) return;
+    pointers.set(e.pointerId, local(e));
+    if (pointers.size === 1) { dragged = false; travel = 0; }
+    engaged = true; cancelAnimationFrame(anim);
+  });
+  svg.addEventListener('pointermove', e => {
+    const prev = pointers.get(e.pointerId);
+    if (!prev) return;
+    const cur = local(e);
+    if (pointers.size === 1) {
+      const dx = cur[0] - prev[0], dy = cur[1] - prev[1];
+      travel += Math.abs(dx) + Math.abs(dy);
+      if (!dragged && travel < 6) return; // a tap, not a drag (yet)
+      if (!dragged) { dragged = moved = true; svg.setPointerCapture(e.pointerId); labels.textContent = ''; svg.classList.add('is-dragging'); }
+      const s = scale();
+      setView(clampView([vb[0] - dx * s, vb[1] - dy * s, vb[2], vb[3]]));
+    } else if (pointers.size === 2) {
+      // Two fingers: zoom by the change in their distance, about their midpoint, and follow the midpoint
+      const other = [...pointers.entries()].find(([id]) => id !== e.pointerId)![1];
+      const d0 = Math.hypot(prev[0] - other[0], prev[1] - other[1]), d1 = Math.hypot(cur[0] - other[0], cur[1] - other[1]);
+      const m0 = [(prev[0] + other[0]) / 2, (prev[1] + other[1]) / 2], m1 = [(cur[0] + other[0]) / 2, (cur[1] + other[1]) / 2];
+      if (!dragged) { dragged = moved = true; labels.textContent = ''; }
+      const s = scale(), panned = [vb[0] - (m1[0] - m0[0]) * s, vb[1] - (m1[1] - m0[1]) * s, vb[2], vb[3]];
+      setView(d0 > 0 && d1 > 0 ? zoomedAt(panned, m1[0], m1[1], d0 / d1) : clampView(panned));
+    }
+    pointers.set(e.pointerId, cur);
+  });
+  const lift = (e: PointerEvent) => {
+    if (!pointers.delete(e.pointerId)) return;
+    if (!pointers.size) { svg.classList.remove('is-dragging'); if (dragged) placeLabels(); }
+  };
+  svg.addEventListener('pointerup', lift);
+  svg.addEventListener('pointercancel', lift);
+  svg.addEventListener('mouseleave', () => { engaged = false; });
+  svg.addEventListener('wheel', e => {
+    if (!engaged && !e.ctrlKey) return; // let the page scroll until the map is used
+    e.preventDefault(); cancelAnimationFrame(anim);
+    const [sx, sy] = local(e), unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1;
+    labels.textContent = ''; moved = true;
+    setView(zoomedAt(vb, sx, sy, Math.exp(Math.max(-1, Math.min(1, e.deltaY * unit * 0.0025)))));
+    relabelSoon();
+  }, { passive: false });
+  svg.addEventListener('dblclick', e => { e.preventDefault(); const [sx, sy] = local(e); moved = true; zoomTo(zoomedAt(vb, sx, sy, 0.5)); });
+  root.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach(b => b.addEventListener('click', () => {
+    const z = b.dataset.zoom!;
+    moved = z !== 'fit';
+    zoomTo(z === 'fit' ? fitBox(cfg.regions[region]) : zoomedAt(vb, px() / 2, svg.clientHeight / 2, z === 'in' ? 0.5 : 2));
+    track('map_zoom', { how: z });
+  }));
+
   // A tap picks the nearest dot on screen (dense coasts have dots a few pixels apart); keyboard Enter follows the link
   svg.addEventListener('click', e => {
     if (e.detail === 0) return;
     e.preventDefault();
+    if (dragged) { dragged = false; return; } // the end of a drag, not a tap
     const r = svg.getBoundingClientRect(), s = scale();
     const cx = e.clientX - r.left, cy = e.clientY - r.top;
     let best: Port | null = null, bd = 26;
@@ -179,7 +259,7 @@ function init(root: HTMLElement) {
   dots.forEach((a, id) => a.addEventListener('focus', () => { if (selected !== id) select(id, 'keyboard'); }));
 
   root.querySelectorAll<HTMLButtonElement>('.pmap-tab').forEach(b => b.addEventListener('click', () => {
-    region = b.dataset.region!;
+    region = b.dataset.region!; moved = false;
     root.querySelectorAll('.pmap-tab').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     zoomTo(fitBox(cfg.regions[region]));
     track('map_region', { region });
@@ -189,6 +269,17 @@ function init(root: HTMLElement) {
     root.querySelectorAll('.pmap-mode').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     paint();
   }));
+
+  // The land is first an <image> (cheap, cached); then its paths are put inline so the coast line keeps a thin,
+  // constant width when zoomed in (vector-effect only works on inline shapes)
+  const img = svg.querySelector('image');
+  if (img) fetch(img.getAttribute('href')!).then(r => r.text()).then(text => {
+    const land = new DOMParser().parseFromString(text, 'image/svg+xml').documentElement;
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'pmap-land');
+    for (const el of Array.from(land.children)) g.appendChild(document.importNode(el, true));
+    img.replaceWith(g);
+  }).catch(() => { /* keep the image */ });
 
   // Start: the visitor's port (saved with "اجعله ميناءي") and its sea, else every port
   let mine: string | null = null;
@@ -200,7 +291,16 @@ function init(root: HTMLElement) {
   setView(fitBox(cfg.regions[region]));
   paint();
   if (mine) select(mine, 'saved'); else placeLabels();
-  new ResizeObserver(() => { cancelAnimationFrame(anim); setView(fitBox(cfg.regions[region])); placeLabels(); }).observe(svg);
+  // On resize: refit the chosen tab, or keep the visitor's own view (same centre and width) once they moved it
+  let w0 = svg.clientWidth, h0 = svg.clientHeight;
+  new ResizeObserver(() => {
+    if (svg.clientWidth === w0 && svg.clientHeight === h0) return;
+    w0 = svg.clientWidth; h0 = svg.clientHeight;
+    cancelAnimationFrame(anim);
+    if (moved) { const a = px() / (svg.clientHeight || 1), cx = vb[0] + vb[2] / 2, cy = vb[1] + vb[3] / 2; setView(clampView([cx - vb[2] / 2, cy - vb[2] / a / 2, vb[2], vb[2] / a])); }
+    else setView(fitBox(cfg.regions[region]));
+    placeLabels();
+  }).observe(svg);
   setInterval(paint, 60000);
 }
 

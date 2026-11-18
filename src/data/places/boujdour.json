@@ -1,0 +1,94 @@
+{
+ "id": "boujdour",
+ "name_en": "Boujdour",
+ "name_ar": "بوجدور",
+ "country": "MA",
+ "lat": 26.13,
+ "lon": -14.49,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 26.25,
+  "lon": -14.5,
+  "distance_km": 13.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.24858,
+   "phase": -9.025
+  },
+  "J1": {
+   "amp": 0.33053,
+   "phase": 68.164
+  },
+  "K1": {
+   "amp": 6.15123,
+   "phase": 36.935
+  },
+  "K2": {
+   "amp": 7.94514,
+   "phase": 39.02
+  },
+  "M2": {
+   "amp": 71.72258,
+   "phase": 19.507
+  },
+  "M4": {
+   "amp": 0.6966,
+   "phase": 55.068
+  },
+  "MF": {
+   "amp": 0.83035,
+   "phase": -2.34
+  },
+  "MM": {
+   "amp": 0.56044,
+   "phase": -62.47
+  },
+  "N2": {
+   "amp": 14.51163,
+   "phase": 6.395
+  },
+  "O1": {
+   "amp": 5.05925,
+   "phase": -74.148
+  },
+  "P1": {
+   "amp": 1.75647,
+   "phase": 27.924
+  },
+  "Q1": {
+   "amp": 1.89215,
+   "phase": -119.161
+  },
+  "S1": {
+   "amp": 0.42555,
+   "phase": -28.243
+  },
+  "S2": {
+   "amp": 28.24031,
+   "phase": 43.258
+  },
+  "SA": {
+   "amp": 2.52074,
+   "phase": -62.151
+  },
+  "SSA": {
+   "amp": 0.09656,
+   "phase": -15.309
+  },
+  "T2": {
+   "amp": 1.73845,
+   "phase": 42.316
+  },
+  "Z0": {
+   "amp": 128.9,
+   "phase": 0
+  }
+ }
+}

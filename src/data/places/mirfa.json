@@ -1,0 +1,94 @@
+{
+ "id": "mirfa",
+ "name_en": "Al Mirfa",
+ "name_ar": "المرفأ",
+ "country": "AE",
+ "lat": 24.12,
+ "lon": 53.44,
+ "timezone": "Asia/Dubai",
+ "grid": {
+  "lat": 24.125,
+  "lon": 53.5,
+  "distance_km": 6.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.48806,
+   "phase": 167.552
+  },
+  "J1": {
+   "amp": 1.35182,
+   "phase": 107.464
+  },
+  "K1": {
+   "amp": 43.55117,
+   "phase": 103.961
+  },
+  "K2": {
+   "amp": 5.01865,
+   "phase": -57.072
+  },
+  "M2": {
+   "amp": 38.53557,
+   "phase": -89.991
+  },
+  "M4": {
+   "amp": 2.77713,
+   "phase": -45.677
+  },
+  "MF": {
+   "amp": 0.57385,
+   "phase": -18.542
+  },
+  "MM": {
+   "amp": 0.54271,
+   "phase": 89.239
+  },
+  "N2": {
+   "amp": 7.29746,
+   "phase": -117.255
+  },
+  "O1": {
+   "amp": 21.80925,
+   "phase": 53.823
+  },
+  "P1": {
+   "amp": 11.57088,
+   "phase": 91.228
+  },
+  "Q1": {
+   "amp": 3.34944,
+   "phase": 40.189
+  },
+  "S1": {
+   "amp": 1.72553,
+   "phase": -7.768
+  },
+  "S2": {
+   "amp": 17.67575,
+   "phase": -46.186
+  },
+  "SA": {
+   "amp": 2.23752,
+   "phase": -72.312
+  },
+  "SSA": {
+   "amp": 0.34454,
+   "phase": -174.911
+  },
+  "T2": {
+   "amp": 1.0685,
+   "phase": -32.369
+  },
+  "Z0": {
+   "amp": 136.1,
+   "phase": 0
+  }
+ }
+}

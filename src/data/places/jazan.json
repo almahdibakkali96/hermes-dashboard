@@ -1,0 +1,94 @@
+{
+ "id": "jazan",
+ "name_en": "Jazan",
+ "name_ar": "جازان",
+ "country": "SA",
+ "lat": 16.89,
+ "lon": 42.55,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 16.875,
+  "lon": 42.5,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.90568,
+   "phase": -142.813
+  },
+  "J1": {
+   "amp": 0.06808,
+   "phase": 37.71
+  },
+  "K1": {
+   "amp": 2.08584,
+   "phase": 133.246
+  },
+  "K2": {
+   "amp": 3.58602,
+   "phase": -23.795
+  },
+  "M2": {
+   "amp": 32.58404,
+   "phase": -55.096
+  },
+  "M4": {
+   "amp": 0.34483,
+   "phase": 118.497
+  },
+  "MF": {
+   "amp": 1.40166,
+   "phase": 1.891
+  },
+  "MM": {
+   "amp": 0.53644,
+   "phase": -78.108
+  },
+  "N2": {
+   "amp": 11.3516,
+   "phase": -79.327
+  },
+  "O1": {
+   "amp": 1.53618,
+   "phase": 154.413
+  },
+  "P1": {
+   "amp": 0.6771,
+   "phase": 122.149
+  },
+  "Q1": {
+   "amp": 0.41799,
+   "phase": 101.246
+  },
+  "S1": {
+   "amp": 1.4932,
+   "phase": 8.308
+  },
+  "S2": {
+   "amp": 10.33629,
+   "phase": -22.857
+  },
+  "SA": {
+   "amp": 8.76063,
+   "phase": 32.965
+  },
+  "SSA": {
+   "amp": 0.21905,
+   "phase": -95.504
+  },
+  "T2": {
+   "amp": 0.9245,
+   "phase": 42.789
+  },
+  "Z0": {
+   "amp": 67.5,
+   "phase": 0
+  }
+ }
+}

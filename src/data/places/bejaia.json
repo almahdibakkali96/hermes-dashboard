@@ -1,0 +1,94 @@
+{
+ "id": "bejaia",
+ "name_en": "Béjaïa",
+ "name_ar": "بجاية",
+ "country": "DZ",
+ "lat": 36.75,
+ "lon": 5.09,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 36.75,
+  "lon": 5.125,
+  "distance_km": 3.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.53899,
+   "phase": -172.24
+  },
+  "J1": {
+   "amp": 0.32957,
+   "phase": 175.736
+  },
+  "K1": {
+   "amp": 3.92797,
+   "phase": 175.495
+  },
+  "K2": {
+   "amp": 0.65513,
+   "phase": -115.801
+  },
+  "M2": {
+   "amp": 3.79862,
+   "phase": -133.05
+  },
+  "M4": {
+   "amp": 0.29443,
+   "phase": -15.687
+  },
+  "MF": {
+   "amp": 0.18809,
+   "phase": 162.57
+  },
+  "MM": {
+   "amp": 0.47837,
+   "phase": -79.554
+  },
+  "N2": {
+   "amp": 0.77255,
+   "phase": -171.022
+  },
+  "O1": {
+   "amp": 1.96089,
+   "phase": 105.475
+  },
+  "P1": {
+   "amp": 1.34873,
+   "phase": 160.642
+  },
+  "Q1": {
+   "amp": 0.323,
+   "phase": 49.268
+  },
+  "S1": {
+   "amp": 0.73463,
+   "phase": 6.176
+  },
+  "S2": {
+   "amp": 1.05241,
+   "phase": -126.932
+  },
+  "SA": {
+   "amp": 4.31238,
+   "phase": -76.382
+  },
+  "SSA": {
+   "amp": 0.21207,
+   "phase": -164.134
+  },
+  "T2": {
+   "amp": 0.70826,
+   "phase": -62.024
+  },
+  "Z0": {
+   "amp": 12.8,
+   "phase": 0
+  }
+ }
+}

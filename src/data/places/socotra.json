@@ -1,0 +1,94 @@
+{
+ "id": "socotra",
+ "name_en": "Socotra (Hadibu)",
+ "name_ar": "سقطرى (حديبو)",
+ "country": "YE",
+ "lat": 12.65,
+ "lon": 54.02,
+ "timezone": "Asia/Aden",
+ "grid": {
+  "lat": 12.75,
+  "lon": 54,
+  "distance_km": 11.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.25328,
+   "phase": 93.55
+  },
+  "J1": {
+   "amp": 1.98008,
+   "phase": 0.238
+  },
+  "K1": {
+   "amp": 34.70117,
+   "phase": -12.063
+  },
+  "K2": {
+   "amp": 3.0418,
+   "phase": 150
+  },
+  "M2": {
+   "amp": 27.92202,
+   "phase": 140.203
+  },
+  "M4": {
+   "amp": 0.45274,
+   "phase": -108.931
+  },
+  "MF": {
+   "amp": 1.36237,
+   "phase": 16.341
+  },
+  "MM": {
+   "amp": 0.55389,
+   "phase": 12.679
+  },
+  "N2": {
+   "amp": 7.43861,
+   "phase": 131.16
+  },
+  "O1": {
+   "amp": 17.6556,
+   "phase": -9.261
+  },
+  "P1": {
+   "amp": 10.60835,
+   "phase": -14.311
+  },
+  "Q1": {
+   "amp": 3.34353,
+   "phase": -5.879
+  },
+  "S1": {
+   "amp": 2.15284,
+   "phase": 114.095
+  },
+  "S2": {
+   "amp": 11.55409,
+   "phase": 160.969
+  },
+  "SA": {
+   "amp": 3.31902,
+   "phase": 119.65
+  },
+  "SSA": {
+   "amp": 0.16999,
+   "phase": -32.151
+  },
+  "T2": {
+   "amp": 1.54718,
+   "phase": 178.398
+  },
+  "Z0": {
+   "amp": 123.7,
+   "phase": 0
+  }
+ }
+}

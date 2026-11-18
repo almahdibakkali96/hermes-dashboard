@@ -1,0 +1,94 @@
+{
+ "id": "ras-el-bar",
+ "name_en": "Damietta (Ras El Bar)",
+ "name_ar": "دمياط (رأس البر)",
+ "country": "EG",
+ "lat": 31.52,
+ "lon": 31.83,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 31.5,
+  "lon": 31.875,
+  "distance_km": 4.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.32995,
+   "phase": -134.64
+  },
+  "J1": {
+   "amp": 0.02817,
+   "phase": -135.62
+  },
+  "K1": {
+   "amp": 2.46009,
+   "phase": -84.215
+  },
+  "K2": {
+   "amp": 1.83219,
+   "phase": -110.108
+  },
+  "M2": {
+   "amp": 10.43194,
+   "phase": -121.734
+  },
+  "M4": {
+   "amp": 0.3356,
+   "phase": -103.441
+  },
+  "MF": {
+   "amp": 0.23712,
+   "phase": -41.741
+  },
+  "MM": {
+   "amp": 0.10793,
+   "phase": -111.478
+  },
+  "N2": {
+   "amp": 1.73109,
+   "phase": -117.914
+  },
+  "O1": {
+   "amp": 1.60535,
+   "phase": -116.336
+  },
+  "P1": {
+   "amp": 0.83968,
+   "phase": -79.969
+  },
+  "Q1": {
+   "amp": 0.48883,
+   "phase": -135.242
+  },
+  "S1": {
+   "amp": 0.71637,
+   "phase": 47.654
+  },
+  "S2": {
+   "amp": 5.73093,
+   "phase": -110.111
+  },
+  "SA": {
+   "amp": 3.80903,
+   "phase": -72.159
+  },
+  "SSA": {
+   "amp": 0.1787,
+   "phase": -49.468
+  },
+  "T2": {
+   "amp": 0.44519,
+   "phase": -75.975
+  },
+  "Z0": {
+   "amp": 24.5,
+   "phase": 0
+  }
+ }
+}

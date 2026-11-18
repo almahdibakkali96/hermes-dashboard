@@ -1,0 +1,94 @@
+{
+ "id": "salmiya",
+ "name_en": "Salmiya",
+ "name_ar": "السالمية",
+ "country": "KW",
+ "lat": 29.34,
+ "lon": 48.08,
+ "timezone": "Asia/Kuwait",
+ "grid": {
+  "lat": 29.375,
+  "lon": 48.125,
+  "distance_km": 5.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.93041,
+   "phase": -171.811
+  },
+  "J1": {
+   "amp": 2.16673,
+   "phase": -109.376
+  },
+  "K1": {
+   "amp": 51.56779,
+   "phase": -99.276
+  },
+  "K2": {
+   "amp": 10.27574,
+   "phase": -60.83
+  },
+  "M2": {
+   "amp": 76.27319,
+   "phase": -105.633
+  },
+  "M4": {
+   "amp": 1.80051,
+   "phase": 32.605
+  },
+  "MF": {
+   "amp": 0.79514,
+   "phase": -126.464
+  },
+  "MM": {
+   "amp": 0.81189,
+   "phase": 24.717
+  },
+  "N2": {
+   "amp": 17.7551,
+   "phase": -137.085
+  },
+  "O1": {
+   "amp": 31.12308,
+   "phase": -140.331
+  },
+  "P1": {
+   "amp": 14.90026,
+   "phase": -107.848
+  },
+  "Q1": {
+   "amp": 5.75964,
+   "phase": -156.193
+  },
+  "S1": {
+   "amp": 2.51322,
+   "phase": 36.088
+  },
+  "S2": {
+   "amp": 29.78852,
+   "phase": -49.644
+  },
+  "SA": {
+   "amp": 2.98749,
+   "phase": -89.009
+  },
+  "SSA": {
+   "amp": 0.64706,
+   "phase": 168.839
+  },
+  "T2": {
+   "amp": 1.45287,
+   "phase": -76.21
+  },
+  "Z0": {
+   "amp": 220.7,
+   "phase": 0
+  }
+ }
+}

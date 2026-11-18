@@ -1,0 +1,94 @@
+{
+ "id": "al-wajh",
+ "name_en": "Al Wajh",
+ "name_ar": "الوجه",
+ "country": "SA",
+ "lat": 26.23,
+ "lon": 36.47,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 26.25,
+  "lon": 36.375,
+  "distance_km": 9.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.51971,
+   "phase": 62.166
+  },
+  "J1": {
+   "amp": 0.11879,
+   "phase": 150.389
+  },
+  "K1": {
+   "amp": 2.59871,
+   "phase": 159.464
+  },
+  "K2": {
+   "amp": 2.9476,
+   "phase": 135.17
+  },
+  "M2": {
+   "amp": 23.91875,
+   "phase": 117.174
+  },
+  "M4": {
+   "amp": 0.75321,
+   "phase": 163.684
+  },
+  "MF": {
+   "amp": 1.07802,
+   "phase": 19.921
+  },
+  "MM": {
+   "amp": 0.15647,
+   "phase": 8.275
+  },
+  "N2": {
+   "amp": 7.17077,
+   "phase": 93.757
+  },
+  "O1": {
+   "amp": 1.20798,
+   "phase": 169.48
+  },
+  "P1": {
+   "amp": 0.25355,
+   "phase": 148.297
+  },
+  "Q1": {
+   "amp": 0.1324,
+   "phase": -179.475
+  },
+  "S1": {
+   "amp": 0.62541,
+   "phase": -112.41
+  },
+  "S2": {
+   "amp": 7.39309,
+   "phase": 142.298
+  },
+  "SA": {
+   "amp": 8.96106,
+   "phase": 22.537
+  },
+  "SSA": {
+   "amp": 0.43809,
+   "phase": -152.67
+  },
+  "T2": {
+   "amp": 0.67965,
+   "phase": 151.077
+  },
+  "Z0": {
+   "amp": 50.9,
+   "phase": 0
+  }
+ }
+}

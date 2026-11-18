@@ -520,6 +520,806 @@
   "lon": 43.25
  },
  {
+  "id": "mdiq",
+  "name_en": "M'diq",
+  "name_ar": "المضيق",
+  "country": "MA",
+  "lat": 35.685,
+  "lon": -5.315
+ },
+ {
+  "id": "martil",
+  "name_en": "Martil",
+  "name_ar": "مرتيل",
+  "country": "MA",
+  "lat": 35.625,
+  "lon": -5.27
+ },
+ {
+  "id": "cabo-negro",
+  "name_en": "Cabo Negro",
+  "name_ar": "كابو نيغرو",
+  "country": "MA",
+  "lat": 35.66,
+  "lon": -5.28
+ },
+ {
+  "id": "fnideq",
+  "name_en": "Fnideq",
+  "name_ar": "الفنيدق",
+  "country": "MA",
+  "lat": 35.85,
+  "lon": -5.35
+ },
+ {
+  "id": "nador",
+  "name_en": "Nador",
+  "name_ar": "الناظور",
+  "country": "MA",
+  "lat": 35.2,
+  "lon": -2.9
+ },
+ {
+  "id": "saidia",
+  "name_en": "Saïdia",
+  "name_ar": "السعيدية",
+  "country": "MA",
+  "lat": 35.11,
+  "lon": -2.3
+ },
+ {
+  "id": "asilah",
+  "name_en": "Asilah",
+  "name_ar": "أصيلة",
+  "country": "MA",
+  "lat": 35.47,
+  "lon": -6.04
+ },
+ {
+  "id": "larache",
+  "name_en": "Larache",
+  "name_ar": "العرائش",
+  "country": "MA",
+  "lat": 35.2,
+  "lon": -6.16
+ },
+ {
+  "id": "moulay-bousselham",
+  "name_en": "Moulay Bousselham",
+  "name_ar": "مولاي بوسلهام",
+  "country": "MA",
+  "lat": 34.88,
+  "lon": -6.29
+ },
+ {
+  "id": "kenitra",
+  "name_en": "Kenitra (Mehdia)",
+  "name_ar": "القنيطرة (المهدية)",
+  "country": "MA",
+  "lat": 34.26,
+  "lon": -6.68
+ },
+ {
+  "id": "temara",
+  "name_en": "Temara (Harhoura)",
+  "name_ar": "تمارة (الهرهورة)",
+  "country": "MA",
+  "lat": 33.95,
+  "lon": -6.94
+ },
+ {
+  "id": "skhirat",
+  "name_en": "Skhirat",
+  "name_ar": "الصخيرات",
+  "country": "MA",
+  "lat": 33.87,
+  "lon": -7.05
+ },
+ {
+  "id": "bouznika",
+  "name_en": "Bouznika",
+  "name_ar": "بوزنيقة",
+  "country": "MA",
+  "lat": 33.8,
+  "lon": -7.16
+ },
+ {
+  "id": "mohammedia",
+  "name_en": "Mohammedia",
+  "name_ar": "المحمدية",
+  "country": "MA",
+  "lat": 33.71,
+  "lon": -7.4
+ },
+ {
+  "id": "dar-bouazza",
+  "name_en": "Dar Bouazza (Tamaris)",
+  "name_ar": "دار بوعزة (طماريس)",
+  "country": "MA",
+  "lat": 33.52,
+  "lon": -7.82
+ },
+ {
+  "id": "sidi-rahal",
+  "name_en": "Sidi Rahal",
+  "name_ar": "سيدي رحال",
+  "country": "MA",
+  "lat": 33.47,
+  "lon": -7.95
+ },
+ {
+  "id": "oualidia",
+  "name_en": "Oualidia",
+  "name_ar": "الوليدية",
+  "country": "MA",
+  "lat": 32.73,
+  "lon": -9.04
+ },
+ {
+  "id": "imsouane",
+  "name_en": "Imsouane",
+  "name_ar": "إمسوان",
+  "country": "MA",
+  "lat": 30.84,
+  "lon": -9.82
+ },
+ {
+  "id": "taghazout",
+  "name_en": "Taghazout",
+  "name_ar": "تغازوت",
+  "country": "MA",
+  "lat": 30.545,
+  "lon": -9.71
+ },
+ {
+  "id": "sidi-ifni",
+  "name_en": "Sidi Ifni",
+  "name_ar": "سيدي إفني",
+  "country": "MA",
+  "lat": 29.38,
+  "lon": -10.18
+ },
+ {
+  "id": "tan-tan",
+  "name_en": "Tan-Tan (El Ouatia)",
+  "name_ar": "طانطان (الوطية)",
+  "country": "MA",
+  "lat": 28.49,
+  "lon": -11.34
+ },
+ {
+  "id": "tarfaya",
+  "name_en": "Tarfaya",
+  "name_ar": "طرفاية",
+  "country": "MA",
+  "lat": 27.94,
+  "lon": -12.93
+ },
+ {
+  "id": "laayoune",
+  "name_en": "Laayoune (Foum El Oued)",
+  "name_ar": "العيون (فم الواد)",
+  "country": "MA",
+  "lat": 27.17,
+  "lon": -13.4
+ },
+ {
+  "id": "boujdour",
+  "name_en": "Boujdour",
+  "name_ar": "بوجدور",
+  "country": "MA",
+  "lat": 26.13,
+  "lon": -14.49
+ },
+ {
+  "id": "ghazaouet",
+  "name_en": "Ghazaouet",
+  "name_ar": "الغزوات",
+  "country": "DZ",
+  "lat": 35.1,
+  "lon": -1.86
+ },
+ {
+  "id": "mostaganem",
+  "name_en": "Mostaganem",
+  "name_ar": "مستغانم",
+  "country": "DZ",
+  "lat": 35.94,
+  "lon": 0.08
+ },
+ {
+  "id": "tipaza",
+  "name_en": "Tipaza",
+  "name_ar": "تيبازة",
+  "country": "DZ",
+  "lat": 36.6,
+  "lon": 2.45
+ },
+ {
+  "id": "bejaia",
+  "name_en": "Béjaïa",
+  "name_ar": "بجاية",
+  "country": "DZ",
+  "lat": 36.75,
+  "lon": 5.09
+ },
+ {
+  "id": "jijel",
+  "name_en": "Jijel",
+  "name_ar": "جيجل",
+  "country": "DZ",
+  "lat": 36.82,
+  "lon": 5.77
+ },
+ {
+  "id": "skikda",
+  "name_en": "Skikda",
+  "name_ar": "سكيكدة",
+  "country": "DZ",
+  "lat": 36.88,
+  "lon": 6.91
+ },
+ {
+  "id": "annaba",
+  "name_en": "Annaba",
+  "name_ar": "عنابة",
+  "country": "DZ",
+  "lat": 36.9,
+  "lon": 7.77
+ },
+ {
+  "id": "tabarka",
+  "name_en": "Tabarka",
+  "name_ar": "طبرقة",
+  "country": "TN",
+  "lat": 36.96,
+  "lon": 8.76
+ },
+ {
+  "id": "kelibia",
+  "name_en": "Kelibia",
+  "name_ar": "قليبية",
+  "country": "TN",
+  "lat": 36.85,
+  "lon": 11.1
+ },
+ {
+  "id": "hammamet",
+  "name_en": "Hammamet",
+  "name_ar": "الحمامات",
+  "country": "TN",
+  "lat": 36.4,
+  "lon": 10.61
+ },
+ {
+  "id": "monastir",
+  "name_en": "Monastir",
+  "name_ar": "المنستير",
+  "country": "TN",
+  "lat": 35.78,
+  "lon": 10.83
+ },
+ {
+  "id": "chebba",
+  "name_en": "Chebba",
+  "name_ar": "الشابة",
+  "country": "TN",
+  "lat": 35.24,
+  "lon": 11.12
+ },
+ {
+  "id": "kerkennah",
+  "name_en": "Kerkennah",
+  "name_ar": "قرقنة",
+  "country": "TN",
+  "lat": 34.71,
+  "lon": 11.19
+ },
+ {
+  "id": "skhira",
+  "name_en": "Skhira",
+  "name_ar": "الصخيرة",
+  "country": "TN",
+  "lat": 34.29,
+  "lon": 10.07
+ },
+ {
+  "id": "zarzis",
+  "name_en": "Zarzis",
+  "name_ar": "جرجيس",
+  "country": "TN",
+  "lat": 33.5,
+  "lon": 11.12
+ },
+ {
+  "id": "derna",
+  "name_en": "Derna",
+  "name_ar": "درنة",
+  "country": "LY",
+  "lat": 32.77,
+  "lon": 22.64
+ },
+ {
+  "id": "marsa-matruh",
+  "name_en": "Marsa Matruh",
+  "name_ar": "مرسى مطروح",
+  "country": "EG",
+  "lat": 31.35,
+  "lon": 27.24
+ },
+ {
+  "id": "el-alamein",
+  "name_en": "El Alamein",
+  "name_ar": "العلمين",
+  "country": "EG",
+  "lat": 30.83,
+  "lon": 28.95
+ },
+ {
+  "id": "baltim",
+  "name_en": "Baltim",
+  "name_ar": "بلطيم",
+  "country": "EG",
+  "lat": 31.6,
+  "lon": 31.09
+ },
+ {
+  "id": "ras-el-bar",
+  "name_en": "Damietta (Ras El Bar)",
+  "name_ar": "دمياط (رأس البر)",
+  "country": "EG",
+  "lat": 31.52,
+  "lon": 31.83
+ },
+ {
+  "id": "el-arish",
+  "name_en": "El Arish",
+  "name_ar": "العريش",
+  "country": "EG",
+  "lat": 31.13,
+  "lon": 33.8
+ },
+ {
+  "id": "sidon",
+  "name_en": "Sidon",
+  "name_ar": "صيدا",
+  "country": "LB",
+  "lat": 33.56,
+  "lon": 35.37
+ },
+ {
+  "id": "tyre",
+  "name_en": "Tyre",
+  "name_ar": "صور (لبنان)",
+  "country": "LB",
+  "lat": 33.27,
+  "lon": 35.19
+ },
+ {
+  "id": "byblos",
+  "name_en": "Byblos",
+  "name_ar": "جبيل",
+  "country": "LB",
+  "lat": 34.12,
+  "lon": 35.64
+ },
+ {
+  "id": "suez",
+  "name_en": "Suez",
+  "name_ar": "السويس",
+  "country": "EG",
+  "lat": 29.94,
+  "lon": 32.56
+ },
+ {
+  "id": "ain-sokhna",
+  "name_en": "Ain Sokhna",
+  "name_ar": "العين السخنة",
+  "country": "EG",
+  "lat": 29.6,
+  "lon": 32.35
+ },
+ {
+  "id": "ras-sudr",
+  "name_en": "Ras Sudr",
+  "name_ar": "رأس سدر",
+  "country": "EG",
+  "lat": 29.59,
+  "lon": 32.7
+ },
+ {
+  "id": "zafarana",
+  "name_en": "Zafarana",
+  "name_ar": "الزعفرانة",
+  "country": "EG",
+  "lat": 29.11,
+  "lon": 32.66
+ },
+ {
+  "id": "ras-gharib",
+  "name_en": "Ras Gharib",
+  "name_ar": "رأس غارب",
+  "country": "EG",
+  "lat": 28.36,
+  "lon": 33.1
+ },
+ {
+  "id": "el-tor",
+  "name_en": "El Tor",
+  "name_ar": "الطور",
+  "country": "EG",
+  "lat": 28.24,
+  "lon": 33.62
+ },
+ {
+  "id": "sharm-el-sheikh",
+  "name_en": "Sharm El Sheikh",
+  "name_ar": "شرم الشيخ",
+  "country": "EG",
+  "lat": 27.86,
+  "lon": 34.3
+ },
+ {
+  "id": "dahab",
+  "name_en": "Dahab",
+  "name_ar": "دهب",
+  "country": "EG",
+  "lat": 28.5,
+  "lon": 34.52
+ },
+ {
+  "id": "safaga",
+  "name_en": "Safaga",
+  "name_ar": "سفاجا",
+  "country": "EG",
+  "lat": 26.74,
+  "lon": 33.94
+ },
+ {
+  "id": "marsa-alam",
+  "name_en": "Marsa Alam",
+  "name_ar": "مرسى علم",
+  "country": "EG",
+  "lat": 25.07,
+  "lon": 34.9
+ },
+ {
+  "id": "duba",
+  "name_en": "Duba",
+  "name_ar": "ضباء",
+  "country": "SA",
+  "lat": 27.35,
+  "lon": 35.69
+ },
+ {
+  "id": "al-wajh",
+  "name_en": "Al Wajh",
+  "name_ar": "الوجه",
+  "country": "SA",
+  "lat": 26.23,
+  "lon": 36.47
+ },
+ {
+  "id": "umluj",
+  "name_en": "Umluj",
+  "name_ar": "أملج",
+  "country": "SA",
+  "lat": 25.02,
+  "lon": 37.27
+ },
+ {
+  "id": "yanbu",
+  "name_en": "Yanbu",
+  "name_ar": "ينبع",
+  "country": "SA",
+  "lat": 24.09,
+  "lon": 38.05
+ },
+ {
+  "id": "al-lith",
+  "name_en": "Al Lith",
+  "name_ar": "الليث",
+  "country": "SA",
+  "lat": 20.15,
+  "lon": 40.27
+ },
+ {
+  "id": "qunfudhah",
+  "name_en": "Al Qunfudhah",
+  "name_ar": "القنفذة",
+  "country": "SA",
+  "lat": 19.13,
+  "lon": 41.08
+ },
+ {
+  "id": "jazan",
+  "name_en": "Jazan",
+  "name_ar": "جازان",
+  "country": "SA",
+  "lat": 16.89,
+  "lon": 42.55
+ },
+ {
+  "id": "farasan",
+  "name_en": "Farasan",
+  "name_ar": "فرسان",
+  "country": "SA",
+  "lat": 16.7,
+  "lon": 41.98
+ },
+ {
+  "id": "mocha",
+  "name_en": "Mocha",
+  "name_ar": "المخا",
+  "country": "YE",
+  "lat": 13.32,
+  "lon": 43.25
+ },
+ {
+  "id": "khafji",
+  "name_en": "Khafji",
+  "name_ar": "الخفجي",
+  "country": "SA",
+  "lat": 28.42,
+  "lon": 48.5
+ },
+ {
+  "id": "manifa",
+  "name_en": "Manifa",
+  "name_ar": "منيفة",
+  "country": "SA",
+  "lat": 27.62,
+  "lon": 48.98
+ },
+ {
+  "id": "jubail",
+  "name_en": "Jubail",
+  "name_ar": "الجبيل",
+  "country": "SA",
+  "lat": 27.01,
+  "lon": 49.66
+ },
+ {
+  "id": "ras-tanura",
+  "name_en": "Ras Tanura",
+  "name_ar": "رأس تنورة",
+  "country": "SA",
+  "lat": 26.64,
+  "lon": 50.16
+ },
+ {
+  "id": "qatif",
+  "name_en": "Qatif (Saihat, Tarout)",
+  "name_ar": "القطيف (سيهات، تاروت)",
+  "country": "SA",
+  "lat": 26.56,
+  "lon": 50.01
+ },
+ {
+  "id": "al-khiran",
+  "name_en": "Al Khiran",
+  "name_ar": "الخيران",
+  "country": "KW",
+  "lat": 28.66,
+  "lon": 48.38
+ },
+ {
+  "id": "salmiya",
+  "name_en": "Salmiya",
+  "name_ar": "السالمية",
+  "country": "KW",
+  "lat": 29.34,
+  "lon": 48.08
+ },
+ {
+  "id": "failaka",
+  "name_en": "Failaka",
+  "name_ar": "فيلكا",
+  "country": "KW",
+  "lat": 29.44,
+  "lon": 48.33
+ },
+ {
+  "id": "al-ruwais-qa",
+  "name_en": "Al Ruwais (Qatar)",
+  "name_ar": "الرويس (قطر)",
+  "country": "QA",
+  "lat": 26.14,
+  "lon": 51.21
+ },
+ {
+  "id": "al-khor",
+  "name_en": "Al Khor",
+  "name_ar": "الخور",
+  "country": "QA",
+  "lat": 25.69,
+  "lon": 51.51
+ },
+ {
+  "id": "al-wakrah",
+  "name_en": "Al Wakrah",
+  "name_ar": "الوكرة",
+  "country": "QA",
+  "lat": 25.17,
+  "lon": 51.61
+ },
+ {
+  "id": "khor-al-udaid",
+  "name_en": "Khor Al Udaid",
+  "name_ar": "خور العديد",
+  "country": "QA",
+  "lat": 24.63,
+  "lon": 51.4
+ },
+ {
+  "id": "dukhan",
+  "name_en": "Dukhan",
+  "name_ar": "دخان",
+  "country": "QA",
+  "lat": 25.43,
+  "lon": 50.78
+ },
+ {
+  "id": "sharjah",
+  "name_en": "Sharjah",
+  "name_ar": "الشارقة",
+  "country": "AE",
+  "lat": 25.36,
+  "lon": 55.38
+ },
+ {
+  "id": "ajman",
+  "name_en": "Ajman",
+  "name_ar": "عجمان",
+  "country": "AE",
+  "lat": 25.41,
+  "lon": 55.43
+ },
+ {
+  "id": "ruwais-ae",
+  "name_en": "Al Ruwais (Abu Dhabi)",
+  "name_ar": "الرويس (أبوظبي)",
+  "country": "AE",
+  "lat": 24.12,
+  "lon": 52.73
+ },
+ {
+  "id": "mirfa",
+  "name_en": "Al Mirfa",
+  "name_ar": "المرفأ",
+  "country": "AE",
+  "lat": 24.12,
+  "lon": 53.44
+ },
+ {
+  "id": "khasab",
+  "name_en": "Khasab",
+  "name_ar": "خصب",
+  "country": "OM",
+  "lat": 26.18,
+  "lon": 56.25
+ },
+ {
+  "id": "dibba",
+  "name_en": "Dibba",
+  "name_ar": "دبا",
+  "country": "AE",
+  "lat": 25.62,
+  "lon": 56.28
+ },
+ {
+  "id": "khor-fakkan",
+  "name_en": "Khor Fakkan",
+  "name_ar": "خورفكان",
+  "country": "AE",
+  "lat": 25.34,
+  "lon": 56.36
+ },
+ {
+  "id": "shinas",
+  "name_en": "Shinas",
+  "name_ar": "شناص",
+  "country": "OM",
+  "lat": 24.74,
+  "lon": 56.47
+ },
+ {
+  "id": "saham",
+  "name_en": "Saham",
+  "name_ar": "صحم",
+  "country": "OM",
+  "lat": 24.17,
+  "lon": 56.89
+ },
+ {
+  "id": "barka",
+  "name_en": "Barka",
+  "name_ar": "بركاء",
+  "country": "OM",
+  "lat": 23.71,
+  "lon": 57.89
+ },
+ {
+  "id": "quriyat",
+  "name_en": "Quriyat",
+  "name_ar": "قريات",
+  "country": "OM",
+  "lat": 23.26,
+  "lon": 58.92
+ },
+ {
+  "id": "ras-al-hadd",
+  "name_en": "Ras Al Hadd",
+  "name_ar": "رأس الحد",
+  "country": "OM",
+  "lat": 22.53,
+  "lon": 59.8
+ },
+ {
+  "id": "masirah",
+  "name_en": "Masirah",
+  "name_ar": "مصيرة",
+  "country": "OM",
+  "lat": 20.68,
+  "lon": 58.87
+ },
+ {
+  "id": "duqm",
+  "name_en": "Duqm",
+  "name_ar": "الدقم",
+  "country": "OM",
+  "lat": 19.66,
+  "lon": 57.7
+ },
+ {
+  "id": "mirbat",
+  "name_en": "Mirbat",
+  "name_ar": "مرباط",
+  "country": "OM",
+  "lat": 16.99,
+  "lon": 54.69
+ },
+ {
+  "id": "socotra",
+  "name_en": "Socotra (Hadibu)",
+  "name_ar": "سقطرى (حديبو)",
+  "country": "YE",
+  "lat": 12.65,
+  "lon": 54.02
+ },
+ {
+  "id": "tadjoura",
+  "name_en": "Tadjoura",
+  "name_ar": "تاجورة",
+  "country": "DJ",
+  "lat": 11.79,
+  "lon": 42.88
+ },
+ {
+  "id": "bosaso",
+  "name_en": "Bosaso",
+  "name_ar": "بوصاصو",
+  "country": "SO",
+  "lat": 11.28,
+  "lon": 49.18
+ },
+ {
+  "id": "kismayo",
+  "name_en": "Kismayo",
+  "name_ar": "كيسمايو",
+  "country": "SO",
+  "lat": -0.36,
+  "lon": 42.55
+ },
+ {
+  "id": "mutsamudu",
+  "name_en": "Mutsamudu",
+  "name_ar": "موتسامودو",
+  "country": "KM",
+  "lat": -12.17,
+  "lon": 44.4
+ },
+ {
   "id": "male",
   "name_en": "Malé",
   "name_ar": "ماليه",

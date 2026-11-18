@@ -1,0 +1,94 @@
+{
+ "id": "mutsamudu",
+ "name_en": "Mutsamudu",
+ "name_ar": "موتسامودو",
+ "country": "KM",
+ "lat": -12.17,
+ "lon": 44.4,
+ "timezone": "Indian/Comoro",
+ "grid": {
+  "lat": -12.125,
+  "lon": 44.375,
+  "distance_km": 5.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.10336,
+   "phase": -45.27
+  },
+  "J1": {
+   "amp": 0.85559,
+   "phase": -14.688
+  },
+  "K1": {
+   "amp": 14.16495,
+   "phase": 2.379
+  },
+  "K2": {
+   "amp": 14.99639,
+   "phase": 64.823
+  },
+  "M2": {
+   "amp": 105.01942,
+   "phase": 26.007
+  },
+  "M4": {
+   "amp": 0.47904,
+   "phase": 133.822
+  },
+  "MF": {
+   "amp": 0.99508,
+   "phase": -0.582
+  },
+  "MM": {
+   "amp": 0.66852,
+   "phase": 4.795
+  },
+  "N2": {
+   "amp": 18.99922,
+   "phase": 3.908
+  },
+  "O1": {
+   "amp": 9.06224,
+   "phase": 4.413
+  },
+  "P1": {
+   "amp": 4.07116,
+   "phase": 5.116
+  },
+  "Q1": {
+   "amp": 2.9009,
+   "phase": -13.869
+  },
+  "S1": {
+   "amp": 2.049,
+   "phase": 96.604
+  },
+  "S2": {
+   "amp": 54.00287,
+   "phase": 65.316
+  },
+  "SA": {
+   "amp": 1.39044,
+   "phase": -75.616
+  },
+  "SSA": {
+   "amp": 0.51876,
+   "phase": -8.688
+  },
+  "T2": {
+   "amp": 3.24323,
+   "phase": 64.757
+  },
+  "Z0": {
+   "amp": 197.5,
+   "phase": 0
+  }
+ }
+}

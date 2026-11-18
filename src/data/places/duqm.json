@@ -1,0 +1,94 @@
+{
+ "id": "duqm",
+ "name_en": "Duqm",
+ "name_ar": "الدقم",
+ "country": "OM",
+ "lat": 19.66,
+ "lon": 57.7,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 19.625,
+  "lon": 57.75,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.90649,
+   "phase": 106.715
+  },
+  "J1": {
+   "amp": 2.30931,
+   "phase": -5.259
+  },
+  "K1": {
+   "amp": 37.75272,
+   "phase": -16.231
+  },
+  "K2": {
+   "amp": 4.52871,
+   "phase": -176.966
+  },
+  "M2": {
+   "amp": 50.162,
+   "phase": 158.917
+  },
+  "M4": {
+   "amp": 1.0376,
+   "phase": -140.128
+  },
+  "MF": {
+   "amp": 1.39258,
+   "phase": 11.832
+  },
+  "MM": {
+   "amp": 0.8403,
+   "phase": 36.338
+  },
+  "N2": {
+   "amp": 12.29773,
+   "phase": 143.351
+  },
+  "O1": {
+   "amp": 19.20759,
+   "phase": -14.442
+  },
+  "P1": {
+   "amp": 11.48098,
+   "phase": -16.474
+  },
+  "Q1": {
+   "amp": 4.08216,
+   "phase": -6.413
+  },
+  "S1": {
+   "amp": 3.0805,
+   "phase": 101.65
+  },
+  "S2": {
+   "amp": 19.1489,
+   "phase": -171.597
+  },
+  "SA": {
+   "amp": 3.17183,
+   "phase": 40.139
+  },
+  "SSA": {
+   "amp": 0.1762,
+   "phase": -55.233
+  },
+  "T2": {
+   "amp": 1.90951,
+   "phase": -167.193
+  },
+  "Z0": {
+   "amp": 160,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "tyre",
+ "name_en": "Tyre",
+ "name_ar": "صور (لبنان)",
+ "country": "LB",
+ "lat": 33.27,
+ "lon": 35.19,
+ "timezone": "Asia/Beirut",
+ "grid": {
+  "lat": 33.25,
+  "lon": 35.125,
+  "distance_km": 6.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.09501,
+   "phase": 57.668
+  },
+  "J1": {
+   "amp": 0.3623,
+   "phase": -55.03
+  },
+  "K1": {
+   "amp": 2.78095,
+   "phase": -76.482
+  },
+  "K2": {
+   "amp": 1.86501,
+   "phase": -117.12
+  },
+  "M2": {
+   "amp": 11.71067,
+   "phase": -122.027
+  },
+  "M4": {
+   "amp": 0.24838,
+   "phase": -41.178
+  },
+  "MF": {
+   "amp": 0.46384,
+   "phase": 0.24
+  },
+  "MM": {
+   "amp": 0.33949,
+   "phase": -40.41
+  },
+  "N2": {
+   "amp": 2.03057,
+   "phase": -119.362
+  },
+  "O1": {
+   "amp": 1.92697,
+   "phase": -109.083
+  },
+  "P1": {
+   "amp": 0.92295,
+   "phase": -79.708
+  },
+  "Q1": {
+   "amp": 0.61335,
+   "phase": -102.943
+  },
+  "S1": {
+   "amp": 0.92482,
+   "phase": -20.013
+  },
+  "S2": {
+   "amp": 6.75763,
+   "phase": -106.911
+  },
+  "SA": {
+   "amp": 4.1059,
+   "phase": -83.789
+  },
+  "SSA": {
+   "amp": 0.02479,
+   "phase": 101.167
+  },
+  "T2": {
+   "amp": 0.724,
+   "phase": -70.525
+  },
+  "Z0": {
+   "amp": 27,
+   "phase": 0
+  }
+ }
+}

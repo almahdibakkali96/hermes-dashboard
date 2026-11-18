@@ -1,0 +1,94 @@
+{
+ "id": "oualidia",
+ "name_en": "Oualidia",
+ "name_ar": "الوليدية",
+ "country": "MA",
+ "lat": 32.73,
+ "lon": -9.04,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 32.75,
+  "lon": -9.125,
+  "distance_km": 8.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.13643,
+   "phase": 22.546
+  },
+  "J1": {
+   "amp": 0.23904,
+   "phase": 89.034
+  },
+  "K1": {
+   "amp": 6.93322,
+   "phase": 47.181
+  },
+  "K2": {
+   "amp": 10.05375,
+   "phase": 72.773
+  },
+  "M2": {
+   "amp": 97.23731,
+   "phase": 50.523
+  },
+  "M4": {
+   "amp": 1.48178,
+   "phase": 149.426
+  },
+  "MF": {
+   "amp": 0.28813,
+   "phase": -25.747
+  },
+  "MM": {
+   "amp": 0.46125,
+   "phase": -81.942
+  },
+  "N2": {
+   "amp": 20.70818,
+   "phase": 35.102
+  },
+  "O1": {
+   "amp": 6.24082,
+   "phase": -54.662
+  },
+  "P1": {
+   "amp": 2.47173,
+   "phase": 39.319
+  },
+  "Q1": {
+   "amp": 2.05086,
+   "phase": -107.408
+  },
+  "S1": {
+   "amp": 0.94216,
+   "phase": 13.437
+  },
+  "S2": {
+   "amp": 36.03343,
+   "phase": 75.139
+  },
+  "SA": {
+   "amp": 2.48015,
+   "phase": -55.128
+  },
+  "SSA": {
+   "amp": 0.08237,
+   "phase": 156.851
+  },
+  "T2": {
+   "amp": 2.00302,
+   "phase": 62.299
+  },
+  "Z0": {
+   "amp": 171.8,
+   "phase": 0
+  }
+ }
+}

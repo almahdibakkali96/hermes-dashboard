@@ -1,0 +1,94 @@
+{
+ "id": "marsa-alam",
+ "name_en": "Marsa Alam",
+ "name_ar": "مرسى علم",
+ "country": "EG",
+ "lat": 25.07,
+ "lon": 34.9,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 25.125,
+  "lon": 34.875,
+  "distance_km": 6.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.43009,
+   "phase": 45.29
+  },
+  "J1": {
+   "amp": 0.39846,
+   "phase": -171.448
+  },
+  "K1": {
+   "amp": 2.33033,
+   "phase": 157.18
+  },
+  "K2": {
+   "amp": 2.51056,
+   "phase": 133.53
+  },
+  "M2": {
+   "amp": 22.54567,
+   "phase": 116.901
+  },
+  "M4": {
+   "amp": 0.09764,
+   "phase": -169.082
+  },
+  "MF": {
+   "amp": 1.54686,
+   "phase": 34.955
+  },
+  "MM": {
+   "amp": 0.38179,
+   "phase": -25.516
+  },
+  "N2": {
+   "amp": 7.67982,
+   "phase": 94.816
+  },
+  "O1": {
+   "amp": 0.81325,
+   "phase": 150.252
+  },
+  "P1": {
+   "amp": 0.7874,
+   "phase": 117.035
+  },
+  "Q1": {
+   "amp": 0.49971,
+   "phase": 99.787
+  },
+  "S1": {
+   "amp": 0.48349,
+   "phase": -55.567
+  },
+  "S2": {
+   "amp": 7.06123,
+   "phase": 143.67
+  },
+  "SA": {
+   "amp": 7.83265,
+   "phase": 26.059
+  },
+  "SSA": {
+   "amp": 0.30371,
+   "phase": -146.913
+  },
+  "T2": {
+   "amp": 0.4962,
+   "phase": 155.266
+  },
+  "Z0": {
+   "amp": 49.7,
+   "phase": 0
+  }
+ }
+}

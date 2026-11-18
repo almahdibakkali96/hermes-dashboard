@@ -1,0 +1,94 @@
+{
+ "id": "larache",
+ "name_en": "Larache",
+ "name_ar": "العرائش",
+ "country": "MA",
+ "lat": 35.2,
+ "lon": -6.16,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 35.25,
+  "lon": -6.25,
+  "distance_km": 9.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.18682,
+   "phase": 23.113
+  },
+  "J1": {
+   "amp": 0.4128,
+   "phase": 73.967
+  },
+  "K1": {
+   "amp": 7.32677,
+   "phase": 51.113
+  },
+  "K2": {
+   "amp": 10.11686,
+   "phase": 79.388
+  },
+  "M2": {
+   "amp": 98.83815,
+   "phase": 56.253
+  },
+  "M4": {
+   "amp": 1.86671,
+   "phase": 160.323
+  },
+  "MF": {
+   "amp": 0.12514,
+   "phase": 7.288
+  },
+  "MM": {
+   "amp": 0.13157,
+   "phase": -92.647
+  },
+  "N2": {
+   "amp": 21.15901,
+   "phase": 40.776
+  },
+  "O1": {
+   "amp": 6.50925,
+   "phase": -48.9
+  },
+  "P1": {
+   "amp": 2.58093,
+   "phase": 41.617
+  },
+  "Q1": {
+   "amp": 2.0134,
+   "phase": -99.203
+  },
+  "S1": {
+   "amp": 0.83793,
+   "phase": 50.655
+  },
+  "S2": {
+   "amp": 35.92865,
+   "phase": 82.404
+  },
+  "SA": {
+   "amp": 2.39958,
+   "phase": -66.568
+  },
+  "SSA": {
+   "amp": 0.13253,
+   "phase": 178.534
+  },
+  "T2": {
+   "amp": 1.9089,
+   "phase": 78.181
+  },
+  "Z0": {
+   "amp": 174.2,
+   "phase": 0
+  }
+ }
+}

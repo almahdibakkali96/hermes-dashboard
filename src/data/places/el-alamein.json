@@ -1,0 +1,94 @@
+{
+ "id": "el-alamein",
+ "name_en": "El Alamein",
+ "name_ar": "العلمين",
+ "country": "EG",
+ "lat": 30.83,
+ "lon": 28.95,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 30.875,
+  "lon": 29,
+  "distance_km": 6.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.19388,
+   "phase": 171.403
+  },
+  "J1": {
+   "amp": 0.05364,
+   "phase": -69.646
+  },
+  "K1": {
+   "amp": 1.76594,
+   "phase": -84.927
+  },
+  "K2": {
+   "amp": 1.15262,
+   "phase": -120.454
+  },
+  "M2": {
+   "amp": 7.06168,
+   "phase": -111.255
+  },
+  "M4": {
+   "amp": 0.1608,
+   "phase": -140.841
+  },
+  "MF": {
+   "amp": 0.21825,
+   "phase": -27.627
+  },
+  "MM": {
+   "amp": 0.47563,
+   "phase": -66.732
+  },
+  "N2": {
+   "amp": 1.36218,
+   "phase": -94.453
+  },
+  "O1": {
+   "amp": 1.29477,
+   "phase": -132.425
+  },
+  "P1": {
+   "amp": 0.61878,
+   "phase": -80.9
+  },
+  "Q1": {
+   "amp": 0.14639,
+   "phase": -74.643
+  },
+  "S1": {
+   "amp": 0.96468,
+   "phase": -0.693
+  },
+  "S2": {
+   "amp": 4.00668,
+   "phase": -104.695
+  },
+  "SA": {
+   "amp": 3.91503,
+   "phase": -77.036
+  },
+  "SSA": {
+   "amp": 0.15336,
+   "phase": -37.612
+  },
+  "T2": {
+   "amp": 0.51923,
+   "phase": -115.02
+  },
+  "Z0": {
+   "amp": 18.6,
+   "phase": 0
+  }
+ }
+}

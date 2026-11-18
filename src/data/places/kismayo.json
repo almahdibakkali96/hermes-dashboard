@@ -1,0 +1,94 @@
+{
+ "id": "kismayo",
+ "name_en": "Kismayo",
+ "name_ar": "كيسمايو",
+ "country": "SO",
+ "lat": -0.36,
+ "lon": 42.55,
+ "timezone": "Africa/Mogadishu",
+ "grid": {
+  "lat": -0.375,
+  "lon": 42.625,
+  "distance_km": 8.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.66436,
+   "phase": -32.219
+  },
+  "J1": {
+   "amp": 1.44891,
+   "phase": 19.745
+  },
+  "K1": {
+   "amp": 21.09512,
+   "phase": -7.306
+  },
+  "K2": {
+   "amp": 11.75856,
+   "phase": 60.704
+  },
+  "M2": {
+   "amp": 85.7621,
+   "phase": 23.885
+  },
+  "M4": {
+   "amp": 0.5688,
+   "phase": -172.092
+  },
+  "MF": {
+   "amp": 1.54794,
+   "phase": 4.422
+  },
+  "MM": {
+   "amp": 0.75038,
+   "phase": 2.174
+  },
+  "N2": {
+   "amp": 16.00028,
+   "phase": 3.434
+  },
+  "O1": {
+   "amp": 12.06955,
+   "phase": -2.653
+  },
+  "P1": {
+   "amp": 6.5559,
+   "phase": -5.646
+  },
+  "Q1": {
+   "amp": 2.45692,
+   "phase": -5.526
+  },
+  "S1": {
+   "amp": 2.61855,
+   "phase": 118.201
+  },
+  "S2": {
+   "amp": 42.2609,
+   "phase": 63.066
+  },
+  "SA": {
+   "amp": 1.03449,
+   "phase": 96.195
+  },
+  "SSA": {
+   "amp": 0.87593,
+   "phase": 22.494
+  },
+  "T2": {
+   "amp": 3.00318,
+   "phase": 63.477
+  },
+  "Z0": {
+   "amp": 164.9,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "sidi-rahal",
+ "name_en": "Sidi Rahal",
+ "name_ar": "سيدي رحال",
+ "country": "MA",
+ "lat": 33.47,
+ "lon": -7.95,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 33.5,
+  "lon": -8,
+  "distance_km": 5.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.18121,
+   "phase": 20.385
+  },
+  "J1": {
+   "amp": 0.51579,
+   "phase": 72.303
+  },
+  "K1": {
+   "amp": 6.9708,
+   "phase": 48.568
+  },
+  "K2": {
+   "amp": 10.22307,
+   "phase": 74.802
+  },
+  "M2": {
+   "amp": 100.02034,
+   "phase": 53.037
+  },
+  "M4": {
+   "amp": 1.63724,
+   "phase": 145.064
+  },
+  "MF": {
+   "amp": 0.33281,
+   "phase": -37.143
+  },
+  "MM": {
+   "amp": 0.17016,
+   "phase": -63.491
+  },
+  "N2": {
+   "amp": 21.39895,
+   "phase": 37.321
+  },
+  "O1": {
+   "amp": 6.20548,
+   "phase": -51.94
+  },
+  "P1": {
+   "amp": 2.55404,
+   "phase": 36.804
+  },
+  "Q1": {
+   "amp": 2.1886,
+   "phase": -106.191
+  },
+  "S1": {
+   "amp": 1.26301,
+   "phase": 21.049
+  },
+  "S2": {
+   "amp": 37.01014,
+   "phase": 78.326
+  },
+  "SA": {
+   "amp": 2.68711,
+   "phase": -51.616
+  },
+  "SSA": {
+   "amp": 0.0781,
+   "phase": 158.893
+  },
+  "T2": {
+   "amp": 2.05008,
+   "phase": 72.538
+  },
+  "Z0": {
+   "amp": 176.1,
+   "phase": 0
+  }
+ }
+}

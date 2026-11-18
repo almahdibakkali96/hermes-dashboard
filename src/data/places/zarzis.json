@@ -1,0 +1,94 @@
+{
+ "id": "zarzis",
+ "name_en": "Zarzis",
+ "name_ar": "جرجيس",
+ "country": "TN",
+ "lat": 33.5,
+ "lon": 11.12,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 33.5,
+  "lon": 11.125,
+  "distance_km": 0.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.55961,
+   "phase": 49.108
+  },
+  "J1": {
+   "amp": 0.26832,
+   "phase": 10.821
+  },
+  "K1": {
+   "amp": 1.88645,
+   "phase": 17.723
+  },
+  "K2": {
+   "amp": 4.63037,
+   "phase": 92.138
+  },
+  "M2": {
+   "amp": 25.30286,
+   "phase": 74.616
+  },
+  "M4": {
+   "amp": 0.244,
+   "phase": 78.883
+  },
+  "MF": {
+   "amp": 0.51245,
+   "phase": -22.252
+  },
+  "MM": {
+   "amp": 0.44737,
+   "phase": -72.694
+  },
+  "N2": {
+   "amp": 3.67905,
+   "phase": 70.037
+  },
+  "O1": {
+   "amp": 0.54336,
+   "phase": 106.644
+  },
+  "P1": {
+   "amp": 0.71658,
+   "phase": -23.958
+  },
+  "Q1": {
+   "amp": 0.75176,
+   "phase": 74.648
+  },
+  "S1": {
+   "amp": 1.34106,
+   "phase": 54.376
+  },
+  "S2": {
+   "amp": 15.15638,
+   "phase": 99.676
+  },
+  "SA": {
+   "amp": 4.04738,
+   "phase": -77.351
+  },
+  "SSA": {
+   "amp": 0.08288,
+   "phase": -153.907
+  },
+  "T2": {
+   "amp": 0.32717,
+   "phase": 153.857
+  },
+  "Z0": {
+   "amp": 53.3,
+   "phase": 0
+  }
+ }
+}

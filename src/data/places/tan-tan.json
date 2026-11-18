@@ -1,0 +1,94 @@
+{
+ "id": "tan-tan",
+ "name_en": "Tan-Tan (El Ouatia)",
+ "name_ar": "طانطان (الوطية)",
+ "country": "MA",
+ "lat": 28.49,
+ "lon": -11.34,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 28.5,
+  "lon": -11.375,
+  "distance_km": 3.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.89278,
+   "phase": 11.668
+  },
+  "J1": {
+   "amp": 0.2023,
+   "phase": 58.646
+  },
+  "K1": {
+   "amp": 6.8294,
+   "phase": 46.009
+  },
+  "K2": {
+   "amp": 10.52432,
+   "phase": 60.208
+  },
+  "M2": {
+   "amp": 98.57609,
+   "phase": 39.346
+  },
+  "M4": {
+   "amp": 1.90897,
+   "phase": 126.804
+  },
+  "MF": {
+   "amp": 0.19898,
+   "phase": -22.12
+  },
+  "MM": {
+   "amp": 0.50659,
+   "phase": -68.053
+  },
+  "N2": {
+   "amp": 20.8689,
+   "phase": 24.78
+  },
+  "O1": {
+   "amp": 5.92629,
+   "phase": -63.089
+  },
+  "P1": {
+   "amp": 2.24696,
+   "phase": 30.623
+  },
+  "Q1": {
+   "amp": 1.81312,
+   "phase": -114.461
+  },
+  "S1": {
+   "amp": 1.23891,
+   "phase": -3.137
+  },
+  "S2": {
+   "amp": 37.33044,
+   "phase": 63.49
+  },
+  "SA": {
+   "amp": 2.30573,
+   "phase": -43.586
+  },
+  "SSA": {
+   "amp": 0.05045,
+   "phase": -52.264
+  },
+  "T2": {
+   "amp": 2.30777,
+   "phase": 54.341
+  },
+  "Z0": {
+   "amp": 173.9,
+   "phase": 0
+  }
+ }
+}

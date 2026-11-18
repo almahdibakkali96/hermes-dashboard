@@ -1,0 +1,94 @@
+{
+ "id": "zafarana",
+ "name_en": "Zafarana",
+ "name_ar": "الزعفرانة",
+ "country": "EG",
+ "lat": 29.11,
+ "lon": 32.66,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 29.125,
+  "lon": 32.75,
+  "distance_km": 8.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.33952,
+   "phase": -170.484
+  },
+  "J1": {
+   "amp": 0.75892,
+   "phase": -32.604
+  },
+  "K1": {
+   "amp": 4.70857,
+   "phase": 149.538
+  },
+  "K2": {
+   "amp": 3.08294,
+   "phase": -49.655
+  },
+  "M2": {
+   "amp": 47.04929,
+   "phase": -85.798
+  },
+  "M4": {
+   "amp": 0.77468,
+   "phase": -18.459
+  },
+  "MF": {
+   "amp": 0.90597,
+   "phase": 112.426
+  },
+  "MM": {
+   "amp": 1.0853,
+   "phase": 10.244
+  },
+  "N2": {
+   "amp": 16.48355,
+   "phase": -118.389
+  },
+  "O1": {
+   "amp": 1.26319,
+   "phase": -172.236
+  },
+  "P1": {
+   "amp": 1.42239,
+   "phase": 164.727
+  },
+  "Q1": {
+   "amp": 0.67311,
+   "phase": -101.572
+  },
+  "S1": {
+   "amp": 2.5581,
+   "phase": -22.977
+  },
+  "S2": {
+   "amp": 12.12177,
+   "phase": -63.704
+  },
+  "SA": {
+   "amp": 7.58035,
+   "phase": 16.638
+  },
+  "SSA": {
+   "amp": 0.4778,
+   "phase": -151.205
+  },
+  "T2": {
+   "amp": 2.03754,
+   "phase": 0.276
+  },
+  "Z0": {
+   "amp": 90.7,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "failaka",
+ "name_en": "Failaka",
+ "name_ar": "فيلكا",
+ "country": "KW",
+ "lat": 29.44,
+ "lon": 48.33,
+ "timezone": "Asia/Kuwait",
+ "grid": {
+  "lat": 29.5,
+  "lon": 48.375,
+  "distance_km": 8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.7845,
+   "phase": 179.823
+  },
+  "J1": {
+   "amp": 2.21193,
+   "phase": -113.422
+  },
+  "K1": {
+   "amp": 50.59234,
+   "phase": -102.235
+  },
+  "K2": {
+   "amp": 9.7918,
+   "phase": -69.969
+  },
+  "M2": {
+   "amp": 75.56366,
+   "phase": -116.387
+  },
+  "M4": {
+   "amp": 1.34669,
+   "phase": 7.388
+  },
+  "MF": {
+   "amp": 0.66203,
+   "phase": -126.786
+  },
+  "MM": {
+   "amp": 0.77586,
+   "phase": 31.689
+  },
+  "N2": {
+   "amp": 17.39783,
+   "phase": -145.45
+  },
+  "O1": {
+   "amp": 30.58297,
+   "phase": -143.319
+  },
+  "P1": {
+   "amp": 14.60275,
+   "phase": -109.776
+  },
+  "Q1": {
+   "amp": 5.64166,
+   "phase": -159.997
+  },
+  "S1": {
+   "amp": 2.24912,
+   "phase": 32.666
+  },
+  "S2": {
+   "amp": 28.41915,
+   "phase": -59.732
+  },
+  "SA": {
+   "amp": 2.90895,
+   "phase": -90.332
+  },
+  "SSA": {
+   "amp": 0.64423,
+   "phase": 168.309
+  },
+  "T2": {
+   "amp": 1.4812,
+   "phase": -87.636
+  },
+  "Z0": {
+   "amp": 215.1,
+   "phase": 0
+  }
+ }
+}

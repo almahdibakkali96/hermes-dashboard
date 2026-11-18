@@ -1,0 +1,94 @@
+{
+ "id": "skhira",
+ "name_en": "Skhira",
+ "name_ar": "الصخيرة",
+ "country": "TN",
+ "lat": 34.29,
+ "lon": 10.07,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 34.25,
+  "lon": 10.125,
+  "distance_km": 6.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.72553,
+   "phase": 75.758
+  },
+  "J1": {
+   "amp": 0.28153,
+   "phase": 0.838
+  },
+  "K1": {
+   "amp": 2.15723,
+   "phase": 7.998
+  },
+  "K2": {
+   "amp": 10.27413,
+   "phase": 90.101
+  },
+  "M2": {
+   "amp": 49.40894,
+   "phase": 70.528
+  },
+  "M4": {
+   "amp": 1.25244,
+   "phase": 94.848
+  },
+  "MF": {
+   "amp": 0.7012,
+   "phase": 15.951
+  },
+  "MM": {
+   "amp": 0.43507,
+   "phase": -103.716
+  },
+  "N2": {
+   "amp": 7.02684,
+   "phase": 67.81
+  },
+  "O1": {
+   "amp": 0.78639,
+   "phase": 98.661
+  },
+  "P1": {
+   "amp": 0.95195,
+   "phase": -16.429
+  },
+  "Q1": {
+   "amp": 0.90392,
+   "phase": 49.052
+  },
+  "S1": {
+   "amp": 1.74411,
+   "phase": 58.115
+  },
+  "S2": {
+   "amp": 34.21709,
+   "phase": 97.614
+  },
+  "SA": {
+   "amp": 4.01277,
+   "phase": -81.295
+  },
+  "SSA": {
+   "amp": 0.11391,
+   "phase": -144.194
+  },
+  "T2": {
+   "amp": 1.97562,
+   "phase": 115.617
+  },
+  "Z0": {
+   "amp": 105.2,
+   "phase": 0
+  }
+ }
+}

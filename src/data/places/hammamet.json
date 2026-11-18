@@ -1,0 +1,94 @@
+{
+ "id": "hammamet",
+ "name_en": "Hammamet",
+ "name_ar": "الحمامات",
+ "country": "TN",
+ "lat": 36.4,
+ "lon": 10.61,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 36.375,
+  "lon": 10.625,
+  "distance_km": 3.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.08517,
+   "phase": 101.931
+  },
+  "J1": {
+   "amp": 0.60235,
+   "phase": -84.988
+  },
+  "K1": {
+   "amp": 0.21255,
+   "phase": -118.303
+  },
+  "K2": {
+   "amp": 1.43992,
+   "phase": 15.053
+  },
+  "M2": {
+   "amp": 5.21063,
+   "phase": 0.86
+  },
+  "M4": {
+   "amp": 0.28144,
+   "phase": -111.702
+  },
+  "MF": {
+   "amp": 0.41375,
+   "phase": -3.151
+  },
+  "MM": {
+   "amp": 0.87738,
+   "phase": -82.475
+  },
+  "N2": {
+   "amp": 0.62484,
+   "phase": 2.433
+  },
+  "O1": {
+   "amp": 0.90766,
+   "phase": 60.474
+  },
+  "P1": {
+   "amp": 0.22411,
+   "phase": -66.374
+  },
+  "Q1": {
+   "amp": 0.42458,
+   "phase": 15.113
+  },
+  "S1": {
+   "amp": 1.51783,
+   "phase": 13.63
+  },
+  "S2": {
+   "amp": 4.7638,
+   "phase": 30.019
+  },
+  "SA": {
+   "amp": 3.87484,
+   "phase": -66.123
+  },
+  "SSA": {
+   "amp": 0.24066,
+   "phase": -154.63
+  },
+  "T2": {
+   "amp": 0.57746,
+   "phase": 17.765
+  },
+  "Z0": {
+   "amp": 17.3,
+   "phase": 0
+  }
+ }
+}

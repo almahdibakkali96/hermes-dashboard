@@ -1,0 +1,94 @@
+{
+ "id": "farasan",
+ "name_en": "Farasan",
+ "name_ar": "فرسان",
+ "country": "SA",
+ "lat": 16.7,
+ "lon": 41.98,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 16.625,
+  "lon": 42,
+  "distance_km": 8.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.58886,
+   "phase": -150.516
+  },
+  "J1": {
+   "amp": 0.07416,
+   "phase": 44.669
+  },
+  "K1": {
+   "amp": 1.55821,
+   "phase": 133.578
+  },
+  "K2": {
+   "amp": 2.7979,
+   "phase": -26.332
+  },
+  "M2": {
+   "amp": 26.28008,
+   "phase": -56.656
+  },
+  "M4": {
+   "amp": 0.31053,
+   "phase": 106.538
+  },
+  "MF": {
+   "amp": 1.50567,
+   "phase": 6.108
+  },
+  "MM": {
+   "amp": 0.51434,
+   "phase": -67.631
+  },
+  "N2": {
+   "amp": 9.00065,
+   "phase": -82.266
+  },
+  "O1": {
+   "amp": 1.36437,
+   "phase": 156.789
+  },
+  "P1": {
+   "amp": 0.55043,
+   "phase": 138.141
+  },
+  "Q1": {
+   "amp": 0.3909,
+   "phase": 81.698
+  },
+  "S1": {
+   "amp": 0.70159,
+   "phase": 7.383
+  },
+  "S2": {
+   "amp": 7.74995,
+   "phase": -24.694
+  },
+  "SA": {
+   "amp": 8.62552,
+   "phase": 32.834
+  },
+  "SSA": {
+   "amp": 0.21629,
+   "phase": -92.732
+  },
+  "T2": {
+   "amp": 0.80151,
+   "phase": 44.636
+  },
+  "Z0": {
+   "amp": 54.7,
+   "phase": 0
+  }
+ }
+}

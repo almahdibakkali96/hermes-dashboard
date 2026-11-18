@@ -1,0 +1,94 @@
+{
+ "id": "saidia",
+ "name_en": "Saïdia",
+ "name_ar": "السعيدية",
+ "country": "MA",
+ "lat": 35.11,
+ "lon": -2.3,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 35.125,
+  "lon": -2.25,
+  "distance_km": 4.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.04928,
+   "phase": -146.285
+  },
+  "J1": {
+   "amp": 0.26047,
+   "phase": 141.785
+  },
+  "K1": {
+   "amp": 4.24502,
+   "phase": 152.063
+  },
+  "K2": {
+   "amp": 0.8539,
+   "phase": 109.024
+  },
+  "M2": {
+   "amp": 10.7761,
+   "phase": 66.155
+  },
+  "M4": {
+   "amp": 0.98917,
+   "phase": -177.15
+  },
+  "MF": {
+   "amp": 0.21521,
+   "phase": -137.133
+  },
+  "MM": {
+   "amp": 0.63842,
+   "phase": -81.003
+  },
+  "N2": {
+   "amp": 2.14158,
+   "phase": 46.825
+  },
+  "O1": {
+   "amp": 2.04202,
+   "phase": 100.978
+  },
+  "P1": {
+   "amp": 1.01049,
+   "phase": 142.77
+  },
+  "Q1": {
+   "amp": 0.28839,
+   "phase": 18.609
+  },
+  "S1": {
+   "amp": 1.51294,
+   "phase": 8.642
+  },
+  "S2": {
+   "amp": 4.63783,
+   "phase": 88.204
+  },
+  "SA": {
+   "amp": 4.10119,
+   "phase": -88.687
+  },
+  "SSA": {
+   "amp": 0.20885,
+   "phase": -164.074
+  },
+  "T2": {
+   "amp": 0.60569,
+   "phase": -110.023
+  },
+  "Z0": {
+   "amp": 26.2,
+   "phase": 0
+  }
+ }
+}

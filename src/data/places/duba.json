@@ -1,0 +1,94 @@
+{
+ "id": "duba",
+ "name_en": "Duba",
+ "name_ar": "ضباء",
+ "country": "SA",
+ "lat": 27.35,
+ "lon": 35.69,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 27.375,
+  "lon": 35.625,
+  "distance_km": 7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.42383,
+   "phase": 51.23
+  },
+  "J1": {
+   "amp": 0.30391,
+   "phase": 115.152
+  },
+  "K1": {
+   "amp": 2.16941,
+   "phase": 146.888
+  },
+  "K2": {
+   "amp": 2.72162,
+   "phase": 139.814
+  },
+  "M2": {
+   "amp": 25.66239,
+   "phase": 116.873
+  },
+  "M4": {
+   "amp": 0.62702,
+   "phase": 159.233
+  },
+  "MF": {
+   "amp": 1.06219,
+   "phase": 9.716
+  },
+  "MM": {
+   "amp": 0.17234,
+   "phase": -127.212
+  },
+  "N2": {
+   "amp": 7.94227,
+   "phase": 95.324
+  },
+  "O1": {
+   "amp": 0.91765,
+   "phase": 156.813
+  },
+  "P1": {
+   "amp": 0.44179,
+   "phase": 146.468
+  },
+  "Q1": {
+   "amp": 0.30582,
+   "phase": -155.071
+  },
+  "S1": {
+   "amp": 0.22122,
+   "phase": -1.048
+  },
+  "S2": {
+   "amp": 8.07371,
+   "phase": 145.435
+  },
+  "SA": {
+   "amp": 9.25924,
+   "phase": 22.528
+  },
+  "SSA": {
+   "amp": 0.46612,
+   "phase": -152.509
+  },
+  "T2": {
+   "amp": 1.20649,
+   "phase": 146.891
+  },
+  "Z0": {
+   "amp": 53.1,
+   "phase": 0
+  }
+ }
+}

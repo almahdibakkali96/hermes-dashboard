@@ -1,0 +1,94 @@
+{
+ "id": "kelibia",
+ "name_en": "Kelibia",
+ "name_ar": "قليبية",
+ "country": "TN",
+ "lat": 36.85,
+ "lon": 11.1,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 36.75,
+  "lon": 11.125,
+  "distance_km": 11.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.25307,
+   "phase": 130.154
+  },
+  "J1": {
+   "amp": 0.33461,
+   "phase": -101.312
+  },
+  "K1": {
+   "amp": 1.0426,
+   "phase": -120.406
+  },
+  "K2": {
+   "amp": 0.9732,
+   "phase": 9.437
+  },
+  "M2": {
+   "amp": 3.35362,
+   "phase": -28.166
+  },
+  "M4": {
+   "amp": 0.28861,
+   "phase": -138.897
+  },
+  "MF": {
+   "amp": 0.36314,
+   "phase": -6.554
+  },
+  "MM": {
+   "amp": 0.83984,
+   "phase": -82.503
+  },
+  "N2": {
+   "amp": 0.36252,
+   "phase": -32.434
+  },
+  "O1": {
+   "amp": 0.77217,
+   "phase": 85.161
+  },
+  "P1": {
+   "amp": 0.43869,
+   "phase": -111.977
+  },
+  "Q1": {
+   "amp": 0.46743,
+   "phase": 27.811
+  },
+  "S1": {
+   "amp": 1.19862,
+   "phase": 5.689
+  },
+  "S2": {
+   "amp": 3.25759,
+   "phase": 21.05
+  },
+  "SA": {
+   "amp": 3.66473,
+   "phase": -74.665
+  },
+  "SSA": {
+   "amp": 0.2144,
+   "phase": -155.793
+  },
+  "T2": {
+   "amp": 0.4207,
+   "phase": -20.703
+  },
+  "Z0": {
+   "amp": 12.9,
+   "phase": 0
+  }
+ }
+}

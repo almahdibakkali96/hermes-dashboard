@@ -1,0 +1,94 @@
+{
+ "id": "bosaso",
+ "name_en": "Bosaso",
+ "name_ar": "بوصاصو",
+ "country": "SO",
+ "lat": 11.28,
+ "lon": 49.18,
+ "timezone": "Africa/Mogadishu",
+ "grid": {
+  "lat": 11.375,
+  "lon": 49.125,
+  "distance_km": 12.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.01178,
+   "phase": 108.491
+  },
+  "J1": {
+   "amp": 2.64453,
+   "phase": 13.719
+  },
+  "K1": {
+   "amp": 38.07811,
+   "phase": -10.496
+  },
+  "K2": {
+   "amp": 5.3809,
+   "phase": 154.599
+  },
+  "M2": {
+   "amp": 40.6865,
+   "phase": 138.472
+  },
+  "M4": {
+   "amp": 0.34905,
+   "phase": -133.258
+  },
+  "MF": {
+   "amp": 1.24041,
+   "phase": 10.136
+  },
+  "MM": {
+   "amp": 0.83095,
+   "phase": -11.288
+  },
+  "N2": {
+   "amp": 11.2865,
+   "phase": 133.597
+  },
+  "O1": {
+   "amp": 18.78258,
+   "phase": -7.945
+  },
+  "P1": {
+   "amp": 11.57532,
+   "phase": -13.301
+  },
+  "Q1": {
+   "amp": 4.34229,
+   "phase": -13.442
+  },
+  "S1": {
+   "amp": 2.90912,
+   "phase": 126.037
+  },
+  "S2": {
+   "amp": 17.42214,
+   "phase": 158.345
+  },
+  "SA": {
+   "amp": 4.69794,
+   "phase": 95.028
+  },
+  "SSA": {
+   "amp": 0.83905,
+   "phase": -18.358
+  },
+  "T2": {
+   "amp": 1.26126,
+   "phase": 149.938
+  },
+  "Z0": {
+   "amp": 151.9,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "temara",
+ "name_en": "Temara (Harhoura)",
+ "name_ar": "تمارة (الهرهورة)",
+ "country": "MA",
+ "lat": 33.95,
+ "lon": -6.94,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 34,
+  "lon": -7,
+  "distance_km": 7.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.21121,
+   "phase": 17.479
+  },
+  "J1": {
+   "amp": 0.46474,
+   "phase": 64.79
+  },
+  "K1": {
+   "amp": 6.84716,
+   "phase": 50.344
+  },
+  "K2": {
+   "amp": 10.08433,
+   "phase": 77.126
+  },
+  "M2": {
+   "amp": 99.98113,
+   "phase": 54.129
+  },
+  "M4": {
+   "amp": 1.6788,
+   "phase": 157.164
+  },
+  "MF": {
+   "amp": 0.30572,
+   "phase": 17.324
+  },
+  "MM": {
+   "amp": 0.09958,
+   "phase": -82.858
+  },
+  "N2": {
+   "amp": 21.33348,
+   "phase": 38.166
+  },
+  "O1": {
+   "amp": 6.26702,
+   "phase": -52.351
+  },
+  "P1": {
+   "amp": 2.4904,
+   "phase": 38.051
+  },
+  "Q1": {
+   "amp": 2.08629,
+   "phase": -112.11
+  },
+  "S1": {
+   "amp": 0.58511,
+   "phase": 86.151
+  },
+  "S2": {
+   "amp": 36.44121,
+   "phase": 80.003
+  },
+  "SA": {
+   "amp": 2.57173,
+   "phase": -58.28
+  },
+  "SSA": {
+   "amp": 0.07897,
+   "phase": 175.693
+  },
+  "T2": {
+   "amp": 1.89637,
+   "phase": 74.176
+  },
+  "Z0": {
+   "amp": 176.4,
+   "phase": 0
+  }
+ }
+}

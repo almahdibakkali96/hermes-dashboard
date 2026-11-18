@@ -1,0 +1,94 @@
+{
+ "id": "imsouane",
+ "name_en": "Imsouane",
+ "name_ar": "إمسوان",
+ "country": "MA",
+ "lat": 30.84,
+ "lon": -9.82,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 30.875,
+  "lon": -9.875,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.79251,
+   "phase": 15.027
+  },
+  "J1": {
+   "amp": 0.27697,
+   "phase": 50.786
+  },
+  "K1": {
+   "amp": 7.06415,
+   "phase": 42.743
+  },
+  "K2": {
+   "amp": 9.99412,
+   "phase": 64.236
+  },
+  "M2": {
+   "amp": 95.05929,
+   "phase": 43.843
+  },
+  "M4": {
+   "amp": 1.50103,
+   "phase": 139.995
+  },
+  "MF": {
+   "amp": 0.24067,
+   "phase": -10.375
+  },
+  "MM": {
+   "amp": 0.21259,
+   "phase": -61.383
+  },
+  "N2": {
+   "amp": 20.06244,
+   "phase": 28.926
+  },
+  "O1": {
+   "amp": 6.19417,
+   "phase": -57.78
+  },
+  "P1": {
+   "amp": 2.50401,
+   "phase": 38.759
+  },
+  "Q1": {
+   "amp": 1.85729,
+   "phase": -112.543
+  },
+  "S1": {
+   "amp": 0.56687,
+   "phase": 28.642
+  },
+  "S2": {
+   "amp": 35.20877,
+   "phase": 68.067
+  },
+  "SA": {
+   "amp": 1.86485,
+   "phase": -48.214
+  },
+  "SSA": {
+   "amp": 0.00233,
+   "phase": 59.039
+  },
+  "T2": {
+   "amp": 2.00313,
+   "phase": 52.421
+  },
+  "Z0": {
+   "amp": 167.9,
+   "phase": 0
+  }
+ }
+}

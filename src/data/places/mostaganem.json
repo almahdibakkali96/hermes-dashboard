@@ -1,0 +1,94 @@
+{
+ "id": "mostaganem",
+ "name_en": "Mostaganem",
+ "name_ar": "مستغانم",
+ "country": "DZ",
+ "lat": 35.94,
+ "lon": 0.08,
+ "timezone": "Africa/Algiers",
+ "grid": {
+  "lat": 36,
+  "lon": 0,
+  "distance_km": 9.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.35539,
+   "phase": -57.589
+  },
+  "J1": {
+   "amp": 0.52237,
+   "phase": 91.439
+  },
+  "K1": {
+   "amp": 3.98642,
+   "phase": 156.306
+  },
+  "K2": {
+   "amp": 0.57884,
+   "phase": 64.68
+  },
+  "M2": {
+   "amp": 4.88937,
+   "phase": 75.764
+  },
+  "M4": {
+   "amp": 0.7075,
+   "phase": 172.538
+  },
+  "MF": {
+   "amp": 0.09834,
+   "phase": -41.374
+  },
+  "MM": {
+   "amp": 0.36231,
+   "phase": -54.4
+  },
+  "N2": {
+   "amp": 1.18275,
+   "phase": 61.957
+  },
+  "O1": {
+   "amp": 2.05189,
+   "phase": 110.134
+  },
+  "P1": {
+   "amp": 1.29138,
+   "phase": 156.972
+  },
+  "Q1": {
+   "amp": 0.25285,
+   "phase": 118.277
+  },
+  "S1": {
+   "amp": 1.2012,
+   "phase": 21.27
+  },
+  "S2": {
+   "amp": 2.75327,
+   "phase": 94.56
+  },
+  "SA": {
+   "amp": 3.00807,
+   "phase": -82.07
+  },
+  "SSA": {
+   "amp": 0.15083,
+   "phase": -161.32
+  },
+  "T2": {
+   "amp": 0.26794,
+   "phase": 32.107
+  },
+  "Z0": {
+   "amp": 16.6,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "derna",
+ "name_en": "Derna",
+ "name_ar": "درنة",
+ "country": "LY",
+ "lat": 32.77,
+ "lon": 22.64,
+ "timezone": "Africa/Tripoli",
+ "grid": {
+  "lat": 32.75,
+  "lon": 22.75,
+  "distance_km": 10.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.36591,
+   "phase": -159.471
+  },
+  "J1": {
+   "amp": 0.07685,
+   "phase": -65.858
+  },
+  "K1": {
+   "amp": 1.11725,
+   "phase": -38.33
+  },
+  "K2": {
+   "amp": 0.26388,
+   "phase": 157.809
+  },
+  "M2": {
+   "amp": 0.65761,
+   "phase": 12.993
+  },
+  "M4": {
+   "amp": 0.18184,
+   "phase": -149.279
+  },
+  "MF": {
+   "amp": 0.21671,
+   "phase": -30.479
+  },
+  "MM": {
+   "amp": 0.46798,
+   "phase": -105.434
+  },
+  "N2": {
+   "amp": 0.28514,
+   "phase": -29.248
+  },
+  "O1": {
+   "amp": 0.49539,
+   "phase": -89.315
+  },
+  "P1": {
+   "amp": 0.42193,
+   "phase": -50.04
+  },
+  "Q1": {
+   "amp": 0.09062,
+   "phase": -72.702
+  },
+  "S1": {
+   "amp": 1.16024,
+   "phase": -26.214
+  },
+  "S2": {
+   "amp": 0.07915,
+   "phase": 51.185
+  },
+  "SA": {
+   "amp": 3.58787,
+   "phase": -70.921
+  },
+  "SSA": {
+   "amp": 0.12668,
+   "phase": -84.71
+  },
+  "T2": {
+   "amp": 0.45808,
+   "phase": -76.99
+  },
+  "Z0": {
+   "amp": 9.1,
+   "phase": 0
+  }
+ }
+}

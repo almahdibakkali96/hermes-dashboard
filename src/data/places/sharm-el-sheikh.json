@@ -1,0 +1,94 @@
+{
+ "id": "sharm-el-sheikh",
+ "name_en": "Sharm El Sheikh",
+ "name_ar": "شرم الشيخ",
+ "country": "EG",
+ "lat": 27.86,
+ "lon": 34.3,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 27.875,
+  "lon": 34.375,
+  "distance_km": 7.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.11485,
+   "phase": 41.73
+  },
+  "J1": {
+   "amp": 0.60341,
+   "phase": 144.067
+  },
+  "K1": {
+   "amp": 1.88093,
+   "phase": 173.557
+  },
+  "K2": {
+   "amp": 2.3858,
+   "phase": 141.834
+  },
+  "M2": {
+   "amp": 25.48502,
+   "phase": 116.307
+  },
+  "M4": {
+   "amp": 0.44933,
+   "phase": -61.581
+  },
+  "MF": {
+   "amp": 1.02199,
+   "phase": 37.428
+  },
+  "MM": {
+   "amp": 0.3643,
+   "phase": 109.726
+  },
+  "N2": {
+   "amp": 8.04989,
+   "phase": 103.262
+  },
+  "O1": {
+   "amp": 1.3762,
+   "phase": 124.361
+  },
+  "P1": {
+   "amp": 1.63231,
+   "phase": -156.016
+  },
+  "Q1": {
+   "amp": 0.76425,
+   "phase": -140.127
+  },
+  "S1": {
+   "amp": 1.10214,
+   "phase": 0.975
+  },
+  "S2": {
+   "amp": 7.5711,
+   "phase": 147.79
+  },
+  "SA": {
+   "amp": 7.23764,
+   "phase": 24.749
+  },
+  "SSA": {
+   "amp": 0.36879,
+   "phase": -141.419
+  },
+  "T2": {
+   "amp": 1.00652,
+   "phase": 127.992
+  },
+  "Z0": {
+   "amp": 50.5,
+   "phase": 0
+  }
+ }
+}

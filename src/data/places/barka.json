@@ -1,0 +1,94 @@
+{
+ "id": "barka",
+ "name_en": "Barka",
+ "name_ar": "بركاء",
+ "country": "OM",
+ "lat": 23.71,
+ "lon": 57.89,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 23.75,
+  "lon": 57.875,
+  "distance_km": 4.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.37157,
+   "phase": 110.876
+  },
+  "J1": {
+   "amp": 2.32364,
+   "phase": -8.091
+  },
+  "K1": {
+   "amp": 39.52454,
+   "phase": -18.778
+  },
+  "K2": {
+   "amp": 7.05265,
+   "phase": -175.816
+  },
+  "M2": {
+   "amp": 68.14552,
+   "phase": 158.929
+  },
+  "M4": {
+   "amp": 1.09162,
+   "phase": -128.501
+  },
+  "MF": {
+   "amp": 0.81728,
+   "phase": 19.823
+  },
+  "MM": {
+   "amp": 0.60211,
+   "phase": 30.938
+  },
+  "N2": {
+   "amp": 16.30094,
+   "phase": 142.501
+  },
+  "O1": {
+   "amp": 19.90536,
+   "phase": -18.059
+  },
+  "P1": {
+   "amp": 12.27784,
+   "phase": -20.029
+  },
+  "Q1": {
+   "amp": 4.02948,
+   "phase": -16.575
+  },
+  "S1": {
+   "amp": 1.81856,
+   "phase": 112.501
+  },
+  "S2": {
+   "amp": 26.3706,
+   "phase": -170.242
+  },
+  "SA": {
+   "amp": 1.43533,
+   "phase": 34.835
+  },
+  "SSA": {
+   "amp": 0.31482,
+   "phase": -44.434
+  },
+  "T2": {
+   "amp": 1.66391,
+   "phase": -164.975
+  },
+  "Z0": {
+   "amp": 188.3,
+   "phase": 0
+  }
+ }
+}

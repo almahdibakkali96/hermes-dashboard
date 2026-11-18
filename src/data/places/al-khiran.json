@@ -1,0 +1,94 @@
+{
+ "id": "al-khiran",
+ "name_en": "Al Khiran",
+ "name_ar": "الخيران",
+ "country": "KW",
+ "lat": 28.66,
+ "lon": 48.38,
+ "timezone": "Asia/Kuwait",
+ "grid": {
+  "lat": 28.75,
+  "lon": 48.375,
+  "distance_km": 10
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.41335,
+   "phase": -174.235
+  },
+  "J1": {
+   "amp": 2.0445,
+   "phase": -107.482
+  },
+  "K1": {
+   "amp": 45.26507,
+   "phase": -99.02
+  },
+  "K2": {
+   "amp": 5.65517,
+   "phase": -63.776
+  },
+  "M2": {
+   "amp": 45.36926,
+   "phase": -112.4
+  },
+  "M4": {
+   "amp": 2.09624,
+   "phase": -166.88
+  },
+  "MF": {
+   "amp": 0.38024,
+   "phase": -98.136
+  },
+  "MM": {
+   "amp": 0.82415,
+   "phase": 43.344
+  },
+  "N2": {
+   "amp": 10.30066,
+   "phase": -141.091
+  },
+  "O1": {
+   "amp": 27.3335,
+   "phase": -140.931
+  },
+  "P1": {
+   "amp": 13.14552,
+   "phase": -107.531
+  },
+  "Q1": {
+   "amp": 5.25217,
+   "phase": -156.137
+  },
+  "S1": {
+   "amp": 2.48231,
+   "phase": 28.376
+  },
+  "S2": {
+   "amp": 16.56034,
+   "phase": -55.31
+  },
+  "SA": {
+   "amp": 3.01634,
+   "phase": -86.407
+  },
+  "SSA": {
+   "amp": 0.56524,
+   "phase": 171.212
+  },
+  "T2": {
+   "amp": 0.87447,
+   "phase": -76.36
+  },
+  "Z0": {
+   "amp": 158,
+   "phase": 0
+  }
+ }
+}

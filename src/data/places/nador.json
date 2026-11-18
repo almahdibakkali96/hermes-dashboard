@@ -1,0 +1,94 @@
+{
+ "id": "nador",
+ "name_en": "Nador",
+ "name_ar": "الناظور",
+ "country": "MA",
+ "lat": 35.2,
+ "lon": -2.9,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 35.25,
+  "lon": -2.875,
+  "distance_km": 6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.04593,
+   "phase": 57.404
+  },
+  "J1": {
+   "amp": 0.19397,
+   "phase": 121.125
+  },
+  "K1": {
+   "amp": 4.11848,
+   "phase": 145.06
+  },
+  "K2": {
+   "amp": 1.19017,
+   "phase": 99.045
+  },
+  "M2": {
+   "amp": 12.61605,
+   "phase": 64.135
+  },
+  "M4": {
+   "amp": 1.28656,
+   "phase": -179.765
+  },
+  "MF": {
+   "amp": 0.3204,
+   "phase": -115.731
+  },
+  "MM": {
+   "amp": 0.63691,
+   "phase": -90.381
+  },
+  "N2": {
+   "amp": 2.58048,
+   "phase": 54.256
+  },
+  "O1": {
+   "amp": 2.03505,
+   "phase": 101.357
+  },
+  "P1": {
+   "amp": 0.9559,
+   "phase": 132.306
+  },
+  "Q1": {
+   "amp": 0.16287,
+   "phase": 22.22
+  },
+  "S1": {
+   "amp": 1.46106,
+   "phase": -3.879
+  },
+  "S2": {
+   "amp": 5.46529,
+   "phase": 87.675
+  },
+  "SA": {
+   "amp": 3.43327,
+   "phase": -83.003
+  },
+  "SSA": {
+   "amp": 0.19657,
+   "phase": -177.605
+  },
+  "T2": {
+   "amp": 0.33704,
+   "phase": -97.91
+  },
+  "Z0": {
+   "amp": 28.6,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "skhirat",
+ "name_en": "Skhirat",
+ "name_ar": "الصخيرات",
+ "country": "MA",
+ "lat": 33.87,
+ "lon": -7.05,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 33.875,
+  "lon": -7.125,
+  "distance_km": 6.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.22637,
+   "phase": 17.647
+  },
+  "J1": {
+   "amp": 0.48029,
+   "phase": 66.789
+  },
+  "K1": {
+   "amp": 6.85287,
+   "phase": 49.865
+  },
+  "K2": {
+   "amp": 10.10715,
+   "phase": 76.72
+  },
+  "M2": {
+   "amp": 100.18482,
+   "phase": 54.001
+  },
+  "M4": {
+   "amp": 1.66342,
+   "phase": 154.646
+  },
+  "MF": {
+   "amp": 0.29949,
+   "phase": 14.588
+  },
+  "MM": {
+   "amp": 0.08733,
+   "phase": -54.941
+  },
+  "N2": {
+   "amp": 21.37455,
+   "phase": 38.076
+  },
+  "O1": {
+   "amp": 6.24279,
+   "phase": -52.337
+  },
+  "P1": {
+   "amp": 2.50973,
+   "phase": 37.315
+  },
+  "Q1": {
+   "amp": 2.14409,
+   "phase": -112.031
+  },
+  "S1": {
+   "amp": 0.67118,
+   "phase": 66.247
+  },
+  "S2": {
+   "amp": 36.58329,
+   "phase": 79.767
+  },
+  "SA": {
+   "amp": 2.59728,
+   "phase": -56.97
+  },
+  "SSA": {
+   "amp": 0.07599,
+   "phase": 172.144
+  },
+  "T2": {
+   "amp": 1.92759,
+   "phase": 74.453
+  },
+  "Z0": {
+   "amp": 176.6,
+   "phase": 0
+  }
+ }
+}

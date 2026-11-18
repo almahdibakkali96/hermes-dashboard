@@ -1,0 +1,94 @@
+{
+ "id": "el-tor",
+ "name_en": "El Tor",
+ "name_ar": "الطور",
+ "country": "EG",
+ "lat": 28.24,
+ "lon": 33.62,
+ "timezone": "Africa/Cairo",
+ "grid": {
+  "lat": 28.25,
+  "lon": 33.5,
+  "distance_km": 11.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.28893,
+   "phase": 116.386
+  },
+  "J1": {
+   "amp": 1.67398,
+   "phase": -152.048
+  },
+  "K1": {
+   "amp": 1.69635,
+   "phase": -174.676
+  },
+  "K2": {
+   "amp": 0.86066,
+   "phase": -69.525
+  },
+  "M2": {
+   "amp": 9.99518,
+   "phase": -124.076
+  },
+  "M4": {
+   "amp": 0.28778,
+   "phase": 156.45
+  },
+  "MF": {
+   "amp": 1.2213,
+   "phase": 96.372
+  },
+  "MM": {
+   "amp": 0.52954,
+   "phase": 115.91
+  },
+  "N2": {
+   "amp": 6.05941,
+   "phase": -160.415
+  },
+  "O1": {
+   "amp": 1.77471,
+   "phase": 106.649
+  },
+  "P1": {
+   "amp": 2.2572,
+   "phase": -150.278
+  },
+  "Q1": {
+   "amp": 1.044,
+   "phase": -134.692
+  },
+  "S1": {
+   "amp": 6.18102,
+   "phase": -47.728
+  },
+  "S2": {
+   "amp": 3.43996,
+   "phase": -97.461
+  },
+  "SA": {
+   "amp": 0.30223,
+   "phase": 10.922
+  },
+  "SSA": {
+   "amp": 0.25923,
+   "phase": -37.522
+  },
+  "T2": {
+   "amp": 0.58832,
+   "phase": 151.75
+  },
+  "Z0": {
+   "amp": 27.2,
+   "phase": 0
+  }
+ }
+}

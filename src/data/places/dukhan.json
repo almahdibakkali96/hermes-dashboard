@@ -1,0 +1,94 @@
+{
+ "id": "dukhan",
+ "name_en": "Dukhan",
+ "name_ar": "دخان",
+ "country": "QA",
+ "lat": 25.43,
+ "lon": 50.78,
+ "timezone": "Asia/Qatar",
+ "grid": {
+  "lat": 25.375,
+  "lon": 50.75,
+  "distance_km": 6.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.29983,
+   "phase": 37.082
+  },
+  "J1": {
+   "amp": 0.15227,
+   "phase": 2.408
+  },
+  "K1": {
+   "amp": 11.01203,
+   "phase": 36.571
+  },
+  "K2": {
+   "amp": 2.80428,
+   "phase": -109.273
+  },
+  "M2": {
+   "amp": 32.91278,
+   "phase": -166.722
+  },
+  "M4": {
+   "amp": 3.34276,
+   "phase": -89.112
+  },
+  "MF": {
+   "amp": 1.40441,
+   "phase": 16.852
+  },
+  "MM": {
+   "amp": 1.89264,
+   "phase": 29.19
+  },
+  "N2": {
+   "amp": 7.92038,
+   "phase": 163.76
+  },
+  "O1": {
+   "amp": 8.2656,
+   "phase": -43.583
+  },
+  "P1": {
+   "amp": 3.89844,
+   "phase": 22.363
+  },
+  "Q1": {
+   "amp": 2.33051,
+   "phase": -63.282
+  },
+  "S1": {
+   "amp": 6.50492,
+   "phase": 84.705
+  },
+  "S2": {
+   "amp": 12.77426,
+   "phase": -104.916
+  },
+  "SA": {
+   "amp": 2.41807,
+   "phase": -69.034
+  },
+  "SSA": {
+   "amp": 0.35711,
+   "phase": 170.559
+  },
+  "T2": {
+   "amp": 1.4416,
+   "phase": -156.942
+  },
+  "Z0": {
+   "amp": 82.9,
+   "phase": 0
+  }
+ }
+}

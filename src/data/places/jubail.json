@@ -1,0 +1,94 @@
+{
+ "id": "jubail",
+ "name_en": "Jubail",
+ "name_ar": "الجبيل",
+ "country": "SA",
+ "lat": 27.01,
+ "lon": 49.66,
+ "timezone": "Asia/Riyadh",
+ "grid": {
+  "lat": 27,
+  "lon": 49.75,
+  "distance_km": 9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.11293,
+   "phase": -33.626
+  },
+  "J1": {
+   "amp": 0.47453,
+   "phase": -148.041
+  },
+  "K1": {
+   "amp": 18.14329,
+   "phase": -83.154
+  },
+  "K2": {
+   "amp": 6.37309,
+   "phase": 85.589
+  },
+  "M2": {
+   "amp": 51.96985,
+   "phase": 37.626
+  },
+  "M4": {
+   "amp": 1.6801,
+   "phase": 56.999
+  },
+  "MF": {
+   "amp": 0.36333,
+   "phase": 25.628
+  },
+  "MM": {
+   "amp": 1.02883,
+   "phase": 28.244
+  },
+  "N2": {
+   "amp": 10.88456,
+   "phase": 11.312
+  },
+  "O1": {
+   "amp": 13.79814,
+   "phase": -130.157
+  },
+  "P1": {
+   "amp": 5.47509,
+   "phase": -93.403
+  },
+  "Q1": {
+   "amp": 2.8332,
+   "phase": -147.653
+  },
+  "S1": {
+   "amp": 0.76887,
+   "phase": 17.275
+  },
+  "S2": {
+   "amp": 19.95257,
+   "phase": 92.102
+  },
+  "SA": {
+   "amp": 2.90534,
+   "phase": -70.357
+  },
+  "SSA": {
+   "amp": 0.44285,
+   "phase": 174.812
+  },
+  "T2": {
+   "amp": 1.18724,
+   "phase": 109.823
+  },
+  "Z0": {
+   "amp": 108.8,
+   "phase": 0
+  }
+ }
+}

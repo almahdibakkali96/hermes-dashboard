@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { arabPlaces as placesIndex, allPlaces, worldPlaces, zoneOf, zoneNames, type Zone } from '../lib/regions';
 import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
+import { altNamesAr, frenchName } from '../lib/portNames';
 import { articles } from '../lib/articles';
 import CalendarPromo from '../components/CalendarPromo.astro';
 import LiveTides from '../components/LiveTides.astro';
@@ -69,8 +70,10 @@ const moon = moonPhase(new Date());
 const todayAr = new Date().toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'Asia/Riyadh', weekday: 'long', day: 'numeric', month: 'long' });
 
 // Full port list for the search dropdown (client-side)
+// (alt: other spellings and French names, so «مارتيل», «هرهورة» or «Tanger» find their port)
 const searchPorts = allPlaces.map((p: { id: string; name_ar: string; name_en: string; country: string; lat: number; lon: number }) => ({
-  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryName(p.country), lat: p.lat, lon: p.lon
+  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryName(p.country), lat: p.lat, lon: p.lon,
+  alt: [...altNamesAr(p.id, p.name_ar), frenchName(p.id) || ''].filter(Boolean).join(' '),
 }));
 const searchPortsJSON = JSON.stringify(searchPorts);
 
@@ -84,7 +87,7 @@ const features = [
 
 <BaseLayout
   title="جدول المد والجزر اليوم وأوقات الصيد في الموانئ العربية"
-  description={`جدول المد والجزر اليوم في ${placesIndex.length} ميناءً من المغرب إلى الخليج: أوقات المد العالي والجزر المنخفض، وأفضل أوقات الصيد، وأطوار القمر ومواقيت الصلاة.`}
+  description={`جدول المد والجزر اليوم في ${placesIndex.length} ميناءً وشاطئاً من المغرب إلى الخليج، و${worldPlaces.length} مكاناً حول العالم بالعربية: أوقات المد العالي والجزر المنخفض، وأفضل أوقات الصيد، وأطوار القمر ومواقيت الصلاة.`}
 >
   <!-- Hero -->
   <section class="hero">
@@ -101,7 +104,7 @@ const features = [
         <span class="block whitespace-nowrap text-teal-300">للموانئ العربية</span>
       </h1>
       <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed">
-        توقعات المد والجزر، أفضل أوقات الصيد، أطوار القمر وأوقات الصلاة لـ{placesIndex.length} ميناءً من المحيط الأطلسي إلى الخليج العربي.
+        توقعات المد والجزر، أفضل أوقات الصيد، أطوار القمر وأوقات الصلاة لـ<span class="latin">{placesIndex.length}</span> ميناءً وشاطئاً من المحيط الأطلسي إلى الخليج العربي، و<span class="latin">{worldPlaces.length}</span> مكاناً حول العالم.
       </p>
 
       <!-- Search -->
@@ -110,7 +113,7 @@ const features = [
         <input
           type="search"
           id="port-search"
-          placeholder="ابحث عن ميناء أو دولة… دبي، جدة، المغرب"
+          placeholder="ابحث عن ميناء أو شاطئ أو دولة… مرتيل، جدة، إسطنبول"
           autocomplete="off"
           role="combobox"
           aria-autocomplete="list"
@@ -162,7 +165,7 @@ const features = [
     <section class="mt-6 mb-14" aria-labelledby="map-title">
       <div class="section-title">
         <h2 id="map-title">خريطة الموانئ الآن</h2>
-        <p>هل يرتفع الماء أم ينخفض في كل ميناء، بالتوقيت المحلي</p>
+        <p>هل يرتفع الماء أم ينخفض الآن في <span class="latin">{allPlaces.length}</span> مكاناً، بالتوقيت المحلي</p>
       </div>
       <PortsMap />
     </section>
@@ -337,7 +340,7 @@ const features = [
     <section id="ports" class="mb-8 scroll-mt-20" aria-labelledby="ports-title">
       <div class="section-title">
         <h2 id="ports-title">جميع الموانئ</h2>
-        <p><span class="latin">{placesIndex.length}</span> ميناءً</p>
+        <p><span class="latin">{placesIndex.length}</span> ميناءً وشاطئاً عربياً</p>
       </div>
       <details class="all-ports card" id="all-ports">
         <summary class="all-ports-toggle">عرض الموانئ الـ<span class="latin">{placesIndex.length}</span> حسب الدولة</summary>
@@ -398,6 +401,12 @@ const features = [
 <script type="application/json" id="search-data" set:html={searchPortsJSON}></script>
 <script is:inline define:vars={{ base: BASE }}>
   var portsData = [];
+  // Search ignores hamza forms, ة/ه, ى/ي, tatweel, harakat and Latin accents (Béjaïa = bejaia)
+  function norm(s) {
+    // NFD splits أ إ آ ؤ ئ into a letter plus a hamza or madda mark (U+0653…U+0655), removed with the harakat
+    return s.toLowerCase().normalize('NFD').replace(/[̀-ًͯ-ٕـ]/g, '')
+      .replace(/[أإآٱ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي');
+  }
   var searchEl = document.getElementById('port-search');
   var dropdown = document.getElementById('search-results');
 
@@ -407,14 +416,14 @@ const features = [
   } catch(e) {}
 
   searchEl?.addEventListener('input', function () {
-    var q = this.value.trim().toLowerCase();
+    var q = norm(this.value.trim());
     if (!dropdown) return;
     dropdown.innerHTML = '';
     if (!q || !portsData.length) { dropdown.classList.add('hidden'); this.setAttribute('aria-expanded','false'); return; }
     var matches = [];
     for (var i=0; i<portsData.length; i++) {
       var p = portsData[i];
-      var txt = (p.name_ar + ' ' + p.name_en + ' ' + p.countryName).toLowerCase();
+      var txt = p.txt || (p.txt = norm(p.name_ar + ' ' + p.name_en + ' ' + p.countryName + ' ' + (p.alt || '')));
       if (txt.indexOf(q) !== -1) matches.push(p);
     }
     if (!matches.length) {
@@ -425,7 +434,7 @@ const features = [
         var m = matches[j];
         html += '<a href="' + base + 'ports/' + m.id + '" class="flex items-center gap-3 px-4 py-3 hover:bg-[var(--surface-elevated)] transition-colors text-sm border-b border-[var(--border-subtle)] last:border-0"><span class="font-medium">' + m.name_ar + '</span><span class="text-xs text-[var(--text-muted)]">' + m.countryName + '</span><span class="text-xs text-[var(--text-muted)] latin ms-auto">' + m.name_en + '</span></a>';
       }
-      if (matches.length > 8) html += '<div class="px-4 py-2 text-xs text-[var(--text-muted)]">و ' + (matches.length - 8) + ' ميناء آخر...</div>';
+      if (matches.length > 8) html += '<div class="px-4 py-2 text-xs text-[var(--text-muted)]">و ' + (matches.length - 8) + ' نتيجة أخرى، اكتب أكثر لتضييق البحث</div>';
       dropdown.innerHTML = html;
     }
     dropdown.classList.remove('hidden');

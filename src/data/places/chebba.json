@@ -1,0 +1,94 @@
+{
+ "id": "chebba",
+ "name_en": "Chebba",
+ "name_ar": "الشابة",
+ "country": "TN",
+ "lat": 35.24,
+ "lon": 11.12,
+ "timezone": "Africa/Tunis",
+ "grid": {
+  "lat": 35.25,
+  "lon": 11.25,
+  "distance_km": 11.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.06825,
+   "phase": 40.758
+  },
+  "J1": {
+   "amp": 0.2958,
+   "phase": -74.404
+  },
+  "K1": {
+   "amp": 0.66945,
+   "phase": -82.342
+  },
+  "K2": {
+   "amp": 2.22642,
+   "phase": 27.96
+  },
+  "M2": {
+   "amp": 10.59556,
+   "phase": 12.506
+  },
+  "M4": {
+   "amp": 0.30685,
+   "phase": -144.087
+  },
+  "MF": {
+   "amp": 0.36366,
+   "phase": -13.937
+  },
+  "MM": {
+   "amp": 0.79983,
+   "phase": -87.696
+  },
+  "N2": {
+   "amp": 1.54932,
+   "phase": 22.506
+  },
+  "O1": {
+   "amp": 0.64777,
+   "phase": 97.283
+  },
+  "P1": {
+   "amp": 0.30082,
+   "phase": -62.627
+  },
+  "Q1": {
+   "amp": 0.43296,
+   "phase": 31.664
+  },
+  "S1": {
+   "amp": 1.13639,
+   "phase": 10.865
+  },
+  "S2": {
+   "amp": 7.94232,
+   "phase": 37.733
+  },
+  "SA": {
+   "amp": 3.9213,
+   "phase": -69.472
+  },
+  "SSA": {
+   "amp": 0.17994,
+   "phase": -154.917
+  },
+  "T2": {
+   "amp": 0.22486,
+   "phase": -13.55
+  },
+  "Z0": {
+   "amp": 27.1,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "khasab",
+ "name_en": "Khasab",
+ "name_ar": "خصب",
+ "country": "OM",
+ "lat": 26.18,
+ "lon": 56.25,
+ "timezone": "Asia/Muscat",
+ "grid": {
+  "lat": 26.25,
+  "lon": 56.25,
+  "distance_km": 7.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.25983,
+   "phase": 134.366
+  },
+  "J1": {
+   "amp": 1.3101,
+   "phase": 7.469
+  },
+  "K1": {
+   "amp": 19.36536,
+   "phase": 19.597
+  },
+  "K2": {
+   "amp": 7.03229,
+   "phase": -136.498
+  },
+  "M2": {
+   "amp": 69.65323,
+   "phase": -162.386
+  },
+  "M4": {
+   "amp": 2.39475,
+   "phase": -35.54
+  },
+  "MF": {
+   "amp": 0.62396,
+   "phase": 28.013
+  },
+  "MM": {
+   "amp": 0.60794,
+   "phase": 68.834
+  },
+  "N2": {
+   "amp": 16.83462,
+   "phase": 177.319
+  },
+  "O1": {
+   "amp": 16.83912,
+   "phase": 15.059
+  },
+  "P1": {
+   "amp": 6.84577,
+   "phase": 18.449
+  },
+  "Q1": {
+   "amp": 3.29634,
+   "phase": 2.005
+  },
+  "S1": {
+   "amp": 0.35072,
+   "phase": 150.526
+  },
+  "S2": {
+   "amp": 25.12422,
+   "phase": -128.753
+  },
+  "SA": {
+   "amp": 1.76472,
+   "phase": -32.105
+  },
+  "SSA": {
+   "amp": 0.13231,
+   "phase": -110.324
+  },
+  "T2": {
+   "amp": 1.74856,
+   "phase": -133.048
+  },
+  "Z0": {
+   "amp": 154.6,
+   "phase": 0
+  }
+ }
+}

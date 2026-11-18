@@ -1,0 +1,94 @@
+{
+ "id": "moulay-bousselham",
+ "name_en": "Moulay Bousselham",
+ "name_ar": "مولاي بوسلهام",
+ "country": "MA",
+ "lat": 34.88,
+ "lon": -6.29,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 34.875,
+  "lon": -6.375,
+  "distance_km": 7.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.20578,
+   "phase": 20.676
+  },
+  "J1": {
+   "amp": 0.37084,
+   "phase": 75.273
+  },
+  "K1": {
+   "amp": 7.11649,
+   "phase": 49.575
+  },
+  "K2": {
+   "amp": 10.10176,
+   "phase": 78.523
+  },
+  "M2": {
+   "amp": 99.90713,
+   "phase": 55.072
+  },
+  "M4": {
+   "amp": 1.79286,
+   "phase": 161.874
+  },
+  "MF": {
+   "amp": 0.20799,
+   "phase": -3.992
+  },
+  "MM": {
+   "amp": 0.11552,
+   "phase": -133.3
+  },
+  "N2": {
+   "amp": 21.36456,
+   "phase": 39.308
+  },
+  "O1": {
+   "amp": 6.42905,
+   "phase": -51.393
+  },
+  "P1": {
+   "amp": 2.58675,
+   "phase": 39.809
+  },
+  "Q1": {
+   "amp": 1.95088,
+   "phase": -101.14
+  },
+  "S1": {
+   "amp": 0.70814,
+   "phase": 84.069
+  },
+  "S2": {
+   "amp": 36.25355,
+   "phase": 81.155
+  },
+  "SA": {
+   "amp": 2.46384,
+   "phase": -63.728
+  },
+  "SSA": {
+   "amp": 0.11587,
+   "phase": 177.458
+  },
+  "T2": {
+   "amp": 1.84904,
+   "phase": 74.408
+  },
+  "Z0": {
+   "amp": 176.3,
+   "phase": 0
+  }
+ }
+}

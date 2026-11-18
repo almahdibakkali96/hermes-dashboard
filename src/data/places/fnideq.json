@@ -1,0 +1,94 @@
+{
+ "id": "fnideq",
+ "name_en": "Fnideq",
+ "name_ar": "الفنيدق",
+ "country": "MA",
+ "lat": 35.85,
+ "lon": -5.35,
+ "timezone": "Africa/Casablanca",
+ "grid": {
+  "lat": 35.875,
+  "lon": -5.25,
+  "distance_km": 9.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.84244,
+   "phase": 40.871
+  },
+  "J1": {
+   "amp": 0.09373,
+   "phase": 154.302
+  },
+  "K1": {
+   "amp": 3.01366,
+   "phase": 131.682
+  },
+  "K2": {
+   "amp": 2.74521,
+   "phase": 75.334
+  },
+  "M2": {
+   "amp": 27.47412,
+   "phase": 59.631
+  },
+  "M4": {
+   "amp": 2.07704,
+   "phase": 160.954
+  },
+  "MF": {
+   "amp": 0.26103,
+   "phase": 122.852
+  },
+  "MM": {
+   "amp": 0.54282,
+   "phase": -71.495
+  },
+  "N2": {
+   "amp": 6.01822,
+   "phase": 48.43
+  },
+  "O1": {
+   "amp": 1.36751,
+   "phase": 100.197
+  },
+  "P1": {
+   "amp": 0.95093,
+   "phase": 137.12
+  },
+  "Q1": {
+   "amp": 0.46073,
+   "phase": -67.483
+  },
+  "S1": {
+   "amp": 0.74459,
+   "phase": 12.112
+  },
+  "S2": {
+   "amp": 10.3383,
+   "phase": 85.595
+  },
+  "SA": {
+   "amp": 2.2134,
+   "phase": -68.095
+  },
+  "SSA": {
+   "amp": 0.1947,
+   "phase": -178.64
+  },
+  "T2": {
+   "amp": 0.37129,
+   "phase": 35.884
+  },
+  "Z0": {
+   "amp": 50.1,
+   "phase": 0
+  }
+ }
+}
