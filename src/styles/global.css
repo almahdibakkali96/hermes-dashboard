@@ -302,13 +302,7 @@ body {
 }
 .my-port-card:hover { background: rgba(255, 255, 255, 0.15); }
 .my-port-card[hidden] { display: none; }
-/* Homepage hero: nearest-port button and the quick port chips (most searched, or the visitor's recent ports) */
-.near-me-btn {
-  display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.85rem; border-radius: var(--radius-pill);
-  font-size: 0.75rem; font-weight: 700; color: #0b2540; background: #5eead4; cursor: pointer; transition: background-color 0.15s ease;
-}
-.near-me-btn:hover { background: #99f6e4; }
-.near-me-btn:disabled { opacity: 0.75; cursor: progress; }
+/* Homepage hero: the quick port chips (most searched, or the visitor's recent ports) */
 .quick-chip {
   padding: 0.25rem 0.75rem; border-radius: var(--radius-pill); font-size: 0.75rem; color: #fff;
   background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); transition: background-color 0.15s ease;

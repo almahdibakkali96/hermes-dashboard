@@ -85,7 +85,7 @@ const todayAr = new Date().toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'As
 // Full port list for the search dropdown (client-side)
 // (alt: other spellings and French names, so «مارتيل», «هرهورة» or «Tanger» find their port)
 const searchPorts = allPlaces.map((p: { id: string; name_ar: string; name_en: string; country: string; lat: number; lon: number }) => ({
-  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryName(p.country), lat: p.lat, lon: p.lon,
+  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryName(p.country),
   alt: [...altNamesAr(p.id, p.name_ar), frenchName(p.id) || ''].filter(Boolean).join(' '),
 }));
 const searchPortsJSON = JSON.stringify(searchPorts);
@@ -144,8 +144,6 @@ const features: { icon: IconName; title: string; text: string }[] = [
       </div>
 
       <div class="mt-4 flex flex-wrap items-center gap-2 text-sm">
-        <!-- The visitor's location stays in the browser: it only picks the nearest ports from the list below -->
-        <button type="button" id="near-me" class="near-me-btn"><Icon name="locate" size={14} /> <span data-l>أقرب ميناء إليّ</span></button>
         <!-- Returning visitors see the ports they opened last instead (filled from localStorage) -->
         <span class="text-slate-400 text-xs" id="quick-label">الأكثر بحثاً:</span>
         <span id="quick-chips" class="contents">
@@ -462,43 +460,6 @@ const features: { icon: IconName; title: string; text: string }[] = [
   searchEl?.addEventListener('focus', function () {
     if (dropdown && dropdown.children.length) { dropdown.classList.remove('hidden'); this.setAttribute('aria-expanded','true'); }
   });
-
-  // "Nearest port to me": the browser's position, used here only, picks the four nearest ports; the list opens
-  // in the search dropdown (absolutely placed, so the page doesn't move)
-  (function () {
-    var btn = document.getElementById('near-me');
-    if (!btn || !dropdown) return;
-    var label = btn.querySelector('[data-l]'), idle = label.textContent;
-    function rad(x) { return x * Math.PI / 180; }
-    function km(aLat, aLon, bLat, bLon) {
-      var s = Math.pow(Math.sin(rad(bLat - aLat) / 2), 2) + Math.cos(rad(aLat)) * Math.cos(rad(bLat)) * Math.pow(Math.sin(rad(bLon - aLon) / 2), 2);
-      return 2 * 6371 * Math.asin(Math.sqrt(s));
-    }
-    function open(html) { dropdown.innerHTML = html; dropdown.classList.remove('hidden'); }
-    function done() { btn.disabled = false; label.textContent = idle; }
-    var fail = '<div class="px-4 py-3 text-sm text-[var(--text-muted)]">لم نتمكن من تحديد موقعك. اكتب اسم ميناءك أو مدينتك في البحث.</div>';
-    btn.addEventListener('click', function () {
-      if (!navigator.geolocation || !portsData.length) { open(fail); return; }
-      btn.disabled = true; label.textContent = 'نحدد موقعك…';
-      navigator.geolocation.getCurrentPosition(function (pos) {
-        var lat = pos.coords.latitude, lon = pos.coords.longitude;
-        var list = portsData.map(function (p) { return { p: p, d: km(lat, lon, p.lat, p.lon) }; })
-          .sort(function (a, b) { return a.d - b.d; }).slice(0, 4);
-        var html = '<div class="px-4 pt-3 pb-1 text-xs font-semibold text-[var(--text-muted)]">أقرب الموانئ إليك</div>';
-        list.forEach(function (x, i) {
-          html += '<a href="' + base + 'ports/' + x.p.id + '" class="flex items-center gap-3 px-4 py-3 hover:bg-[var(--surface-elevated)] transition-colors text-sm border-b border-[var(--border-subtle)] last:border-0' + (i === 0 ? ' font-semibold' : '') + '"><span>' + x.p.name_ar + '</span><span class="text-xs text-[var(--text-muted)]">' + x.p.countryName + '</span><span class="text-xs text-[var(--text-muted)] ms-auto"><span class="latin">' + Math.round(x.d) + '</span> كم</span></a>';
-        });
-        open(html);
-        try { if (window.va) window.va('event', { name: 'near_me', data: { port: list[0].p.id, km: Math.round(list[0].d) } }); } catch (e) {}
-        try { if (window.gtag) window.gtag('event', 'near_me', { port: list[0].p.id }); } catch (e) {}
-        done();
-      }, function () { open(fail); done(); }, { timeout: 12000, maximumAge: 600000 });
-    });
-    // Close the list on a tap outside the search box and the button
-    document.addEventListener('click', function (e) {
-      if (!dropdown.classList.contains('hidden') && !dropdown.contains(e.target) && e.target !== searchEl && !btn.contains(e.target)) dropdown.classList.add('hidden');
-    });
-  })();
 
   // Returning visitors: the ports they opened last replace "most searched" (saved by port pages)
   (function () {
