@@ -1,0 +1,90 @@
+---
+// Stripe "after payment" redirect for the 2027 calendar's Payment Links:
+//   https://www.arabtides.com/calendar/thanks?session_id={CHECKOUT_SESSION_ID}
+// /api/calendar-download (api/calendar-download.js) checks with Stripe that the session is a paid calendar purchase;
+// the button then gets a 10-minute signed link to that port's PDF only (private bucket). Not linked anywhere, noindex.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import placesIndex from '../../data/places/places_index.json';
+import { CAL } from '../../lib/calendar';
+
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const names = Object.fromEntries((placesIndex as { id: string; name_ar: string; name_en: string }[]).map(p => [p.id, [p.name_ar, p.name_en]]));
+---
+
+<BaseLayout title="شكراً لشرائك" description={`تأكيد شراء ${CAL.title} من ArabTides`} noindex>
+  <main id="main" class="max-w-2xl mx-auto px-4 py-14 w-full text-center">
+    <div id="thx-head">
+      <div class="text-6xl" aria-hidden="true">🎉</div>
+      <h1 class="mt-4 text-3xl font-bold display">شكراً لشرائك!</h1>
+      <p class="mt-3 text-lg text-[var(--text-secondary)] leading-relaxed">تم الدفع بنجاح عبر <span class="latin">Stripe</span>.</p>
+    </div>
+
+    <!-- Download: filled in by the script below -->
+    <section class="card p-6 mt-8" aria-live="polite">
+      <div id="st-wait">
+        <div class="cal-spin mx-auto" aria-hidden="true"></div>
+        <p class="mt-3 text-[var(--text-secondary)]">نجهّز رابط تقويمك…</p>
+      </div>
+      <div id="st-ok" hidden>
+        <img src={`${BASE}calendar/cover.webp`} alt="" width="640" height="905" class="w-32 h-auto mx-auto rounded-md shadow-lg -rotate-2" />
+        <h2 class="mt-5 text-2xl font-bold display">تقويم <span class="latin">{CAL.year}</span> <span id="ok-port"></span></h2>
+        <a id="ok-link" href="#" class="btn-primary text-lg justify-center mt-5 inline-flex" style="background:var(--accent);color:#fff"><span>⬇️ حمّل تقويمك (PDF)</span></a>
+        <p class="mt-3 text-sm text-[var(--text-muted)]" dir="ltr"><span class="latin" id="ok-file"></span></p>
+        <p class="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">💡 احفظ الملف في هاتفك أو حاسوبك الآن، فهو لك ويعمل دون إنترنت. ويمكنك العودة إلى هذه الصفحة من سجلّ المتصفح لتحميله مرة أخرى خلال <span class="latin">30</span> يوماً.</p>
+      </div>
+      <div id="st-err" hidden>
+        <p class="font-semibold">لم نتمكن من عرض رابط التحميل هنا.</p>
+        <p class="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">لا تقلق: دفعتك مسجّلة لدى <span class="latin">Stripe</span>. راسلنا من صفحة الاتصال بالبريد الذي دفعت به، واذكر ميناءك، ونرسل إليك تقويمه.</p>
+        <a href={`${BASE}contact`} class="btn-primary justify-center mt-4 inline-flex" style="background:var(--accent);color:#fff">صفحة الاتصال</a>
+      </div>
+      <div id="st-none" hidden>
+        <h1 class="text-2xl font-bold display">صفحة التأكيد بعد الشراء</h1>
+        <p class="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">تظهر فيها روابط التحميل بعد الدفع مباشرة. إن دفعت ولم يظهر لك الرابط، فراسلنا من صفحة الاتصال بالبريد الذي دفعت به.</p>
+        <div class="mt-4 flex flex-wrap justify-center gap-3">
+          <a href={`${BASE}calendar`} class="btn-primary justify-center inline-flex" style="background:var(--accent);color:#fff"><span>تقويم <span class="latin">{CAL.year}</span></span></a>
+          <a href={`${BASE}contact`} class="inline-flex items-center px-4 rounded-xl border border-[var(--border-subtle)] font-semibold text-[var(--accent-text)]">صفحة الاتصال</a>
+        </div>
+      </div>
+    </section>
+
+    <ol class="mt-8 grid gap-3 text-start">
+      <li class="card p-4 flex gap-4 items-start"><span class="text-2xl shrink-0" aria-hidden="true">🧾</span><span><span class="block font-semibold">إيصال الدفع</span><span class="block text-sm text-[var(--text-secondary)] mt-1 leading-relaxed">يصلك من <span class="latin">Stripe</span> على بريدك، وفيه رقم العملية.</span></span></li>
+      <li class="card p-4 flex gap-4 items-start"><span class="text-2xl shrink-0" aria-hidden="true">📖</span><span><span class="block font-semibold">كيف تقرأ التقويم؟</span><span class="block text-sm text-[var(--text-secondary)] mt-1 leading-relaxed">الصفحة الثانية تشرح كل عمود في صفحات الأشهر. ابدأ بصفحة «أفضل <span class="latin">12</span> يوماً» واحجزها من الآن.</span></span></li>
+      <li class="card p-4 flex gap-4 items-start"><span class="text-2xl shrink-0" aria-hidden="true">📸</span><span><span class="block font-semibold">شاركنا صيدك</span><span class="block text-sm text-[var(--text-secondary)] mt-1 leading-relaxed">أرسل لنا صورة صيدك في يوم ممتاز على إنستغرام <a href="https://www.instagram.com/arabtides/" rel="noopener" target="_blank" class="latin text-[var(--accent-text)] underline">@arabtides</a>، وقد ننشرها.</span></span></li>
+    </ol>
+    <p class="mt-8"><a href={BASE} class="text-[var(--accent-text)] hover:underline">← أوقات المد في ميناءك اليوم</a></p>
+  </main>
+
+  <script type="application/json" id="thx-data" set:html={JSON.stringify({ api: `${BASE}api/calendar-download`, names })} />
+  <script is:inline>
+    (function () {
+      var D = JSON.parse(document.getElementById('thx-data').textContent);
+      var show = function (id) { ['st-wait', 'st-ok', 'st-err', 'st-none'].forEach(function (k) { document.getElementById(k).hidden = k !== id; }); };
+      var sid = new URLSearchParams(location.search).get('session_id');
+      if (!sid || sid.indexOf('{') === 0) { document.getElementById('thx-head').hidden = true; show('st-none'); return; }
+      var tries = 0;
+      (function ask() {
+        fetch(D.api + '?session_id=' + encodeURIComponent(sid), { cache: 'no-store' })
+          .then(function (r) { return r.json().then(function (j) { return { status: r.status, j: j }; }); })
+          .then(function (x) {
+            // A card payment can take a moment to settle: retry a few times on "unpaid"
+            if (x.status === 402 && tries++ < 5) { setTimeout(ask, 2000); return; }
+            if (!x.j.ok) { show('st-err'); return; }
+            var n = D.names[x.j.port];
+            document.getElementById('ok-port').textContent = n ? 'لـ' + n[0] : '';
+            // Each click asks the function again, which re-checks the payment and redirects to a fresh signed link
+            document.getElementById('ok-link').href = D.api + '?session_id=' + encodeURIComponent(sid) + '&file=1';
+            document.getElementById('ok-file').textContent = 'ArabTides-2027-' + x.j.port + '.pdf';
+            show('st-ok');
+            try { if (window.va) window.va('event', { name: 'purchase', data: { product: 'tide-calendar-2027', port: x.j.port || '' } }); } catch (e) {}
+          })
+          .catch(function () { show('st-err'); });
+      })();
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .cal-spin { width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 4px solid var(--accent-muted); border-top-color: var(--accent); animation: spin 0.9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>

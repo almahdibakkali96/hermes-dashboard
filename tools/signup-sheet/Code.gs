@@ -1,11 +1,13 @@
 /**
  * ArabTides — email sign-ups → this Google Sheet.
  * Paste into Extensions → Apps Script of your Sheet, then Deploy → Web app (see README.md).
- * The website POSTs: email, source, page, port (+ a hidden "website" honeypot field).
+ * The website POSTs: email, source, page, port, product, utm_source, utm_content (+ a hidden "website" honeypot field).
+ * Every sign-up is kept as its own row, even when the email is already in the sheet (the owner wants all of them;
+ * filter or remove duplicates in the Sheet when needed).
  * The contact page POSTs form=contact with name, reply_to, subject, message, page → "Messages" tab.
  */
 const SHEET_NAME = 'Signups';
-const HEADERS = ['date', 'email', 'source', 'page', 'port'];
+const HEADERS = ['date', 'email', 'source', 'page', 'port', 'product', 'utm_source', 'utm_content'];
 const MESSAGES_SHEET = 'Messages';
 const MESSAGES_HEADERS = ['date', 'name', 'email', 'subject', 'message', 'page'];
 
@@ -20,11 +22,9 @@ function doPost(e) {
   lock.waitLock(10000);
   try {
     const sheet = getSheet_();
-    const last = sheet.getLastRow();
-    const existing = last > 1 ? sheet.getRange(2, 2, last - 1, 1).getValues().map(r => String(r[0]).toLowerCase()) : [];
-    if (existing.indexOf(email) === -1) {
-      sheet.appendRow([new Date(), safe_(email), safe_(p.source, 40), safe_(p.page, 200), safe_(p.port, 40)]);
-    }
+    const product = safe_(p.product, 40);
+    if (sheet.getLastColumn() < HEADERS.length) sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);  // older sheet: add the new columns
+    sheet.appendRow([new Date(), safe_(email), safe_(p.source, 40), safe_(p.page, 200), safe_(p.port, 40), product, safe_(p.utm_source, 60), safe_(p.utm_content, 60)]);
   } finally {
     lock.releaseLock();
   }

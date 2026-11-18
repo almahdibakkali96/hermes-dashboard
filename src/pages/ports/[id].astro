@@ -12,7 +12,7 @@ import RatingBadge from '../../components/RatingBadge.astro';
 import { calcFish, fishColors, fishLabels, fishAdvice, monthDays as monthDaysOf, maxRangeOf, ratingsFrom } from '../../lib/fishing';
 import { yearStats, seas, portSea } from '../../lib/seas';
 import { fishForPort, fishLabel } from '../../lib/fish';
-import GuidePromo from '../../components/GuidePromo.astro';
+import CalendarPromo from '../../components/CalendarPromo.astro';
 import LiveTides from '../../components/LiveTides.astro';
 import { altNamesAr, frenchName, nameWithAlts } from '../../lib/portNames';
 
@@ -520,7 +520,7 @@ const pageJsonLd = [
           </p>
         </section>
 
-        <div class="lg:hidden"><GuidePromo variant="strip" /></div>
+        <div class="lg:hidden"><CalendarPromo variant="strip" port={{ id: id!, name: port.name_ar }} /></div>
 
         <!-- FAQ -->
         <section class="card p-5" aria-labelledby="faq-title">
@@ -540,7 +540,7 @@ const pageJsonLd = [
 
       <!-- Sidebar -->
       <aside class="space-y-6 min-w-0">
-        <div class="hidden lg:block"><GuidePromo variant="card" /></div>
+        <div class="hidden lg:block"><CalendarPromo variant="card" port={{ id: id!, name: port.name_ar }} /></div>
 
         <section class="card p-5" aria-labelledby="sun-title">
           <h2 id="sun-title" class="font-semibold">☀️ الشمس والقمر</h2>

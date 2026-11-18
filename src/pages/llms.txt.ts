@@ -4,6 +4,7 @@ import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
 import { fish } from '../lib/fish';
 import { GUIDE, SALES_OPEN } from '../lib/shop';
+import { CAL, CAL_SALES_OPEN } from '../lib/calendar';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
@@ -35,8 +36,9 @@ ${fish.map(f => `- [${f.ar} — ${f.en} (${f.sci})](${origin}/fish/${f.id}): ${f
 ## Articles
 ${articles.map(a => `- [${a.title}](${origin}/articles/${a.slug}): ${a.summary}`).join('\n')}
 
-## Guide (paid, PDF)
-- [${GUIDE.title}](${origin}/guide): ${GUIDE.pages}-page Arabic PDF on moon phases, spring/neap tides, reading tide tables and solunar periods for fishing; ${SALES_OPEN ? GUIDE.priceLabel : 'coming soon'}. A free one-page cheat sheet is offered on the same page.
+## Products (PDF)
+- [2027 fishing & tide calendar](${origin}/calendar): one ${CAL.pages}-page Arabic PDF per port (${CAL.ports} Arab ports) with every day of 2027: high and low tides (time and height above LAT), tide coefficient, moon, sunrise/sunset, Hijri date, the solunar major periods and a 1–5 fishing rating; best 12 days of the year, the port's fish and fishing bans. ${CAL_SALES_OPEN ? 'On sale.' : 'Waitlist open; launching soon.'} The page shows each port's 2027 headline numbers.
+- [${GUIDE.title}](${origin}/guide): ${GUIDE.pages}-page Arabic PDF on moon phases, spring/neap tides, reading tide tables and solunar periods for fishing; ${SALES_OPEN ? GUIDE.priceLabel : '1st edition sold out, a 2nd edition is in preparation (waitlist on the page)'}.
 
 ## About
 - [Lunar calendar](${origin}/moon): moon phase and illumination for every day of this month and the next two, the matching (computed) Hijri date, and principal phase times in Makkah time

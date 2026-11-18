@@ -7,32 +7,44 @@ export interface Props {
   port?: string;
   dark?: boolean;
   compact?: boolean;
+  product?: string;        // what the sign-up is for (e.g. 'tide-calendar-2027'); stored in the Sheet's product column
+  cta?: string;            // button text
+  done?: string;           // line shown after sign-up (above the free download when gift is on)
+  gift?: boolean;          // false: waitlist only, no cheat sheet download after sign-up
 }
-const { source, port = '', dark = false, compact = false } = Astro.props;
+const { source, port = '', dark = false, compact = false, product = '', gift = true, cta = 'احصل على الورقة المختصرة مجاناً', done = '✓ شكراً! هذه ورقتك المختصرة:' } = Astro.props;
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 ---
 
-<form class:list={['signup', { 'signup-dark': dark }]} data-endpoint={SIGNUP_URL} data-pdf={`${BASE}${CHEAT_SHEET_PDF}`} novalidate>
+<form class:list={['signup', { 'signup-dark': dark }]} data-endpoint={SIGNUP_URL} data-pdf={gift ? `${BASE}${CHEAT_SHEET_PDF}` : ''} novalidate>
   <input type="hidden" name="source" value={source} />
   <input type="hidden" name="port" value={port} />
+  <input type="hidden" name="product" value={product} />
+  <input type="hidden" name="utm_source" value="" />
+  <input type="hidden" name="utm_content" value="" />
   <!-- Honeypot: bots fill it, people never see it -->
   <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
   <div class:list={['flex gap-2', compact ? 'flex-col' : 'flex-col sm:flex-row']}>
     <label class="sr-only" for={`email-${source}`}>بريدك الإلكتروني</label>
     <input id={`email-${source}`} type="email" name="email" required inputmode="email" autocomplete="email" dir="ltr"
            placeholder="your@email.com" class="signup-input" />
-    <button type="submit" class="signup-btn">احصل على الورقة المختصرة مجاناً</button>
+    <button type="submit" class="signup-btn">{cta}</button>
   </div>
   <p class="signup-note">نرسل لك أحياناً نصائح الصيد وتوقعات المد. لا رسائل مزعجة، ويمكنك إلغاء الاشتراك متى شئت. <a href={`${BASE}privacy`}>الخصوصية</a></p>
   <p class="signup-error" role="alert" hidden>أدخل بريداً إلكترونياً صحيحاً.</p>
   <div class="signup-done" hidden>
-    <p class="font-semibold">✓ شكراً! هذه ورقتك المختصرة:</p>
-    <a class="signup-btn inline-flex mt-2" download>⬇️ تحميل الورقة المختصرة (PDF)</a>
+    <p class="font-semibold">{done}</p>
+    {gift && <a class="signup-btn inline-flex mt-2" download>⬇️ تحميل الورقة المختصرة (PDF)</a>}
   </div>
 </form>
 
 <script>
+  const utm = new URLSearchParams(location.search);
   document.querySelectorAll<HTMLFormElement>('form.signup').forEach((form) => {
+    (['utm_source', 'utm_content'] as const).forEach((k) => {
+      const el = form.querySelector<HTMLInputElement>(`input[name=${k}]`);
+      if (el) el.value = (utm.get(k) || '').slice(0, 60);
+    });
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(form);
@@ -53,7 +65,8 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
       form.querySelector('.flex')!.remove();
       form.querySelector('.signup-note')!.remove();
       const done = form.querySelector<HTMLElement>('.signup-done')!;
-      done.querySelector('a')!.setAttribute('href', form.dataset.pdf!);
+      const pdf = done.querySelector('a');
+      if (pdf && form.dataset.pdf) pdf.setAttribute('href', form.dataset.pdf);
       done.hidden = false;
     });
   });

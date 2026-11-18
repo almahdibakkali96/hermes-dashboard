@@ -11,7 +11,7 @@ const links = [
   { href: `${BASE}methodology`, label: 'المنهجية', match: '/methodology' },
   { href: `${BASE}about`, label: 'عن الموقع', match: '/about' },
 ];
-const guideActive = path.includes('/guide');
+const calActive = path.includes('/calendar');
 ---
 
 <header class="site-header">
@@ -43,9 +43,9 @@ const guideActive = path.includes('/guide');
       ))}
     </nav>
 
-    <!-- The paid guide stays visible at every width -->
-    <a href={`${BASE}guide`} class:list={['nav-cta', { active: guideActive }]} aria-current={guideActive ? 'page' : undefined}>
-      <span aria-hidden="true">📘</span> <span class="nav-cta-short">الدليل</span><span class="nav-cta-long">دليل الصياد</span>
+    <!-- The product (2027 calendar) stays visible at every width -->
+    <a href={`${BASE}calendar`} class:list={['nav-cta', { active: calActive }]} aria-current={calActive ? 'page' : undefined}>
+      <span aria-hidden="true">📅</span> <span class="nav-cta-short">التقويم</span><span class="nav-cta-long">تقويم <span class="latin">2027</span></span>
     </a>
 
     <!-- Narrow screens: the links in a menu -->

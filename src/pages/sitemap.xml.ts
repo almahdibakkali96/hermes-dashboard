@@ -1,6 +1,7 @@
 import placesIndex from '../data/places/places_index.json';
 import { articles } from '../lib/articles';
 import { fish } from '../lib/fish';
+import { CAL } from '../lib/calendar';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL);
 
@@ -39,6 +40,7 @@ export async function GET({ site }: { site: URL | undefined }) {
 
   // Shop
   urls.push({ loc: `${origin}${BASE}/guide`, priority: 0.9, changefreq: 'weekly', lastmod: today });
+  if (CAL.public) urls.push({ loc: `${origin}${BASE}/calendar`, priority: 0.9, changefreq: 'weekly', lastmod: today });
 
   // Static pages
   urls.push({ loc: `${origin}${BASE}/methodology`, priority: 0.6, changefreq: 'monthly' });

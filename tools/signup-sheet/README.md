@@ -33,3 +33,9 @@ This needs the version of `Code.gs` that has `contact_`. To check, open the `/ex
 When you're ready to send emails, use **File → Download → CSV** and import it into Brevo, Mailchimp or similar.
 
 If you change `Code.gs`, use **Deploy → Manage deployments → ✏️ → Version: New version**. That keeps the same URL.
+
+## Product waitlists (columns product, utm_source, utm_content)
+
+Forms with a `product` (e.g. the 2027 calendar waitlist on `/calendar`, `product=tide-calendar-2027`) also send
+`utm_source` and `utm_content` from the page URL. The script adds these three columns to an older sheet on the first sign-up. **Every sign-up gets its own row, even if the email is already there** (a guide buyer joining the calendar waitlist, someone signing up twice): filter by `product`, or use Data → Data cleanup → Remove duplicates when you need a clean list.
+This needs the new `Code.gs` published as a new version (see above). Until then sign-ups still arrive, but without those columns, and emails already in the sheet are skipped.

@@ -4,7 +4,7 @@ import placesIndex from '../data/places/places_index.json';
 import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
-import GuidePromo from '../components/GuidePromo.astro';
+import CalendarPromo from '../components/CalendarPromo.astro';
 import LiveTides from '../components/LiveTides.astro';
 import Flag from '../components/Flag.astro';
 import RatingBadge from '../components/RatingBadge.astro';
@@ -204,8 +204,8 @@ const features = [
       </div>
     </section>
 
-    <!-- Paid guide -->
-    <div class="mb-14"><GuidePromo variant="banner" /></div>
+    <!-- Product: the 2027 calendar -->
+    <div class="mb-14"><CalendarPromo variant="banner" /></div>
 
     <!-- Fish guide teaser -->
     <section class="mb-14" aria-labelledby="fish-title">

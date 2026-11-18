@@ -23,9 +23,13 @@ const SHEET_WEBAPP = 'https://script.google.com/macros/s/AKfycbxaf_1RR9Iuvavu0QP
 export const STRIPE_GUIDE_URL: string = import.meta.env.PUBLIC_STRIPE_GUIDE_URL || STRIPE_LINK;
 export const SIGNUP_URL: string = import.meta.env.PUBLIC_SIGNUP_URL || SHEET_WEBAPP;
 
-/** Sales are open only once a Stripe link is set. Until then the site hides prices and Buy
- *  buttons, presents the guide as "coming soon" and only collects emails. */
-export const SALES_OPEN = Boolean(STRIPE_GUIDE_URL);
+/** The guide's 1st edition went off sale on 17 Nov 2026 while a 2nd edition is prepared (campaign 10K).
+ *  Set back to true for the relaunch. Off sale: /guide shows the 2nd-edition waitlist and the site promotes
+ *  the 2027 calendar instead (CalendarPromo). Also deactivate the guide's Payment Link in Stripe. */
+export const GUIDE_ON_SALE = false;
+
+/** Guide sales are open only while GUIDE_ON_SALE and a Stripe link is set. */
+export const SALES_OPEN = GUIDE_ON_SALE && Boolean(STRIPE_GUIDE_URL);
 
 export const GUIDE = {
   id: 'moon-tide-guide',   // Stripe client_reference_id — letters, digits, - and _ only
