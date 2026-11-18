@@ -1,0 +1,94 @@
+{
+ "id": "maputo",
+ "name_en": "Maputo",
+ "name_ar": "مابوتو",
+ "country": "MZ",
+ "lat": -25.97,
+ "lon": 32.59,
+ "timezone": "Africa/Maputo",
+ "grid": {
+  "lat": -26,
+  "lon": 32.625,
+  "distance_km": 4.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.5759,
+   "phase": 47.976
+  },
+  "J1": {
+   "amp": 0.60078,
+   "phase": 158.535
+  },
+  "K1": {
+   "amp": 4.42819,
+   "phase": 152.47
+  },
+  "K2": {
+   "amp": 13.25146,
+   "phase": 82.438
+  },
+  "M2": {
+   "amp": 77.93244,
+   "phase": 51.75
+  },
+  "M4": {
+   "amp": 1.80727,
+   "phase": -18.387
+  },
+  "MF": {
+   "amp": 0.66387,
+   "phase": 14.239
+  },
+  "MM": {
+   "amp": 0.32692,
+   "phase": 66.239
+  },
+  "N2": {
+   "amp": 13.16979,
+   "phase": 39.275
+  },
+  "O1": {
+   "amp": 2.26419,
+   "phase": -39.804
+  },
+  "P1": {
+   "amp": 0.96655,
+   "phase": 148.859
+  },
+  "Q1": {
+   "amp": 1.16228,
+   "phase": -53.599
+  },
+  "S1": {
+   "amp": 2.29444,
+   "phase": 58.177
+  },
+  "S2": {
+   "amp": 46.55285,
+   "phase": 90.1
+  },
+  "SA": {
+   "amp": 1.068,
+   "phase": 115
+  },
+  "SSA": {
+   "amp": 0.25185,
+   "phase": 4.03
+  },
+  "T2": {
+   "amp": 2.16719,
+   "phase": 87.468
+  },
+  "Z0": {
+   "amp": 157.5,
+   "phase": 0
+  }
+ }
+}

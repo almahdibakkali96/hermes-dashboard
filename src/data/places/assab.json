@@ -1,0 +1,94 @@
+{
+ "id": "assab",
+ "name_en": "Assab",
+ "name_ar": "عصب",
+ "country": "ER",
+ "lat": 13.01,
+ "lon": 42.74,
+ "timezone": "Africa/Asmara",
+ "grid": {
+  "lat": 13,
+  "lon": 42.75,
+  "distance_km": 1.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.37668,
+   "phase": 155.78
+  },
+  "J1": {
+   "amp": 0.88928,
+   "phase": 8.522
+  },
+  "K1": {
+   "amp": 16.12026,
+   "phase": -14.38
+  },
+  "K2": {
+   "amp": 0.98195,
+   "phase": 131.218
+  },
+  "M2": {
+   "amp": 4.9925,
+   "phase": -108.071
+  },
+  "M4": {
+   "amp": 0.18075,
+   "phase": -93.994
+  },
+  "MF": {
+   "amp": 1.19286,
+   "phase": 13.645
+  },
+  "MM": {
+   "amp": 0.49637,
+   "phase": -47.778
+  },
+  "N2": {
+   "amp": 5.37787,
+   "phase": -132.155
+  },
+  "O1": {
+   "amp": 7.92508,
+   "phase": -10.979
+  },
+  "P1": {
+   "amp": 4.4663,
+   "phase": -24.673
+  },
+  "Q1": {
+   "amp": 1.56063,
+   "phase": -16.914
+  },
+  "S1": {
+   "amp": 2.53865,
+   "phase": 58.985
+  },
+  "S2": {
+   "amp": 2.88758,
+   "phase": 152.523
+  },
+  "SA": {
+   "amp": 5.67465,
+   "phase": 45.248
+  },
+  "SSA": {
+   "amp": 0.27341,
+   "phase": -29.356
+  },
+  "T2": {
+   "amp": 0.60211,
+   "phase": 109.643
+  },
+  "Z0": {
+   "amp": 49.5,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "reykjavik",
+ "name_en": "Reykjavík",
+ "name_ar": "ريكيافيك",
+ "country": "IS",
+ "lat": 64.15,
+ "lon": -21.95,
+ "timezone": "Atlantic/Reykjavik",
+ "grid": {
+  "lat": 64.125,
+  "lon": -22,
+  "distance_km": 3.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.52848,
+   "phase": 140.008
+  },
+  "J1": {
+   "amp": 0.59299,
+   "phase": 111.328
+  },
+  "K1": {
+   "amp": 10.80265,
+   "phase": 116.171
+  },
+  "K2": {
+   "amp": 14.13321,
+   "phase": -142.729
+  },
+  "M2": {
+   "amp": 128.67421,
+   "phase": -177.738
+  },
+  "M4": {
+   "amp": 1.47605,
+   "phase": -177.69
+  },
+  "MF": {
+   "amp": 1.79126,
+   "phase": -165.746
+  },
+  "MM": {
+   "amp": 1.06423,
+   "phase": -149.132
+  },
+  "N2": {
+   "amp": 25.13398,
+   "phase": 159.405
+  },
+  "O1": {
+   "amp": 6.77516,
+   "phase": 67.023
+  },
+  "P1": {
+   "amp": 3.3043,
+   "phase": 109.11
+  },
+  "Q1": {
+   "amp": 1.20858,
+   "phase": 6.242
+  },
+  "S1": {
+   "amp": 0.57475,
+   "phase": 52.993
+  },
+  "S2": {
+   "amp": 50.28655,
+   "phase": -141.067
+  },
+  "SA": {
+   "amp": 2.86929,
+   "phase": -79.998
+  },
+  "SSA": {
+   "amp": 1.22762,
+   "phase": -178.565
+  },
+  "T2": {
+   "amp": 2.80943,
+   "phase": -145.699
+  },
+  "Z0": {
+   "amp": 231,
+   "phase": 0
+  }
+ }
+}

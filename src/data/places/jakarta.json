@@ -1,0 +1,94 @@
+{
+ "id": "jakarta",
+ "name_en": "Jakarta",
+ "name_ar": "جاكرتا",
+ "country": "ID",
+ "lat": -6.1,
+ "lon": 106.81,
+ "timezone": "Asia/Jakarta",
+ "grid": {
+  "lat": -6,
+  "lon": 106.75,
+  "distance_km": 12.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.40107,
+   "phase": 86.252
+  },
+  "J1": {
+   "amp": 1.38804,
+   "phase": 85.252
+  },
+  "K1": {
+   "amp": 25.47755,
+   "phase": 37.089
+  },
+  "K2": {
+   "amp": 1.91986,
+   "phase": 37.882
+  },
+  "M2": {
+   "amp": 3.83139,
+   "phase": 139.042
+  },
+  "M4": {
+   "amp": 0.7627,
+   "phase": 105.38
+  },
+  "MF": {
+   "amp": 1.28944,
+   "phase": 8.815
+  },
+  "MM": {
+   "amp": 1.41106,
+   "phase": 21.474
+  },
+  "N2": {
+   "amp": 1.92626,
+   "phase": 98.351
+  },
+  "O1": {
+   "amp": 13.23978,
+   "phase": 25.687
+  },
+  "P1": {
+   "amp": 8.22097,
+   "phase": 39.532
+  },
+  "Q1": {
+   "amp": 3.34659,
+   "phase": 19.175
+  },
+  "S1": {
+   "amp": 0.93603,
+   "phase": -169.259
+  },
+  "S2": {
+   "amp": 5.45604,
+   "phase": 72.983
+  },
+  "SA": {
+   "amp": 2.78989,
+   "phase": -174.664
+  },
+  "SSA": {
+   "amp": 0.58109,
+   "phase": -74.543
+  },
+  "T2": {
+   "amp": 0.31217,
+   "phase": -175.646
+  },
+  "Z0": {
+   "amp": 57.4,
+   "phase": 0
+  }
+ }
+}

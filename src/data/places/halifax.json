@@ -1,0 +1,94 @@
+{
+ "id": "halifax",
+ "name_en": "Halifax",
+ "name_ar": "هاليفاكس",
+ "country": "CA",
+ "lat": 44.64,
+ "lon": -63.57,
+ "timezone": "America/Halifax",
+ "grid": {
+  "lat": 44.625,
+  "lon": -63.375,
+  "distance_km": 15.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.89551,
+   "phase": -44.837
+  },
+  "J1": {
+   "amp": 0.43292,
+   "phase": 103.218
+  },
+  "K1": {
+   "amp": 10.16386,
+   "phase": 120.445
+  },
+  "K2": {
+   "amp": 3.84504,
+   "phase": 20.792
+  },
+  "M2": {
+   "amp": 60.75972,
+   "phase": -8.412
+  },
+  "M4": {
+   "amp": 3.50818,
+   "phase": -93.029
+  },
+  "MF": {
+   "amp": 0.48262,
+   "phase": -140.728
+  },
+  "MM": {
+   "amp": 0.30712,
+   "phase": -172.504
+  },
+  "N2": {
+   "amp": 13.46712,
+   "phase": -30.93
+  },
+  "O1": {
+   "amp": 4.5416,
+   "phase": 98.341
+  },
+  "P1": {
+   "amp": 3.18366,
+   "phase": 116.392
+  },
+  "Q1": {
+   "amp": 0.57751,
+   "phase": 61.657
+  },
+  "S1": {
+   "amp": 0.79456,
+   "phase": 96.195
+  },
+  "S2": {
+   "amp": 12.68862,
+   "phase": 21.504
+  },
+  "SA": {
+   "amp": 2.6206,
+   "phase": -48.707
+  },
+  "SSA": {
+   "amp": 0.51301,
+   "phase": 173.024
+  },
+  "T2": {
+   "amp": 0.92053,
+   "phase": 7.154
+  },
+  "Z0": {
+   "amp": 105.9,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "melbourne",
+ "name_en": "Melbourne",
+ "name_ar": "ملبورن",
+ "country": "AU",
+ "lat": -37.86,
+ "lon": 144.97,
+ "timezone": "Australia/Melbourne",
+ "grid": {
+  "lat": -37.875,
+  "lon": 144.875,
+  "distance_km": 8.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.02872,
+   "phase": 46.362
+  },
+  "J1": {
+   "amp": 0.8744,
+   "phase": -44.036
+  },
+  "K1": {
+   "amp": 15.4533,
+   "phase": -66.566
+  },
+  "K2": {
+   "amp": 0.82399,
+   "phase": 27.367
+  },
+  "M2": {
+   "amp": 26.85347,
+   "phase": 23.28
+  },
+  "M4": {
+   "amp": 0.68872,
+   "phase": -111.913
+  },
+  "MF": {
+   "amp": 0.8428,
+   "phase": 149.976
+  },
+  "MM": {
+   "amp": 0.12979,
+   "phase": -151.728
+  },
+  "N2": {
+   "amp": 2.72187,
+   "phase": 33.61
+  },
+  "O1": {
+   "amp": 6.98854,
+   "phase": -72.119
+  },
+  "P1": {
+   "amp": 3.24653,
+   "phase": -70.992
+  },
+  "Q1": {
+   "amp": 3.12923,
+   "phase": -81.189
+  },
+  "S1": {
+   "amp": 1.84504,
+   "phase": 10.08
+  },
+  "S2": {
+   "amp": 10.64391,
+   "phase": -135.67
+  },
+  "SA": {
+   "amp": 4.99789,
+   "phase": 172.361
+  },
+  "SSA": {
+   "amp": 0.31533,
+   "phase": -142.91
+  },
+  "T2": {
+   "amp": 1.94274,
+   "phase": -163.27
+  },
+  "Z0": {
+   "amp": 70.3,
+   "phase": 0
+  }
+ }
+}

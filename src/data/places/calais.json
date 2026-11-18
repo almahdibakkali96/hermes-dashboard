@@ -1,0 +1,94 @@
+{
+ "id": "calais",
+ "name_en": "Calais",
+ "name_ar": "كاليه",
+ "country": "FR",
+ "lat": 50.97,
+ "lon": 1.84,
+ "timezone": "Europe/Paris",
+ "grid": {
+  "lat": 51,
+  "lon": 1.875,
+  "distance_km": 4.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.92167,
+   "phase": -56.018
+  },
+  "J1": {
+   "amp": 1.38388,
+   "phase": 152.609
+  },
+  "K1": {
+   "amp": 2.9091,
+   "phase": 13.73
+  },
+  "K2": {
+   "amp": 22.75556,
+   "phase": 31.757
+  },
+  "M2": {
+   "amp": 248.18708,
+   "phase": -17.801
+  },
+  "M4": {
+   "amp": 21.46556,
+   "phase": -117.906
+  },
+  "MF": {
+   "amp": 1.41276,
+   "phase": -143.164
+  },
+  "MM": {
+   "amp": 1.54589,
+   "phase": -166.823
+  },
+  "N2": {
+   "amp": 43.85249,
+   "phase": -41.149
+  },
+  "O1": {
+   "amp": 6.14833,
+   "phase": 149.491
+  },
+  "P1": {
+   "amp": 0.45788,
+   "phase": 10.256
+  },
+  "Q1": {
+   "amp": 2.22025,
+   "phase": 93.727
+  },
+  "S1": {
+   "amp": 0.29588,
+   "phase": 20.122
+  },
+  "S2": {
+   "amp": 75.7398,
+   "phase": 34.61
+  },
+  "SA": {
+   "amp": 3.37843,
+   "phase": -60.637
+  },
+  "SSA": {
+   "amp": 0.39505,
+   "phase": -157.12
+  },
+  "T2": {
+   "amp": 5.21816,
+   "phase": 21.26
+  },
+  "Z0": {
+   "amp": 415.1,
+   "phase": 0
+  }
+ }
+}

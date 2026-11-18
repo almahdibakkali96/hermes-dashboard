@@ -1,0 +1,94 @@
+{
+ "id": "bari",
+ "name_en": "Bari",
+ "name_ar": "باري",
+ "country": "IT",
+ "lat": 41.13,
+ "lon": 16.87,
+ "timezone": "Europe/Rome",
+ "grid": {
+  "lat": 41.125,
+  "lon": 17,
+  "distance_km": 10.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.2392,
+   "phase": -162.984
+  },
+  "J1": {
+   "amp": 0.4396,
+   "phase": 68.671
+  },
+  "K1": {
+   "amp": 4.7271,
+   "phase": 51.911
+  },
+  "K2": {
+   "amp": 1.76051,
+   "phase": 77.733
+  },
+  "M2": {
+   "amp": 9.67845,
+   "phase": 73.356
+  },
+  "M4": {
+   "amp": 0.19886,
+   "phase": 90.653
+  },
+  "MF": {
+   "amp": 0.24214,
+   "phase": 142.13
+  },
+  "MM": {
+   "amp": 0.28624,
+   "phase": -105.08
+  },
+  "N2": {
+   "amp": 1.65351,
+   "phase": 68.223
+  },
+  "O1": {
+   "amp": 1.42883,
+   "phase": 27.166
+  },
+  "P1": {
+   "amp": 1.62968,
+   "phase": 39.164
+  },
+  "Q1": {
+   "amp": 0.28785,
+   "phase": 47.615
+  },
+  "S1": {
+   "amp": 1.04273,
+   "phase": 0.69
+  },
+  "S2": {
+   "amp": 6.22674,
+   "phase": 78.061
+  },
+  "SA": {
+   "amp": 2.82884,
+   "phase": -61.263
+  },
+  "SSA": {
+   "amp": 0.33877,
+   "phase": -166.833
+  },
+  "T2": {
+   "amp": 0.05457,
+   "phase": 46.462
+  },
+  "Z0": {
+   "amp": 23.8,
+   "phase": 0
+  }
+ }
+}

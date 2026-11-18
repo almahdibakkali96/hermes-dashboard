@@ -1,0 +1,94 @@
+{
+ "id": "makassar",
+ "name_en": "Makassar",
+ "name_ar": "مكاسر",
+ "country": "ID",
+ "lat": -5.13,
+ "lon": 119.4,
+ "timezone": "Asia/Makassar",
+ "grid": {
+  "lat": -5.125,
+  "lon": 119.375,
+  "distance_km": 2.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.95253,
+   "phase": 60.77
+  },
+  "J1": {
+   "amp": 1.13478,
+   "phase": 177.046
+  },
+  "K1": {
+   "amp": 30.8417,
+   "phase": 175.125
+  },
+  "K2": {
+   "amp": 4.35436,
+   "phase": -32.069
+  },
+  "M2": {
+   "amp": 11.24094,
+   "phase": 176.763
+  },
+  "M4": {
+   "amp": 0.59819,
+   "phase": -161.043
+  },
+  "MF": {
+   "amp": 1.20645,
+   "phase": 23.06
+  },
+  "MM": {
+   "amp": 1.35572,
+   "phase": 29.936
+  },
+  "N2": {
+   "amp": 3.46723,
+   "phase": 113.159
+  },
+  "O1": {
+   "amp": 20.22278,
+   "phase": 153.01
+  },
+  "P1": {
+   "amp": 9.6631,
+   "phase": 170.694
+  },
+  "Q1": {
+   "amp": 4.37246,
+   "phase": 142.804
+  },
+  "S1": {
+   "amp": 2.27013,
+   "phase": 9.66
+  },
+  "S2": {
+   "amp": 13.25983,
+   "phase": -27.16
+  },
+  "SA": {
+   "amp": 4.59274,
+   "phase": 38.54
+  },
+  "SSA": {
+   "amp": 0.72802,
+   "phase": -8.685
+  },
+  "T2": {
+   "amp": 0.38622,
+   "phase": -148.18
+  },
+  "Z0": {
+   "amp": 91.1,
+   "phase": 0
+  }
+ }
+}

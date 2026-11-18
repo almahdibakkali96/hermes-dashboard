@@ -1,0 +1,94 @@
+{
+ "id": "hobart",
+ "name_en": "Hobart",
+ "name_ar": "هوبارت",
+ "country": "AU",
+ "lat": -42.88,
+ "lon": 147.34,
+ "timezone": "Australia/Hobart",
+ "grid": {
+  "lat": -43,
+  "lon": 147.375,
+  "distance_km": 13.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.14357,
+   "phase": -95.914
+  },
+  "J1": {
+   "amp": 0.9415,
+   "phase": -46.161
+  },
+  "K1": {
+   "amp": 21.10477,
+   "phase": -65.517
+  },
+  "K2": {
+   "amp": 1.05906,
+   "phase": -124.235
+  },
+  "M2": {
+   "amp": 24.05239,
+   "phase": -51.572
+  },
+  "M4": {
+   "amp": 0.25543,
+   "phase": -138.666
+  },
+  "MF": {
+   "amp": 0.83722,
+   "phase": 155.435
+  },
+  "MM": {
+   "amp": 0.34622,
+   "phase": -157.694
+  },
+  "N2": {
+   "amp": 7.07236,
+   "phase": -65.46
+  },
+  "O1": {
+   "amp": 14.0647,
+   "phase": -90.267
+  },
+  "P1": {
+   "amp": 6.37785,
+   "phase": -70.111
+  },
+  "Q1": {
+   "amp": 3.33637,
+   "phase": -110.221
+  },
+  "S1": {
+   "amp": 1.11937,
+   "phase": 20.681
+  },
+  "S2": {
+   "amp": 1.24732,
+   "phase": -125.686
+  },
+  "SA": {
+   "amp": 2.53996,
+   "phase": 150.436
+  },
+  "SSA": {
+   "amp": 0.41538,
+   "phase": -177.508
+  },
+  "T2": {
+   "amp": 0.70181,
+   "phase": -175.651
+  },
+  "Z0": {
+   "amp": 76,
+   "phase": 0
+  }
+ }
+}

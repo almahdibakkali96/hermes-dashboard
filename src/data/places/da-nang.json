@@ -1,0 +1,94 @@
+{
+ "id": "da-nang",
+ "name_en": "Da Nang",
+ "name_ar": "دا نانغ",
+ "country": "VN",
+ "lat": 16.07,
+ "lon": 108.23,
+ "timezone": "Asia/Ho_Chi_Minh",
+ "grid": {
+  "lat": 16.125,
+  "lon": 108.375,
+  "distance_km": 16.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.46708,
+   "phase": 75.174
+  },
+  "J1": {
+   "amp": 0.87109,
+   "phase": -136.004
+  },
+  "K1": {
+   "amp": 21.45332,
+   "phase": -179.123
+  },
+  "K2": {
+   "amp": 2.00286,
+   "phase": 136.944
+  },
+  "M2": {
+   "amp": 17.66253,
+   "phase": 90.679
+  },
+  "M4": {
+   "amp": 0.14755,
+   "phase": -171.434
+  },
+  "MF": {
+   "amp": 1.21659,
+   "phase": 37.425
+  },
+  "MM": {
+   "amp": 0.69349,
+   "phase": 21.521
+  },
+  "N2": {
+   "amp": 3.37656,
+   "phase": 77.571
+  },
+  "O1": {
+   "amp": 14.74272,
+   "phase": 142.518
+  },
+  "P1": {
+   "amp": 6.74313,
+   "phase": 178.355
+  },
+  "Q1": {
+   "amp": 2.88163,
+   "phase": 129.595
+  },
+  "S1": {
+   "amp": 0.3652,
+   "phase": 117.104
+  },
+  "S2": {
+   "amp": 5.20246,
+   "phase": 127.558
+  },
+  "SA": {
+   "amp": 8.24354,
+   "phase": -25.932
+  },
+  "SSA": {
+   "amp": 0.03051,
+   "phase": 119.977
+  },
+  "T2": {
+   "amp": 0.65365,
+   "phase": 65.079
+  },
+  "Z0": {
+   "amp": 80.9,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "budva",
+ "name_en": "Budva",
+ "name_ar": "بودفا",
+ "country": "ME",
+ "lat": 42.28,
+ "lon": 18.84,
+ "timezone": "Europe/Podgorica",
+ "grid": {
+  "lat": 42.25,
+  "lon": 18.875,
+  "distance_km": 4.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.12208,
+   "phase": -0.087
+  },
+  "J1": {
+   "amp": 0.18599,
+   "phase": 56.606
+  },
+  "K1": {
+   "amp": 5.25369,
+   "phase": 37.139
+  },
+  "K2": {
+   "amp": 1.72373,
+   "phase": 76.765
+  },
+  "M2": {
+   "amp": 9.07827,
+   "phase": 74.307
+  },
+  "M4": {
+   "amp": 0.35149,
+   "phase": 44.339
+  },
+  "MF": {
+   "amp": 0.57862,
+   "phase": -143.321
+  },
+  "MM": {
+   "amp": 0.62095,
+   "phase": -140.474
+  },
+  "N2": {
+   "amp": 1.66676,
+   "phase": 70.479
+  },
+  "O1": {
+   "amp": 1.88924,
+   "phase": 17.451
+  },
+  "P1": {
+   "amp": 1.79285,
+   "phase": 36.832
+  },
+  "Q1": {
+   "amp": 0.47183,
+   "phase": 20.544
+  },
+  "S1": {
+   "amp": 1.15492,
+   "phase": 54.345
+  },
+  "S2": {
+   "amp": 5.68232,
+   "phase": 85.158
+  },
+  "SA": {
+   "amp": 3.21856,
+   "phase": -51.888
+  },
+  "SSA": {
+   "amp": 0.47546,
+   "phase": -165.107
+  },
+  "T2": {
+   "amp": 0.45086,
+   "phase": 97.825
+  },
+  "Z0": {
+   "amp": 24.1,
+   "phase": 0
+  }
+ }
+}

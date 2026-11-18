@@ -1,0 +1,94 @@
+{
+ "id": "copenhagen",
+ "name_en": "Copenhagen",
+ "name_ar": "كوبنهاغن",
+ "country": "DK",
+ "lat": 55.69,
+ "lon": 12.61,
+ "timezone": "Europe/Copenhagen",
+ "grid": {
+  "lat": 55.75,
+  "lon": 12.625,
+  "distance_km": 6.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.29769,
+   "phase": -88.629
+  },
+  "J1": {
+   "amp": 0.16755,
+   "phase": -29.931
+  },
+  "K1": {
+   "amp": 1.38819,
+   "phase": 154.278
+  },
+  "K2": {
+   "amp": 0.45421,
+   "phase": 126.93
+  },
+  "M2": {
+   "amp": 3.35672,
+   "phase": -93.725
+  },
+  "M4": {
+   "amp": 1.31143,
+   "phase": -150.906
+  },
+  "MF": {
+   "amp": 0.65706,
+   "phase": -47.813
+  },
+  "MM": {
+   "amp": 0.57467,
+   "phase": 162.745
+  },
+  "N2": {
+   "amp": 0.99426,
+   "phase": -127.593
+  },
+  "O1": {
+   "amp": 1.46263,
+   "phase": 28.75
+  },
+  "P1": {
+   "amp": 0.57808,
+   "phase": -102.826
+  },
+  "Q1": {
+   "amp": 0.29713,
+   "phase": 51.661
+  },
+  "S1": {
+   "amp": 1.22017,
+   "phase": -9.918
+  },
+  "S2": {
+   "amp": 0.87049,
+   "phase": 166.75
+  },
+  "SA": {
+   "amp": 2.76861,
+   "phase": -78.136
+  },
+  "SSA": {
+   "amp": 0.49008,
+   "phase": -155.961
+  },
+  "T2": {
+   "amp": 0.25913,
+   "phase": -31.867
+  },
+  "Z0": {
+   "amp": 9.7,
+   "phase": 0
+  }
+ }
+}

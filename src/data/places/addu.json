@@ -1,0 +1,94 @@
+{
+ "id": "addu",
+ "name_en": "Addu",
+ "name_ar": "أدو",
+ "country": "MV",
+ "lat": -0.63,
+ "lon": 73.16,
+ "timezone": "Indian/Maldives",
+ "grid": {
+  "lat": -0.625,
+  "lon": 73.125,
+  "distance_km": 3.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.76182,
+   "phase": -104.539
+  },
+  "J1": {
+   "amp": 0.60789,
+   "phase": -3.626
+  },
+  "K1": {
+   "amp": 9.07729,
+   "phase": -3.502
+  },
+  "K2": {
+   "amp": 5.27083,
+   "phase": -77.395
+  },
+  "M2": {
+   "amp": 29.16192,
+   "phase": -110.306
+  },
+  "M4": {
+   "amp": 0.37442,
+   "phase": -144.698
+  },
+  "MF": {
+   "amp": 1.53475,
+   "phase": 0.47
+  },
+  "MM": {
+   "amp": 0.67482,
+   "phase": -12.716
+  },
+  "N2": {
+   "amp": 4.53067,
+   "phase": -114.501
+  },
+  "O1": {
+   "amp": 5.45502,
+   "phase": 15.283
+  },
+  "P1": {
+   "amp": 2.64669,
+   "phase": 1.308
+  },
+  "Q1": {
+   "amp": 1.43128,
+   "phase": 14.168
+  },
+  "S1": {
+   "amp": 0.64297,
+   "phase": 151.591
+  },
+  "S2": {
+   "amp": 18.13045,
+   "phase": -75.667
+  },
+  "SA": {
+   "amp": 1.83741,
+   "phase": -174.411
+  },
+  "SSA": {
+   "amp": 0.63523,
+   "phase": -2.192
+  },
+  "T2": {
+   "amp": 0.67917,
+   "phase": -68.151
+  },
+  "Z0": {
+   "amp": 70.3,
+   "phase": 0
+  }
+ }
+}

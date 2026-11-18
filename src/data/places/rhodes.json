@@ -1,0 +1,94 @@
+{
+ "id": "rhodes",
+ "name_en": "Rhodes",
+ "name_ar": "رودس",
+ "country": "GR",
+ "lat": 36.45,
+ "lon": 28.23,
+ "timezone": "Europe/Athens",
+ "grid": {
+  "lat": 36.5,
+  "lon": 28.25,
+  "distance_km": 5.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.20568,
+   "phase": -166.893
+  },
+  "J1": {
+   "amp": 0.25832,
+   "phase": -75.283
+  },
+  "K1": {
+   "amp": 2.24377,
+   "phase": -48.922
+  },
+  "K2": {
+   "amp": 1.13155,
+   "phase": -112.187
+  },
+  "M2": {
+   "amp": 5.91809,
+   "phase": -116.148
+  },
+  "M4": {
+   "amp": 0.22653,
+   "phase": 41.96
+  },
+  "MF": {
+   "amp": 0.62643,
+   "phase": -75.246
+  },
+  "MM": {
+   "amp": 0.45944,
+   "phase": -71.388
+  },
+  "N2": {
+   "amp": 1.0679,
+   "phase": -100.465
+  },
+  "O1": {
+   "amp": 1.22868,
+   "phase": -88.926
+  },
+  "P1": {
+   "amp": 0.79995,
+   "phase": -30.447
+  },
+  "Q1": {
+   "amp": 0.02042,
+   "phase": -27.883
+  },
+  "S1": {
+   "amp": 0.86221,
+   "phase": 33.448
+  },
+  "S2": {
+   "amp": 3.76182,
+   "phase": -95.149
+  },
+  "SA": {
+   "amp": 3.196,
+   "phase": -66.398
+  },
+  "SSA": {
+   "amp": 0.10496,
+   "phase": -135.092
+  },
+  "T2": {
+   "amp": 0.46234,
+   "phase": -103.816
+  },
+  "Z0": {
+   "amp": 16.4,
+   "phase": 0
+  }
+ }
+}

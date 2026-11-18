@@ -1,0 +1,94 @@
+{
+ "id": "incheon",
+ "name_en": "Incheon",
+ "name_ar": "إنتشون",
+ "country": "KR",
+ "lat": 37.45,
+ "lon": 126.6,
+ "timezone": "Asia/Seoul",
+ "grid": {
+  "lat": 37.5,
+  "lon": 126.625,
+  "distance_km": 6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 6.11207,
+   "phase": -155.088
+  },
+  "J1": {
+   "amp": 0.98681,
+   "phase": -176.602
+  },
+  "K1": {
+   "amp": 40.07353,
+   "phase": 176.67
+  },
+  "K2": {
+   "amp": 27.79948,
+   "phase": -80.542
+  },
+  "M2": {
+   "amp": 253.64843,
+   "phase": -119.77
+  },
+  "M4": {
+   "amp": 12.76363,
+   "phase": 66.739
+  },
+  "MF": {
+   "amp": 1.11479,
+   "phase": -175.259
+  },
+  "MM": {
+   "amp": 0.45938,
+   "phase": 83.985
+  },
+  "N2": {
+   "amp": 50.60552,
+   "phase": -138.818
+  },
+  "O1": {
+   "amp": 29.60163,
+   "phase": 145.134
+  },
+  "P1": {
+   "amp": 11.72602,
+   "phase": 170.842
+  },
+  "Q1": {
+   "amp": 4.95114,
+   "phase": 129.786
+  },
+  "S1": {
+   "amp": 0.86308,
+   "phase": -122.22
+  },
+  "S2": {
+   "amp": 81.76681,
+   "phase": -60.896
+  },
+  "SA": {
+   "amp": 5.21992,
+   "phase": -124.167
+  },
+  "SSA": {
+   "amp": 0.18258,
+   "phase": 102.674
+  },
+  "T2": {
+   "amp": 6.33488,
+   "phase": -72.31
+  },
+  "Z0": {
+   "amp": 437.9,
+   "phase": 0
+  }
+ }
+}

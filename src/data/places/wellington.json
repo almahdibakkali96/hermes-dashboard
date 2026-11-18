@@ -1,0 +1,94 @@
+{
+ "id": "wellington",
+ "name_en": "Wellington",
+ "name_ar": "ويلينغتون",
+ "country": "NZ",
+ "lat": -41.29,
+ "lon": 174.78,
+ "timezone": "Pacific/Auckland",
+ "grid": {
+  "lat": -41.25,
+  "lon": 174.875,
+  "distance_km": 9.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.43845,
+   "phase": 95.581
+  },
+  "J1": {
+   "amp": 0.10058,
+   "phase": -108.371
+  },
+  "K1": {
+   "amp": 2.84639,
+   "phase": -79.499
+  },
+  "K2": {
+   "amp": 1.14074,
+   "phase": 42.037
+  },
+  "M2": {
+   "amp": 47.09283,
+   "phase": 146.975
+  },
+  "M4": {
+   "amp": 0.35169,
+   "phase": 136.684
+  },
+  "MF": {
+   "amp": 1.04506,
+   "phase": 178.367
+  },
+  "MM": {
+   "amp": 1.08239,
+   "phase": -169.847
+  },
+  "N2": {
+   "amp": 11.47499,
+   "phase": 113.224
+  },
+  "O1": {
+   "amp": 3.22086,
+   "phase": -135.281
+  },
+  "P1": {
+   "amp": 0.92165,
+   "phase": -82.635
+  },
+  "Q1": {
+   "amp": 1.15867,
+   "phase": -150.448
+  },
+  "S1": {
+   "amp": 0.34993,
+   "phase": 5.74
+  },
+  "S2": {
+   "amp": 2.18813,
+   "phase": -14.87
+  },
+  "SA": {
+   "amp": 2.00697,
+   "phase": 118.971
+  },
+  "SSA": {
+   "amp": 0.38213,
+   "phase": 179.248
+  },
+  "T2": {
+   "amp": 0.38931,
+   "phase": -64.293
+  },
+  "Z0": {
+   "amp": 69,
+   "phase": 0
+  }
+ }
+}

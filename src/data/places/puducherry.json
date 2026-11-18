@@ -1,0 +1,94 @@
+{
+ "id": "puducherry",
+ "name_en": "Puducherry",
+ "name_ar": "بونديشيري",
+ "country": "IN",
+ "lat": 11.93,
+ "lon": 79.84,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 11.875,
+  "lon": 79.875,
+  "distance_km": 7.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.96752,
+   "phase": 52.306
+  },
+  "J1": {
+   "amp": 0.67389,
+   "phase": -130.76
+  },
+  "K1": {
+   "amp": 8.85713,
+   "phase": -106.81
+  },
+  "K2": {
+   "amp": 3.88665,
+   "phase": 102.062
+  },
+  "M2": {
+   "amp": 28.24657,
+   "phase": 76.364
+  },
+  "M4": {
+   "amp": 0.30096,
+   "phase": 108.676
+  },
+  "MF": {
+   "amp": 1.64692,
+   "phase": 3.164
+  },
+  "MM": {
+   "amp": 0.40229,
+   "phase": -7.27
+  },
+  "N2": {
+   "amp": 5.91243,
+   "phase": 67.093
+  },
+  "O1": {
+   "amp": 2.60246,
+   "phase": -112.254
+  },
+  "P1": {
+   "amp": 3.08064,
+   "phase": -99.459
+  },
+  "Q1": {
+   "amp": 0.38662,
+   "phase": 78.31
+  },
+  "S1": {
+   "amp": 1.2709,
+   "phase": -15.021
+  },
+  "S2": {
+   "amp": 10.73546,
+   "phase": 105.833
+  },
+  "SA": {
+   "amp": 2.96215,
+   "phase": -5.537
+  },
+  "SSA": {
+   "amp": 0.22857,
+   "phase": -96.043
+  },
+  "T2": {
+   "amp": 0.74552,
+   "phase": 20.524
+  },
+  "Z0": {
+   "amp": 57.8,
+   "phase": 0
+  }
+ }
+}

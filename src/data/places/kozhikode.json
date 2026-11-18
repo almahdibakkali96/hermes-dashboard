@@ -1,0 +1,94 @@
+{
+ "id": "kozhikode",
+ "name_en": "Kozhikode (Calicut)",
+ "name_ar": "كاليكوت",
+ "country": "IN",
+ "lat": 11.25,
+ "lon": 75.77,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 11.25,
+  "lon": 75.75,
+  "distance_km": 2.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.64877,
+   "phase": 80.247
+  },
+  "J1": {
+   "amp": 1.6774,
+   "phase": -14.848
+  },
+  "K1": {
+   "amp": 22.76879,
+   "phase": -30.266
+  },
+  "K2": {
+   "amp": 2.67195,
+   "phase": -152.018
+  },
+  "M2": {
+   "amp": 31.59873,
+   "phase": 164.818
+  },
+  "M4": {
+   "amp": 0.64327,
+   "phase": 74.491
+  },
+  "MF": {
+   "amp": 1.3657,
+   "phase": 5.208
+  },
+  "MM": {
+   "amp": 0.58138,
+   "phase": -18.824
+  },
+  "N2": {
+   "amp": 6.77109,
+   "phase": 143.753
+  },
+  "O1": {
+   "amp": 11.25079,
+   "phase": -25.751
+  },
+  "P1": {
+   "amp": 6.6889,
+   "phase": -32.378
+  },
+  "Q1": {
+   "amp": 2.57822,
+   "phase": -9.998
+  },
+  "S1": {
+   "amp": 1.15837,
+   "phase": 81.014
+  },
+  "S2": {
+   "amp": 11.1343,
+   "phase": -143.97
+  },
+  "SA": {
+   "amp": 7.46447,
+   "phase": 31.143
+  },
+  "SSA": {
+   "amp": 0.50416,
+   "phase": -10.067
+  },
+  "T2": {
+   "amp": 1.51199,
+   "phase": -172.528
+  },
+  "Z0": {
+   "amp": 94.8,
+   "phase": 0
+  }
+ }
+}

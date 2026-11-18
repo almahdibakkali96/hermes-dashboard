@@ -1,0 +1,94 @@
+{
+ "id": "tokyo",
+ "name_en": "Tokyo",
+ "name_ar": "طوكيو",
+ "country": "JP",
+ "lat": 35.62,
+ "lon": 139.78,
+ "timezone": "Asia/Tokyo",
+ "grid": {
+  "lat": 35.625,
+  "lon": 139.875,
+  "distance_km": 8.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.90885,
+   "phase": -169.992
+  },
+  "J1": {
+   "amp": 1.45321,
+   "phase": 37.386
+  },
+  "K1": {
+   "amp": 25.02236,
+   "phase": 39.924
+  },
+  "K2": {
+   "amp": 5.51521,
+   "phase": -110.646
+  },
+  "M2": {
+   "amp": 42.98893,
+   "phase": -125.263
+  },
+  "M4": {
+   "amp": 1.63309,
+   "phase": -86.002
+  },
+  "MF": {
+   "amp": 0.60514,
+   "phase": 104.04
+  },
+  "MM": {
+   "amp": 0.58675,
+   "phase": 95.914
+  },
+  "N2": {
+   "amp": 6.6845,
+   "phase": -136.52
+  },
+  "O1": {
+   "amp": 18.80604,
+   "phase": 20.263
+  },
+  "P1": {
+   "amp": 7.74341,
+   "phase": 35.459
+  },
+  "Q1": {
+   "amp": 4.02145,
+   "phase": 18.04
+  },
+  "S1": {
+   "amp": 1.43532,
+   "phase": -91.42
+  },
+  "S2": {
+   "amp": 20.61214,
+   "phase": -94.861
+  },
+  "SA": {
+   "amp": 4.29525,
+   "phase": -64.646
+  },
+  "SSA": {
+   "amp": 0.16199,
+   "phase": 170.396
+  },
+  "T2": {
+   "amp": 1.60766,
+   "phase": -103.791
+  },
+  "Z0": {
+   "amp": 127.5,
+   "phase": 0
+  }
+ }
+}

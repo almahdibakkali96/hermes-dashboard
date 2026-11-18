@@ -1,0 +1,94 @@
+{
+ "id": "punta-cana",
+ "name_en": "Punta Cana",
+ "name_ar": "بونتا كانا",
+ "country": "DO",
+ "lat": 18.58,
+ "lon": -68.37,
+ "timezone": "America/Santo_Domingo",
+ "grid": {
+  "lat": 18.5,
+  "lon": -68.375,
+  "distance_km": 8.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.23578,
+   "phase": -93.875
+  },
+  "J1": {
+   "amp": 0.47528,
+   "phase": -115.973
+  },
+  "K1": {
+   "amp": 8.18914,
+   "phase": -136.346
+  },
+  "K2": {
+   "amp": 0.15563,
+   "phase": 41.952
+  },
+  "M2": {
+   "amp": 8.22632,
+   "phase": 37.088
+  },
+  "M4": {
+   "amp": 0.23819,
+   "phase": -90.315
+  },
+  "MF": {
+   "amp": 1.42736,
+   "phase": -8.35
+  },
+  "MM": {
+   "amp": 0.75459,
+   "phase": -2.798
+  },
+  "N2": {
+   "amp": 1.94634,
+   "phase": 28.512
+  },
+  "O1": {
+   "amp": 6.56739,
+   "phase": -135.342
+  },
+  "P1": {
+   "amp": 2.90335,
+   "phase": -138.098
+  },
+  "Q1": {
+   "amp": 1.32648,
+   "phase": -152.396
+  },
+  "S1": {
+   "amp": 0.52101,
+   "phase": 108.242
+  },
+  "S2": {
+   "amp": 1.22892,
+   "phase": 50.255
+  },
+  "SA": {
+   "amp": 2.31953,
+   "phase": -76.166
+  },
+  "SSA": {
+   "amp": 0.53289,
+   "phase": 3.443
+  },
+  "T2": {
+   "amp": 0.1665,
+   "phase": -148.297
+  },
+  "Z0": {
+   "amp": 26,
+   "phase": 0
+  }
+ }
+}

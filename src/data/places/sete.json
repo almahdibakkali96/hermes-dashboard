@@ -1,0 +1,94 @@
+{
+ "id": "sete",
+ "name_en": "Sète",
+ "name_ar": "سيت",
+ "country": "FR",
+ "lat": 43.39,
+ "lon": 3.7,
+ "timezone": "Europe/Paris",
+ "grid": {
+  "lat": 43.375,
+  "lon": 3.75,
+  "distance_km": 4.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.39333,
+   "phase": -133.652
+  },
+  "J1": {
+   "amp": 0.1593,
+   "phase": 89.81
+  },
+  "K1": {
+   "amp": 3.62694,
+   "phase": 162.098
+  },
+  "K2": {
+   "amp": 0.9125,
+   "phase": -134.61
+  },
+  "M2": {
+   "amp": 6.14522,
+   "phase": -148.35
+  },
+  "M4": {
+   "amp": 0.3815,
+   "phase": -53.972
+  },
+  "MF": {
+   "amp": 0.54632,
+   "phase": 166.531
+  },
+  "MM": {
+   "amp": 0.32592,
+   "phase": -124.111
+  },
+  "N2": {
+   "amp": 1.24191,
+   "phase": -136.984
+  },
+  "O1": {
+   "amp": 2.0191,
+   "phase": 97.078
+  },
+  "P1": {
+   "amp": 1.13957,
+   "phase": 162.533
+  },
+  "Q1": {
+   "amp": 0.45347,
+   "phase": 43.164
+  },
+  "S1": {
+   "amp": 1.06104,
+   "phase": 24.436
+  },
+  "S2": {
+   "amp": 2.04878,
+   "phase": -136.989
+  },
+  "SA": {
+   "amp": 2.57221,
+   "phase": -69.605
+  },
+  "SSA": {
+   "amp": 0.52971,
+   "phase": -172.303
+  },
+  "T2": {
+   "amp": 0.67559,
+   "phase": -38.403
+  },
+  "Z0": {
+   "amp": 15.7,
+   "phase": 0
+  }
+ }
+}

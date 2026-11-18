@@ -1,0 +1,94 @@
+{
+ "id": "new-york",
+ "name_en": "New York (Coney Island)",
+ "name_ar": "نيويورك",
+ "country": "US",
+ "lat": 40.57,
+ "lon": -73.98,
+ "timezone": "America/New_York",
+ "grid": {
+  "lat": 40.5,
+  "lon": -74,
+  "distance_km": 8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.29582,
+   "phase": -34.876
+  },
+  "J1": {
+   "amp": 0.78346,
+   "phase": -167.298
+  },
+  "K1": {
+   "amp": 9.80915,
+   "phase": 168.959
+  },
+  "K2": {
+   "amp": 3.31732,
+   "phase": 22.268
+  },
+  "M2": {
+   "amp": 65.41259,
+   "phase": -8.132
+  },
+  "M4": {
+   "amp": 1.2527,
+   "phase": -179.269
+  },
+  "MF": {
+   "amp": 0.74112,
+   "phase": -70.609
+  },
+  "MM": {
+   "amp": 0.76878,
+   "phase": 36.201
+  },
+  "N2": {
+   "amp": 14.84224,
+   "phase": -27.845
+  },
+  "O1": {
+   "amp": 5.87802,
+   "phase": 158.497
+  },
+  "P1": {
+   "amp": 3.4155,
+   "phase": 176.914
+  },
+  "Q1": {
+   "amp": 0.9151,
+   "phase": 171.652
+  },
+  "S1": {
+   "amp": 0.43424,
+   "phase": 127.393
+  },
+  "S2": {
+   "amp": 12.00004,
+   "phase": 11.368
+  },
+  "SA": {
+   "amp": 3.0387,
+   "phase": -109.739
+  },
+  "SSA": {
+   "amp": 0.43504,
+   "phase": 157.398
+  },
+  "T2": {
+   "amp": 0.62943,
+   "phase": -70.188
+  },
+  "Z0": {
+   "amp": 105.3,
+   "phase": 0
+  }
+ }
+}

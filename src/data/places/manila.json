@@ -1,0 +1,94 @@
+{
+ "id": "manila",
+ "name_en": "Manila",
+ "name_ar": "مانيلا",
+ "country": "PH",
+ "lat": 14.58,
+ "lon": 120.97,
+ "timezone": "Asia/Manila",
+ "grid": {
+  "lat": 14.625,
+  "lon": 120.875,
+  "distance_km": 11.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.97185,
+   "phase": 23.76
+  },
+  "J1": {
+   "amp": 1.1373,
+   "phase": -169.423
+  },
+  "K1": {
+   "amp": 30.90726,
+   "phase": -161.716
+  },
+  "K2": {
+   "amp": 1.95154,
+   "phase": 84.107
+  },
+  "M2": {
+   "amp": 20.06681,
+   "phase": 67.093
+  },
+  "M4": {
+   "amp": 0.86455,
+   "phase": -74.414
+  },
+  "MF": {
+   "amp": 0.79321,
+   "phase": 3.775
+  },
+  "MM": {
+   "amp": 0.83969,
+   "phase": 30.716
+  },
+  "N2": {
+   "amp": 4.63437,
+   "phase": 49.47
+  },
+  "O1": {
+   "amp": 26.19453,
+   "phase": 155.953
+  },
+  "P1": {
+   "amp": 9.97665,
+   "phase": -169.273
+  },
+  "Q1": {
+   "amp": 5.20033,
+   "phase": 138.404
+  },
+  "S1": {
+   "amp": 3.63294,
+   "phase": -147.923
+  },
+  "S2": {
+   "amp": 6.8444,
+   "phase": 104.041
+  },
+  "SA": {
+   "amp": 2.92102,
+   "phase": -137.352
+  },
+  "SSA": {
+   "amp": 0.37654,
+   "phase": -6.853
+  },
+  "T2": {
+   "amp": 0.92713,
+   "phase": 104.773
+  },
+  "Z0": {
+   "amp": 92.5,
+   "phase": 0
+  }
+ }
+}

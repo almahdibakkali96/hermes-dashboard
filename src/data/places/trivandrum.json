@@ -1,0 +1,94 @@
+{
+ "id": "trivandrum",
+ "name_en": "Thiruvananthapuram",
+ "name_ar": "تريفاندرم",
+ "country": "IN",
+ "lat": 8.48,
+ "lon": 76.92,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 8.5,
+  "lon": 76.875,
+  "distance_km": 5.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.5138,
+   "phase": 131.012
+  },
+  "J1": {
+   "amp": 1.20155,
+   "phase": -45.483
+  },
+  "K1": {
+   "amp": 15.0658,
+   "phase": -36.561
+  },
+  "K2": {
+   "amp": 2.57271,
+   "phase": -97.688
+  },
+  "M2": {
+   "amp": 18.82608,
+   "phase": -160.26
+  },
+  "M4": {
+   "amp": 0.35179,
+   "phase": 116.26
+  },
+  "MF": {
+   "amp": 1.84966,
+   "phase": -2.157
+  },
+  "MM": {
+   "amp": 0.72179,
+   "phase": -12.038
+  },
+  "N2": {
+   "amp": 3.4322,
+   "phase": 163.193
+  },
+  "O1": {
+   "amp": 7.38901,
+   "phase": -26.03
+  },
+  "P1": {
+   "amp": 4.47843,
+   "phase": -37.099
+  },
+  "Q1": {
+   "amp": 1.72289,
+   "phase": -5.64
+  },
+  "S1": {
+   "amp": 1.07442,
+   "phase": 81.351
+  },
+  "S2": {
+   "amp": 10.32062,
+   "phase": -100.063
+  },
+  "SA": {
+   "amp": 6.67216,
+   "phase": 26.327
+  },
+  "SSA": {
+   "amp": 0.58064,
+   "phase": -15.44
+  },
+  "T2": {
+   "amp": 0.40238,
+   "phase": -157.67
+  },
+  "Z0": {
+   "amp": 58.9,
+   "phase": 0
+  }
+ }
+}

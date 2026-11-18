@@ -1,0 +1,94 @@
+{
+ "id": "funchal",
+ "name_en": "Funchal (Madeira)",
+ "name_ar": "فونشال (ماديرا)",
+ "country": "PT",
+ "lat": 32.64,
+ "lon": -16.91,
+ "timezone": "Atlantic/Madeira",
+ "grid": {
+  "lat": 32.625,
+  "lon": -16.875,
+  "distance_km": 3.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.20746,
+   "phase": 13.533
+  },
+  "J1": {
+   "amp": 0.40663,
+   "phase": 52.537
+  },
+  "K1": {
+   "amp": 5.85563,
+   "phase": 47.793
+  },
+  "K2": {
+   "amp": 7.51646,
+   "phase": 62.681
+  },
+  "M2": {
+   "amp": 70.70463,
+   "phase": 45.193
+  },
+  "M4": {
+   "amp": 0.85652,
+   "phase": 124.14
+  },
+  "MF": {
+   "amp": 0.40334,
+   "phase": -5.444
+  },
+  "MM": {
+   "amp": 0.17325,
+   "phase": -98.308
+  },
+  "N2": {
+   "amp": 15.10388,
+   "phase": 30.247
+  },
+  "O1": {
+   "amp": 4.36537,
+   "phase": -54.965
+  },
+  "P1": {
+   "amp": 1.82525,
+   "phase": 32.004
+  },
+  "Q1": {
+   "amp": 1.43972,
+   "phase": -110.162
+  },
+  "S1": {
+   "amp": 0.77415,
+   "phase": 1.745
+  },
+  "S2": {
+   "amp": 26.48113,
+   "phase": 68.059
+  },
+  "SA": {
+   "amp": 2.73642,
+   "phase": -83.927
+  },
+  "SSA": {
+   "amp": 0.07751,
+   "phase": 2.939
+  },
+  "T2": {
+   "amp": 1.61159,
+   "phase": 66.75
+  },
+  "Z0": {
+   "amp": 127.1,
+   "phase": 0
+  }
+ }
+}

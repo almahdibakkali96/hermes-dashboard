@@ -1,0 +1,94 @@
+{
+ "id": "los-angeles",
+ "name_en": "Los Angeles (Santa Monica)",
+ "name_ar": "لوس أنجلوس",
+ "country": "US",
+ "lat": 34.01,
+ "lon": -118.5,
+ "timezone": "America/Los_Angeles",
+ "grid": {
+  "lat": 34,
+  "lon": -118.5,
+  "distance_km": 1.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.82016,
+   "phase": 96.296
+  },
+  "J1": {
+   "amp": 1.85667,
+   "phase": -156.419
+  },
+  "K1": {
+   "amp": 34.28666,
+   "phase": -150.95
+  },
+  "K2": {
+   "amp": 5.7112,
+   "phase": 136.54
+  },
+  "M2": {
+   "amp": 49.86829,
+   "phase": 147.457
+  },
+  "M4": {
+   "amp": 0.31933,
+   "phase": -1.069
+  },
+  "MF": {
+   "amp": 0.87741,
+   "phase": 130.989
+  },
+  "MM": {
+   "amp": 0.31228,
+   "phase": 142.819
+  },
+  "N2": {
+   "amp": 11.53301,
+   "phase": 124.334
+  },
+  "O1": {
+   "amp": 21.52848,
+   "phase": -165.433
+  },
+  "P1": {
+   "amp": 10.64165,
+   "phase": -155.402
+  },
+  "Q1": {
+   "amp": 4.07055,
+   "phase": -178.756
+  },
+  "S1": {
+   "amp": 0.48645,
+   "phase": -162.304
+  },
+  "S2": {
+   "amp": 19.89787,
+   "phase": 142.796
+  },
+  "SA": {
+   "amp": 2.79387,
+   "phase": -61.731
+  },
+  "SSA": {
+   "amp": 0.15836,
+   "phase": -2.843
+  },
+  "T2": {
+   "amp": 1.1653,
+   "phase": 147.656
+  },
+  "Z0": {
+   "amp": 140.2,
+   "phase": 0
+  }
+ }
+}

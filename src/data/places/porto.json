@@ -1,0 +1,94 @@
+{
+ "id": "porto",
+ "name_en": "Porto",
+ "name_ar": "بورتو",
+ "country": "PT",
+ "lat": 41.17,
+ "lon": -8.7,
+ "timezone": "Europe/Lisbon",
+ "grid": {
+  "lat": 41.125,
+  "lon": -8.75,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.89287,
+   "phase": 41.824
+  },
+  "J1": {
+   "amp": 0.4072,
+   "phase": 48.261
+  },
+  "K1": {
+   "amp": 6.99606,
+   "phase": 60.819
+  },
+  "K2": {
+   "amp": 10.12591,
+   "phase": 99.946
+  },
+  "M2": {
+   "amp": 104.48106,
+   "phase": 74.764
+  },
+  "M4": {
+   "amp": 0.82672,
+   "phase": -136.12
+  },
+  "MF": {
+   "amp": 0.31342,
+   "phase": -149.953
+  },
+  "MM": {
+   "amp": 0.42097,
+   "phase": -120.069
+  },
+  "N2": {
+   "amp": 22.46742,
+   "phase": 56.254
+  },
+  "O1": {
+   "amp": 5.60547,
+   "phase": -43.375
+  },
+  "P1": {
+   "amp": 2.19568,
+   "phase": 52.691
+  },
+  "Q1": {
+   "amp": 1.58819,
+   "phase": -95.035
+  },
+  "S1": {
+   "amp": 1.22129,
+   "phase": 21.561
+  },
+  "S2": {
+   "amp": 36.87777,
+   "phase": 103.125
+  },
+  "SA": {
+   "amp": 2.38539,
+   "phase": -37.698
+  },
+  "SSA": {
+   "amp": 0.41176,
+   "phase": -179.611
+  },
+  "T2": {
+   "amp": 1.83119,
+   "phase": 94.761
+  },
+  "Z0": {
+   "amp": 182.2,
+   "phase": 0
+  }
+ }
+}

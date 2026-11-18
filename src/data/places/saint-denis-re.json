@@ -1,0 +1,94 @@
+{
+ "id": "saint-denis-re",
+ "name_en": "Saint-Denis (Réunion)",
+ "name_ar": "سان دوني (لا ريونيون)",
+ "country": "RE",
+ "lat": -20.88,
+ "lon": 55.45,
+ "timezone": "Indian/Reunion",
+ "grid": {
+  "lat": -20.875,
+  "lon": 55.375,
+  "distance_km": 7.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.60025,
+   "phase": -108.775
+  },
+  "J1": {
+   "amp": 0.46945,
+   "phase": 105.421
+  },
+  "K1": {
+   "amp": 4.61311,
+   "phase": 82.098
+  },
+  "K2": {
+   "amp": 2.83158,
+   "phase": -70.201
+  },
+  "M2": {
+   "amp": 16.40945,
+   "phase": -79.76
+  },
+  "M4": {
+   "amp": 0.46725,
+   "phase": -44.537
+  },
+  "MF": {
+   "amp": 0.84548,
+   "phase": 7.521
+  },
+  "MM": {
+   "amp": 0.55968,
+   "phase": 20.484
+  },
+  "N2": {
+   "amp": 4.73536,
+   "phase": -83.168
+  },
+  "O1": {
+   "amp": 3.596,
+   "phase": 43.164
+  },
+  "P1": {
+   "amp": 1.80682,
+   "phase": 79.461
+  },
+  "Q1": {
+   "amp": 0.51782,
+   "phase": 2.455
+  },
+  "S1": {
+   "amp": 0.83421,
+   "phase": 93.421
+  },
+  "S2": {
+   "amp": 10.44344,
+   "phase": -71.096
+  },
+  "SA": {
+   "amp": 0.9982,
+   "phase": 64.492
+  },
+  "SSA": {
+   "amp": 0.33994,
+   "phase": -0.493
+  },
+  "T2": {
+   "amp": 0.23711,
+   "phase": -83.458
+  },
+  "Z0": {
+   "amp": 42.1,
+   "phase": 0
+  }
+ }
+}

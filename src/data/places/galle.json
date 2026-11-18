@@ -1,0 +1,94 @@
+{
+ "id": "galle",
+ "name_en": "Galle",
+ "name_ar": "غالي",
+ "country": "LK",
+ "lat": 6.03,
+ "lon": 80.21,
+ "timezone": "Asia/Colombo",
+ "grid": {
+  "lat": 6,
+  "lon": 80.25,
+  "distance_km": 5.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.43934,
+   "phase": -85.361
+  },
+  "J1": {
+   "amp": 0.53414,
+   "phase": -52.315
+  },
+  "K1": {
+   "amp": 4.86114,
+   "phase": -60.137
+  },
+  "K2": {
+   "amp": 2.99565,
+   "phase": -66.946
+  },
+  "M2": {
+   "amp": 15.68537,
+   "phase": -106.09
+  },
+  "M4": {
+   "amp": 0.45566,
+   "phase": -118.59
+  },
+  "MF": {
+   "amp": 1.92625,
+   "phase": 15.615
+  },
+  "MM": {
+   "amp": 0.66283,
+   "phase": 6.688
+  },
+  "N2": {
+   "amp": 1.92799,
+   "phase": -106.013
+  },
+  "O1": {
+   "amp": 1.4276,
+   "phase": -19.065
+  },
+  "P1": {
+   "amp": 1.55761,
+   "phase": -69.358
+  },
+  "Q1": {
+   "amp": 0.81136,
+   "phase": 3.179
+  },
+  "S1": {
+   "amp": 0.75189,
+   "phase": -69.404
+  },
+  "S2": {
+   "amp": 11.80092,
+   "phase": -70.213
+  },
+  "SA": {
+   "amp": 4.16969,
+   "phase": 22.4
+  },
+  "SSA": {
+   "amp": 0.54421,
+   "phase": -9.229
+  },
+  "T2": {
+   "amp": 0.59817,
+   "phase": -106.476
+  },
+  "Z0": {
+   "amp": 36.2,
+   "phase": 0
+  }
+ }
+}

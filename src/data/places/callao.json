@@ -1,0 +1,94 @@
+{
+ "id": "callao",
+ "name_en": "Callao (Lima)",
+ "name_ar": "كالاو (ليما)",
+ "country": "PE",
+ "lat": -12.05,
+ "lon": -77.15,
+ "timezone": "America/Lima",
+ "grid": {
+  "lat": -12.125,
+  "lon": -77.125,
+  "distance_km": 8.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.84429,
+   "phase": -73.209
+  },
+  "J1": {
+   "amp": 1.01293,
+   "phase": 34.323
+  },
+  "K1": {
+   "amp": 14.49066,
+   "phase": 29.685
+  },
+  "K2": {
+   "amp": 2.56355,
+   "phase": -26.059
+  },
+  "M2": {
+   "amp": 23.06694,
+   "phase": -40.598
+  },
+  "M4": {
+   "amp": 0.25421,
+   "phase": -72.659
+  },
+  "MF": {
+   "amp": 1.11388,
+   "phase": 21.77
+  },
+  "MM": {
+   "amp": 0.30398,
+   "phase": 46.564
+  },
+  "N2": {
+   "amp": 6.90754,
+   "phase": -71.569
+  },
+  "O1": {
+   "amp": 7.33933,
+   "phase": -14.598
+  },
+  "P1": {
+   "amp": 4.07666,
+   "phase": 28.43
+  },
+  "Q1": {
+   "amp": 0.92378,
+   "phase": -46.362
+  },
+  "S1": {
+   "amp": 0.60956,
+   "phase": 179.038
+  },
+  "S2": {
+   "amp": 7.90349,
+   "phase": -30.018
+  },
+  "SA": {
+   "amp": 0.69404,
+   "phase": 92.013
+  },
+  "SSA": {
+   "amp": 0.60127,
+   "phase": -7.376
+  },
+  "T2": {
+   "amp": 0.40411,
+   "phase": -57.928
+  },
+  "Z0": {
+   "amp": 55.4,
+   "phase": 0
+  }
+ }
+}

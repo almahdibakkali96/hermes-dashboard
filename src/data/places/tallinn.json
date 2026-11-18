@@ -1,0 +1,94 @@
+{
+ "id": "tallinn",
+ "name_en": "Tallinn",
+ "name_ar": "تالين",
+ "country": "EE",
+ "lat": 59.45,
+ "lon": 24.75,
+ "timezone": "Europe/Tallinn",
+ "grid": {
+  "lat": 59.5,
+  "lon": 24.75,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.38657,
+   "phase": -70.25
+  },
+  "J1": {
+   "amp": 0.79653,
+   "phase": 46.814
+  },
+  "K1": {
+   "amp": 1.65818,
+   "phase": -78.712
+  },
+  "K2": {
+   "amp": 0.46264,
+   "phase": -32.736
+  },
+  "M2": {
+   "amp": 0.2053,
+   "phase": -113.769
+  },
+  "M4": {
+   "amp": 0.4547,
+   "phase": 130.698
+  },
+  "MF": {
+   "amp": 0.43729,
+   "phase": -76.075
+  },
+  "MM": {
+   "amp": 0.07998,
+   "phase": -14.665
+  },
+  "N2": {
+   "amp": 0.58185,
+   "phase": -59.466
+  },
+  "O1": {
+   "amp": 1.85329,
+   "phase": -49.652
+  },
+  "P1": {
+   "amp": 0.84312,
+   "phase": -68.96
+  },
+  "Q1": {
+   "amp": 0.54707,
+   "phase": -68.816
+  },
+  "S1": {
+   "amp": 1.59972,
+   "phase": -27.413
+  },
+  "S2": {
+   "amp": 1.04003,
+   "phase": 161.564
+  },
+  "SA": {
+   "amp": 4.99707,
+   "phase": -17.245
+  },
+  "SSA": {
+   "amp": 0.38995,
+   "phase": -114.94
+  },
+  "T2": {
+   "amp": 0.38919,
+   "phase": 98.904
+  },
+  "Z0": {
+   "amp": 13.5,
+   "phase": 0
+  }
+ }
+}

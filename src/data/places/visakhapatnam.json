@@ -1,0 +1,94 @@
+{
+ "id": "visakhapatnam",
+ "name_en": "Visakhapatnam",
+ "name_ar": "فيساخاباتنام",
+ "country": "IN",
+ "lat": 17.69,
+ "lon": 83.3,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 17.625,
+  "lon": 83.25,
+  "distance_km": 9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.54107,
+   "phase": 65.252
+  },
+  "J1": {
+   "amp": 0.83894,
+   "phase": -112.967
+  },
+  "K1": {
+   "amp": 11.31602,
+   "phase": -106.813
+  },
+  "K2": {
+   "amp": 5.3182,
+   "phase": 98.576
+  },
+  "M2": {
+   "amp": 45.66044,
+   "phase": 79.487
+  },
+  "M4": {
+   "amp": 0.25358,
+   "phase": 103.675
+  },
+  "MF": {
+   "amp": 1.58888,
+   "phase": 9.939
+  },
+  "MM": {
+   "amp": 0.70769,
+   "phase": -17.79
+  },
+  "N2": {
+   "amp": 10.28942,
+   "phase": 71.779
+  },
+  "O1": {
+   "amp": 4.01384,
+   "phase": -115.811
+  },
+  "P1": {
+   "amp": 3.20464,
+   "phase": -104.726
+  },
+  "Q1": {
+   "amp": 0.19554,
+   "phase": -113.415
+  },
+  "S1": {
+   "amp": 0.67901,
+   "phase": -57.081
+  },
+  "S2": {
+   "amp": 19.77313,
+   "phase": 107.653
+  },
+  "SA": {
+   "amp": 1.97722,
+   "phase": -49.772
+  },
+  "SSA": {
+   "amp": 0.17721,
+   "phase": -98.393
+  },
+  "T2": {
+   "amp": 0.89482,
+   "phase": 172.572
+  },
+  "Z0": {
+   "amp": 88.9,
+   "phase": 0
+  }
+ }
+}

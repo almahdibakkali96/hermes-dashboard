@@ -1,0 +1,94 @@
+{
+ "id": "osaka",
+ "name_en": "Osaka",
+ "name_ar": "أوساكا",
+ "country": "JP",
+ "lat": 34.65,
+ "lon": 135.42,
+ "timezone": "Asia/Tokyo",
+ "grid": {
+  "lat": 34.625,
+  "lon": 135.375,
+  "distance_km": 5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.16846,
+   "phase": -57.825
+  },
+  "J1": {
+   "amp": 1.49626,
+   "phase": 167.072
+  },
+  "K1": {
+   "amp": 23.49062,
+   "phase": 55.623
+  },
+  "K2": {
+   "amp": 8.49067,
+   "phase": -65.915
+  },
+  "M2": {
+   "amp": 48.75589,
+   "phase": -82.048
+  },
+  "M4": {
+   "amp": 8.91906,
+   "phase": 92.319
+  },
+  "MF": {
+   "amp": 0.70633,
+   "phase": 154.854
+  },
+  "MM": {
+   "amp": 0.53903,
+   "phase": -30.878
+  },
+  "N2": {
+   "amp": 10.63832,
+   "phase": -77.809
+  },
+  "O1": {
+   "amp": 19.57408,
+   "phase": 31.78
+  },
+  "P1": {
+   "amp": 8.03115,
+   "phase": 50.999
+  },
+  "Q1": {
+   "amp": 3.19631,
+   "phase": 37.239
+  },
+  "S1": {
+   "amp": 2.17944,
+   "phase": -34.826
+  },
+  "S2": {
+   "amp": 20.90378,
+   "phase": -56.807
+  },
+  "SA": {
+   "amp": 6.08493,
+   "phase": -97.951
+  },
+  "SSA": {
+   "amp": 0.2308,
+   "phase": 155.977
+  },
+  "T2": {
+   "amp": 2.41098,
+   "phase": -60.616
+  },
+  "Z0": {
+   "amp": 139.7,
+   "phase": 0
+  }
+ }
+}

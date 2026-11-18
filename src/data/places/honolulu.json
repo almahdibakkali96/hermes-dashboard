@@ -1,0 +1,94 @@
+{
+ "id": "honolulu",
+ "name_en": "Honolulu",
+ "name_ar": "هونولولو",
+ "country": "US",
+ "lat": 21.3,
+ "lon": -157.86,
+ "timezone": "Pacific/Honolulu",
+ "grid": {
+  "lat": 21.25,
+  "lon": -157.875,
+  "distance_km": 5.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.44081,
+   "phase": 23.804
+  },
+  "J1": {
+   "amp": 1.11801,
+   "phase": -158.586
+  },
+  "K1": {
+   "amp": 15.0537,
+   "phase": -132.447
+  },
+  "K2": {
+   "amp": 1.55612,
+   "phase": 44.165
+  },
+  "M2": {
+   "amp": 17.16438,
+   "phase": 45.874
+  },
+  "M4": {
+   "amp": 0.22379,
+   "phase": -72.993
+  },
+  "MF": {
+   "amp": 0.67779,
+   "phase": 39.258
+  },
+  "MM": {
+   "amp": 0.50388,
+   "phase": 13.716
+  },
+  "N2": {
+   "amp": 3.03956,
+   "phase": 41.327
+  },
+  "O1": {
+   "amp": 8.33414,
+   "phase": -141.664
+  },
+  "P1": {
+   "amp": 4.70404,
+   "phase": -131.669
+  },
+  "Q1": {
+   "amp": 1.26104,
+   "phase": -154.673
+  },
+  "S1": {
+   "amp": 0.25986,
+   "phase": 13.962
+  },
+  "S2": {
+   "amp": 6.60537,
+   "phase": 48.872
+  },
+  "SA": {
+   "amp": 1.44151,
+   "phase": -91.555
+  },
+  "SSA": {
+   "amp": 0.44155,
+   "phase": 7.874
+  },
+  "T2": {
+   "amp": 0.23384,
+   "phase": 160.585
+  },
+  "Z0": {
+   "amp": 41.9,
+   "phase": 0
+  }
+ }
+}

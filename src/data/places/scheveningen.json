@@ -1,0 +1,94 @@
+{
+ "id": "scheveningen",
+ "name_en": "The Hague (Scheveningen)",
+ "name_ar": "لاهاي (شيفنينغن)",
+ "country": "NL",
+ "lat": 52.11,
+ "lon": 4.26,
+ "timezone": "Europe/Amsterdam",
+ "grid": {
+  "lat": 52.125,
+  "lon": 4.25,
+  "distance_km": 1.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.65229,
+   "phase": 19.856
+  },
+  "J1": {
+   "amp": 0.93185,
+   "phase": 70.177
+  },
+  "K1": {
+   "amp": 8.55254,
+   "phase": -19.258
+  },
+  "K2": {
+   "amp": 6.2887,
+   "phase": 129.123
+  },
+  "M2": {
+   "amp": 75.95762,
+   "phase": 67.85
+  },
+  "M4": {
+   "amp": 21.28814,
+   "phase": 108.487
+  },
+  "MF": {
+   "amp": 0.22391,
+   "phase": 54.316
+  },
+  "MM": {
+   "amp": 1.80508,
+   "phase": 63.034
+  },
+  "N2": {
+   "amp": 11.05386,
+   "phase": 41.476
+  },
+  "O1": {
+   "amp": 11.66549,
+   "phase": 176.789
+  },
+  "P1": {
+   "amp": 4.48217,
+   "phase": -31.35
+  },
+  "Q1": {
+   "amp": 3.92524,
+   "phase": 119.371
+  },
+  "S1": {
+   "amp": 0.79937,
+   "phase": 48.187
+  },
+  "S2": {
+   "amp": 18.19952,
+   "phase": 128.708
+  },
+  "SA": {
+   "amp": 4.13873,
+   "phase": -63.471
+  },
+  "SSA": {
+   "amp": 0.45098,
+   "phase": 178.925
+  },
+  "T2": {
+   "amp": 1.78769,
+   "phase": 132.053
+  },
+  "Z0": {
+   "amp": 119.4,
+   "phase": 0
+  }
+ }
+}

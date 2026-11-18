@@ -1,0 +1,94 @@
+{
+ "id": "brighton",
+ "name_en": "Brighton",
+ "name_ar": "برايتون",
+ "country": "GB",
+ "lat": 50.81,
+ "lon": -0.14,
+ "timezone": "Europe/London",
+ "grid": {
+  "lat": 50.75,
+  "lon": -0.125,
+  "distance_km": 6.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 5.08952,
+   "phase": -81.335
+  },
+  "J1": {
+   "amp": 0.65179,
+   "phase": -138.604
+  },
+  "K1": {
+   "amp": 7.52464,
+   "phase": 110.674
+  },
+  "K2": {
+   "amp": 20.16286,
+   "phase": 7.959
+  },
+  "M2": {
+   "amp": 216.12092,
+   "phase": -39.024
+  },
+  "M4": {
+   "amp": 5.72922,
+   "phase": -102.457
+  },
+  "MF": {
+   "amp": 1.74705,
+   "phase": -132.101
+  },
+  "MM": {
+   "amp": 1.98576,
+   "phase": -152.733
+  },
+  "N2": {
+   "amp": 41.6482,
+   "phase": -61.287
+  },
+  "O1": {
+   "amp": 2.20439,
+   "phase": -13.636
+  },
+  "P1": {
+   "amp": 1.65226,
+   "phase": 102.4
+  },
+  "Q1": {
+   "amp": 0.15081,
+   "phase": 119.567
+  },
+  "S1": {
+   "amp": 0.88274,
+   "phase": 43.192
+  },
+  "S2": {
+   "amp": 70.70246,
+   "phase": 10.123
+  },
+  "SA": {
+   "amp": 3.56025,
+   "phase": -60.068
+  },
+  "SSA": {
+   "amp": 0.49406,
+   "phase": -158.735
+  },
+  "T2": {
+   "amp": 5.01032,
+   "phase": -1.771
+  },
+  "Z0": {
+   "amp": 364.4,
+   "phase": 0
+  }
+ }
+}

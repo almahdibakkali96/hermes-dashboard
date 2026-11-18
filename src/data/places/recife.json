@@ -1,0 +1,94 @@
+{
+ "id": "recife",
+ "name_en": "Recife",
+ "name_ar": "ريسيفي",
+ "country": "BR",
+ "lat": -8.06,
+ "lon": -34.87,
+ "timezone": "America/Recife",
+ "grid": {
+  "lat": -8.125,
+  "lon": -34.875,
+  "distance_km": 7.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.18641,
+   "phase": -171.54
+  },
+  "J1": {
+   "amp": 0.41749,
+   "phase": -80.633
+  },
+  "K1": {
+   "amp": 4.22106,
+   "phase": -91.691
+  },
+  "K2": {
+   "amp": 7.85586,
+   "phase": -146.846
+  },
+  "M2": {
+   "amp": 76.61298,
+   "phase": -160.952
+  },
+  "M4": {
+   "amp": 0.63448,
+   "phase": 3.854
+  },
+  "MF": {
+   "amp": 1.79349,
+   "phase": 3.396
+  },
+  "MM": {
+   "amp": 0.62657,
+   "phase": -7.474
+  },
+  "N2": {
+   "amp": 15.65379,
+   "phase": -170.729
+  },
+  "O1": {
+   "amp": 5.1666,
+   "phase": 178.182
+  },
+  "P1": {
+   "amp": 1.43583,
+   "phase": -95.434
+  },
+  "Q1": {
+   "amp": 1.5421,
+   "phase": 140.373
+  },
+  "S1": {
+   "amp": 0.31324,
+   "phase": 116.427
+  },
+  "S2": {
+   "amp": 27.59848,
+   "phase": -143.649
+  },
+  "SA": {
+   "amp": 0.64355,
+   "phase": 135.155
+  },
+  "SSA": {
+   "amp": 0.66136,
+   "phase": -0.733
+  },
+  "T2": {
+   "amp": 1.61016,
+   "phase": -149.47
+  },
+  "Z0": {
+   "amp": 133.8,
+   "phase": 0
+  }
+ }
+}

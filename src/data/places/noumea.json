@@ -1,0 +1,94 @@
+{
+ "id": "noumea",
+ "name_en": "Nouméa",
+ "name_ar": "نوميا",
+ "country": "NC",
+ "lat": -22.28,
+ "lon": 166.44,
+ "timezone": "Pacific/Noumea",
+ "grid": {
+  "lat": -22.25,
+  "lon": 166.5,
+  "distance_km": 7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.8154,
+   "phase": -100.816
+  },
+  "J1": {
+   "amp": 0.83154,
+   "phase": 42.821
+  },
+  "K1": {
+   "amp": 14.26143,
+   "phase": 27.892
+  },
+  "K2": {
+   "amp": 3.61192,
+   "phase": -67.097
+  },
+  "M2": {
+   "amp": 39.18923,
+   "phase": -94.756
+  },
+  "M4": {
+   "amp": 0.25501,
+   "phase": 29.879
+  },
+  "MF": {
+   "amp": 0.48638,
+   "phase": -4.471
+  },
+  "MM": {
+   "amp": 0.34784,
+   "phase": 34.784
+  },
+  "N2": {
+   "amp": 6.0863,
+   "phase": -106.632
+  },
+  "O1": {
+   "amp": 6.62104,
+   "phase": 1.221
+  },
+  "P1": {
+   "amp": 4.56307,
+   "phase": 23.599
+  },
+  "Q1": {
+   "amp": 1.15583,
+   "phase": -38.59
+  },
+  "S1": {
+   "amp": 1.34217,
+   "phase": -67.799
+  },
+  "S2": {
+   "amp": 13.06847,
+   "phase": -58.408
+  },
+  "SA": {
+   "amp": 0.52977,
+   "phase": 8.955
+  },
+  "SSA": {
+   "amp": 0.49152,
+   "phase": -4.669
+  },
+  "T2": {
+   "amp": 0.83187,
+   "phase": -65.819
+  },
+  "Z0": {
+   "amp": 81.3,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "salvador",
+ "name_en": "Salvador",
+ "name_ar": "سلفادور",
+ "country": "BR",
+ "lat": -12.97,
+ "lon": -38.52,
+ "timezone": "America/Bahia",
+ "grid": {
+  "lat": -12.875,
+  "lon": -38.5,
+  "distance_km": 10.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.28346,
+   "phase": -179.154
+  },
+  "J1": {
+   "amp": 0.09594,
+   "phase": -64.022
+  },
+  "K1": {
+   "amp": 3.86097,
+   "phase": -105.921
+  },
+  "K2": {
+   "amp": 8.71886,
+   "phase": -154.594
+  },
+  "M2": {
+   "amp": 77.79015,
+   "phase": -164.507
+  },
+  "M4": {
+   "amp": 2.26506,
+   "phase": 27.144
+  },
+  "MF": {
+   "amp": 1.41711,
+   "phase": -1.736
+  },
+  "MM": {
+   "amp": 0.94538,
+   "phase": 0.706
+  },
+  "N2": {
+   "amp": 13.62465,
+   "phase": -171.587
+  },
+  "O1": {
+   "amp": 6.36196,
+   "phase": 165.685
+  },
+  "P1": {
+   "amp": 0.99227,
+   "phase": -112.856
+  },
+  "Q1": {
+   "amp": 1.71377,
+   "phase": 139.823
+  },
+  "S1": {
+   "amp": 1.74362,
+   "phase": 11.379
+  },
+  "S2": {
+   "amp": 30.93298,
+   "phase": -150.332
+  },
+  "SA": {
+   "amp": 1.41532,
+   "phase": 123.009
+  },
+  "SSA": {
+   "amp": 0.52969,
+   "phase": 3.126
+  },
+  "T2": {
+   "amp": 1.81937,
+   "phase": -143.426
+  },
+  "Z0": {
+   "amp": 137.9,
+   "phase": 0
+  }
+ }
+}

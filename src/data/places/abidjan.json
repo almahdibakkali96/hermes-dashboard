@@ -1,0 +1,94 @@
+{
+ "id": "abidjan",
+ "name_en": "Abidjan",
+ "name_ar": "أبيدجان",
+ "country": "CI",
+ "lat": 5.25,
+ "lon": -4,
+ "timezone": "Africa/Abidjan",
+ "grid": {
+  "lat": 5.25,
+  "lon": -4,
+  "distance_km": 0
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.82045,
+   "phase": 101.645
+  },
+  "J1": {
+   "amp": 0.80622,
+   "phase": -6.283
+  },
+  "K1": {
+   "amp": 12.00097,
+   "phase": -8.231
+  },
+  "K2": {
+   "amp": 4.00703,
+   "phase": 144.195
+  },
+  "M2": {
+   "amp": 38.47502,
+   "phase": 123.066
+  },
+  "M4": {
+   "amp": 0.20048,
+   "phase": 18.745
+  },
+  "MF": {
+   "amp": 1.88352,
+   "phase": -3.406
+  },
+  "MM": {
+   "amp": 0.76802,
+   "phase": -3.854
+  },
+  "N2": {
+   "amp": 8.95041,
+   "phase": 117.45
+  },
+  "O1": {
+   "amp": 1.87345,
+   "phase": -47.563
+  },
+  "P1": {
+   "amp": 3.26959,
+   "phase": -12.543
+  },
+  "Q1": {
+   "amp": 0.64828,
+   "phase": 74.316
+  },
+  "S1": {
+   "amp": 0.87738,
+   "phase": 107.709
+  },
+  "S2": {
+   "amp": 13.81815,
+   "phase": 145.726
+  },
+  "SA": {
+   "amp": 2.53138,
+   "phase": 22.879
+  },
+  "SSA": {
+   "amp": 0.19845,
+   "phase": 9.862
+  },
+  "T2": {
+   "amp": 0.86576,
+   "phase": 161.095
+  },
+  "Z0": {
+   "amp": 78.5,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "zamboanga",
+ "name_en": "Zamboanga",
+ "name_ar": "زامبوانغا",
+ "country": "PH",
+ "lat": 6.91,
+ "lon": 122.07,
+ "timezone": "Asia/Manila",
+ "grid": {
+  "lat": 6.875,
+  "lon": 122.125,
+  "distance_km": 7.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.69441,
+   "phase": -94.033
+  },
+  "J1": {
+   "amp": 0.81832,
+   "phase": 137.39
+  },
+  "K1": {
+   "amp": 19.167,
+   "phase": 164.525
+  },
+  "K2": {
+   "amp": 7.6168,
+   "phase": -24.976
+  },
+  "M2": {
+   "amp": 45.56568,
+   "phase": -61.384
+  },
+  "M4": {
+   "amp": 1.7841,
+   "phase": 62.537
+  },
+  "MF": {
+   "amp": 0.93504,
+   "phase": 10.797
+  },
+  "MM": {
+   "amp": 0.57061,
+   "phase": 19.175
+  },
+  "N2": {
+   "amp": 6.86537,
+   "phase": -71.945
+  },
+  "O1": {
+   "amp": 16.90718,
+   "phase": 141.745
+  },
+  "P1": {
+   "amp": 5.9614,
+   "phase": 163.861
+  },
+  "Q1": {
+   "amp": 3.12155,
+   "phase": 126.915
+  },
+  "S1": {
+   "amp": 0.95038,
+   "phase": -7.54
+  },
+  "S2": {
+   "amp": 27.5739,
+   "phase": -19.525
+  },
+  "SA": {
+   "amp": 1.25341,
+   "phase": -146.202
+  },
+  "SSA": {
+   "amp": 0.44591,
+   "phase": 4.262
+  },
+  "T2": {
+   "amp": 1.16663,
+   "phase": -18.318
+  },
+  "Z0": {
+   "amp": 96.2,
+   "phase": 0
+  }
+ }
+}

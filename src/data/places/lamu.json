@@ -1,0 +1,94 @@
+{
+ "id": "lamu",
+ "name_en": "Lamu",
+ "name_ar": "لامو",
+ "country": "KE",
+ "lat": -2.27,
+ "lon": 40.9,
+ "timezone": "Africa/Nairobi",
+ "grid": {
+  "lat": -2.25,
+  "lon": 41,
+  "distance_km": 11.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.80991,
+   "phase": -19.374
+  },
+  "J1": {
+   "amp": 1.36944,
+   "phase": 13.683
+  },
+  "K1": {
+   "amp": 19.91589,
+   "phase": -6.476
+  },
+  "K2": {
+   "amp": 13.16473,
+   "phase": 59.864
+  },
+  "M2": {
+   "amp": 94.95617,
+   "phase": 25.184
+  },
+  "M4": {
+   "amp": 0.62134,
+   "phase": 174.471
+  },
+  "MF": {
+   "amp": 1.17289,
+   "phase": 4.121
+  },
+  "MM": {
+   "amp": 0.66127,
+   "phase": -8.311
+  },
+  "N2": {
+   "amp": 17.45503,
+   "phase": 3.102
+  },
+  "O1": {
+   "amp": 11.67886,
+   "phase": -1.576
+  },
+  "P1": {
+   "amp": 5.79721,
+   "phase": -4.209
+  },
+  "Q1": {
+   "amp": 2.55313,
+   "phase": -14.456
+  },
+  "S1": {
+   "amp": 2.16916,
+   "phase": 104.51
+  },
+  "S2": {
+   "amp": 47.11893,
+   "phase": 63.257
+  },
+  "SA": {
+   "amp": 0.81702,
+   "phase": 116.101
+  },
+  "SSA": {
+   "amp": 0.82771,
+   "phase": 14.26
+  },
+  "T2": {
+   "amp": 3.39497,
+   "phase": 59.187
+  },
+  "Z0": {
+   "amp": 180.8,
+   "phase": 0
+  }
+ }
+}

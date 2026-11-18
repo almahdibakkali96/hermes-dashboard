@@ -1,0 +1,94 @@
+{
+ "id": "acapulco",
+ "name_en": "Acapulco",
+ "name_ar": "أكابولكو",
+ "country": "MX",
+ "lat": 16.85,
+ "lon": -99.88,
+ "timezone": "America/Mexico_City",
+ "grid": {
+  "lat": 16.75,
+  "lon": -99.875,
+  "distance_km": 11.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.61854,
+   "phase": 165.365
+  },
+  "J1": {
+   "amp": 0.67213,
+   "phase": 144.194
+  },
+  "K1": {
+   "amp": 11.51798,
+   "phase": 143.018
+  },
+  "K2": {
+   "amp": 1.8554,
+   "phase": 58.66
+  },
+  "M2": {
+   "amp": 18.90363,
+   "phase": -126.911
+  },
+  "M4": {
+   "amp": 0.17911,
+   "phase": -97.361
+  },
+  "MF": {
+   "amp": 1.13342,
+   "phase": 37.409
+  },
+  "MM": {
+   "amp": 0.43416,
+   "phase": -8.684
+  },
+  "N2": {
+   "amp": 5.01757,
+   "phase": -177.255
+  },
+  "O1": {
+   "amp": 8.75573,
+   "phase": 148.514
+  },
+  "P1": {
+   "amp": 3.50336,
+   "phase": 142.009
+  },
+  "Q1": {
+   "amp": 2.13363,
+   "phase": 145.684
+  },
+  "S1": {
+   "amp": 1.4775,
+   "phase": 160.99
+  },
+  "S2": {
+   "amp": 7.65189,
+   "phase": 56.345
+  },
+  "SA": {
+   "amp": 2.81048,
+   "phase": -110.384
+  },
+  "SSA": {
+   "amp": 0.82332,
+   "phase": -17.512
+  },
+  "T2": {
+   "amp": 1.02791,
+   "phase": 29.442
+  },
+  "Z0": {
+   "amp": 52.3,
+   "phase": 0
+  }
+ }
+}

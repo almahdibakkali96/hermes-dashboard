@@ -1,0 +1,94 @@
+{
+ "id": "cairns",
+ "name_en": "Cairns",
+ "name_ar": "كيرنز",
+ "country": "AU",
+ "lat": -16.92,
+ "lon": 145.78,
+ "timezone": "Australia/Brisbane",
+ "grid": {
+  "lat": -16.875,
+  "lon": 145.875,
+  "distance_km": 11.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.61546,
+   "phase": -39.919
+  },
+  "J1": {
+   "amp": 1.83511,
+   "phase": 50.829
+  },
+  "K1": {
+   "amp": 31.21231,
+   "phase": 39.59
+  },
+  "K2": {
+   "amp": 8.95311,
+   "phase": -60.358
+  },
+  "M2": {
+   "amp": 53.99697,
+   "phase": -15.599
+  },
+  "M4": {
+   "amp": 0.5747,
+   "phase": -132.938
+  },
+  "MF": {
+   "amp": 1.11997,
+   "phase": 5.215
+  },
+  "MM": {
+   "amp": 0.78964,
+   "phase": 37.821
+  },
+  "N2": {
+   "amp": 18.5115,
+   "phase": -32.412
+  },
+  "O1": {
+   "amp": 15.15378,
+   "phase": 13.031
+  },
+  "P1": {
+   "amp": 8.51174,
+   "phase": 37.046
+  },
+  "Q1": {
+   "amp": 2.4829,
+   "phase": -7.589
+  },
+  "S1": {
+   "amp": 0.76539,
+   "phase": -31.897
+  },
+  "S2": {
+   "amp": 31.30194,
+   "phase": -55.459
+  },
+  "SA": {
+   "amp": 0.99923,
+   "phase": 6.119
+  },
+  "SSA": {
+   "amp": 0.44987,
+   "phase": -0.816
+  },
+  "T2": {
+   "amp": 3.58632,
+   "phase": -90.663
+  },
+  "Z0": {
+   "amp": 146.3,
+   "phase": 0
+  }
+ }
+}

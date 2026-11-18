@@ -2,7 +2,7 @@
 // Homepage map of every port, in the brand's map style (public/map/land.svg, the Reels' look): each dot shows whether
 // the water is rising or falling right now, or today's fishing rating; tabs zoom to a sea; a tap opens the port's card.
 // Drawn here (dots are plain links, so it works and is crawlable without JS); src/scripts/ports-map.ts adds the rest.
-import { arabPlaces } from '../lib/regions';
+import { allPlaces, isWorld, zoneOf, zoneNames, type Zone } from '../lib/regions';
 import { PROJ, project } from '../lib/mapProjection';
 import { portSea, seas, type SeaId } from '../lib/seaNames';
 import { countryName } from '../lib/countries';
@@ -14,13 +14,17 @@ const DAY = 86400000;
 const now = new Date();
 type Place = { id: string; name_ar: string; country: string; lat: number; lon: number };
 
-// Bigger cities get their label first when names would overlap
+// Bigger cities get their label first when names would overlap (Arab ports first, then world cities)
 const MAJOR = ['casablanca', 'dubai', 'jeddah', 'alexandria', 'muscat', 'doha', 'kuwait-city', 'tunis', 'algiers', 'beirut',
   'dammam', 'manama', 'aden', 'tripoli-ly', 'abu-dhabi', 'agadir', 'tangier', 'nouakchott', 'djibouti', 'port-sudan', 'aqaba',
-  'benghazi', 'salalah', 'hurghada', 'port-said', 'sfax', 'oran', 'latakia', 'mogadishu', 'moroni', 'hodeidah', 'mukalla'];
+  'benghazi', 'salalah', 'hurghada', 'port-said', 'sfax', 'oran', 'latakia', 'mogadishu', 'moroni', 'hodeidah', 'mukalla',
+  'istanbul', 'new-york', 'sydney', 'tokyo', 'singapore', 'mumbai', 'cape-town', 'rio-de-janeiro', 'barcelona', 'marseille',
+  'miami', 'los-angeles', 'hong-kong', 'bali', 'male', 'karachi', 'lagos', 'dakar', 'lisbon', 'honolulu', 'auckland', 'piraeus',
+  'naples', 'brest', 'malaga', 'antalya', 'colombo', 'phuket', 'zanzibar', 'mombasa', 'jakarta', 'manila', 'busan', 'perth',
+  'cancun', 'havana', 'panama-city', 'callao', 'valparaiso', 'reykjavik', 'bergen', 'dublin', 'durban', 'kozhikode'];
 
-// Arab ports only: the map covers the Atlantic to Oman (world places have their own homepage list)
-const ports = await Promise.all((arabPlaces as Place[]).map(async p => {
+// Every place: Arab ports (seas tabs) and world places (continent tabs)
+const ports = await Promise.all((allPlaces as Place[]).map(async p => {
   const data = (await import(`../data/places/${p.id}.json`)).default;
   const cons = data.constituents as Record<string, Constituent>;
   const tz = getTimezoneOffset(data.timezone, now), day = portDay(now, tz);
@@ -28,7 +32,7 @@ const ports = await Promise.all((arabPlaces as Place[]).map(async p => {
   const [x, y] = project(p.lon, p.lat);
   const pr = MAJOR.indexOf(p.id);
   return {
-    id: p.id, name: p.name_ar, country: countryName(p.country), sea: portSea[p.id], x: +x.toFixed(1), y: +y.toFixed(1),
+    id: p.id, name: p.name_ar, country: countryName(p.country), sea: isWorld(p.id) ? zoneOf(p) : portSea[p.id], x: +x.toFixed(1), y: +y.toFixed(1),
     r: ratingsFrom(cons, day, 1, tz)[0].rating, pr: pr < 0 ? 99 : pr,
     // [minutes since epoch, 1 high | 0 low, local HH:MM]
     ex: ex.map(e => [Math.round(e.time.getTime() / 60000), e.type === 'high' ? 1 : 0, formatTime(e.time, tz)]),
@@ -39,8 +43,11 @@ const ports = await Promise.all((arabPlaces as Place[]).map(async p => {
 const box = (ps: typeof ports) => [Math.min(...ps.map(p => p.x)), Math.min(...ps.map(p => p.y)), Math.max(...ps.map(p => p.x)), Math.max(...ps.map(p => p.y))];
 const seaOrder: SeaId[] = ['atlantic', 'med', 'red', 'gulf', 'indian'];
 const tabNames: Record<SeaId, string> = { atlantic: 'الأطلسي', med: 'المتوسط', red: 'البحر الأحمر', gulf: 'الخليج', indian: 'بحر العرب' };
-const regions: Record<string, number[]> = { all: box(ports.filter(p => p.y < project(0, 8)[1])) };
+const arab = ports.filter(p => !isWorld(p.id));
+const zoneOrder: Zone[] = ['europe', 'africa', 'asia', 'americas', 'oceania'];
+const regions: Record<string, number[]> = { all: box(arab.filter(p => p.y < project(0, 8)[1])), world: box(ports) };
 for (const s of seaOrder) regions[s] = box(ports.filter(p => p.sea === s));
+for (const z of zoneOrder) regions[z] = box(ports.filter(p => p.sea === z));
 
 // First view (before the script fits it to the box): "all" at a wide aspect
 const fit = ([x0, y0, x1, y1]: number[], aspect: number) => {
@@ -54,14 +61,19 @@ const s0 = vb0[2] / 1000; // dot scale for a ~1000 px wide map
 
 // Faint lines every 10°, and the seas' names
 const grat: string[] = [];
-for (let lon = -20; lon <= 70; lon += 10) { const [x] = project(lon, 0); grat.push(`M${x.toFixed(1)} 0V${PROJ.H}`); }
-for (let lat = -10; lat <= 40; lat += 10) { const [, y] = project(0, lat); grat.push(`M0 ${y.toFixed(1)}H${PROJ.W}`); }
+for (let lon = -170; lon <= 170; lon += 10) { const [x] = project(lon, 0); grat.push(`M${x.toFixed(1)} 0V${PROJ.H}`); }
+for (let lat = -50; lat <= 70; lat += 10) { const [, y] = project(0, lat); grat.push(`M0 ${y.toFixed(1)}H${PROJ.W}`); }
 const seaLabels = [
   { t: 'المحيط الأطلسي', lon: -19.5, lat: 29, rot: 0 },
   { t: 'البحر الأبيض المتوسط', lon: 18.5, lat: 34.6, rot: 0 },
   { t: 'البحر الأحمر', lon: 37.6, lat: 21.6, rot: 60 },
   { t: 'الخليج العربي', lon: 51.3, lat: 27.6, rot: 25 },
   { t: 'بحر العرب', lon: 62, lat: 15.5, rot: 0 },
+  { t: 'المحيط الهندي', lon: 80, lat: -18, rot: 0 },
+  { t: 'المحيط الهادئ', lon: -140, lat: 5, rot: 0 },
+  { t: 'المحيط الهادئ', lon: 160, lat: 25, rot: 0 },
+  { t: 'المحيط الأطلسي', lon: -40, lat: 32, rot: 0 },
+  { t: 'المحيط الأطلسي', lon: -20, lat: -20, rot: 0 },
 ].map(l => { const [x, y] = project(l.lon, l.lat); return { ...l, x: +x.toFixed(1), y: +y.toFixed(1) }; });
 
 const cfg = { ports, regions, base: BASE };
@@ -70,8 +82,11 @@ const cfg = { ports, regions, base: BASE };
 <div class="pmap" data-ports-map>
   <div class="pmap-bar">
     <div class="pmap-tabs" role="group" aria-label="اختر البحر">
-      <button type="button" class="pmap-tab" data-region="all" aria-pressed="true">كل الموانئ</button>
+      <button type="button" class="pmap-tab" data-region="all" aria-pressed="true">العالم العربي</button>
       {seaOrder.map(s => <button type="button" class="pmap-tab" data-region={s} aria-pressed="false" style={`--sea:${seas[s].color}`}>{tabNames[s]}</button>)}
+      <span class="pmap-sep" aria-hidden="true"></span>
+      <button type="button" class="pmap-tab" data-region="world" aria-pressed="false">🌍 العالم كله</button>
+      {zoneOrder.map(z => <button type="button" class="pmap-tab" data-region={z} aria-pressed="false">{zoneNames[z]}</button>)}
     </div>
     <div class="pmap-modes" role="group" aria-label="ماذا تعرض النقاط">
       <button type="button" class="pmap-mode" data-mode="tide" aria-pressed="true">المد الآن</button>
@@ -80,7 +95,7 @@ const cfg = { ports, regions, base: BASE };
   </div>
 
   <div class="pmap-stage">
-    <svg class="pmap-svg" viewBox={vb0.join(' ')} preserveAspectRatio="xMidYMid meet" role="img" aria-label="خريطة الموانئ العربية">
+    <svg class="pmap-svg" viewBox={vb0.join(' ')} preserveAspectRatio="xMidYMid meet" role="img" aria-label="خريطة الموانئ العربية وحول العالم">
       <defs>
         <radialGradient id="pmap-glow" cx="0.55" cy="0.35" r="0.7"><stop offset="0" stop-color="#14506b" /><stop offset="1" stop-color="#0b2540" /></radialGradient>
       </defs>

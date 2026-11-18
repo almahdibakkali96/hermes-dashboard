@@ -1,0 +1,94 @@
+{
+ "id": "puntarenas",
+ "name_en": "Puntarenas",
+ "name_ar": "بونتاريناس",
+ "country": "CR",
+ "lat": 9.97,
+ "lon": -84.83,
+ "timezone": "America/Costa_Rica",
+ "grid": {
+  "lat": 10,
+  "lon": -84.875,
+  "distance_km": 6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.76267,
+   "phase": -176.146
+  },
+  "J1": {
+   "amp": 0.91524,
+   "phase": 45.81
+  },
+  "K1": {
+   "amp": 10.46746,
+   "phase": 76.821
+  },
+  "K2": {
+   "amp": 6.20407,
+   "phase": -55.403
+  },
+  "M2": {
+   "amp": 95.6026,
+   "phase": -117.416
+  },
+  "M4": {
+   "amp": 1.27958,
+   "phase": -117.718
+  },
+  "MF": {
+   "amp": 1.29084,
+   "phase": 2.957
+  },
+  "MM": {
+   "amp": 0.42261,
+   "phase": -55.54
+  },
+  "N2": {
+   "amp": 20.28872,
+   "phase": -150.441
+  },
+  "O1": {
+   "amp": 3.68851,
+   "phase": 104.924
+  },
+  "P1": {
+   "amp": 3.30097,
+   "phase": 78.812
+  },
+  "Q1": {
+   "amp": 0.56539,
+   "phase": 167.956
+  },
+  "S1": {
+   "amp": 1.60591,
+   "phase": 148.339
+  },
+  "S2": {
+   "amp": 23.87899,
+   "phase": -56.496
+  },
+  "SA": {
+   "amp": 1.85407,
+   "phase": -113.501
+  },
+  "SSA": {
+   "amp": 0.60316,
+   "phase": -31.878
+  },
+  "T2": {
+   "amp": 1.53136,
+   "phase": -36.414
+  },
+  "Z0": {
+   "amp": 157.9,
+   "phase": 0
+  }
+ }
+}

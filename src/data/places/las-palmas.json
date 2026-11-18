@@ -1,0 +1,94 @@
+{
+ "id": "las-palmas",
+ "name_en": "Las Palmas",
+ "name_ar": "لاس بالماس",
+ "country": "ES",
+ "lat": 28.14,
+ "lon": -15.42,
+ "timezone": "Atlantic/Canary",
+ "grid": {
+  "lat": 28.125,
+  "lon": -15.375,
+  "distance_km": 4.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.28427,
+   "phase": -1.015
+  },
+  "J1": {
+   "amp": 0.24571,
+   "phase": 69.951
+  },
+  "K1": {
+   "amp": 6.29032,
+   "phase": 38.615
+  },
+  "K2": {
+   "amp": 7.97554,
+   "phase": 50.194
+  },
+  "M2": {
+   "amp": 73.86037,
+   "phase": 30.236
+  },
+  "M4": {
+   "amp": 0.82894,
+   "phase": 108.934
+  },
+  "MF": {
+   "amp": 0.97374,
+   "phase": -5.489
+  },
+  "MM": {
+   "amp": 0.32493,
+   "phase": -69.546
+  },
+  "N2": {
+   "amp": 15.29186,
+   "phase": 16.558
+  },
+  "O1": {
+   "amp": 4.96671,
+   "phase": -65.202
+  },
+  "P1": {
+   "amp": 1.86397,
+   "phase": 34.859
+  },
+  "Q1": {
+   "amp": 1.57262,
+   "phase": -119.289
+  },
+  "S1": {
+   "amp": 0.25466,
+   "phase": -47.267
+  },
+  "S2": {
+   "amp": 28.44936,
+   "phase": 53.698
+  },
+  "SA": {
+   "amp": 1.82186,
+   "phase": -75.85
+  },
+  "SSA": {
+   "amp": 0.18728,
+   "phase": -10.404
+  },
+  "T2": {
+   "amp": 1.70042,
+   "phase": 56.766
+  },
+  "Z0": {
+   "amp": 132,
+   "phase": 0
+  }
+ }
+}

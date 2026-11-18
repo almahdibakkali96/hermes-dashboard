@@ -1,0 +1,94 @@
+{
+ "id": "suva",
+ "name_en": "Suva (Fiji)",
+ "name_ar": "سوفا (فيجي)",
+ "country": "FJ",
+ "lat": -18.14,
+ "lon": 178.42,
+ "timezone": "Pacific/Fiji",
+ "grid": {
+  "lat": -18.125,
+  "lon": 178.5,
+  "distance_km": 8.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.898,
+   "phase": 159.79
+  },
+  "J1": {
+   "amp": 0.44091,
+   "phase": 60.287
+  },
+  "K1": {
+   "amp": 9.41085,
+   "phase": 54.881
+  },
+  "K2": {
+   "amp": 2.47072,
+   "phase": -158.705
+  },
+  "M2": {
+   "amp": 54.33984,
+   "phase": -159.109
+  },
+  "M4": {
+   "amp": 0.29725,
+   "phase": -136.701
+  },
+  "MF": {
+   "amp": 0.95802,
+   "phase": 28.075
+  },
+  "MM": {
+   "amp": 0.35952,
+   "phase": 14.635
+  },
+  "N2": {
+   "amp": 12.90076,
+   "phase": 175.774
+  },
+  "O1": {
+   "amp": 4.74453,
+   "phase": 40.198
+  },
+  "P1": {
+   "amp": 2.6904,
+   "phase": 53.348
+  },
+  "Q1": {
+   "amp": 0.75011,
+   "phase": 24.531
+  },
+  "S1": {
+   "amp": 0.43458,
+   "phase": -117.941
+  },
+  "S2": {
+   "amp": 8.49984,
+   "phase": -145.355
+  },
+  "SA": {
+   "amp": 0.94341,
+   "phase": -48.572
+  },
+  "SSA": {
+   "amp": 0.55429,
+   "phase": 4.688
+  },
+  "T2": {
+   "amp": 0.24316,
+   "phase": -100.635
+  },
+  "Z0": {
+   "amp": 92.5,
+   "phase": 0
+  }
+ }
+}

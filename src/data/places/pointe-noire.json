@@ -1,0 +1,94 @@
+{
+ "id": "pointe-noire",
+ "name_en": "Pointe-Noire",
+ "name_ar": "بوانت نوار",
+ "country": "CG",
+ "lat": -4.78,
+ "lon": 11.84,
+ "timezone": "Africa/Brazzaville",
+ "grid": {
+  "lat": -4.75,
+  "lon": 11.75,
+  "distance_km": 10.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.93055,
+   "phase": 61.357
+  },
+  "J1": {
+   "amp": 0.54493,
+   "phase": -23.252
+  },
+  "K1": {
+   "amp": 10.02717,
+   "phase": 5.208
+  },
+  "K2": {
+   "amp": 4.58834,
+   "phase": 104.296
+  },
+  "M2": {
+   "amp": 50.84946,
+   "phase": 84.047
+  },
+  "M4": {
+   "amp": 0.62266,
+   "phase": -77.518
+  },
+  "MF": {
+   "amp": 1.65315,
+   "phase": -9.074
+  },
+  "MM": {
+   "amp": 0.73778,
+   "phase": -31.178
+  },
+  "N2": {
+   "amp": 10.16403,
+   "phase": 77.93
+  },
+  "O1": {
+   "amp": 1.18337,
+   "phase": -63.873
+  },
+  "P1": {
+   "amp": 2.9467,
+   "phase": -0.723
+  },
+  "Q1": {
+   "amp": 0.9363,
+   "phase": 135.803
+  },
+  "S1": {
+   "amp": 0.55471,
+   "phase": 81.264
+  },
+  "S2": {
+   "amp": 17.50072,
+   "phase": 108.962
+  },
+  "SA": {
+   "amp": 3.20655,
+   "phase": 3.057
+  },
+  "SSA": {
+   "amp": 0.66553,
+   "phase": 34.061
+  },
+  "T2": {
+   "amp": 1.23112,
+   "phase": 112.494
+  },
+  "Z0": {
+   "amp": 93.9,
+   "phase": 0
+  }
+ }
+}

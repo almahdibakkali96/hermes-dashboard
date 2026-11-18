@@ -1,0 +1,94 @@
+{
+ "id": "sihanoukville",
+ "name_en": "Sihanoukville",
+ "name_ar": "سيهانوكفيل",
+ "country": "KH",
+ "lat": 10.62,
+ "lon": 103.51,
+ "timezone": "Asia/Phnom_Penh",
+ "grid": {
+  "lat": 10.5,
+  "lon": 103.5,
+  "distance_km": 13.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.96462,
+   "phase": 124.912
+  },
+  "J1": {
+   "amp": 0.80792,
+   "phase": 29.636
+  },
+  "K1": {
+   "amp": 21.59215,
+   "phase": 13.152
+  },
+  "K2": {
+   "amp": 1.64765,
+   "phase": 140.621
+  },
+  "M2": {
+   "amp": 8.61115,
+   "phase": 145.291
+  },
+  "M4": {
+   "amp": 0.91858,
+   "phase": 133.036
+  },
+  "MF": {
+   "amp": 0.84139,
+   "phase": 53.804
+  },
+  "MM": {
+   "amp": 0.69808,
+   "phase": -5.684
+  },
+  "N2": {
+   "amp": 1.93502,
+   "phase": 141.062
+  },
+  "O1": {
+   "amp": 15.53684,
+   "phase": -18.13
+  },
+  "P1": {
+   "amp": 6.60184,
+   "phase": 19.137
+  },
+  "Q1": {
+   "amp": 3.14329,
+   "phase": -36.432
+  },
+  "S1": {
+   "amp": 1.24991,
+   "phase": -65.133
+  },
+  "S2": {
+   "amp": 4.20805,
+   "phase": -175.571
+  },
+  "SA": {
+   "amp": 10.42806,
+   "phase": 3.375
+  },
+  "SSA": {
+   "amp": 0.16767,
+   "phase": -90.957
+  },
+  "T2": {
+   "amp": 0.74417,
+   "phase": -47.189
+  },
+  "Z0": {
+   "amp": 77.3,
+   "phase": 0
+  }
+ }
+}

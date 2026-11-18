@@ -1,0 +1,94 @@
+{
+ "id": "venice",
+ "name_en": "Venice (Lido)",
+ "name_ar": "البندقية",
+ "country": "IT",
+ "lat": 45.4,
+ "lon": 12.38,
+ "timezone": "Europe/Rome",
+ "grid": {
+  "lat": 45.375,
+  "lon": 12.375,
+  "distance_km": 2.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.72786,
+   "phase": -45.884
+  },
+  "J1": {
+   "amp": 1.33611,
+   "phase": 119.508
+  },
+  "K1": {
+   "amp": 18.25494,
+   "phase": 64.08
+  },
+  "K2": {
+   "amp": 4.4395,
+   "phase": -101.039
+  },
+  "M2": {
+   "amp": 23.88287,
+   "phase": -100.827
+  },
+  "M4": {
+   "amp": 0.2428,
+   "phase": -11.279
+  },
+  "MF": {
+   "amp": 0.91329,
+   "phase": -149.643
+  },
+  "MM": {
+   "amp": 0.28829,
+   "phase": -179.973
+  },
+  "N2": {
+   "amp": 3.67495,
+   "phase": -109.462
+  },
+  "O1": {
+   "amp": 5.10555,
+   "phase": 49.838
+  },
+  "P1": {
+   "amp": 6.04554,
+   "phase": 53.455
+  },
+  "Q1": {
+   "amp": 1.68268,
+   "phase": 71.694
+  },
+  "S1": {
+   "amp": 2.01571,
+   "phase": 6.397
+  },
+  "S2": {
+   "amp": 13.99159,
+   "phase": -93.681
+  },
+  "SA": {
+   "amp": 3.57952,
+   "phase": -64.266
+  },
+  "SSA": {
+   "amp": 0.7183,
+   "phase": -172.851
+  },
+  "T2": {
+   "amp": 1.88626,
+   "phase": -67.03
+  },
+  "Z0": {
+   "amp": 69.7,
+   "phase": 0
+  }
+ }
+}

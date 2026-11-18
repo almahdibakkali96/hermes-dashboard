@@ -1,0 +1,94 @@
+{
+ "id": "auckland",
+ "name_en": "Auckland",
+ "name_ar": "أوكلاند",
+ "country": "NZ",
+ "lat": -36.84,
+ "lon": 174.77,
+ "timezone": "Pacific/Auckland",
+ "grid": {
+  "lat": -36.75,
+  "lon": 174.875,
+  "distance_km": 13.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.60274,
+   "phase": 161.275
+  },
+  "J1": {
+   "amp": 0.30419,
+   "phase": 6.679
+  },
+  "K1": {
+   "amp": 6.89877,
+   "phase": -5.809
+  },
+  "K2": {
+   "amp": 3.52342,
+   "phase": -100.898
+  },
+  "M2": {
+   "amp": 101.12308,
+   "phase": -145.581
+  },
+  "M4": {
+   "amp": 2.04342,
+   "phase": -83.813
+  },
+  "MF": {
+   "amp": 0.32168,
+   "phase": -110.266
+  },
+  "MM": {
+   "amp": 0.45004,
+   "phase": -152.229
+  },
+  "N2": {
+   "amp": 20.86385,
+   "phase": -174.291
+  },
+  "O1": {
+   "amp": 1.84504,
+   "phase": -48.167
+  },
+  "P1": {
+   "amp": 2.09731,
+   "phase": -10.182
+  },
+  "Q1": {
+   "amp": 0.2688,
+   "phase": -65.95
+  },
+  "S1": {
+   "amp": 0.7091,
+   "phase": -38.565
+  },
+  "S2": {
+   "amp": 14.8008,
+   "phase": -90.464
+  },
+  "SA": {
+   "amp": 2.55355,
+   "phase": 106.24
+  },
+  "SSA": {
+   "amp": 0.14576,
+   "phase": 157.945
+  },
+  "T2": {
+   "amp": 1.10901,
+   "phase": -51.869
+  },
+  "Z0": {
+   "amp": 156,
+   "phase": 0
+  }
+ }
+}

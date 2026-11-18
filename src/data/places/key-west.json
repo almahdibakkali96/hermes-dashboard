@@ -1,0 +1,94 @@
+{
+ "id": "key-west",
+ "name_en": "Key West",
+ "name_ar": "كي وست",
+ "country": "US",
+ "lat": 24.55,
+ "lon": -81.8,
+ "timezone": "America/New_York",
+ "grid": {
+  "lat": 24.5,
+  "lon": -81.75,
+  "distance_km": 7.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.6365,
+   "phase": 3.958
+  },
+  "J1": {
+   "amp": 0.50329,
+   "phase": -19.945
+  },
+  "K1": {
+   "amp": 8.36623,
+   "phase": -3.922
+  },
+  "K2": {
+   "amp": 1.3156,
+   "phase": 65.949
+  },
+  "M2": {
+   "amp": 18.19291,
+   "phase": 53.67
+  },
+  "M4": {
+   "amp": 0.63311,
+   "phase": -123.079
+  },
+  "MF": {
+   "amp": 1.04152,
+   "phase": -7.733
+  },
+  "MM": {
+   "amp": 0.60549,
+   "phase": -22.638
+  },
+  "N2": {
+   "amp": 3.73841,
+   "phase": 37.065
+  },
+  "O1": {
+   "amp": 8.88813,
+   "phase": -6.699
+  },
+  "P1": {
+   "amp": 2.4258,
+   "phase": -12.035
+  },
+  "Q1": {
+   "amp": 2.25579,
+   "phase": -14.791
+  },
+  "S1": {
+   "amp": 1.00871,
+   "phase": 43.678
+  },
+  "S2": {
+   "amp": 4.48685,
+   "phase": 70.073
+  },
+  "SA": {
+   "amp": 3.12685,
+   "phase": -93.414
+  },
+  "SSA": {
+   "amp": 0.21422,
+   "phase": 34.376
+  },
+  "T2": {
+   "amp": 0.69968,
+   "phase": 98.945
+  },
+  "Z0": {
+   "amp": 42.8,
+   "phase": 0
+  }
+ }
+}

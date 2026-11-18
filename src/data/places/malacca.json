@@ -1,0 +1,94 @@
+{
+ "id": "malacca",
+ "name_en": "Malacca",
+ "name_ar": "ملقا",
+ "country": "MY",
+ "lat": 2.19,
+ "lon": 102.24,
+ "timezone": "Asia/Kuala_Lumpur",
+ "grid": {
+  "lat": 2.125,
+  "lon": 102.25,
+  "distance_km": 7.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.87963,
+   "phase": 4.783
+  },
+  "J1": {
+   "amp": 1.91761,
+   "phase": -35.182
+  },
+  "K1": {
+   "amp": 11.92806,
+   "phase": 29.122
+  },
+  "K2": {
+   "amp": 8.76841,
+   "phase": 46.246
+  },
+  "M2": {
+   "amp": 63.46265,
+   "phase": 11.938
+  },
+  "M4": {
+   "amp": 3.64658,
+   "phase": -61.768
+  },
+  "MF": {
+   "amp": 1.27936,
+   "phase": -7.497
+  },
+  "MM": {
+   "amp": 1.41024,
+   "phase": 16.506
+  },
+  "N2": {
+   "amp": 10.60756,
+   "phase": 2.138
+  },
+  "O1": {
+   "amp": 21.0872,
+   "phase": 33.208
+  },
+  "P1": {
+   "amp": 3.32409,
+   "phase": -5.751
+  },
+  "Q1": {
+   "amp": 2.46865,
+   "phase": 5.526
+  },
+  "S1": {
+   "amp": 3.55763,
+   "phase": 91.365
+  },
+  "S2": {
+   "amp": 28.96958,
+   "phase": 51.126
+  },
+  "SA": {
+   "amp": 2.69912,
+   "phase": -64.489
+  },
+  "SSA": {
+   "amp": 0.37671,
+   "phase": -131.871
+  },
+  "T2": {
+   "amp": 1.99314,
+   "phase": 38.822
+  },
+  "Z0": {
+   "amp": 124.1,
+   "phase": 0
+  }
+ }
+}

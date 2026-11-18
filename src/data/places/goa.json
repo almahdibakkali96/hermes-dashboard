@@ -1,0 +1,94 @@
+{
+ "id": "goa",
+ "name_en": "Goa (Panaji)",
+ "name_ar": "غوا",
+ "country": "IN",
+ "lat": 15.5,
+ "lon": 73.8,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 15.5,
+  "lon": 73.75,
+  "distance_km": 5.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.3404,
+   "phase": 97.131
+  },
+  "J1": {
+   "amp": 2.06306,
+   "phase": -17.877
+  },
+  "K1": {
+   "amp": 31.43046,
+   "phase": -28.462
+  },
+  "K2": {
+   "amp": 5.02569,
+   "phase": 177.285
+  },
+  "M2": {
+   "amp": 53.78596,
+   "phase": 150.499
+  },
+  "M4": {
+   "amp": 0.9945,
+   "phase": 78.774
+  },
+  "MF": {
+   "amp": 1.27543,
+   "phase": 18.962
+  },
+  "MM": {
+   "amp": 1.0094,
+   "phase": 7.077
+  },
+  "N2": {
+   "amp": 13.15528,
+   "phase": 133.252
+  },
+  "O1": {
+   "amp": 15.74673,
+   "phase": -24.8
+  },
+  "P1": {
+   "amp": 9.23829,
+   "phase": -28.535
+  },
+  "Q1": {
+   "amp": 3.27006,
+   "phase": -17.005
+  },
+  "S1": {
+   "amp": 0.96523,
+   "phase": 99.946
+  },
+  "S2": {
+   "amp": 19.71909,
+   "phase": -174.637
+  },
+  "SA": {
+   "amp": 5.30516,
+   "phase": 33.69
+  },
+  "SSA": {
+   "amp": 0.45704,
+   "phase": -27.611
+  },
+  "T2": {
+   "amp": 1.81914,
+   "phase": 175.756
+  },
+  "Z0": {
+   "amp": 147.3,
+   "phase": 0
+  }
+ }
+}

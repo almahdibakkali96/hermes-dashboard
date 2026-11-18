@@ -1,0 +1,94 @@
+{
+ "id": "mazatlan",
+ "name_en": "Mazatlán",
+ "name_ar": "مازاتلان",
+ "country": "MX",
+ "lat": 23.21,
+ "lon": -106.42,
+ "timezone": "America/Mazatlan",
+ "grid": {
+  "lat": 23.25,
+  "lon": -106.5,
+  "distance_km": 9.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.19954,
+   "phase": 56.855
+  },
+  "J1": {
+   "amp": 1.08086,
+   "phase": -168.856
+  },
+  "K1": {
+   "amp": 20.98394,
+   "phase": 178.257
+  },
+  "K2": {
+   "amp": 7.33548,
+   "phase": 100.928
+  },
+  "M2": {
+   "amp": 35.10507,
+   "phase": 98.655
+  },
+  "M4": {
+   "amp": 0.52757,
+   "phase": -131.351
+  },
+  "MF": {
+   "amp": 0.62557,
+   "phase": 27.485
+  },
+  "MM": {
+   "amp": 0.2248,
+   "phase": 79.4
+  },
+  "N2": {
+   "amp": 8.21017,
+   "phase": 90.595
+  },
+  "O1": {
+   "amp": 14.6442,
+   "phase": 166.354
+  },
+  "P1": {
+   "amp": 6.90839,
+   "phase": 178.097
+  },
+  "Q1": {
+   "amp": 3.5823,
+   "phase": 166.116
+  },
+  "S1": {
+   "amp": 0.44328,
+   "phase": -126.532
+  },
+  "S2": {
+   "amp": 23.71249,
+   "phase": 102.52
+  },
+  "SA": {
+   "amp": 5.09642,
+   "phase": -106.845
+  },
+  "SSA": {
+   "amp": 0.52688,
+   "phase": -1.723
+  },
+  "T2": {
+   "amp": 1.80571,
+   "phase": 40.728
+  },
+  "Z0": {
+   "amp": 106.9,
+   "phase": 0
+  }
+ }
+}

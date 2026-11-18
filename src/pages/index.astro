@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 // Arab ports drive the homepage lists and counts; world places get their own section (src/lib/regions.ts)
-import { arabPlaces as placesIndex, allPlaces, worldPlaces } from '../lib/regions';
+import { arabPlaces as placesIndex, allPlaces, worldPlaces, zoneOf, zoneNames, type Zone } from '../lib/regions';
 import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
@@ -19,6 +19,7 @@ import {
 } from '../lib/tides';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const zones: Zone[] = ['europe', 'africa', 'asia', 'americas', 'oceania'];
 const worldCountries = [...new Set(worldPlaces.map(p => p.country))].sort((a, b) => countryName(a).localeCompare(countryName(b), 'ar'));
 const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))]
   .sort((a, b) => countryName(a).localeCompare(countryName(b), 'ar'));
@@ -315,15 +316,16 @@ const features = [
     <section id="world" class="mb-14 scroll-mt-20" aria-labelledby="world-title">
       <div class="section-title">
         <h2 id="world-title">حول العالم بالعربية</h2>
-        <p><span class="latin">{worldPlaces.length}</span> مكاناً يسافر إليها العرب أو يعيشون فيها: المد والجزر وأوقات الصيد بالعربية</p>
+        <p><span class="latin">{worldPlaces.length}</span> مكاناً في <span class="latin">{worldCountries.length}</span> دولة: المد والجزر وأوقات الصيد بالعربية حيث يسافر العرب أو يعيشون</p>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
-        {worldCountries.map(code => (
-          <div class="card px-3 py-2.5 min-w-0">
-            <a href={`${BASE}country/${code}`} class="flex items-center gap-2 text-sm font-semibold hover:text-[var(--accent-text)]"><Flag code={code} size={20} /><span class="truncate">{countryName(code)}</span></a>
-            <div class="mt-1.5 flex flex-wrap gap-1">
-              {worldPlaces.filter(p => p.country === code).map(p => (
-                <a href={`${BASE}ports/${p.id}`} class="world-chip">{p.name_ar}</a>
+      <!-- One block per continent: its countries (flag, name, number of places) link to the country pages -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        {zones.map(z => (
+          <div class="card p-4">
+            <h3 class="font-semibold display">{zoneNames[z]} <span class="text-xs font-normal text-[var(--text-muted)] latin">{worldPlaces.filter(p => zoneOf(p) === z).length}</span></h3>
+            <div class="mt-2.5 flex flex-wrap gap-1.5">
+              {worldCountries.filter(c => zoneOf(worldPlaces.find(p => p.country === c)!) === z).map(code => (
+                <a href={`${BASE}country/${code}`} class="world-chip inline-flex items-center gap-1.5"><Flag code={code} size={16} />{countryName(code)} <span class="latin text-[var(--text-muted)]">{worldPlaces.filter(p => p.country === code).length}</span></a>
               ))}
             </div>
           </div>

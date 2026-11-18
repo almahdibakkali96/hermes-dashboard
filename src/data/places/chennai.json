@@ -1,0 +1,94 @@
+{
+ "id": "chennai",
+ "name_en": "Chennai",
+ "name_ar": "تشيناي",
+ "country": "IN",
+ "lat": 13.08,
+ "lon": 80.29,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 13.125,
+  "lon": 80.375,
+  "distance_km": 10.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.95614,
+   "phase": 45.172
+  },
+  "J1": {
+   "amp": 0.74963,
+   "phase": -120.215
+  },
+  "K1": {
+   "amp": 10.16646,
+   "phase": -106.537
+  },
+  "K2": {
+   "amp": 4.19366,
+   "phase": 102.89
+  },
+  "M2": {
+   "amp": 32.95481,
+   "phase": 77.163
+  },
+  "M4": {
+   "amp": 0.31075,
+   "phase": 43.721
+  },
+  "MF": {
+   "amp": 1.36134,
+   "phase": 9.278
+  },
+  "MM": {
+   "amp": 0.47823,
+   "phase": -5.905
+  },
+  "N2": {
+   "amp": 7.119,
+   "phase": 70.292
+  },
+  "O1": {
+   "amp": 2.94018,
+   "phase": -110.486
+  },
+  "P1": {
+   "amp": 2.81522,
+   "phase": -100.338
+  },
+  "Q1": {
+   "amp": 0.27511,
+   "phase": -66.998
+  },
+  "S1": {
+   "amp": 1.80599,
+   "phase": 16.918
+  },
+  "S2": {
+   "amp": 13.04107,
+   "phase": 107.703
+  },
+  "SA": {
+   "amp": 1.90868,
+   "phase": -12.196
+  },
+  "SSA": {
+   "amp": 0.13697,
+   "phase": -63.75
+  },
+  "T2": {
+   "amp": 0.01254,
+   "phase": -55.029
+  },
+  "Z0": {
+   "amp": 66.5,
+   "phase": 0
+  }
+ }
+}

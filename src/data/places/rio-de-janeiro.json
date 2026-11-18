@@ -1,0 +1,94 @@
+{
+ "id": "rio-de-janeiro",
+ "name_en": "Rio de Janeiro",
+ "name_ar": "ريو دي جانيرو",
+ "country": "BR",
+ "lat": -22.97,
+ "lon": -43.18,
+ "timezone": "America/Sao_Paulo",
+ "grid": {
+  "lat": -23,
+  "lon": -43.125,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.11833,
+   "phase": -157.202
+  },
+  "J1": {
+   "amp": 0.54896,
+   "phase": -134.063
+  },
+  "K1": {
+   "amp": 6.16173,
+   "phase": -172.241
+  },
+  "K2": {
+   "amp": 4.68525,
+   "phase": 171.253
+  },
+  "M2": {
+   "amp": 29.82491,
+   "phase": 166.009
+  },
+  "M4": {
+   "amp": 2.87306,
+   "phase": -167.848
+  },
+  "MF": {
+   "amp": 1.08989,
+   "phase": -19.368
+  },
+  "MM": {
+   "amp": 0.20392,
+   "phase": 43.598
+  },
+  "N2": {
+   "amp": 3.86465,
+   "phase": -159.603
+  },
+  "O1": {
+   "amp": 10.6272,
+   "phase": 127.12
+  },
+  "P1": {
+   "amp": 2.09056,
+   "phase": -173.927
+  },
+  "Q1": {
+   "amp": 2.72507,
+   "phase": 98.882
+  },
+  "S1": {
+   "amp": 2.17954,
+   "phase": -170.156
+  },
+  "S2": {
+   "amp": 17.15046,
+   "phase": 175.129
+  },
+  "SA": {
+   "amp": 2.49291,
+   "phase": 152.274
+  },
+  "SSA": {
+   "amp": 0.27221,
+   "phase": -23.599
+  },
+  "T2": {
+   "amp": 0.70006,
+   "phase": 167.437
+  },
+  "Z0": {
+   "amp": 75.6,
+   "phase": 0
+  }
+ }
+}

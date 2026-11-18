@@ -1,0 +1,94 @@
+{
+ "id": "sanya",
+ "name_en": "Sanya",
+ "name_ar": "سانيا",
+ "country": "CN",
+ "lat": 18.22,
+ "lon": 109.5,
+ "timezone": "Asia/Shanghai",
+ "grid": {
+  "lat": 18.125,
+  "lon": 109.5,
+  "distance_km": 10.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.54206,
+   "phase": 48.354
+  },
+  "J1": {
+   "amp": 1.2999,
+   "phase": -167.784
+  },
+  "K1": {
+   "amp": 30.82025,
+   "phase": -153.46
+  },
+  "K2": {
+   "amp": 2.45595,
+   "phase": 124.872
+  },
+  "M2": {
+   "amp": 20.95452,
+   "phase": 84.462
+  },
+  "M4": {
+   "amp": 0.42504,
+   "phase": -153.083
+  },
+  "MF": {
+   "amp": 1.45529,
+   "phase": 27.291
+  },
+  "MM": {
+   "amp": 0.55563,
+   "phase": -36.473
+  },
+  "N2": {
+   "amp": 4.1386,
+   "phase": 67.455
+  },
+  "O1": {
+   "amp": 28.47125,
+   "phase": 170.045
+  },
+  "P1": {
+   "amp": 9.32205,
+   "phase": -161.102
+  },
+  "Q1": {
+   "amp": 6.16419,
+   "phase": 149.738
+  },
+  "S1": {
+   "amp": 1.24413,
+   "phase": 134.808
+  },
+  "S2": {
+   "amp": 5.95778,
+   "phase": 121.524
+  },
+  "SA": {
+   "amp": 7.39118,
+   "phase": -24.012
+  },
+  "SSA": {
+   "amp": 0.07941,
+   "phase": 118.597
+  },
+  "T2": {
+   "amp": 0.06362,
+   "phase": 150.901
+  },
+  "Z0": {
+   "amp": 101.2,
+   "phase": 0
+  }
+ }
+}

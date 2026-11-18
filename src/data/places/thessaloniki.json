@@ -1,0 +1,94 @@
+{
+ "id": "thessaloniki",
+ "name_en": "Thessaloniki",
+ "name_ar": "سالونيك",
+ "country": "GR",
+ "lat": 40.62,
+ "lon": 22.94,
+ "timezone": "Europe/Athens",
+ "grid": {
+  "lat": 40.625,
+  "lon": 22.875,
+  "distance_km": 5.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.29347,
+   "phase": 62.342
+  },
+  "J1": {
+   "amp": 0.11066,
+   "phase": 25.916
+  },
+  "K1": {
+   "amp": 2.81762,
+   "phase": -15.379
+  },
+  "K2": {
+   "amp": 2.29445,
+   "phase": 71.473
+  },
+  "M2": {
+   "amp": 8.95823,
+   "phase": 54.85
+  },
+  "M4": {
+   "amp": 0.87793,
+   "phase": -47.432
+  },
+  "MF": {
+   "amp": 0.19685,
+   "phase": 176.961
+  },
+  "MM": {
+   "amp": 0.23288,
+   "phase": -88.221
+  },
+  "N2": {
+   "amp": 1.51297,
+   "phase": 61.978
+  },
+  "O1": {
+   "amp": 1.24873,
+   "phase": -46.578
+  },
+  "P1": {
+   "amp": 1.25503,
+   "phase": -11.09
+  },
+  "Q1": {
+   "amp": 0.28238,
+   "phase": -154.262
+  },
+  "S1": {
+   "amp": 1.65346,
+   "phase": 43.215
+  },
+  "S2": {
+   "amp": 7.0353,
+   "phase": 77.078
+  },
+  "SA": {
+   "amp": 3.46794,
+   "phase": -68.79
+  },
+  "SSA": {
+   "amp": 0.28659,
+   "phase": -165.978
+  },
+  "T2": {
+   "amp": 0.49318,
+   "phase": -33.008
+  },
+  "Z0": {
+   "amp": 26.5,
+   "phase": 0
+  }
+ }
+}

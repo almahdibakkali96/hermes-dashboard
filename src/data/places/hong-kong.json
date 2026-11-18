@@ -1,0 +1,94 @@
+{
+ "id": "hong-kong",
+ "name_en": "Hong Kong",
+ "name_ar": "هونغ كونغ",
+ "country": "HK",
+ "lat": 22.28,
+ "lon": 114.17,
+ "timezone": "Asia/Hong_Kong",
+ "grid": {
+  "lat": 22.25,
+  "lon": 114.125,
+  "distance_km": 5.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.5645,
+   "phase": 9.831
+  },
+  "J1": {
+   "amp": 1.41101,
+   "phase": -164.857
+  },
+  "K1": {
+   "amp": 34.07056,
+   "phase": 177.551
+  },
+  "K2": {
+   "amp": 4.41738,
+   "phase": 58.466
+  },
+  "M2": {
+   "amp": 36.90022,
+   "phase": 27.733
+  },
+  "M4": {
+   "amp": 5.0359,
+   "phase": -139.531
+  },
+  "MF": {
+   "amp": 0.50104,
+   "phase": 74.159
+  },
+  "MM": {
+   "amp": 0.79244,
+   "phase": 22.782
+  },
+  "N2": {
+   "amp": 7.44877,
+   "phase": 15.056
+  },
+  "O1": {
+   "amp": 27.82471,
+   "phase": 137.85
+  },
+  "P1": {
+   "amp": 10.65831,
+   "phase": 175.815
+  },
+  "Q1": {
+   "amp": 5.18352,
+   "phase": 122.09
+  },
+  "S1": {
+   "amp": 1.22363,
+   "phase": 133.123
+  },
+  "S2": {
+   "amp": 14.33332,
+   "phase": 50.387
+  },
+  "SA": {
+   "amp": 7.01356,
+   "phase": -36.533
+  },
+  "SSA": {
+   "amp": 0.16832,
+   "phase": 121.705
+  },
+  "T2": {
+   "amp": 1.6776,
+   "phase": 62.82
+  },
+  "Z0": {
+   "amp": 121.2,
+   "phase": 0
+  }
+ }
+}

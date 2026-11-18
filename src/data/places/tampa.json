@@ -1,0 +1,94 @@
+{
+ "id": "tampa",
+ "name_en": "Tampa (Clearwater)",
+ "name_ar": "تامبا (كليرووتر)",
+ "country": "US",
+ "lat": 27.98,
+ "lon": -82.83,
+ "timezone": "America/New_York",
+ "grid": {
+  "lat": 28,
+  "lon": -82.875,
+  "distance_km": 4.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.73747,
+   "phase": 136.238
+  },
+  "J1": {
+   "amp": 1.48315,
+   "phase": 1.549
+  },
+  "K1": {
+   "amp": 14.89531,
+   "phase": 11.983
+  },
+  "K2": {
+   "amp": 2.84826,
+   "phase": 135.347
+  },
+  "M2": {
+   "amp": 25.88656,
+   "phase": 124.799
+  },
+  "M4": {
+   "amp": 0.85334,
+   "phase": 46.058
+  },
+  "MF": {
+   "amp": 0.71986,
+   "phase": 10.236
+  },
+  "MM": {
+   "amp": 0.3744,
+   "phase": -35.158
+  },
+  "N2": {
+   "amp": 4.44428,
+   "phase": 113.02
+  },
+  "O1": {
+   "amp": 14.2535,
+   "phase": 5.918
+  },
+  "P1": {
+   "amp": 4.90797,
+   "phase": 9.859
+  },
+  "Q1": {
+   "amp": 3.10532,
+   "phase": 2.693
+  },
+  "S1": {
+   "amp": 1.58424,
+   "phase": 40.124
+  },
+  "S2": {
+   "amp": 9.79399,
+   "phase": 141.381
+  },
+  "SA": {
+   "amp": 4.00091,
+   "phase": -114.65
+  },
+  "SSA": {
+   "amp": 0.16232,
+   "phase": 90.227
+  },
+  "T2": {
+   "amp": 0.67607,
+   "phase": 134.351
+  },
+  "Z0": {
+   "amp": 74.8,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "mangalore",
+ "name_en": "Mangaluru",
+ "name_ar": "مانغالور",
+ "country": "IN",
+ "lat": 12.87,
+ "lon": 74.83,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 12.875,
+  "lon": 74.75,
+  "distance_km": 8.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.2788,
+   "phase": 90.667
+  },
+  "J1": {
+   "amp": 1.77714,
+   "phase": -23.047
+  },
+  "K1": {
+   "amp": 26.59703,
+   "phase": -30.825
+  },
+  "K2": {
+   "amp": 3.5241,
+   "phase": -172.278
+  },
+  "M2": {
+   "amp": 40.33298,
+   "phase": 155.415
+  },
+  "M4": {
+   "amp": 0.75881,
+   "phase": 52.124
+  },
+  "MF": {
+   "amp": 1.4936,
+   "phase": 6.404
+  },
+  "MM": {
+   "amp": 0.98163,
+   "phase": -8.819
+  },
+  "N2": {
+   "amp": 9.85977,
+   "phase": 135.187
+  },
+  "O1": {
+   "amp": 13.5069,
+   "phase": -27.351
+  },
+  "P1": {
+   "amp": 7.90606,
+   "phase": -31.558
+  },
+  "Q1": {
+   "amp": 2.69977,
+   "phase": -19.864
+  },
+  "S1": {
+   "amp": 0.46096,
+   "phase": 117.053
+  },
+  "S2": {
+   "amp": 13.87084,
+   "phase": -163.243
+  },
+  "SA": {
+   "amp": 6.18441,
+   "phase": 37.208
+  },
+  "SSA": {
+   "amp": 0.49512,
+   "phase": -16.888
+  },
+  "T2": {
+   "amp": 1.50806,
+   "phase": 167.779
+  },
+  "Z0": {
+   "amp": 115.7,
+   "phase": 0
+  }
+ }
+}

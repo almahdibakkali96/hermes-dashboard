@@ -1,0 +1,94 @@
+{
+ "id": "dover",
+ "name_en": "Dover",
+ "name_ar": "دوفر",
+ "country": "GB",
+ "lat": 51.11,
+ "lon": 1.33,
+ "timezone": "Europe/London",
+ "grid": {
+  "lat": 51.125,
+  "lon": 1.375,
+  "distance_km": 3.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.8576,
+   "phase": -63.585
+  },
+  "J1": {
+   "amp": 1.10122,
+   "phase": 172.281
+  },
+  "K1": {
+   "amp": 5.23812,
+   "phase": 29.045
+  },
+  "K2": {
+   "amp": 21.53331,
+   "phase": 22.572
+  },
+  "M2": {
+   "amp": 232.06921,
+   "phase": -26.34
+  },
+  "M4": {
+   "amp": 25.49964,
+   "phase": -137.402
+  },
+  "MF": {
+   "amp": 2.03139,
+   "phase": -141.322
+  },
+  "MM": {
+   "amp": 2.58959,
+   "phase": -158.847
+  },
+  "N2": {
+   "amp": 42.02496,
+   "phase": -49.517
+  },
+  "O1": {
+   "amp": 5.82654,
+   "phase": 174.451
+  },
+  "P1": {
+   "amp": 1.53472,
+   "phase": 21.518
+  },
+  "Q1": {
+   "amp": 2.31329,
+   "phase": 115.659
+  },
+  "S1": {
+   "amp": 0.1017,
+   "phase": 62.603
+  },
+  "S2": {
+   "amp": 72.36821,
+   "phase": 25.321
+  },
+  "SA": {
+   "amp": 3.28231,
+   "phase": -61.147
+  },
+  "SSA": {
+   "amp": 0.47409,
+   "phase": -157.786
+  },
+  "T2": {
+   "amp": 5.05837,
+   "phase": 13.968
+  },
+  "Z0": {
+   "amp": 395.9,
+   "phase": 0
+  }
+ }
+}

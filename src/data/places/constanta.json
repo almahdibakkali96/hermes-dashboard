@@ -1,0 +1,94 @@
+{
+ "id": "constanta",
+ "name_en": "Constanța",
+ "name_ar": "كونستانتسا",
+ "country": "RO",
+ "lat": 44.17,
+ "lon": 28.66,
+ "timezone": "Europe/Bucharest",
+ "grid": {
+  "lat": 44.125,
+  "lon": 28.75,
+  "distance_km": 8.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.2378,
+   "phase": -138.474
+  },
+  "J1": {
+   "amp": 0.18438,
+   "phase": 9.818
+  },
+  "K1": {
+   "amp": 0.49222,
+   "phase": 42.492
+  },
+  "K2": {
+   "amp": 0.08288,
+   "phase": -138.958
+  },
+  "M2": {
+   "amp": 1.60677,
+   "phase": 24.186
+  },
+  "M4": {
+   "amp": 0.33263,
+   "phase": 5.262
+  },
+  "MF": {
+   "amp": 0.28933,
+   "phase": 77.447
+  },
+  "MM": {
+   "amp": 0.52057,
+   "phase": -49.927
+  },
+  "N2": {
+   "amp": 0.18311,
+   "phase": 3.426
+  },
+  "O1": {
+   "amp": 0.68259,
+   "phase": 51.973
+  },
+  "P1": {
+   "amp": 0.17077,
+   "phase": 80.885
+  },
+  "Q1": {
+   "amp": 0.34144,
+   "phase": 115.651
+  },
+  "S1": {
+   "amp": 0.49808,
+   "phase": 1.973
+  },
+  "S2": {
+   "amp": 1.15731,
+   "phase": 57.294
+  },
+  "SA": {
+   "amp": 1.61734,
+   "phase": 103.91
+  },
+  "SSA": {
+   "amp": 0.46061,
+   "phase": -134.145
+  },
+  "T2": {
+   "amp": 0.6795,
+   "phase": -54.412
+  },
+  "Z0": {
+   "amp": 5.4,
+   "phase": 0
+  }
+ }
+}

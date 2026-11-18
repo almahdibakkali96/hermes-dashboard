@@ -1,0 +1,94 @@
+{
+ "id": "valparaiso",
+ "name_en": "Valparaíso",
+ "name_ar": "فالبارايسو",
+ "country": "CL",
+ "lat": -33.03,
+ "lon": -71.63,
+ "timezone": "America/Santiago",
+ "grid": {
+  "lat": -33,
+  "lon": -71.625,
+  "distance_km": 3.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.29588,
+   "phase": -3.055
+  },
+  "J1": {
+   "amp": 0.79977,
+   "phase": 46.615
+  },
+  "K1": {
+   "amp": 15.55129,
+   "phase": 39.576
+  },
+  "K2": {
+   "amp": 4.41892,
+   "phase": 76.998
+  },
+  "M2": {
+   "amp": 43.20442,
+   "phase": 61.377
+  },
+  "M4": {
+   "amp": 0.21852,
+   "phase": -40.15
+  },
+  "MF": {
+   "amp": 0.56232,
+   "phase": 127.649
+  },
+  "MM": {
+   "amp": 0.06371,
+   "phase": 96.443
+  },
+  "N2": {
+   "amp": 9.3053,
+   "phase": 31.761
+  },
+  "O1": {
+   "amp": 10.10023,
+   "phase": -3.685
+  },
+  "P1": {
+   "amp": 4.90446,
+   "phase": 35.233
+  },
+  "Q1": {
+   "amp": 2.08523,
+   "phase": -17.752
+  },
+  "S1": {
+   "amp": 0.48561,
+   "phase": -21.319
+  },
+  "S2": {
+   "amp": 14.06079,
+   "phase": 84.602
+  },
+  "SA": {
+   "amp": 0.55198,
+   "phase": 117.023
+  },
+  "SSA": {
+   "amp": 0.13458,
+   "phase": -37.216
+  },
+  "T2": {
+   "amp": 0.40173,
+   "phase": 90.135
+  },
+  "Z0": {
+   "amp": 76.4,
+   "phase": 0
+  }
+ }
+}

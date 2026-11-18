@@ -1,0 +1,94 @@
+{
+ "id": "corfu",
+ "name_en": "Corfu",
+ "name_ar": "كورفو",
+ "country": "GR",
+ "lat": 39.62,
+ "lon": 19.92,
+ "timezone": "Europe/Athens",
+ "grid": {
+  "lat": 39.625,
+  "lon": 20,
+  "distance_km": 6.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.31958,
+   "phase": 81.729
+  },
+  "J1": {
+   "amp": 0.29799,
+   "phase": -91.827
+  },
+  "K1": {
+   "amp": 2.24138,
+   "phase": 12.122
+  },
+  "K2": {
+   "amp": 0.89169,
+   "phase": 58.037
+  },
+  "M2": {
+   "amp": 5.85731,
+   "phase": 61.409
+  },
+  "M4": {
+   "amp": 0.2631,
+   "phase": 108.076
+  },
+  "MF": {
+   "amp": 0.50544,
+   "phase": -101.275
+  },
+  "MM": {
+   "amp": 0.48787,
+   "phase": -120.351
+  },
+  "N2": {
+   "amp": 1.03696,
+   "phase": 60.329
+  },
+  "O1": {
+   "amp": 1.09196,
+   "phase": -4.823
+  },
+  "P1": {
+   "amp": 0.68459,
+   "phase": 22.556
+  },
+  "Q1": {
+   "amp": 0.19905,
+   "phase": -6.26
+  },
+  "S1": {
+   "amp": 0.83538,
+   "phase": 18.639
+  },
+  "S2": {
+   "amp": 3.55224,
+   "phase": 71.272
+  },
+  "SA": {
+   "amp": 3.33142,
+   "phase": -62.018
+  },
+  "SSA": {
+   "amp": 0.29542,
+   "phase": -172.8
+  },
+  "T2": {
+   "amp": 0.1788,
+   "phase": -37.283
+  },
+  "Z0": {
+   "amp": 16.4,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "cartagena",
+ "name_en": "Cartagena",
+ "name_ar": "قرطاجنة",
+ "country": "CO",
+ "lat": 10.42,
+ "lon": -75.55,
+ "timezone": "America/Bogota",
+ "grid": {
+  "lat": 10.375,
+  "lon": -75.625,
+  "distance_km": 9.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.42117,
+   "phase": 137.623
+  },
+  "J1": {
+   "amp": 0.50845,
+   "phase": -109.353
+  },
+  "K1": {
+   "amp": 9.51512,
+   "phase": -118.352
+  },
+  "K2": {
+   "amp": 0.64498,
+   "phase": 44.299
+  },
+  "M2": {
+   "amp": 7.63988,
+   "phase": 136.841
+  },
+  "M4": {
+   "amp": 0.17877,
+   "phase": 78.844
+  },
+  "MF": {
+   "amp": 1.78258,
+   "phase": -6.361
+  },
+  "MM": {
+   "amp": 1.01339,
+   "phase": 6.075
+  },
+  "N2": {
+   "amp": 2.82077,
+   "phase": 112.185
+  },
+  "O1": {
+   "amp": 6.03558,
+   "phase": -116.736
+  },
+  "P1": {
+   "amp": 2.74864,
+   "phase": -115.295
+  },
+  "Q1": {
+   "amp": 0.92004,
+   "phase": -138.791
+  },
+  "S1": {
+   "amp": 0.83207,
+   "phase": -132.746
+  },
+  "S2": {
+   "amp": 1.21357,
+   "phase": 30.639
+  },
+  "SA": {
+   "amp": 2.00353,
+   "phase": -72.956
+  },
+  "SSA": {
+   "amp": 0.41972,
+   "phase": 8.35
+  },
+  "T2": {
+   "amp": 0.10637,
+   "phase": -39.76
+  },
+  "Z0": {
+   "amp": 24.7,
+   "phase": 0
+  }
+ }
+}

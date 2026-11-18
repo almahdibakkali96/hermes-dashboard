@@ -1,4 +1,5 @@
-// The site's map background: public/map/land.svg, the land from the Atlantic to the Gulf in the brand's map style
+// The site's map background: public/map/land.svg, the world's land in the brand's map style (detailed from the Atlantic
+// to the Gulf and the Mediterranean, coarser elsewhere to keep the file small)
 // (the same look as the Reels' maps, brand/arab-map.mjs). The ports are drawn on top of it by src/components/PortsMap.astro,
 // in the projection of src/lib/mapProjection.ts (keep the two in step).
 //
@@ -65,8 +66,15 @@ function clip(pts) {
   return out;
 }
 
-// Douglas–Peucker, tolerance in projected units (0.12 ≈ 1.3 km)
-function simplify(pts, tol = 0.12) {
+// Tolerance in projected units by where a point is: 0.12 (≈1.3 km) around the Arab ports and the Mediterranean, where
+// port mini-maps zoom in; 0.55 elsewhere; 1.6 in the far north (long coasts, no ports)
+const tolAt = ([x, y]) => {
+  const lon = x / (PROJ.K * PROJ.C) + PROJ.L0, lat = PROJ.B1 - y / PROJ.K;
+  return lon > -30 && lon < 75 && lat > -25 && lat < 50 ? 0.12 : lat > 60 ? 1.6 : 0.8;
+};
+
+// Douglas–Peucker with a tolerance that depends on the point's place (tolAt)
+function simplify(pts) {
   // A closed ring repeats its first point at the end: drop it, or the start–end chord has no length and the ring collapses
   const n = pts.length;
   if (n > 1 && pts[0][0] === pts[n - 1][0] && pts[0][1] === pts[n - 1][1]) pts = pts.slice(0, -1);
@@ -78,7 +86,7 @@ function simplify(pts, tol = 0.12) {
     const [ax, ay] = pts[s], [bx, by] = pts[e], dx = bx - ax, dy = by - ay, len = Math.hypot(dx, dy) || 1;
     let max = 0, idx = -1;
     for (let i = s + 1; i < e; i++) { const d = Math.abs(dy * pts[i][0] - dx * pts[i][1] + bx * ay - by * ax) / len; if (d > max) { max = d; idx = i; } }
-    if (max > tol && idx > 0) { keep[idx] = 1; stack.push([s, idx], [idx, e]); }
+    if (idx > 0 && max > tolAt(pts[idx])) { keep[idx] = 1; stack.push([s, idx], [idx, e]); }
   }
   return pts.filter((_, i) => keep[i]);
 }
@@ -90,11 +98,22 @@ function pathOf(rings) {
     const lons = r.map(p => p[0]), wrap = Math.max(...lons) - Math.min(...lons) > 180;
     const pts = simplify(clip(r.map(([lon, lat]) => project(wrap && lon < 0 ? lon + 360 : lon, lat))));
     if (pts.length < 3) continue;
-    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
-    if (Math.max(...xs) - Math.min(...xs) < 0.4 && Math.max(...ys) - Math.min(...ys) < 0.4) continue; // specks
-    let last = '';
-    pts.forEach((p, i) => { const s = p[0].toFixed(1) + ' ' + p[1].toFixed(1); if (s !== last) d += (i ? 'L' : 'M') + s; last = s; });
-    d += 'Z';
+    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), speck = tolAt(pts[0]) > 0.2 ? 1.5 : 0.4;
+    if (Math.max(...xs) - Math.min(...xs) < speck && Math.max(...ys) - Math.min(...ys) < speck) continue; // specks
+    // Relative moves between points rounded to 0.1 (no drift: each delta is taken between rounded positions)
+    const r1 = v => Math.round(v * 10);
+    let [px0, py0] = [r1(pts[0][0]), r1(pts[0][1])];
+    d += `M${px0 / 10} ${py0 / 10}l`;
+    let first = true;
+    for (const p of pts.slice(1)) {
+      const x = r1(p[0]), y = r1(p[1]), dx = x - px0, dy = y - py0;
+      if (!dx && !dy) continue;
+      const n = v => (v / 10).toString().replace(/^(-?)0\./, '$1.');
+      const sx = n(dx), sy = n(dy);
+      d += (first || sx.startsWith('-') ? '' : ' ') + sx + (sy.startsWith('-') ? '' : ' ') + sy;
+      first = false; px0 = x; py0 = y;
+    }
+    d += 'z';
   }
   return d.replace(/(\d)\.0(?=\D)/g, '$1');
 }

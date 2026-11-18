@@ -1,0 +1,94 @@
+{
+ "id": "san-francisco",
+ "name_en": "San Francisco",
+ "name_ar": "سان فرانسيسكو",
+ "country": "US",
+ "lat": 37.81,
+ "lon": -122.47,
+ "timezone": "America/Los_Angeles",
+ "grid": {
+  "lat": 37.875,
+  "lon": -122.5,
+  "distance_km": 7.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.74935,
+   "phase": 161.676
+  },
+  "J1": {
+   "amp": 1.91812,
+   "phase": -124.298
+  },
+  "K1": {
+   "amp": 37.12414,
+   "phase": -133.458
+  },
+  "K2": {
+   "amp": 4.16328,
+   "phase": -153.772
+  },
+  "M2": {
+   "amp": 57.70963,
+   "phase": -149.97
+  },
+  "M4": {
+   "amp": 1.9824,
+   "phase": 92.061
+  },
+  "MF": {
+   "amp": 1.0195,
+   "phase": 175.548
+  },
+  "MM": {
+   "amp": 0.4153,
+   "phase": 116.149
+  },
+  "N2": {
+   "amp": 12.85066,
+   "phase": -176.805
+  },
+  "O1": {
+   "amp": 23.41002,
+   "phase": -149.092
+  },
+  "P1": {
+   "amp": 11.39334,
+   "phase": -133.818
+  },
+  "Q1": {
+   "amp": 3.86067,
+   "phase": -150.351
+  },
+  "S1": {
+   "amp": 0.03854,
+   "phase": -136.997
+  },
+  "S2": {
+   "amp": 13.6549,
+   "phase": -147.166
+  },
+  "SA": {
+   "amp": 3.11721,
+   "phase": -28.668
+  },
+  "SSA": {
+   "amp": 0.07101,
+   "phase": -123.364
+  },
+  "T2": {
+   "amp": 1.49639,
+   "phase": -128.685
+  },
+  "Z0": {
+   "amp": 155.1,
+   "phase": 0
+  }
+ }
+}

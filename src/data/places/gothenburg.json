@@ -1,0 +1,94 @@
+{
+ "id": "gothenburg",
+ "name_en": "Gothenburg",
+ "name_ar": "غوتنبرغ",
+ "country": "SE",
+ "lat": 57.68,
+ "lon": 11.84,
+ "timezone": "Europe/Stockholm",
+ "grid": {
+  "lat": 57.625,
+  "lon": 11.75,
+  "distance_km": 8.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.28972,
+   "phase": -21.871
+  },
+  "J1": {
+   "amp": 0.1325,
+   "phase": -59.264
+  },
+  "K1": {
+   "amp": 1.21428,
+   "phase": -58.3
+  },
+  "K2": {
+   "amp": 0.46685,
+   "phase": 55.012
+  },
+  "M2": {
+   "amp": 7.53719,
+   "phase": 128.899
+  },
+  "M4": {
+   "amp": 1.10625,
+   "phase": -70.32
+  },
+  "MF": {
+   "amp": 0.99471,
+   "phase": -144.101
+  },
+  "MM": {
+   "amp": 0.52625,
+   "phase": -152.914
+  },
+  "N2": {
+   "amp": 1.73684,
+   "phase": 62.719
+  },
+  "O1": {
+   "amp": 2.28806,
+   "phase": -65.475
+  },
+  "P1": {
+   "amp": 0.65637,
+   "phase": -112.943
+  },
+  "Q1": {
+   "amp": 0.86443,
+   "phase": -132.882
+  },
+  "S1": {
+   "amp": 0.60942,
+   "phase": 53.623
+  },
+  "S2": {
+   "amp": 1.80283,
+   "phase": 64.204
+  },
+  "SA": {
+   "amp": 3.6774,
+   "phase": -68.055
+  },
+  "SSA": {
+   "amp": 0.77872,
+   "phase": -167.571
+  },
+  "T2": {
+   "amp": 0.6052,
+   "phase": 43.485
+  },
+  "Z0": {
+   "amp": 19.2,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "walvis-bay",
+ "name_en": "Walvis Bay",
+ "name_ar": "والفيس باي",
+ "country": "NA",
+ "lat": -22.95,
+ "lon": 14.49,
+ "timezone": "Africa/Windhoek",
+ "grid": {
+  "lat": -22.875,
+  "lon": 14.5,
+  "distance_km": 8.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.57897,
+   "phase": 21.6
+  },
+  "J1": {
+   "amp": 0.43939,
+   "phase": 63.13
+  },
+  "K1": {
+   "amp": 4.64089,
+   "phase": 59.982
+  },
+  "K2": {
+   "amp": 5.36609,
+   "phase": 56.846
+  },
+  "M2": {
+   "amp": 49.8794,
+   "phase": 40.199
+  },
+  "M4": {
+   "amp": 1.47672,
+   "phase": 134.156
+  },
+  "MF": {
+   "amp": 1.21182,
+   "phase": -7.568
+  },
+  "MM": {
+   "amp": 0.3469,
+   "phase": -3.34
+  },
+  "N2": {
+   "amp": 10.73233,
+   "phase": 26.842
+  },
+  "O1": {
+   "amp": 1.7617,
+   "phase": -144.547
+  },
+  "P1": {
+   "amp": 1.35737,
+   "phase": 52.147
+  },
+  "Q1": {
+   "amp": 0.96504,
+   "phase": 172.922
+  },
+  "S1": {
+   "amp": 0.83172,
+   "phase": 83.054
+  },
+  "S2": {
+   "amp": 19.69824,
+   "phase": 55.083
+  },
+  "SA": {
+   "amp": 1.09548,
+   "phase": -8.487
+  },
+  "SSA": {
+   "amp": 0.3617,
+   "phase": 12.069
+  },
+  "T2": {
+   "amp": 1.28573,
+   "phase": 50.088
+  },
+  "Z0": {
+   "amp": 91.6,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "lagos",
+ "name_en": "Lagos",
+ "name_ar": "لاغوس",
+ "country": "NG",
+ "lat": 6.41,
+ "lon": 3.4,
+ "timezone": "Africa/Lagos",
+ "grid": {
+  "lat": 6.375,
+  "lon": 3.375,
+  "distance_km": 4.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.9605,
+   "phase": 83.64
+  },
+  "J1": {
+   "amp": 0.69039,
+   "phase": -0.757
+  },
+  "K1": {
+   "amp": 13.41173,
+   "phase": -6.101
+  },
+  "K2": {
+   "amp": 4.90965,
+   "phase": 126.889
+  },
+  "M2": {
+   "amp": 50.22193,
+   "phase": 103.964
+  },
+  "M4": {
+   "amp": 1.52335,
+   "phase": -37.368
+  },
+  "MF": {
+   "amp": 2.05402,
+   "phase": -4.702
+  },
+  "MM": {
+   "amp": 0.60317,
+   "phase": 11.538
+  },
+  "N2": {
+   "amp": 10.73172,
+   "phase": 99.193
+  },
+  "O1": {
+   "amp": 2.92739,
+   "phase": -28.269
+  },
+  "P1": {
+   "amp": 4.00291,
+   "phase": -11.824
+  },
+  "Q1": {
+   "amp": 0.39454,
+   "phase": 72.8
+  },
+  "S1": {
+   "amp": 1.48594,
+   "phase": 99.711
+  },
+  "S2": {
+   "amp": 18.30977,
+   "phase": 130.638
+  },
+  "SA": {
+   "amp": 2.06786,
+   "phase": -9.517
+  },
+  "SSA": {
+   "amp": 0.44652,
+   "phase": 37.099
+  },
+  "T2": {
+   "amp": 0.74606,
+   "phase": 142.593
+  },
+  "Z0": {
+   "amp": 99,
+   "phase": 0
+  }
+ }
+}

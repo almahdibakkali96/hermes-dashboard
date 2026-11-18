@@ -1,0 +1,94 @@
+{
+ "id": "charleston",
+ "name_en": "Charleston",
+ "name_ar": "تشارلستون",
+ "country": "US",
+ "lat": 32.75,
+ "lon": -79.87,
+ "timezone": "America/New_York",
+ "grid": {
+  "lat": 32.75,
+  "lon": -79.875,
+  "distance_km": 0.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.69554,
+   "phase": -34.678
+  },
+  "J1": {
+   "amp": 0.60203,
+   "phase": -150.879
+  },
+  "K1": {
+   "amp": 10.17984,
+   "phase": -167.331
+  },
+  "K2": {
+   "amp": 3.23142,
+   "phase": 26.222
+  },
+  "M2": {
+   "amp": 72.77687,
+   "phase": 1.185
+  },
+  "M4": {
+   "amp": 0.64109,
+   "phase": 174.533
+  },
+  "MF": {
+   "amp": 0.80729,
+   "phase": -40.883
+  },
+  "MM": {
+   "amp": 0.95153,
+   "phase": 29.952
+  },
+  "N2": {
+   "amp": 16.40253,
+   "phase": -18.301
+  },
+  "O1": {
+   "amp": 7.58361,
+   "phase": -164.402
+  },
+  "P1": {
+   "amp": 3.42783,
+   "phase": -169.073
+  },
+  "Q1": {
+   "amp": 1.69683,
+   "phase": -176.907
+  },
+  "S1": {
+   "amp": 1.14297,
+   "phase": 114.291
+  },
+  "S2": {
+   "amp": 11.341,
+   "phase": 16.748
+  },
+  "SA": {
+   "amp": 4.23233,
+   "phase": -95.527
+  },
+  "SSA": {
+   "amp": 0.44306,
+   "phase": 134.373
+  },
+  "T2": {
+   "amp": 0.45745,
+   "phase": -2.557
+  },
+  "Z0": {
+   "amp": 114,
+   "phase": 0
+  }
+ }
+}

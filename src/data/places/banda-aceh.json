@@ -1,0 +1,94 @@
+{
+ "id": "banda-aceh",
+ "name_en": "Banda Aceh",
+ "name_ar": "باندا آتشيه",
+ "country": "ID",
+ "lat": 5.57,
+ "lon": 95.32,
+ "timezone": "Asia/Jakarta",
+ "grid": {
+  "lat": 5.625,
+  "lon": 95.375,
+  "distance_km": 8.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.55286,
+   "phase": 71.533
+  },
+  "J1": {
+   "amp": 0.81097,
+   "phase": -126.245
+  },
+  "K1": {
+   "amp": 10.39055,
+   "phase": -145.476
+  },
+  "K2": {
+   "amp": 6.94342,
+   "phase": 117.102
+  },
+  "M2": {
+   "amp": 44.83173,
+   "phase": 84.776
+  },
+  "M4": {
+   "amp": 0.81965,
+   "phase": 148.575
+  },
+  "MF": {
+   "amp": 1.03819,
+   "phase": 17.984
+  },
+  "MM": {
+   "amp": 0.67887,
+   "phase": 0.696
+  },
+  "N2": {
+   "amp": 8.5161,
+   "phase": 76.391
+  },
+  "O1": {
+   "amp": 4.28193,
+   "phase": -176.404
+  },
+  "P1": {
+   "amp": 3.7685,
+   "phase": -151.825
+  },
+  "Q1": {
+   "amp": 0.59229,
+   "phase": 127.287
+  },
+  "S1": {
+   "amp": 1.95671,
+   "phase": -16.4
+  },
+  "S2": {
+   "amp": 21.62661,
+   "phase": 119.936
+  },
+  "SA": {
+   "amp": 3.3293,
+   "phase": -142.492
+  },
+  "SSA": {
+   "amp": 0.38716,
+   "phase": -49.961
+  },
+  "T2": {
+   "amp": 1.4157,
+   "phase": 104.997
+  },
+  "Z0": {
+   "amp": 92.1,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "a-coruna",
+ "name_en": "A Coruña",
+ "name_ar": "لاكورونيا",
+ "country": "ES",
+ "lat": 43.38,
+ "lon": -8.4,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 43.375,
+  "lon": -8.375,
+  "distance_km": 2.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.64011,
+   "phase": 48.022
+  },
+  "J1": {
+   "amp": 0.34403,
+   "phase": 96.51
+  },
+  "K1": {
+   "amp": 7.4003,
+   "phase": 69.952
+  },
+  "K2": {
+   "amp": 11.75501,
+   "phase": 114.435
+  },
+  "M2": {
+   "amp": 117.92253,
+   "phase": 87.097
+  },
+  "M4": {
+   "amp": 1.241,
+   "phase": -68.75
+  },
+  "MF": {
+   "amp": 0.43642,
+   "phase": -164.236
+  },
+  "MM": {
+   "amp": 0.48927,
+   "phase": -138.99
+  },
+  "N2": {
+   "amp": 24.96094,
+   "phase": 67.498
+  },
+  "O1": {
+   "amp": 6.44006,
+   "phase": -35.613
+  },
+  "P1": {
+   "amp": 2.3885,
+   "phase": 57.964
+  },
+  "Q1": {
+   "amp": 2.02324,
+   "phase": -86.1
+  },
+  "S1": {
+   "amp": 0.92886,
+   "phase": -0.934
+  },
+  "S2": {
+   "amp": 41.58108,
+   "phase": 116.862
+  },
+  "SA": {
+   "amp": 2.20058,
+   "phase": -61.367
+  },
+  "SSA": {
+   "amp": 0.40326,
+   "phase": 178.363
+  },
+  "T2": {
+   "amp": 2.00067,
+   "phase": 105.192
+  },
+  "Z0": {
+   "amp": 206.7,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "port-klang",
+ "name_en": "Port Klang (Kuala Lumpur)",
+ "name_ar": "بورت كلانغ (كوالالمبور)",
+ "country": "MY",
+ "lat": 3,
+ "lon": 101.39,
+ "timezone": "Asia/Kuala_Lumpur",
+ "grid": {
+  "lat": 3.125,
+  "lon": 101.25,
+  "distance_km": 20.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.70448,
+   "phase": -108.584
+  },
+  "J1": {
+   "amp": 3.45397,
+   "phase": -56.933
+  },
+  "K1": {
+   "amp": 18.24406,
+   "phase": -105.688
+  },
+  "K2": {
+   "amp": 17.60858,
+   "phase": -45.992
+  },
+  "M2": {
+   "amp": 132.38706,
+   "phase": -82.438
+  },
+  "M4": {
+   "amp": 3.0257,
+   "phase": 37.931
+  },
+  "MF": {
+   "amp": 2.27863,
+   "phase": 18.41
+  },
+  "MM": {
+   "amp": 1.69754,
+   "phase": 29.015
+  },
+  "N2": {
+   "amp": 23.58236,
+   "phase": -86.887
+  },
+  "O1": {
+   "amp": 4.57488,
+   "phase": 59.855
+  },
+  "P1": {
+   "amp": 7.7535,
+   "phase": -99.089
+  },
+  "Q1": {
+   "amp": 1.15945,
+   "phase": 66.323
+  },
+  "S1": {
+   "amp": 4.53503,
+   "phase": 43.008
+  },
+  "S2": {
+   "amp": 66.34239,
+   "phase": -44.686
+  },
+  "SA": {
+   "amp": 2.63565,
+   "phase": -109.219
+  },
+  "SSA": {
+   "amp": 0.23789,
+   "phase": -75.214
+  },
+  "T2": {
+   "amp": 4.43896,
+   "phase": -41.891
+  },
+  "Z0": {
+   "amp": 262,
+   "phase": 0
+  }
+ }
+}

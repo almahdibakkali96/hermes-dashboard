@@ -1,0 +1,94 @@
+{
+ "id": "dakar",
+ "name_en": "Dakar",
+ "name_ar": "داكار",
+ "country": "SN",
+ "lat": 14.69,
+ "lon": -17.45,
+ "timezone": "Africa/Dakar",
+ "grid": {
+  "lat": 14.625,
+  "lon": -17.5,
+  "distance_km": 9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.99167,
+   "phase": -140.693
+  },
+  "J1": {
+   "amp": 0.29111,
+   "phase": -45.08
+  },
+  "K1": {
+   "amp": 6.29326,
+   "phase": -6.779
+  },
+  "K2": {
+   "amp": 4.55697,
+   "phase": -67.46
+  },
+  "M2": {
+   "amp": 44.19343,
+   "phase": -100.875
+  },
+  "M4": {
+   "amp": 1.21174,
+   "phase": -80.137
+  },
+  "MF": {
+   "amp": 1.43758,
+   "phase": -8.677
+  },
+  "MM": {
+   "amp": 0.45513,
+   "phase": -23.279
+  },
+  "N2": {
+   "amp": 8.70606,
+   "phase": -123.904
+  },
+  "O1": {
+   "amp": 4.05996,
+   "phase": -105.942
+  },
+  "P1": {
+   "amp": 1.45668,
+   "phase": -14.949
+  },
+  "Q1": {
+   "amp": 0.98596,
+   "phase": -162.706
+  },
+  "S1": {
+   "amp": 1.01921,
+   "phase": 137.412
+  },
+  "S2": {
+   "amp": 15.29114,
+   "phase": -62.277
+  },
+  "SA": {
+   "amp": 3.91002,
+   "phase": -102.485
+  },
+  "SSA": {
+   "amp": 0.44035,
+   "phase": -14.417
+  },
+  "T2": {
+   "amp": 0.69996,
+   "phase": -86.307
+  },
+  "Z0": {
+   "amp": 78.7,
+   "phase": 0
+  }
+ }
+}

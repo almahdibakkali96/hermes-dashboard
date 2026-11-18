@@ -1,0 +1,94 @@
+{
+ "id": "monrovia",
+ "name_en": "Monrovia",
+ "name_ar": "مونروفيا",
+ "country": "LR",
+ "lat": 6.32,
+ "lon": -10.81,
+ "timezone": "Africa/Monrovia",
+ "grid": {
+  "lat": 6.375,
+  "lon": -10.875,
+  "distance_km": 9.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.54879,
+   "phase": 152.543
+  },
+  "J1": {
+   "amp": 0.48735,
+   "phase": -12.318
+  },
+  "K1": {
+   "amp": 9.62857,
+   "phase": -13.833
+  },
+  "K2": {
+   "amp": 4.06975,
+   "phase": -143.943
+  },
+  "M2": {
+   "amp": 41.30793,
+   "phase": -167.787
+  },
+  "M4": {
+   "amp": 0.93523,
+   "phase": 141.142
+  },
+  "MF": {
+   "amp": 1.79644,
+   "phase": -6.152
+  },
+  "MM": {
+   "amp": 0.70618,
+   "phase": 15.157
+  },
+  "N2": {
+   "amp": 9.79312,
+   "phase": 174.047
+  },
+  "O1": {
+   "amp": 1.86172,
+   "phase": -89.886
+  },
+  "P1": {
+   "amp": 2.61645,
+   "phase": -24.176
+  },
+  "Q1": {
+   "amp": 0.39838,
+   "phase": -179.83
+  },
+  "S1": {
+   "amp": 1.10634,
+   "phase": 100.497
+  },
+  "S2": {
+   "amp": 13.99379,
+   "phase": -145.675
+  },
+  "SA": {
+   "amp": 1.07963,
+   "phase": -85.382
+  },
+  "SSA": {
+   "amp": 0.4202,
+   "phase": -18.748
+  },
+  "T2": {
+   "amp": 1.09149,
+   "phase": -135.949
+  },
+  "Z0": {
+   "amp": 77.4,
+   "phase": 0
+  }
+ }
+}

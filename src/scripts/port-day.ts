@@ -69,7 +69,13 @@ function init() {
   const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.day-tab[data-day]'));
   const pick = input?.closest('.day-pick') ?? null;
   const pickLabel = pick?.querySelector('[data-pick-label]') ?? null;
-  const tomorrow = keyOf(new Date(noon(cfg.today).getTime() + DAY));
+  // "Today" is the port's real local date. The build's date (cfg.today) can be a day behind for places far from the
+  // rebuild hours (UTC+0…+4, e.g. the Americas or the Pacific): then the page moves itself to the real day below.
+  const tzFor0 = (key: string) => cfg.offsets[Math.round((noon(key).getTime() - noon(cfg.min).getTime()) / DAY)] ?? cfg.tz;
+  const approx = keyOf(new Date(Date.now() + cfg.tz * 60000));
+  let today = keyOf(new Date(Date.now() + tzFor0(approx) * 60000));
+  if (today < cfg.min || today > cfg.max) today = cfg.today;
+  const tomorrow = keyOf(new Date(noon(today).getTime() + DAY));
   const todayMarkup = svg.innerHTML;
 
   const tzFor = (key: string) => cfg.offsets[Math.round((noon(key).getTime() - noon(cfg.min).getTime()) / DAY)] ?? cfg.tz;
@@ -122,6 +128,11 @@ function init() {
       const anchor = cx > W - PR - 40 ? 'end' : cx < PL + 40 ? 'start' : 'middle';
       s += `<circle cx="${cx}" cy="${cy}" r="5" fill="${hi ? '#0d9488' : '#e11d48'}" stroke="#fff" stroke-width="2"/>`;
       s += `<text x="${cx}" y="${hi ? cy - 13 : cy + 24}" text-anchor="${anchor}" class="ex-label" fill="${hi ? '#0f766e' : '#be123c'}">${formatTime(ex.time, d.tz)}</text>`;
+    }
+    // "Now" line when this is the real today drawn here (the build's today keeps its own server-drawn line)
+    if (d.key === today) {
+      const loc = new Date(Date.now() + d.tz * 60000), nx = x(loc.getUTCHours() + loc.getUTCMinutes() / 60);
+      s += `<g id="now-marker"><line x1="${nx}" x2="${nx}" y1="${PT - 6}" y2="${PT + PH}" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 3"/><text x="${nx}" y="${PT - 12}" text-anchor="middle" class="now-label">الآن</text></g>`;
     }
     return s;
   }
@@ -207,12 +218,12 @@ function init() {
     if (more?.classList.contains('is-alert')) { more.innerHTML = moreHtml; more.classList.remove('is-alert'); }
     cur = dayInfo(key);
     const d = cur.date;
-    svg!.innerHTML = key === cfg.today ? todayMarkup : chartMarkup(cur);
+    svg!.innerHTML = key === cfg.today && today === cfg.today ? todayMarkup : chartMarkup(cur);
     svg!.classList.remove('is-scrubbing');
     addScrub();
-    const label = key === cfg.today ? 'اليوم' : key === tomorrow ? 'غداً' : `${WEEKDAYS[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
+    const label = key === today ? 'اليوم' : key === tomorrow ? 'غداً' : `${WEEKDAYS[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
     svg!.setAttribute('aria-label', `منحنى المد والجزر ${label}`);
-    if (title) title.textContent = key === cfg.today || key === tomorrow ? `منحنى المد والجزر ${label}` : `منحنى المد والجزر — ${label}`;
+    if (title) title.textContent = key === today || key === tomorrow ? `منحنى المد والجزر ${label}` : `منحنى المد والجزر — ${label}`;
     if (dateEl) dateEl.textContent = d.toLocaleDateString('en-GB', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' });
     if (tiles) tiles.innerHTML = tilesMarkup(cur);
     if (facts) facts.innerHTML = factsMarkup(cur);
@@ -224,10 +235,10 @@ function init() {
     if (pickLabel) pickLabel.textContent = custom ? `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}` : 'يوم آخر';
     try {
       const u = new URL(location.href);
-      if (key === cfg.today) u.searchParams.delete('d'); else u.searchParams.set('d', key);
+      if (key === today) u.searchParams.delete('d'); else u.searchParams.set('d', key);
       history.replaceState(history.state, '', u);
     } catch { /* file:// or old browser */ }
-    track('day_view', { how, ahead: Math.round((noon(key).getTime() - noon(cfg.today).getTime()) / DAY) });
+    if (how !== 'auto') track('day_view', { how, ahead: Math.round((noon(key).getTime() - noon(cfg.today).getTime()) / DAY) });
   }
   tabs.forEach(t => t.addEventListener('click', () => select(t.dataset.day!, 'tab')));
   input?.addEventListener('change', () => { if (input.value) select(input.value, 'picker'); });
@@ -238,8 +249,17 @@ function init() {
     select((e as CustomEvent<string>).detail, 'calendar');
     card?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+  // The build is a day behind here: relabel the tabs from the real today and show it
+  if (today !== cfg.today) {
+    tabs.forEach(t => {
+      const diff = Math.round((noon(t.dataset.day!).getTime() - noon(today).getTime()) / DAY);
+      const name = t.querySelector('.d-name');
+      if (name) name.textContent = diff === 0 ? 'اليوم' : diff === 1 ? 'غداً' : diff === -1 ? 'أمس' : WEEKDAYS[noon(t.dataset.day!).getUTCDay()];
+    });
+  }
   const asked = new URLSearchParams(location.search).get('d');
-  if (asked && asked !== cfg.today) select(asked, 'link');
+  if (asked && asked !== today) select(asked, 'link');
+  else if (today !== cfg.today) select(today, 'auto');
 
   // --- Hero: is the water rising or falling right now, and when is the next turn ---
   const status = document.getElementById('now-status');

@@ -1,0 +1,94 @@
+{
+ "id": "mersin",
+ "name_en": "Mersin",
+ "name_ar": "مرسين",
+ "country": "TR",
+ "lat": 36.78,
+ "lon": 34.64,
+ "timezone": "Europe/Istanbul",
+ "grid": {
+  "lat": 36.75,
+  "lon": 34.625,
+  "distance_km": 3.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.32842,
+   "phase": -170.552
+  },
+  "J1": {
+   "amp": 0.33831,
+   "phase": 10.47
+  },
+  "K1": {
+   "amp": 2.74455,
+   "phase": -80.199
+  },
+  "K2": {
+   "amp": 1.94156,
+   "phase": -121.638
+  },
+  "M2": {
+   "amp": 11.1182,
+   "phase": -124.204
+  },
+  "M4": {
+   "amp": 0.29145,
+   "phase": -77.075
+  },
+  "MF": {
+   "amp": 0.06868,
+   "phase": 124.584
+  },
+  "MM": {
+   "amp": 0.62307,
+   "phase": -70.624
+  },
+  "N2": {
+   "amp": 1.55378,
+   "phase": -121.28
+  },
+  "O1": {
+   "amp": 2.01592,
+   "phase": -105.573
+  },
+  "P1": {
+   "amp": 1.06652,
+   "phase": -72.222
+  },
+  "Q1": {
+   "amp": 0.42667,
+   "phase": -143.39
+  },
+  "S1": {
+   "amp": 1.29243,
+   "phase": 40.227
+  },
+  "S2": {
+   "amp": 6.43969,
+   "phase": -117.091
+  },
+  "SA": {
+   "amp": 3.93639,
+   "phase": -83.359
+  },
+  "SSA": {
+   "amp": 0.06285,
+   "phase": -166.323
+  },
+  "T2": {
+   "amp": 0.55115,
+   "phase": -94.714
+  },
+  "Z0": {
+   "amp": 27.2,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "perth",
+ "name_en": "Perth (Fremantle)",
+ "name_ar": "بيرث (فريمانتل)",
+ "country": "AU",
+ "lat": -32.06,
+ "lon": 115.74,
+ "timezone": "Australia/Perth",
+ "grid": {
+  "lat": -32.125,
+  "lon": 115.75,
+  "distance_km": 7.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.40693,
+   "phase": 42.109
+  },
+  "J1": {
+   "amp": 0.958,
+   "phase": -133.406
+  },
+  "K1": {
+   "amp": 16.61152,
+   "phase": -178.217
+  },
+  "K2": {
+   "amp": 1.44408,
+   "phase": 35.717
+  },
+  "M2": {
+   "amp": 5.48108,
+   "phase": 58.156
+  },
+  "M4": {
+   "amp": 0.48147,
+   "phase": 137.33
+  },
+  "MF": {
+   "amp": 0.48118,
+   "phase": 31.287
+  },
+  "MM": {
+   "amp": 0.47651,
+   "phase": -133.17
+  },
+  "N2": {
+   "amp": 1.37371,
+   "phase": 106.355
+  },
+  "O1": {
+   "amp": 12.16213,
+   "phase": 176.18
+  },
+  "P1": {
+   "amp": 5.05421,
+   "phase": 170.982
+  },
+  "Q1": {
+   "amp": 2.30196,
+   "phase": 173.284
+  },
+  "S1": {
+   "amp": 1.56956,
+   "phase": -48.047
+  },
+  "S2": {
+   "amp": 4.18781,
+   "phase": 62.995
+  },
+  "SA": {
+   "amp": 5.471,
+   "phase": 143.466
+  },
+  "SSA": {
+   "amp": 0.22768,
+   "phase": -143.037
+  },
+  "T2": {
+   "amp": 0.27831,
+   "phase": -127.958
+  },
+  "Z0": {
+   "amp": 50.3,
+   "phase": 0
+  }
+ }
+}

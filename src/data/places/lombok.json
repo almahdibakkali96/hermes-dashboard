@@ -1,0 +1,94 @@
+{
+ "id": "lombok",
+ "name_en": "Lombok (Senggigi)",
+ "name_ar": "لومبوك",
+ "country": "ID",
+ "lat": -8.49,
+ "lon": 116.04,
+ "timezone": "Asia/Makassar",
+ "grid": {
+  "lat": -8.5,
+  "lon": 116,
+  "distance_km": 4.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.68042,
+   "phase": 49.4
+  },
+  "J1": {
+   "amp": 1.71213,
+   "phase": -167.57
+  },
+  "K1": {
+   "amp": 30.55948,
+   "phase": -175.633
+  },
+  "K2": {
+   "amp": 4.6293,
+   "phase": 97.061
+  },
+  "M2": {
+   "amp": 32.1638,
+   "phase": 80.968
+  },
+  "M4": {
+   "amp": 0.53048,
+   "phase": -124.778
+  },
+  "MF": {
+   "amp": 1.43533,
+   "phase": 13.43
+  },
+  "MM": {
+   "amp": 0.90636,
+   "phase": 5.848
+  },
+  "N2": {
+   "amp": 6.34506,
+   "phase": 63.952
+  },
+  "O1": {
+   "amp": 21.10126,
+   "phase": 165.015
+  },
+  "P1": {
+   "amp": 9.39411,
+   "phase": -179.573
+  },
+  "Q1": {
+   "amp": 4.82527,
+   "phase": 152.343
+  },
+  "S1": {
+   "amp": 1.43919,
+   "phase": -19.26
+  },
+  "S2": {
+   "amp": 17.5144,
+   "phase": 104.901
+  },
+  "SA": {
+   "amp": 2.67142,
+   "phase": 63.408
+  },
+  "SSA": {
+   "amp": 0.52262,
+   "phase": -33.518
+  },
+  "T2": {
+   "amp": 1.05563,
+   "phase": 154.47
+  },
+  "Z0": {
+   "amp": 112,
+   "phase": 0
+  }
+ }
+}

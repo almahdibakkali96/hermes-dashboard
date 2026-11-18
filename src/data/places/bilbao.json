@@ -1,0 +1,94 @@
+{
+ "id": "bilbao",
+ "name_en": "Bilbao (Getxo)",
+ "name_ar": "بلباو",
+ "country": "ES",
+ "lat": 43.35,
+ "lon": -3.03,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 43.375,
+  "lon": -3.125,
+  "distance_km": 8.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.09243,
+   "phase": 52.676
+  },
+  "J1": {
+   "amp": 0.29104,
+   "phase": 93.762
+  },
+  "K1": {
+   "amp": 6.79209,
+   "phase": 70.179
+  },
+  "K2": {
+   "amp": 12.79701,
+   "phase": 121.913
+  },
+  "M2": {
+   "amp": 131.6734,
+   "phase": 92.802
+  },
+  "M4": {
+   "amp": 2.81403,
+   "phase": -39.304
+  },
+  "MF": {
+   "amp": 0.55424,
+   "phase": -159.122
+  },
+  "MM": {
+   "amp": 0.29385,
+   "phase": -166.881
+  },
+  "N2": {
+   "amp": 27.87612,
+   "phase": 73.082
+  },
+  "O1": {
+   "amp": 7.10663,
+   "phase": -39.55
+  },
+  "P1": {
+   "amp": 2.3194,
+   "phase": 57.871
+  },
+  "Q1": {
+   "amp": 1.98529,
+   "phase": -88.005
+  },
+  "S1": {
+   "amp": 1.52184,
+   "phase": 3.987
+  },
+  "S2": {
+   "amp": 45.98794,
+   "phase": 124.975
+  },
+  "SA": {
+   "amp": 2.45471,
+   "phase": -68.386
+  },
+  "SSA": {
+   "amp": 0.37603,
+   "phase": 177.123
+  },
+  "T2": {
+   "amp": 2.17334,
+   "phase": 121.451
+  },
+  "Z0": {
+   "amp": 231,
+   "phase": 0
+  }
+ }
+}

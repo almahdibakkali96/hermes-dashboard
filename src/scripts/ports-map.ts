@@ -87,7 +87,8 @@ function init(root: HTMLElement) {
     const over = (b: number[], list: number[][]) => list.some(t => b[0] < t[2] && b[2] > t[0] && b[1] < t[3] && b[3] > t[1]);
     // Names sit under the dots, so a main port's name may cross a neighbour's dot when no spot is free; never another name
     const hit = (b: number[], major: boolean) => over(b, taken) || (!major && over(b, dotsAt));
-    const order = [...visible].sort((a, b) => Number(b.id === selected) - Number(a.id === selected) || a.pr - b.pr);
+    // The selected port, then the places of the chosen tab (a sea or a continent), then by size
+    const order = [...visible].sort((a, b) => Number(b.id === selected) - Number(a.id === selected) || Number(b.sea === region) - Number(a.sea === region) || a.pr - b.pr);
     // On a wide view only the main ports get a name
     const max = vb[2] > 500 ? (W < 640 ? 6 : 16) : vb[2] > 250 ? 24 : 99;
     let n = 0;

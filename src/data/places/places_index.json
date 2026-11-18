@@ -808,5 +808,1955 @@
   "lon": -2.03,
   "region": "world",
   "timezone": "Europe/Paris"
+ },
+ {
+  "id": "brighton",
+  "name_en": "Brighton",
+  "name_ar": "برايتون",
+  "country": "GB",
+  "lat": 50.81,
+  "lon": -0.14,
+  "region": "world",
+  "timezone": "Europe/London"
+ },
+ {
+  "id": "plymouth",
+  "name_en": "Plymouth",
+  "name_ar": "بليموث",
+  "country": "GB",
+  "lat": 50.35,
+  "lon": -4.14,
+  "region": "world",
+  "timezone": "Europe/London"
+ },
+ {
+  "id": "dover",
+  "name_en": "Dover",
+  "name_ar": "دوفر",
+  "country": "GB",
+  "lat": 51.11,
+  "lon": 1.33,
+  "region": "world",
+  "timezone": "Europe/London"
+ },
+ {
+  "id": "aberdeen",
+  "name_en": "Aberdeen",
+  "name_ar": "أبردين",
+  "country": "GB",
+  "lat": 57.15,
+  "lon": -2.07,
+  "region": "world",
+  "timezone": "Europe/London"
+ },
+ {
+  "id": "dublin",
+  "name_en": "Dublin",
+  "name_ar": "دبلن",
+  "country": "IE",
+  "lat": 53.34,
+  "lon": -6.15,
+  "region": "world",
+  "timezone": "Europe/Dublin"
+ },
+ {
+  "id": "la-rochelle",
+  "name_en": "La Rochelle",
+  "name_ar": "لاروشيل",
+  "country": "FR",
+  "lat": 46.14,
+  "lon": -1.2,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "biarritz",
+  "name_en": "Biarritz",
+  "name_ar": "بياريتز",
+  "country": "FR",
+  "lat": 43.49,
+  "lon": -1.57,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "calais",
+  "name_en": "Calais",
+  "name_ar": "كاليه",
+  "country": "FR",
+  "lat": 50.97,
+  "lon": 1.84,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "cherbourg",
+  "name_en": "Cherbourg",
+  "name_ar": "شيربورغ",
+  "country": "FR",
+  "lat": 49.66,
+  "lon": -1.62,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "sete",
+  "name_en": "Sète",
+  "name_ar": "سيت",
+  "country": "FR",
+  "lat": 43.39,
+  "lon": 3.7,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "ajaccio",
+  "name_en": "Ajaccio",
+  "name_ar": "أجاكسيو",
+  "country": "FR",
+  "lat": 41.91,
+  "lon": 8.74,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "barcelona",
+  "name_en": "Barcelona",
+  "name_ar": "برشلونة",
+  "country": "ES",
+  "lat": 41.37,
+  "lon": 2.2,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "valencia",
+  "name_en": "Valencia",
+  "name_ar": "فالنسيا",
+  "country": "ES",
+  "lat": 39.45,
+  "lon": -0.31,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "alicante",
+  "name_en": "Alicante",
+  "name_ar": "أليكانتي",
+  "country": "ES",
+  "lat": 38.33,
+  "lon": -0.47,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "palma",
+  "name_en": "Palma de Mallorca",
+  "name_ar": "بالما دي مايوركا",
+  "country": "ES",
+  "lat": 39.55,
+  "lon": 2.64,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "ibiza",
+  "name_en": "Ibiza",
+  "name_ar": "إيبيزا",
+  "country": "ES",
+  "lat": 38.9,
+  "lon": 1.44,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "cadiz",
+  "name_en": "Cádiz",
+  "name_ar": "قادش",
+  "country": "ES",
+  "lat": 36.53,
+  "lon": -6.31,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "a-coruna",
+  "name_en": "A Coruña",
+  "name_ar": "لاكورونيا",
+  "country": "ES",
+  "lat": 43.38,
+  "lon": -8.4,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "bilbao",
+  "name_en": "Bilbao (Getxo)",
+  "name_ar": "بلباو",
+  "country": "ES",
+  "lat": 43.35,
+  "lon": -3.03,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "santander",
+  "name_en": "Santander",
+  "name_ar": "سانتاندير",
+  "country": "ES",
+  "lat": 43.47,
+  "lon": -3.78,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "las-palmas",
+  "name_en": "Las Palmas",
+  "name_ar": "لاس بالماس",
+  "country": "ES",
+  "lat": 28.14,
+  "lon": -15.42,
+  "region": "world",
+  "timezone": "Atlantic/Canary"
+ },
+ {
+  "id": "tenerife",
+  "name_en": "Santa Cruz de Tenerife",
+  "name_ar": "تينيريفي",
+  "country": "ES",
+  "lat": 28.47,
+  "lon": -16.24,
+  "region": "world",
+  "timezone": "Atlantic/Canary"
+ },
+ {
+  "id": "lisbon",
+  "name_en": "Lisbon (Cascais)",
+  "name_ar": "لشبونة",
+  "country": "PT",
+  "lat": 38.69,
+  "lon": -9.42,
+  "region": "world",
+  "timezone": "Europe/Lisbon"
+ },
+ {
+  "id": "porto",
+  "name_en": "Porto",
+  "name_ar": "بورتو",
+  "country": "PT",
+  "lat": 41.17,
+  "lon": -8.7,
+  "region": "world",
+  "timezone": "Europe/Lisbon"
+ },
+ {
+  "id": "faro",
+  "name_en": "Faro",
+  "name_ar": "فارو",
+  "country": "PT",
+  "lat": 37.0,
+  "lon": -7.93,
+  "region": "world",
+  "timezone": "Europe/Lisbon"
+ },
+ {
+  "id": "funchal",
+  "name_en": "Funchal (Madeira)",
+  "name_ar": "فونشال (ماديرا)",
+  "country": "PT",
+  "lat": 32.64,
+  "lon": -16.91,
+  "region": "world",
+  "timezone": "Atlantic/Madeira"
+ },
+ {
+  "id": "naples",
+  "name_en": "Naples",
+  "name_ar": "نابولي",
+  "country": "IT",
+  "lat": 40.83,
+  "lon": 14.25,
+  "region": "world",
+  "timezone": "Europe/Rome"
+ },
+ {
+  "id": "genoa",
+  "name_en": "Genoa",
+  "name_ar": "جنوة",
+  "country": "IT",
+  "lat": 44.4,
+  "lon": 8.92,
+  "region": "world",
+  "timezone": "Europe/Rome"
+ },
+ {
+  "id": "venice",
+  "name_en": "Venice (Lido)",
+  "name_ar": "البندقية",
+  "country": "IT",
+  "lat": 45.4,
+  "lon": 12.38,
+  "region": "world",
+  "timezone": "Europe/Rome"
+ },
+ {
+  "id": "bari",
+  "name_en": "Bari",
+  "name_ar": "باري",
+  "country": "IT",
+  "lat": 41.13,
+  "lon": 16.87,
+  "region": "world",
+  "timezone": "Europe/Rome"
+ },
+ {
+  "id": "ostia",
+  "name_en": "Rome (Ostia)",
+  "name_ar": "روما (أوستيا)",
+  "country": "IT",
+  "lat": 41.73,
+  "lon": 12.28,
+  "region": "world",
+  "timezone": "Europe/Rome"
+ },
+ {
+  "id": "catania",
+  "name_en": "Catania",
+  "name_ar": "كاتانيا",
+  "country": "IT",
+  "lat": 37.5,
+  "lon": 15.1,
+  "region": "world",
+  "timezone": "Europe/Rome"
+ },
+ {
+  "id": "cagliari",
+  "name_en": "Cagliari",
+  "name_ar": "كالياري",
+  "country": "IT",
+  "lat": 39.2,
+  "lon": 9.11,
+  "region": "world",
+  "timezone": "Europe/Rome"
+ },
+ {
+  "id": "valletta",
+  "name_en": "Valletta",
+  "name_ar": "فاليتا",
+  "country": "MT",
+  "lat": 35.9,
+  "lon": 14.52,
+  "region": "world",
+  "timezone": "Europe/Malta"
+ },
+ {
+  "id": "thessaloniki",
+  "name_en": "Thessaloniki",
+  "name_ar": "سالونيك",
+  "country": "GR",
+  "lat": 40.62,
+  "lon": 22.94,
+  "region": "world",
+  "timezone": "Europe/Athens"
+ },
+ {
+  "id": "heraklion",
+  "name_en": "Heraklion (Crete)",
+  "name_ar": "هيراكليون (كريت)",
+  "country": "GR",
+  "lat": 35.34,
+  "lon": 25.14,
+  "region": "world",
+  "timezone": "Europe/Athens"
+ },
+ {
+  "id": "rhodes",
+  "name_en": "Rhodes",
+  "name_ar": "رودس",
+  "country": "GR",
+  "lat": 36.45,
+  "lon": 28.23,
+  "region": "world",
+  "timezone": "Europe/Athens"
+ },
+ {
+  "id": "corfu",
+  "name_en": "Corfu",
+  "name_ar": "كورفو",
+  "country": "GR",
+  "lat": 39.62,
+  "lon": 19.92,
+  "region": "world",
+  "timezone": "Europe/Athens"
+ },
+ {
+  "id": "split",
+  "name_en": "Split",
+  "name_ar": "سبليت",
+  "country": "HR",
+  "lat": 43.5,
+  "lon": 16.43,
+  "region": "world",
+  "timezone": "Europe/Zagreb"
+ },
+ {
+  "id": "dubrovnik",
+  "name_en": "Dubrovnik",
+  "name_ar": "دوبروفنيك",
+  "country": "HR",
+  "lat": 42.64,
+  "lon": 18.1,
+  "region": "world",
+  "timezone": "Europe/Zagreb"
+ },
+ {
+  "id": "budva",
+  "name_en": "Budva",
+  "name_ar": "بودفا",
+  "country": "ME",
+  "lat": 42.28,
+  "lon": 18.84,
+  "region": "world",
+  "timezone": "Europe/Podgorica"
+ },
+ {
+  "id": "durres",
+  "name_en": "Durrës",
+  "name_ar": "دوريس",
+  "country": "AL",
+  "lat": 41.31,
+  "lon": 19.44,
+  "region": "world",
+  "timezone": "Europe/Tirane"
+ },
+ {
+  "id": "alanya",
+  "name_en": "Alanya",
+  "name_ar": "ألانيا",
+  "country": "TR",
+  "lat": 36.54,
+  "lon": 32.0,
+  "region": "world",
+  "timezone": "Europe/Istanbul"
+ },
+ {
+  "id": "mersin",
+  "name_en": "Mersin",
+  "name_ar": "مرسين",
+  "country": "TR",
+  "lat": 36.78,
+  "lon": 34.64,
+  "region": "world",
+  "timezone": "Europe/Istanbul"
+ },
+ {
+  "id": "fethiye",
+  "name_en": "Fethiye",
+  "name_ar": "فتحية",
+  "country": "TR",
+  "lat": 36.62,
+  "lon": 29.1,
+  "region": "world",
+  "timezone": "Europe/Istanbul"
+ },
+ {
+  "id": "iskenderun",
+  "name_en": "Iskenderun",
+  "name_ar": "الإسكندرونة",
+  "country": "TR",
+  "lat": 36.59,
+  "lon": 36.17,
+  "region": "world",
+  "timezone": "Europe/Istanbul"
+ },
+ {
+  "id": "limassol",
+  "name_en": "Limassol",
+  "name_ar": "ليماسول",
+  "country": "CY",
+  "lat": 34.67,
+  "lon": 33.04,
+  "region": "world",
+  "timezone": "Asia/Nicosia"
+ },
+ {
+  "id": "odesa",
+  "name_en": "Odesa",
+  "name_ar": "أوديسا",
+  "country": "UA",
+  "lat": 46.48,
+  "lon": 30.76,
+  "region": "world",
+  "timezone": "Europe/Kyiv"
+ },
+ {
+  "id": "varna",
+  "name_en": "Varna",
+  "name_ar": "فارنا",
+  "country": "BG",
+  "lat": 43.2,
+  "lon": 27.93,
+  "region": "world",
+  "timezone": "Europe/Sofia"
+ },
+ {
+  "id": "constanta",
+  "name_en": "Constanța",
+  "name_ar": "كونستانتسا",
+  "country": "RO",
+  "lat": 44.17,
+  "lon": 28.66,
+  "region": "world",
+  "timezone": "Europe/Bucharest"
+ },
+ {
+  "id": "batumi",
+  "name_en": "Batumi",
+  "name_ar": "باتومي",
+  "country": "GE",
+  "lat": 41.65,
+  "lon": 41.63,
+  "region": "world",
+  "timezone": "Asia/Tbilisi"
+ },
+ {
+  "id": "sochi",
+  "name_en": "Sochi",
+  "name_ar": "سوتشي",
+  "country": "RU",
+  "lat": 43.58,
+  "lon": 39.71,
+  "region": "world",
+  "timezone": "Europe/Moscow"
+ },
+ {
+  "id": "scheveningen",
+  "name_en": "The Hague (Scheveningen)",
+  "name_ar": "لاهاي (شيفنينغن)",
+  "country": "NL",
+  "lat": 52.11,
+  "lon": 4.26,
+  "region": "world",
+  "timezone": "Europe/Amsterdam"
+ },
+ {
+  "id": "ostend",
+  "name_en": "Ostend",
+  "name_ar": "أوستند",
+  "country": "BE",
+  "lat": 51.23,
+  "lon": 2.91,
+  "region": "world",
+  "timezone": "Europe/Brussels"
+ },
+ {
+  "id": "copenhagen",
+  "name_en": "Copenhagen",
+  "name_ar": "كوبنهاغن",
+  "country": "DK",
+  "lat": 55.69,
+  "lon": 12.61,
+  "region": "world",
+  "timezone": "Europe/Copenhagen"
+ },
+ {
+  "id": "esbjerg",
+  "name_en": "Esbjerg",
+  "name_ar": "إسبيرغ",
+  "country": "DK",
+  "lat": 55.46,
+  "lon": 8.43,
+  "region": "world",
+  "timezone": "Europe/Copenhagen"
+ },
+ {
+  "id": "gothenburg",
+  "name_en": "Gothenburg",
+  "name_ar": "غوتنبرغ",
+  "country": "SE",
+  "lat": 57.68,
+  "lon": 11.84,
+  "region": "world",
+  "timezone": "Europe/Stockholm"
+ },
+ {
+  "id": "bergen",
+  "name_en": "Bergen",
+  "name_ar": "بيرغن",
+  "country": "NO",
+  "lat": 60.39,
+  "lon": 5.3,
+  "region": "world",
+  "timezone": "Europe/Oslo"
+ },
+ {
+  "id": "oslo",
+  "name_en": "Oslo",
+  "name_ar": "أوسلو",
+  "country": "NO",
+  "lat": 59.9,
+  "lon": 10.73,
+  "region": "world",
+  "timezone": "Europe/Oslo"
+ },
+ {
+  "id": "helsinki",
+  "name_en": "Helsinki",
+  "name_ar": "هلسنكي",
+  "country": "FI",
+  "lat": 60.16,
+  "lon": 24.96,
+  "region": "world",
+  "timezone": "Europe/Helsinki"
+ },
+ {
+  "id": "gdansk",
+  "name_en": "Gdańsk",
+  "name_ar": "غدانسك",
+  "country": "PL",
+  "lat": 54.41,
+  "lon": 18.68,
+  "region": "world",
+  "timezone": "Europe/Warsaw"
+ },
+ {
+  "id": "tallinn",
+  "name_en": "Tallinn",
+  "name_ar": "تالين",
+  "country": "EE",
+  "lat": 59.45,
+  "lon": 24.75,
+  "region": "world",
+  "timezone": "Europe/Tallinn"
+ },
+ {
+  "id": "reykjavik",
+  "name_en": "Reykjavík",
+  "name_ar": "ريكيافيك",
+  "country": "IS",
+  "lat": 64.15,
+  "lon": -21.95,
+  "region": "world",
+  "timezone": "Atlantic/Reykjavik"
+ },
+ {
+  "id": "dakar",
+  "name_en": "Dakar",
+  "name_ar": "داكار",
+  "country": "SN",
+  "lat": 14.69,
+  "lon": -17.45,
+  "region": "world",
+  "timezone": "Africa/Dakar"
+ },
+ {
+  "id": "banjul",
+  "name_en": "Banjul",
+  "name_ar": "بانجول",
+  "country": "GM",
+  "lat": 13.46,
+  "lon": -16.57,
+  "region": "world",
+  "timezone": "Africa/Banjul"
+ },
+ {
+  "id": "conakry",
+  "name_en": "Conakry",
+  "name_ar": "كوناكري",
+  "country": "GN",
+  "lat": 9.51,
+  "lon": -13.71,
+  "region": "world",
+  "timezone": "Africa/Conakry"
+ },
+ {
+  "id": "freetown",
+  "name_en": "Freetown",
+  "name_ar": "فريتاون",
+  "country": "SL",
+  "lat": 8.49,
+  "lon": -13.24,
+  "region": "world",
+  "timezone": "Africa/Freetown"
+ },
+ {
+  "id": "monrovia",
+  "name_en": "Monrovia",
+  "name_ar": "مونروفيا",
+  "country": "LR",
+  "lat": 6.32,
+  "lon": -10.81,
+  "region": "world",
+  "timezone": "Africa/Monrovia"
+ },
+ {
+  "id": "abidjan",
+  "name_en": "Abidjan",
+  "name_ar": "أبيدجان",
+  "country": "CI",
+  "lat": 5.25,
+  "lon": -4.0,
+  "region": "world",
+  "timezone": "Africa/Abidjan"
+ },
+ {
+  "id": "accra",
+  "name_en": "Accra",
+  "name_ar": "أكرا",
+  "country": "GH",
+  "lat": 5.53,
+  "lon": -0.2,
+  "region": "world",
+  "timezone": "Africa/Accra"
+ },
+ {
+  "id": "lome",
+  "name_en": "Lomé",
+  "name_ar": "لومي",
+  "country": "TG",
+  "lat": 6.12,
+  "lon": 1.23,
+  "region": "world",
+  "timezone": "Africa/Lome"
+ },
+ {
+  "id": "cotonou",
+  "name_en": "Cotonou",
+  "name_ar": "كوتونو",
+  "country": "BJ",
+  "lat": 6.35,
+  "lon": 2.42,
+  "region": "world",
+  "timezone": "Africa/Porto-Novo"
+ },
+ {
+  "id": "lagos",
+  "name_en": "Lagos",
+  "name_ar": "لاغوس",
+  "country": "NG",
+  "lat": 6.41,
+  "lon": 3.4,
+  "region": "world",
+  "timezone": "Africa/Lagos"
+ },
+ {
+  "id": "kribi",
+  "name_en": "Kribi",
+  "name_ar": "كريبي",
+  "country": "CM",
+  "lat": 2.94,
+  "lon": 9.9,
+  "region": "world",
+  "timezone": "Africa/Douala"
+ },
+ {
+  "id": "malabo",
+  "name_en": "Malabo",
+  "name_ar": "مالابو",
+  "country": "GQ",
+  "lat": 3.76,
+  "lon": 8.78,
+  "region": "world",
+  "timezone": "Africa/Malabo"
+ },
+ {
+  "id": "sao-tome",
+  "name_en": "São Tomé",
+  "name_ar": "ساو تومي",
+  "country": "ST",
+  "lat": 0.34,
+  "lon": 6.74,
+  "region": "world",
+  "timezone": "Africa/Sao_Tome"
+ },
+ {
+  "id": "libreville",
+  "name_en": "Libreville",
+  "name_ar": "ليبرفيل",
+  "country": "GA",
+  "lat": 0.39,
+  "lon": 9.44,
+  "region": "world",
+  "timezone": "Africa/Libreville"
+ },
+ {
+  "id": "pointe-noire",
+  "name_en": "Pointe-Noire",
+  "name_ar": "بوانت نوار",
+  "country": "CG",
+  "lat": -4.78,
+  "lon": 11.84,
+  "region": "world",
+  "timezone": "Africa/Brazzaville"
+ },
+ {
+  "id": "luanda",
+  "name_en": "Luanda",
+  "name_ar": "لواندا",
+  "country": "AO",
+  "lat": -8.8,
+  "lon": 13.22,
+  "region": "world",
+  "timezone": "Africa/Luanda"
+ },
+ {
+  "id": "walvis-bay",
+  "name_en": "Walvis Bay",
+  "name_ar": "والفيس باي",
+  "country": "NA",
+  "lat": -22.95,
+  "lon": 14.49,
+  "region": "world",
+  "timezone": "Africa/Windhoek"
+ },
+ {
+  "id": "cape-town",
+  "name_en": "Cape Town",
+  "name_ar": "كيب تاون",
+  "country": "ZA",
+  "lat": -33.9,
+  "lon": 18.42,
+  "region": "world",
+  "timezone": "Africa/Johannesburg"
+ },
+ {
+  "id": "port-elizabeth",
+  "name_en": "Gqeberha (Port Elizabeth)",
+  "name_ar": "بورت إليزابيث",
+  "country": "ZA",
+  "lat": -33.96,
+  "lon": 25.63,
+  "region": "world",
+  "timezone": "Africa/Johannesburg"
+ },
+ {
+  "id": "durban",
+  "name_en": "Durban",
+  "name_ar": "ديربان",
+  "country": "ZA",
+  "lat": -29.87,
+  "lon": 31.05,
+  "region": "world",
+  "timezone": "Africa/Johannesburg"
+ },
+ {
+  "id": "maputo",
+  "name_en": "Maputo",
+  "name_ar": "مابوتو",
+  "country": "MZ",
+  "lat": -25.97,
+  "lon": 32.59,
+  "region": "world",
+  "timezone": "Africa/Maputo"
+ },
+ {
+  "id": "toamasina",
+  "name_en": "Toamasina",
+  "name_ar": "تواماسينا",
+  "country": "MG",
+  "lat": -18.15,
+  "lon": 49.42,
+  "region": "world",
+  "timezone": "Indian/Antananarivo"
+ },
+ {
+  "id": "mahajanga",
+  "name_en": "Mahajanga",
+  "name_ar": "ماهاجانغا",
+  "country": "MG",
+  "lat": -15.72,
+  "lon": 46.31,
+  "region": "world",
+  "timezone": "Indian/Antananarivo"
+ },
+ {
+  "id": "dar-es-salaam",
+  "name_en": "Dar es Salaam",
+  "name_ar": "دار السلام",
+  "country": "TZ",
+  "lat": -6.82,
+  "lon": 39.3,
+  "region": "world",
+  "timezone": "Africa/Dar_es_Salaam"
+ },
+ {
+  "id": "malindi",
+  "name_en": "Malindi",
+  "name_ar": "ماليندي",
+  "country": "KE",
+  "lat": -3.22,
+  "lon": 40.13,
+  "region": "world",
+  "timezone": "Africa/Nairobi"
+ },
+ {
+  "id": "lamu",
+  "name_en": "Lamu",
+  "name_ar": "لامو",
+  "country": "KE",
+  "lat": -2.27,
+  "lon": 40.9,
+  "region": "world",
+  "timezone": "Africa/Nairobi"
+ },
+ {
+  "id": "praia",
+  "name_en": "Praia",
+  "name_ar": "برايا",
+  "country": "CV",
+  "lat": 14.92,
+  "lon": -23.51,
+  "region": "world",
+  "timezone": "Atlantic/Cape_Verde"
+ },
+ {
+  "id": "saint-denis-re",
+  "name_en": "Saint-Denis (Réunion)",
+  "name_ar": "سان دوني (لا ريونيون)",
+  "country": "RE",
+  "lat": -20.88,
+  "lon": 55.45,
+  "region": "world",
+  "timezone": "Indian/Reunion"
+ },
+ {
+  "id": "assab",
+  "name_en": "Assab",
+  "name_ar": "عصب",
+  "country": "ER",
+  "lat": 13.01,
+  "lon": 42.74,
+  "region": "world",
+  "timezone": "Africa/Asmara"
+ },
+ {
+  "id": "chennai",
+  "name_en": "Chennai",
+  "name_ar": "تشيناي",
+  "country": "IN",
+  "lat": 13.08,
+  "lon": 80.29,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "goa",
+  "name_en": "Goa (Panaji)",
+  "name_ar": "غوا",
+  "country": "IN",
+  "lat": 15.5,
+  "lon": 73.8,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "visakhapatnam",
+  "name_en": "Visakhapatnam",
+  "name_ar": "فيساخاباتنام",
+  "country": "IN",
+  "lat": 17.69,
+  "lon": 83.3,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "kozhikode",
+  "name_en": "Kozhikode (Calicut)",
+  "name_ar": "كاليكوت",
+  "country": "IN",
+  "lat": 11.25,
+  "lon": 75.77,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "mangalore",
+  "name_en": "Mangaluru",
+  "name_ar": "مانغالور",
+  "country": "IN",
+  "lat": 12.87,
+  "lon": 74.83,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "trivandrum",
+  "name_en": "Thiruvananthapuram",
+  "name_ar": "تريفاندرم",
+  "country": "IN",
+  "lat": 8.48,
+  "lon": 76.92,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "puducherry",
+  "name_en": "Puducherry",
+  "name_ar": "بونديشيري",
+  "country": "IN",
+  "lat": 11.93,
+  "lon": 79.84,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "porbandar",
+  "name_en": "Porbandar",
+  "name_ar": "بوربندر",
+  "country": "IN",
+  "lat": 21.63,
+  "lon": 69.6,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "port-blair",
+  "name_en": "Port Blair",
+  "name_ar": "بورت بلير",
+  "country": "IN",
+  "lat": 11.67,
+  "lon": 92.75,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "galle",
+  "name_en": "Galle",
+  "name_ar": "غالي",
+  "country": "LK",
+  "lat": 6.03,
+  "lon": 80.21,
+  "region": "world",
+  "timezone": "Asia/Colombo"
+ },
+ {
+  "id": "trincomalee",
+  "name_en": "Trincomalee",
+  "name_ar": "ترينكومالي",
+  "country": "LK",
+  "lat": 8.57,
+  "lon": 81.24,
+  "region": "world",
+  "timezone": "Asia/Colombo"
+ },
+ {
+  "id": "coxs-bazar",
+  "name_en": "Cox's Bazar",
+  "name_ar": "كوكس بازار",
+  "country": "BD",
+  "lat": 21.43,
+  "lon": 91.97,
+  "region": "world",
+  "timezone": "Asia/Dhaka"
+ },
+ {
+  "id": "addu",
+  "name_en": "Addu",
+  "name_ar": "أدو",
+  "country": "MV",
+  "lat": -0.63,
+  "lon": 73.16,
+  "region": "world",
+  "timezone": "Indian/Maldives"
+ },
+ {
+  "id": "krabi",
+  "name_en": "Krabi (Ao Nang)",
+  "name_ar": "كرابي",
+  "country": "TH",
+  "lat": 8.03,
+  "lon": 98.82,
+  "region": "world",
+  "timezone": "Asia/Bangkok"
+ },
+ {
+  "id": "koh-samui",
+  "name_en": "Koh Samui",
+  "name_ar": "كوه ساموي",
+  "country": "TH",
+  "lat": 9.53,
+  "lon": 100.06,
+  "region": "world",
+  "timezone": "Asia/Bangkok"
+ },
+ {
+  "id": "hua-hin",
+  "name_en": "Hua Hin",
+  "name_ar": "هوا هين",
+  "country": "TH",
+  "lat": 12.57,
+  "lon": 99.96,
+  "region": "world",
+  "timezone": "Asia/Bangkok"
+ },
+ {
+  "id": "port-klang",
+  "name_en": "Port Klang (Kuala Lumpur)",
+  "name_ar": "بورت كلانغ (كوالالمبور)",
+  "country": "MY",
+  "lat": 3.0,
+  "lon": 101.39,
+  "region": "world",
+  "timezone": "Asia/Kuala_Lumpur"
+ },
+ {
+  "id": "malacca",
+  "name_en": "Malacca",
+  "name_ar": "ملقا",
+  "country": "MY",
+  "lat": 2.19,
+  "lon": 102.24,
+  "region": "world",
+  "timezone": "Asia/Kuala_Lumpur"
+ },
+ {
+  "id": "kuantan",
+  "name_en": "Kuantan",
+  "name_ar": "كوانتان",
+  "country": "MY",
+  "lat": 3.81,
+  "lon": 103.34,
+  "region": "world",
+  "timezone": "Asia/Kuala_Lumpur"
+ },
+ {
+  "id": "kota-kinabalu",
+  "name_en": "Kota Kinabalu",
+  "name_ar": "كوتا كينابالو",
+  "country": "MY",
+  "lat": 5.98,
+  "lon": 116.07,
+  "region": "world",
+  "timezone": "Asia/Kuching"
+ },
+ {
+  "id": "singapore",
+  "name_en": "Singapore",
+  "name_ar": "سنغافورة",
+  "country": "SG",
+  "lat": 1.26,
+  "lon": 103.83,
+  "region": "world",
+  "timezone": "Asia/Singapore"
+ },
+ {
+  "id": "jakarta",
+  "name_en": "Jakarta",
+  "name_ar": "جاكرتا",
+  "country": "ID",
+  "lat": -6.1,
+  "lon": 106.81,
+  "region": "world",
+  "timezone": "Asia/Jakarta"
+ },
+ {
+  "id": "lombok",
+  "name_en": "Lombok (Senggigi)",
+  "name_ar": "لومبوك",
+  "country": "ID",
+  "lat": -8.49,
+  "lon": 116.04,
+  "region": "world",
+  "timezone": "Asia/Makassar"
+ },
+ {
+  "id": "makassar",
+  "name_en": "Makassar",
+  "name_ar": "مكاسر",
+  "country": "ID",
+  "lat": -5.13,
+  "lon": 119.4,
+  "region": "world",
+  "timezone": "Asia/Makassar"
+ },
+ {
+  "id": "banda-aceh",
+  "name_en": "Banda Aceh",
+  "name_ar": "باندا آتشيه",
+  "country": "ID",
+  "lat": 5.57,
+  "lon": 95.32,
+  "region": "world",
+  "timezone": "Asia/Jakarta"
+ },
+ {
+  "id": "batam",
+  "name_en": "Batam",
+  "name_ar": "باتام",
+  "country": "ID",
+  "lat": 1.13,
+  "lon": 104.05,
+  "region": "world",
+  "timezone": "Asia/Jakarta"
+ },
+ {
+  "id": "padang",
+  "name_en": "Padang",
+  "name_ar": "بادانغ",
+  "country": "ID",
+  "lat": -0.95,
+  "lon": 100.35,
+  "region": "world",
+  "timezone": "Asia/Jakarta"
+ },
+ {
+  "id": "manado",
+  "name_en": "Manado",
+  "name_ar": "مانادو",
+  "country": "ID",
+  "lat": 1.49,
+  "lon": 124.84,
+  "region": "world",
+  "timezone": "Asia/Makassar"
+ },
+ {
+  "id": "ambon",
+  "name_en": "Ambon",
+  "name_ar": "أمبون",
+  "country": "ID",
+  "lat": -3.69,
+  "lon": 128.18,
+  "region": "world",
+  "timezone": "Asia/Jayapura"
+ },
+ {
+  "id": "manila",
+  "name_en": "Manila",
+  "name_ar": "مانيلا",
+  "country": "PH",
+  "lat": 14.58,
+  "lon": 120.97,
+  "region": "world",
+  "timezone": "Asia/Manila"
+ },
+ {
+  "id": "cebu",
+  "name_en": "Cebu",
+  "name_ar": "سيبو",
+  "country": "PH",
+  "lat": 10.3,
+  "lon": 123.9,
+  "region": "world",
+  "timezone": "Asia/Manila"
+ },
+ {
+  "id": "boracay",
+  "name_en": "Boracay",
+  "name_ar": "بوراكاي",
+  "country": "PH",
+  "lat": 11.96,
+  "lon": 121.92,
+  "region": "world",
+  "timezone": "Asia/Manila"
+ },
+ {
+  "id": "zamboanga",
+  "name_en": "Zamboanga",
+  "name_ar": "زامبوانغا",
+  "country": "PH",
+  "lat": 6.91,
+  "lon": 122.07,
+  "region": "world",
+  "timezone": "Asia/Manila"
+ },
+ {
+  "id": "da-nang",
+  "name_en": "Da Nang",
+  "name_ar": "دا نانغ",
+  "country": "VN",
+  "lat": 16.07,
+  "lon": 108.23,
+  "region": "world",
+  "timezone": "Asia/Ho_Chi_Minh"
+ },
+ {
+  "id": "nha-trang",
+  "name_en": "Nha Trang",
+  "name_ar": "نها ترانغ",
+  "country": "VN",
+  "lat": 12.24,
+  "lon": 109.2,
+  "region": "world",
+  "timezone": "Asia/Ho_Chi_Minh"
+ },
+ {
+  "id": "ha-long",
+  "name_en": "Ha Long",
+  "name_ar": "ها لونغ",
+  "country": "VN",
+  "lat": 20.95,
+  "lon": 107.08,
+  "region": "world",
+  "timezone": "Asia/Ho_Chi_Minh"
+ },
+ {
+  "id": "sihanoukville",
+  "name_en": "Sihanoukville",
+  "name_ar": "سيهانوكفيل",
+  "country": "KH",
+  "lat": 10.62,
+  "lon": 103.51,
+  "region": "world",
+  "timezone": "Asia/Phnom_Penh"
+ },
+ {
+  "id": "hong-kong",
+  "name_en": "Hong Kong",
+  "name_ar": "هونغ كونغ",
+  "country": "HK",
+  "lat": 22.28,
+  "lon": 114.17,
+  "region": "world",
+  "timezone": "Asia/Hong_Kong"
+ },
+ {
+  "id": "xiamen",
+  "name_en": "Xiamen",
+  "name_ar": "شيامن",
+  "country": "CN",
+  "lat": 24.45,
+  "lon": 118.07,
+  "region": "world",
+  "timezone": "Asia/Shanghai"
+ },
+ {
+  "id": "qingdao",
+  "name_en": "Qingdao",
+  "name_ar": "تشينغداو",
+  "country": "CN",
+  "lat": 36.06,
+  "lon": 120.33,
+  "region": "world",
+  "timezone": "Asia/Shanghai"
+ },
+ {
+  "id": "sanya",
+  "name_en": "Sanya",
+  "name_ar": "سانيا",
+  "country": "CN",
+  "lat": 18.22,
+  "lon": 109.5,
+  "region": "world",
+  "timezone": "Asia/Shanghai"
+ },
+ {
+  "id": "kaohsiung",
+  "name_en": "Kaohsiung",
+  "name_ar": "كاوهسيونغ",
+  "country": "TW",
+  "lat": 22.61,
+  "lon": 120.27,
+  "region": "world",
+  "timezone": "Asia/Taipei"
+ },
+ {
+  "id": "busan",
+  "name_en": "Busan",
+  "name_ar": "بوسان",
+  "country": "KR",
+  "lat": 35.1,
+  "lon": 129.04,
+  "region": "world",
+  "timezone": "Asia/Seoul"
+ },
+ {
+  "id": "incheon",
+  "name_en": "Incheon",
+  "name_ar": "إنتشون",
+  "country": "KR",
+  "lat": 37.45,
+  "lon": 126.6,
+  "region": "world",
+  "timezone": "Asia/Seoul"
+ },
+ {
+  "id": "tokyo",
+  "name_en": "Tokyo",
+  "name_ar": "طوكيو",
+  "country": "JP",
+  "lat": 35.62,
+  "lon": 139.78,
+  "region": "world",
+  "timezone": "Asia/Tokyo"
+ },
+ {
+  "id": "osaka",
+  "name_en": "Osaka",
+  "name_ar": "أوساكا",
+  "country": "JP",
+  "lat": 34.65,
+  "lon": 135.42,
+  "region": "world",
+  "timezone": "Asia/Tokyo"
+ },
+ {
+  "id": "naha",
+  "name_en": "Naha (Okinawa)",
+  "name_ar": "ناها (أوكيناوا)",
+  "country": "JP",
+  "lat": 26.21,
+  "lon": 127.67,
+  "region": "world",
+  "timezone": "Asia/Tokyo"
+ },
+ {
+  "id": "fukuoka",
+  "name_en": "Fukuoka",
+  "name_ar": "فوكوكا",
+  "country": "JP",
+  "lat": 33.6,
+  "lon": 130.4,
+  "region": "world",
+  "timezone": "Asia/Tokyo"
+ },
+ {
+  "id": "vladivostok",
+  "name_en": "Vladivostok",
+  "name_ar": "فلاديفوستوك",
+  "country": "RU",
+  "lat": 43.11,
+  "lon": 131.88,
+  "region": "world",
+  "timezone": "Asia/Vladivostok"
+ },
+ {
+  "id": "sydney",
+  "name_en": "Sydney",
+  "name_ar": "سيدني",
+  "country": "AU",
+  "lat": -33.89,
+  "lon": 151.28,
+  "region": "world",
+  "timezone": "Australia/Sydney"
+ },
+ {
+  "id": "melbourne",
+  "name_en": "Melbourne",
+  "name_ar": "ملبورن",
+  "country": "AU",
+  "lat": -37.86,
+  "lon": 144.97,
+  "region": "world",
+  "timezone": "Australia/Melbourne"
+ },
+ {
+  "id": "gold-coast",
+  "name_en": "Gold Coast",
+  "name_ar": "غولد كوست",
+  "country": "AU",
+  "lat": -27.97,
+  "lon": 153.43,
+  "region": "world",
+  "timezone": "Australia/Brisbane"
+ },
+ {
+  "id": "perth",
+  "name_en": "Perth (Fremantle)",
+  "name_ar": "بيرث (فريمانتل)",
+  "country": "AU",
+  "lat": -32.06,
+  "lon": 115.74,
+  "region": "world",
+  "timezone": "Australia/Perth"
+ },
+ {
+  "id": "darwin",
+  "name_en": "Darwin",
+  "name_ar": "داروين",
+  "country": "AU",
+  "lat": -12.46,
+  "lon": 130.84,
+  "region": "world",
+  "timezone": "Australia/Darwin"
+ },
+ {
+  "id": "cairns",
+  "name_en": "Cairns",
+  "name_ar": "كيرنز",
+  "country": "AU",
+  "lat": -16.92,
+  "lon": 145.78,
+  "region": "world",
+  "timezone": "Australia/Brisbane"
+ },
+ {
+  "id": "adelaide",
+  "name_en": "Adelaide (Glenelg)",
+  "name_ar": "أديلايد",
+  "country": "AU",
+  "lat": -34.98,
+  "lon": 138.51,
+  "region": "world",
+  "timezone": "Australia/Adelaide"
+ },
+ {
+  "id": "hobart",
+  "name_en": "Hobart",
+  "name_ar": "هوبارت",
+  "country": "AU",
+  "lat": -42.88,
+  "lon": 147.34,
+  "region": "world",
+  "timezone": "Australia/Hobart"
+ },
+ {
+  "id": "auckland",
+  "name_en": "Auckland",
+  "name_ar": "أوكلاند",
+  "country": "NZ",
+  "lat": -36.84,
+  "lon": 174.77,
+  "region": "world",
+  "timezone": "Pacific/Auckland"
+ },
+ {
+  "id": "wellington",
+  "name_en": "Wellington",
+  "name_ar": "ويلينغتون",
+  "country": "NZ",
+  "lat": -41.29,
+  "lon": 174.78,
+  "region": "world",
+  "timezone": "Pacific/Auckland"
+ },
+ {
+  "id": "suva",
+  "name_en": "Suva (Fiji)",
+  "name_ar": "سوفا (فيجي)",
+  "country": "FJ",
+  "lat": -18.14,
+  "lon": 178.42,
+  "region": "world",
+  "timezone": "Pacific/Fiji"
+ },
+ {
+  "id": "noumea",
+  "name_en": "Nouméa",
+  "name_ar": "نوميا",
+  "country": "NC",
+  "lat": -22.28,
+  "lon": 166.44,
+  "region": "world",
+  "timezone": "Pacific/Noumea"
+ },
+ {
+  "id": "papeete",
+  "name_en": "Papeete (Tahiti)",
+  "name_ar": "بابيتي (تاهيتي)",
+  "country": "PF",
+  "lat": -17.53,
+  "lon": -149.57,
+  "region": "world",
+  "timezone": "Pacific/Tahiti"
+ },
+ {
+  "id": "honolulu",
+  "name_en": "Honolulu",
+  "name_ar": "هونولولو",
+  "country": "US",
+  "lat": 21.3,
+  "lon": -157.86,
+  "region": "world",
+  "timezone": "Pacific/Honolulu"
+ },
+ {
+  "id": "new-york",
+  "name_en": "New York (Coney Island)",
+  "name_ar": "نيويورك",
+  "country": "US",
+  "lat": 40.57,
+  "lon": -73.98,
+  "region": "world",
+  "timezone": "America/New_York"
+ },
+ {
+  "id": "boston",
+  "name_en": "Boston",
+  "name_ar": "بوسطن",
+  "country": "US",
+  "lat": 42.35,
+  "lon": -71.04,
+  "region": "world",
+  "timezone": "America/New_York"
+ },
+ {
+  "id": "miami",
+  "name_en": "Miami",
+  "name_ar": "ميامي",
+  "country": "US",
+  "lat": 25.77,
+  "lon": -80.13,
+  "region": "world",
+  "timezone": "America/New_York"
+ },
+ {
+  "id": "key-west",
+  "name_en": "Key West",
+  "name_ar": "كي وست",
+  "country": "US",
+  "lat": 24.55,
+  "lon": -81.8,
+  "region": "world",
+  "timezone": "America/New_York"
+ },
+ {
+  "id": "charleston",
+  "name_en": "Charleston",
+  "name_ar": "تشارلستون",
+  "country": "US",
+  "lat": 32.75,
+  "lon": -79.87,
+  "region": "world",
+  "timezone": "America/New_York"
+ },
+ {
+  "id": "tampa",
+  "name_en": "Tampa (Clearwater)",
+  "name_ar": "تامبا (كليرووتر)",
+  "country": "US",
+  "lat": 27.98,
+  "lon": -82.83,
+  "region": "world",
+  "timezone": "America/New_York"
+ },
+ {
+  "id": "galveston",
+  "name_en": "Galveston (Houston)",
+  "name_ar": "غالفستون (هيوستن)",
+  "country": "US",
+  "lat": 29.29,
+  "lon": -94.79,
+  "region": "world",
+  "timezone": "America/Chicago"
+ },
+ {
+  "id": "los-angeles",
+  "name_en": "Los Angeles (Santa Monica)",
+  "name_ar": "لوس أنجلوس",
+  "country": "US",
+  "lat": 34.01,
+  "lon": -118.5,
+  "region": "world",
+  "timezone": "America/Los_Angeles"
+ },
+ {
+  "id": "san-diego",
+  "name_en": "San Diego",
+  "name_ar": "سان دييغو",
+  "country": "US",
+  "lat": 32.71,
+  "lon": -117.17,
+  "region": "world",
+  "timezone": "America/Los_Angeles"
+ },
+ {
+  "id": "san-francisco",
+  "name_en": "San Francisco",
+  "name_ar": "سان فرانسيسكو",
+  "country": "US",
+  "lat": 37.81,
+  "lon": -122.47,
+  "region": "world",
+  "timezone": "America/Los_Angeles"
+ },
+ {
+  "id": "seattle",
+  "name_en": "Seattle",
+  "name_ar": "سياتل",
+  "country": "US",
+  "lat": 47.6,
+  "lon": -122.34,
+  "region": "world",
+  "timezone": "America/Los_Angeles"
+ },
+ {
+  "id": "halifax",
+  "name_en": "Halifax",
+  "name_ar": "هاليفاكس",
+  "country": "CA",
+  "lat": 44.64,
+  "lon": -63.57,
+  "region": "world",
+  "timezone": "America/Halifax"
+ },
+ {
+  "id": "st-johns",
+  "name_en": "St. John's",
+  "name_ar": "سانت جونز",
+  "country": "CA",
+  "lat": 47.57,
+  "lon": -52.7,
+  "region": "world",
+  "timezone": "America/St_Johns"
+ },
+ {
+  "id": "cancun",
+  "name_en": "Cancún",
+  "name_ar": "كانكون",
+  "country": "MX",
+  "lat": 21.16,
+  "lon": -86.82,
+  "region": "world",
+  "timezone": "America/Cancun"
+ },
+ {
+  "id": "acapulco",
+  "name_en": "Acapulco",
+  "name_ar": "أكابولكو",
+  "country": "MX",
+  "lat": 16.85,
+  "lon": -99.88,
+  "region": "world",
+  "timezone": "America/Mexico_City"
+ },
+ {
+  "id": "mazatlan",
+  "name_en": "Mazatlán",
+  "name_ar": "مازاتلان",
+  "country": "MX",
+  "lat": 23.21,
+  "lon": -106.42,
+  "region": "world",
+  "timezone": "America/Mazatlan"
+ },
+ {
+  "id": "veracruz",
+  "name_en": "Veracruz",
+  "name_ar": "فيراكروز",
+  "country": "MX",
+  "lat": 19.2,
+  "lon": -96.13,
+  "region": "world",
+  "timezone": "America/Mexico_City"
+ },
+ {
+  "id": "havana",
+  "name_en": "Havana",
+  "name_ar": "هافانا",
+  "country": "CU",
+  "lat": 23.14,
+  "lon": -82.36,
+  "region": "world",
+  "timezone": "America/Havana"
+ },
+ {
+  "id": "santo-domingo",
+  "name_en": "Santo Domingo",
+  "name_ar": "سانتو دومينغو",
+  "country": "DO",
+  "lat": 18.46,
+  "lon": -69.89,
+  "region": "world",
+  "timezone": "America/Santo_Domingo"
+ },
+ {
+  "id": "punta-cana",
+  "name_en": "Punta Cana",
+  "name_ar": "بونتا كانا",
+  "country": "DO",
+  "lat": 18.58,
+  "lon": -68.37,
+  "region": "world",
+  "timezone": "America/Santo_Domingo"
+ },
+ {
+  "id": "san-juan",
+  "name_en": "San Juan",
+  "name_ar": "سان خوان",
+  "country": "PR",
+  "lat": 18.47,
+  "lon": -66.11,
+  "region": "world",
+  "timezone": "America/Puerto_Rico"
+ },
+ {
+  "id": "nassau",
+  "name_en": "Nassau",
+  "name_ar": "ناساو",
+  "country": "BS",
+  "lat": 25.08,
+  "lon": -77.35,
+  "region": "world",
+  "timezone": "America/Nassau"
+ },
+ {
+  "id": "bridgetown",
+  "name_en": "Bridgetown",
+  "name_ar": "بريدجتاون",
+  "country": "BB",
+  "lat": 13.1,
+  "lon": -59.62,
+  "region": "world",
+  "timezone": "America/Barbados"
+ },
+ {
+  "id": "panama-city",
+  "name_en": "Panama City",
+  "name_ar": "مدينة بنما",
+  "country": "PA",
+  "lat": 8.95,
+  "lon": -79.53,
+  "region": "world",
+  "timezone": "America/Panama"
+ },
+ {
+  "id": "puntarenas",
+  "name_en": "Puntarenas",
+  "name_ar": "بونتاريناس",
+  "country": "CR",
+  "lat": 9.97,
+  "lon": -84.83,
+  "region": "world",
+  "timezone": "America/Costa_Rica"
+ },
+ {
+  "id": "cartagena",
+  "name_en": "Cartagena",
+  "name_ar": "قرطاجنة",
+  "country": "CO",
+  "lat": 10.42,
+  "lon": -75.55,
+  "region": "world",
+  "timezone": "America/Bogota"
+ },
+ {
+  "id": "la-guaira",
+  "name_en": "La Guaira (Caracas)",
+  "name_ar": "لا غوايرا (كاراكاس)",
+  "country": "VE",
+  "lat": 10.61,
+  "lon": -66.93,
+  "region": "world",
+  "timezone": "America/Caracas"
+ },
+ {
+  "id": "rio-de-janeiro",
+  "name_en": "Rio de Janeiro",
+  "name_ar": "ريو دي جانيرو",
+  "country": "BR",
+  "lat": -22.97,
+  "lon": -43.18,
+  "region": "world",
+  "timezone": "America/Sao_Paulo"
+ },
+ {
+  "id": "santos",
+  "name_en": "Santos (São Paulo)",
+  "name_ar": "سانتوس (ساو باولو)",
+  "country": "BR",
+  "lat": -23.98,
+  "lon": -46.31,
+  "region": "world",
+  "timezone": "America/Sao_Paulo"
+ },
+ {
+  "id": "salvador",
+  "name_en": "Salvador",
+  "name_ar": "سلفادور",
+  "country": "BR",
+  "lat": -12.97,
+  "lon": -38.52,
+  "region": "world",
+  "timezone": "America/Bahia"
+ },
+ {
+  "id": "fortaleza",
+  "name_en": "Fortaleza",
+  "name_ar": "فورتاليزا",
+  "country": "BR",
+  "lat": -3.72,
+  "lon": -38.5,
+  "region": "world",
+  "timezone": "America/Fortaleza"
+ },
+ {
+  "id": "recife",
+  "name_en": "Recife",
+  "name_ar": "ريسيفي",
+  "country": "BR",
+  "lat": -8.06,
+  "lon": -34.87,
+  "region": "world",
+  "timezone": "America/Recife"
+ },
+ {
+  "id": "florianopolis",
+  "name_en": "Florianópolis",
+  "name_ar": "فلوريانوبوليس",
+  "country": "BR",
+  "lat": -27.6,
+  "lon": -48.55,
+  "region": "world",
+  "timezone": "America/Sao_Paulo"
+ },
+ {
+  "id": "mar-del-plata",
+  "name_en": "Mar del Plata",
+  "name_ar": "مار ديل بلاتا",
+  "country": "AR",
+  "lat": -38.0,
+  "lon": -57.54,
+  "region": "world",
+  "timezone": "America/Argentina/Buenos_Aires"
+ },
+ {
+  "id": "puerto-madryn",
+  "name_en": "Puerto Madryn",
+  "name_ar": "بويرتو مادرين",
+  "country": "AR",
+  "lat": -42.77,
+  "lon": -65.03,
+  "region": "world",
+  "timezone": "America/Argentina/Catamarca"
+ },
+ {
+  "id": "punta-del-este",
+  "name_en": "Punta del Este",
+  "name_ar": "بونتا ديل إستي",
+  "country": "UY",
+  "lat": -34.96,
+  "lon": -54.95,
+  "region": "world",
+  "timezone": "America/Montevideo"
+ },
+ {
+  "id": "valparaiso",
+  "name_en": "Valparaíso",
+  "name_ar": "فالبارايسو",
+  "country": "CL",
+  "lat": -33.03,
+  "lon": -71.63,
+  "region": "world",
+  "timezone": "America/Santiago"
+ },
+ {
+  "id": "antofagasta",
+  "name_en": "Antofagasta",
+  "name_ar": "أنتوفاغاستا",
+  "country": "CL",
+  "lat": -23.65,
+  "lon": -70.41,
+  "region": "world",
+  "timezone": "America/Santiago"
+ },
+ {
+  "id": "callao",
+  "name_en": "Callao (Lima)",
+  "name_ar": "كالاو (ليما)",
+  "country": "PE",
+  "lat": -12.05,
+  "lon": -77.15,
+  "region": "world",
+  "timezone": "America/Lima"
+ },
+ {
+  "id": "manta",
+  "name_en": "Manta",
+  "name_ar": "مانتا",
+  "country": "EC",
+  "lat": -0.94,
+  "lon": -80.73,
+  "region": "world",
+  "timezone": "America/Guayaquil"
  }
 ]

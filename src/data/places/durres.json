@@ -1,0 +1,94 @@
+{
+ "id": "durres",
+ "name_en": "Durrës",
+ "name_ar": "دوريس",
+ "country": "AL",
+ "lat": 41.31,
+ "lon": 19.44,
+ "timezone": "Europe/Tirane",
+ "grid": {
+  "lat": 41.25,
+  "lon": 19.5,
+  "distance_km": 8.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.39684,
+   "phase": 40.047
+  },
+  "J1": {
+   "amp": 0.13186,
+   "phase": 55.909
+  },
+  "K1": {
+   "amp": 5.32564,
+   "phase": 29.698
+  },
+  "K2": {
+   "amp": 1.64834,
+   "phase": 68.552
+  },
+  "M2": {
+   "amp": 8.54816,
+   "phase": 68.556
+  },
+  "M4": {
+   "amp": 0.48322,
+   "phase": 69.419
+  },
+  "MF": {
+   "amp": 0.4916,
+   "phase": -132.278
+  },
+  "MM": {
+   "amp": 0.53518,
+   "phase": -132.815
+  },
+  "N2": {
+   "amp": 1.48314,
+   "phase": 63.245
+  },
+  "O1": {
+   "amp": 1.75747,
+   "phase": 13.529
+  },
+  "P1": {
+   "amp": 1.77151,
+   "phase": 35.487
+  },
+  "Q1": {
+   "amp": 0.57346,
+   "phase": 7.392
+  },
+  "S1": {
+   "amp": 1.49889,
+   "phase": 84.435
+  },
+  "S2": {
+   "amp": 5.37955,
+   "phase": 79.71
+  },
+  "SA": {
+   "amp": 3.14288,
+   "phase": -50.34
+  },
+  "SSA": {
+   "amp": 0.41772,
+   "phase": -166.692
+  },
+  "T2": {
+   "amp": 0.13428,
+   "phase": 14.847
+  },
+  "Z0": {
+   "amp": 23.7,
+   "phase": 0
+  }
+ }
+}

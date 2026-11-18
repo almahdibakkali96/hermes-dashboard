@@ -1,0 +1,94 @@
+{
+ "id": "miami",
+ "name_en": "Miami",
+ "name_ar": "ميامي",
+ "country": "US",
+ "lat": 25.77,
+ "lon": -80.13,
+ "timezone": "America/New_York",
+ "grid": {
+  "lat": 25.75,
+  "lon": -80.125,
+  "distance_km": 2.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.5902,
+   "phase": -17.512
+  },
+  "J1": {
+   "amp": 0.49839,
+   "phase": -91.636
+  },
+  "K1": {
+   "amp": 3.61933,
+   "phase": -106.601
+  },
+  "K2": {
+   "amp": 2.39202,
+   "phase": 40.516
+  },
+  "M2": {
+   "amp": 35.97664,
+   "phase": 21.641
+  },
+  "M4": {
+   "amp": 0.6327,
+   "phase": -153.087
+  },
+  "MF": {
+   "amp": 1.26532,
+   "phase": -14.968
+  },
+  "MM": {
+   "amp": 0.41631,
+   "phase": -36.832
+  },
+  "N2": {
+   "amp": 8.2167,
+   "phase": 1.474
+  },
+  "O1": {
+   "amp": 3.45312,
+   "phase": -88.231
+  },
+  "P1": {
+   "amp": 1.40585,
+   "phase": -100.379
+  },
+  "Q1": {
+   "amp": 0.64387,
+   "phase": -108.464
+  },
+  "S1": {
+   "amp": 0.29091,
+   "phase": 99.274
+  },
+  "S2": {
+   "amp": 6.22548,
+   "phase": 48.125
+  },
+  "SA": {
+   "amp": 3.10198,
+   "phase": -86.116
+  },
+  "SSA": {
+   "amp": 0.18998,
+   "phase": 66.389
+  },
+  "T2": {
+   "amp": 0.58976,
+   "phase": 59.645
+  },
+  "Z0": {
+   "amp": 61.5,
+   "phase": 0
+  }
+ }
+}

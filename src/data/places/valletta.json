@@ -1,0 +1,94 @@
+{
+ "id": "valletta",
+ "name_en": "Valletta",
+ "name_ar": "فاليتا",
+ "country": "MT",
+ "lat": 35.9,
+ "lon": 14.52,
+ "timezone": "Europe/Malta",
+ "grid": {
+  "lat": 35.875,
+  "lon": 14.625,
+  "distance_km": 9.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.23695,
+   "phase": 66.933
+  },
+  "J1": {
+   "amp": 0.28744,
+   "phase": 6.531
+  },
+  "K1": {
+   "amp": 1.48669,
+   "phase": 39.578
+  },
+  "K2": {
+   "amp": 0.99622,
+   "phase": 55.898
+  },
+  "M2": {
+   "amp": 7.0846,
+   "phase": 53.295
+  },
+  "M4": {
+   "amp": 0.15152,
+   "phase": -35.087
+  },
+  "MF": {
+   "amp": 0.15561,
+   "phase": 121.996
+  },
+  "MM": {
+   "amp": 0.34414,
+   "phase": -93.704
+  },
+  "N2": {
+   "amp": 1.33599,
+   "phase": 51.043
+  },
+  "O1": {
+   "amp": 0.71723,
+   "phase": 47.664
+  },
+  "P1": {
+   "amp": 0.64657,
+   "phase": 35.654
+  },
+  "Q1": {
+   "amp": 0.24555,
+   "phase": 0.072
+  },
+  "S1": {
+   "amp": 0.43408,
+   "phase": 35.216
+  },
+  "S2": {
+   "amp": 4.30282,
+   "phase": 62.913
+  },
+  "SA": {
+   "amp": 4.22264,
+   "phase": -77.011
+  },
+  "SSA": {
+   "amp": 0.21864,
+   "phase": -172.641
+  },
+  "T2": {
+   "amp": 0.09466,
+   "phase": -74.526
+  },
+  "Z0": {
+   "amp": 18.8,
+   "phase": 0
+  }
+ }
+}

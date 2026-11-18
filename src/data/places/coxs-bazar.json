@@ -1,0 +1,94 @@
+{
+ "id": "coxs-bazar",
+ "name_en": "Cox's Bazar",
+ "name_ar": "كوكس بازار",
+ "country": "BD",
+ "lat": 21.43,
+ "lon": 91.97,
+ "timezone": "Asia/Dhaka",
+ "grid": {
+  "lat": 21.375,
+  "lon": 92,
+  "distance_km": 6.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.79046,
+   "phase": 86.506
+  },
+  "J1": {
+   "amp": 0.92622,
+   "phase": -120.325
+  },
+  "K1": {
+   "amp": 15.9359,
+   "phase": -115.767
+  },
+  "K2": {
+   "amp": 13.3312,
+   "phase": 137.627
+  },
+  "M2": {
+   "amp": 99.92355,
+   "phase": 111.915
+  },
+  "M4": {
+   "amp": 0.92384,
+   "phase": -9.938
+  },
+  "MF": {
+   "amp": 1.32298,
+   "phase": -37.493
+  },
+  "MM": {
+   "amp": 0.17605,
+   "phase": -136.336
+  },
+  "N2": {
+   "amp": 21.07607,
+   "phase": 103.456
+  },
+  "O1": {
+   "amp": 6.70401,
+   "phase": -126.602
+  },
+  "P1": {
+   "amp": 5.432,
+   "phase": -120.057
+  },
+  "Q1": {
+   "amp": 1.03017,
+   "phase": -126.364
+  },
+  "S1": {
+   "amp": 0.76124,
+   "phase": 33.842
+  },
+  "S2": {
+   "amp": 46.87017,
+   "phase": 136.797
+  },
+  "SA": {
+   "amp": 10.05154,
+   "phase": -134.94
+  },
+  "SSA": {
+   "amp": 0.46773,
+   "phase": -92.094
+  },
+  "T2": {
+   "amp": 3.43028,
+   "phase": 100.141
+  },
+  "Z0": {
+   "amp": 202,
+   "phase": 0
+  }
+ }
+}

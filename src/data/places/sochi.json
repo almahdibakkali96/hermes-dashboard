@@ -1,0 +1,94 @@
+{
+ "id": "sochi",
+ "name_en": "Sochi",
+ "name_ar": "سوتشي",
+ "country": "RU",
+ "lat": 43.58,
+ "lon": 39.71,
+ "timezone": "Europe/Moscow",
+ "grid": {
+  "lat": 43.625,
+  "lon": 39.625,
+  "distance_km": 8.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.17965,
+   "phase": -161.848
+  },
+  "J1": {
+   "amp": 0.21759,
+   "phase": -125.078
+  },
+  "K1": {
+   "amp": 0.2124,
+   "phase": -108.705
+  },
+  "K2": {
+   "amp": 0.4557,
+   "phase": -158.697
+  },
+  "M2": {
+   "amp": 2.13452,
+   "phase": -152.665
+  },
+  "M4": {
+   "amp": 0.15036,
+   "phase": -116.917
+  },
+  "MF": {
+   "amp": 0.04668,
+   "phase": 43.206
+  },
+  "MM": {
+   "amp": 0.31916,
+   "phase": -11.788
+  },
+  "N2": {
+   "amp": 0.43335,
+   "phase": 176.055
+  },
+  "O1": {
+   "amp": 0.85634,
+   "phase": -114.274
+  },
+  "P1": {
+   "amp": 0.57273,
+   "phase": -67.801
+  },
+  "Q1": {
+   "amp": 0.07377,
+   "phase": -150.745
+  },
+  "S1": {
+   "amp": 0.37354,
+   "phase": -133.433
+  },
+  "S2": {
+   "amp": 0.49487,
+   "phase": -125.812
+  },
+  "SA": {
+   "amp": 1.76347,
+   "phase": 103.252
+  },
+  "SSA": {
+   "amp": 0.48071,
+   "phase": -123.675
+  },
+  "T2": {
+   "amp": 0.82758,
+   "phase": -86.706
+  },
+  "Z0": {
+   "amp": 7.4,
+   "phase": 0
+  }
+ }
+}

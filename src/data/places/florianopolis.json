@@ -1,0 +1,94 @@
+{
+ "id": "florianopolis",
+ "name_en": "Florianópolis",
+ "name_ar": "فلوريانوبوليس",
+ "country": "BR",
+ "lat": -27.6,
+ "lon": -48.55,
+ "timezone": "America/Sao_Paulo",
+ "grid": {
+  "lat": -27.625,
+  "lon": -48.625,
+  "distance_km": 7.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.32747,
+   "phase": -164.985
+  },
+  "J1": {
+   "amp": 0.7899,
+   "phase": 127.31
+  },
+  "K1": {
+   "amp": 6.29762,
+   "phase": 179.522
+  },
+  "K2": {
+   "amp": 3.69292,
+   "phase": 140.246
+  },
+  "M2": {
+   "amp": 16.96394,
+   "phase": 152.399
+  },
+  "M4": {
+   "amp": 2.87901,
+   "phase": -167.554
+  },
+  "MF": {
+   "amp": 1.2906,
+   "phase": -73.975
+  },
+  "MM": {
+   "amp": 0.39742,
+   "phase": -135.682
+  },
+  "N2": {
+   "amp": 3.54474,
+   "phase": -127.629
+  },
+  "O1": {
+   "amp": 10.66445,
+   "phase": 116.793
+  },
+  "P1": {
+   "amp": 2.26176,
+   "phase": 173.359
+  },
+  "Q1": {
+   "amp": 3.14209,
+   "phase": 91.077
+  },
+  "S1": {
+   "amp": 2.11507,
+   "phase": 178.442
+  },
+  "S2": {
+   "amp": 12.51468,
+   "phase": 155.622
+  },
+  "SA": {
+   "amp": 2.42284,
+   "phase": 150.986
+  },
+  "SSA": {
+   "amp": 0.17419,
+   "phase": -35.99
+  },
+  "T2": {
+   "amp": 0.10415,
+   "phase": -169.927
+  },
+  "Z0": {
+   "amp": 57.3,
+   "phase": 0
+  }
+ }
+}

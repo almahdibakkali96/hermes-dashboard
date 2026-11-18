@@ -1,0 +1,94 @@
+{
+ "id": "punta-del-este",
+ "name_en": "Punta del Este",
+ "name_ar": "بونتا ديل إستي",
+ "country": "UY",
+ "lat": -34.96,
+ "lon": -54.95,
+ "timezone": "America/Montevideo",
+ "grid": {
+  "lat": -35,
+  "lon": -55,
+  "distance_km": 6.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.94999,
+   "phase": -100.89
+  },
+  "J1": {
+   "amp": 0.2818,
+   "phase": 171.602
+  },
+  "K1": {
+   "amp": 1.7317,
+   "phase": 96.359
+  },
+  "K2": {
+   "amp": 1.02438,
+   "phase": 99.899
+  },
+  "M2": {
+   "amp": 6.8925,
+   "phase": -37.319
+  },
+  "M4": {
+   "amp": 2.99946,
+   "phase": -117.012
+  },
+  "MF": {
+   "amp": 0.69668,
+   "phase": 153.754
+  },
+  "MM": {
+   "amp": 0.72036,
+   "phase": 34.928
+  },
+  "N2": {
+   "amp": 3.57474,
+   "phase": -59.73
+  },
+  "O1": {
+   "amp": 4.41422,
+   "phase": 151.117
+  },
+  "P1": {
+   "amp": 0.64872,
+   "phase": 158.628
+  },
+  "Q1": {
+   "amp": 2.1085,
+   "phase": 119.733
+  },
+  "S1": {
+   "amp": 1.08472,
+   "phase": 163.116
+  },
+  "S2": {
+   "amp": 1.05178,
+   "phase": 68.264
+  },
+  "SA": {
+   "amp": 3.65955,
+   "phase": 89.082
+  },
+  "SSA": {
+   "amp": 0.16202,
+   "phase": -168.829
+  },
+  "T2": {
+   "amp": 0.34939,
+   "phase": 148.284
+  },
+  "Z0": {
+   "amp": 24.8,
+   "phase": 0
+  }
+ }
+}

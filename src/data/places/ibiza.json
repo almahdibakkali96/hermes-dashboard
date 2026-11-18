@@ -1,0 +1,94 @@
+{
+ "id": "ibiza",
+ "name_en": "Ibiza",
+ "name_ar": "إيبيزا",
+ "country": "ES",
+ "lat": 38.9,
+ "lon": 1.44,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 38.875,
+  "lon": 1.5,
+  "distance_km": 5.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.15244,
+   "phase": 44.943
+  },
+  "J1": {
+   "amp": 0.19006,
+   "phase": 126.116
+  },
+  "K1": {
+   "amp": 3.53235,
+   "phase": 167.685
+  },
+  "K2": {
+   "amp": 0.06414,
+   "phase": 172.023
+  },
+  "M2": {
+   "amp": 1.38473,
+   "phase": -152.846
+  },
+  "M4": {
+   "amp": 0.20983,
+   "phase": -29.44
+  },
+  "MF": {
+   "amp": 0.20018,
+   "phase": -159.511
+  },
+  "MM": {
+   "amp": 0.37255,
+   "phase": -51.546
+  },
+  "N2": {
+   "amp": 0.23649,
+   "phase": 151.924
+  },
+  "O1": {
+   "amp": 2.2615,
+   "phase": 107.413
+  },
+  "P1": {
+   "amp": 1.46478,
+   "phase": 162.304
+  },
+  "Q1": {
+   "amp": 0.08312,
+   "phase": -0.883
+  },
+  "S1": {
+   "amp": 0.59203,
+   "phase": 16.365
+  },
+  "S2": {
+   "amp": 0.40534,
+   "phase": -174.204
+  },
+  "SA": {
+   "amp": 4.07604,
+   "phase": -87.67
+  },
+  "SSA": {
+   "amp": 0.25485,
+   "phase": 167.39
+  },
+  "T2": {
+   "amp": 0.32815,
+   "phase": -79.503
+  },
+  "Z0": {
+   "amp": 10,
+   "phase": 0
+  }
+ }
+}

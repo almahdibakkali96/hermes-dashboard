@@ -1,0 +1,94 @@
+{
+ "id": "malindi",
+ "name_en": "Malindi",
+ "name_ar": "ماليندي",
+ "country": "KE",
+ "lat": -3.22,
+ "lon": 40.13,
+ "timezone": "Africa/Nairobi",
+ "grid": {
+  "lat": -3.25,
+  "lon": 40.25,
+  "distance_km": 13.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.9809,
+   "phase": -12.452
+  },
+  "J1": {
+   "amp": 1.30673,
+   "phase": 12.77
+  },
+  "K1": {
+   "amp": 19.34209,
+   "phase": -5.96
+  },
+  "K2": {
+   "amp": 13.68097,
+   "phase": 60.423
+  },
+  "M2": {
+   "amp": 99.78893,
+   "phase": 24.324
+  },
+  "M4": {
+   "amp": 0.47869,
+   "phase": 172.492
+  },
+  "MF": {
+   "amp": 1.16663,
+   "phase": 9.374
+  },
+  "MM": {
+   "amp": 0.51569,
+   "phase": 1.234
+  },
+  "N2": {
+   "amp": 18.23856,
+   "phase": 2.273
+  },
+  "O1": {
+   "amp": 11.41756,
+   "phase": -1.75
+  },
+  "P1": {
+   "amp": 5.59952,
+   "phase": -8.219
+  },
+  "Q1": {
+   "amp": 2.30728,
+   "phase": -12.643
+  },
+  "S1": {
+   "amp": 1.83014,
+   "phase": 118.17
+  },
+  "S2": {
+   "amp": 50.04004,
+   "phase": 63.417
+  },
+  "SA": {
+   "amp": 1.11378,
+   "phase": 169.348
+  },
+  "SSA": {
+   "amp": 0.71657,
+   "phase": 7.342
+  },
+  "T2": {
+   "amp": 3.20434,
+   "phase": 67.923
+  },
+  "Z0": {
+   "amp": 189.4,
+   "phase": 0
+  }
+ }
+}

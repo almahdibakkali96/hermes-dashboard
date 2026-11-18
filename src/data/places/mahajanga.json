@@ -1,0 +1,94 @@
+{
+ "id": "mahajanga",
+ "name_en": "Mahajanga",
+ "name_ar": "ماهاجانغا",
+ "country": "MG",
+ "lat": -15.72,
+ "lon": 46.31,
+ "timezone": "Indian/Antananarivo",
+ "grid": {
+  "lat": -15.625,
+  "lon": 46.25,
+  "distance_km": 12.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.80107,
+   "phase": -27.582
+  },
+  "J1": {
+   "amp": 0.90614,
+   "phase": 29.706
+  },
+  "K1": {
+   "amp": 12.82164,
+   "phase": 12.108
+  },
+  "K2": {
+   "amp": 16.94941,
+   "phase": 66.103
+  },
+  "M2": {
+   "amp": 114.55654,
+   "phase": 27.44
+  },
+  "M4": {
+   "amp": 0.44569,
+   "phase": 132.807
+  },
+  "MF": {
+   "amp": 1.21687,
+   "phase": -3.329
+  },
+  "MM": {
+   "amp": 0.61604,
+   "phase": 14.865
+  },
+  "N2": {
+   "amp": 20.15048,
+   "phase": 7.492
+  },
+  "O1": {
+   "amp": 8.11039,
+   "phase": 10.779
+  },
+  "P1": {
+   "amp": 4.23181,
+   "phase": 18.144
+  },
+  "Q1": {
+   "amp": 1.94496,
+   "phase": -2.974
+  },
+  "S1": {
+   "amp": 1.52448,
+   "phase": 61.667
+  },
+  "S2": {
+   "amp": 59.95012,
+   "phase": 67.402
+  },
+  "SA": {
+   "amp": 0.98601,
+   "phase": -11.671
+  },
+  "SSA": {
+   "amp": 0.35115,
+   "phase": -12.978
+  },
+  "T2": {
+   "amp": 3.99579,
+   "phase": 78.249
+  },
+  "Z0": {
+   "amp": 214,
+   "phase": 0
+  }
+ }
+}

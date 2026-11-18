@@ -1,0 +1,94 @@
+{
+ "id": "cebu",
+ "name_en": "Cebu",
+ "name_ar": "سيبو",
+ "country": "PH",
+ "lat": 10.3,
+ "lon": 123.9,
+ "timezone": "Asia/Manila",
+ "grid": {
+  "lat": 10.25,
+  "lon": 123.875,
+  "distance_km": 6.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.83703,
+   "phase": 57.206
+  },
+  "J1": {
+   "amp": 1.3696,
+   "phase": -130.343
+  },
+  "K1": {
+   "amp": 30.82672,
+   "phase": -155.276
+  },
+  "K2": {
+   "amp": 6.78358,
+   "phase": 123.09
+  },
+  "M2": {
+   "amp": 40.01401,
+   "phase": 80.461
+  },
+  "M4": {
+   "amp": 0.57898,
+   "phase": -148.971
+  },
+  "MF": {
+   "amp": 0.78895,
+   "phase": -2.346
+  },
+  "MM": {
+   "amp": 0.58757,
+   "phase": 40.729
+  },
+  "N2": {
+   "amp": 6.211,
+   "phase": 55.248
+  },
+  "O1": {
+   "amp": 28.85162,
+   "phase": 167.438
+  },
+  "P1": {
+   "amp": 10.46084,
+   "phase": -153.803
+  },
+  "Q1": {
+   "amp": 5.45243,
+   "phase": 156.375
+  },
+  "S1": {
+   "amp": 1.20092,
+   "phase": 2.583
+  },
+  "S2": {
+   "amp": 22.2,
+   "phase": 127.004
+  },
+  "SA": {
+   "amp": 2.70181,
+   "phase": -140.317
+  },
+  "SSA": {
+   "amp": 0.37489,
+   "phase": 5.083
+  },
+  "T2": {
+   "amp": 2.09875,
+   "phase": 127.304
+  },
+  "Z0": {
+   "amp": 120,
+   "phase": 0
+  }
+ }
+}

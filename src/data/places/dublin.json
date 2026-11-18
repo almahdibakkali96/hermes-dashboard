@@ -1,0 +1,94 @@
+{
+ "id": "dublin",
+ "name_en": "Dublin",
+ "name_ar": "دبلن",
+ "country": "IE",
+ "lat": 53.34,
+ "lon": -6.15,
+ "timezone": "Europe/Dublin",
+ "grid": {
+  "lat": 53.375,
+  "lon": -6.125,
+  "distance_km": 4.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.61582,
+   "phase": -92.18
+  },
+  "J1": {
+   "amp": 0.21448,
+   "phase": -174.426
+  },
+  "K1": {
+   "amp": 10.24862,
+   "phase": -172.04
+  },
+  "K2": {
+   "amp": 11.25426,
+   "phase": -2.294
+  },
+  "M2": {
+   "amp": 137.73553,
+   "phase": -35.08
+  },
+  "M4": {
+   "amp": 8.47983,
+   "phase": 52.413
+  },
+  "MF": {
+   "amp": 1.08019,
+   "phase": -166.765
+  },
+  "MM": {
+   "amp": 1.13828,
+   "phase": 178.202
+  },
+  "N2": {
+   "amp": 27.76269,
+   "phase": -63.247
+  },
+  "O1": {
+   "amp": 10.12807,
+   "phase": 43.636
+  },
+  "P1": {
+   "amp": 3.31438,
+   "phase": -174.561
+  },
+  "Q1": {
+   "amp": 3.32355,
+   "phase": -14.046
+  },
+  "S1": {
+   "amp": 0.93479,
+   "phase": 44.799
+  },
+  "S2": {
+   "amp": 39.60767,
+   "phase": -1.996
+  },
+  "SA": {
+   "amp": 3.84253,
+   "phase": -45.761
+  },
+  "SSA": {
+   "amp": 0.81006,
+   "phase": -174.263
+  },
+  "T2": {
+   "amp": 3.07728,
+   "phase": -12.384
+  },
+  "Z0": {
+   "amp": 242.8,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "naples",
+ "name_en": "Naples",
+ "name_ar": "نابولي",
+ "country": "IT",
+ "lat": 40.83,
+ "lon": 14.25,
+ "timezone": "Europe/Rome",
+ "grid": {
+  "lat": 40.75,
+  "lon": 14.25,
+  "distance_km": 8.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.45859,
+   "phase": -156.158
+  },
+  "J1": {
+   "amp": 0.07337,
+   "phase": -167.862
+  },
+  "K1": {
+   "amp": 2.69926,
+   "phase": -169.836
+  },
+  "K2": {
+   "amp": 1.40632,
+   "phase": -109.418
+  },
+  "M2": {
+   "amp": 11.81135,
+   "phase": -126.437
+  },
+  "M4": {
+   "amp": 0.6182,
+   "phase": 171.489
+  },
+  "MF": {
+   "amp": 0.31235,
+   "phase": 161.68
+  },
+  "MM": {
+   "amp": 0.44014,
+   "phase": -107.651
+  },
+  "N2": {
+   "amp": 2.27422,
+   "phase": -139.665
+  },
+  "O1": {
+   "amp": 0.78424,
+   "phase": 113.147
+  },
+  "P1": {
+   "amp": 0.47018,
+   "phase": -161.118
+  },
+  "Q1": {
+   "amp": 0.27941,
+   "phase": 48.359
+  },
+  "S1": {
+   "amp": 0.99338,
+   "phase": 7.542
+  },
+  "S2": {
+   "amp": 4.20371,
+   "phase": -106.002
+  },
+  "SA": {
+   "amp": 3.00308,
+   "phase": -75.994
+  },
+  "SSA": {
+   "amp": 0.34946,
+   "phase": -175.86
+  },
+  "T2": {
+   "amp": 0.82085,
+   "phase": -79.272
+  },
+  "Z0": {
+   "amp": 24.5,
+   "phase": 0
+  }
+ }
+}

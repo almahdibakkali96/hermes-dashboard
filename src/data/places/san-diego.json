@@ -1,0 +1,94 @@
+{
+ "id": "san-diego",
+ "name_en": "San Diego",
+ "name_ar": "سان دييغو",
+ "country": "US",
+ "lat": 32.71,
+ "lon": -117.17,
+ "timezone": "America/Los_Angeles",
+ "grid": {
+  "lat": 32.625,
+  "lon": -117.125,
+  "distance_km": 10.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.75964,
+   "phase": 84.726
+  },
+  "J1": {
+   "amp": 1.93042,
+   "phase": -148.171
+  },
+  "K1": {
+   "amp": 32.78706,
+   "phase": -153.537
+  },
+  "K2": {
+   "amp": 6.26151,
+   "phase": 133.265
+  },
+  "M2": {
+   "amp": 49.67319,
+   "phase": 139.9
+  },
+  "M4": {
+   "amp": 0.12519,
+   "phase": -50.906
+  },
+  "MF": {
+   "amp": 0.53506,
+   "phase": 121.368
+  },
+  "MM": {
+   "amp": 0.25383,
+   "phase": 89.581
+  },
+  "N2": {
+   "amp": 11.86744,
+   "phase": 120.16
+  },
+  "O1": {
+   "amp": 20.87855,
+   "phase": -168.576
+  },
+  "P1": {
+   "amp": 10.40654,
+   "phase": -156.393
+  },
+  "Q1": {
+   "amp": 3.58809,
+   "phase": -175.472
+  },
+  "S1": {
+   "amp": 0.62647,
+   "phase": -116.65
+  },
+  "S2": {
+   "amp": 20.49372,
+   "phase": 136.111
+  },
+  "SA": {
+   "amp": 3.03582,
+   "phase": -58.183
+  },
+  "SSA": {
+   "amp": 0.22053,
+   "phase": -2.008
+  },
+  "T2": {
+   "amp": 1.20572,
+   "phase": 132.243
+  },
+  "Z0": {
+   "amp": 136.8,
+   "phase": 0
+  }
+ }
+}

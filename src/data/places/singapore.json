@@ -1,0 +1,94 @@
+{
+ "id": "singapore",
+ "name_en": "Singapore",
+ "name_ar": "سنغافورة",
+ "country": "SG",
+ "lat": 1.26,
+ "lon": 103.83,
+ "timezone": "Asia/Singapore",
+ "grid": {
+  "lat": 1.25,
+  "lon": 103.875,
+  "distance_km": 5.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.21859,
+   "phase": 58.388
+  },
+  "J1": {
+   "amp": 0.77111,
+   "phase": 51.813
+  },
+  "K1": {
+   "amp": 24.04717,
+   "phase": -1.118
+  },
+  "K2": {
+   "amp": 8.9481,
+   "phase": 133.96
+  },
+  "M2": {
+   "amp": 71.88376,
+   "phase": 94.669
+  },
+  "M4": {
+   "amp": 3.55376,
+   "phase": -177.558
+  },
+  "MF": {
+   "amp": 0.45877,
+   "phase": -28.037
+  },
+  "MM": {
+   "amp": 1.10929,
+   "phase": 22.134
+  },
+  "N2": {
+   "amp": 15.08356,
+   "phase": 74.98
+  },
+  "O1": {
+   "amp": 23.06614,
+   "phase": -44.078
+  },
+  "P1": {
+   "amp": 7.71281,
+   "phase": -11.609
+  },
+  "Q1": {
+   "amp": 4.63958,
+   "phase": -79.042
+  },
+  "S1": {
+   "amp": 2.34902,
+   "phase": 61.123
+  },
+  "S2": {
+   "amp": 31.68025,
+   "phase": 142.842
+  },
+  "SA": {
+   "amp": 5.42596,
+   "phase": -12.615
+  },
+  "SSA": {
+   "amp": 0.3642,
+   "phase": -134.113
+  },
+  "T2": {
+   "amp": 1.56671,
+   "phase": 135.872
+  },
+  "Z0": {
+   "amp": 171.2,
+   "phase": 0
+  }
+ }
+}

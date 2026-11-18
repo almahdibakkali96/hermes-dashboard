@@ -1,0 +1,94 @@
+{
+ "id": "busan",
+ "name_en": "Busan",
+ "name_ar": "بوسان",
+ "country": "KR",
+ "lat": 35.1,
+ "lon": 129.04,
+ "timezone": "Asia/Seoul",
+ "grid": {
+  "lat": 35,
+  "lon": 129,
+  "distance_km": 11.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.10812,
+   "phase": -30.773
+  },
+  "J1": {
+   "amp": 0.36993,
+   "phase": -5.179
+  },
+  "K1": {
+   "amp": 6.34265,
+   "phase": 21.704
+  },
+  "K2": {
+   "amp": 6.24935,
+   "phase": 0.352
+  },
+  "M2": {
+   "amp": 45.0278,
+   "phase": -18.968
+  },
+  "M4": {
+   "amp": 1.00625,
+   "phase": 48.036
+  },
+  "MF": {
+   "amp": 0.88746,
+   "phase": -171.304
+  },
+  "MM": {
+   "amp": 0.33965,
+   "phase": 86.231
+  },
+  "N2": {
+   "amp": 8.66223,
+   "phase": -24.228
+  },
+  "O1": {
+   "amp": 2.87773,
+   "phase": 6.063
+  },
+  "P1": {
+   "amp": 2.36163,
+   "phase": 23.001
+  },
+  "Q1": {
+   "amp": 0.48911,
+   "phase": -50.649
+  },
+  "S1": {
+   "amp": 0.66136,
+   "phase": -75.528
+  },
+  "S2": {
+   "amp": 20.66766,
+   "phase": 8.924
+  },
+  "SA": {
+   "amp": 5.54786,
+   "phase": -94.681
+  },
+  "SSA": {
+   "amp": 0.21381,
+   "phase": 137.656
+  },
+  "T2": {
+   "amp": 1.83968,
+   "phase": -9.905
+  },
+  "Z0": {
+   "amp": 89.7,
+   "phase": 0
+  }
+ }
+}

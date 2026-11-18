@@ -1,0 +1,94 @@
+{
+ "id": "sydney",
+ "name_en": "Sydney",
+ "name_ar": "سيدني",
+ "country": "AU",
+ "lat": -33.89,
+ "lon": 151.28,
+ "timezone": "Australia/Sydney",
+ "grid": {
+  "lat": -33.875,
+  "lon": 151.375,
+  "distance_km": 8.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.82401,
+   "phase": -79.242
+  },
+  "J1": {
+   "amp": 1.05052,
+   "phase": 10.555
+  },
+  "K1": {
+   "amp": 16.09143,
+   "phase": -32.65
+  },
+  "K2": {
+   "amp": 2.70991,
+   "phase": -45.725
+  },
+  "M2": {
+   "amp": 49.32089,
+   "phase": -51.714
+  },
+  "M4": {
+   "amp": 0.59472,
+   "phase": -116.778
+  },
+  "MF": {
+   "amp": 0.25878,
+   "phase": -116.21
+  },
+  "MM": {
+   "amp": 0.35661,
+   "phase": 56.998
+  },
+  "N2": {
+   "amp": 10.93875,
+   "phase": -65.203
+  },
+  "O1": {
+   "amp": 9.32206,
+   "phase": -63.419
+  },
+  "P1": {
+   "amp": 4.58222,
+   "phase": -41.03
+  },
+  "Q1": {
+   "amp": 1.28029,
+   "phase": -80.019
+  },
+  "S1": {
+   "amp": 1.5949,
+   "phase": -40.907
+  },
+  "S2": {
+   "amp": 12.23708,
+   "phase": -45.406
+  },
+  "SA": {
+   "amp": 3.29113,
+   "phase": 148.649
+  },
+  "SSA": {
+   "amp": 0.14797,
+   "phase": -123.928
+  },
+  "T2": {
+   "amp": 0.81495,
+   "phase": -97.302
+  },
+  "Z0": {
+   "amp": 86.9,
+   "phase": 0
+  }
+ }
+}

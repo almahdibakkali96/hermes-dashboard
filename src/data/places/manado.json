@@ -1,0 +1,94 @@
+{
+ "id": "manado",
+ "name_en": "Manado",
+ "name_ar": "مانادو",
+ "country": "ID",
+ "lat": 1.49,
+ "lon": 124.84,
+ "timezone": "Asia/Makassar",
+ "grid": {
+  "lat": 1.5,
+  "lon": 124.75,
+  "distance_km": 10.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.967,
+   "phase": -104.409
+  },
+  "J1": {
+   "amp": 1.00613,
+   "phase": 120.145
+  },
+  "K1": {
+   "amp": 17.17379,
+   "phase": 129.397
+  },
+  "K2": {
+   "amp": 10.50614,
+   "phase": -37.733
+  },
+  "M2": {
+   "amp": 60.53417,
+   "phase": -70.776
+  },
+  "M4": {
+   "amp": 0.20761,
+   "phase": 8.767
+  },
+  "MF": {
+   "amp": 1.21854,
+   "phase": 6.467
+  },
+  "MM": {
+   "amp": 0.67988,
+   "phase": -4.756
+  },
+  "N2": {
+   "amp": 9.90299,
+   "phase": -85.639
+  },
+  "O1": {
+   "amp": 12.82508,
+   "phase": 113.734
+  },
+  "P1": {
+   "amp": 5.62425,
+   "phase": 128.95
+  },
+  "Q1": {
+   "amp": 2.74283,
+   "phase": 109.372
+  },
+  "S1": {
+   "amp": 1.28992,
+   "phase": -10.983
+  },
+  "S2": {
+   "amp": 35.583,
+   "phase": -33.534
+  },
+  "SA": {
+   "amp": 1.51835,
+   "phase": 34.153
+  },
+  "SSA": {
+   "amp": 0.77242,
+   "phase": -6.745
+  },
+  "T2": {
+   "amp": 2.02666,
+   "phase": -25.093
+  },
+  "Z0": {
+   "amp": 125.8,
+   "phase": 0
+  }
+ }
+}

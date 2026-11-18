@@ -1,0 +1,94 @@
+{
+ "id": "odesa",
+ "name_en": "Odesa",
+ "name_ar": "أوديسا",
+ "country": "UA",
+ "lat": 46.48,
+ "lon": 30.76,
+ "timezone": "Europe/Kyiv",
+ "grid": {
+  "lat": 46.5,
+  "lon": 30.75,
+  "distance_km": 2.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.17393,
+   "phase": 33.339
+  },
+  "J1": {
+   "amp": 0.0892,
+   "phase": 140.938
+  },
+  "K1": {
+   "amp": 1.08661,
+   "phase": 77.128
+  },
+  "K2": {
+   "amp": 0.47031,
+   "phase": 80.845
+  },
+  "M2": {
+   "amp": 3.91028,
+   "phase": 75.833
+  },
+  "M4": {
+   "amp": 0.13395,
+   "phase": -58.521
+  },
+  "MF": {
+   "amp": 0.42322,
+   "phase": 128.322
+  },
+  "MM": {
+   "amp": 0.66245,
+   "phase": -120.852
+  },
+  "N2": {
+   "amp": 0.87377,
+   "phase": 47.622
+  },
+  "O1": {
+   "amp": 0.47644,
+   "phase": 75.483
+  },
+  "P1": {
+   "amp": 0.57605,
+   "phase": 25.442
+  },
+  "Q1": {
+   "amp": 0.31131,
+   "phase": 59.126
+  },
+  "S1": {
+   "amp": 0.40578,
+   "phase": 42.095
+  },
+  "S2": {
+   "amp": 2.7983,
+   "phase": 80.871
+  },
+  "SA": {
+   "amp": 1.42379,
+   "phase": 97.335
+  },
+  "SSA": {
+   "amp": 0.54956,
+   "phase": -144.276
+  },
+  "T2": {
+   "amp": 0.30132,
+   "phase": -143.409
+  },
+  "Z0": {
+   "amp": 11.7,
+   "phase": 0
+  }
+ }
+}

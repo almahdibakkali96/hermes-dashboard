@@ -1,0 +1,94 @@
+{
+ "id": "freetown",
+ "name_en": "Freetown",
+ "name_ar": "فريتاون",
+ "country": "SL",
+ "lat": 8.49,
+ "lon": -13.24,
+ "timezone": "Africa/Freetown",
+ "grid": {
+  "lat": 8.5,
+  "lon": -13.25,
+  "distance_km": 1.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.0075,
+   "phase": -162.48
+  },
+  "J1": {
+   "amp": 0.44373,
+   "phase": -2.228
+  },
+  "K1": {
+   "amp": 10.09547,
+   "phase": -7.19
+  },
+  "K2": {
+   "amp": 10.02251,
+   "phase": -101.964
+  },
+  "M2": {
+   "amp": 96.87029,
+   "phase": -130.795
+  },
+  "M4": {
+   "amp": 2.65908,
+   "phase": -5.935
+  },
+  "MF": {
+   "amp": 1.51508,
+   "phase": -9.263
+  },
+  "MM": {
+   "amp": 0.69468,
+   "phase": -23.324
+  },
+  "N2": {
+   "amp": 19.82088,
+   "phase": -151.085
+  },
+  "O1": {
+   "amp": 2.07718,
+   "phase": -95.707
+  },
+  "P1": {
+   "amp": 2.56525,
+   "phase": -21.515
+  },
+  "Q1": {
+   "amp": 0.75149,
+   "phase": 179.86
+  },
+  "S1": {
+   "amp": 1.26309,
+   "phase": 88.396
+  },
+  "S2": {
+   "amp": 33.25557,
+   "phase": -100.237
+  },
+  "SA": {
+   "amp": 1.82128,
+   "phase": -93.739
+  },
+  "SSA": {
+   "amp": 0.387,
+   "phase": -31.421
+  },
+  "T2": {
+   "amp": 1.97537,
+   "phase": -108.287
+  },
+  "Z0": {
+   "amp": 170.1,
+   "phase": 0
+  }
+ }
+}

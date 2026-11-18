@@ -1,0 +1,94 @@
+{
+ "id": "kota-kinabalu",
+ "name_en": "Kota Kinabalu",
+ "name_ar": "كوتا كينابالو",
+ "country": "MY",
+ "lat": 5.98,
+ "lon": 116.07,
+ "timezone": "Asia/Kuching",
+ "grid": {
+  "lat": 6,
+  "lon": 116,
+  "distance_km": 8.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.95413,
+   "phase": 70.831
+  },
+  "J1": {
+   "amp": 1.02334,
+   "phase": -164.28
+  },
+  "K1": {
+   "amp": 35.8249,
+   "phase": -166.238
+  },
+  "K2": {
+   "amp": 2.79174,
+   "phase": 102.873
+  },
+  "M2": {
+   "amp": 23.16333,
+   "phase": 87.684
+  },
+  "M4": {
+   "amp": 0.31701,
+   "phase": 62.158
+  },
+  "MF": {
+   "amp": 0.98605,
+   "phase": 23.242
+  },
+  "MM": {
+   "amp": 0.95371,
+   "phase": 27.551
+  },
+  "N2": {
+   "amp": 5.13095,
+   "phase": 80.586
+  },
+  "O1": {
+   "amp": 31.24921,
+   "phase": 153.389
+  },
+  "P1": {
+   "amp": 11.15929,
+   "phase": -169.056
+  },
+  "Q1": {
+   "amp": 5.72562,
+   "phase": 136.657
+  },
+  "S1": {
+   "amp": 0.74692,
+   "phase": -56.882
+  },
+  "S2": {
+   "amp": 9.81097,
+   "phase": 117.846
+  },
+  "SA": {
+   "amp": 4.0669,
+   "phase": -62.072
+  },
+  "SSA": {
+   "amp": 0.45538,
+   "phase": -25.799
+  },
+  "T2": {
+   "amp": 0.93697,
+   "phase": 113.648
+  },
+  "Z0": {
+   "amp": 120.1,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "adelaide",
+ "name_en": "Adelaide (Glenelg)",
+ "name_ar": "أديلايد",
+ "country": "AU",
+ "lat": -34.98,
+ "lon": 138.51,
+ "timezone": "Australia/Adelaide",
+ "grid": {
+  "lat": -35,
+  "lon": 138.5,
+  "distance_km": 2.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.86413,
+   "phase": -118.421
+  },
+  "J1": {
+   "amp": 1.46006,
+   "phase": -77.432
+  },
+  "K1": {
+   "amp": 24.3953,
+   "phase": -90.772
+  },
+  "K2": {
+   "amp": 10.38604,
+   "phase": -103.259
+  },
+  "M2": {
+   "amp": 47.61535,
+   "phase": -167.467
+  },
+  "M4": {
+   "amp": 1.77344,
+   "phase": -25.067
+  },
+  "MF": {
+   "amp": 0.22277,
+   "phase": -93.002
+  },
+  "MM": {
+   "amp": 1.49553,
+   "phase": -92.666
+  },
+  "N2": {
+   "amp": 3.18732,
+   "phase": -74.973
+  },
+  "O1": {
+   "amp": 16.18698,
+   "phase": -111.051
+  },
+  "P1": {
+   "amp": 7.00192,
+   "phase": -97.036
+  },
+  "Q1": {
+   "amp": 3.68821,
+   "phase": -121.275
+  },
+  "S1": {
+   "amp": 0.21851,
+   "phase": -120.573
+  },
+  "S2": {
+   "amp": 43.88571,
+   "phase": -116.719
+  },
+  "SA": {
+   "amp": 6.4035,
+   "phase": 174.55
+  },
+  "SSA": {
+   "amp": 0.36549,
+   "phase": -147.739
+  },
+  "T2": {
+   "amp": 3.49509,
+   "phase": -142.604
+  },
+  "Z0": {
+   "amp": 120.9,
+   "phase": 0
+  }
+ }
+}

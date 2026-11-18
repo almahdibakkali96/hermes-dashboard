@@ -1,0 +1,94 @@
+{
+ "id": "durban",
+ "name_en": "Durban",
+ "name_ar": "ديربان",
+ "country": "ZA",
+ "lat": -29.87,
+ "lon": 31.05,
+ "timezone": "Africa/Johannesburg",
+ "grid": {
+  "lat": -29.875,
+  "lon": 31.125,
+  "distance_km": 7.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.31216,
+   "phase": 39.886
+  },
+  "J1": {
+   "amp": 0.33408,
+   "phase": 83.601
+  },
+  "K1": {
+   "amp": 5.35052,
+   "phase": 147.51
+  },
+  "K2": {
+   "amp": 9.29065,
+   "phase": 73.116
+  },
+  "M2": {
+   "amp": 55.83356,
+   "phase": 44.201
+  },
+  "M4": {
+   "amp": 0.51215,
+   "phase": 172.386
+  },
+  "MF": {
+   "amp": 0.69145,
+   "phase": -22.882
+  },
+  "MM": {
+   "amp": 0.11086,
+   "phase": 110.499
+  },
+  "N2": {
+   "amp": 9.99611,
+   "phase": 36.238
+  },
+  "O1": {
+   "amp": 1.84822,
+   "phase": -51.038
+  },
+  "P1": {
+   "amp": 1.66791,
+   "phase": 149.942
+  },
+  "Q1": {
+   "amp": 1.3287,
+   "phase": -111.478
+  },
+  "S1": {
+   "amp": 1.41061,
+   "phase": 30.714
+  },
+  "S2": {
+   "amp": 31.95209,
+   "phase": 75.852
+  },
+  "SA": {
+   "amp": 0.651,
+   "phase": 160.626
+  },
+  "SSA": {
+   "amp": 0.17245,
+   "phase": -35.189
+  },
+  "T2": {
+   "amp": 1.86903,
+   "phase": 77.151
+  },
+  "Z0": {
+   "amp": 111.2,
+   "phase": 0
+  }
+ }
+}

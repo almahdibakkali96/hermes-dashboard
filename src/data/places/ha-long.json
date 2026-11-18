@@ -1,0 +1,94 @@
+{
+ "id": "ha-long",
+ "name_en": "Ha Long",
+ "name_ar": "ها لونغ",
+ "country": "VN",
+ "lat": 20.95,
+ "lon": 107.08,
+ "timezone": "Asia/Ho_Chi_Minh",
+ "grid": {
+  "lat": 20.875,
+  "lon": 107.125,
+  "distance_km": 9.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.79132,
+   "phase": 145.391
+  },
+  "J1": {
+   "amp": 2.17482,
+   "phase": -20.281
+  },
+  "K1": {
+   "amp": 73.11751,
+   "phase": -17.961
+  },
+  "K2": {
+   "amp": 1.1811,
+   "phase": -78.411
+  },
+  "M2": {
+   "amp": 6.62378,
+   "phase": -88.299
+  },
+  "M4": {
+   "amp": 0.50595,
+   "phase": -167.598
+  },
+  "MF": {
+   "amp": 0.76249,
+   "phase": 87.51
+  },
+  "MM": {
+   "amp": 0.81312,
+   "phase": 59.501
+  },
+  "N2": {
+   "amp": 2.05262,
+   "phase": -89.043
+  },
+  "O1": {
+   "amp": 81.27356,
+   "phase": -72.119
+  },
+  "P1": {
+   "amp": 23.35788,
+   "phase": -21.87
+  },
+  "Q1": {
+   "amp": 16.61665,
+   "phase": -101.838
+  },
+  "S1": {
+   "amp": 1.88139,
+   "phase": 107.091
+  },
+  "S2": {
+   "amp": 3.57824,
+   "phase": -88.819
+  },
+  "SA": {
+   "amp": 7.17119,
+   "phase": -38.559
+  },
+  "SSA": {
+   "amp": 0.51617,
+   "phase": 135.854
+  },
+  "T2": {
+   "amp": 0.81518,
+   "phase": -44.405
+  },
+  "Z0": {
+   "amp": 215.3,
+   "phase": 0
+  }
+ }
+}

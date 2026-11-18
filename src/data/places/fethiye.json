@@ -1,0 +1,94 @@
+{
+ "id": "fethiye",
+ "name_en": "Fethiye",
+ "name_ar": "فتحية",
+ "country": "TR",
+ "lat": 36.62,
+ "lon": 29.1,
+ "timezone": "Europe/Istanbul",
+ "grid": {
+  "lat": 36.625,
+  "lon": 29,
+  "distance_km": 8.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.09691,
+   "phase": -151.033
+  },
+  "J1": {
+   "amp": 0.0878,
+   "phase": -76.244
+  },
+  "K1": {
+   "amp": 2.25189,
+   "phase": -57.557
+  },
+  "K2": {
+   "amp": 1.04584,
+   "phase": -108.666
+  },
+  "M2": {
+   "amp": 6.40698,
+   "phase": -115.863
+  },
+  "M4": {
+   "amp": 0.09464,
+   "phase": -3.142
+  },
+  "MF": {
+   "amp": 0.51428,
+   "phase": -65.407
+  },
+  "MM": {
+   "amp": 0.55087,
+   "phase": -93.9
+  },
+  "N2": {
+   "amp": 1.10001,
+   "phase": -109.763
+  },
+  "O1": {
+   "amp": 1.33081,
+   "phase": -92.547
+  },
+  "P1": {
+   "amp": 1.00486,
+   "phase": -48.602
+  },
+  "Q1": {
+   "amp": 0.1351,
+   "phase": 164.614
+  },
+  "S1": {
+   "amp": 1.44898,
+   "phase": 10.432
+  },
+  "S2": {
+   "amp": 3.99793,
+   "phase": -95.265
+  },
+  "SA": {
+   "amp": 3.32309,
+   "phase": -70.784
+  },
+  "SSA": {
+   "amp": 0.09183,
+   "phase": -139.152
+  },
+  "T2": {
+   "amp": 0.21152,
+   "phase": -81.39
+  },
+  "Z0": {
+   "amp": 17.3,
+   "phase": 0
+  }
+ }
+}

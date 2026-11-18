@@ -1,0 +1,94 @@
+{
+ "id": "dubrovnik",
+ "name_en": "Dubrovnik",
+ "name_ar": "دوبروفنيك",
+ "country": "HR",
+ "lat": 42.64,
+ "lon": 18.1,
+ "timezone": "Europe/Zagreb",
+ "grid": {
+  "lat": 42.625,
+  "lon": 18,
+  "distance_km": 8.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.06749,
+   "phase": 27.343
+  },
+  "J1": {
+   "amp": 0.36777,
+   "phase": 69.056
+  },
+  "K1": {
+   "amp": 5.32652,
+   "phase": 42.194
+  },
+  "K2": {
+   "amp": 1.65466,
+   "phase": 73.55
+  },
+  "M2": {
+   "amp": 9.79942,
+   "phase": 75.685
+  },
+  "M4": {
+   "amp": 0.27034,
+   "phase": 163.515
+  },
+  "MF": {
+   "amp": 0.36087,
+   "phase": 146.86
+  },
+  "MM": {
+   "amp": 0.5257,
+   "phase": -136.191
+  },
+  "N2": {
+   "amp": 1.87726,
+   "phase": 72.483
+  },
+  "O1": {
+   "amp": 1.71522,
+   "phase": 22.256
+  },
+  "P1": {
+   "amp": 1.88712,
+   "phase": 41.179
+  },
+  "Q1": {
+   "amp": 0.37255,
+   "phase": 65.106
+  },
+  "S1": {
+   "amp": 1.14193,
+   "phase": 13.816
+  },
+  "S2": {
+   "amp": 6.30453,
+   "phase": 80.23
+  },
+  "SA": {
+   "amp": 2.80381,
+   "phase": -58.194
+  },
+  "SSA": {
+   "amp": 0.45731,
+   "phase": -166.429
+  },
+  "T2": {
+   "amp": 0.10263,
+   "phase": 106.672
+  },
+  "Z0": {
+   "amp": 24.6,
+   "phase": 0
+  }
+ }
+}

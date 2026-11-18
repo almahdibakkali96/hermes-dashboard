@@ -1,0 +1,94 @@
+{
+ "id": "puerto-madryn",
+ "name_en": "Puerto Madryn",
+ "name_ar": "بويرتو مادرين",
+ "country": "AR",
+ "lat": -42.77,
+ "lon": -65.03,
+ "timezone": "America/Argentina/Catamarca",
+ "grid": {
+  "lat": -42.75,
+  "lon": -65,
+  "distance_km": 3.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.36828,
+   "phase": -77.463
+  },
+  "J1": {
+   "amp": 3.35634,
+   "phase": -85.331
+  },
+  "K1": {
+   "amp": 16.42529,
+   "phase": -37.413
+  },
+  "K2": {
+   "amp": 8.45597,
+   "phase": 73.9
+  },
+  "M2": {
+   "amp": 176.97088,
+   "phase": -4.368
+  },
+  "M4": {
+   "amp": 13.30599,
+   "phase": -153.473
+  },
+  "MF": {
+   "amp": 1.84658,
+   "phase": -123.308
+  },
+  "MM": {
+   "amp": 1.65054,
+   "phase": -35.334
+  },
+  "N2": {
+   "amp": 32.9714,
+   "phase": -38.699
+  },
+  "O1": {
+   "amp": 8.49786,
+   "phase": -131.047
+  },
+  "P1": {
+   "amp": 5.2956,
+   "phase": -22.915
+  },
+  "Q1": {
+   "amp": 1.51215,
+   "phase": 125.824
+  },
+  "S1": {
+   "amp": 1.0665,
+   "phase": 163.554
+  },
+  "S2": {
+   "amp": 34.38435,
+   "phase": 83.623
+  },
+  "SA": {
+   "amp": 3.43732,
+   "phase": 70.751
+  },
+  "SSA": {
+   "amp": 0.25881,
+   "phase": 123.862
+  },
+  "T2": {
+   "amp": 1.22134,
+   "phase": 14.047
+  },
+  "Z0": {
+   "amp": 288.7,
+   "phase": 0
+  }
+ }
+}

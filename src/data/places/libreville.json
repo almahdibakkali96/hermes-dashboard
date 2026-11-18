@@ -1,0 +1,94 @@
+{
+ "id": "libreville",
+ "name_en": "Libreville",
+ "name_ar": "ليبرفيل",
+ "country": "GA",
+ "lat": 0.39,
+ "lon": 9.44,
+ "timezone": "Africa/Libreville",
+ "grid": {
+  "lat": 0.375,
+  "lon": 9.375,
+  "distance_km": 7.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.3908,
+   "phase": 89.905
+  },
+  "J1": {
+   "amp": 0.96324,
+   "phase": 1.39
+  },
+  "K1": {
+   "amp": 11.82518,
+   "phase": -3.461
+  },
+  "K2": {
+   "amp": 5.85866,
+   "phase": 134.87
+  },
+  "M2": {
+   "amp": 57.87277,
+   "phase": 107.04
+  },
+  "M4": {
+   "amp": 3.02597,
+   "phase": 5.092
+  },
+  "MF": {
+   "amp": 1.59539,
+   "phase": 0.852
+  },
+  "MM": {
+   "amp": 1.04742,
+   "phase": -23.566
+  },
+  "N2": {
+   "amp": 12.52372,
+   "phase": 103.535
+  },
+  "O1": {
+   "amp": 1.82576,
+   "phase": -48.833
+  },
+  "P1": {
+   "amp": 3.41936,
+   "phase": -8.921
+  },
+  "Q1": {
+   "amp": 0.56675,
+   "phase": 125.423
+  },
+  "S1": {
+   "amp": 0.78233,
+   "phase": 64.908
+  },
+  "S2": {
+   "amp": 21.02674,
+   "phase": 138.078
+  },
+  "SA": {
+   "amp": 2.93238,
+   "phase": -10.474
+  },
+  "SSA": {
+   "amp": 0.70744,
+   "phase": 17.851
+  },
+  "T2": {
+   "amp": 1.50707,
+   "phase": 145.246
+  },
+  "Z0": {
+   "amp": 112.1,
+   "phase": 0
+  }
+ }
+}

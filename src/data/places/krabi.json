@@ -1,0 +1,94 @@
+{
+ "id": "krabi",
+ "name_en": "Krabi (Ao Nang)",
+ "name_ar": "كرابي",
+ "country": "TH",
+ "lat": 8.03,
+ "lon": 98.82,
+ "timezone": "Asia/Bangkok",
+ "grid": {
+  "lat": 8,
+  "lon": 98.875,
+  "distance_km": 6.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.03853,
+   "phase": 61.573
+  },
+  "J1": {
+   "amp": 0.88359,
+   "phase": -124.676
+  },
+  "K1": {
+   "amp": 13.68939,
+   "phase": -130.453
+  },
+  "K2": {
+   "amp": 12.16308,
+   "phase": 127.861
+  },
+  "M2": {
+   "amp": 85.24883,
+   "phase": 101.469
+  },
+  "M4": {
+   "amp": 1.446,
+   "phase": 3.624
+  },
+  "MF": {
+   "amp": 0.90791,
+   "phase": -13.242
+  },
+  "MM": {
+   "amp": 0.30938,
+   "phase": 9.32
+  },
+  "N2": {
+   "amp": 16.8339,
+   "phase": 95.654
+  },
+  "O1": {
+   "amp": 5.27498,
+   "phase": -166.823
+  },
+  "P1": {
+   "amp": 4.06861,
+   "phase": -127.623
+  },
+  "Q1": {
+   "amp": 1.02082,
+   "phase": 122.696
+  },
+  "S1": {
+   "amp": 2.80693,
+   "phase": -16.232
+  },
+  "S2": {
+   "amp": 43.10226,
+   "phase": 138.027
+  },
+  "SA": {
+   "amp": 2.89065,
+   "phase": -136.398
+  },
+  "SSA": {
+   "amp": 0.3,
+   "phase": -65.678
+  },
+  "T2": {
+   "amp": 2.61249,
+   "phase": 141.477
+  },
+  "Z0": {
+   "amp": 172.7,
+   "phase": 0
+  }
+ }
+}

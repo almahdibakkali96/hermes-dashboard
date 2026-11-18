@@ -1,0 +1,94 @@
+{
+ "id": "toamasina",
+ "name_en": "Toamasina",
+ "name_ar": "تواماسينا",
+ "country": "MG",
+ "lat": -18.15,
+ "lon": 49.42,
+ "timezone": "Indian/Antananarivo",
+ "grid": {
+  "lat": -18.125,
+  "lon": 49.5,
+  "distance_km": 8.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.09917,
+   "phase": -84.474
+  },
+  "J1": {
+   "amp": 0.40607,
+   "phase": 113.664
+  },
+  "K1": {
+   "amp": 2.96111,
+   "phase": 21.018
+  },
+  "K2": {
+   "amp": 2.19265,
+   "phase": -40.833
+  },
+  "M2": {
+   "amp": 20.57885,
+   "phase": -49.153
+  },
+  "M4": {
+   "amp": 0.27938,
+   "phase": 29.74
+  },
+  "MF": {
+   "amp": 1.08437,
+   "phase": 5.666
+  },
+  "MM": {
+   "amp": 0.72677,
+   "phase": -19.257
+  },
+  "N2": {
+   "amp": 5.63043,
+   "phase": -60.709
+  },
+  "O1": {
+   "amp": 3.6188,
+   "phase": 13.003
+  },
+  "P1": {
+   "amp": 1.26316,
+   "phase": 71.302
+  },
+  "Q1": {
+   "amp": 0.88987,
+   "phase": -30.387
+  },
+  "S1": {
+   "amp": 0.69897,
+   "phase": 39.24
+  },
+  "S2": {
+   "amp": 9.35638,
+   "phase": -45.188
+  },
+  "SA": {
+   "amp": 1.54104,
+   "phase": 30.612
+  },
+  "SSA": {
+   "amp": 0.42155,
+   "phase": -6.516
+  },
+  "T2": {
+   "amp": 0.45846,
+   "phase": -34.801
+  },
+  "Z0": {
+   "amp": 43.5,
+   "phase": 0
+  }
+ }
+}

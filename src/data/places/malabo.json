@@ -1,0 +1,94 @@
+{
+ "id": "malabo",
+ "name_en": "Malabo",
+ "name_ar": "مالابو",
+ "country": "GQ",
+ "lat": 3.76,
+ "lon": 8.78,
+ "timezone": "Africa/Malabo",
+ "grid": {
+  "lat": 3.875,
+  "lon": 8.75,
+  "distance_km": 13.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.53956,
+   "phase": 83.354
+  },
+  "J1": {
+   "amp": 1.03977,
+   "phase": 1.618
+  },
+  "K1": {
+   "amp": 12.84509,
+   "phase": -6.53
+  },
+  "K2": {
+   "amp": 5.79987,
+   "phase": 125.955
+  },
+  "M2": {
+   "amp": 59.8152,
+   "phase": 100.255
+  },
+  "M4": {
+   "amp": 4.0163,
+   "phase": -18.978
+  },
+  "MF": {
+   "amp": 1.47359,
+   "phase": -0.257
+  },
+  "MM": {
+   "amp": 0.62055,
+   "phase": -4.47
+  },
+  "N2": {
+   "amp": 12.42781,
+   "phase": 94.274
+  },
+  "O1": {
+   "amp": 2.43484,
+   "phase": -35.408
+  },
+  "P1": {
+   "amp": 3.81288,
+   "phase": -9.272
+  },
+  "Q1": {
+   "amp": 0.26185,
+   "phase": -170.483
+  },
+  "S1": {
+   "amp": 2.55965,
+   "phase": 119.498
+  },
+  "S2": {
+   "amp": 21.56537,
+   "phase": 128.832
+  },
+  "SA": {
+   "amp": 2.91256,
+   "phase": -53.186
+  },
+  "SSA": {
+   "amp": 0.75015,
+   "phase": 19.76
+  },
+  "T2": {
+   "amp": 1.4004,
+   "phase": 137.422
+  },
+  "Z0": {
+   "amp": 118.2,
+   "phase": 0
+  }
+ }
+}

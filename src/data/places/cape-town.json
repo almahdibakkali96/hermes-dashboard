@@ -1,0 +1,94 @@
+{
+ "id": "cape-town",
+ "name_en": "Cape Town",
+ "name_ar": "كيب تاون",
+ "country": "ZA",
+ "lat": -33.9,
+ "lon": 18.42,
+ "timezone": "Africa/Johannesburg",
+ "grid": {
+  "lat": -33.875,
+  "lon": 18.375,
+  "distance_km": 5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.55793,
+   "phase": 10.106
+  },
+  "J1": {
+   "amp": 0.44891,
+   "phase": 102.891
+  },
+  "K1": {
+   "amp": 6.02747,
+   "phase": 110.435
+  },
+  "K2": {
+   "amp": 6.38654,
+   "phase": 53.445
+  },
+  "M2": {
+   "amp": 50.02795,
+   "phase": 33.799
+  },
+  "M4": {
+   "amp": 0.79003,
+   "phase": 38.779
+  },
+  "MF": {
+   "amp": 0.10203,
+   "phase": -75.594
+  },
+  "MM": {
+   "amp": 0.15167,
+   "phase": -160.374
+  },
+  "N2": {
+   "amp": 11.0729,
+   "phase": 25.723
+  },
+  "O1": {
+   "amp": 1.4744,
+   "phase": -134.039
+  },
+  "P1": {
+   "amp": 1.74563,
+   "phase": 102.69
+  },
+  "Q1": {
+   "amp": 0.8991,
+   "phase": -144.763
+  },
+  "S1": {
+   "amp": 1.28459,
+   "phase": 136.476
+  },
+  "S2": {
+   "amp": 22.6072,
+   "phase": 53.699
+  },
+  "SA": {
+   "amp": 0.95232,
+   "phase": -66.723
+  },
+  "SSA": {
+   "amp": 0.04538,
+   "phase": 95.458
+  },
+  "T2": {
+   "amp": 0.93981,
+   "phase": 69.007
+  },
+  "Z0": {
+   "amp": 96.2,
+   "phase": 0
+  }
+ }
+}

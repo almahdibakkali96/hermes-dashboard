@@ -1,0 +1,94 @@
+{
+ "id": "santos",
+ "name_en": "Santos (São Paulo)",
+ "name_ar": "سانتوس (ساو باولو)",
+ "country": "BR",
+ "lat": -23.98,
+ "lon": -46.31,
+ "timezone": "America/Sao_Paulo",
+ "grid": {
+  "lat": -24,
+  "lon": -46.25,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.40066,
+   "phase": -143.25
+  },
+  "J1": {
+   "amp": 0.08786,
+   "phase": -149.108
+  },
+  "K1": {
+   "amp": 6.36471,
+   "phase": -178.296
+  },
+  "K2": {
+   "amp": 7.12721,
+   "phase": 165.997
+  },
+  "M2": {
+   "amp": 35.29387,
+   "phase": 164.681
+  },
+  "M4": {
+   "amp": 2.53809,
+   "phase": 158.264
+  },
+  "MF": {
+   "amp": 1.11711,
+   "phase": -38.458
+  },
+  "MM": {
+   "amp": 0.12892,
+   "phase": -63.084
+  },
+  "N2": {
+   "amp": 5.01228,
+   "phase": -137.255
+  },
+  "O1": {
+   "amp": 11.0698,
+   "phase": 124.25
+  },
+  "P1": {
+   "amp": 1.69219,
+   "phase": 160.578
+  },
+  "Q1": {
+   "amp": 2.91913,
+   "phase": 93.707
+  },
+  "S1": {
+   "amp": 1.98617,
+   "phase": 173.552
+  },
+  "S2": {
+   "amp": 22.75049,
+   "phase": 177.79
+  },
+  "SA": {
+   "amp": 3.12541,
+   "phase": 160.713
+  },
+  "SSA": {
+   "amp": 0.30499,
+   "phase": -17.417
+  },
+  "T2": {
+   "amp": 0.55911,
+   "phase": -141.697
+  },
+  "Z0": {
+   "amp": 89.9,
+   "phase": 0
+  }
+ }
+}

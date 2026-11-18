@@ -1,0 +1,94 @@
+{
+ "id": "boston",
+ "name_en": "Boston",
+ "name_ar": "بوسطن",
+ "country": "US",
+ "lat": 42.35,
+ "lon": -71.04,
+ "timezone": "America/New_York",
+ "grid": {
+  "lat": 42.375,
+  "lon": -70.875,
+  "distance_km": 13.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.64769,
+   "phase": 61.406
+  },
+  "J1": {
+   "amp": 0.80245,
+   "phase": -150.467
+  },
+  "K1": {
+   "amp": 12.84954,
+   "phase": -155.336
+  },
+  "K2": {
+   "amp": 5.4688,
+   "phase": 141.166
+  },
+  "M2": {
+   "amp": 132.24268,
+   "phase": 108.238
+  },
+  "M4": {
+   "amp": 1.7974,
+   "phase": -0.244
+  },
+  "MF": {
+   "amp": 0.50646,
+   "phase": -67.381
+  },
+  "MM": {
+   "amp": 0.28355,
+   "phase": 6.114
+  },
+  "N2": {
+   "amp": 29.87026,
+   "phase": 76.483
+  },
+  "O1": {
+   "amp": 11.55621,
+   "phase": -173.039
+  },
+  "P1": {
+   "amp": 4.57948,
+   "phase": -141.701
+  },
+  "Q1": {
+   "amp": 1.97724,
+   "phase": 160.841
+  },
+  "S1": {
+   "amp": 3.23744,
+   "phase": 108.178
+  },
+  "S2": {
+   "amp": 16.38498,
+   "phase": 144.368
+  },
+  "SA": {
+   "amp": 1.8321,
+   "phase": -123.861
+  },
+  "SSA": {
+   "amp": 0.39011,
+   "phase": 169.668
+  },
+  "T2": {
+   "amp": 4.08176,
+   "phase": 110.698
+  },
+  "Z0": {
+   "amp": 209.1,
+   "phase": 0
+  }
+ }
+}

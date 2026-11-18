@@ -1,0 +1,94 @@
+{
+ "id": "catania",
+ "name_en": "Catania",
+ "name_ar": "كاتانيا",
+ "country": "IT",
+ "lat": 37.5,
+ "lon": 15.1,
+ "timezone": "Europe/Rome",
+ "grid": {
+  "lat": 37.5,
+  "lon": 15.125,
+  "distance_km": 2.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.17597,
+   "phase": 4.72
+  },
+  "J1": {
+   "amp": 0.3233,
+   "phase": 90.929
+  },
+  "K1": {
+   "amp": 2.27274,
+   "phase": 41.046
+  },
+  "K2": {
+   "amp": 0.77403,
+   "phase": 76.462
+  },
+  "M2": {
+   "amp": 6.40526,
+   "phase": 56.528
+  },
+  "M4": {
+   "amp": 0.14096,
+   "phase": 165.272
+  },
+  "MF": {
+   "amp": 0.28791,
+   "phase": 172.43
+  },
+  "MM": {
+   "amp": 0.24294,
+   "phase": -112.327
+  },
+  "N2": {
+   "amp": 1.33102,
+   "phase": 51.605
+  },
+  "O1": {
+   "amp": 1.05013,
+   "phase": 39.335
+  },
+  "P1": {
+   "amp": 1.07616,
+   "phase": 37.333
+  },
+  "Q1": {
+   "amp": 0.33238,
+   "phase": 36.367
+  },
+  "S1": {
+   "amp": 1.29471,
+   "phase": -0.344
+  },
+  "S2": {
+   "amp": 3.61325,
+   "phase": 61.712
+  },
+  "SA": {
+   "amp": 3.27482,
+   "phase": -68.053
+  },
+  "SSA": {
+   "amp": 0.22811,
+   "phase": -172.586
+  },
+  "T2": {
+   "amp": 0.13553,
+   "phase": 93.187
+  },
+  "Z0": {
+   "amp": 16.3,
+   "phase": 0
+  }
+ }
+}

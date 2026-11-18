@@ -1,0 +1,94 @@
+{
+ "id": "xiamen",
+ "name_en": "Xiamen",
+ "name_ar": "شيامن",
+ "country": "CN",
+ "lat": 24.45,
+ "lon": 118.07,
+ "timezone": "Asia/Shanghai",
+ "grid": {
+  "lat": 24.375,
+  "lon": 118.125,
+  "distance_km": 10
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.21162,
+   "phase": 65.857
+  },
+  "J1": {
+   "amp": 1.90656,
+   "phase": -154.25
+  },
+  "K1": {
+   "amp": 33.01646,
+   "phase": 158.188
+  },
+  "K2": {
+   "amp": 14.73789,
+   "phase": 152.221
+  },
+  "M2": {
+   "amp": 167.38974,
+   "phase": 113.968
+  },
+  "M4": {
+   "amp": 3.26891,
+   "phase": -142.438
+  },
+  "MF": {
+   "amp": 1.24449,
+   "phase": 8.916
+  },
+  "MM": {
+   "amp": 0.19654,
+   "phase": 36.095
+  },
+  "N2": {
+   "amp": 32.41935,
+   "phase": 92.959
+  },
+  "O1": {
+   "amp": 27.1431,
+   "phase": 124.827
+  },
+  "P1": {
+   "amp": 10.55577,
+   "phase": 157.046
+  },
+  "Q1": {
+   "amp": 6.13923,
+   "phase": 107.565
+  },
+  "S1": {
+   "amp": 0.19859,
+   "phase": -53.921
+  },
+  "S2": {
+   "amp": 50.42366,
+   "phase": 156.811
+  },
+  "SA": {
+   "amp": 9.00525,
+   "phase": -35.61
+  },
+  "SSA": {
+   "amp": 0.21881,
+   "phase": 88.624
+  },
+  "T2": {
+   "amp": 2.71251,
+   "phase": 109.211
+  },
+  "Z0": {
+   "amp": 323.8,
+   "phase": 0
+  }
+ }
+}

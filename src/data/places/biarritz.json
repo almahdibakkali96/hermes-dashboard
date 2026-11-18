@@ -1,0 +1,94 @@
+{
+ "id": "biarritz",
+ "name_en": "Biarritz",
+ "name_ar": "بياريتز",
+ "country": "FR",
+ "lat": 43.49,
+ "lon": -1.57,
+ "timezone": "Europe/Paris",
+ "grid": {
+  "lat": 43.5,
+  "lon": -1.625,
+  "distance_km": 4.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.17921,
+   "phase": 57.309
+  },
+  "J1": {
+   "amp": 0.41589,
+   "phase": 80.669
+  },
+  "K1": {
+   "amp": 6.5524,
+   "phase": 64.685
+  },
+  "K2": {
+   "amp": 13.10191,
+   "phase": 121.163
+  },
+  "M2": {
+   "amp": 133.21483,
+   "phase": 92.766
+  },
+  "M4": {
+   "amp": 3.43156,
+   "phase": -36.41
+  },
+  "MF": {
+   "amp": 0.4485,
+   "phase": -150.797
+  },
+  "MM": {
+   "amp": 0.16427,
+   "phase": -159.857
+  },
+  "N2": {
+   "amp": 28.07894,
+   "phase": 72.684
+  },
+  "O1": {
+   "amp": 7.14495,
+   "phase": -41.68
+  },
+  "P1": {
+   "amp": 2.42884,
+   "phase": 52.518
+  },
+  "Q1": {
+   "amp": 2.23637,
+   "phase": -96.645
+  },
+  "S1": {
+   "amp": 1.16814,
+   "phase": -0.9
+  },
+  "S2": {
+   "amp": 46.33069,
+   "phase": 125.438
+  },
+  "SA": {
+   "amp": 2.55811,
+   "phase": -61.326
+  },
+  "SSA": {
+   "amp": 0.40931,
+   "phase": 179.514
+  },
+  "T2": {
+   "amp": 2.55419,
+   "phase": 121.988
+  },
+  "Z0": {
+   "amp": 235,
+   "phase": 0
+  }
+ }
+}

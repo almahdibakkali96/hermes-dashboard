@@ -1,0 +1,94 @@
+{
+ "id": "helsinki",
+ "name_en": "Helsinki",
+ "name_ar": "هلسنكي",
+ "country": "FI",
+ "lat": 60.16,
+ "lon": 24.96,
+ "timezone": "Europe/Helsinki",
+ "grid": {
+  "lat": 60.125,
+  "lon": 25,
+  "distance_km": 4.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.06005,
+   "phase": -178.362
+  },
+  "J1": {
+   "amp": 0.89538,
+   "phase": 52.404
+  },
+  "K1": {
+   "amp": 0.39835,
+   "phase": -88.155
+  },
+  "K2": {
+   "amp": 0.47139,
+   "phase": -70.405
+  },
+  "M2": {
+   "amp": 0.70221,
+   "phase": 51.406
+  },
+  "M4": {
+   "amp": 0.24383,
+   "phase": -163.73
+  },
+  "MF": {
+   "amp": 0.42189,
+   "phase": -102.153
+  },
+  "MM": {
+   "amp": 0.14691,
+   "phase": -175.022
+  },
+  "N2": {
+   "amp": 0.60269,
+   "phase": -27.354
+  },
+  "O1": {
+   "amp": 1.86256,
+   "phase": -15.054
+  },
+  "P1": {
+   "amp": 0.31636,
+   "phase": 9.998
+  },
+  "Q1": {
+   "amp": 0.35809,
+   "phase": -0.776
+  },
+  "S1": {
+   "amp": 1.4167,
+   "phase": -38.608
+  },
+  "S2": {
+   "amp": 0.59253,
+   "phase": 127.02
+  },
+  "SA": {
+   "amp": 5.16376,
+   "phase": -9.825
+  },
+  "SSA": {
+   "amp": 0.39045,
+   "phase": -115.648
+  },
+  "T2": {
+   "amp": 0.4087,
+   "phase": 91.908
+  },
+  "Z0": {
+   "amp": 11.5,
+   "phase": 0
+  }
+ }
+}

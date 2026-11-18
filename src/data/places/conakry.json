@@ -1,0 +1,94 @@
+{
+ "id": "conakry",
+ "name_en": "Conakry",
+ "name_ar": "كوناكري",
+ "country": "GN",
+ "lat": 9.51,
+ "lon": -13.71,
+ "timezone": "Africa/Conakry",
+ "grid": {
+  "lat": 9.5,
+  "lon": -13.75,
+  "distance_km": 4.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.16876,
+   "phase": -161.436
+  },
+  "J1": {
+   "amp": 0.66473,
+   "phase": 4.347
+  },
+  "K1": {
+   "amp": 10.48893,
+   "phase": -7.713
+  },
+  "K2": {
+   "amp": 11.36072,
+   "phase": -96.838
+  },
+  "M2": {
+   "amp": 114.81681,
+   "phase": -128.807
+  },
+  "M4": {
+   "amp": 3.51818,
+   "phase": -4.693
+  },
+  "MF": {
+   "amp": 1.18343,
+   "phase": -4.004
+  },
+  "MM": {
+   "amp": 1.021,
+   "phase": -24.689
+  },
+  "N2": {
+   "amp": 23.46258,
+   "phase": -148.205
+  },
+  "O1": {
+   "amp": 2.03163,
+   "phase": -80.988
+  },
+  "P1": {
+   "amp": 2.66289,
+   "phase": -21.318
+  },
+  "Q1": {
+   "amp": 0.98698,
+   "phase": -175.247
+  },
+  "S1": {
+   "amp": 2.17718,
+   "phase": 125.539
+  },
+  "S2": {
+   "amp": 38.80406,
+   "phase": -96.401
+  },
+  "SA": {
+   "amp": 2.27248,
+   "phase": -92.736
+  },
+  "SSA": {
+   "amp": 0.39658,
+   "phase": -27.72
+  },
+  "T2": {
+   "amp": 2.42008,
+   "phase": -100.711
+  },
+  "Z0": {
+   "amp": 199.8,
+   "phase": 0
+  }
+ }
+}

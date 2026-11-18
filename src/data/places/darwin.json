@@ -1,0 +1,94 @@
+{
+ "id": "darwin",
+ "name_en": "Darwin",
+ "name_ar": "داروين",
+ "country": "AU",
+ "lat": -12.46,
+ "lon": 130.84,
+ "timezone": "Australia/Darwin",
+ "grid": {
+  "lat": -12.5,
+  "lon": 130.875,
+  "distance_km": 5.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.64442,
+   "phase": -160.938
+  },
+  "J1": {
+   "amp": 4.02662,
+   "phase": -120.509
+  },
+  "K1": {
+   "amp": 57.90623,
+   "phase": -157.58
+  },
+  "K2": {
+   "amp": 25.2598,
+   "phase": -68.342
+  },
+  "M2": {
+   "amp": 165.94251,
+   "phase": -113.03
+  },
+  "M4": {
+   "amp": 7.49507,
+   "phase": 91.658
+  },
+  "MF": {
+   "amp": 1.79395,
+   "phase": 13.246
+  },
+  "MM": {
+   "amp": 0.68838,
+   "phase": -28.668
+  },
+  "N2": {
+   "amp": 31.5675,
+   "phase": -132.523
+  },
+  "O1": {
+   "amp": 30.22571,
+   "phase": -169.005
+  },
+  "P1": {
+   "amp": 16.11585,
+   "phase": -153.701
+  },
+  "Q1": {
+   "amp": 7.36118,
+   "phase": 177.955
+  },
+  "S1": {
+   "amp": 3.72359,
+   "phase": 12.459
+  },
+  "S2": {
+   "amp": 89.11811,
+   "phase": -65.233
+  },
+  "SA": {
+   "amp": 3.56761,
+   "phase": 33.889
+  },
+  "SSA": {
+   "amp": 0.53722,
+   "phase": 13.12
+  },
+  "T2": {
+   "amp": 4.86037,
+   "phase": -64.137
+  },
+  "Z0": {
+   "amp": 387.2,
+   "phase": 0
+  }
+ }
+}

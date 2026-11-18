@@ -1,0 +1,94 @@
+{
+ "id": "ambon",
+ "name_en": "Ambon",
+ "name_ar": "أمبون",
+ "country": "ID",
+ "lat": -3.69,
+ "lon": 128.18,
+ "timezone": "Asia/Jayapura",
+ "grid": {
+  "lat": -3.75,
+  "lon": 128.25,
+  "distance_km": 10.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.71659,
+   "phase": 78.023
+  },
+  "J1": {
+   "amp": 1.34253,
+   "phase": -140.466
+  },
+  "K1": {
+   "amp": 28.68532,
+   "phase": -172.166
+  },
+  "K2": {
+   "amp": 4.97963,
+   "phase": -164.197
+  },
+  "M2": {
+   "amp": 54.32544,
+   "phase": 138.313
+  },
+  "M4": {
+   "amp": 0.52106,
+   "phase": 70.592
+  },
+  "MF": {
+   "amp": 1.49061,
+   "phase": 14.786
+  },
+  "MM": {
+   "amp": 0.71567,
+   "phase": 15.948
+  },
+  "N2": {
+   "amp": 11.60824,
+   "phase": 112.138
+  },
+  "O1": {
+   "amp": 20.14504,
+   "phase": 173.749
+  },
+  "P1": {
+   "amp": 8.33585,
+   "phase": -172.64
+  },
+  "Q1": {
+   "amp": 4.57748,
+   "phase": 160.077
+  },
+  "S1": {
+   "amp": 2.095,
+   "phase": 3.914
+  },
+  "S2": {
+   "amp": 19.0265,
+   "phase": -160.506
+  },
+  "SA": {
+   "amp": 4.54318,
+   "phase": 49.994
+  },
+  "SSA": {
+   "amp": 0.79878,
+   "phase": 3.437
+  },
+  "T2": {
+   "amp": 1.56756,
+   "phase": -162.337
+  },
+  "Z0": {
+   "amp": 149.1,
+   "phase": 0
+  }
+ }
+}

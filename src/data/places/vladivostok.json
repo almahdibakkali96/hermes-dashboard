@@ -1,0 +1,94 @@
+{
+ "id": "vladivostok",
+ "name_en": "Vladivostok",
+ "name_ar": "فلاديفوستوك",
+ "country": "RU",
+ "lat": 43.11,
+ "lon": 131.88,
+ "timezone": "Asia/Vladivostok",
+ "grid": {
+  "lat": 43.125,
+  "lon": 131.875,
+  "distance_km": 1.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.27537,
+   "phase": -160.42
+  },
+  "J1": {
+   "amp": 0.26901,
+   "phase": 174.785
+  },
+  "K1": {
+   "amp": 6.26623,
+   "phase": -131.234
+  },
+  "K2": {
+   "amp": 0.67497,
+   "phase": -139.422
+  },
+  "M2": {
+   "amp": 8.10718,
+   "phase": -169.853
+  },
+  "M4": {
+   "amp": 0.52879,
+   "phase": -123.486
+  },
+  "MF": {
+   "amp": 1.65625,
+   "phase": -168.453
+  },
+  "MM": {
+   "amp": 0.45445,
+   "phase": 126.083
+  },
+  "N2": {
+   "amp": 1.57916,
+   "phase": 176.265
+  },
+  "O1": {
+   "amp": 4.85326,
+   "phase": -165.06
+  },
+  "P1": {
+   "amp": 2.04088,
+   "phase": -136.483
+  },
+  "Q1": {
+   "amp": 1.06686,
+   "phase": 177.473
+  },
+  "S1": {
+   "amp": 1.52328,
+   "phase": -112.412
+  },
+  "S2": {
+   "amp": 4.43384,
+   "phase": -148.632
+  },
+  "SA": {
+   "amp": 2.86693,
+   "phase": -107.577
+  },
+  "SSA": {
+   "amp": 0.44974,
+   "phase": 171.435
+  },
+  "T2": {
+   "amp": 0.41947,
+   "phase": -135.802
+  },
+  "Z0": {
+   "amp": 27.8,
+   "phase": 0
+  }
+ }
+}

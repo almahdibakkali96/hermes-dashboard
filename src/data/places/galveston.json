@@ -1,0 +1,94 @@
+{
+ "id": "galveston",
+ "name_en": "Galveston (Houston)",
+ "name_ar": "غالفستون (هيوستن)",
+ "country": "US",
+ "lat": 29.29,
+ "lon": -94.79,
+ "timezone": "America/Chicago",
+ "grid": {
+  "lat": 29.25,
+  "lon": -94.75,
+  "distance_km": 5.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.91446,
+   "phase": -130.41
+  },
+  "J1": {
+   "amp": 0.90403,
+   "phase": 15.559
+  },
+  "K1": {
+   "amp": 16.40504,
+   "phase": 30.178
+  },
+  "K2": {
+   "amp": 0.81818,
+   "phase": -48.906
+  },
+  "M2": {
+   "amp": 13.04004,
+   "phase": -84.549
+  },
+  "M4": {
+   "amp": 0.68434,
+   "phase": -131.437
+  },
+  "MF": {
+   "amp": 0.96353,
+   "phase": -1.913
+  },
+  "MM": {
+   "amp": 0.53648,
+   "phase": -103.705
+  },
+  "N2": {
+   "amp": 4.54476,
+   "phase": -99.237
+  },
+  "O1": {
+   "amp": 15.34962,
+   "phase": 22.591
+  },
+  "P1": {
+   "amp": 5.01234,
+   "phase": 27.363
+  },
+  "Q1": {
+   "amp": 3.33388,
+   "phase": 2.355
+  },
+  "S1": {
+   "amp": 0.89103,
+   "phase": -14.785
+  },
+  "S2": {
+   "amp": 3.83932,
+   "phase": -75.826
+  },
+  "SA": {
+   "amp": 4.38253,
+   "phase": -111.084
+  },
+  "SSA": {
+   "amp": 0.25808,
+   "phase": 112.27
+  },
+  "T2": {
+   "amp": 0.49845,
+   "phase": -41.348
+  },
+  "Z0": {
+   "amp": 65.6,
+   "phase": 0
+  }
+ }
+}

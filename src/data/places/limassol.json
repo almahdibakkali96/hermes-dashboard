@@ -1,0 +1,94 @@
+{
+ "id": "limassol",
+ "name_en": "Limassol",
+ "name_ar": "ليماسول",
+ "country": "CY",
+ "lat": 34.67,
+ "lon": 33.04,
+ "timezone": "Asia/Nicosia",
+ "grid": {
+  "lat": 34.625,
+  "lon": 33.125,
+  "distance_km": 9.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.0597,
+   "phase": -86.43
+  },
+  "J1": {
+   "amp": 0.13319,
+   "phase": -34.563
+  },
+  "K1": {
+   "amp": 2.65159,
+   "phase": -79.258
+  },
+  "K2": {
+   "amp": 2.03346,
+   "phase": -114.883
+  },
+  "M2": {
+   "amp": 9.95345,
+   "phase": -120.556
+  },
+  "M4": {
+   "amp": 0.3558,
+   "phase": -114.707
+  },
+  "MF": {
+   "amp": 0.25499,
+   "phase": 22.462
+  },
+  "MM": {
+   "amp": 0.13553,
+   "phase": -78.553
+  },
+  "N2": {
+   "amp": 1.39483,
+   "phase": -112.001
+  },
+  "O1": {
+   "amp": 1.81776,
+   "phase": -106.728
+  },
+  "P1": {
+   "amp": 0.8182,
+   "phase": -63.527
+  },
+  "Q1": {
+   "amp": 0.36912,
+   "phase": -112.072
+  },
+  "S1": {
+   "amp": 0.51852,
+   "phase": 67.184
+  },
+  "S2": {
+   "amp": 6.2058,
+   "phase": -109.338
+  },
+  "SA": {
+   "amp": 3.78864,
+   "phase": -81.331
+  },
+  "SSA": {
+   "amp": 0.19246,
+   "phase": -165.804
+  },
+  "T2": {
+   "amp": 0.49174,
+   "phase": -108.58
+  },
+  "Z0": {
+   "amp": 24.5,
+   "phase": 0
+  }
+ }
+}

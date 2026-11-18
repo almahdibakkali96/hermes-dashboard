@@ -1,0 +1,94 @@
+{
+ "id": "kaohsiung",
+ "name_en": "Kaohsiung",
+ "name_ar": "كاوهسيونغ",
+ "country": "TW",
+ "lat": 22.61,
+ "lon": 120.27,
+ "timezone": "Asia/Taipei",
+ "grid": {
+  "lat": 22.625,
+  "lon": 120.25,
+  "distance_km": 2.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.93054,
+   "phase": -46.324
+  },
+  "J1": {
+   "amp": 0.85703,
+   "phase": 159.203
+  },
+  "K1": {
+   "amp": 19.3279,
+   "phase": 162.995
+  },
+  "K2": {
+   "amp": 1.81032,
+   "phase": 6.874
+  },
+  "M2": {
+   "amp": 19.59324,
+   "phase": -11.601
+  },
+  "M4": {
+   "amp": 0.28907,
+   "phase": 65.423
+  },
+  "MF": {
+   "amp": 0.38975,
+   "phase": 15.761
+  },
+  "MM": {
+   "amp": 0.49957,
+   "phase": -78.036
+  },
+  "N2": {
+   "amp": 4.4762,
+   "phase": -22.541
+  },
+  "O1": {
+   "amp": 17.53809,
+   "phase": 127.709
+  },
+  "P1": {
+   "amp": 5.71709,
+   "phase": 158.109
+  },
+  "Q1": {
+   "amp": 3.28193,
+   "phase": 105.942
+  },
+  "S1": {
+   "amp": 1.85815,
+   "phase": -160.193
+  },
+  "S2": {
+   "amp": 7.73908,
+   "phase": -12.571
+  },
+  "SA": {
+   "amp": 2.7555,
+   "phase": -102.915
+  },
+  "SSA": {
+   "amp": 0.25713,
+   "phase": 22.723
+  },
+  "T2": {
+   "amp": 0.69555,
+   "phase": 3.679
+  },
+  "Z0": {
+   "amp": 62.8,
+   "phase": 0
+  }
+ }
+}

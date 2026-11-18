@@ -1,0 +1,94 @@
+{
+ "id": "port-elizabeth",
+ "name_en": "Gqeberha (Port Elizabeth)",
+ "name_ar": "بورت إليزابيث",
+ "country": "ZA",
+ "lat": -33.96,
+ "lon": 25.63,
+ "timezone": "Africa/Johannesburg",
+ "grid": {
+  "lat": -34,
+  "lon": 25.75,
+  "distance_km": 11.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.71787,
+   "phase": 23.565
+  },
+  "J1": {
+   "amp": 0.56773,
+   "phase": 163.895
+  },
+  "K1": {
+   "amp": 6.51252,
+   "phase": 140.562
+  },
+  "K2": {
+   "amp": 7.98879,
+   "phase": 65.906
+  },
+  "M2": {
+   "amp": 51.62889,
+   "phase": 43.346
+  },
+  "M4": {
+   "amp": 0.38473,
+   "phase": 118.036
+  },
+  "MF": {
+   "amp": 0.52448,
+   "phase": 63.796
+  },
+  "MM": {
+   "amp": 0.25165,
+   "phase": 19.058
+  },
+  "N2": {
+   "amp": 10.04441,
+   "phase": 38.006
+  },
+  "O1": {
+   "amp": 1.59776,
+   "phase": -91.607
+  },
+  "P1": {
+   "amp": 2.0607,
+   "phase": 143.105
+  },
+  "Q1": {
+   "amp": 0.98073,
+   "phase": -118.054
+  },
+  "S1": {
+   "amp": 1.32317,
+   "phase": 110.117
+  },
+  "S2": {
+   "amp": 27.32494,
+   "phase": 69.484
+  },
+  "SA": {
+   "amp": 1.58438,
+   "phase": -151.931
+  },
+  "SSA": {
+   "amp": 0.05969,
+   "phase": -70.405
+  },
+  "T2": {
+   "amp": 1.54406,
+   "phase": 80.131
+  },
+  "Z0": {
+   "amp": 100.5,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "bergen",
+ "name_en": "Bergen",
+ "name_ar": "بيرغن",
+ "country": "NO",
+ "lat": 60.39,
+ "lon": 5.3,
+ "timezone": "Europe/Oslo",
+ "grid": {
+  "lat": 60.5,
+  "lon": 5.25,
+  "distance_km": 12.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.27862,
+   "phase": -119.305
+  },
+  "J1": {
+   "amp": 0.10873,
+   "phase": -179.412
+  },
+  "K1": {
+   "amp": 3.2633,
+   "phase": 162.123
+  },
+  "K2": {
+   "amp": 4.60935,
+   "phase": -43.5
+  },
+  "M2": {
+   "amp": 46.92814,
+   "phase": -78.234
+  },
+  "M4": {
+   "amp": 1.1475,
+   "phase": -70.747
+  },
+  "MF": {
+   "amp": 1.74326,
+   "phase": -152.581
+  },
+  "MM": {
+   "amp": 0.89117,
+   "phase": -179.093
+  },
+  "N2": {
+   "amp": 9.16912,
+   "phase": -101.66
+  },
+  "O1": {
+   "amp": 3.15915,
+   "phase": 6.197
+  },
+  "P1": {
+   "amp": 0.84646,
+   "phase": 164.526
+  },
+  "Q1": {
+   "amp": 1.34489,
+   "phase": -50.201
+  },
+  "S1": {
+   "amp": 0.62061,
+   "phase": 65.092
+  },
+  "S2": {
+   "amp": 16.31572,
+   "phase": -39.197
+  },
+  "SA": {
+   "amp": 3.46343,
+   "phase": -45.88
+  },
+  "SSA": {
+   "amp": 1.07688,
+   "phase": -178.793
+  },
+  "T2": {
+   "amp": 1.19918,
+   "phase": -42.288
+  },
+  "Z0": {
+   "amp": 89.1,
+   "phase": 0
+  }
+ }
+}

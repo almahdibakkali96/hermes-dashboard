@@ -1,0 +1,94 @@
+{
+ "id": "la-rochelle",
+ "name_en": "La Rochelle",
+ "name_ar": "لاروشيل",
+ "country": "FR",
+ "lat": 46.14,
+ "lon": -1.2,
+ "timezone": "Europe/Paris",
+ "grid": {
+  "lat": 46.125,
+  "lon": -1.25,
+  "distance_km": 4.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.89224,
+   "phase": 59.504
+  },
+  "J1": {
+   "amp": 0.28085,
+   "phase": 87.82
+  },
+  "K1": {
+   "amp": 6.14933,
+   "phase": 76.832
+  },
+  "K2": {
+   "amp": 16.76499,
+   "phase": 125.828
+  },
+  "M2": {
+   "amp": 162.3082,
+   "phase": 97.392
+  },
+  "M4": {
+   "amp": 22.00146,
+   "phase": 2.567
+  },
+  "MF": {
+   "amp": 0.53063,
+   "phase": -161.743
+  },
+  "MM": {
+   "amp": 0.41761,
+   "phase": 0.101
+  },
+  "N2": {
+   "amp": 34.07938,
+   "phase": 77.358
+  },
+  "O1": {
+   "amp": 7.56224,
+   "phase": -36.195
+  },
+  "P1": {
+   "amp": 1.92673,
+   "phase": 69.304
+  },
+  "Q1": {
+   "amp": 2.19876,
+   "phase": -76.942
+  },
+  "S1": {
+   "amp": 1.12007,
+   "phase": 71.494
+  },
+  "S2": {
+   "amp": 58.49925,
+   "phase": 129.462
+  },
+  "SA": {
+   "amp": 2.95169,
+   "phase": -53.969
+  },
+  "SSA": {
+   "amp": 0.68562,
+   "phase": -174.283
+  },
+  "T2": {
+   "amp": 3.02074,
+   "phase": 117.916
+  },
+  "Z0": {
+   "amp": 305.8,
+   "phase": 0
+  }
+ }
+}

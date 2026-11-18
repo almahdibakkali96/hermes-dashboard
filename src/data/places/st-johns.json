@@ -1,0 +1,94 @@
+{
+ "id": "st-johns",
+ "name_en": "St. John's",
+ "name_ar": "سانت جونز",
+ "country": "CA",
+ "lat": 47.57,
+ "lon": -52.7,
+ "timezone": "America/St_Johns",
+ "grid": {
+  "lat": 47.625,
+  "lon": -52.625,
+  "distance_km": 8.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.06696,
+   "phase": -55.474
+  },
+  "J1": {
+   "amp": 0.53399,
+   "phase": 140.637
+  },
+  "K1": {
+   "amp": 8.288,
+   "phase": 160.098
+  },
+  "K2": {
+   "amp": 4.13317,
+   "phase": -0.736
+  },
+  "M2": {
+   "amp": 34.71974,
+   "phase": -45.678
+  },
+  "M4": {
+   "amp": 0.77915,
+   "phase": -164.821
+  },
+  "MF": {
+   "amp": 0.52657,
+   "phase": -117.938
+  },
+  "MM": {
+   "amp": 0.51124,
+   "phase": -122.586
+  },
+  "N2": {
+   "amp": 6.99361,
+   "phase": -61.842
+  },
+  "O1": {
+   "amp": 6.72973,
+   "phase": 129.554
+  },
+  "P1": {
+   "amp": 2.63455,
+   "phase": 157.347
+  },
+  "Q1": {
+   "amp": 0.70065,
+   "phase": 74.915
+  },
+  "S1": {
+   "amp": 0.66344,
+   "phase": 45.91
+  },
+  "S2": {
+   "amp": 14.6182,
+   "phase": 0.621
+  },
+  "SA": {
+   "amp": 3.21226,
+   "phase": -32.177
+  },
+  "SSA": {
+   "amp": 0.53396,
+   "phase": -177.406
+  },
+  "T2": {
+   "amp": 0.51785,
+   "phase": 26.384
+  },
+  "Z0": {
+   "amp": 67.2,
+   "phase": 0
+  }
+ }
+}

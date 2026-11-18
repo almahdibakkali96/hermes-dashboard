@@ -1,0 +1,94 @@
+{
+ "id": "lisbon",
+ "name_en": "Lisbon (Cascais)",
+ "name_ar": "لشبونة",
+ "country": "PT",
+ "lat": 38.69,
+ "lon": -9.42,
+ "timezone": "Europe/Lisbon",
+ "grid": {
+  "lat": 38.625,
+  "lon": -9.375,
+  "distance_km": 8.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.90747,
+   "phase": 28.167
+  },
+  "J1": {
+   "amp": 0.44367,
+   "phase": 71.784
+  },
+  "K1": {
+   "amp": 7.0226,
+   "phase": 53.649
+  },
+  "K2": {
+   "amp": 9.5482,
+   "phase": 87.793
+  },
+  "M2": {
+   "amp": 98.75853,
+   "phase": 64.153
+  },
+  "M4": {
+   "amp": 1.29698,
+   "phase": 177.955
+  },
+  "MF": {
+   "amp": 0.2776,
+   "phase": -162.1
+  },
+  "MM": {
+   "amp": 0.2581,
+   "phase": -98.729
+  },
+  "N2": {
+   "amp": 21.05745,
+   "phase": 47.507
+  },
+  "O1": {
+   "amp": 5.87065,
+   "phase": -47.978
+  },
+  "P1": {
+   "amp": 2.28109,
+   "phase": 43.958
+  },
+  "Q1": {
+   "amp": 1.65999,
+   "phase": -92.06
+  },
+  "S1": {
+   "amp": 0.82249,
+   "phase": 18.788
+  },
+  "S2": {
+   "amp": 35.23453,
+   "phase": 90.361
+  },
+  "SA": {
+   "amp": 2.3813,
+   "phase": -43.446
+  },
+  "SSA": {
+   "amp": 0.30288,
+   "phase": 176.22
+  },
+  "T2": {
+   "amp": 2.00762,
+   "phase": 80.421
+  },
+  "Z0": {
+   "amp": 172.5,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "cadiz",
+ "name_en": "Cádiz",
+ "name_ar": "قادش",
+ "country": "ES",
+ "lat": 36.53,
+ "lon": -6.31,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 36.5,
+  "lon": -6.25,
+  "distance_km": 6.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.16796,
+   "phase": 20.415
+  },
+  "J1": {
+   "amp": 0.38036,
+   "phase": 41.31
+  },
+  "K1": {
+   "amp": 6.63066,
+   "phase": 40.554
+  },
+  "K2": {
+   "amp": 10.44634,
+   "phase": 76.182
+  },
+  "M2": {
+   "amp": 100.4863,
+   "phase": 53.468
+  },
+  "M4": {
+   "amp": 1.9301,
+   "phase": 162.301
+  },
+  "MF": {
+   "amp": 0.18221,
+   "phase": -169.438
+  },
+  "MM": {
+   "amp": 0.34117,
+   "phase": -72.478
+  },
+  "N2": {
+   "amp": 21.68167,
+   "phase": 38.284
+  },
+  "O1": {
+   "amp": 6.25449,
+   "phase": -60.541
+  },
+  "P1": {
+   "amp": 2.12332,
+   "phase": 37.37
+  },
+  "Q1": {
+   "amp": 2.12914,
+   "phase": -106.435
+  },
+  "S1": {
+   "amp": 1.12156,
+   "phase": 26.87
+  },
+  "S2": {
+   "amp": 36.32089,
+   "phase": 80.239
+  },
+  "SA": {
+   "amp": 2.40542,
+   "phase": -65.432
+  },
+  "SSA": {
+   "amp": 0.22419,
+   "phase": 178.05
+  },
+  "T2": {
+   "amp": 2.03901,
+   "phase": 72.693
+  },
+  "Z0": {
+   "amp": 178.6,
+   "phase": 0
+  }
+ }
+}

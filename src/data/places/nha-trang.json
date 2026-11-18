@@ -1,0 +1,94 @@
+{
+ "id": "nha-trang",
+ "name_en": "Nha Trang",
+ "name_ar": "نها ترانغ",
+ "country": "VN",
+ "lat": 12.24,
+ "lon": 109.2,
+ "timezone": "Asia/Ho_Chi_Minh",
+ "grid": {
+  "lat": 12.25,
+  "lon": 109.25,
+  "distance_km": 5.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.03705,
+   "phase": 79.003
+  },
+  "J1": {
+   "amp": 1.68742,
+   "phase": -148.381
+  },
+  "K1": {
+   "amp": 34.50041,
+   "phase": -168.785
+  },
+  "K2": {
+   "amp": 2.45564,
+   "phase": 113.111
+  },
+  "M2": {
+   "amp": 17.76234,
+   "phase": 86.959
+  },
+  "M4": {
+   "amp": 0.7402,
+   "phase": 154.995
+  },
+  "MF": {
+   "amp": 0.69587,
+   "phase": 25.629
+  },
+  "MM": {
+   "amp": 0.5494,
+   "phase": 25.884
+  },
+  "N2": {
+   "amp": 3.59485,
+   "phase": 72.474
+  },
+  "O1": {
+   "amp": 27.38931,
+   "phase": 151.314
+  },
+  "P1": {
+   "amp": 11.48676,
+   "phase": -170.679
+  },
+  "Q1": {
+   "amp": 5.50155,
+   "phase": 133.332
+  },
+  "S1": {
+   "amp": 0.28358,
+   "phase": -98.498
+  },
+  "S2": {
+   "amp": 6.09639,
+   "phase": 127.703
+  },
+  "SA": {
+   "amp": 4.54664,
+   "phase": 0.541
+  },
+  "SSA": {
+   "amp": 0.27653,
+   "phase": -13.492
+  },
+  "T2": {
+   "amp": 1.39081,
+   "phase": 109.642
+  },
+  "Z0": {
+   "amp": 109.8,
+   "phase": 0
+  }
+ }
+}

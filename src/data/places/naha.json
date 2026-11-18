@@ -1,0 +1,94 @@
+{
+ "id": "naha",
+ "name_en": "Naha (Okinawa)",
+ "name_ar": "ناها (أوكيناوا)",
+ "country": "JP",
+ "lat": 26.21,
+ "lon": 127.67,
+ "timezone": "Asia/Tokyo",
+ "grid": {
+  "lat": 26.25,
+  "lon": 127.625,
+  "distance_km": 6.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.50364,
+   "phase": -67.16
+  },
+  "J1": {
+   "amp": 1.19334,
+   "phase": 75.546
+  },
+  "K1": {
+   "amp": 20.49987,
+   "phase": 81.403
+  },
+  "K2": {
+   "amp": 7.16956,
+   "phase": -31.685
+  },
+  "M2": {
+   "amp": 57.54463,
+   "phase": -57.565
+  },
+  "M4": {
+   "amp": 0.09061,
+   "phase": 167.948
+  },
+  "MF": {
+   "amp": 0.30051,
+   "phase": 52.436
+  },
+  "MM": {
+   "amp": 0.20219,
+   "phase": 141.488
+  },
+  "N2": {
+   "amp": 10.85688,
+   "phase": -64.313
+  },
+  "O1": {
+   "amp": 15.84983,
+   "phase": 61.706
+  },
+  "P1": {
+   "amp": 6.67204,
+   "phase": 79.008
+  },
+  "Q1": {
+   "amp": 3.29971,
+   "phase": 51.324
+  },
+  "S1": {
+   "amp": 0.628,
+   "phase": -143.351
+  },
+  "S2": {
+   "amp": 23.78926,
+   "phase": -33.731
+  },
+  "SA": {
+   "amp": 4.77266,
+   "phase": -110.074
+  },
+  "SSA": {
+   "amp": 0.43308,
+   "phase": -10.362
+  },
+  "T2": {
+   "amp": 1.55924,
+   "phase": -41.312
+  },
+  "Z0": {
+   "amp": 137.8,
+   "phase": 0
+  }
+ }
+}

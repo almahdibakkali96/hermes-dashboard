@@ -1,0 +1,94 @@
+{
+ "id": "praia",
+ "name_en": "Praia",
+ "name_ar": "برايا",
+ "country": "CV",
+ "lat": 14.92,
+ "lon": -23.51,
+ "timezone": "Atlantic/Cape_Verde",
+ "grid": {
+  "lat": 14.875,
+  "lon": -23.5,
+  "distance_km": 5.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.07158,
+   "phase": -153.993
+  },
+  "J1": {
+   "amp": 0.46263,
+   "phase": -28.9
+  },
+  "K1": {
+   "amp": 5.40081,
+   "phase": -20.234
+  },
+  "K2": {
+   "amp": 3.51935,
+   "phase": -75.578
+  },
+  "M2": {
+   "amp": 39.06457,
+   "phase": -112.62
+  },
+  "M4": {
+   "amp": 0.72609,
+   "phase": -80.61
+  },
+  "MF": {
+   "amp": 1.3984,
+   "phase": 3.275
+  },
+  "MM": {
+   "amp": 0.72243,
+   "phase": -6.81
+  },
+  "N2": {
+   "amp": 8.05448,
+   "phase": -138.152
+  },
+  "O1": {
+   "amp": 3.6077,
+   "phase": -105.485
+  },
+  "P1": {
+   "amp": 1.38895,
+   "phase": -28.965
+  },
+  "Q1": {
+   "amp": 1.11365,
+   "phase": -154.051
+  },
+  "S1": {
+   "amp": 0.38738,
+   "phase": 152.714
+  },
+  "S2": {
+   "amp": 12.45324,
+   "phase": -74.668
+  },
+  "SA": {
+   "amp": 0.61808,
+   "phase": -52.898
+  },
+  "SSA": {
+   "amp": 0.48625,
+   "phase": -2.374
+  },
+  "T2": {
+   "amp": 0.88688,
+   "phase": -99.909
+  },
+  "Z0": {
+   "amp": 64.8,
+   "phase": 0
+  }
+ }
+}

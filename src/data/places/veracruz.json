@@ -1,0 +1,94 @@
+{
+ "id": "veracruz",
+ "name_en": "Veracruz",
+ "name_ar": "فيراكروز",
+ "country": "MX",
+ "lat": 19.2,
+ "lon": -96.13,
+ "timezone": "America/Mexico_City",
+ "grid": {
+  "lat": 19.25,
+  "lon": -96.125,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.30873,
+   "phase": -143.41
+  },
+  "J1": {
+   "amp": 0.83136,
+   "phase": -3.022
+  },
+  "K1": {
+   "amp": 15.25754,
+   "phase": 18.533
+  },
+  "K2": {
+   "amp": 0.59215,
+   "phase": -116.331
+  },
+  "M2": {
+   "amp": 8.87618,
+   "phase": -113.46
+  },
+  "M4": {
+   "amp": 0.28235,
+   "phase": 125.752
+  },
+  "MF": {
+   "amp": 1.35151,
+   "phase": -15.419
+  },
+  "MM": {
+   "amp": 0.85365,
+   "phase": -6.545
+  },
+  "N2": {
+   "amp": 2.27511,
+   "phase": -132.288
+  },
+  "O1": {
+   "amp": 14.93767,
+   "phase": 15.213
+  },
+  "P1": {
+   "amp": 4.59047,
+   "phase": 17.593
+  },
+  "Q1": {
+   "amp": 3.48347,
+   "phase": -7.418
+  },
+  "S1": {
+   "amp": 1.66895,
+   "phase": 68.551
+  },
+  "S2": {
+   "amp": 2.8505,
+   "phase": -112.244
+  },
+  "SA": {
+   "amp": 2.95486,
+   "phase": -74.152
+  },
+  "SSA": {
+   "amp": 0.39995,
+   "phase": 52.062
+  },
+  "T2": {
+   "amp": 0.82048,
+   "phase": -155.632
+  },
+  "Z0": {
+   "amp": 58.6,
+   "phase": 0
+  }
+ }
+}

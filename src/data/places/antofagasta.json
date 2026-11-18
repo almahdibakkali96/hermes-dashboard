@@ -1,0 +1,94 @@
+{
+ "id": "antofagasta",
+ "name_en": "Antofagasta",
+ "name_ar": "أنتوفاغاستا",
+ "country": "CL",
+ "lat": -23.65,
+ "lon": -70.41,
+ "timezone": "America/Santiago",
+ "grid": {
+  "lat": -23.625,
+  "lon": -70.5,
+  "distance_km": 9.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.13424,
+   "phase": -43.321
+  },
+  "J1": {
+   "amp": 1.2592,
+   "phase": 48.894
+  },
+  "K1": {
+   "amp": 15.11597,
+   "phase": 32.674
+  },
+  "K2": {
+   "amp": 3.54564,
+   "phase": 46.658
+  },
+  "M2": {
+   "amp": 36.94587,
+   "phase": 36.363
+  },
+  "M4": {
+   "amp": 0.21913,
+   "phase": 68.81
+  },
+  "MF": {
+   "amp": 0.40311,
+   "phase": 44.23
+  },
+  "MM": {
+   "amp": 0.43435,
+   "phase": 14.878
+  },
+  "N2": {
+   "amp": 8.31883,
+   "phase": 0.462
+  },
+  "O1": {
+   "amp": 8.91187,
+   "phase": -11.881
+  },
+  "P1": {
+   "amp": 4.37404,
+   "phase": 25.495
+  },
+  "Q1": {
+   "amp": 1.67555,
+   "phase": -47.262
+  },
+  "S1": {
+   "amp": 1.1192,
+   "phase": 165.069
+  },
+  "S2": {
+   "amp": 10.76746,
+   "phase": 63.379
+  },
+  "SA": {
+   "amp": 1.00377,
+   "phase": 58.606
+  },
+  "SSA": {
+   "amp": 0.35775,
+   "phase": -20.942
+  },
+  "T2": {
+   "amp": 0.12637,
+   "phase": 70.199
+  },
+  "Z0": {
+   "amp": 64.1,
+   "phase": 0
+  }
+ }
+}

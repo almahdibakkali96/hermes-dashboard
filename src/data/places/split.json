@@ -1,0 +1,94 @@
+{
+ "id": "split",
+ "name_en": "Split",
+ "name_ar": "سبليت",
+ "country": "HR",
+ "lat": 43.5,
+ "lon": 16.43,
+ "timezone": "Europe/Zagreb",
+ "grid": {
+  "lat": 43.5,
+  "lon": 16.375,
+  "distance_km": 4.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.40918,
+   "phase": 179.367
+  },
+  "J1": {
+   "amp": 0.48176,
+   "phase": 46.144
+  },
+  "K1": {
+   "amp": 9.01151,
+   "phase": 42.539
+  },
+  "K2": {
+   "amp": 1.90843,
+   "phase": 92.045
+  },
+  "M2": {
+   "amp": 8.54532,
+   "phase": 96.882
+  },
+  "M4": {
+   "amp": 0.44842,
+   "phase": -25.455
+  },
+  "MF": {
+   "amp": 0.22795,
+   "phase": 163.925
+  },
+  "MM": {
+   "amp": 0.76313,
+   "phase": -129.009
+  },
+  "N2": {
+   "amp": 1.01571,
+   "phase": 115.711
+  },
+  "O1": {
+   "amp": 2.67777,
+   "phase": 28.004
+  },
+  "P1": {
+   "amp": 3.03778,
+   "phase": 29.418
+  },
+  "Q1": {
+   "amp": 0.32506,
+   "phase": 36.867
+  },
+  "S1": {
+   "amp": 1.52251,
+   "phase": -3.978
+  },
+  "S2": {
+   "amp": 7.27255,
+   "phase": 93.274
+  },
+  "SA": {
+   "amp": 2.91748,
+   "phase": -49.015
+  },
+  "SSA": {
+   "amp": 0.45664,
+   "phase": -168.902
+  },
+  "T2": {
+   "amp": 0.20268,
+   "phase": -82.5
+  },
+  "Z0": {
+   "amp": 27.1,
+   "phase": 0
+  }
+ }
+}

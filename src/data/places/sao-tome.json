@@ -1,0 +1,94 @@
+{
+ "id": "sao-tome",
+ "name_en": "São Tomé",
+ "name_ar": "ساو تومي",
+ "country": "ST",
+ "lat": 0.34,
+ "lon": 6.74,
+ "timezone": "Africa/Sao_Tome",
+ "grid": {
+  "lat": 0.375,
+  "lon": 6.75,
+  "distance_km": 4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.08699,
+   "phase": 77.91
+  },
+  "J1": {
+   "amp": 0.92899,
+   "phase": 5.044
+  },
+  "K1": {
+   "amp": 11.66949,
+   "phase": -5.845
+  },
+  "K2": {
+   "amp": 5.40013,
+   "phase": 120.232
+  },
+  "M2": {
+   "amp": 52.11905,
+   "phase": 95.888
+  },
+  "M4": {
+   "amp": 1.67702,
+   "phase": -41.756
+  },
+  "MF": {
+   "amp": 1.73257,
+   "phase": -0.992
+  },
+  "MM": {
+   "amp": 0.84438,
+   "phase": -19.367
+  },
+  "N2": {
+   "amp": 11.03474,
+   "phase": 90.395
+  },
+  "O1": {
+   "amp": 1.96572,
+   "phase": -47.978
+  },
+  "P1": {
+   "amp": 3.63995,
+   "phase": -10.284
+  },
+  "Q1": {
+   "amp": 0.51545,
+   "phase": 129.387
+  },
+  "S1": {
+   "amp": 0.72853,
+   "phase": 94.969
+  },
+  "S2": {
+   "amp": 18.59316,
+   "phase": 124.718
+  },
+  "SA": {
+   "amp": 2.48379,
+   "phase": -7.257
+  },
+  "SSA": {
+   "amp": 0.72746,
+   "phase": 23.172
+  },
+  "T2": {
+   "amp": 1.1549,
+   "phase": 136.842
+  },
+  "Z0": {
+   "amp": 100.3,
+   "phase": 0
+  }
+ }
+}

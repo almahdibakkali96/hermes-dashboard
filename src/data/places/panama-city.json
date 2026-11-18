@@ -1,0 +1,94 @@
+{
+ "id": "panama-city",
+ "name_en": "Panama City",
+ "name_ar": "مدينة بنما",
+ "country": "PA",
+ "lat": 8.95,
+ "lon": -79.53,
+ "timezone": "America/Panama",
+ "grid": {
+  "lat": 8.875,
+  "lon": -79.5,
+  "distance_km": 9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.38692,
+   "phase": -168.875
+  },
+  "J1": {
+   "amp": 0.71968,
+   "phase": 38.216
+  },
+  "K1": {
+   "amp": 13.79381,
+   "phase": 61.23
+  },
+  "K2": {
+   "amp": 12.52691,
+   "phase": -57.411
+  },
+  "M2": {
+   "amp": 180.92359,
+   "phase": -110.576
+  },
+  "M4": {
+   "amp": 4.84434,
+   "phase": -46.042
+  },
+  "MF": {
+   "amp": 1.01197,
+   "phase": 31.979
+  },
+  "MM": {
+   "amp": 0.1017,
+   "phase": 119.941
+  },
+  "N2": {
+   "amp": 37.63729,
+   "phase": -142.357
+  },
+  "O1": {
+   "amp": 3.85443,
+   "phase": 75.458
+  },
+  "P1": {
+   "amp": 4.84544,
+   "phase": 60.85
+  },
+  "Q1": {
+   "amp": 0.54591,
+   "phase": 123.394
+  },
+  "S1": {
+   "amp": 1.30016,
+   "phase": -171.593
+  },
+  "S2": {
+   "amp": 49.8757,
+   "phase": -54.676
+  },
+  "SA": {
+   "amp": 4.10764,
+   "phase": -103.165
+  },
+  "SSA": {
+   "amp": 0.42987,
+   "phase": -40.054
+  },
+  "T2": {
+   "amp": 2.73167,
+   "phase": -53.055
+  },
+  "Z0": {
+   "amp": 304.2,
+   "phase": 0
+  }
+ }
+}

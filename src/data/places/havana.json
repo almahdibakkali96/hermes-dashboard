@@ -1,0 +1,94 @@
+{
+ "id": "havana",
+ "name_en": "Havana",
+ "name_ar": "هافانا",
+ "country": "CU",
+ "lat": 23.14,
+ "lon": -82.36,
+ "timezone": "America/Havana",
+ "grid": {
+  "lat": 23.25,
+  "lon": -82.375,
+  "distance_km": 12.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.71908,
+   "phase": 29.284
+  },
+  "J1": {
+   "amp": 0.66021,
+   "phase": 4.923
+  },
+  "K1": {
+   "amp": 8.03447,
+   "phase": 4.375
+  },
+  "K2": {
+   "amp": 1.29897,
+   "phase": 56.842
+  },
+  "M2": {
+   "amp": 12.5475,
+   "phase": 46.35
+  },
+  "M4": {
+   "amp": 0.65244,
+   "phase": -67.594
+  },
+  "MF": {
+   "amp": 1.12105,
+   "phase": -5.932
+  },
+  "MM": {
+   "amp": 0.1942,
+   "phase": -66.081
+  },
+  "N2": {
+   "amp": 2.63704,
+   "phase": 29.463
+  },
+  "O1": {
+   "amp": 8.3805,
+   "phase": 4.73
+  },
+  "P1": {
+   "amp": 2.29749,
+   "phase": 12.676
+  },
+  "Q1": {
+   "amp": 2.1327,
+   "phase": -29.845
+  },
+  "S1": {
+   "amp": 1.3006,
+   "phase": 19.957
+  },
+  "S2": {
+   "amp": 3.84398,
+   "phase": 85.728
+  },
+  "SA": {
+   "amp": 3.13762,
+   "phase": -107.201
+  },
+  "SSA": {
+   "amp": 0.30297,
+   "phase": 8.025
+  },
+  "T2": {
+   "amp": 1.05223,
+   "phase": 97.114
+  },
+  "Z0": {
+   "amp": 34.6,
+   "phase": 0
+  }
+ }
+}

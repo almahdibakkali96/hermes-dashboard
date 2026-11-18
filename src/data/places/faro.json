@@ -1,0 +1,94 @@
+{
+ "id": "faro",
+ "name_en": "Faro",
+ "name_ar": "فارو",
+ "country": "PT",
+ "lat": 37,
+ "lon": -7.93,
+ "timezone": "Europe/Lisbon",
+ "grid": {
+  "lat": 37,
+  "lon": -7.875,
+  "distance_km": 4.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.06412,
+   "phase": 21.878
+  },
+  "J1": {
+   "amp": 0.40238,
+   "phase": 77.204
+  },
+  "K1": {
+   "amp": 6.96113,
+   "phase": 48.76
+  },
+  "K2": {
+   "amp": 10.08158,
+   "phase": 79.931
+  },
+  "M2": {
+   "amp": 99.85,
+   "phase": 56.67
+  },
+  "M4": {
+   "amp": 1.73038,
+   "phase": 167.071
+  },
+  "MF": {
+   "amp": 0.06945,
+   "phase": -38.517
+  },
+  "MM": {
+   "amp": 0.38596,
+   "phase": -129.285
+  },
+  "N2": {
+   "amp": 21.42619,
+   "phase": 40.628
+  },
+  "O1": {
+   "amp": 6.18602,
+   "phase": -51.392
+  },
+  "P1": {
+   "amp": 2.1752,
+   "phase": 40.891
+  },
+  "Q1": {
+   "amp": 1.76614,
+   "phase": -100.047
+  },
+  "S1": {
+   "amp": 0.79042,
+   "phase": 24.023
+  },
+  "S2": {
+   "amp": 36.39209,
+   "phase": 82.344
+  },
+  "SA": {
+   "amp": 2.2072,
+   "phase": -60.06
+  },
+  "SSA": {
+   "amp": 0.23569,
+   "phase": 172.911
+  },
+  "T2": {
+   "amp": 1.97612,
+   "phase": 74.654
+  },
+  "Z0": {
+   "amp": 176.2,
+   "phase": 0
+  }
+ }
+}

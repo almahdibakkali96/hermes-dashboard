@@ -1,0 +1,94 @@
+{
+ "id": "nassau",
+ "name_en": "Nassau",
+ "name_ar": "ناساو",
+ "country": "BS",
+ "lat": 25.08,
+ "lon": -77.35,
+ "timezone": "America/Nassau",
+ "grid": {
+  "lat": 25.125,
+  "lon": -77.375,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.50019,
+   "phase": -17.776
+  },
+  "J1": {
+   "amp": 0.52508,
+   "phase": -144.314
+  },
+  "K1": {
+   "amp": 8.04016,
+   "phase": -161.191
+  },
+  "K2": {
+   "amp": 1.41798,
+   "phase": 18.794
+  },
+  "M2": {
+   "amp": 36.02801,
+   "phase": 9.827
+  },
+  "M4": {
+   "amp": 0.3928,
+   "phase": 77.545
+  },
+  "MF": {
+   "amp": 1.09158,
+   "phase": -12.296
+  },
+  "MM": {
+   "amp": 0.43217,
+   "phase": -20.533
+  },
+  "N2": {
+   "amp": 8.46219,
+   "phase": -9.767
+  },
+  "O1": {
+   "amp": 6.45243,
+   "phase": -157.571
+  },
+  "P1": {
+   "amp": 2.73899,
+   "phase": -160.85
+  },
+  "Q1": {
+   "amp": 1.22222,
+   "phase": -167.272
+  },
+  "S1": {
+   "amp": 0.31191,
+   "phase": 117.937
+  },
+  "S2": {
+   "amp": 4.33915,
+   "phase": 30.387
+  },
+  "SA": {
+   "amp": 3.79783,
+   "phase": -107.59
+  },
+  "SSA": {
+   "amp": 0.35028,
+   "phase": 20.76
+  },
+  "T2": {
+   "amp": 0.14099,
+   "phase": 52.922
+  },
+  "Z0": {
+   "amp": 58.1,
+   "phase": 0
+  }
+ }
+}

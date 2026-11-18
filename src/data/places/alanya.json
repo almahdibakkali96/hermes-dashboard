@@ -1,0 +1,94 @@
+{
+ "id": "alanya",
+ "name_en": "Alanya",
+ "name_ar": "ألانيا",
+ "country": "TR",
+ "lat": 36.54,
+ "lon": 32,
+ "timezone": "Europe/Istanbul",
+ "grid": {
+  "lat": 36.5,
+  "lon": 32,
+  "distance_km": 4.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.4883,
+   "phase": 156.816
+  },
+  "J1": {
+   "amp": 0.14334,
+   "phase": 66.477
+  },
+  "K1": {
+   "amp": 2.69168,
+   "phase": -72.025
+  },
+  "K2": {
+   "amp": 1.91523,
+   "phase": -116.35
+  },
+  "M2": {
+   "amp": 8.27613,
+   "phase": -118.07
+  },
+  "M4": {
+   "amp": 0.16447,
+   "phase": 130.267
+  },
+  "MF": {
+   "amp": 0.20106,
+   "phase": 77.719
+  },
+  "MM": {
+   "amp": 0.67804,
+   "phase": -108.576
+  },
+  "N2": {
+   "amp": 1.28259,
+   "phase": -108.457
+  },
+  "O1": {
+   "amp": 1.59823,
+   "phase": -97.847
+  },
+  "P1": {
+   "amp": 1.10746,
+   "phase": -59.297
+  },
+  "Q1": {
+   "amp": 0.34622,
+   "phase": -5.667
+  },
+  "S1": {
+   "amp": 1.39026,
+   "phase": 5.649
+  },
+  "S2": {
+   "amp": 4.94219,
+   "phase": -103.2
+  },
+  "SA": {
+   "amp": 3.99529,
+   "phase": -77.931
+  },
+  "SSA": {
+   "amp": 0.12165,
+   "phase": -124.935
+  },
+  "T2": {
+   "amp": 0.29491,
+   "phase": -93.303
+  },
+  "Z0": {
+   "amp": 22.5,
+   "phase": 0
+  }
+ }
+}

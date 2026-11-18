@@ -1,0 +1,94 @@
+{
+ "id": "porbandar",
+ "name_en": "Porbandar",
+ "name_ar": "بوربندر",
+ "country": "IN",
+ "lat": 21.63,
+ "lon": 69.6,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 21.625,
+  "lon": 69.5,
+  "distance_km": 10.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.56299,
+   "phase": 103.167
+  },
+  "J1": {
+   "amp": 2.26436,
+   "phase": -9.669
+  },
+  "K1": {
+   "amp": 36.24673,
+   "phase": -26.619
+  },
+  "K2": {
+   "amp": 6.55686,
+   "phase": -177.02
+  },
+  "M2": {
+   "amp": 67.4728,
+   "phase": 153.176
+  },
+  "M4": {
+   "amp": 1.5815,
+   "phase": 171.949
+  },
+  "MF": {
+   "amp": 1.10658,
+   "phase": 20.717
+  },
+  "MM": {
+   "amp": 0.71727,
+   "phase": 31.088
+  },
+  "N2": {
+   "amp": 16.15124,
+   "phase": 135.252
+  },
+  "O1": {
+   "amp": 18.44043,
+   "phase": -23.989
+  },
+  "P1": {
+   "amp": 10.25312,
+   "phase": -25.047
+  },
+  "Q1": {
+   "amp": 3.87562,
+   "phase": -18.451
+  },
+  "S1": {
+   "amp": 3.53001,
+   "phase": 117.93
+  },
+  "S2": {
+   "amp": 25.04862,
+   "phase": -177.039
+  },
+  "SA": {
+   "amp": 3.96512,
+   "phase": 24.425
+  },
+  "SSA": {
+   "amp": 0.278,
+   "phase": -49.146
+  },
+  "T2": {
+   "amp": 1.57497,
+   "phase": -164.451
+  },
+  "Z0": {
+   "amp": 180.4,
+   "phase": 0
+  }
+ }
+}

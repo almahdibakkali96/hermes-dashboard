@@ -1,0 +1,94 @@
+{
+ "id": "tenerife",
+ "name_en": "Santa Cruz de Tenerife",
+ "name_ar": "تينيريفي",
+ "country": "ES",
+ "lat": 28.47,
+ "lon": -16.24,
+ "timezone": "Atlantic/Canary",
+ "grid": {
+  "lat": 28.375,
+  "lon": -16.25,
+  "distance_km": 10.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.26173,
+   "phase": -1.204
+  },
+  "J1": {
+   "amp": 0.22922,
+   "phase": 32.589
+  },
+  "K1": {
+   "amp": 6.1864,
+   "phase": 37.843
+  },
+  "K2": {
+   "amp": 7.41376,
+   "phase": 49.598
+  },
+  "M2": {
+   "amp": 69.13869,
+   "phase": 29.692
+  },
+  "M4": {
+   "amp": 0.70296,
+   "phase": 91.96
+  },
+  "MF": {
+   "amp": 1.0695,
+   "phase": 7.669
+  },
+  "MM": {
+   "amp": 0.21496,
+   "phase": -26.559
+  },
+  "N2": {
+   "amp": 14.20555,
+   "phase": 16.7
+  },
+  "O1": {
+   "amp": 4.64505,
+   "phase": -66.473
+  },
+  "P1": {
+   "amp": 1.60296,
+   "phase": 24.577
+  },
+  "Q1": {
+   "amp": 1.6473,
+   "phase": -125.465
+  },
+  "S1": {
+   "amp": 0.27893,
+   "phase": -178.662
+  },
+  "S2": {
+   "amp": 26.7163,
+   "phase": 52.664
+  },
+  "SA": {
+   "amp": 2.12936,
+   "phase": -90.529
+  },
+  "SSA": {
+   "amp": 0.20107,
+   "phase": 0.376
+  },
+  "T2": {
+   "amp": 1.5853,
+   "phase": 57.141
+  },
+  "Z0": {
+   "amp": 125.1,
+   "phase": 0
+  }
+ }
+}

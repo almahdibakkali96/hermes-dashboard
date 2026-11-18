@@ -1,0 +1,94 @@
+{
+ "id": "santo-domingo",
+ "name_en": "Santo Domingo",
+ "name_ar": "سانتو دومينغو",
+ "country": "DO",
+ "lat": 18.46,
+ "lon": -69.89,
+ "timezone": "America/Santo_Domingo",
+ "grid": {
+  "lat": 18.375,
+  "lon": -69.875,
+  "distance_km": 9.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.07436,
+   "phase": -38.31
+  },
+  "J1": {
+   "amp": 0.59175,
+   "phase": -121.599
+  },
+  "K1": {
+   "amp": 7.97396,
+   "phase": -125.574
+  },
+  "K2": {
+   "amp": 0.68693,
+   "phase": -30.444
+  },
+  "M2": {
+   "amp": 1.53406,
+   "phase": 74.955
+  },
+  "M4": {
+   "amp": 0.25269,
+   "phase": -24.793
+  },
+  "MF": {
+   "amp": 1.49108,
+   "phase": -6.913
+  },
+  "MM": {
+   "amp": 0.81357,
+   "phase": 11.667
+  },
+  "N2": {
+   "amp": 0.51515,
+   "phase": 125.063
+  },
+  "O1": {
+   "amp": 5.92366,
+   "phase": -130.417
+  },
+  "P1": {
+   "amp": 2.06753,
+   "phase": -120.987
+  },
+  "Q1": {
+   "amp": 1.15722,
+   "phase": -148.579
+  },
+  "S1": {
+   "amp": 0.46933,
+   "phase": 106.012
+  },
+  "S2": {
+   "amp": 1.06826,
+   "phase": 4.615
+  },
+  "SA": {
+   "amp": 2.68529,
+   "phase": -78.088
+  },
+  "SSA": {
+   "amp": 0.51332,
+   "phase": 2.972
+  },
+  "T2": {
+   "amp": 0.27295,
+   "phase": -135.011
+  },
+  "Z0": {
+   "amp": 21.9,
+   "phase": 0
+  }
+ }
+}

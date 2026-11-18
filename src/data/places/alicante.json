@@ -1,0 +1,94 @@
+{
+ "id": "alicante",
+ "name_en": "Alicante",
+ "name_ar": "أليكانتي",
+ "country": "ES",
+ "lat": 38.33,
+ "lon": -0.47,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 38.25,
+  "lon": -0.5,
+  "distance_km": 9.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.35348,
+   "phase": -68.258
+  },
+  "J1": {
+   "amp": 0.22337,
+   "phase": 107.124
+  },
+  "K1": {
+   "amp": 3.61268,
+   "phase": 161.805
+  },
+  "K2": {
+   "amp": 0.4104,
+   "phase": 71.789
+  },
+  "M2": {
+   "amp": 2.36706,
+   "phase": 55.761
+  },
+  "M4": {
+   "amp": 0.41751,
+   "phase": 134.458
+  },
+  "MF": {
+   "amp": 0.14437,
+   "phase": -146.565
+  },
+  "MM": {
+   "amp": 0.57844,
+   "phase": -88.787
+  },
+  "N2": {
+   "amp": 0.42377,
+   "phase": 51.407
+  },
+  "O1": {
+   "amp": 2.18905,
+   "phase": 116.024
+  },
+  "P1": {
+   "amp": 1.24769,
+   "phase": 149.02
+  },
+  "Q1": {
+   "amp": 0.51008,
+   "phase": 72.987
+  },
+  "S1": {
+   "amp": 0.90502,
+   "phase": 36.325
+  },
+  "S2": {
+   "amp": 1.52403,
+   "phase": 81.331
+  },
+  "SA": {
+   "amp": 3.59082,
+   "phase": -81.76
+  },
+  "SSA": {
+   "amp": 0.20374,
+   "phase": -169.958
+  },
+  "T2": {
+   "amp": 0.19216,
+   "phase": -63.647
+  },
+  "Z0": {
+   "amp": 13.3,
+   "phase": 0
+  }
+ }
+}

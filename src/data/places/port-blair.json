@@ -1,0 +1,94 @@
+{
+ "id": "port-blair",
+ "name_en": "Port Blair",
+ "name_ar": "بورت بلير",
+ "country": "IN",
+ "lat": 11.67,
+ "lon": 92.75,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 11.625,
+  "lon": 92.625,
+  "distance_km": 14.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.06611,
+   "phase": 50.872
+  },
+  "J1": {
+   "amp": 0.99258,
+   "phase": -142.786
+  },
+  "K1": {
+   "amp": 10.23065,
+   "phase": -131.041
+  },
+  "K2": {
+   "amp": 5.37416,
+   "phase": 93.602
+  },
+  "M2": {
+   "amp": 47.25908,
+   "phase": 70.943
+  },
+  "M4": {
+   "amp": 0.26813,
+   "phase": 145.67
+  },
+  "MF": {
+   "amp": 1.62409,
+   "phase": 1.833
+  },
+  "MM": {
+   "amp": 0.84741,
+   "phase": -11.427
+  },
+  "N2": {
+   "amp": 9.79861,
+   "phase": 63.805
+  },
+  "O1": {
+   "amp": 3.88613,
+   "phase": -143.814
+  },
+  "P1": {
+   "amp": 3.37442,
+   "phase": -136.036
+  },
+  "Q1": {
+   "amp": 0.43084,
+   "phase": -179.734
+  },
+  "S1": {
+   "amp": 0.7029,
+   "phase": -64.819
+  },
+  "S2": {
+   "amp": 21.09833,
+   "phase": 100.464
+  },
+  "SA": {
+   "amp": 1.04313,
+   "phase": -113.08
+  },
+  "SSA": {
+   "amp": 0.7032,
+   "phase": -34.829
+  },
+  "T2": {
+   "amp": 1.02756,
+   "phase": 81.424
+  },
+  "Z0": {
+   "amp": 87.9,
+   "phase": 0
+  }
+ }
+}

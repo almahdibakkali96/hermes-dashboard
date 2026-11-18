@@ -1,0 +1,94 @@
+{
+ "id": "accra",
+ "name_en": "Accra",
+ "name_ar": "أكرا",
+ "country": "GH",
+ "lat": 5.53,
+ "lon": -0.2,
+ "timezone": "Africa/Accra",
+ "grid": {
+  "lat": 5.5,
+  "lon": -0.25,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.70737,
+   "phase": 81.25
+  },
+  "J1": {
+   "amp": 0.77301,
+   "phase": 7.984
+  },
+  "K1": {
+   "amp": 12.40564,
+   "phase": -7.513
+  },
+  "K2": {
+   "amp": 4.88215,
+   "phase": 131.894
+  },
+  "M2": {
+   "amp": 47.87036,
+   "phase": 107.373
+  },
+  "M4": {
+   "amp": 1.01504,
+   "phase": -42.287
+  },
+  "MF": {
+   "amp": 1.88073,
+   "phase": 3.394
+  },
+  "MM": {
+   "amp": 0.81186,
+   "phase": -12.452
+  },
+  "N2": {
+   "amp": 10.36222,
+   "phase": 102.128
+  },
+  "O1": {
+   "amp": 2.36081,
+   "phase": -31.64
+  },
+  "P1": {
+   "amp": 4.14158,
+   "phase": -16.807
+  },
+  "Q1": {
+   "amp": 0.42482,
+   "phase": 87.337
+  },
+  "S1": {
+   "amp": 1.31576,
+   "phase": 50.88
+  },
+  "S2": {
+   "amp": 17.3181,
+   "phase": 133.975
+  },
+  "SA": {
+   "amp": 2.62972,
+   "phase": 10.037
+  },
+  "SSA": {
+   "amp": 0.29088,
+   "phase": 44.88
+  },
+  "T2": {
+   "amp": 1.15662,
+   "phase": 145.946
+  },
+  "Z0": {
+   "amp": 94.9,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "banjul",
+ "name_en": "Banjul",
+ "name_ar": "بانجول",
+ "country": "GM",
+ "lat": 13.46,
+ "lon": -16.57,
+ "timezone": "Africa/Banjul",
+ "grid": {
+  "lat": 13.5,
+  "lon": -16.625,
+  "distance_km": 7.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.36035,
+   "phase": -133.134
+  },
+  "J1": {
+   "amp": 0.12674,
+   "phase": -0.946
+  },
+  "K1": {
+   "amp": 6.91319,
+   "phase": -1.228
+  },
+  "K2": {
+   "amp": 5.77793,
+   "phase": -62.619
+  },
+  "M2": {
+   "amp": 59.52325,
+   "phase": -93.752
+  },
+  "M4": {
+   "amp": 4.97673,
+   "phase": -4.446
+  },
+  "MF": {
+   "amp": 1.39368,
+   "phase": -16.146
+  },
+  "MM": {
+   "amp": 0.48403,
+   "phase": -0.268
+  },
+  "N2": {
+   "amp": 11.14192,
+   "phase": -122.365
+  },
+  "O1": {
+   "amp": 4.30921,
+   "phase": -99.098
+  },
+  "P1": {
+   "amp": 1.72199,
+   "phase": -23.581
+  },
+  "Q1": {
+   "amp": 1.05814,
+   "phase": -169.142
+  },
+  "S1": {
+   "amp": 2.09065,
+   "phase": 126.759
+  },
+  "S2": {
+   "amp": 18.40384,
+   "phase": -59.429
+  },
+  "SA": {
+   "amp": 4.04486,
+   "phase": -104.349
+  },
+  "SSA": {
+   "amp": 0.34768,
+   "phase": -21.007
+  },
+  "T2": {
+   "amp": 1.19621,
+   "phase": -84.576
+  },
+  "Z0": {
+   "amp": 107.1,
+   "phase": 0
+  }
+ }
+}

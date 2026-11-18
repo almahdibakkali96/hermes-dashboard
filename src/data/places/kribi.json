@@ -1,0 +1,94 @@
+{
+ "id": "kribi",
+ "name_en": "Kribi",
+ "name_ar": "كريبي",
+ "country": "CM",
+ "lat": 2.94,
+ "lon": 9.9,
+ "timezone": "Africa/Douala",
+ "grid": {
+  "lat": 3,
+  "lon": 9.875,
+  "distance_km": 7.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.76477,
+   "phase": 71.475
+  },
+  "J1": {
+   "amp": 0.62442,
+   "phase": 3.442
+  },
+  "K1": {
+   "amp": 12.3936,
+   "phase": -7.904
+  },
+  "K2": {
+   "amp": 5.54338,
+   "phase": 124.508
+  },
+  "M2": {
+   "amp": 56.00585,
+   "phase": 98.603
+  },
+  "M4": {
+   "amp": 2.82316,
+   "phase": -26.455
+  },
+  "MF": {
+   "amp": 1.71018,
+   "phase": -4.937
+  },
+  "MM": {
+   "amp": 0.76371,
+   "phase": 2.647
+  },
+  "N2": {
+   "amp": 11.46063,
+   "phase": 92.209
+  },
+  "O1": {
+   "amp": 1.94938,
+   "phase": -41.255
+  },
+  "P1": {
+   "amp": 3.42574,
+   "phase": -11.45
+  },
+  "Q1": {
+   "amp": 0.16836,
+   "phase": 38.254
+  },
+  "S1": {
+   "amp": 0.81797,
+   "phase": 68.64
+  },
+  "S2": {
+   "amp": 20.25756,
+   "phase": 128.98
+  },
+  "SA": {
+   "amp": 2.83214,
+   "phase": -48.22
+  },
+  "SSA": {
+   "amp": 0.70984,
+   "phase": 20.121
+  },
+  "T2": {
+   "amp": 0.85494,
+   "phase": 140.748
+  },
+  "Z0": {
+   "amp": 108.1,
+   "phase": 0
+  }
+ }
+}

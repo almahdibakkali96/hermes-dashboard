@@ -1,0 +1,94 @@
+{
+ "id": "manta",
+ "name_en": "Manta",
+ "name_ar": "مانتا",
+ "country": "EC",
+ "lat": -0.94,
+ "lon": -80.73,
+ "timezone": "America/Guayaquil",
+ "grid": {
+  "lat": -0.875,
+  "lon": -80.75,
+  "distance_km": 7.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.57664,
+   "phase": -173.369
+  },
+  "J1": {
+   "amp": 0.74765,
+   "phase": 60.202
+  },
+  "K1": {
+   "amp": 10.98009,
+   "phase": 47.521
+  },
+  "K2": {
+   "amp": 6.50495,
+   "phase": -66.15
+  },
+  "M2": {
+   "amp": 92.50395,
+   "phase": -111.882
+  },
+  "M4": {
+   "amp": 0.25945,
+   "phase": 151.377
+  },
+  "MF": {
+   "amp": 1.24518,
+   "phase": 28.767
+  },
+  "MM": {
+   "amp": 0.77898,
+   "phase": 12.548
+  },
+  "N2": {
+   "amp": 19.78944,
+   "phase": -142.526
+  },
+  "O1": {
+   "amp": 2.36235,
+   "phase": 24.223
+  },
+  "P1": {
+   "amp": 2.89207,
+   "phase": 48.556
+  },
+  "Q1": {
+   "amp": 0.14359,
+   "phase": 1.184
+  },
+  "S1": {
+   "amp": 0.97783,
+   "phase": 148.118
+  },
+  "S2": {
+   "amp": 26.4015,
+   "phase": -63.387
+  },
+  "SA": {
+   "amp": 0.92771,
+   "phase": -137.327
+  },
+  "SSA": {
+   "amp": 0.59995,
+   "phase": -24.239
+  },
+  "T2": {
+   "amp": 1.20131,
+   "phase": -62.669
+  },
+  "Z0": {
+   "amp": 157.8,
+   "phase": 0
+  }
+ }
+}

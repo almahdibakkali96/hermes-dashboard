@@ -1,0 +1,94 @@
+{
+ "id": "heraklion",
+ "name_en": "Heraklion (Crete)",
+ "name_ar": "هيراكليون (كريت)",
+ "country": "GR",
+ "lat": 35.34,
+ "lon": 25.14,
+ "timezone": "Europe/Athens",
+ "grid": {
+  "lat": 35.375,
+  "lon": 25.125,
+  "distance_km": 4.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.05401,
+   "phase": 122.575
+  },
+  "J1": {
+   "amp": 0.11471,
+   "phase": -49.308
+  },
+  "K1": {
+   "amp": 1.67924,
+   "phase": -31.12
+  },
+  "K2": {
+   "amp": 0.29602,
+   "phase": -73.726
+  },
+  "M2": {
+   "amp": 1.68639,
+   "phase": -59.042
+  },
+  "M4": {
+   "amp": 0.26153,
+   "phase": -62.923
+  },
+  "MF": {
+   "amp": 0.10648,
+   "phase": -75.642
+  },
+  "MM": {
+   "amp": 0.29918,
+   "phase": -80.079
+  },
+  "N2": {
+   "amp": 0.41365,
+   "phase": -32.199
+  },
+  "O1": {
+   "amp": 0.70546,
+   "phase": -61.362
+  },
+  "P1": {
+   "amp": 0.66342,
+   "phase": -23.57
+  },
+  "Q1": {
+   "amp": 0.11369,
+   "phase": -83.261
+  },
+  "S1": {
+   "amp": 0.48025,
+   "phase": -13.003
+  },
+  "S2": {
+   "amp": 0.96449,
+   "phase": -71.172
+  },
+  "SA": {
+   "amp": 3.64619,
+   "phase": -80.451
+  },
+  "SSA": {
+   "amp": 0.14876,
+   "phase": -163.316
+  },
+  "T2": {
+   "amp": 0.41248,
+   "phase": -29.072
+  },
+  "Z0": {
+   "amp": 7.6,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "trincomalee",
+ "name_en": "Trincomalee",
+ "name_ar": "ترينكومالي",
+ "country": "LK",
+ "lat": 8.57,
+ "lon": 81.24,
+ "timezone": "Asia/Colombo",
+ "grid": {
+  "lat": 8.625,
+  "lon": 81.25,
+  "distance_km": 6.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.83789,
+   "phase": 70.092
+  },
+  "J1": {
+   "amp": 0.27047,
+   "phase": -97.959
+  },
+  "K1": {
+   "amp": 6.99382,
+   "phase": -111.003
+  },
+  "K2": {
+   "amp": 1.98732,
+   "phase": 96.086
+  },
+  "M2": {
+   "amp": 18.23803,
+   "phase": 73.721
+  },
+  "M4": {
+   "amp": 0.25445,
+   "phase": 125.896
+  },
+  "MF": {
+   "amp": 1.33245,
+   "phase": 12.693
+  },
+  "MM": {
+   "amp": 0.62226,
+   "phase": 3.365
+  },
+  "N2": {
+   "amp": 4.95857,
+   "phase": 67.51
+  },
+  "O1": {
+   "amp": 1.97032,
+   "phase": -128.473
+  },
+  "P1": {
+   "amp": 1.86547,
+   "phase": -107.649
+  },
+  "Q1": {
+   "amp": 0.4119,
+   "phase": 50.768
+  },
+  "S1": {
+   "amp": 0.92843,
+   "phase": 11.879
+  },
+  "S2": {
+   "amp": 5.91546,
+   "phase": 98.271
+  },
+  "SA": {
+   "amp": 3.15949,
+   "phase": 28.61
+  },
+  "SSA": {
+   "amp": 0.35467,
+   "phase": -42.061
+  },
+  "T2": {
+   "amp": 0.55257,
+   "phase": 98.923
+  },
+  "Z0": {
+   "amp": 36.6,
+   "phase": 0
+  }
+ }
+}

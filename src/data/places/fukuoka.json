@@ -1,0 +1,94 @@
+{
+ "id": "fukuoka",
+ "name_en": "Fukuoka",
+ "name_ar": "فوكوكا",
+ "country": "JP",
+ "lat": 33.6,
+ "lon": 130.4,
+ "timezone": "Asia/Tokyo",
+ "grid": {
+  "lat": 33.625,
+  "lon": 130.375,
+  "distance_km": 3.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.30927,
+   "phase": 7.099
+  },
+  "J1": {
+   "amp": 0.86117,
+   "phase": 107.838
+  },
+  "K1": {
+   "amp": 14.73255,
+   "phase": 139.5
+  },
+  "K2": {
+   "amp": 6.62274,
+   "phase": 28.565
+  },
+  "M2": {
+   "amp": 48.4406,
+   "phase": 17.928
+  },
+  "M4": {
+   "amp": 1.20468,
+   "phase": 78.814
+  },
+  "MF": {
+   "amp": 1.31525,
+   "phase": -163.936
+  },
+  "MM": {
+   "amp": 0.50862,
+   "phase": 118.541
+  },
+  "N2": {
+   "amp": 9.74788,
+   "phase": 15.949
+  },
+  "O1": {
+   "amp": 13.36869,
+   "phase": 119.291
+  },
+  "P1": {
+   "amp": 4.89059,
+   "phase": 135
+  },
+  "Q1": {
+   "amp": 2.79567,
+   "phase": 107.973
+  },
+  "S1": {
+   "amp": 1.45238,
+   "phase": -4.926
+  },
+  "S2": {
+   "amp": 23.56994,
+   "phase": 43.223
+  },
+  "SA": {
+   "amp": 7.15102,
+   "phase": -103.52
+  },
+  "SSA": {
+   "amp": 0.27844,
+   "phase": 161.014
+  },
+  "T2": {
+   "amp": 1.64528,
+   "phase": 11.015
+  },
+  "Z0": {
+   "amp": 114.1,
+   "phase": 0
+  }
+ }
+}

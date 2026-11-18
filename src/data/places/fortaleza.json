@@ -1,0 +1,94 @@
+{
+ "id": "fortaleza",
+ "name_en": "Fortaleza",
+ "name_ar": "فورتاليزا",
+ "country": "BR",
+ "lat": -3.72,
+ "lon": -38.5,
+ "timezone": "America/Fortaleza",
+ "grid": {
+  "lat": -3.625,
+  "lon": -38.5,
+  "distance_km": 10.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.80666,
+   "phase": -173.064
+  },
+  "J1": {
+   "amp": 0.36498,
+   "phase": -144.48
+  },
+  "K1": {
+   "amp": 7.40045,
+   "phase": -91.651
+  },
+  "K2": {
+   "amp": 8.64606,
+   "phase": -123.938
+  },
+  "M2": {
+   "amp": 93.66679,
+   "phase": -142.908
+  },
+  "M4": {
+   "amp": 0.76007,
+   "phase": 124.908
+  },
+  "MF": {
+   "amp": 1.80572,
+   "phase": -5.567
+  },
+  "MM": {
+   "amp": 0.84349,
+   "phase": -4.241
+  },
+  "N2": {
+   "amp": 20.07589,
+   "phase": -157.991
+  },
+  "O1": {
+   "amp": 7.06954,
+   "phase": -135.404
+  },
+  "P1": {
+   "amp": 2.67491,
+   "phase": -92.238
+  },
+  "Q1": {
+   "amp": 1.65153,
+   "phase": -171.356
+  },
+  "S1": {
+   "amp": 1.40576,
+   "phase": 159.006
+  },
+  "S2": {
+   "amp": 30.59897,
+   "phase": -120.485
+  },
+  "SA": {
+   "amp": 1.12559,
+   "phase": -75.774
+  },
+  "SSA": {
+   "amp": 0.72255,
+   "phase": 0.347
+  },
+  "T2": {
+   "amp": 1.5656,
+   "phase": -127.659
+  },
+  "Z0": {
+   "amp": 159.6,
+   "phase": 0
+  }
+ }
+}

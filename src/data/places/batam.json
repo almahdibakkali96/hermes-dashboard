@@ -1,0 +1,94 @@
+{
+ "id": "batam",
+ "name_en": "Batam",
+ "name_ar": "باتام",
+ "country": "ID",
+ "lat": 1.13,
+ "lon": 104.05,
+ "timezone": "Asia/Jakarta",
+ "grid": {
+  "lat": 1.25,
+  "lon": 104,
+  "distance_km": 14.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.14997,
+   "phase": 52.82
+  },
+  "J1": {
+   "amp": 0.66587,
+   "phase": 64.576
+  },
+  "K1": {
+   "amp": 24.11418,
+   "phase": -10.605
+  },
+  "K2": {
+   "amp": 8.17185,
+   "phase": 132.616
+  },
+  "M2": {
+   "amp": 67.29755,
+   "phase": 91.953
+  },
+  "M4": {
+   "amp": 2.95529,
+   "phase": -167.752
+  },
+  "MF": {
+   "amp": 0.51813,
+   "phase": -48.421
+  },
+  "MM": {
+   "amp": 1.19346,
+   "phase": 16.659
+  },
+  "N2": {
+   "amp": 14.35749,
+   "phase": 71.61
+  },
+  "O1": {
+   "amp": 23.71036,
+   "phase": -54.104
+  },
+  "P1": {
+   "amp": 7.7717,
+   "phase": -18.227
+  },
+  "Q1": {
+   "amp": 4.81275,
+   "phase": -85.781
+  },
+  "S1": {
+   "amp": 2.40629,
+   "phase": 60.859
+  },
+  "S2": {
+   "amp": 28.9943,
+   "phase": 142.094
+  },
+  "SA": {
+   "amp": 5.63219,
+   "phase": -10.909
+  },
+  "SSA": {
+   "amp": 0.36508,
+   "phase": -130.489
+  },
+  "T2": {
+   "amp": 1.46637,
+   "phase": 128.289
+  },
+  "Z0": {
+   "amp": 167.3,
+   "phase": 0
+  }
+ }
+}

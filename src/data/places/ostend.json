@@ -1,0 +1,94 @@
+{
+ "id": "ostend",
+ "name_en": "Ostend",
+ "name_ar": "أوستند",
+ "country": "BE",
+ "lat": 51.23,
+ "lon": 2.91,
+ "timezone": "Europe/Brussels",
+ "grid": {
+  "lat": 51.25,
+  "lon": 2.875,
+  "distance_km": 3.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.32177,
+   "phase": -35.221
+  },
+  "J1": {
+   "amp": 1.27324,
+   "phase": 118.691
+  },
+  "K1": {
+   "amp": 6.61427,
+   "phase": -15.08
+  },
+  "K2": {
+   "amp": 15.11201,
+   "phase": 57.349
+  },
+  "M2": {
+   "amp": 178.4175,
+   "phase": 4.896
+  },
+  "M4": {
+   "amp": 10.49577,
+   "phase": -12.466
+  },
+  "MF": {
+   "amp": 0.31251,
+   "phase": 148.307
+  },
+  "MM": {
+   "amp": 1.03233,
+   "phase": 70.486
+  },
+  "N2": {
+   "amp": 30.11517,
+   "phase": -20.566
+  },
+  "O1": {
+   "amp": 10.20324,
+   "phase": 168.47
+  },
+  "P1": {
+   "amp": 2.92601,
+   "phase": -33.967
+  },
+  "Q1": {
+   "amp": 3.21238,
+   "phase": 104.152
+  },
+  "S1": {
+   "amp": 0.527,
+   "phase": 40.802
+  },
+  "S2": {
+   "amp": 49.28305,
+   "phase": 57.65
+  },
+  "SA": {
+   "amp": 3.54083,
+   "phase": -61.605
+  },
+  "SSA": {
+   "amp": 0.35949,
+   "phase": -166.38
+  },
+  "T2": {
+   "amp": 3.39591,
+   "phase": 46.021
+  },
+  "Z0": {
+   "amp": 288.1,
+   "phase": 0
+  }
+ }
+}

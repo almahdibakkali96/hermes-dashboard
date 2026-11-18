@@ -1,0 +1,94 @@
+{
+ "id": "genoa",
+ "name_en": "Genoa",
+ "name_ar": "جنوة",
+ "country": "IT",
+ "lat": 44.4,
+ "lon": 8.92,
+ "timezone": "Europe/Rome",
+ "grid": {
+  "lat": 44.375,
+  "lon": 8.875,
+  "distance_km": 4.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.37722,
+   "phase": -166.291
+  },
+  "J1": {
+   "amp": 0.27326,
+   "phase": -140.316
+  },
+  "K1": {
+   "amp": 3.27997,
+   "phase": -177.412
+  },
+  "K2": {
+   "amp": 1.01776,
+   "phase": -138.682
+  },
+  "M2": {
+   "amp": 8.21031,
+   "phase": -137.563
+  },
+  "M4": {
+   "amp": 0.61825,
+   "phase": -10.144
+  },
+  "MF": {
+   "amp": 0.76754,
+   "phase": 177.162
+  },
+  "MM": {
+   "amp": 0.52251,
+   "phase": -77.694
+  },
+  "N2": {
+   "amp": 1.61957,
+   "phase": -145.806
+  },
+  "O1": {
+   "amp": 1.38317,
+   "phase": 107.826
+  },
+  "P1": {
+   "amp": 0.96317,
+   "phase": 153.749
+  },
+  "Q1": {
+   "amp": 0.10548,
+   "phase": -48.248
+  },
+  "S1": {
+   "amp": 0.45422,
+   "phase": 19.757
+  },
+  "S2": {
+   "amp": 2.79521,
+   "phase": -123.99
+  },
+  "SA": {
+   "amp": 3.41831,
+   "phase": -81.324
+  },
+  "SSA": {
+   "amp": 0.51876,
+   "phase": -175.484
+  },
+  "T2": {
+   "amp": 0.71468,
+   "phase": -102.773
+  },
+  "Z0": {
+   "amp": 20.5,
+   "phase": 0
+  }
+ }
+}

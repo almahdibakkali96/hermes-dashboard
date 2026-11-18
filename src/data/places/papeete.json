@@ -1,0 +1,94 @@
+{
+ "id": "papeete",
+ "name_en": "Papeete (Tahiti)",
+ "name_ar": "بابيتي (تاهيتي)",
+ "country": "PF",
+ "lat": -17.53,
+ "lon": -149.57,
+ "timezone": "Pacific/Tahiti",
+ "grid": {
+  "lat": -17.5,
+  "lon": -149.625,
+  "distance_km": 6.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.10156,
+   "phase": -149.308
+  },
+  "J1": {
+   "amp": 0.16004,
+   "phase": 158.093
+  },
+  "K1": {
+   "amp": 0.08181,
+   "phase": -68.655
+  },
+  "K2": {
+   "amp": 2.07609,
+   "phase": -36.823
+  },
+  "M2": {
+   "amp": 6.54953,
+   "phase": -38.695
+  },
+  "M4": {
+   "amp": 0.19092,
+   "phase": -52.297
+  },
+  "MF": {
+   "amp": 0.85615,
+   "phase": 32.804
+  },
+  "MM": {
+   "amp": 0.51889,
+   "phase": 18.925
+  },
+  "N2": {
+   "amp": 1.06288,
+   "phase": -69.088
+  },
+  "O1": {
+   "amp": 1.57674,
+   "phase": 97.913
+  },
+  "P1": {
+   "amp": 0.18343,
+   "phase": 80.681
+  },
+  "Q1": {
+   "amp": 0.36192,
+   "phase": 89.226
+  },
+  "S1": {
+   "amp": 0.31408,
+   "phase": -50.126
+  },
+  "S2": {
+   "amp": 7.08602,
+   "phase": -40.496
+  },
+  "SA": {
+   "amp": 0.71669,
+   "phase": 145.439
+  },
+  "SSA": {
+   "amp": 0.56108,
+   "phase": 11.376
+  },
+  "T2": {
+   "amp": 0.28967,
+   "phase": -80.044
+  },
+  "Z0": {
+   "amp": 16.8,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "kuantan",
+ "name_en": "Kuantan",
+ "name_ar": "كوانتان",
+ "country": "MY",
+ "lat": 3.81,
+ "lon": 103.34,
+ "timezone": "Asia/Kuala_Lumpur",
+ "grid": {
+  "lat": 3.75,
+  "lon": 103.375,
+  "distance_km": 7.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.87737,
+   "phase": -11.601
+  },
+  "J1": {
+   "amp": 2.7143,
+   "phase": -63.446
+  },
+  "K1": {
+   "amp": 54.35496,
+   "phase": -104.938
+  },
+  "K2": {
+   "amp": 6.6915,
+   "phase": 76.449
+  },
+  "M2": {
+   "amp": 56.50871,
+   "phase": 31.154
+  },
+  "M4": {
+   "amp": 1.41122,
+   "phase": 132.003
+  },
+  "MF": {
+   "amp": 1.51072,
+   "phase": 36.902
+  },
+  "MM": {
+   "amp": 0.36282,
+   "phase": -1.844
+  },
+  "N2": {
+   "amp": 12.23674,
+   "phase": 6.91
+  },
+  "O1": {
+   "amp": 35.84048,
+   "phase": -139.975
+  },
+  "P1": {
+   "amp": 16.77329,
+   "phase": -105.177
+  },
+  "Q1": {
+   "amp": 6.72174,
+   "phase": -156.57
+  },
+  "S1": {
+   "amp": 0.54216,
+   "phase": -151.32
+  },
+  "S2": {
+   "amp": 17.60595,
+   "phase": 70.233
+  },
+  "SA": {
+   "amp": 8.93925,
+   "phase": -3.934
+  },
+  "SSA": {
+   "amp": 0.38627,
+   "phase": -38.505
+  },
+  "T2": {
+   "amp": 1.51344,
+   "phase": 34.115
+  },
+  "Z0": {
+   "amp": 186.4,
+   "phase": 0
+  }
+ }
+}

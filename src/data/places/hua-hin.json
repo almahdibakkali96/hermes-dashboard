@@ -1,0 +1,94 @@
+{
+ "id": "hua-hin",
+ "name_en": "Hua Hin",
+ "name_ar": "هوا هين",
+ "country": "TH",
+ "lat": 12.57,
+ "lon": 99.96,
+ "timezone": "Asia/Bangkok",
+ "grid": {
+  "lat": 12.625,
+  "lon": 100,
+  "distance_km": 7.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.3894,
+   "phase": -71.115
+  },
+  "J1": {
+   "amp": 3.08321,
+   "phase": 108.114
+  },
+  "K1": {
+   "amp": 60.98671,
+   "phase": 59.67
+  },
+  "K2": {
+   "amp": 6.07478,
+   "phase": -17.833
+  },
+  "M2": {
+   "amp": 33.7089,
+   "phase": -63.019
+  },
+  "M4": {
+   "amp": 0.79257,
+   "phase": -35.17
+  },
+  "MF": {
+   "amp": 0.34828,
+   "phase": -129.688
+  },
+  "MM": {
+   "amp": 0.83858,
+   "phase": 16.104
+  },
+  "N2": {
+   "amp": 6.02011,
+   "phase": -90.501
+  },
+  "O1": {
+   "amp": 39.04989,
+   "phase": 18.778
+  },
+  "P1": {
+   "amp": 18.23144,
+   "phase": 58.05
+  },
+  "Q1": {
+   "amp": 8.63416,
+   "phase": -0.04
+  },
+  "S1": {
+   "amp": 2.1356,
+   "phase": -87.522
+  },
+  "S2": {
+   "amp": 14.8839,
+   "phase": -1.932
+  },
+  "SA": {
+   "amp": 11.07336,
+   "phase": 7.882
+  },
+  "SSA": {
+   "amp": 0.11671,
+   "phase": -109.66
+  },
+  "T2": {
+   "amp": 1.99823,
+   "phase": -53.81
+  },
+  "Z0": {
+   "amp": 189,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "barcelona",
+ "name_en": "Barcelona",
+ "name_ar": "برشلونة",
+ "country": "ES",
+ "lat": 41.37,
+ "lon": 2.2,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 41.375,
+  "lon": 2.25,
+  "distance_km": 4.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.12335,
+   "phase": -143.72
+  },
+  "J1": {
+   "amp": 0.09996,
+   "phase": 68.709
+  },
+  "K1": {
+   "amp": 3.37093,
+   "phase": 165.293
+  },
+  "K2": {
+   "amp": 0.58989,
+   "phase": -141.465
+  },
+  "M2": {
+   "amp": 4.41294,
+   "phase": -149.563
+  },
+  "M4": {
+   "amp": 0.5752,
+   "phase": -21.086
+  },
+  "MF": {
+   "amp": 0.63258,
+   "phase": -174.233
+  },
+  "MM": {
+   "amp": 0.41393,
+   "phase": -123.607
+  },
+  "N2": {
+   "amp": 0.81304,
+   "phase": -152.98
+  },
+  "O1": {
+   "amp": 2.07724,
+   "phase": 98.681
+  },
+  "P1": {
+   "amp": 1.3692,
+   "phase": 161.042
+  },
+  "Q1": {
+   "amp": 0.30703,
+   "phase": -19.723
+  },
+  "S1": {
+   "amp": 1.03313,
+   "phase": 23.332
+  },
+  "S2": {
+   "amp": 1.26614,
+   "phase": -143.174
+  },
+  "SA": {
+   "amp": 4.54176,
+   "phase": -87.67
+  },
+  "SSA": {
+   "amp": 0.3412,
+   "phase": 175.785
+  },
+  "T2": {
+   "amp": 0.47802,
+   "phase": -82.455
+  },
+  "Z0": {
+   "amp": 15,
+   "phase": 0
+  }
+ }
+}

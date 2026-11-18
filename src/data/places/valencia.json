@@ -1,0 +1,94 @@
+{
+ "id": "valencia",
+ "name_en": "Valencia",
+ "name_ar": "فالنسيا",
+ "country": "ES",
+ "lat": 39.45,
+ "lon": -0.31,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 39.5,
+  "lon": -0.25,
+  "distance_km": 7.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.15209,
+   "phase": 172.875
+  },
+  "J1": {
+   "amp": 0.19617,
+   "phase": 65.459
+  },
+  "K1": {
+   "amp": 3.52765,
+   "phase": 166.168
+  },
+  "K2": {
+   "amp": 0.07751,
+   "phase": -151.394
+  },
+  "M2": {
+   "amp": 1.46097,
+   "phase": -168.006
+  },
+  "M4": {
+   "amp": 0.29468,
+   "phase": -45.823
+  },
+  "MF": {
+   "amp": 0.24414,
+   "phase": 171.625
+  },
+  "MM": {
+   "amp": 0.43017,
+   "phase": -75.111
+  },
+  "N2": {
+   "amp": 0.26079,
+   "phase": 167.234
+  },
+  "O1": {
+   "amp": 2.34756,
+   "phase": 113.236
+  },
+  "P1": {
+   "amp": 1.47919,
+   "phase": 152.554
+  },
+  "Q1": {
+   "amp": 0.34956,
+   "phase": 58.972
+  },
+  "S1": {
+   "amp": 0.63193,
+   "phase": 70.47
+  },
+  "S2": {
+   "amp": 0.58076,
+   "phase": 169.322
+  },
+  "SA": {
+   "amp": 3.80644,
+   "phase": -81.765
+  },
+  "SSA": {
+   "amp": 0.27657,
+   "phase": -179.34
+  },
+  "T2": {
+   "amp": 0.51692,
+   "phase": -107.883
+  },
+  "Z0": {
+   "amp": 10.2,
+   "phase": 0
+  }
+ }
+}

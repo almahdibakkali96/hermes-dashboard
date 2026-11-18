@@ -1,0 +1,94 @@
+{
+ "id": "koh-samui",
+ "name_en": "Koh Samui",
+ "name_ar": "كوه ساموي",
+ "country": "TH",
+ "lat": 9.53,
+ "lon": 100.06,
+ "timezone": "Asia/Bangkok",
+ "grid": {
+  "lat": 9.5,
+  "lon": 100.125,
+  "distance_km": 7.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.08045,
+   "phase": 70.001
+  },
+  "J1": {
+   "amp": 0.93087,
+   "phase": 106.335
+  },
+  "K1": {
+   "amp": 31.42858,
+   "phase": 69.973
+  },
+  "K2": {
+   "amp": 2.6333,
+   "phase": 171.342
+  },
+  "M2": {
+   "amp": 14.10483,
+   "phase": 103.309
+  },
+  "M4": {
+   "amp": 0.86344,
+   "phase": -98.008
+  },
+  "MF": {
+   "amp": 0.60274,
+   "phase": 7.267
+  },
+  "MM": {
+   "amp": 0.81303,
+   "phase": 5.759
+  },
+  "N2": {
+   "amp": 2.77125,
+   "phase": 68.414
+  },
+  "O1": {
+   "amp": 22.09573,
+   "phase": 28.277
+  },
+  "P1": {
+   "amp": 9.32191,
+   "phase": 67.261
+  },
+  "Q1": {
+   "amp": 4.55682,
+   "phase": 6.408
+  },
+  "S1": {
+   "amp": 0.83526,
+   "phase": -70.775
+  },
+  "S2": {
+   "amp": 7.84646,
+   "phase": 177.489
+  },
+  "SA": {
+   "amp": 11.94269,
+   "phase": 8.207
+  },
+  "SSA": {
+   "amp": 0.14902,
+   "phase": -100.886
+  },
+  "T2": {
+   "amp": 0.16536,
+   "phase": -25.09
+  },
+  "Z0": {
+   "amp": 72.7,
+   "phase": 0
+  }
+ }
+}

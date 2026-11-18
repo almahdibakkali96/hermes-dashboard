@@ -1,0 +1,94 @@
+{
+ "id": "cotonou",
+ "name_en": "Cotonou",
+ "name_ar": "كوتونو",
+ "country": "BJ",
+ "lat": 6.35,
+ "lon": 2.42,
+ "timezone": "Africa/Porto-Novo",
+ "grid": {
+  "lat": 6.25,
+  "lon": 2.375,
+  "distance_km": 12.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.7875,
+   "phase": 84.313
+  },
+  "J1": {
+   "amp": 0.52891,
+   "phase": -3.868
+  },
+  "K1": {
+   "amp": 13.27668,
+   "phase": -6.224
+  },
+  "K2": {
+   "amp": 4.79663,
+   "phase": 125.776
+  },
+  "M2": {
+   "amp": 49.44061,
+   "phase": 104.011
+  },
+  "M4": {
+   "amp": 1.47566,
+   "phase": -33.75
+  },
+  "MF": {
+   "amp": 2.07297,
+   "phase": -2.177
+  },
+  "MM": {
+   "amp": 0.63878,
+   "phase": 19.366
+  },
+  "N2": {
+   "amp": 10.4375,
+   "phase": 99.828
+  },
+  "O1": {
+   "amp": 2.82563,
+   "phase": -30.949
+  },
+  "P1": {
+   "amp": 3.76984,
+   "phase": -12.101
+  },
+  "Q1": {
+   "amp": 0.18076,
+   "phase": 137.213
+  },
+  "S1": {
+   "amp": 1.09274,
+   "phase": 106.746
+  },
+  "S2": {
+   "amp": 17.90123,
+   "phase": 130.394
+  },
+  "SA": {
+   "amp": 2.10127,
+   "phase": -7.093
+  },
+  "SSA": {
+   "amp": 0.42553,
+   "phase": 36.546
+  },
+  "T2": {
+   "amp": 0.87351,
+   "phase": 126.038
+  },
+  "Z0": {
+   "amp": 97.3,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "qingdao",
+ "name_en": "Qingdao",
+ "name_ar": "تشينغداو",
+ "country": "CN",
+ "lat": 36.06,
+ "lon": 120.33,
+ "timezone": "Asia/Shanghai",
+ "grid": {
+  "lat": 36,
+  "lon": 120.375,
+  "distance_km": 7.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.96328,
+   "phase": -143.144
+  },
+  "J1": {
+   "amp": 0.90778,
+   "phase": -76.413
+  },
+  "K1": {
+   "amp": 25.60653,
+   "phase": -126.728
+  },
+  "K2": {
+   "amp": 10.92691,
+   "phase": -72.829
+  },
+  "M2": {
+   "amp": 117.25427,
+   "phase": -102.043
+  },
+  "M4": {
+   "amp": 10.04418,
+   "phase": 35.523
+  },
+  "MF": {
+   "amp": 0.8183,
+   "phase": -151.147
+  },
+  "MM": {
+   "amp": 0.27762,
+   "phase": -128.699
+  },
+  "N2": {
+   "amp": 23.2748,
+   "phase": -124.592
+  },
+  "O1": {
+   "amp": 20.03809,
+   "phase": -177.368
+  },
+  "P1": {
+   "amp": 7.01166,
+   "phase": -135.175
+  },
+  "Q1": {
+   "amp": 3.9056,
+   "phase": 156.414
+  },
+  "S1": {
+   "amp": 2.30228,
+   "phase": -145.873
+  },
+  "S2": {
+   "amp": 37.38489,
+   "phase": -70.081
+  },
+  "SA": {
+   "amp": 5.74047,
+   "phase": -116.567
+  },
+  "SSA": {
+   "amp": 0.29071,
+   "phase": 91.703
+  },
+  "T2": {
+   "amp": 1.98098,
+   "phase": -60.464
+  },
+  "Z0": {
+   "amp": 238.8,
+   "phase": 0
+  }
+ }
+}

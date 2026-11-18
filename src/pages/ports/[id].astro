@@ -193,7 +193,8 @@ const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
 const keyOf = (d: Date) => d.toISOString().slice(0, 10);
 const viewDays = [...monthDays, ...nextMonthRated];
 const viewLast = viewDays[viewDays.length - 1];
-const calSummary = portYearSummary(port.id, constituents, port.timezone);
+// The 2027 numbers are for the calendar promo: Arab ports only (about 200 ms a port, so world places skip it)
+const calSummary = world ? undefined : portYearSummary(port.id, constituents, port.timezone);
 const dayTabs = forecastWithFish.map((f, i) => {
   const d = new Date(today.getTime() + i * DAY_MS);
   return { key: keyOf(d), label: i === 0 ? 'اليوم' : i === 1 ? 'غداً' : weekDays[d.getUTCDay()], day: d.getUTCDate(), rating: f.fishRating };
@@ -203,7 +204,7 @@ const engineCfg = {
   min: keyOf(viewDays[0].date), max: keyOf(viewLast.date),
   offsets: viewDays.map(d => getTimezoneOffset(port.timezone, d.date)),
   tz: tzOffset,
-  yearMax: { [CAL.year]: calSummary.yearMax, [year]: stats.maxRange },
+  yearMax: calSummary ? { [CAL.year]: calSummary.yearMax, [year]: stats.maxRange } : { [year]: stats.maxRange },
   calYear: CAL.year,
 };
 const todayMajors = solunar.periods.filter(p => p.type === 'major').sort((a, b) => a.start.localeCompare(b.start));

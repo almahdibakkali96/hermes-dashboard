@@ -1,0 +1,94 @@
+{
+ "id": "iskenderun",
+ "name_en": "Iskenderun",
+ "name_ar": "الإسكندرونة",
+ "country": "TR",
+ "lat": 36.59,
+ "lon": 36.17,
+ "timezone": "Europe/Istanbul",
+ "grid": {
+  "lat": 36.625,
+  "lon": 36.125,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.11847,
+   "phase": 108.71
+  },
+  "J1": {
+   "amp": 0.36374,
+   "phase": -167.694
+  },
+  "K1": {
+   "amp": 2.53019,
+   "phase": -80.86
+  },
+  "K2": {
+   "amp": 2.65499,
+   "phase": -119.186
+  },
+  "M2": {
+   "amp": 12.97434,
+   "phase": -127.015
+  },
+  "M4": {
+   "amp": 0.39515,
+   "phase": -140.676
+  },
+  "MF": {
+   "amp": 0.5284,
+   "phase": -40.658
+  },
+  "MM": {
+   "amp": 0.97517,
+   "phase": -67.052
+  },
+  "N2": {
+   "amp": 2.90594,
+   "phase": -132.187
+  },
+  "O1": {
+   "amp": 2.119,
+   "phase": -103.516
+  },
+  "P1": {
+   "amp": 2.27458,
+   "phase": -57.326
+  },
+  "Q1": {
+   "amp": 0.54009,
+   "phase": -102.315
+  },
+  "S1": {
+   "amp": 1.30104,
+   "phase": -5.79
+  },
+  "S2": {
+   "amp": 7.47093,
+   "phase": -113.163
+  },
+  "SA": {
+   "amp": 4.19794,
+   "phase": -78.192
+  },
+  "SSA": {
+   "amp": 0.1634,
+   "phase": -85.063
+  },
+  "T2": {
+   "amp": 0.38006,
+   "phase": -103.318
+  },
+  "Z0": {
+   "amp": 32.1,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,203 @@
+# World places (region "world"): id | English name | Arabic name | country | lat | lon | IANA time zone
+# Added to src/data/places/places_index.json by tools/tides/add-world.py; coastal points, no river or estuary ports
+brighton|Brighton|برايتون|GB|50.81|-0.14|Europe/London
+plymouth|Plymouth|بليموث|GB|50.35|-4.14|Europe/London
+dover|Dover|دوفر|GB|51.11|1.33|Europe/London
+aberdeen|Aberdeen|أبردين|GB|57.15|-2.07|Europe/London
+dublin|Dublin|دبلن|IE|53.34|-6.15|Europe/Dublin
+# dropped, EOT20 gives 1 cm M2 (real ~1.5 m): galway|Galway|غالواي|IE|53.25|-9.08|Europe/Dublin
+la-rochelle|La Rochelle|لاروشيل|FR|46.14|-1.20|Europe/Paris
+biarritz|Biarritz|بياريتز|FR|43.49|-1.57|Europe/Paris
+calais|Calais|كاليه|FR|50.97|1.84|Europe/Paris
+cherbourg|Cherbourg|شيربورغ|FR|49.66|-1.62|Europe/Paris
+sete|Sète|سيت|FR|43.39|3.70|Europe/Paris
+ajaccio|Ajaccio|أجاكسيو|FR|41.91|8.74|Europe/Paris
+barcelona|Barcelona|برشلونة|ES|41.37|2.20|Europe/Madrid
+valencia|Valencia|فالنسيا|ES|39.45|-0.31|Europe/Madrid
+alicante|Alicante|أليكانتي|ES|38.33|-0.47|Europe/Madrid
+palma|Palma de Mallorca|بالما دي مايوركا|ES|39.55|2.64|Europe/Madrid
+ibiza|Ibiza|إيبيزا|ES|38.90|1.44|Europe/Madrid
+cadiz|Cádiz|قادش|ES|36.53|-6.31|Europe/Madrid
+a-coruna|A Coruña|لاكورونيا|ES|43.38|-8.40|Europe/Madrid
+bilbao|Bilbao (Getxo)|بلباو|ES|43.35|-3.03|Europe/Madrid
+santander|Santander|سانتاندير|ES|43.47|-3.78|Europe/Madrid
+las-palmas|Las Palmas|لاس بالماس|ES|28.14|-15.42|Atlantic/Canary
+tenerife|Santa Cruz de Tenerife|تينيريفي|ES|28.47|-16.24|Atlantic/Canary
+lisbon|Lisbon (Cascais)|لشبونة|PT|38.69|-9.42|Europe/Lisbon
+porto|Porto|بورتو|PT|41.17|-8.70|Europe/Lisbon
+faro|Faro|فارو|PT|37.00|-7.93|Europe/Lisbon
+funchal|Funchal (Madeira)|فونشال (ماديرا)|PT|32.64|-16.91|Atlantic/Madeira
+naples|Naples|نابولي|IT|40.83|14.25|Europe/Rome
+genoa|Genoa|جنوة|IT|44.40|8.92|Europe/Rome
+venice|Venice (Lido)|البندقية|IT|45.40|12.38|Europe/Rome
+bari|Bari|باري|IT|41.13|16.87|Europe/Rome
+ostia|Rome (Ostia)|روما (أوستيا)|IT|41.73|12.28|Europe/Rome
+catania|Catania|كاتانيا|IT|37.50|15.10|Europe/Rome
+cagliari|Cagliari|كالياري|IT|39.20|9.11|Europe/Rome
+valletta|Valletta|فاليتا|MT|35.90|14.52|Europe/Malta
+thessaloniki|Thessaloniki|سالونيك|GR|40.62|22.94|Europe/Athens
+heraklion|Heraklion (Crete)|هيراكليون (كريت)|GR|35.34|25.14|Europe/Athens
+rhodes|Rhodes|رودس|GR|36.45|28.23|Europe/Athens
+corfu|Corfu|كورفو|GR|39.62|19.92|Europe/Athens
+split|Split|سبليت|HR|43.50|16.43|Europe/Zagreb
+dubrovnik|Dubrovnik|دوبروفنيك|HR|42.64|18.10|Europe/Zagreb
+budva|Budva|بودفا|ME|42.28|18.84|Europe/Podgorica
+durres|Durrës|دوريس|AL|41.31|19.44|Europe/Tirane
+# dropped, water cell 23 km away: izmir|Izmir|إزمير|TR|38.44|27.13|Europe/Istanbul
+alanya|Alanya|ألانيا|TR|36.54|32.00|Europe/Istanbul
+mersin|Mersin|مرسين|TR|36.78|34.64|Europe/Istanbul
+fethiye|Fethiye|فتحية|TR|36.62|29.10|Europe/Istanbul
+iskenderun|Iskenderun|الإسكندرونة|TR|36.59|36.17|Europe/Istanbul
+limassol|Limassol|ليماسول|CY|34.67|33.04|Asia/Nicosia
+odesa|Odesa|أوديسا|UA|46.48|30.76|Europe/Kyiv
+varna|Varna|فارنا|BG|43.20|27.93|Europe/Sofia
+constanta|Constanța|كونستانتسا|RO|44.17|28.66|Europe/Bucharest
+batumi|Batumi|باتومي|GE|41.65|41.63|Asia/Tbilisi
+sochi|Sochi|سوتشي|RU|43.58|39.71|Europe/Moscow
+scheveningen|The Hague (Scheveningen)|لاهاي (شيفنينغن)|NL|52.11|4.26|Europe/Amsterdam
+ostend|Ostend|أوستند|BE|51.23|2.91|Europe/Brussels
+# dropped, water cell 16 km away: kiel|Kiel|كيل|DE|54.36|10.16|Europe/Berlin
+copenhagen|Copenhagen|كوبنهاغن|DK|55.69|12.61|Europe/Copenhagen
+esbjerg|Esbjerg|إسبيرغ|DK|55.46|8.43|Europe/Copenhagen
+gothenburg|Gothenburg|غوتنبرغ|SE|57.68|11.84|Europe/Stockholm
+# dropped, water cell 17 km away: stockholm|Stockholm|ستوكهولم|SE|59.32|18.10|Europe/Stockholm
+bergen|Bergen|بيرغن|NO|60.39|5.30|Europe/Oslo
+oslo|Oslo|أوسلو|NO|59.90|10.73|Europe/Oslo
+# dropped, water cell 28 km away: tromso|Tromsø|ترومسو|NO|69.65|18.97|Europe/Oslo
+helsinki|Helsinki|هلسنكي|FI|60.16|24.96|Europe/Helsinki
+gdansk|Gdańsk|غدانسك|PL|54.41|18.68|Europe/Warsaw
+tallinn|Tallinn|تالين|EE|59.45|24.75|Europe/Tallinn
+reykjavik|Reykjavík|ريكيافيك|IS|64.15|-21.95|Atlantic/Reykjavik
+dakar|Dakar|داكار|SN|14.69|-17.45|Africa/Dakar
+banjul|Banjul|بانجول|GM|13.46|-16.57|Africa/Banjul
+conakry|Conakry|كوناكري|GN|9.51|-13.71|Africa/Conakry
+freetown|Freetown|فريتاون|SL|8.49|-13.24|Africa/Freetown
+monrovia|Monrovia|مونروفيا|LR|6.32|-10.81|Africa/Monrovia
+abidjan|Abidjan|أبيدجان|CI|5.25|-4.00|Africa/Abidjan
+accra|Accra|أكرا|GH|5.53|-0.20|Africa/Accra
+lome|Lomé|لومي|TG|6.12|1.23|Africa/Lome
+cotonou|Cotonou|كوتونو|BJ|6.35|2.42|Africa/Porto-Novo
+lagos|Lagos|لاغوس|NG|6.41|3.40|Africa/Lagos
+kribi|Kribi|كريبي|CM|2.94|9.90|Africa/Douala
+malabo|Malabo|مالابو|GQ|3.76|8.78|Africa/Malabo
+sao-tome|São Tomé|ساو تومي|ST|0.34|6.74|Africa/Sao_Tome
+libreville|Libreville|ليبرفيل|GA|0.39|9.44|Africa/Libreville
+pointe-noire|Pointe-Noire|بوانت نوار|CG|-4.78|11.84|Africa/Brazzaville
+luanda|Luanda|لواندا|AO|-8.80|13.22|Africa/Luanda
+walvis-bay|Walvis Bay|والفيس باي|NA|-22.95|14.49|Africa/Windhoek
+cape-town|Cape Town|كيب تاون|ZA|-33.90|18.42|Africa/Johannesburg
+port-elizabeth|Gqeberha (Port Elizabeth)|بورت إليزابيث|ZA|-33.96|25.63|Africa/Johannesburg
+durban|Durban|ديربان|ZA|-29.87|31.05|Africa/Johannesburg
+maputo|Maputo|مابوتو|MZ|-25.97|32.59|Africa/Maputo
+toamasina|Toamasina|تواماسينا|MG|-18.15|49.42|Indian/Antananarivo
+mahajanga|Mahajanga|ماهاجانغا|MG|-15.72|46.31|Indian/Antananarivo
+dar-es-salaam|Dar es Salaam|دار السلام|TZ|-6.82|39.30|Africa/Dar_es_Salaam
+malindi|Malindi|ماليندي|KE|-3.22|40.13|Africa/Nairobi
+lamu|Lamu|لامو|KE|-2.27|40.90|Africa/Nairobi
+praia|Praia|برايا|CV|14.92|-23.51|Atlantic/Cape_Verde
+saint-denis-re|Saint-Denis (Réunion)|سان دوني (لا ريونيون)|RE|-20.88|55.45|Indian/Reunion
+assab|Assab|عصب|ER|13.01|42.74|Africa/Asmara
+chennai|Chennai|تشيناي|IN|13.08|80.29|Asia/Kolkata
+goa|Goa (Panaji)|غوا|IN|15.50|73.80|Asia/Kolkata
+visakhapatnam|Visakhapatnam|فيساخاباتنام|IN|17.69|83.30|Asia/Kolkata
+kozhikode|Kozhikode (Calicut)|كاليكوت|IN|11.25|75.77|Asia/Kolkata
+mangalore|Mangaluru|مانغالور|IN|12.87|74.83|Asia/Kolkata
+trivandrum|Thiruvananthapuram|تريفاندرم|IN|8.48|76.92|Asia/Kolkata
+puducherry|Puducherry|بونديشيري|IN|11.93|79.84|Asia/Kolkata
+porbandar|Porbandar|بوربندر|IN|21.63|69.60|Asia/Kolkata
+port-blair|Port Blair|بورت بلير|IN|11.67|92.75|Asia/Kolkata
+galle|Galle|غالي|LK|6.03|80.21|Asia/Colombo
+trincomalee|Trincomalee|ترينكومالي|LK|8.57|81.24|Asia/Colombo
+coxs-bazar|Cox's Bazar|كوكس بازار|BD|21.43|91.97|Asia/Dhaka
+addu|Addu|أدو|MV|-0.63|73.16|Indian/Maldives
+krabi|Krabi (Ao Nang)|كرابي|TH|8.03|98.82|Asia/Bangkok
+koh-samui|Koh Samui|كوه ساموي|TH|9.53|100.06|Asia/Bangkok
+hua-hin|Hua Hin|هوا هين|TH|12.57|99.96|Asia/Bangkok
+port-klang|Port Klang (Kuala Lumpur)|بورت كلانغ (كوالالمبور)|MY|3.00|101.39|Asia/Kuala_Lumpur
+malacca|Malacca|ملقا|MY|2.19|102.24|Asia/Kuala_Lumpur
+kuantan|Kuantan|كوانتان|MY|3.81|103.34|Asia/Kuala_Lumpur
+kota-kinabalu|Kota Kinabalu|كوتا كينابالو|MY|5.98|116.07|Asia/Kuching
+singapore|Singapore|سنغافورة|SG|1.26|103.83|Asia/Singapore
+jakarta|Jakarta|جاكرتا|ID|-6.10|106.81|Asia/Jakarta
+lombok|Lombok (Senggigi)|لومبوك|ID|-8.49|116.04|Asia/Makassar
+makassar|Makassar|مكاسر|ID|-5.13|119.40|Asia/Makassar
+banda-aceh|Banda Aceh|باندا آتشيه|ID|5.57|95.32|Asia/Jakarta
+batam|Batam|باتام|ID|1.13|104.05|Asia/Jakarta
+padang|Padang|بادانغ|ID|-0.95|100.35|Asia/Jakarta
+manado|Manado|مانادو|ID|1.49|124.84|Asia/Makassar
+ambon|Ambon|أمبون|ID|-3.69|128.18|Asia/Jayapura
+manila|Manila|مانيلا|PH|14.58|120.97|Asia/Manila
+cebu|Cebu|سيبو|PH|10.30|123.90|Asia/Manila
+boracay|Boracay|بوراكاي|PH|11.96|121.92|Asia/Manila
+zamboanga|Zamboanga|زامبوانغا|PH|6.91|122.07|Asia/Manila
+da-nang|Da Nang|دا نانغ|VN|16.07|108.23|Asia/Ho_Chi_Minh
+nha-trang|Nha Trang|نها ترانغ|VN|12.24|109.20|Asia/Ho_Chi_Minh
+ha-long|Ha Long|ها لونغ|VN|20.95|107.08|Asia/Ho_Chi_Minh
+sihanoukville|Sihanoukville|سيهانوكفيل|KH|10.62|103.51|Asia/Phnom_Penh
+hong-kong|Hong Kong|هونغ كونغ|HK|22.28|114.17|Asia/Hong_Kong
+xiamen|Xiamen|شيامن|CN|24.45|118.07|Asia/Shanghai
+qingdao|Qingdao|تشينغداو|CN|36.06|120.33|Asia/Shanghai
+sanya|Sanya|سانيا|CN|18.22|109.50|Asia/Shanghai
+kaohsiung|Kaohsiung|كاوهسيونغ|TW|22.61|120.27|Asia/Taipei
+busan|Busan|بوسان|KR|35.10|129.04|Asia/Seoul
+incheon|Incheon|إنتشون|KR|37.45|126.60|Asia/Seoul
+tokyo|Tokyo|طوكيو|JP|35.62|139.78|Asia/Tokyo
+osaka|Osaka|أوساكا|JP|34.65|135.42|Asia/Tokyo
+naha|Naha (Okinawa)|ناها (أوكيناوا)|JP|26.21|127.67|Asia/Tokyo
+fukuoka|Fukuoka|فوكوكا|JP|33.60|130.40|Asia/Tokyo
+vladivostok|Vladivostok|فلاديفوستوك|RU|43.11|131.88|Asia/Vladivostok
+sydney|Sydney|سيدني|AU|-33.89|151.28|Australia/Sydney
+melbourne|Melbourne|ملبورن|AU|-37.86|144.97|Australia/Melbourne
+gold-coast|Gold Coast|غولد كوست|AU|-27.97|153.43|Australia/Brisbane
+perth|Perth (Fremantle)|بيرث (فريمانتل)|AU|-32.06|115.74|Australia/Perth
+darwin|Darwin|داروين|AU|-12.46|130.84|Australia/Darwin
+cairns|Cairns|كيرنز|AU|-16.92|145.78|Australia/Brisbane
+adelaide|Adelaide (Glenelg)|أديلايد|AU|-34.98|138.51|Australia/Adelaide
+hobart|Hobart|هوبارت|AU|-42.88|147.34|Australia/Hobart
+auckland|Auckland|أوكلاند|NZ|-36.84|174.77|Pacific/Auckland
+wellington|Wellington|ويلينغتون|NZ|-41.29|174.78|Pacific/Auckland
+suva|Suva (Fiji)|سوفا (فيجي)|FJ|-18.14|178.42|Pacific/Fiji
+noumea|Nouméa|نوميا|NC|-22.28|166.44|Pacific/Noumea
+papeete|Papeete (Tahiti)|بابيتي (تاهيتي)|PF|-17.53|-149.57|Pacific/Tahiti
+honolulu|Honolulu|هونولولو|US|21.30|-157.86|Pacific/Honolulu
+new-york|New York (Coney Island)|نيويورك|US|40.57|-73.98|America/New_York
+boston|Boston|بوسطن|US|42.35|-71.04|America/New_York
+miami|Miami|ميامي|US|25.77|-80.13|America/New_York
+key-west|Key West|كي وست|US|24.55|-81.80|America/New_York
+charleston|Charleston|تشارلستون|US|32.75|-79.87|America/New_York
+tampa|Tampa (Clearwater)|تامبا (كليرووتر)|US|27.98|-82.83|America/New_York
+galveston|Galveston (Houston)|غالفستون (هيوستن)|US|29.29|-94.79|America/Chicago
+los-angeles|Los Angeles (Santa Monica)|لوس أنجلوس|US|34.01|-118.50|America/Los_Angeles
+san-diego|San Diego|سان دييغو|US|32.71|-117.17|America/Los_Angeles
+san-francisco|San Francisco|سان فرانسيسكو|US|37.81|-122.47|America/Los_Angeles
+seattle|Seattle|سياتل|US|47.60|-122.34|America/Los_Angeles
+halifax|Halifax|هاليفاكس|CA|44.64|-63.57|America/Halifax
+# dropped, water cell 32 km away, M2 27% low: vancouver|Vancouver|فانكوفر|CA|49.29|-123.14|America/Vancouver
+st-johns|St. John's|سانت جونز|CA|47.57|-52.70|America/St_Johns
+cancun|Cancún|كانكون|MX|21.16|-86.82|America/Cancun
+acapulco|Acapulco|أكابولكو|MX|16.85|-99.88|America/Mexico_City
+mazatlan|Mazatlán|مازاتلان|MX|23.21|-106.42|America/Mazatlan
+veracruz|Veracruz|فيراكروز|MX|19.20|-96.13|America/Mexico_City
+havana|Havana|هافانا|CU|23.14|-82.36|America/Havana
+santo-domingo|Santo Domingo|سانتو دومينغو|DO|18.46|-69.89|America/Santo_Domingo
+punta-cana|Punta Cana|بونتا كانا|DO|18.58|-68.37|America/Santo_Domingo
+san-juan|San Juan|سان خوان|PR|18.47|-66.11|America/Puerto_Rico
+nassau|Nassau|ناساو|BS|25.08|-77.35|America/Nassau
+bridgetown|Bridgetown|بريدجتاون|BB|13.10|-59.62|America/Barbados
+panama-city|Panama City|مدينة بنما|PA|8.95|-79.53|America/Panama
+puntarenas|Puntarenas|بونتاريناس|CR|9.97|-84.83|America/Costa_Rica
+cartagena|Cartagena|قرطاجنة|CO|10.42|-75.55|America/Bogota
+la-guaira|La Guaira (Caracas)|لا غوايرا (كاراكاس)|VE|10.61|-66.93|America/Caracas
+rio-de-janeiro|Rio de Janeiro|ريو دي جانيرو|BR|-22.97|-43.18|America/Sao_Paulo
+santos|Santos (São Paulo)|سانتوس (ساو باولو)|BR|-23.98|-46.31|America/Sao_Paulo
+salvador|Salvador|سلفادور|BR|-12.97|-38.52|America/Bahia
+fortaleza|Fortaleza|فورتاليزا|BR|-3.72|-38.50|America/Fortaleza
+recife|Recife|ريسيفي|BR|-8.06|-34.87|America/Recife
+florianopolis|Florianópolis|فلوريانوبوليس|BR|-27.60|-48.55|America/Sao_Paulo
+mar-del-plata|Mar del Plata|مار ديل بلاتا|AR|-38.00|-57.54|America/Argentina/Buenos_Aires
+puerto-madryn|Puerto Madryn|بويرتو مادرين|AR|-42.77|-65.03|America/Argentina/Catamarca
+punta-del-este|Punta del Este|بونتا ديل إستي|UY|-34.96|-54.95|America/Montevideo
+valparaiso|Valparaíso|فالبارايسو|CL|-33.03|-71.63|America/Santiago
+antofagasta|Antofagasta|أنتوفاغاستا|CL|-23.65|-70.41|America/Santiago
+callao|Callao (Lima)|كالاو (ليما)|PE|-12.05|-77.15|America/Lima
+manta|Manta|مانتا|EC|-0.94|-80.73|America/Guayaquil

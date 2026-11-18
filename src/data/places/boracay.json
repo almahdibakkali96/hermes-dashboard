@@ -1,0 +1,94 @@
+{
+ "id": "boracay",
+ "name_en": "Boracay",
+ "name_ar": "بوراكاي",
+ "country": "PH",
+ "lat": 11.96,
+ "lon": 121.92,
+ "timezone": "Asia/Manila",
+ "grid": {
+  "lat": 12,
+  "lon": 121.875,
+  "distance_km": 6.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.70354,
+   "phase": 43.825
+  },
+  "J1": {
+   "amp": 1.04653,
+   "phase": -143.24
+  },
+  "K1": {
+   "amp": 33.50335,
+   "phase": -158.189
+  },
+  "K2": {
+   "amp": 5.69189,
+   "phase": 121.517
+  },
+  "M2": {
+   "amp": 37.89214,
+   "phase": 80.455
+  },
+  "M4": {
+   "amp": 0.32738,
+   "phase": -74.8
+  },
+  "MF": {
+   "amp": 1.02057,
+   "phase": 8.48
+  },
+  "MM": {
+   "amp": 0.77338,
+   "phase": 8.719
+  },
+  "N2": {
+   "amp": 6.65501,
+   "phase": 60.248
+  },
+  "O1": {
+   "amp": 29.65809,
+   "phase": 163.394
+  },
+  "P1": {
+   "amp": 10.61456,
+   "phase": -159.024
+  },
+  "Q1": {
+   "amp": 5.73397,
+   "phase": 149.665
+  },
+  "S1": {
+   "amp": 0.28329,
+   "phase": 165.585
+  },
+  "S2": {
+   "amp": 18.05968,
+   "phase": 121.967
+  },
+  "SA": {
+   "amp": 3.43062,
+   "phase": -135.023
+  },
+  "SSA": {
+   "amp": 0.36309,
+   "phase": 0.227
+  },
+  "T2": {
+   "amp": 1.40366,
+   "phase": 146.05
+  },
+  "Z0": {
+   "amp": 121.2,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "aberdeen",
+ "name_en": "Aberdeen",
+ "name_ar": "أبردين",
+ "country": "GB",
+ "lat": 57.15,
+ "lon": -2.07,
+ "timezone": "Europe/London",
+ "grid": {
+  "lat": 57.125,
+  "lon": -2,
+  "distance_km": 5.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 3.82694,
+   "phase": -24.518
+  },
+  "J1": {
+   "amp": 0.56564,
+   "phase": -176.08
+  },
+  "K1": {
+   "amp": 11.11292,
+   "phase": -152.593
+  },
+  "K2": {
+   "amp": 12.52716,
+   "phase": 62.72
+  },
+  "M2": {
+   "amp": 129.63892,
+   "phase": 26.92
+  },
+  "M4": {
+   "amp": 3.45191,
+   "phase": 172.916
+  },
+  "MF": {
+   "amp": 1.68954,
+   "phase": -164.465
+  },
+  "MM": {
+   "amp": 1.24395,
+   "phase": 173.463
+  },
+  "N2": {
+   "amp": 25.82569,
+   "phase": 4.118
+  },
+  "O1": {
+   "amp": 12.16285,
+   "phase": 54.665
+  },
+  "P1": {
+   "amp": 3.33453,
+   "phase": -157.527
+  },
+  "Q1": {
+   "amp": 3.96994,
+   "phase": -3.673
+  },
+  "S1": {
+   "amp": 0.96656,
+   "phase": 100.178
+  },
+  "S2": {
+   "amp": 43.35893,
+   "phase": 64.539
+  },
+  "SA": {
+   "amp": 3.78998,
+   "phase": -51.023
+  },
+  "SSA": {
+   "amp": 0.93936,
+   "phase": 179.022
+  },
+  "T2": {
+   "amp": 1.88049,
+   "phase": 43.345
+  },
+  "Z0": {
+   "amp": 244.2,
+   "phase": 0
+  }
+ }
+}

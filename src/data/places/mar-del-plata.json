@@ -1,0 +1,94 @@
+{
+ "id": "mar-del-plata",
+ "name_en": "Mar del Plata",
+ "name_ar": "مار ديل بلاتا",
+ "country": "AR",
+ "lat": -38,
+ "lon": -57.54,
+ "timezone": "America/Argentina/Buenos_Aires",
+ "grid": {
+  "lat": -38,
+  "lon": -57.5,
+  "distance_km": 3.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.57331,
+   "phase": -117.872
+  },
+  "J1": {
+   "amp": 0.63223,
+   "phase": 172.696
+  },
+  "K1": {
+   "amp": 15.41707,
+   "phase": 170.718
+  },
+  "K2": {
+   "amp": 2.1059,
+   "phase": 27.617
+  },
+  "M2": {
+   "amp": 35.7249,
+   "phase": -59.386
+  },
+  "M4": {
+   "amp": 4.13913,
+   "phase": 178.204
+  },
+  "MF": {
+   "amp": 0.59224,
+   "phase": -164.886
+  },
+  "MM": {
+   "amp": 0.49986,
+   "phase": 20.503
+  },
+  "N2": {
+   "amp": 10.09035,
+   "phase": -99.136
+  },
+  "O1": {
+   "amp": 19.3089,
+   "phase": 72.387
+  },
+  "P1": {
+   "amp": 4.21222,
+   "phase": 162.738
+  },
+  "Q1": {
+   "amp": 4.50311,
+   "phase": 40.873
+  },
+  "S1": {
+   "amp": 2.33047,
+   "phase": 158.988
+  },
+  "S2": {
+   "amp": 5.10379,
+   "phase": 11.51
+  },
+  "SA": {
+   "amp": 2.61339,
+   "phase": 88.844
+  },
+  "SSA": {
+   "amp": 0.22931,
+   "phase": -170.499
+  },
+  "T2": {
+   "amp": 0.61273,
+   "phase": 7.611
+  },
+  "Z0": {
+   "amp": 78.1,
+   "phase": 0
+  }
+ }
+}

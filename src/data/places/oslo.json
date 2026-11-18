@@ -1,0 +1,94 @@
+{
+ "id": "oslo",
+ "name_en": "Oslo",
+ "name_ar": "أوسلو",
+ "country": "NO",
+ "lat": 59.9,
+ "lon": 10.73,
+ "timezone": "Europe/Oslo",
+ "grid": {
+  "lat": 59.875,
+  "lon": 10.75,
+  "distance_km": 3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.97588,
+   "phase": 15.716
+  },
+  "J1": {
+   "amp": 0.48994,
+   "phase": 36.587
+  },
+  "K1": {
+   "amp": 0.86046,
+   "phase": -88.923
+  },
+  "K2": {
+   "amp": 1.22149,
+   "phase": 46.697
+  },
+  "M2": {
+   "amp": 12.32745,
+   "phase": 110.112
+  },
+  "M4": {
+   "amp": 2.38579,
+   "phase": -94.153
+  },
+  "MF": {
+   "amp": 1.34462,
+   "phase": -144.949
+  },
+  "MM": {
+   "amp": 1.24821,
+   "phase": -161.069
+  },
+  "N2": {
+   "amp": 3.10308,
+   "phase": 58.715
+  },
+  "O1": {
+   "amp": 2.35574,
+   "phase": -92.658
+  },
+  "P1": {
+   "amp": 1.09707,
+   "phase": 176.33
+  },
+  "Q1": {
+   "amp": 0.29325,
+   "phase": -102.514
+  },
+  "S1": {
+   "amp": 1.15125,
+   "phase": -0.115
+  },
+  "S2": {
+   "amp": 3.30253,
+   "phase": 51.661
+  },
+  "SA": {
+   "amp": 3.37449,
+   "phase": -54.364
+  },
+  "SSA": {
+   "amp": 0.89861,
+   "phase": -176.923
+  },
+  "T2": {
+   "amp": 0.56969,
+   "phase": -28.664
+  },
+  "Z0": {
+   "amp": 28.7,
+   "phase": 0
+  }
+ }
+}

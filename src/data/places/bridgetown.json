@@ -1,0 +1,94 @@
+{
+ "id": "bridgetown",
+ "name_en": "Bridgetown",
+ "name_ar": "بريدجتاون",
+ "country": "BB",
+ "lat": 13.1,
+ "lon": -59.62,
+ "timezone": "America/Barbados",
+ "grid": {
+  "lat": 13,
+  "lon": -59.625,
+  "distance_km": 11.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.43915,
+   "phase": 170.871
+  },
+  "J1": {
+   "amp": 0.34182,
+   "phase": -69.988
+  },
+  "K1": {
+   "amp": 8.13375,
+   "phase": -123.368
+  },
+  "K2": {
+   "amp": 1.9477,
+   "phase": -117.081
+  },
+  "M2": {
+   "amp": 22.64367,
+   "phase": -139.466
+  },
+  "M4": {
+   "amp": 0.27061,
+   "phase": 99.692
+  },
+  "MF": {
+   "amp": 1.57776,
+   "phase": -11.537
+  },
+  "MM": {
+   "amp": 0.90308,
+   "phase": -1.655
+  },
+  "N2": {
+   "amp": 5.0423,
+   "phase": -151.819
+  },
+  "O1": {
+   "amp": 7.33485,
+   "phase": -129.397
+  },
+  "P1": {
+   "amp": 2.78482,
+   "phase": -119.866
+  },
+  "Q1": {
+   "amp": 1.32611,
+   "phase": -139.982
+  },
+  "S1": {
+   "amp": 0.44491,
+   "phase": 101.923
+  },
+  "S2": {
+   "amp": 8.18417,
+   "phase": -118.418
+  },
+  "SA": {
+   "amp": 2.91602,
+   "phase": 177.588
+  },
+  "SSA": {
+   "amp": 0.4937,
+   "phase": 0.813
+  },
+  "T2": {
+   "amp": 0.50272,
+   "phase": 170.703
+  },
+  "Z0": {
+   "amp": 56.2,
+   "phase": 0
+  }
+ }
+}

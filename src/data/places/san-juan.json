@@ -1,0 +1,94 @@
+{
+ "id": "san-juan",
+ "name_en": "San Juan",
+ "name_ar": "سان خوان",
+ "country": "PR",
+ "lat": 18.47,
+ "lon": -66.11,
+ "timezone": "America/Puerto_Rico",
+ "grid": {
+  "lat": 18.5,
+  "lon": -66.125,
+  "distance_km": 3.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.57242,
+   "phase": -27.212
+  },
+  "J1": {
+   "amp": 0.31265,
+   "phase": -138.856
+  },
+  "K1": {
+   "amp": 7.87397,
+   "phase": -141.234
+  },
+  "K2": {
+   "amp": 0.43748,
+   "phase": 22.174
+  },
+  "M2": {
+   "amp": 16.20849,
+   "phase": 12.732
+  },
+  "M4": {
+   "amp": 0.07251,
+   "phase": 52.484
+  },
+  "MF": {
+   "amp": 1.33066,
+   "phase": -12.54
+  },
+  "MM": {
+   "amp": 0.70618,
+   "phase": -4.691
+  },
+  "N2": {
+   "amp": 3.77964,
+   "phase": -9.443
+  },
+  "O1": {
+   "amp": 6.71187,
+   "phase": -141.032
+  },
+  "P1": {
+   "amp": 2.67793,
+   "phase": -132.912
+  },
+  "Q1": {
+   "amp": 1.2804,
+   "phase": -153.308
+  },
+  "S1": {
+   "amp": 0.92371,
+   "phase": 65.063
+  },
+  "S2": {
+   "amp": 2.29312,
+   "phase": 44.725
+  },
+  "SA": {
+   "amp": 2.12932,
+   "phase": -75.167
+  },
+  "SSA": {
+   "amp": 0.51858,
+   "phase": 1.034
+  },
+  "T2": {
+   "amp": 0.14548,
+   "phase": 109.262
+  },
+  "Z0": {
+   "amp": 36.1,
+   "phase": 0
+  }
+ }
+}

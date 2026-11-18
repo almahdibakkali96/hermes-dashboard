@@ -1,0 +1,94 @@
+{
+ "id": "lome",
+ "name_en": "Lomé",
+ "name_ar": "لومي",
+ "country": "TG",
+ "lat": 6.12,
+ "lon": 1.23,
+ "timezone": "Africa/Lome",
+ "grid": {
+  "lat": 6.125,
+  "lon": 1.25,
+  "distance_km": 2.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.79999,
+   "phase": 83.186
+  },
+  "J1": {
+   "amp": 0.67537,
+   "phase": -13.856
+  },
+  "K1": {
+   "amp": 13.06189,
+   "phase": -7.425
+  },
+  "K2": {
+   "amp": 4.85184,
+   "phase": 126.65
+  },
+  "M2": {
+   "amp": 49.11342,
+   "phase": 104.753
+  },
+  "M4": {
+   "amp": 1.33425,
+   "phase": -46.645
+  },
+  "MF": {
+   "amp": 2.03274,
+   "phase": -0.943
+  },
+  "MM": {
+   "amp": 0.57713,
+   "phase": 0.674
+  },
+  "N2": {
+   "amp": 10.49522,
+   "phase": 100.616
+  },
+  "O1": {
+   "amp": 2.80962,
+   "phase": -31.605
+  },
+  "P1": {
+   "amp": 3.91298,
+   "phase": -14.912
+  },
+  "Q1": {
+   "amp": 0.54902,
+   "phase": 92.083
+  },
+  "S1": {
+   "amp": 0.93471,
+   "phase": 48.196
+  },
+  "S2": {
+   "amp": 17.84918,
+   "phase": 131.216
+  },
+  "SA": {
+   "amp": 2.3492,
+   "phase": 1.495
+  },
+  "SSA": {
+   "amp": 0.37062,
+   "phase": 40.732
+  },
+  "T2": {
+   "amp": 1.22196,
+   "phase": 133.541
+  },
+  "Z0": {
+   "amp": 97.2,
+   "phase": 0
+  }
+ }
+}

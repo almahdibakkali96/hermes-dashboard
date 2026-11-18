@@ -1,0 +1,94 @@
+{
+ "id": "plymouth",
+ "name_en": "Plymouth",
+ "name_ar": "بليموث",
+ "country": "GB",
+ "lat": 50.35,
+ "lon": -4.14,
+ "timezone": "Europe/London",
+ "grid": {
+  "lat": 50.25,
+  "lon": -4.125,
+  "distance_km": 11.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.05874,
+   "phase": 125.172
+  },
+  "J1": {
+   "amp": 0.52891,
+   "phase": 177.415
+  },
+  "K1": {
+   "amp": 7.66056,
+   "phase": 109.983
+  },
+  "K2": {
+   "amp": 17.32862,
+   "phase": -159.54
+  },
+  "M2": {
+   "amp": 167.69669,
+   "phase": 152.124
+  },
+  "M4": {
+   "amp": 13.76973,
+   "phase": 131.281
+  },
+  "MF": {
+   "amp": 0.64824,
+   "phase": 113.652
+  },
+  "MM": {
+   "amp": 1.65064,
+   "phase": 37.886
+  },
+  "N2": {
+   "amp": 31.76642,
+   "phase": 135.829
+  },
+  "O1": {
+   "amp": 5.96348,
+   "phase": -14.797
+  },
+  "P1": {
+   "amp": 2.58164,
+   "phase": 92.593
+  },
+  "Q1": {
+   "amp": 1.48927,
+   "phase": -58.722
+  },
+  "S1": {
+   "amp": 0.84576,
+   "phase": -0.307
+  },
+  "S2": {
+   "amp": 61.33349,
+   "phase": -156.477
+  },
+  "SA": {
+   "amp": 3.50934,
+   "phase": -49.929
+  },
+  "SSA": {
+   "amp": 0.68355,
+   "phase": -175.745
+  },
+  "T2": {
+   "amp": 3.28033,
+   "phase": -163.585
+  },
+  "Z0": {
+   "amp": 303.4,
+   "phase": 0
+  }
+ }
+}

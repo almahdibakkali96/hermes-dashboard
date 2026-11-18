@@ -13,6 +13,7 @@ export const countryNames: Record<string, string> = {
   MV: 'جزر المالديف', LK: 'سريلانكا', TH: 'تايلاند', MY: 'ماليزيا', ID: 'إندونيسيا', TZ: 'تنزانيا',
   KE: 'كينيا', SC: 'سيشل', MU: 'موريشيوس', PK: 'باكستان', IN: 'الهند', ER: 'إريتريا', TR: 'تركيا',
   CY: 'قبرص', GR: 'اليونان', IT: 'إيطاليا', ES: 'إسبانيا', FR: 'فرنسا',
+  HK: 'هونغ كونغ', DK: 'الدنمارك', CG: 'الكونغو', RE: 'لا ريونيون', // shorter or more usual than CLDR's
 };
 // Any other country: the browser/Node's own Arabic name (CLDR)
 const regionNames = (() => { try { return new Intl.DisplayNames(['ar'], { type: 'region' }); } catch { return null; } })();

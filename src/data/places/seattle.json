@@ -1,0 +1,94 @@
+{
+ "id": "seattle",
+ "name_en": "Seattle",
+ "name_ar": "سياتل",
+ "country": "US",
+ "lat": 47.6,
+ "lon": -122.34,
+ "timezone": "America/Los_Angeles",
+ "grid": {
+  "lat": 47.625,
+  "lon": -122.375,
+  "distance_km": 3.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.65452,
+   "phase": -170.346
+  },
+  "J1": {
+   "amp": 10.45245,
+   "phase": 135.994
+  },
+  "K1": {
+   "amp": 53.73027,
+   "phase": -107.284
+  },
+  "K2": {
+   "amp": 5.84009,
+   "phase": -75.374
+  },
+  "M2": {
+   "amp": 90.84255,
+   "phase": -113.4
+  },
+  "M4": {
+   "amp": 3.01158,
+   "phase": 47.962
+  },
+  "MF": {
+   "amp": 1.83463,
+   "phase": 173.949
+  },
+  "MM": {
+   "amp": 0.57418,
+   "phase": 160.888
+  },
+  "N2": {
+   "amp": 20.7526,
+   "phase": -130.136
+  },
+  "O1": {
+   "amp": 32.5411,
+   "phase": -126.121
+  },
+  "P1": {
+   "amp": 20.91273,
+   "phase": -118.442
+  },
+  "Q1": {
+   "amp": 7.52923,
+   "phase": -130.024
+  },
+  "S1": {
+   "amp": 2.48015,
+   "phase": 98.272
+  },
+  "S2": {
+   "amp": 35.61543,
+   "phase": -84.021
+  },
+  "SA": {
+   "amp": 5.59629,
+   "phase": 9.632
+  },
+  "SSA": {
+   "amp": 0.63137,
+   "phase": -115.322
+  },
+  "T2": {
+   "amp": 2.49159,
+   "phase": 20.845
+  },
+  "Z0": {
+   "amp": 252.4,
+   "phase": 0
+  }
+ }
+}

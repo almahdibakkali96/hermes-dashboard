@@ -1,0 +1,94 @@
+{
+ "id": "luanda",
+ "name_en": "Luanda",
+ "name_ar": "لواندا",
+ "country": "AO",
+ "lat": -8.8,
+ "lon": 13.22,
+ "timezone": "Africa/Luanda",
+ "grid": {
+  "lat": -8.75,
+  "lon": 13.25,
+  "distance_km": 6.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.7717,
+   "phase": 70.783
+  },
+  "J1": {
+   "amp": 0.40054,
+   "phase": -4.311
+  },
+  "K1": {
+   "amp": 8.58309,
+   "phase": 11.391
+  },
+  "K2": {
+   "amp": 4.55687,
+   "phase": 98.645
+  },
+  "M2": {
+   "amp": 48.06099,
+   "phase": 78.717
+  },
+  "M4": {
+   "amp": 0.18664,
+   "phase": 159.396
+  },
+  "MF": {
+   "amp": 1.85698,
+   "phase": -2.396
+  },
+  "MM": {
+   "amp": 0.59011,
+   "phase": -25.004
+  },
+  "N2": {
+   "amp": 9.75351,
+   "phase": 70.511
+  },
+  "O1": {
+   "amp": 0.64096,
+   "phase": -110.414
+  },
+  "P1": {
+   "amp": 2.65454,
+   "phase": 11.197
+  },
+  "Q1": {
+   "amp": 0.66013,
+   "phase": 151.964
+  },
+  "S1": {
+   "amp": 2.35197,
+   "phase": 98.566
+  },
+  "S2": {
+   "amp": 15.98171,
+   "phase": 102.922
+  },
+  "SA": {
+   "amp": 2.19616,
+   "phase": 20.849
+  },
+  "SSA": {
+   "amp": 0.58175,
+   "phase": 23.737
+  },
+  "T2": {
+   "amp": 0.5961,
+   "phase": 88.149
+  },
+  "Z0": {
+   "amp": 85.3,
+   "phase": 0
+  }
+ }
+}

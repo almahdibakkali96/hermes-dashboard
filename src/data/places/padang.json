@@ -1,0 +1,94 @@
+{
+ "id": "padang",
+ "name_en": "Padang",
+ "name_ar": "بادانغ",
+ "country": "ID",
+ "lat": -0.95,
+ "lon": 100.35,
+ "timezone": "Asia/Jakarta",
+ "grid": {
+  "lat": -1,
+  "lon": 100.375,
+  "distance_km": 6.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.32341,
+   "phase": -76.006
+  },
+  "J1": {
+   "amp": 1.08777,
+   "phase": -173.081
+  },
+  "K1": {
+   "amp": 14.011,
+   "phase": 171.4
+  },
+  "K2": {
+   "amp": 4.55542,
+   "phase": 14.934
+  },
+  "M2": {
+   "amp": 35.84186,
+   "phase": -25.349
+  },
+  "M4": {
+   "amp": 1.57983,
+   "phase": 46.176
+  },
+  "MF": {
+   "amp": 1.73567,
+   "phase": -0.253
+  },
+  "MM": {
+   "amp": 1.02347,
+   "phase": 19.263
+  },
+  "N2": {
+   "amp": 7.62835,
+   "phase": -36.675
+  },
+  "O1": {
+   "amp": 7.71493,
+   "phase": 167.974
+  },
+  "P1": {
+   "amp": 4.93095,
+   "phase": 172.971
+  },
+  "Q1": {
+   "amp": 1.53713,
+   "phase": 163.99
+  },
+  "S1": {
+   "amp": 1.86917,
+   "phase": -88.409
+  },
+  "S2": {
+   "amp": 14.69196,
+   "phase": 14.042
+  },
+  "SA": {
+   "amp": 0.60657,
+   "phase": -151.986
+  },
+  "SSA": {
+   "amp": 0.28829,
+   "phase": -61.837
+  },
+  "T2": {
+   "amp": 1.25639,
+   "phase": -44.099
+  },
+  "Z0": {
+   "amp": 67.8,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "batumi",
+ "name_en": "Batumi",
+ "name_ar": "باتومي",
+ "country": "GE",
+ "lat": 41.65,
+ "lon": 41.63,
+ "timezone": "Asia/Tbilisi",
+ "grid": {
+  "lat": 41.75,
+  "lon": 41.625,
+  "distance_km": 11.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.0675,
+   "phase": -136.341
+  },
+  "J1": {
+   "amp": 1.13275,
+   "phase": -138.003
+  },
+  "K1": {
+   "amp": 1.61977,
+   "phase": -102.956
+  },
+  "K2": {
+   "amp": 1.01202,
+   "phase": 144.844
+  },
+  "M2": {
+   "amp": 2.59353,
+   "phase": -161.522
+  },
+  "M4": {
+   "amp": 0.31568,
+   "phase": 173.096
+  },
+  "MF": {
+   "amp": 0.15966,
+   "phase": -34.361
+  },
+  "MM": {
+   "amp": 0.27001,
+   "phase": 178.997
+  },
+  "N2": {
+   "amp": 1.12202,
+   "phase": -128.874
+  },
+  "O1": {
+   "amp": 0.95817,
+   "phase": -111.692
+  },
+  "P1": {
+   "amp": 0.62265,
+   "phase": 18.765
+  },
+  "Q1": {
+   "amp": 0.64106,
+   "phase": -68.927
+  },
+  "S1": {
+   "amp": 1.49632,
+   "phase": -156.733
+  },
+  "S2": {
+   "amp": 0.65357,
+   "phase": -142.877
+  },
+  "SA": {
+   "amp": 1.10647,
+   "phase": 142.369
+  },
+  "SSA": {
+   "amp": 0.42141,
+   "phase": -123.068
+  },
+  "T2": {
+   "amp": 0.48231,
+   "phase": 116.056
+  },
+  "Z0": {
+   "amp": 10.6,
+   "phase": 0
+  }
+ }
+}

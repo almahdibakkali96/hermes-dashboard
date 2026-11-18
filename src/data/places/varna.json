@@ -1,0 +1,94 @@
+{
+ "id": "varna",
+ "name_en": "Varna",
+ "name_ar": "فارنا",
+ "country": "BG",
+ "lat": 43.2,
+ "lon": 27.93,
+ "timezone": "Europe/Sofia",
+ "grid": {
+  "lat": 43.125,
+  "lon": 28,
+  "distance_km": 10.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.52399,
+   "phase": -155.915
+  },
+  "J1": {
+   "amp": 0.22195,
+   "phase": -20.51
+  },
+  "K1": {
+   "amp": 1.14097,
+   "phase": 46.193
+  },
+  "K2": {
+   "amp": 0.17463,
+   "phase": -86.206
+  },
+  "M2": {
+   "amp": 2.12169,
+   "phase": 22.157
+  },
+  "M4": {
+   "amp": 0.13594,
+   "phase": -80.03
+  },
+  "MF": {
+   "amp": 0.0402,
+   "phase": -169.098
+  },
+  "MM": {
+   "amp": 0.25116,
+   "phase": -7.099
+  },
+  "N2": {
+   "amp": 0.50421,
+   "phase": 12.167
+  },
+  "O1": {
+   "amp": 1.0322,
+   "phase": 57.36
+  },
+  "P1": {
+   "amp": 0.28801,
+   "phase": 69.804
+  },
+  "Q1": {
+   "amp": 0.20647,
+   "phase": 106.856
+  },
+  "S1": {
+   "amp": 0.47937,
+   "phase": 4.597
+  },
+  "S2": {
+   "amp": 1.4835,
+   "phase": 24.692
+  },
+  "SA": {
+   "amp": 1.34445,
+   "phase": 129.731
+  },
+  "SSA": {
+   "amp": 0.43977,
+   "phase": -124.743
+  },
+  "T2": {
+   "amp": 0.76824,
+   "phase": -71.62
+  },
+  "Z0": {
+   "amp": 7.1,
+   "phase": 0
+  }
+ }
+}

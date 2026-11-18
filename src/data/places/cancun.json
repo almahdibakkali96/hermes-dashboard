@@ -1,0 +1,94 @@
+{
+ "id": "cancun",
+ "name_en": "Cancún",
+ "name_ar": "كانكون",
+ "country": "MX",
+ "lat": 21.16,
+ "lon": -86.82,
+ "timezone": "America/Cancun",
+ "grid": {
+  "lat": 21.125,
+  "lon": -86.75,
+  "distance_km": 8.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.49571,
+   "phase": 81.99
+  },
+  "J1": {
+   "amp": 0.28595,
+   "phase": -7.366
+  },
+  "K1": {
+   "amp": 0.38247,
+   "phase": 37.627
+  },
+  "K2": {
+   "amp": 0.70395,
+   "phase": 27.051
+  },
+  "M2": {
+   "amp": 6.56426,
+   "phase": 77.888
+  },
+  "M4": {
+   "amp": 0.55096,
+   "phase": -82.162
+  },
+  "MF": {
+   "amp": 1.15009,
+   "phase": 0.283
+  },
+  "MM": {
+   "amp": 0.86826,
+   "phase": -13.053
+  },
+  "N2": {
+   "amp": 2.33121,
+   "phase": 58.762
+  },
+  "O1": {
+   "amp": 2.59346,
+   "phase": 22.03
+  },
+  "P1": {
+   "amp": 0.54504,
+   "phase": 120.292
+  },
+  "Q1": {
+   "amp": 0.65866,
+   "phase": 23.221
+  },
+  "S1": {
+   "amp": 0.47437,
+   "phase": 114.181
+  },
+  "S2": {
+   "amp": 2.79548,
+   "phase": 25.268
+  },
+  "SA": {
+   "amp": 3.22714,
+   "phase": -56.527
+  },
+  "SSA": {
+   "amp": 0.32129,
+   "phase": 31.186
+  },
+  "T2": {
+   "amp": 0.11758,
+   "phase": -14.025
+  },
+  "Z0": {
+   "amp": 15.8,
+   "phase": 0
+  }
+ }
+}

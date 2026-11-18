@@ -1,0 +1,94 @@
+{
+ "id": "esbjerg",
+ "name_en": "Esbjerg",
+ "name_ar": "إسبيرغ",
+ "country": "DK",
+ "lat": 55.46,
+ "lon": 8.43,
+ "timezone": "Europe/Copenhagen",
+ "grid": {
+  "lat": 55.5,
+  "lon": 8.375,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.11259,
+   "phase": -53.216
+  },
+  "J1": {
+   "amp": 0.86876,
+   "phase": 124.846
+  },
+  "K1": {
+   "amp": 4.84171,
+   "phase": 46.567
+  },
+  "K2": {
+   "amp": 5.16776,
+   "phase": 62.316
+  },
+  "M2": {
+   "amp": 66.82042,
+   "phase": 8.014
+  },
+  "M4": {
+   "amp": 8.98161,
+   "phase": -178.063
+  },
+  "MF": {
+   "amp": 1.12348,
+   "phase": -165.416
+  },
+  "MM": {
+   "amp": 0.94134,
+   "phase": 151.645
+  },
+  "N2": {
+   "amp": 11.32689,
+   "phase": -20.714
+  },
+  "O1": {
+   "amp": 8.48596,
+   "phase": -103.474
+  },
+  "P1": {
+   "amp": 1.37452,
+   "phase": 56.037
+  },
+  "Q1": {
+   "amp": 2.81756,
+   "phase": -169.914
+  },
+  "S1": {
+   "amp": 2.31063,
+   "phase": 15.464
+  },
+  "S2": {
+   "amp": 17.62598,
+   "phase": 70.777
+  },
+  "SA": {
+   "amp": 5.26086,
+   "phase": -56.169
+  },
+  "SSA": {
+   "amp": 0.60539,
+   "phase": -167.078
+  },
+  "T2": {
+   "amp": 0.61551,
+   "phase": 52.04
+  },
+  "Z0": {
+   "amp": 121.3,
+   "phase": 0
+  }
+ }
+}

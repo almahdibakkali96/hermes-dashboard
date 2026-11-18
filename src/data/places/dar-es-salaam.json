@@ -1,0 +1,94 @@
+{
+ "id": "dar-es-salaam",
+ "name_en": "Dar es Salaam",
+ "name_ar": "دار السلام",
+ "country": "TZ",
+ "lat": -6.82,
+ "lon": 39.3,
+ "timezone": "Africa/Dar_es_Salaam",
+ "grid": {
+  "lat": -6.75,
+  "lon": 39.25,
+  "distance_km": 9.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.03178,
+   "phase": -26.295
+  },
+  "J1": {
+   "amp": 1.01919,
+   "phase": 12.623
+  },
+  "K1": {
+   "amp": 17.58446,
+   "phase": -5.518
+  },
+  "K2": {
+   "amp": 15.15923,
+   "phase": 59.812
+  },
+  "M2": {
+   "amp": 108.08963,
+   "phase": 25.044
+  },
+  "M4": {
+   "amp": 0.60306,
+   "phase": -179.116
+  },
+  "MF": {
+   "amp": 1.49546,
+   "phase": 3.612
+  },
+  "MM": {
+   "amp": 0.30854,
+   "phase": -23.517
+  },
+  "N2": {
+   "amp": 19.52697,
+   "phase": 3.298
+  },
+  "O1": {
+   "amp": 10.20598,
+   "phase": 2.108
+  },
+  "P1": {
+   "amp": 5.49347,
+   "phase": -4.322
+  },
+  "Q1": {
+   "amp": 1.83496,
+   "phase": -1.847
+  },
+  "S1": {
+   "amp": 2.82112,
+   "phase": 107.274
+  },
+  "S2": {
+   "amp": 53.91,
+   "phase": 64.041
+  },
+  "SA": {
+   "amp": 0.77852,
+   "phase": -170.769
+  },
+  "SSA": {
+   "amp": 0.61025,
+   "phase": 2.769
+  },
+  "T2": {
+   "amp": 3.3399,
+   "phase": 69.874
+  },
+  "Z0": {
+   "amp": 204.2,
+   "phase": 0
+  }
+ }
+}
