@@ -522,24 +522,20 @@ button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
 .day-bar { display: flex; align-items: stretch; gap: 0.4rem; margin-top: 0.85rem; }
 .day-tabs { flex: 1 1 auto; min-width: 0; display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none; padding: 2px; }
 .day-tabs::-webkit-scrollbar { display: none; }
-.day-bar > .day-pick { margin-block: 2px; }
 /* Phones: the row's far end fades, a hint that more days scroll in (RTL: the end is on the left) */
 @media (max-width: 639px) {
   .day-tabs { -webkit-mask-image: linear-gradient(to left, transparent 0, #000 1.5rem); mask-image: linear-gradient(to left, transparent 0, #000 1.5rem); }
 }
-.day-tab, .day-pick {
+.day-tab {
   flex: 0 0 auto; position: relative; min-width: 3.5rem; padding: 0.4rem 0.5rem 0.45rem; text-align: center; line-height: 1.25;
   border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); background: var(--surface-card);
   font: inherit; color: var(--text-secondary); cursor: pointer; transition: border-color 0.15s ease, background-color 0.15s ease;
 }
-.day-tab:hover, .day-pick:hover { border-color: var(--accent-border); }
+.day-tab:hover { border-color: var(--accent-border); }
 .day-tab .d-name { display: block; font-size: 0.7rem; white-space: nowrap; }
 .day-tab .d-num { display: block; font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
 .day-tab .d-bar { display: block; height: 0.25rem; margin: 0.25rem 0.3rem 0; border-radius: 9999px; background: var(--rating); }
-.day-tab[aria-pressed="true"], .day-pick.is-on { background: #f0fdfa; border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); color: var(--accent-text); }
-.day-pick { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1rem; min-width: 4.25rem; font-size: 0.7rem; color: var(--accent-text); border-style: dashed; white-space: nowrap; }
-.day-pick.is-on { border-style: solid; font-weight: 600; }
-.day-pick input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.day-tab[aria-pressed="true"] { background: #f0fdfa; border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); color: var(--accent-text); }
 .day-facts { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.45rem; margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-secondary); }
 .day-fact { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.65rem; border-radius: var(--radius-pill); background: var(--surface-elevated); }
 .day-more { margin-top: 0.75rem; font-size: 0.75rem; line-height: 1.7; color: var(--text-muted); }

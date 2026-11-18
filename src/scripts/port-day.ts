@@ -65,10 +65,7 @@ function init() {
   const tiles = document.getElementById('tide-tiles');
   const facts = document.getElementById('day-facts');
   const more = document.getElementById('day-more');
-  const input = document.getElementById('day-input') as HTMLInputElement | null;
   const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.day-tab[data-day]'));
-  const pick = input?.closest('.day-pick') ?? null;
-  const pickLabel = pick?.querySelector('[data-pick-label]') ?? null;
   // "Today" is the port's real local date. The build's date (cfg.today) can be a day behind for places far from the
   // rebuild hours (UTC+0…+4, e.g. the Americas or the Pacific): then the page moves itself to the real day below.
   const tzFor0 = (key: string) => cfg.offsets[Math.round((noon(key).getTime() - noon(cfg.min).getTime()) / DAY)] ?? cfg.tz;
@@ -228,11 +225,6 @@ function init() {
     if (tiles) tiles.innerHTML = tilesMarkup(cur);
     if (facts) facts.innerHTML = factsMarkup(cur);
     tabs.forEach(t => t.setAttribute('aria-pressed', String(t.dataset.day === key)));
-    if (input) input.value = key;
-    // The picker shows the day it chose when that day isn't one of the tabs
-    const custom = !tabs.some(t => t.dataset.day === key);
-    pick?.classList.toggle('is-on', custom);
-    if (pickLabel) pickLabel.textContent = custom ? `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}` : 'يوم آخر';
     try {
       const u = new URL(location.href);
       if (key === today) u.searchParams.delete('d'); else u.searchParams.set('d', key);
@@ -241,9 +233,6 @@ function init() {
     if (how !== 'auto') track('day_view', { how, ahead: Math.round((noon(key).getTime() - noon(cfg.today).getTime()) / DAY) });
   }
   tabs.forEach(t => t.addEventListener('click', () => select(t.dataset.day!, 'tab')));
-  input?.addEventListener('change', () => { if (input.value) select(input.value, 'picker'); });
-  // Desktop browsers open the calendar only from its icon: open it on any click of the (transparent) field
-  input?.addEventListener('click', () => { try { (input as HTMLInputElement & { showPicker?: () => void }).showPicker?.(); } catch { /* not allowed here */ } });
   // "Curve of this day" in the month calendar's day details
   document.addEventListener('port:day', e => {
     select((e as CustomEvent<string>).detail, 'calendar');

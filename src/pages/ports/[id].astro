@@ -190,7 +190,7 @@ const dayDetails = [...monthDays, ...nextMonthRated].map(d => {
 const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
 
 // Day viewer (src/scripts/port-day.ts): today plus the next six days as tabs, and any day of this month and
-// next (the days the calendar above shows) through the date picker. Further days are the 2027 calendar's job.
+// next through the month calendar's "curve of this day" button. No date picker on purpose: the year is the 2027 calendar's job.
 const keyOf = (d: Date) => d.toISOString().slice(0, 10);
 const viewDays = [...monthDays, ...nextMonthRated];
 const viewLast = viewDays[viewDays.length - 1];
@@ -386,14 +386,14 @@ const pageJsonLd = [
           <button type="button" class="summary-more no-print" onclick="document.getElementById('summary-text').classList.remove('is-clamped');this.remove()">اقرأ الملخص كاملاً</button>
         </section>
 
-        <!-- Today's tide chart; the tabs and the picker redraw it for another day (src/scripts/port-day.ts) -->
+        <!-- Today's tide chart; the tabs redraw it for another day (src/scripts/port-day.ts) -->
         <section id="chart-card" class="card p-5 scroll-mt-20" aria-labelledby="chart-title">
           <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h2 id="chart-title" class="text-lg font-semibold display">منحنى المد والجزر اليوم</h2>
             <span id="chart-date" class="text-xs text-[var(--text-muted)] latin">{today.toLocaleDateString('en-GB', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' })}</span>
             <span class="ms-auto text-xs text-[var(--text-muted)]">بالتوقيت المحلي · الارتفاع بالسنتيمتر</span>
           </div>
-          <!-- The week scrolls sideways on phones; the picker stays in view at the end of the row -->
+          <!-- The week scrolls sideways on phones -->
           <div class="day-bar no-print">
             <div class="day-tabs" role="group" aria-label="اختر اليوم">
               {dayTabs.map((t, i) => (
@@ -404,11 +404,6 @@ const pageJsonLd = [
                 </button>
               ))}
             </div>
-            <label class="day-pick">
-              <Icon name="calendar" size={15} />
-              <span data-pick-label>يوم آخر</span>
-              <input id="day-input" type="date" min={engineCfg.min} max={engineCfg.max} value={localDateStr} aria-label="اختر يوماً" />
-            </label>
           </div>
           <div class="chart-ltr mt-3">
             <svg id="tide-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="tide-chart w-full h-auto" role="img"
