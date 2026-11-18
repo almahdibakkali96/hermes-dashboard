@@ -338,3 +338,20 @@ function getQuality(moonPhaseVal: number, periodType: string): string {
   if (p < 0.05 || p > 0.95 || (p > 0.45 && p < 0.55)) return 'good';
   return 'fair';
 }
+/**
+ * The moon drawn as it looks tonight, as inline SVG (used instead of moon emoji, which differ on every phone).
+ * phase: 0 new, 0.25 first quarter, 0.5 full, 0.75 last quarter. Lit on the right while waxing, as seen from the
+ * northern hemisphere. The dark part follows the text colour; the lit part is pale moonlight.
+ */
+export function moonIcon(phase: number, size = 16): string {
+  const r = 10, c = 12, p = ((phase % 1) + 1) % 1;
+  const k = Math.cos(2 * Math.PI * p); // 1 new … -1 full
+  const rx = (r * Math.abs(k)).toFixed(2), waxing = p < 0.5, crescent = k > 0;
+  const outer = waxing ? 1 : 0;                    // the lit limb: right while waxing, left while waning
+  const term = waxing === crescent ? 0 : 1;        // the terminator bulges toward the lit limb for a crescent
+  const lit = p < 0.02 || p > 0.98 ? '' : p > 0.48 && p < 0.52
+    ? `<circle cx="${c}" cy="${c}" r="${r}" fill="#fde68a"/>`
+    : `<path d="M${c} ${c - r}A${r} ${r} 0 0 ${outer} ${c} ${c + r}A${rx} ${r} 0 0 ${term} ${c} ${c - r}Z" fill="#fde68a"/>`;
+  return `<svg class="moon-icon" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true">`
+    + `<circle cx="${c}" cy="${c}" r="${r}" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-opacity=".35" stroke-width="1"/>${lit}</svg>`;
+}

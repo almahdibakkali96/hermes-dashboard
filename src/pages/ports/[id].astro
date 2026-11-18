@@ -5,10 +5,11 @@ import {
   generateTideCurve, dayExtremes, formatTime, localMidnight, DATUM_KEY,
   classifyTide, classifySpringNeap, getTimezoneOffset, portDay, tideCoefficient, coefficientLabelAr
 } from '../../lib/tides';
-import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
+import { moonIcon, moonPhase, sunTimes, moonTimes, solunarPeriods } from '../../lib/astronomy';
 import { calculatePrayerTimes, gregorianToHijri } from '../../lib/prayer';
 import { countryName, formatCoords } from '../../lib/countries';
 import RatingBadge from '../../components/RatingBadge.astro';
+import Icon from '../../components/Icon.astro';
 import { calcFish, fishColors, fishLabels, fishAdvice, monthDays as monthDaysOf, maxRangeOf, ratingsFrom } from '../../lib/fishing';
 import { yearStats, seas, portSea } from '../../lib/seas';
 import { fishForPort, fishLabel } from '../../lib/fish';
@@ -183,7 +184,7 @@ const dayDetails = [...monthDays, ...nextMonthRated].map(d => {
     highs: tideList('high'), lows: tideList('low'),
     sun: `${sunD.sunrise ?? '—'} / ${sunD.sunset ?? '—'}`,
     coef: coefOf(d.range),
-    moon: `${d.moon.emoji} ${d.moon.phaseNameAr} · ${Math.round(d.moon.illumination * 100)}%`,
+    moon: `${d.moon.phaseNameAr} · ${Math.round(d.moon.illumination * 100)}%`,
   };
 });
 const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
@@ -327,9 +328,9 @@ const pageJsonLd = [
           {frName && <p class="mt-1 text-xs text-slate-400"><span lang="fr" dir="ltr">Marées à {frName} aujourd'hui : horaires de marée haute et marée basse</span></p>}
         </div>
         <div class="ms-auto flex flex-wrap items-center gap-2 text-xs">
-          <span class="hero-chip">📅 {hijri.day} {hijri.monthAr} {hijri.year} هـ</span>
-          <span class="hero-chip">{moon.emoji} {moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
-          <span class="hero-chip">🌊 {tideClass.typeAr}</span>
+          <span class="hero-chip"><Icon name="calendar" size={14} /> {hijri.day} {hijri.monthAr} {hijri.year} هـ</span>
+          <span class="hero-chip"><Fragment set:html={moonIcon(moon.phase, 14)} /> {moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
+          <span class="hero-chip"><Icon name="waves" size={14} /> {tideClass.typeAr}</span>
         </div>
       </div>
 
@@ -362,9 +363,9 @@ const pageJsonLd = [
 
       <div class="mt-4 flex flex-wrap gap-2 no-print">
         <button type="button" class="hero-action" id="my-port" data-id={port.id} data-name={port.name_ar} aria-pressed="false" title="يظهر أولاً في الصفحة الرئيسية">
-          <span data-star aria-hidden="true">☆</span> <span data-label>اجعله ميناءي</span>
+          <span data-star class="inline-flex"><Icon name="star" size={15} /></span> <span data-label>اجعله ميناءي</span>
         </button>
-        <a class="hero-action" href={`https://wa.me/?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}`} target="_blank" rel="noopener">💬 أرسله في واتساب</a>
+        <a class="hero-action" href={`https://wa.me/?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}`} target="_blank" rel="noopener"><Icon name="message" size={15} /> أرسله في واتساب</a>
       </div>
     </div>
     <svg class="hero-waves" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
@@ -404,7 +405,7 @@ const pageJsonLd = [
               ))}
             </div>
             <label class="day-pick">
-              <span aria-hidden="true">📅</span>
+              <Icon name="calendar" size={15} />
               <span data-pick-label>يوم آخر</span>
               <input id="day-input" type="date" min={engineCfg.min} max={engineCfg.max} value={localDateStr} aria-label="اختر يوماً" />
             </label>
@@ -457,9 +458,9 @@ const pageJsonLd = [
           <!-- The chosen day's rating, best hours, sun, moon and coefficient (same markup as port-day.ts factsMarkup) -->
           <div id="day-facts" class="day-facts">
             <RatingBadge rating={todayFish.fishRating} size="sm" />
-            {todayMajors.length > 0 && <span class="day-fact">🎣 أفضل وقت {todayMajors.map((p, i) => <>{i > 0 && ' و'}<span class="latin">{p.start}–{p.end}</span></>)}</span>}
+            {todayMajors.length > 0 && <span class="day-fact"><Icon name="fish" size={14} /> أفضل وقت {todayMajors.map((p, i) => <>{i > 0 && ' و'}<span class="latin">{p.start}–{p.end}</span></>)}</span>}
             <span class="day-fact">الشروق <span class="latin">{sun.sunrise ?? '—'}</span> · الغروب <span class="latin">{sun.sunset ?? '—'}</span></span>
-            <span class="day-fact">{moon.emoji} {moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
+            <span class="day-fact"><Fragment set:html={moonIcon(moon.phase, 14)} /> {moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
             {todayCoef !== null && <span class="day-fact">معامل المد <span class="latin">{todayCoef}</span> · {coefficientLabelAr(todayCoef)}</span>}
           </div>
           <p id="day-more" class="day-more no-print">
@@ -497,7 +498,7 @@ const pageJsonLd = [
             {forecastWithFish.map(day => (
               <li class:list={['week-row px-5 py-4', { 'bg-teal-50/50': day.isToday }]}>
                 <div class="flex items-center gap-3">
-                  <span class="text-2xl" aria-hidden="true">{day.moon.emoji}</span>
+                  <span class="inline-flex text-slate-400" aria-hidden="true" set:html={moonIcon(day.moon.phase, 24)} />
                   <div>
                     <div class="font-semibold">{day.label}</div>
                     <div class="text-xs text-[var(--text-muted)] latin">{day.dateStr}</div>
@@ -534,7 +535,7 @@ const pageJsonLd = [
             {monthDays.map(d => (
               <button type="button" class={`cal-cell ${d.isToday ? 'cal-today' : ''}`} style={`--rating:${d.fishColor}`} data-day={d.date.toISOString().slice(0, 10)} aria-pressed={d.isToday ? 'true' : 'false'} title={`${d.day} ${monthNames[month]} — ${d.fishLabel}`}>
                 <div class="text-xs sm:text-sm font-semibold latin">{d.day}</div>
-                <div class="text-sm sm:text-base leading-none my-0.5" aria-hidden="true">{d.moon.emoji}</div>
+                <div class="flex justify-center my-0.5 text-slate-400" aria-hidden="true" set:html={moonIcon(d.moon.phase, 15)} />
                 <div class="cal-bar" style={`background:${d.fishColor};opacity:${0.25 + d.fishRating * 0.15}`}></div>
               </button>
             ))}
@@ -562,19 +563,19 @@ const pageJsonLd = [
             </dl>
             <div class="mt-3 flex items-center gap-3">
               <p class="text-xs text-[var(--text-muted)]">اضغط على أي يوم في التقويم لعرض تفاصيله.</p>
-              <button type="button" class="day-chart-link ms-auto no-print" data-f="chart">📈 منحنى هذا اليوم</button>
+              <button type="button" class="day-chart-link ms-auto no-print" data-f="chart"><Icon name="chart" size={14} /> منحنى هذا اليوم</button>
             </div>
           </div>
           <script type="application/json" id="day-data" set:html={JSON.stringify(dayDetails)} />
 
           <div class="mt-6 rounded-xl bg-[var(--surface-elevated)] p-4">
-            <h3 class="font-semibold text-sm">🎣 أفضل أيام الصيد القادمة</h3>
+            <h3 class="font-semibold text-sm inline-flex items-center gap-2"><Icon name="fish" size={16} class="text-[var(--text-muted)]" /> أفضل أيام الصيد القادمة</h3>
             {bestDays.length > 0 ? (
               <div class="mt-3 flex flex-wrap gap-2">
                 {bestDays.map(d => (
                   <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white text-sm font-medium border" style={`border-color:${d.fishColor}55;color:${d.fishColor}`}>
                     <span class="latin">{d.day}</span> {monthNames[d.month]}
-                    {d.twilight && <span title="مد عالٍ قرب الشروق أو الغروب" aria-label="مد عالٍ قرب الشروق أو الغروب">🌅</span>}
+                    {d.twilight && <span title="مد عالٍ قرب الشروق أو الغروب" aria-label="مد عالٍ قرب الشروق أو الغروب" class="text-amber-600"><Icon name="sunrise" size={14} /></span>}
                     <RatingBadge rating={d.fishRating} size="sm" label={false} />
                   </span>
                 ))}
@@ -582,10 +583,10 @@ const pageJsonLd = [
             ) : (
               <p class="mt-2 text-sm text-[var(--text-muted)]">لا توجد أيام ممتازة خلال الثلاثين يوماً القادمة</p>
             )}
-            {bestDays.some(d => d.twilight) && <p class="mt-2 text-xs text-[var(--text-muted)]">🌅 مد عالٍ قرب الشروق أو الغروب، وهو من أنشط أوقات الصيد.</p>}
+            {bestDays.some(d => d.twilight) && <p class="mt-2 text-xs text-[var(--text-muted)] inline-flex items-center gap-1.5"><span class="text-amber-600"><Icon name="sunrise" size={14} /></span> مد عالٍ قرب الشروق أو الغروب، وهو من أنشط أوقات الصيد.</p>}
             <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-              <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">📖 التفسير:</strong> أفضل الصيد قرب اكتمال القمر (بدر) وميلاده (محاق) — يرتفع المد وتتحرك المياه فتنشط الأسماك على التغذي.</p>
-              <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">🎯 القاعدة العملية:</strong> انطلق قبل ساعتين من ذروة المد أو بعدها مباشرة. أثناء الجزر تتركز الأسماك في القنوات العميقة.</p>
+              <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">التفسير:</strong> أفضل الصيد قرب اكتمال القمر (بدر) وميلاده (محاق) — يرتفع المد وتتحرك المياه فتنشط الأسماك على التغذي.</p>
+              <p class="text-[var(--text-secondary)] leading-relaxed"><strong class="text-[var(--text-primary)]">القاعدة العملية:</strong> انطلق قبل ساعتين من ذروة المد أو بعدها مباشرة. أثناء الجزر تتركز الأسماك في القنوات العميقة.</p>
             </div>
           </div>
         </section>
@@ -602,14 +603,14 @@ const pageJsonLd = [
               <a href={`${BASE}fish/${f.id}`} class="rounded-lg overflow-hidden border border-[var(--border-subtle)] group block">
                 <img src={`${BASE}fish/sm/${f.id}.webp`} srcset={`${BASE}fish/xs/${f.id}.webp 240w, ${BASE}fish/sm/${f.id}.webp 480w`} sizes="(min-width: 1024px) 170px, (min-width: 640px) 25vw, 33vw" alt={fishLabel(f)} width="480" height="360" loading="lazy" decoding="async" class="fish-thumb" />
                 <span class="block px-2 py-1.5 text-xs font-semibold truncate group-hover:text-[var(--accent-text)] transition-colors">
-                  {portFish.observed.has(f.id) && <span title="سُجّلت مشاهدته قرب الميناء">📍 </span>}{f.ar}
+                  {portFish.observed.has(f.id) && <span title="سُجّلت مشاهدته قرب الميناء" class="text-[var(--accent-text)] inline-block align-[-2px] me-1"><Icon name="pin" size={13} /></span>}{f.ar}
                 </span>
               </a>
             ))}
           </div>
           <p class="mt-3 text-xs text-[var(--text-muted)] leading-relaxed">
             {portFish.observed.size > 0
-              ? <>📍 <span class="latin">{portFish.observed.size}</span> من هذه الأنواع سجّل الغواصون والصيادون مشاهدتها في نطاق <span class="latin">50</span> كم من {port.name_ar} على منصة iNaturalist.</>
+              ? <><span class="text-[var(--accent-text)] inline-block align-[-2px]"><Icon name="pin" size={13} /></span> <span class="latin">{portFish.observed.size}</span> من هذه الأنواع سجّل الغواصون والصيادون مشاهدتها في نطاق <span class="latin">50</span> كم من {port.name_ar} على منصة iNaturalist.</>
               : <>الأنواع الشائعة في {seas[portSea[id!]].name}.</>}
             {portFish.fish.length > 12 && <> وأنواع أخرى في <a href={`${BASE}fish`} class="text-[var(--accent-text)] underline">دليل الأسماك</a>.</>}
           </p>
@@ -660,7 +661,7 @@ const pageJsonLd = [
         <div class:list={['hidden', { 'lg:block': !world }]}><CalendarPromo variant="card" port={{ id: id!, name: port.name_ar }} summary={calSummary} /></div>
 
         <section class="card p-5" aria-labelledby="sun-title">
-          <h2 id="sun-title" class="font-semibold">☀️ الشمس والقمر</h2>
+          <h2 id="sun-title" class="font-semibold inline-flex items-center gap-2"><span class="text-[var(--text-muted)]"><Icon name="sun" size={18} /></span> الشمس والقمر</h2>
           <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
             <div class="info-tile"><dt>الشروق</dt><dd class="latin">{sun.sunrise || '—'}</dd></div>
             <div class="info-tile"><dt>الغروب</dt><dd class="latin">{sun.sunset || '—'}</dd></div>
@@ -668,7 +669,7 @@ const pageJsonLd = [
             <div class="info-tile"><dt>غروب القمر</dt><dd class="latin">{moonT.moonset || '—'}</dd></div>
           </dl>
           <div class="mt-3 flex items-center gap-3 rounded-xl bg-[var(--surface-elevated)] p-3">
-            <span class="text-3xl" aria-hidden="true">{moon.emoji}</span>
+            <span class="inline-flex text-slate-400" aria-hidden="true" set:html={moonIcon(moon.phase, 32)} />
             <div>
               <div class="font-semibold text-sm">{moon.phaseNameAr}</div>
               <div class="text-xs text-[var(--text-muted)]">الإضاءة <span class="latin">{Math.round(moon.illumination * 100)}%</span> · عمر القمر <span class="latin">{moon.age.toFixed(1)}</span> يوم</div>
@@ -677,7 +678,7 @@ const pageJsonLd = [
         </section>
 
         <section class="card p-5" aria-labelledby="prayer-title">
-          <h2 id="prayer-title" class="font-semibold">🕌 أوقات الصلاة</h2>
+          <h2 id="prayer-title" class="font-semibold inline-flex items-center gap-2"><span class="text-[var(--text-muted)]"><Icon name="clock" size={18} /></span> أوقات الصلاة</h2>
           <dl class="mt-3 grid grid-cols-3 gap-2 text-sm">
             {Object.entries(prayers).map(([name, time]) => (
               <div class="info-tile text-center"><dt>{prayerLabels[name]}</dt><dd class="latin">{time}</dd></div>
@@ -691,14 +692,14 @@ const pageJsonLd = [
         <section class="card p-5 no-print" aria-labelledby="share-title">
           <h2 id="share-title" class="font-semibold">شارك الصفحة</h2>
           <div class="mt-3 grid grid-cols-3 gap-2 text-sm">
-            <a href={`https://wa.me/?text=${encodeURIComponent(shareText)}%20${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener" class="share-btn">💬 واتساب</a>
-            <button type="button" class="share-btn" id="copy-link" data-url={pageUrl}>🔗 نسخ الرابط</button>
-            <button type="button" class="share-btn" onclick="window.print()">🖨️ طباعة</button>
+            <a href={`https://wa.me/?text=${encodeURIComponent(shareText)}%20${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener" class="share-btn"><Icon name="message" size={15} /> واتساب</a>
+            <button type="button" class="share-btn" id="copy-link" data-url={pageUrl}><Icon name="link" size={15} /> <span data-copy-label>نسخ الرابط</span></button>
+            <button type="button" class="share-btn" onclick="window.print()"><Icon name="printer" size={15} /> طباعة</button>
           </div>
         </section>
 
         <section class="card p-5 text-xs text-[var(--text-muted)] leading-relaxed">
-          <p>⚠️ تقديرات فلكية، لا تُستخدم للملاحة. الارتفاعات فوق أدنى جزر فلكي (<span class="latin">LAT</span>)، وهو صفر جداول المد الرسمية، ومتوسط سطح البحر هنا على <span class="latin">{datumCm}</span> سم فوقه. <a href={`${BASE}disclaimer`} class="text-[var(--accent-text)] underline">إخلاء المسؤولية</a> · <a href={`${BASE}methodology`} class="text-[var(--accent-text)] underline">كيف تعمل الحسابات؟</a></p>
+          <p><span class="inline-block align-[-3px] text-amber-600 me-1"><Icon name="alert" size={15} /></span>تقديرات فلكية، لا تُستخدم للملاحة. الارتفاعات فوق أدنى جزر فلكي (<span class="latin">LAT</span>)، وهو صفر جداول المد الرسمية، ومتوسط سطح البحر هنا على <span class="latin">{datumCm}</span> سم فوقه. <a href={`${BASE}disclaimer`} class="text-[var(--accent-text)] underline">إخلاء المسؤولية</a> · <a href={`${BASE}methodology`} class="text-[var(--accent-text)] underline">كيف تعمل الحسابات؟</a></p>
           <p class="mt-2 latin" lang="en">{port.source}</p>
           <details class="mt-3">
             <summary class="cursor-pointer select-none hover:text-[var(--text-primary)]">المركبات التوافقية (<span class="latin">{waves.length}</span>)</summary>
@@ -738,7 +739,6 @@ const pageJsonLd = [
       try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
       function paint(on) {
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
-        b.querySelector('[data-star]').textContent = on ? '★' : '☆';
         b.querySelector('[data-label]').textContent = on ? 'ميناءي' : 'اجعله ميناءي';
       }
       paint(!!saved && saved.id === b.dataset.id);
@@ -816,8 +816,8 @@ const pageJsonLd = [
       if (!btn || !navigator.clipboard) return;
       btn.addEventListener('click', function () {
         navigator.clipboard.writeText(btn.dataset.url).then(function () {
-          var old = btn.textContent; btn.textContent = '✓ تم النسخ';
-          setTimeout(function () { btn.textContent = old; }, 1800);
+          var l = btn.querySelector('[data-copy-label]'), old = l.textContent; l.textContent = 'تم النسخ';
+          setTimeout(function () { l.textContent = old; }, 1800);
         });
       });
     })();

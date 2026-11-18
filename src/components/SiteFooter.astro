@@ -1,5 +1,6 @@
 ---
 import buildInfo from '../build.json';
+import Icon from './Icon.astro';
 import { arabPlaces, worldPlaces } from '../lib/regions';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
@@ -24,7 +25,7 @@ const popular = [
         مواقيت المد والجزر، أطوار القمر، أوقات الصيد والصلاة لـ<span class="latin">{arabPlaces.length}</span> ميناءً من المحيط الأطلسي إلى الخليج العربي، و<span class="latin">{worldPlaces.length}</span> مكاناً حول العالم بالعربية.
       </p>
       <p class="mt-4 text-xs text-slate-400 leading-relaxed max-w-sm">
-        ⚠️ حسابات فلكية تقديرية، لا تُستخدم للملاحة.
+        <span class="inline-block align-[-3px] text-amber-400 me-1"><Icon name="alert" size={15} /></span>حسابات فلكية تقديرية، لا تُستخدم للملاحة.
       </p>
       <a href="https://www.instagram.com/arabtides/" rel="me noopener" target="_blank" class="footer-link mt-4 inline-flex items-center gap-2">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
@@ -42,8 +43,8 @@ const popular = [
     <div>
       <h2 class="footer-heading">الموقع</h2>
       <ul class="space-y-2">
-        <li><a href={`${BASE}calendar`} class="footer-link">📅 تقويم الصيد <span class="latin">2027</span></a></li>
-        <li><a href={`${BASE}guide`} class="footer-link">📘 دليل الصياد</a></li>
+        <li><a href={`${BASE}calendar`} class="footer-link">تقويم الصيد <span class="latin">2027</span></a></li>
+        <li><a href={`${BASE}guide`} class="footer-link">دليل الصياد</a></li>
         <li><a href={`${BASE}fish`} class="footer-link">دليل الأسماك</a></li>
         <li><a href={`${BASE}articles`} class="footer-link">مقالات</a></li>
         <li><a href={`${BASE}moon`} class="footer-link">تقويم القمر</a></li>

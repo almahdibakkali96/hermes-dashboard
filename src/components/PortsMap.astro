@@ -85,7 +85,7 @@ const cfg = { ports, regions, base: BASE, size: [PROJ.W, PROJ.H] };
       <button type="button" class="pmap-tab" data-region="all" aria-pressed="true">العالم العربي</button>
       {seaOrder.map(s => <button type="button" class="pmap-tab" data-region={s} aria-pressed="false" style={`--sea:${seas[s].color}`}>{tabNames[s]}</button>)}
       <span class="pmap-sep" aria-hidden="true"></span>
-      <button type="button" class="pmap-tab" data-region="world" aria-pressed="false">🌍 العالم كله</button>
+      <button type="button" class="pmap-tab" data-region="world" aria-pressed="false">العالم كله</button>
       {zoneOrder.map(z => <button type="button" class="pmap-tab" data-region={z} aria-pressed="false">{zoneNames[z]}</button>)}
     </div>
     <div class="pmap-modes" role="group" aria-label="ماذا تعرض النقاط">

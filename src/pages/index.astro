@@ -2,7 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 // Arab ports drive the homepage lists and counts; world places get their own section (src/lib/regions.ts)
 import { arabPlaces as placesIndex, allPlaces, worldPlaces, zoneOf, zoneNames, type Zone } from '../lib/regions';
-import { moonPhase } from '../lib/astronomy';
+import { moonIcon, moonPhase } from '../lib/astronomy';
+import Icon, { type IconName } from '../components/Icon.astro';
+import { BOARD, boardShape, localDayStart, type Ex } from '../lib/heroBoard';
 import { countryName } from '../lib/countries';
 import { altNamesAr, frenchName } from '../lib/portNames';
 import { articles } from '../lib/articles';
@@ -66,6 +68,17 @@ const weekRows = await Promise.all(seaPorts.map(async ([sea, pid]) => {
 }));
 
 const moon = moonPhase(new Date());
+
+// Hero tide board: the default port (the visitor's saved port replaces it in the browser, src/scripts/hero-board.ts)
+const BOARD_PORT = 'dubai';
+const boardData = await (async () => {
+  const p = (await import(`../data/places/${BOARD_PORT}.json`)).default;
+  const now = new Date(), tz = getTimezoneOffset(p.timezone, now), day = portDay(now, tz);
+  const ex: Ex[] = [-1, 0, 1, 2].flatMap(k => dayExtremes(p.constituents, new Date(day.getTime() + k * 86400000), tz))
+    .map(e => [e.time.getTime(), e.type === 'high' ? 1 : 0, formatTime(e.time, tz), Math.round(e.height)] as Ex);
+  return { id: p.id, name: p.name_ar, country: countryName(p.country), offset: tz, ex };
+})();
+const board0 = boardShape(boardData.ex, localDayStart(Date.now(), boardData.offset));
 // Headline date in Makkah time (UTC+3), the middle of the ports' UTC+0…+4 span
 const todayAr = new Date().toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'Asia/Riyadh', weekday: 'long', day: 'numeric', month: 'long' });
 
@@ -77,11 +90,11 @@ const searchPorts = allPlaces.map((p: { id: string; name_ar: string; name_en: st
 }));
 const searchPortsJSON = JSON.stringify(searchPorts);
 
-const features = [
-  { icon: '🌊', title: 'منحنى المد والجزر', text: 'منحنى يومي لارتفاع الماء مع أوقات المد العالي والجزر المنخفض وتوقعات ٧ أيام.' },
-  { icon: '🎣', title: 'أوقات الصيد', text: 'تقييم يومي من ١ إلى ٥ وفترات السولونار الكبرى والصغرى وتقويم شهري لأفضل الأيام.' },
-  { icon: '🌙', title: 'الشمس والقمر', text: 'شروق وغروب الشمس والقمر، طور القمر ونسبة إضاءته.' },
-  { icon: '🕌', title: 'الصلاة والتاريخ الهجري', text: 'أوقات الصلاة بطريقة أم القرى والتاريخ الهجري التقديري.' },
+const features: { icon: IconName; title: string; text: string }[] = [
+  { icon: 'waves', title: 'منحنى المد والجزر', text: 'ارتفاع الماء ساعة بساعة، وأوقات المد العالي والجزر المنخفض لسبعة أيام وأي يوم من هذا الشهر والشهر القادم' },
+  { icon: 'fish', title: 'أوقات الصيد', text: 'تقييم كل يوم من 1 إلى 5، والفترات الرئيسية والثانوية (السولونار)، وتقويم الشهر بأفضل أيامه' },
+  { icon: 'moon', title: 'الشمس والقمر', text: 'الشروق والغروب، وشروق القمر وغروبه، وطوره ونسبة إضاءته' },
+  { icon: 'clock', title: 'الصلاة والتاريخ الهجري', text: 'مواقيت الصلاة بطريقة أم القرى، والتاريخ الهجري التقديري' },
 ];
 ---
 
@@ -91,9 +104,10 @@ const features = [
 >
   <!-- Hero -->
   <section class="hero">
-    <div class="max-w-6xl mx-auto px-4 pt-14 pb-24 sm:pt-20 sm:pb-28">
+    <div class="max-w-6xl mx-auto px-4 pt-12 pb-24 sm:pt-16 sm:pb-28 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,25rem)] gap-x-12 gap-y-8 items-center">
+      <div class="min-w-0">
       <p class="inline-flex items-center gap-2 text-xs text-teal-100 bg-white/10 border border-white/15 rounded-full px-3 py-1">
-        <span aria-hidden="true">{moon.emoji}</span>
+        <span class="inline-flex" aria-hidden="true" set:html={moonIcon(moon.phase, 14)} />
         <span>{todayAr}</span>
         <span class="opacity-50">·</span>
         <span>{moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
@@ -131,7 +145,7 @@ const features = [
 
       <div class="mt-4 flex flex-wrap items-center gap-2 text-sm">
         <!-- The visitor's location stays in the browser: it only picks the nearest ports from the list below -->
-        <button type="button" id="near-me" class="near-me-btn"><span aria-hidden="true">📍</span> <span data-l>أقرب ميناء إليّ</span></button>
+        <button type="button" id="near-me" class="near-me-btn"><Icon name="locate" size={14} /> <span data-l>أقرب ميناء إليّ</span></button>
         <!-- Returning visitors see the ports they opened last instead (filled from localStorage) -->
         <span class="text-slate-400 text-xs" id="quick-label">الأكثر بحثاً:</span>
         <span id="quick-chips" class="contents">
@@ -141,18 +155,27 @@ const features = [
         </span>
       </div>
 
-      <!-- The port saved with "اجعله ميناءي" on a port page: shown here with its next tides -->
-      <a id="my-port-card" href={`${BASE}#ports`} class="my-port-card max-w-xl" hidden>
-        <span class="text-2xl text-amber-200" aria-hidden="true">★</span>
-        <span class="min-w-0">
-          <span class="block text-xs text-slate-300">ميناؤك</span>
-          <span class="block text-lg font-semibold display truncate" data-name></span>
-        </span>
-        <span class="ms-auto text-sm text-end leading-relaxed">
-          <span class="block">▲ <span class="latin font-semibold text-teal-300" data-h>—</span></span>
-          <span class="block">▼ <span class="latin font-semibold text-rose-300" data-l>—</span></span>
-        </span>
-      </a>
+      </div>
+
+      <!-- Tide board: the water at one port right now (the visitor's saved port, else the default), drawn by
+           src/scripts/hero-board.ts; the build draws the default port so the hero never jumps -->
+      <div class="tide-board" data-hero-board data-base={BASE}>
+        <div class="tb-head">
+          <div class="min-w-0">
+            <p class="tb-label" data-label>الآن في</p>
+            <a class="tb-name display" data-name href={`${BASE}ports/${boardData.id}`}>{boardData.name}</a>
+          </div>
+          <span class="tb-country" data-country>{boardData.country}</span>
+        </div>
+        <p class="tb-now" data-now>&nbsp;</p>
+        <svg class="tb-chart" data-chart viewBox={`0 0 ${BOARD.W} ${BOARD.H}`} preserveAspectRatio="none" role="img" aria-label="منحنى ارتفاع الماء اليوم">
+          <path class="tb-area" d={board0.area} /><path class="tb-line" d={board0.line} />
+          {board0.marks.map(k => <g class={k.high ? 'tb-hi' : 'tb-lo'}><circle cx={k.x} cy={k.y} r="3.5" /><text x={Math.min(BOARD.W - 18, Math.max(18, k.x))} y={k.high ? k.y - 9 : k.y + 17} text-anchor="middle">{k.time}</text></g>)}
+        </svg>
+        <div class="tb-axis latin" aria-hidden="true"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+        <a class="tb-go" data-go href={`${BASE}ports/${boardData.id}`}>جدول {boardData.name} كاملاً ←</a>
+        <script type="application/json" set:html={JSON.stringify(boardData)} />
+      </div>
     </div>
     <svg class="hero-waves" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0 40c120-20 240-30 360-18s240 40 360 36 240-34 360-38 240 18 360 26v26H0z" fill="currentColor" />
@@ -256,7 +279,7 @@ const features = [
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {features.map(f => (
           <div class="card p-4 flex gap-3 items-start">
-            <div class="w-10 h-10 shrink-0 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-xl" aria-hidden="true">{f.icon}</div>
+            <div class="w-9 h-9 shrink-0 rounded-lg bg-[var(--accent-muted)] text-[var(--accent-text)] flex items-center justify-center"><Icon name={f.icon} size={18} /></div>
             <div>
               <h3 class="font-semibold">{f.title}</h3>
               <p class="mt-0.5 text-sm text-[var(--text-secondary)] leading-relaxed">{f.text}</p>
@@ -283,7 +306,6 @@ const features = [
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {articles.slice(0, 6).map((a, i) => (
           <a href={`${BASE}articles/${a.slug}`} class:list={['card p-5 gap-4 items-start group', i < 4 ? 'flex' : 'hidden md:flex']}>
-            <span class="w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center text-2xl" style="background:linear-gradient(160deg,#0b2540,#0f3d5c)" aria-hidden="true">{a.icon}</span>
             <span>
               <span class="block font-semibold leading-snug group-hover:text-[var(--accent-text)] transition-colors">{a.title}</span>
               <span class="block text-sm text-[var(--text-muted)] mt-1 leading-relaxed">{a.summary}</span>
@@ -343,7 +365,7 @@ const features = [
         <p><span class="latin">{placesIndex.length}</span> ميناءً وشاطئاً عربياً</p>
       </div>
       <details class="all-ports card" id="all-ports">
-        <summary class="all-ports-toggle">عرض الموانئ الـ<span class="latin">{placesIndex.length}</span> حسب الدولة</summary>
+        <summary class="all-ports-toggle"><span>عرض الموانئ الـ<span class="latin">{placesIndex.length}</span> حسب الدولة</span></summary>
         <div class="p-5 sm:p-6 columns-1 sm:columns-2 lg:columns-3 gap-8">
         {countries.map((code: string) => (
           <div class="break-inside-avoid mb-5">
@@ -369,6 +391,10 @@ const features = [
 
 <LiveTides />
 
+<script>
+  import '../scripts/hero-board';
+</script>
+
 <script is:inline define:vars={{ base: BASE }}>
   (function () {
     // Wide screens show the full port list open; a link to #ports opens it on phones too
@@ -377,24 +403,7 @@ const features = [
     if (all && window.matchMedia('(min-width: 640px)').matches) all.open = true;
     openList(); window.addEventListener('hashchange', openList);
 
-    var card = document.getElementById('my-port-card'), saved = null;
-    try { saved = JSON.parse(localStorage.getItem('arabtides.myPort') || 'null'); } catch (e) {}
-    if (!card || !saved || !/^[a-z0-9-]+$/.test(saved.id || '')) return;
-    card.href = base + 'ports/' + saved.id;
-    card.querySelector('[data-name]').textContent = saved.name || saved.id;
-    card.hidden = false;
-    fetch(base + 'ports/' + saved.id + '.json').then(function (r) { return r.json(); }).then(function (j) {
-      var now = Date.now(), tides = [];
-      j.days.forEach(function (d) { tides = tides.concat(d.tides); });
-      ['high', 'low'].forEach(function (type) {
-        for (var i = 0; i < tides.length; i++) {
-          if (tides[i].type === type && Date.parse(tides[i].time_utc) > now) {
-            card.querySelector(type === 'high' ? '[data-h]' : '[data-l]').textContent = tides[i].time_local;
-            return;
-          }
-        }
-      });
-    }).catch(function () {});
+    // The visitor's saved port is shown on the hero's tide board (src/scripts/hero-board.ts)
   })();
 </script>
 

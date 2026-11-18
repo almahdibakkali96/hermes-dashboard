@@ -8,7 +8,7 @@
  * Config comes from <script type="application/json" id="port-engine"> on the page.
  */
 import { generateTideCurve, dayExtremes, formatTime, predictHeight, tideCoefficient, coefficientLabelAr, type Constituent, type TidePoint, type TideExtreme } from '../lib/tides';
-import { moonPhase, sunTimes, moonTimes, solunarPeriods } from '../lib/astronomy';
+import { moonIcon, moonPhase, sunTimes, moonTimes, solunarPeriods } from '../lib/astronomy';
 import { monthDays, maxRangeOf, calcFish, fishColors, fishLabels, type RangeDay } from '../lib/fishing';
 
 interface Cfg {
@@ -147,7 +147,7 @@ function init() {
     let s = `<span class="rating-badge rating-sm" style="--rating:${fishColors[r]}" role="img" aria-label="تقييم الصيد ${r} من 5، ${fishLabels[r]}"><span class="rating-num latin" aria-hidden="true">${r}<span class="rating-of">/5</span></span><span class="rating-word" aria-hidden="true">${fishLabels[r]}</span></span>`;
     if (d.majors.length) s += `<span class="day-fact">🎣 أفضل وقت ${d.majors.map(p => latin(`${p.start}–${p.end}`)).join(' و')}</span>`;
     s += `<span class="day-fact">الشروق ${latin(d.sun.sunrise ?? '—')} · الغروب ${latin(d.sun.sunset ?? '—')}</span>`;
-    s += `<span class="day-fact">${d.moon.emoji} ${d.moon.phaseNameAr} ${latin(Math.round(d.moon.illumination * 100) + '%')}</span>`;
+    s += `<span class="day-fact">${moonIcon(d.moon.phase, 14)} ${d.moon.phaseNameAr} ${latin(Math.round(d.moon.illumination * 100) + '%')}</span>`;
     if (d.coef !== null) s += `<span class="day-fact">معامل المد ${latin(d.coef)} · ${coefficientLabelAr(d.coef)}</span>`;
     return s;
   }

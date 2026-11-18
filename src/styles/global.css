@@ -79,7 +79,7 @@ body {
   font-weight: 700;
   letter-spacing: 0;
 }
-.display-heavy { font-weight: 800; }
+.display-heavy { font-weight: 700; }
 
 /* Homepage port tiles: name, today's curve, next high and low */
 .port-tile { display: flex; flex-direction: column; gap: 0.5rem; padding: 0.85rem 0.9rem; min-width: 0; }
@@ -245,10 +245,39 @@ body {
 .hero {
   position: relative;
   color: #fff;
-  background:
-    radial-gradient(1200px 400px at 85% -10%, rgba(45, 212, 191, 0.25), transparent 60%),
-    linear-gradient(160deg, #0b2540 0%, #0f3d5c 55%, #0d5c63 100%);
+  /* One navy, a little deeper toward the water line (no hue shift, no glow) */
+  background: linear-gradient(180deg, #0b2540 0%, #0f3150 100%);
 }
+/* Homepage hero tide board (src/lib/heroBoard.ts, src/scripts/hero-board.ts) */
+.tide-board {
+  position: relative; padding: 1.25rem; border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tb-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 0.75rem; }
+.tb-label { font-size: 0.8125rem; color: #94a3b8; }
+.tb-name { display: block; font-size: 1.5rem; line-height: 1.35; color: #fff; }
+.tb-name:hover { color: #99f6e4; }
+.tb-country { font-size: 0.8125rem; color: #94a3b8; padding-bottom: 0.3rem; }
+.tb-now { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.5rem; margin-top: 0.75rem; min-height: 1.75rem; font-size: 0.875rem; color: #cbd5e1; }
+.tb-now i { font-style: normal; display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; border-radius: 50%; font-size: 0.8rem; font-weight: 700; color: #0b2540; align-self: center; }
+.tb-now b { font-weight: 600; }
+.tb-now.is-rising i { background: #2dd4bf; } .tb-now.is-rising b { color: #5eead4; }
+.tb-now.is-falling i { background: #fb7185; } .tb-now.is-falling b { color: #fda4af; }
+.tb-chart { display: block; width: 100%; height: 8.5rem; margin-top: 0.75rem; overflow: visible; direction: ltr; }
+.tb-area { fill: rgba(45, 212, 191, 0.12); }
+.tb-line { fill: none; stroke: #5eead4; stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.tb-nowline { stroke: rgba(253, 230, 138, 0.55); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.tb-nowdot { stroke: #0b2540; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.tb-nowdot.is-rising { fill: #2dd4bf; } .tb-nowdot.is-falling { fill: #fb7185; }
+.tb-hi circle { fill: #5eead4; } .tb-lo circle { fill: #fb7185; }
+.tb-chart text { font-family: var(--font-latin); font-size: 11px; font-weight: 600; fill: #e2e8f0; font-variant-numeric: tabular-nums; }
+.tb-axis { display: flex; justify-content: space-between; direction: ltr; margin-top: 0.5rem; font-size: 0.6875rem; color: #64748b; font-variant-numeric: tabular-nums; }
+.tb-go { display: inline-block; margin-top: 1rem; font-size: 0.875rem; font-weight: 600; color: #5eead4; }
+.tb-go:hover { color: #99f6e4; }
+.icon { display: inline-block; flex-shrink: 0; vertical-align: -0.15em; }
+.moon-icon { display: inline-block; flex-shrink: 0; vertical-align: -0.15em; }
+/* "اجعله ميناءي": the star fills once the port is saved */
+.hero-action[aria-pressed="true"] [data-star] svg { fill: currentColor; }
 .hero-waves {
   position: absolute;
   inset-inline: 0;
@@ -328,7 +357,7 @@ body {
   color: var(--text-primary);
 }
 /* A short teal bar before each section heading (V2) */
-.section-title h2::before { content: ''; flex-shrink: 0; width: 0.3rem; height: 1.05em; border-radius: 9999px; background: linear-gradient(180deg, #2dd4bf, #0d9488); }
+.section-title h2::before { content: ''; flex-shrink: 0; width: 0.3rem; height: 1.05em; border-radius: 9999px; background: #14b8a6; }
 .section-title p { font-size: 0.8rem; color: var(--text-muted); }
 .section-title > a { white-space: nowrap; }
 @media (max-width: 639px) {
@@ -615,7 +644,7 @@ button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
 .guide-card .btn-primary:hover { background: var(--accent-hover); }
 .guide-banner {
   color: #fff; border-radius: 1.5rem; padding: 2rem;
-  background: radial-gradient(600px 300px at 90% 0%, rgba(45,212,191,.22), transparent 60%), linear-gradient(160deg, #0b2540, #0f3d5c 60%, #0d5c63);
+  background: linear-gradient(180deg, #0b2540, #0f3150);
 }
 .guide-cover img { border-radius: 0.6rem; box-shadow: 0 18px 40px -12px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); transform: rotate(-2deg); transition: transform .2s ease; }
 .guide-cover:hover img { transform: rotate(0deg) scale(1.02); }
