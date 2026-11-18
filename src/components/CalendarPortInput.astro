@@ -1,0 +1,13 @@
+---
+// The port field for the 2027 calendar: plain free text, stored exactly as typed (how people write their port also
+// shows how serious the interest is). The page script quietly shows a port's numbers when the text matches one of ours.
+interface Props { id: string; label: string }
+const { id, label } = Astro.props;
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+---
+
+<label class="signup-label" for={id}>{label}</label>
+<div class="cal-port-field">
+  <img class="cal-port-flag" src={`${BASE}flags/ae.svg`} alt="" width="28" height="21" hidden />
+  <input id={id} name="port" type="text" required maxlength="60" autocomplete="off" placeholder="اكتب اسم ميناءك" class="cal-select" data-cal-port />
+</div>

@@ -4,9 +4,10 @@
 // the "your port in 2027" numbers, the buy link and the sign-up all follow that choice.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SignupForm from '../../components/SignupForm.astro';
-import CalendarPortSelect from '../../components/CalendarPortSelect.astro';
+import CalendarPortInput from '../../components/CalendarPortInput.astro';
 import placesIndex from '../../data/places/places_index.json';
 import { CAL, CAL_SALES_OPEN, calendarBuyUrl, monthsAr, yearSummary } from '../../lib/calendar';
+import { altNamesAr, frenchName } from '../../lib/portNames';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const img = (f: string) => `${BASE}calendar/${f}`;
@@ -23,6 +24,9 @@ for (const p of places) {
   stats[p.id] = [p.name_ar, p.country.toLowerCase(), s.yearMax, s.maxMonth, s.n5, s.n4, s.bestMonth, s.tideType, s.microTidal];
 }
 const ex = stats[EXAMPLE_PORT];
+// Names a visitor may type for each port (Arabic, local spellings, English, French), matched client-side
+const aliases: Record<string, string[]> = Object.fromEntries(places.map(p => [p.id,
+  [p.name_ar, ...altNamesAr(p.id, p.name_ar), p.name_en.replace(/\s*\(.*\)$/, ''), frenchName(p.id) || ''].filter(Boolean)]));
 const metres = (cm: number) => (cm / 100).toFixed(2);
 
 // Sales mode: launch link until the full moon, then the full-price link (switched client-side at the exact minute)
@@ -60,7 +64,7 @@ const faq = [
   ...(CAL_SALES_OPEN ? [
     { q: 'كيف أدفع ومتى يصلني؟', a: 'الدفع آمن على صفحة Stripe بالبطاقة أو Apple Pay أو Google Pay. بعد الدفع مباشرة تعود إلى صفحة شكر على موقعنا فيها زر تحميل تقويم ميناءك (PDF)، ويصلك إيصال الدفع على بريدك.' },
   ] : [
-    { q: 'لماذا أختار ميناءً عند التسجيل؟', a: 'لكل ميناء تقويمه الخاص: أوقات مدّه وارتفاعاته وأفضل أيامه تختلف عن غيره. نسجّل ميناءك لنرسل لك يوم الإطلاق رابط تقويمه هو. وإن أردت أكثر من ميناء، سجّل مرة لكل ميناء.' },
+    { q: 'لماذا أكتب ميناءً عند التسجيل؟', a: 'لكل ميناء تقويمه الخاص: أوقات مدّه وارتفاعاته وأفضل أيامه تختلف عن غيره. نسجّل ميناءك لنرسل لك يوم الإطلاق رابط تقويمه هو. وإن أردت أكثر من ميناء، سجّل مرة لكل ميناء.' },
     { q: 'هل التسجيل التزام بالشراء؟', a: 'لا. التسجيل مجاني ولا يلزمك بشيء. تصلك رسالة يوم الإطلاق بسعر الإطلاق، وتقرر حينها.' },
     { q: 'متى يصدر؟', a: 'قريباً جداً. المسجّلون في قائمة الانتظار يعرفون أولاً، ويصلهم سعر الإطلاق قبل الجميع بيوم.' },
   ]),
@@ -110,14 +114,14 @@ const jsonLd = [
         <div class="mt-5">
           {CAL_SALES_OPEN ? (
             <div id="buy">
-              <CalendarPortSelect id="cal-port" label="اختر ميناءك" />
+              <CalendarPortInput id="cal-port" label="ميناؤك" />
               <p class="cal-preview" data-preview hidden></p>
               <div class="mt-4 flex items-end justify-between gap-3" data-cal-price>
                 {CAL.launchPrice != null && CAL.launchLink && <span class="price-launch leading-none"><span class="latin text-4xl font-extrabold">{priceLabel(CAL.launchPrice)}</span>{CAL.price != null && <s class="latin ms-2 text-[var(--text-muted)]">{priceLabel(CAL.price)}</s>}<span class="block mt-1.5 text-xs text-amber-700">سعر الإطلاق حتى ليلة البدر</span></span>}
                 {CAL.price != null && CAL.link && <span class="price-full leading-none" hidden={Boolean(CAL.launchLink)}><span class="latin text-4xl font-extrabold">{priceLabel(CAL.price)}</span><span class="block mt-1.5 text-xs text-[var(--text-muted)]">دفعة واحدة · بلا اشتراك</span></span>}
               </div>
               <a href={launchUrl || fullUrl} data-launch={launchUrl} data-full={fullUrl} class="signup-btn cal-buy mt-4 w-full flex justify-center" rel="noopener" aria-disabled="true"><span>اشترِ تقويم <span class="cal-port-name">ميناءك</span></span></a>
-              <p class="signup-error" data-buy-error role="alert" hidden>اختر ميناءك أولاً.</p>
+              <p class="signup-error" data-buy-error role="alert" hidden>اكتب اسم ميناءك أولاً.</p>
               <p class="signup-note">🔒 دفع آمن عبر <span class="latin">Stripe</span> · تحميل فوري بعد الدفع</p>
             </div>
           ) : (
@@ -126,7 +130,7 @@ const jsonLd = [
               done="✓ سجّلناك! سنراسلك يوم إطلاق تقويم {port}، بسعر الإطلاق قبل الجميع بيوم."
               note="رسالة يوم الإطلاق فقط، ولا رسائل مزعجة. التسجيل مجاني ولا يلزمك بالشراء.">
               <Fragment slot="fields">
-                <CalendarPortSelect id="cal-port" label="اختر ميناءك" />
+                <CalendarPortInput id="cal-port" label="ميناؤك" />
                 <p class="cal-preview" data-preview hidden></p>
               </Fragment>
             </SignupForm>
@@ -255,7 +259,7 @@ const jsonLd = [
     <p class="text-sm text-center mt-2 text-slate-200"></p>
   </dialog>
 
-  <script type="application/json" id="cal-data" set:html={JSON.stringify({ stats, months: monthsAr, base: BASE, flags: `${BASE}flags/`, end: CAL.launchPriceEnd, ref: CAL.id, example: EXAMPLE_PORT })} />
+  <script type="application/json" id="cal-data" set:html={JSON.stringify({ stats, months: monthsAr, base: BASE, flags: `${BASE}flags/`, end: CAL.launchPriceEnd, ref: CAL.id, example: EXAMPLE_PORT, aliases })} />
   <script is:inline>
     (function () {
       var D = JSON.parse(document.getElementById('cal-data').textContent);
@@ -278,12 +282,29 @@ const jsonLd = [
         k('micro').hidden = !s[8];
       }
 
+      // Typed text → port id: ignore hamza/ta marbuta/alif maqsura spellings, tashkeel, a leading "ميناء", case and spaces
+      var norm = function (t) {
+        return String(t || '').toLowerCase().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
+          .replace(/^\s*(ميناء|مرسى|port of|port)\s+/, '').replace(/[^a-z0-9؀-ۿ]+/g, '');
+      };
+      var lookup = {};
+      Object.keys(D.aliases).forEach(function (id) { D.aliases[id].forEach(function (n) { var k = norm(n); if (k && !lookup[k]) lookup[k] = id; }); });
+      var match = function (t) { return lookup[norm(t)] || ''; };
+
       function choose(id, fromUser) {
         var s = id && D.stats[id];
         var flag = document.querySelector('.cal-port-flag'), preview = document.querySelector('[data-preview]');
         if (!s) {
           if (flag) flag.hidden = true;
           if (preview) preview.hidden = true;
+          all('.cal-buy').forEach(function (a) { a.setAttribute('aria-disabled', 'true'); });
+          // Back to the example (Dubai) in the numbers section, and "ميناءك" in the buttons
+          all('.cal-port-name').forEach(function (el) { el.textContent = el.hasAttribute('data-example-name') ? D.stats[D.example][0] : 'ميناءك'; });
+          all('.cal-port-for').forEach(function (el) { el.textContent = 'لميناءك'; });
+          all('[data-example-note]').forEach(function (el) { el.hidden = false; });
+          all('[data-chosen-note]').forEach(function (el) { el.hidden = true; });
+          all('.cal-port-link').forEach(function (el) { el.href = D.base + 'ports/' + D.example; });
+          stats(D.example);
           return;
         }
         if (flag) { flag.src = D.flags + s[1] + '.svg'; flag.hidden = false; }
@@ -317,7 +338,13 @@ const jsonLd = [
       var q = new URLSearchParams(location.search).get('port'), saved = null;
       try { saved = JSON.parse(localStorage.getItem('arabtides.myPort') || 'null'); } catch (e) {}
       var start = (q && D.stats[q]) ? q : (saved && D.stats[saved.id]) ? saved.id : '';
-      if (sel) { sel.value = start; choose(start); sel.addEventListener('change', function () { choose(sel.value, true); }); }
+      var chosen = start;
+      if (sel) {
+        if (start) sel.value = D.stats[start][0];
+        choose(start);
+        // Live while typing; the text itself is sent exactly as typed
+        sel.addEventListener('input', function () { var id = match(sel.value); if (id !== chosen) { chosen = id; choose(id, !!id); } });
+      }
 
       // Buttons that lead to the card focus the port picker (or the email once a port is chosen)
       all('[data-focus-port]').forEach(function (a) {
@@ -326,7 +353,7 @@ const jsonLd = [
           if (!card) return;
           e.preventDefault();
           card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          var target = sel && !sel.value ? sel : card.querySelector('input[name=email]') || sel;
+          var target = sel && !sel.value.trim() ? sel : card.querySelector('input[name=email]') || sel;
           if (target) setTimeout(function () { target.focus({ preventScroll: true }); }, 450);
         });
       });
@@ -334,7 +361,7 @@ const jsonLd = [
       // Sales mode: no Buy without a port
       all('.cal-buy').forEach(function (a) {
         a.addEventListener('click', function (e) {
-          if (sel && !sel.value) { e.preventDefault(); var err = document.querySelector('[data-buy-error]'); if (err) err.hidden = false; sel.focus(); }
+          if (sel && !match(sel.value)) { e.preventDefault(); var err = document.querySelector('[data-buy-error]'); if (err) err.hidden = false; sel.focus(); }
         });
       });
 
@@ -403,6 +430,7 @@ const jsonLd = [
   :global(.cal-preview) { margin-top: 0.6rem; padding: 0.55rem 0.8rem; border-radius: 0.7rem; background: #f0fdfa; border: 1px solid #99f6e4;
     font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); }
   :global(.cal-preview b) { color: var(--accent-text); }
+  :global(input.cal-select) { font-weight: 600; text-align: start; }
   :global(.cal-preview a) { color: var(--accent-text); text-decoration: underline; white-space: nowrap; }
   .cal-buy[aria-disabled="true"] { opacity: .75; }
 
