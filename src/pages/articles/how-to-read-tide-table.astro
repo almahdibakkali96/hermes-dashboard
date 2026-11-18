@@ -1,7 +1,7 @@
 ---
 import ArticleLayout from '../../components/ArticleLayout.astro';
 import { articleBySlug } from '../../lib/articles';
-import { yearStats } from '../../lib/seas';
+import { arabYearStats as yearStats } from '../../lib/seas';
 import { generateTideCurve, dayExtremes, getTimezoneOffset, formatTime, type Constituent } from '../../lib/tides';
 import { moonPhase } from '../../lib/astronomy';
 
@@ -98,8 +98,8 @@ const faq = [
     <path d="M0 170 C50 170 50 110 100 110 S150 210 200 210 S250 130 300 130" fill="none" stroke="#2dd4bf" stroke-width="7" stroke-linecap="round"/>
     <circle cx="100" cy="110" r="10" fill="#2dd4bf" stroke="#0b2540" stroke-width="4"/>
     <circle cx="200" cy="210" r="10" fill="#f43f5e" stroke="#0b2540" stroke-width="4"/>
-    <text x="100" y="92" fill="#5eead4" font-size="16" text-anchor="middle" font-family="Noto Naskh Arabic">مد عالٍ</text>
-    <text x="200" y="245" fill="#fda4af" font-size="16" text-anchor="middle" font-family="Noto Naskh Arabic">جزر منخفض</text>
+    <text x="100" y="92" fill="#5eead4" font-size="16" text-anchor="middle" font-family="IBM Plex Sans Arabic, sans-serif">مد عالٍ</text>
+    <text x="200" y="245" fill="#fda4af" font-size="16" text-anchor="middle" font-family="IBM Plex Sans Arabic, sans-serif">جزر منخفض</text>
   </svg>
 
   <h2 id="what">ما هو المد والجزر؟</h2>
@@ -116,7 +116,7 @@ const faq = [
         <path d={`${path} L${X(24)},${PT + ph} L${X(0)},${PT + ph} Z`} fill="url(#af)"/>
         <path d={path} fill="none" stroke="#0d9488" stroke-width="3"/>
         <line x1={X(topHi.hours)} x2={X(topHi.hours)} y1={Y(topHi.height)} y2={Y(botLo.height)} stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 4"/>
-        <text x={X(topHi.hours) + 8} y={(Y(topHi.height) + Y(botLo.height)) / 2} font-size="13" font-weight="700" fill="#b45309" font-family="Noto Naskh Arabic">المدى {range} سم</text>
+        <text x={X(topHi.hours) + 8} y={(Y(topHi.height) + Y(botLo.height)) / 2} font-size="13" font-weight="700" fill="#b45309" font-family="IBM Plex Sans Arabic, sans-serif">المدى {range} سم</text>
         {ex.map(e => (
           <>
             <circle cx={X(e.hours)} cy={Y(e.height)} r="6" fill={e.type === 'high' ? '#0d9488' : '#e11d48'} stroke="#fff" stroke-width="2"/>

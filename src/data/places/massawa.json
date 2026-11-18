@@ -1,0 +1,94 @@
+{
+ "id": "massawa",
+ "name_en": "Massawa",
+ "name_ar": "مصوع",
+ "country": "ER",
+ "lat": 15.61,
+ "lon": 39.45,
+ "timezone": "Africa/Asmara",
+ "grid": {
+  "lat": 15.625,
+  "lon": 39.5,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.16324,
+   "phase": -144.725
+  },
+  "J1": {
+   "amp": 0.51439,
+   "phase": -85.407
+  },
+  "K1": {
+   "amp": 2.45196,
+   "phase": 151.263
+  },
+  "K2": {
+   "amp": 3.42461,
+   "phase": -37.862
+  },
+  "M2": {
+   "amp": 36.10136,
+   "phase": -55.685
+  },
+  "M4": {
+   "amp": 0.35568,
+   "phase": 16.131
+  },
+  "MF": {
+   "amp": 1.67198,
+   "phase": 30.452
+  },
+  "MM": {
+   "amp": 0.69653,
+   "phase": -61.56
+  },
+  "N2": {
+   "amp": 11.37258,
+   "phase": -82.75
+  },
+  "O1": {
+   "amp": 1.90139,
+   "phase": 154.529
+  },
+  "P1": {
+   "amp": 0.35621,
+   "phase": 100.862
+  },
+  "Q1": {
+   "amp": 0.77191,
+   "phase": 156.29
+  },
+  "S1": {
+   "amp": 1.33828,
+   "phase": 26.239
+  },
+  "S2": {
+   "amp": 12.032,
+   "phase": -23.025
+  },
+  "SA": {
+   "amp": 6.42449,
+   "phase": 31.56
+  },
+  "SSA": {
+   "amp": 0.25109,
+   "phase": -54.42
+  },
+  "T2": {
+   "amp": 1.34298,
+   "phase": 7.583
+  },
+  "Z0": {
+   "amp": 70.6,
+   "phase": 0
+  }
+ }
+}

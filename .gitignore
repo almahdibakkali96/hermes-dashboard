@@ -29,3 +29,6 @@ hermes-dashboard
 
 # Paid products: keep out of the public repo
 products/
+
+# EOT20 tide model (2.2 GB source data, used by tools/tides/extract.py)
+ocean_tides/

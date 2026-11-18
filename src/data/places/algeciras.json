@@ -1,0 +1,94 @@
+{
+ "id": "algeciras",
+ "name_en": "Algeciras",
+ "name_ar": "الجزيرة الخضراء",
+ "country": "ES",
+ "lat": 36.13,
+ "lon": -5.44,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 36.125,
+  "lon": -5.375,
+  "distance_km": 5.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.89967,
+   "phase": 29.324
+  },
+  "J1": {
+   "amp": 0.09282,
+   "phase": -177.926
+  },
+  "K1": {
+   "amp": 2.24868,
+   "phase": 134.235
+  },
+  "K2": {
+   "amp": 3.1623,
+   "phase": 68.378
+  },
+  "M2": {
+   "amp": 30.36414,
+   "phase": 50.841
+  },
+  "M4": {
+   "amp": 1.99181,
+   "phase": 159.516
+  },
+  "MF": {
+   "amp": 0.30652,
+   "phase": 117.724
+  },
+  "MM": {
+   "amp": 0.48524,
+   "phase": -67.824
+  },
+  "N2": {
+   "amp": 6.53538,
+   "phase": 39.307
+  },
+  "O1": {
+   "amp": 1.17749,
+   "phase": 137.941
+  },
+  "P1": {
+   "amp": 0.78147,
+   "phase": 145.683
+  },
+  "Q1": {
+   "amp": 0.42865,
+   "phase": -96.888
+  },
+  "S1": {
+   "amp": 0.66525,
+   "phase": 18.884
+  },
+  "S2": {
+   "amp": 11.41834,
+   "phase": 77.946
+  },
+  "SA": {
+   "amp": 2.2243,
+   "phase": -65.897
+  },
+  "SSA": {
+   "amp": 0.18974,
+   "phase": -176.203
+  },
+  "T2": {
+   "amp": 0.5102,
+   "phase": 37.773
+  },
+  "Z0": {
+   "amp": 54.6,
+   "phase": 0
+  }
+ }
+}

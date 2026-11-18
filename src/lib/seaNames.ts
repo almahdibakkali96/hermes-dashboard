@@ -2,7 +2,7 @@
  * ArabTides — which sea each port is on (pure data, no imports; also used by Node scripts)
  */
 
-export type SeaId = 'atlantic' | 'med' | 'red' | 'gulf' | 'indian';
+export type SeaId = 'atlantic' | 'med' | 'red' | 'gulf' | 'indian' | 'world';
 
 export const seas: Record<SeaId, { name: string; color: string }> = {
   atlantic: { name: 'المحيط الأطلسي', color: '#0ea5e9' },
@@ -10,6 +10,7 @@ export const seas: Record<SeaId, { name: string; color: string }> = {
   red: { name: 'البحر الأحمر', color: '#f43f5e' },
   gulf: { name: 'الخليج العربي', color: '#0d9488' },
   indian: { name: 'بحر العرب وخليج عدن والمحيط الهندي', color: '#f59e0b' },
+  world: { name: 'خارج العالم العربي', color: '#64748b' }, // world places (src/lib/regions.ts): no fish list
 };
 
 export const portSea: Record<string, SeaId> = {

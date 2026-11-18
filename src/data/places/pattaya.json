@@ -1,0 +1,94 @@
+{
+ "id": "pattaya",
+ "name_en": "Pattaya",
+ "name_ar": "باتايا",
+ "country": "TH",
+ "lat": 12.93,
+ "lon": 100.87,
+ "timezone": "Asia/Bangkok",
+ "grid": {
+  "lat": 12.875,
+  "lon": 100.875,
+  "distance_km": 6.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.1893,
+   "phase": -137.421
+  },
+  "J1": {
+   "amp": 2.43153,
+   "phase": 97.814
+  },
+  "K1": {
+   "amp": 61.34113,
+   "phase": 53.894
+  },
+  "K2": {
+   "amp": 6.42048,
+   "phase": -22.497
+  },
+  "M2": {
+   "amp": 36.99688,
+   "phase": -73.603
+  },
+  "M4": {
+   "amp": 0.3558,
+   "phase": -146.587
+  },
+  "MF": {
+   "amp": 0.22841,
+   "phase": 16.347
+  },
+  "MM": {
+   "amp": 0.97266,
+   "phase": 23.153
+  },
+  "N2": {
+   "amp": 6.20112,
+   "phase": -104.976
+  },
+  "O1": {
+   "amp": 39.43475,
+   "phase": 13.689
+  },
+  "P1": {
+   "amp": 18.82117,
+   "phase": 52.779
+  },
+  "Q1": {
+   "amp": 8.3984,
+   "phase": -5.833
+  },
+  "S1": {
+   "amp": 1.70963,
+   "phase": -75.001
+  },
+  "S2": {
+   "amp": 18.31284,
+   "phase": -11.897
+  },
+  "SA": {
+   "amp": 10.31919,
+   "phase": 8.145
+  },
+  "SSA": {
+   "amp": 0.15885,
+   "phase": -64.432
+  },
+  "T2": {
+   "amp": 1.31226,
+   "phase": -41.039
+  },
+  "Z0": {
+   "amp": 196.6,
+   "phase": 0
+  }
+ }
+}

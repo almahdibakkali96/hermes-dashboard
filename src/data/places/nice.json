@@ -1,0 +1,94 @@
+{
+ "id": "nice",
+ "name_en": "Nice",
+ "name_ar": "نيس",
+ "country": "FR",
+ "lat": 43.69,
+ "lon": 7.27,
+ "timezone": "Europe/Paris",
+ "grid": {
+  "lat": 43.625,
+  "lon": 7.25,
+  "distance_km": 7.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.42409,
+   "phase": 179.257
+  },
+  "J1": {
+   "amp": 0.27743,
+   "phase": 138.467
+  },
+  "K1": {
+   "amp": 3.65569,
+   "phase": 174.906
+  },
+  "K2": {
+   "amp": 0.8974,
+   "phase": -126.286
+  },
+  "M2": {
+   "amp": 7.79975,
+   "phase": -140.718
+  },
+  "M4": {
+   "amp": 0.92643,
+   "phase": -31.632
+  },
+  "MF": {
+   "amp": 0.50827,
+   "phase": 166.604
+  },
+  "MM": {
+   "amp": 0.63106,
+   "phase": -110.654
+  },
+  "N2": {
+   "amp": 1.40096,
+   "phase": -153.584
+  },
+  "O1": {
+   "amp": 1.73786,
+   "phase": 106.74
+  },
+  "P1": {
+   "amp": 0.90754,
+   "phase": 175.095
+  },
+  "Q1": {
+   "amp": 0.15033,
+   "phase": -12.344
+  },
+  "S1": {
+   "amp": 0.98973,
+   "phase": 25.08
+  },
+  "S2": {
+   "amp": 2.74771,
+   "phase": -120.307
+  },
+  "SA": {
+   "amp": 2.8967,
+   "phase": -69.041
+  },
+  "SSA": {
+   "amp": 0.49362,
+   "phase": -171.752
+  },
+  "T2": {
+   "amp": 0.73387,
+   "phase": -79.972
+  },
+  "Z0": {
+   "amp": 18.6,
+   "phase": 0
+  }
+ }
+}

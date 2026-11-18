@@ -1,0 +1,94 @@
+{
+ "id": "male",
+ "name_en": "Malé",
+ "name_ar": "ماليه",
+ "country": "MV",
+ "lat": 4.175,
+ "lon": 73.509,
+ "timezone": "Indian/Maldives",
+ "grid": {
+  "lat": 4.125,
+  "lon": 73.5,
+  "distance_km": 5.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.05877,
+   "phase": -138.494
+  },
+  "J1": {
+   "amp": 0.83557,
+   "phase": 1.692
+  },
+  "K1": {
+   "amp": 11.78016,
+   "phase": -17.663
+  },
+  "K2": {
+   "amp": 3.94931,
+   "phase": -80.614
+  },
+  "M2": {
+   "amp": 24.1425,
+   "phase": -130.011
+  },
+  "M4": {
+   "amp": 0.1773,
+   "phase": -105.708
+  },
+  "MF": {
+   "amp": 1.50599,
+   "phase": 17.471
+  },
+  "MM": {
+   "amp": 0.87466,
+   "phase": -10.258
+  },
+  "N2": {
+   "amp": 3.46976,
+   "phase": -148.56
+  },
+  "O1": {
+   "amp": 6.02524,
+   "phase": -2.153
+  },
+  "P1": {
+   "amp": 3.69713,
+   "phase": -18.059
+  },
+  "Q1": {
+   "amp": 1.66931,
+   "phase": 5.047
+  },
+  "S1": {
+   "amp": 0.32918,
+   "phase": 79.287
+  },
+  "S2": {
+   "amp": 14.7879,
+   "phase": -86.344
+  },
+  "SA": {
+   "amp": 1.66536,
+   "phase": 114.019
+  },
+  "SSA": {
+   "amp": 0.83517,
+   "phase": -8.708
+  },
+  "T2": {
+   "amp": 0.54245,
+   "phase": -113.564
+  },
+  "Z0": {
+   "amp": 63.8,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "istanbul",
+ "name_en": "Istanbul",
+ "name_ar": "إسطنبول",
+ "country": "TR",
+ "lat": 41.01,
+ "lon": 28.98,
+ "timezone": "Europe/Istanbul",
+ "grid": {
+  "lat": 41,
+  "lon": 29,
+  "distance_km": 2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.30118,
+   "phase": -67.035
+  },
+  "J1": {
+   "amp": 0.30813,
+   "phase": 41.056
+  },
+  "K1": {
+   "amp": 1.68798,
+   "phase": 123.108
+  },
+  "K2": {
+   "amp": 0.214,
+   "phase": 59.732
+  },
+  "M2": {
+   "amp": 0.80595,
+   "phase": -112.332
+  },
+  "M4": {
+   "amp": 0.04812,
+   "phase": -53.739
+  },
+  "MF": {
+   "amp": 0.13683,
+   "phase": -86.521
+  },
+  "MM": {
+   "amp": 0.33205,
+   "phase": -120.284
+  },
+  "N2": {
+   "amp": 0.24791,
+   "phase": -22.307
+  },
+  "O1": {
+   "amp": 1.66895,
+   "phase": 105.736
+  },
+  "P1": {
+   "amp": 0.32934,
+   "phase": 107.941
+  },
+  "Q1": {
+   "amp": 0.12186,
+   "phase": 175.199
+  },
+  "S1": {
+   "amp": 0.73522,
+   "phase": -39.374
+  },
+  "S2": {
+   "amp": 0.82882,
+   "phase": 22.656
+  },
+  "SA": {
+   "amp": 0.49968,
+   "phase": -134.354
+  },
+  "SSA": {
+   "amp": 0.34559,
+   "phase": -135.656
+  },
+  "T2": {
+   "amp": 0.23823,
+   "phase": -40.269
+  },
+  "Z0": {
+   "amp": 5.7,
+   "phase": 0
+  }
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "trabzon",
+ "name_en": "Trabzon",
+ "name_ar": "طرابزون",
+ "country": "TR",
+ "lat": 41,
+ "lon": 39.73,
+ "timezone": "Europe/Istanbul",
+ "grid": {
+  "lat": 41,
+  "lon": 39.875,
+  "distance_km": 12.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.24425,
+   "phase": -16.526
+  },
+  "J1": {
+   "amp": 0.22319,
+   "phase": -176.141
+  },
+  "K1": {
+   "amp": 0.95726,
+   "phase": -122.695
+  },
+  "K2": {
+   "amp": 0.82817,
+   "phase": -179.343
+  },
+  "M2": {
+   "amp": 2.72584,
+   "phase": -146.06
+  },
+  "M4": {
+   "amp": 0.23355,
+   "phase": 43.261
+  },
+  "MF": {
+   "amp": 0.30523,
+   "phase": -54.279
+  },
+  "MM": {
+   "amp": 0.22622,
+   "phase": -56.368
+  },
+  "N2": {
+   "amp": 0.58469,
+   "phase": -124.422
+  },
+  "O1": {
+   "amp": 0.77096,
+   "phase": -115.671
+  },
+  "P1": {
+   "amp": 0.6447,
+   "phase": -60.183
+  },
+  "Q1": {
+   "amp": 0.33703,
+   "phase": 129.147
+  },
+  "S1": {
+   "amp": 0.44751,
+   "phase": -4.587
+  },
+  "S2": {
+   "amp": 1.53585,
+   "phase": -95.106
+  },
+  "SA": {
+   "amp": 1.24729,
+   "phase": 169.539
+  },
+  "SSA": {
+   "amp": 0.45004,
+   "phase": -117.468
+  },
+  "T2": {
+   "amp": 0.36601,
+   "phase": 65.233
+  },
+  "Z0": {
+   "amp": 7.8,
+   "phase": 0
+  }
+ }
+}

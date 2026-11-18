@@ -518,5 +518,295 @@
   "country": "KM",
   "lat": -11.7,
   "lon": 43.25
+ },
+ {
+  "id": "male",
+  "name_en": "Malé",
+  "name_ar": "ماليه",
+  "country": "MV",
+  "lat": 4.175,
+  "lon": 73.509,
+  "region": "world",
+  "timezone": "Indian/Maldives"
+ },
+ {
+  "id": "colombo",
+  "name_en": "Colombo",
+  "name_ar": "كولومبو",
+  "country": "LK",
+  "lat": 6.94,
+  "lon": 79.84,
+  "region": "world",
+  "timezone": "Asia/Colombo"
+ },
+ {
+  "id": "phuket",
+  "name_en": "Phuket (Patong)",
+  "name_ar": "بوكيت",
+  "country": "TH",
+  "lat": 7.89,
+  "lon": 98.29,
+  "region": "world",
+  "timezone": "Asia/Bangkok"
+ },
+ {
+  "id": "pattaya",
+  "name_en": "Pattaya",
+  "name_ar": "باتايا",
+  "country": "TH",
+  "lat": 12.93,
+  "lon": 100.87,
+  "region": "world",
+  "timezone": "Asia/Bangkok"
+ },
+ {
+  "id": "langkawi",
+  "name_en": "Langkawi",
+  "name_ar": "لنكاوي",
+  "country": "MY",
+  "lat": 6.35,
+  "lon": 99.8,
+  "region": "world",
+  "timezone": "Asia/Kuala_Lumpur"
+ },
+ {
+  "id": "bali",
+  "name_en": "Bali (Kuta)",
+  "name_ar": "بالي",
+  "country": "ID",
+  "lat": -8.72,
+  "lon": 115.17,
+  "region": "world",
+  "timezone": "Asia/Makassar"
+ },
+ {
+  "id": "zanzibar",
+  "name_en": "Zanzibar",
+  "name_ar": "زنجبار",
+  "country": "TZ",
+  "lat": -6.16,
+  "lon": 39.19,
+  "region": "world",
+  "timezone": "Africa/Dar_es_Salaam"
+ },
+ {
+  "id": "mombasa",
+  "name_en": "Mombasa",
+  "name_ar": "مومباسا",
+  "country": "KE",
+  "lat": -4.06,
+  "lon": 39.67,
+  "region": "world",
+  "timezone": "Africa/Nairobi"
+ },
+ {
+  "id": "mahe",
+  "name_en": "Mahé (Victoria)",
+  "name_ar": "ماهي (سيشل)",
+  "country": "SC",
+  "lat": -4.62,
+  "lon": 55.45,
+  "region": "world",
+  "timezone": "Indian/Mahe"
+ },
+ {
+  "id": "port-louis",
+  "name_en": "Port Louis",
+  "name_ar": "بورت لويس",
+  "country": "MU",
+  "lat": -20.16,
+  "lon": 57.5,
+  "region": "world",
+  "timezone": "Indian/Mauritius"
+ },
+ {
+  "id": "karachi",
+  "name_en": "Karachi",
+  "name_ar": "كراتشي",
+  "country": "PK",
+  "lat": 24.8,
+  "lon": 66.97,
+  "region": "world",
+  "timezone": "Asia/Karachi"
+ },
+ {
+  "id": "gwadar",
+  "name_en": "Gwadar",
+  "name_ar": "جوادر",
+  "country": "PK",
+  "lat": 25.12,
+  "lon": 62.33,
+  "region": "world",
+  "timezone": "Asia/Karachi"
+ },
+ {
+  "id": "mumbai",
+  "name_en": "Mumbai",
+  "name_ar": "مومباي",
+  "country": "IN",
+  "lat": 18.92,
+  "lon": 72.82,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "kochi",
+  "name_en": "Kochi",
+  "name_ar": "كوتشي",
+  "country": "IN",
+  "lat": 9.96,
+  "lon": 76.24,
+  "region": "world",
+  "timezone": "Asia/Kolkata"
+ },
+ {
+  "id": "massawa",
+  "name_en": "Massawa",
+  "name_ar": "مصوع",
+  "country": "ER",
+  "lat": 15.61,
+  "lon": 39.45,
+  "region": "world",
+  "timezone": "Africa/Asmara"
+ },
+ {
+  "id": "istanbul",
+  "name_en": "Istanbul",
+  "name_ar": "إسطنبول",
+  "country": "TR",
+  "lat": 41.01,
+  "lon": 28.98,
+  "region": "world",
+  "timezone": "Europe/Istanbul"
+ },
+ {
+  "id": "antalya",
+  "name_en": "Antalya",
+  "name_ar": "أنطاليا",
+  "country": "TR",
+  "lat": 36.88,
+  "lon": 30.7,
+  "region": "world",
+  "timezone": "Europe/Istanbul"
+ },
+ {
+  "id": "bodrum",
+  "name_en": "Bodrum",
+  "name_ar": "بودروم",
+  "country": "TR",
+  "lat": 37.03,
+  "lon": 27.43,
+  "region": "world",
+  "timezone": "Europe/Istanbul"
+ },
+ {
+  "id": "trabzon",
+  "name_en": "Trabzon",
+  "name_ar": "طرابزون",
+  "country": "TR",
+  "lat": 41.0,
+  "lon": 39.73,
+  "region": "world",
+  "timezone": "Europe/Istanbul"
+ },
+ {
+  "id": "larnaca",
+  "name_en": "Larnaca",
+  "name_ar": "لارنكا",
+  "country": "CY",
+  "lat": 34.91,
+  "lon": 33.64,
+  "region": "world",
+  "timezone": "Asia/Nicosia"
+ },
+ {
+  "id": "piraeus",
+  "name_en": "Piraeus (Athens)",
+  "name_ar": "بيرايوس (أثينا)",
+  "country": "GR",
+  "lat": 37.94,
+  "lon": 23.64,
+  "region": "world",
+  "timezone": "Europe/Athens"
+ },
+ {
+  "id": "palermo",
+  "name_en": "Palermo",
+  "name_ar": "باليرمو",
+  "country": "IT",
+  "lat": 38.13,
+  "lon": 13.37,
+  "region": "world",
+  "timezone": "Europe/Rome"
+ },
+ {
+  "id": "malaga",
+  "name_en": "Málaga",
+  "name_ar": "مالقة",
+  "country": "ES",
+  "lat": 36.71,
+  "lon": -4.42,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "almeria",
+  "name_en": "Almería",
+  "name_ar": "ألمرية",
+  "country": "ES",
+  "lat": 36.83,
+  "lon": -2.46,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "algeciras",
+  "name_en": "Algeciras",
+  "name_ar": "الجزيرة الخضراء",
+  "country": "ES",
+  "lat": 36.13,
+  "lon": -5.44,
+  "region": "world",
+  "timezone": "Europe/Madrid"
+ },
+ {
+  "id": "marseille",
+  "name_en": "Marseille",
+  "name_ar": "مرسيليا",
+  "country": "FR",
+  "lat": 43.3,
+  "lon": 5.36,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "nice",
+  "name_en": "Nice",
+  "name_ar": "نيس",
+  "country": "FR",
+  "lat": 43.69,
+  "lon": 7.27,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "brest",
+  "name_en": "Brest",
+  "name_ar": "بريست",
+  "country": "FR",
+  "lat": 48.38,
+  "lon": -4.49,
+  "region": "world",
+  "timezone": "Europe/Paris"
+ },
+ {
+  "id": "saint-malo",
+  "name_en": "Saint-Malo",
+  "name_ar": "سان مالو",
+  "country": "FR",
+  "lat": 48.65,
+  "lon": -2.03,
+  "region": "world",
+  "timezone": "Europe/Paris"
  }
 ]

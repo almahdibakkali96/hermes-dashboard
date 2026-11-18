@@ -1,0 +1,94 @@
+{
+ "id": "saint-malo",
+ "name_en": "Saint-Malo",
+ "name_ar": "سان مالو",
+ "country": "FR",
+ "lat": 48.65,
+ "lon": -2.03,
+ "timezone": "Europe/Paris",
+ "grid": {
+  "lat": 48.75,
+  "lon": -2,
+  "distance_km": 11.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 10.25842,
+   "phase": 149.28
+  },
+  "J1": {
+   "amp": 0.47557,
+   "phase": -52.034
+  },
+  "K1": {
+   "amp": 9.75458,
+   "phase": 90.091
+  },
+  "K2": {
+   "amp": 42.07352,
+   "phase": -135.218
+  },
+  "M2": {
+   "amp": 374.69126,
+   "phase": 177.816
+  },
+  "M4": {
+   "amp": 27.11137,
+   "phase": -77.52
+  },
+  "MF": {
+   "amp": 1.02963,
+   "phase": 75.998
+  },
+  "MM": {
+   "amp": 2.0727,
+   "phase": 29.627
+  },
+  "N2": {
+   "amp": 72.70878,
+   "phase": 161.137
+  },
+  "O1": {
+   "amp": 7.8006,
+   "phase": -14.448
+  },
+  "P1": {
+   "amp": 4.13044,
+   "phase": 84.124
+  },
+  "Q1": {
+   "amp": 2.49316,
+   "phase": -51.13
+  },
+  "S1": {
+   "amp": 2.80399,
+   "phase": 15.219
+  },
+  "S2": {
+   "amp": 147.01647,
+   "phase": -132.116
+  },
+  "SA": {
+   "amp": 3.6173,
+   "phase": -50.811
+  },
+  "SSA": {
+   "amp": 1.1043,
+   "phase": 178.167
+  },
+  "T2": {
+   "amp": 7.3992,
+   "phase": -149.351
+  },
+  "Z0": {
+   "amp": 652.1,
+   "phase": 0
+  }
+ }
+}

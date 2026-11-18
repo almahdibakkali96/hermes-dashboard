@@ -15,6 +15,9 @@ import { fishForPort, fishLabel } from '../../lib/fish';
 import CalendarPromo from '../../components/CalendarPromo.astro';
 import LiveTides from '../../components/LiveTides.astro';
 import { altNamesAr, frenchName, nameWithAlts } from '../../lib/portNames';
+import { CAL, forPort, portYearSummary } from '../../lib/calendar';
+import PortMiniMap from '../../components/PortMiniMap.astro';
+import { isWorld } from '../../lib/regions';
 
 export function getStaticPaths() {
   return placesIndex.map((p: { id: string }) => ({ params: { id: p.id } }));
@@ -46,7 +49,10 @@ const sun = sunTimes(today, port.lat, port.lon, tzOffset);
 const moonT = moonTimes(today, port.lat, port.lon, tzOffset);
 const solunar = solunarPeriods(moonT.moonrise, moonT.moonset, moonT.lunarTransit, moon.phase, today);
 
-const prayers = calculatePrayerTimes(today, port.lat, port.lon, tzOffset, 'UmmAlQura');
+// World places (src/lib/regions.ts): Muslim World League prayer times, no fish list, no Arab-ports calendar
+const world = isWorld(port.id);
+const prayerMethod = world ? 'MWL' : 'UmmAlQura';
+const prayers = calculatePrayerTimes(today, port.lat, port.lon, tzOffset, prayerMethod);
 const hijri = gregorianToHijri(today);
 
 // 7-day forecast — simple data, no per-day charts; each day rated against its own month
@@ -182,6 +188,53 @@ const dayDetails = [...monthDays, ...nextMonthRated].map(d => {
 });
 const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
 
+// Day viewer (src/scripts/port-day.ts): today plus the next six days as tabs, and any day of this month and
+// next (the days the calendar above shows) through the date picker. Further days are the 2027 calendar's job.
+const keyOf = (d: Date) => d.toISOString().slice(0, 10);
+const viewDays = [...monthDays, ...nextMonthRated];
+const viewLast = viewDays[viewDays.length - 1];
+const calSummary = portYearSummary(port.id, constituents, port.timezone);
+const dayTabs = forecastWithFish.map((f, i) => {
+  const d = new Date(today.getTime() + i * DAY_MS);
+  return { key: keyOf(d), label: i === 0 ? 'اليوم' : i === 1 ? 'غداً' : weekDays[d.getUTCDay()], day: d.getUTCDate(), rating: f.fishRating };
+});
+const engineCfg = {
+  cons: constituents, lat: port.lat, lon: port.lon, today: localDateStr,
+  min: keyOf(viewDays[0].date), max: keyOf(viewLast.date),
+  offsets: viewDays.map(d => getTimezoneOffset(port.timezone, d.date)),
+  tz: tzOffset,
+  yearMax: { [CAL.year]: calSummary.yearMax, [year]: stats.maxRange },
+  calYear: CAL.year,
+};
+const todayMajors = solunar.periods.filter(p => p.type === 'major').sort((a, b) => a.start.localeCompare(b.start));
+
+// Nearby ports (within 400 km), with their next high tide kept current by LiveTides and today's rating
+type Place = { id: string; name_ar: string; name_en: string; country: string; lat: number; lon: number };
+const toRad = (x: number) => (x * Math.PI) / 180;
+const distKm = (a: { lat: number; lon: number }, b: { lat: number; lon: number }) => {
+  const s = Math.sin(toRad(b.lat - a.lat) / 2) ** 2 + Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(toRad(b.lon - a.lon) / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(s));
+};
+const nearby = await Promise.all((placesIndex as Place[])
+  .filter(p => p.id !== port.id)
+  .map(p => ({ ...p, km: distKm(port, p) }))
+  .filter(p => p.km <= 400)
+  .sort((a, b) => a.km - b.km)
+  .slice(0, 4)
+  .map(async p => {
+    const data = (await import(`../../data/places/${p.id}.json`)).default;
+    const cons = data.constituents as Record<string, { amp: number; phase: number }>;
+    const tz = getTimezoneOffset(data.timezone, now), day = portDay(now, tz);
+    const ex = [...dayExtremes(cons, day, tz), ...dayExtremes(cons, new Date(day.getTime() + DAY_MS), tz)];
+    const nextHi = ex.find(e => e.type === 'high' && e.time > now) ?? ex.find(e => e.type === 'high');
+    return {
+      ...p, km: Math.round(p.km), tz, country: countryName(p.country),
+      live: JSON.stringify(ex.map(e => [e.type === 'high' ? 'h' : 'l', e.time.getTime(), formatTime(e.time, tz), Math.round(e.height)])),
+      nextHigh: nextHi ? formatTime(nextHi.time, tz) : '—',
+      rating: ratingsFrom(cons, day, 1, tz)[0].rating,
+    };
+  }));
+
 // --- Plain-language summary + FAQ: quotable by search engines and AI assistants
 const country = countryName(port.country);
 const dateAr = today.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: port.timezone, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
@@ -203,9 +256,15 @@ const tideTypeExplain: Record<string, string> = {
 };
 const maxRangeDateAr = new Date(stats.maxRangeDate + 'T12:00:00Z').toLocaleDateString('ar-EG-u-nu-latn', { day: 'numeric', month: 'long' });
 const summary = `${dateAr} في ${port.name_ar} (${country}): المد العالي عند ${fmtList(todayHighs) || '—'}، والجزر المنخفض عند ${fmtList(todayLows) || '—'} بالتوقيت المحلي. حالة الصيد اليوم ${fishLabels[todayFish.fishRating]} (${todayFish.fishRating} من 5)${majorsToday.length ? `، وأفضل أوقاته ${majorsToday.join(' و')}` : ''}. المد هنا ${tideClass.typeAr}، ومدى اليوم ${todayRange} سم (${springNeap.conditionAr}). أقصى مدى متوقع خلال ${year} نحو ${(stats.maxRange / 100).toFixed(1)} م في ${maxRangeDateAr}.`;
+// Tomorrow, for "المد والجزر غداً" searches
+const tomorrowEx = dayExtremes(constituents, tomorrowDay, tzOffset);
+const tomorrowAr = tomorrowDay.toLocaleDateString('ar-EG-u-nu-latn', { timeZone: port.timezone, weekday: 'long', day: 'numeric', month: 'long' });
+const tomorrowRating = forecastWithFish[1].fishRating;
 const faq = [
   { q: `متى المد والجزر اليوم في ${port.name_ar}؟`,
     a: todayHighs.length ? `اليوم (${dateAr}) المد العالي في ${port.name_ar} عند ${fmtList(todayHighs)}، والجزر المنخفض عند ${fmtList(todayLows)} بالتوقيت المحلي (${port.timezone}).` : 'لا يوجد مد عالٍ اليوم.' },
+  { q: `متى المد والجزر غداً في ${port.name_ar}؟`,
+    a: `غداً (${tomorrowAr}) المد العالي في ${port.name_ar} عند ${fmtList(tomorrowEx.filter(e => e.type === 'high')) || '—'}، والجزر المنخفض عند ${fmtList(tomorrowEx.filter(e => e.type === 'low')) || '—'} بالتوقيت المحلي. تقييم الصيد غداً ${fishLabels[tomorrowRating]} (${tomorrowRating} من 5).` },
   { q: `ما حالة الصيد اليوم في ${port.name_ar}؟`,
     a: `تقييم الصيد اليوم (${dateAr}) في ${port.name_ar}: ${fishLabels[todayFish.fishRating]} (${todayFish.fishRating} من 5)، ${fishAdvice[todayFish.fishRating]}.${majorsToday.length ? ` أفضل أوقات الصيد (الفترات الكبرى): ${majorsToday.join(' و')} بالتوقيت المحلي.` : ''} يجمع التقييم طور القمر وقوة المد في ذلك اليوم.` },
   { q: `ما نوع المد والجزر في ${port.name_ar}؟`,
@@ -256,7 +315,7 @@ const pageJsonLd = [
 
       <div class="mt-4 flex flex-wrap items-end gap-x-6 gap-y-3">
         <div>
-          <h1 class="text-4xl sm:text-5xl font-bold display leading-tight">{port.name_ar}</h1>
+          <h1 class="text-4xl sm:text-5xl display display-heavy leading-tight">{port.name_ar}</h1>
           <p class="mt-2 text-sm text-slate-300">
             <span class="latin" lang="en">{port.name_en}</span>
             <span class="mx-1.5 opacity-50">·</span>{countryName(port.country)}
@@ -273,8 +332,11 @@ const pageJsonLd = [
         </div>
       </div>
 
+      <!-- Right now: rising or falling, the height, and time to the next turn (filled by port-day.ts; space reserved) -->
+      <p id="now-status" class="now-status"></p>
+
       <!-- Today at a glance: next tides and the next major solunar period stay current (LiveTides) -->
-      <dl class="mt-7 grid grid-cols-2 lg:grid-cols-4 gap-3" data-tides={liveTides} data-tz={tzOffset} data-periods={liveMajors}>
+      <dl class="mt-3 grid grid-cols-2 lg:grid-cols-4 gap-3" data-tides={liveTides} data-tz={tzOffset} data-periods={liveMajors}>
         <div class="hero-stat">
           <dt class="text-xs text-slate-400">▲ المد القادم</dt>
           <dd class="mt-1 text-3xl font-bold latin text-teal-300" data-next="h">{nextHigh ? formatTime(nextHigh.time, tzOffset) : '—'}</dd>
@@ -318,15 +380,33 @@ const pageJsonLd = [
         <!-- Plain-text answer first: the sentence search snippets and AI answers quote -->
         <section class="card p-5 summary-card" aria-labelledby="summary-title">
           <h2 id="summary-title" class="text-sm font-semibold text-[var(--accent-text)]">المد والجزر وحالة الصيد اليوم في {port.name_ar}</h2>
-          <p class="mt-2 leading-relaxed text-[var(--text-secondary)]">{summary}</p>
+          <p id="summary-text" class="summary-text is-clamped mt-2 text-[0.95rem] leading-relaxed text-[var(--text-secondary)]">{summary}</p>
+          <button type="button" class="summary-more no-print" onclick="document.getElementById('summary-text').classList.remove('is-clamped');this.remove()">اقرأ الملخص كاملاً</button>
         </section>
 
-        <!-- Today's tide chart -->
-        <section class="card p-5" aria-labelledby="chart-title">
+        <!-- Today's tide chart; the tabs and the picker redraw it for another day (src/scripts/port-day.ts) -->
+        <section id="chart-card" class="card p-5 scroll-mt-20" aria-labelledby="chart-title">
           <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h2 id="chart-title" class="text-lg font-semibold display">منحنى المد والجزر اليوم</h2>
-            <span class="text-xs text-[var(--text-muted)] latin">{today.toLocaleDateString('en-GB', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' })}</span>
+            <span id="chart-date" class="text-xs text-[var(--text-muted)] latin">{today.toLocaleDateString('en-GB', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' })}</span>
             <span class="ms-auto text-xs text-[var(--text-muted)]">بالتوقيت المحلي · الارتفاع بالسنتيمتر</span>
+          </div>
+          <!-- The week scrolls sideways on phones; the picker stays in view at the end of the row -->
+          <div class="day-bar no-print">
+            <div class="day-tabs" role="group" aria-label="اختر اليوم">
+              {dayTabs.map((t, i) => (
+                <button type="button" class="day-tab" data-day={t.key} aria-pressed={i === 0 ? 'true' : 'false'} style={`--rating:${fishColors[t.rating]}`}>
+                  <span class="d-name">{t.label}</span>
+                  <span class="d-num latin">{t.day}</span>
+                  <span class="d-bar" style={`opacity:${0.25 + t.rating * 0.15}`} title={`${t.rating}/5 ${fishLabels[t.rating]}`}></span>
+                </button>
+              ))}
+            </div>
+            <label class="day-pick">
+              <span aria-hidden="true">📅</span>
+              <span data-pick-label>يوم آخر</span>
+              <input id="day-input" type="date" min={engineCfg.min} max={engineCfg.max} value={localDateStr} aria-label="اختر يوماً" />
+            </label>
           </div>
           <div class="chart-ltr mt-3">
             <svg id="tide-chart" viewBox={`0 0 ${CHART_W} ${CHART_H}`} class="tide-chart w-full h-auto" role="img"
@@ -364,7 +444,7 @@ const pageJsonLd = [
               })}
             </svg>
           </div>
-          <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div id="tide-tiles" class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
             {extremes.map(ex => (
               <div class={`rounded-xl px-3 py-2.5 ${ex.type === 'high' ? 'bg-teal-50' : 'bg-rose-50'}`}>
                 <div class={`text-xs font-medium ${ex.type === 'high' ? 'text-teal-700' : 'text-rose-700'}`}>{ex.type === 'high' ? '▲ مد عالٍ' : '▼ جزر منخفض'}</div>
@@ -373,6 +453,17 @@ const pageJsonLd = [
               </div>
             ))}
           </div>
+          <!-- The chosen day's rating, best hours, sun, moon and coefficient (same markup as port-day.ts factsMarkup) -->
+          <div id="day-facts" class="day-facts">
+            <RatingBadge rating={todayFish.fishRating} size="sm" />
+            {todayMajors.length > 0 && <span class="day-fact">🎣 أفضل وقت {todayMajors.map((p, i) => <>{i > 0 && ' و'}<span class="latin">{p.start}–{p.end}</span></>)}</span>}
+            <span class="day-fact">الشروق <span class="latin">{sun.sunrise ?? '—'}</span> · الغروب <span class="latin">{sun.sunset ?? '—'}</span></span>
+            <span class="day-fact">{moon.emoji} {moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
+            {todayCoef !== null && <span class="day-fact">معامل المد <span class="latin">{todayCoef}</span> · {coefficientLabelAr(todayCoef)}</span>}
+          </div>
+          <p id="day-more" class="day-more no-print">
+            اضغط على المنحنى لترى ارتفاع الماء في أي ساعة. يعرض المنحنى أي يوم حتى <span class="latin">{viewLast.day}</span> {monthNames[viewLast.month]}{world ? '.' : <>، وتجد كل أيام سنة <span class="latin">{CAL.year}</span> في <a href={`${BASE}calendar?port=${port.id}`} data-track="calendar_cta" data-track-where="day-viewer">تقويم <span class="latin">{CAL.year}</span> {forPort(port.name_ar)}</a>.</>}
+          </p>
         </section>
 
         <!-- Solunar periods: the hours the hero's "best time" comes from -->
@@ -468,7 +559,10 @@ const pageJsonLd = [
               <div><dt class="text-xs text-[var(--text-muted)]">القمر</dt><dd class="mt-0.5" data-f="moon"></dd></div>
               {todayCoef !== null && <div><dt class="text-xs text-[var(--text-muted)]">معامل المد</dt><dd class="mt-0.5 font-semibold" data-f="coef"></dd></div>}
             </dl>
-            <p class="mt-3 text-xs text-[var(--text-muted)]">اضغط على أي يوم في التقويم لعرض تفاصيله.</p>
+            <div class="mt-3 flex items-center gap-3">
+              <p class="text-xs text-[var(--text-muted)]">اضغط على أي يوم في التقويم لعرض تفاصيله.</p>
+              <button type="button" class="day-chart-link ms-auto no-print" data-f="chart">📈 منحنى هذا اليوم</button>
+            </div>
           </div>
           <script type="application/json" id="day-data" set:html={JSON.stringify(dayDetails)} />
 
@@ -495,8 +589,8 @@ const pageJsonLd = [
           </div>
         </section>
 
-        <!-- Fish in this port's sea -->
-        <section class="card p-5" aria-labelledby="fish-title">
+        <!-- Fish in this port's sea (Arab seas only) -->
+        {!world && <section class="card p-5" aria-labelledby="fish-title">
           <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h2 id="fish-title" class="text-lg font-semibold display">أسماك {port.name_ar}</h2>
             <span class="text-xs text-[var(--text-muted)]">أنواع تعيش في {seas[portSea[id!]].name}</span>
@@ -518,9 +612,31 @@ const pageJsonLd = [
               : <>الأنواع الشائعة في {seas[portSea[id!]].name}.</>}
             {portFish.fish.length > 12 && <> وأنواع أخرى في <a href={`${BASE}fish`} class="text-[var(--accent-text)] underline">دليل الأسماك</a>.</>}
           </p>
-        </section>
+        </section>}
 
-        <div class="lg:hidden"><CalendarPromo variant="strip" port={{ id: id!, name: port.name_ar }} /></div>
+        <!-- Nearby ports: the next page for visitors whose spot is between two ports -->
+        {nearby.length > 0 && (
+          <section class="card p-5" aria-labelledby="near-title">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 id="near-title" class="text-lg font-semibold display">موانئ قريبة من {port.name_ar}</h2>
+              <span class="text-xs text-[var(--text-muted)]">المد العالي القادم وتقييم الصيد اليوم</span>
+            </div>
+            <div class="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+              {nearby.map(p => (
+                <a href={`${BASE}ports/${p.id}`} class="near-card group" data-tides={p.live} data-tz={p.tz}>
+                  <span class="block font-semibold truncate group-hover:text-[var(--accent-text)] transition-colors">{p.name_ar}</span>
+                  <span class="block text-xs text-[var(--text-muted)] truncate"><span class="latin">{p.km}</span> كم{p.country !== country && <> · {p.country}</>}</span>
+                  <span class="mt-2 flex flex-wrap items-center justify-between gap-1.5">
+                    <span class="text-xs text-teal-700">▲ <span class="latin font-bold text-sm" data-next="h">{p.nextHigh}</span></span>
+                    <RatingBadge rating={p.rating} size="sm" label={false} />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <div class:list={['lg:hidden', { hidden: world }]}><CalendarPromo variant="strip" port={{ id: id!, name: port.name_ar }} summary={calSummary} /></div>
 
         <!-- FAQ -->
         <section class="card p-5" aria-labelledby="faq-title">
@@ -540,7 +656,7 @@ const pageJsonLd = [
 
       <!-- Sidebar -->
       <aside class="space-y-6 min-w-0">
-        <div class="hidden lg:block"><CalendarPromo variant="card" port={{ id: id!, name: port.name_ar }} /></div>
+        <div class:list={['hidden', { 'lg:block': !world }]}><CalendarPromo variant="card" port={{ id: id!, name: port.name_ar }} summary={calSummary} /></div>
 
         <section class="card p-5" aria-labelledby="sun-title">
           <h2 id="sun-title" class="font-semibold">☀️ الشمس والقمر</h2>
@@ -566,13 +682,10 @@ const pageJsonLd = [
               <div class="info-tile text-center"><dt>{prayerLabels[name]}</dt><dd class="latin">{time}</dd></div>
             ))}
           </dl>
-          <p class="mt-3 text-xs text-[var(--text-muted)]">طريقة أم القرى · التاريخ الهجري تقديري وقد يختلف بيوم</p>
+          <p class="mt-3 text-xs text-[var(--text-muted)]">{world ? 'طريقة رابطة العالم الإسلامي' : 'طريقة أم القرى'} · التاريخ الهجري تقديري وقد يختلف بيوم</p>
         </section>
 
-        <section class="card p-3" aria-label="موقع الميناء على الخريطة">
-          <div id="map" class="port-map w-full" data-lat={port.lat} data-lon={port.lon} data-name={port.name_ar}></div>
-          <p class="text-[11px] text-[var(--text-dim)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent-text)]" lang="en">OpenStreetMap</a></p>
-        </section>
+        <PortMiniMap port={port} />
 
         <section class="card p-5 no-print" aria-labelledby="share-title">
           <h2 id="share-title" class="font-semibold">شارك الصفحة</h2>
@@ -602,11 +715,24 @@ const pageJsonLd = [
 
   <LiveTides />
 
+  <!-- Day viewer, scrubbable chart and the "now" line: the site's engine, bundled for the browser -->
+  <script type="application/json" id="port-engine" set:html={JSON.stringify(engineCfg)} />
+  <script>
+    import '../../scripts/port-day';
+  </script>
+
   <!-- "My port": remembered in this browser; the homepage shows it first -->
   <script is:inline>
     (function () {
       var b = document.getElementById('my-port');
       if (!b) return;
+      // Recently viewed ports, newest first: the homepage offers them again
+      try {
+        var R = 'arabtides.recent', recent = JSON.parse(localStorage.getItem(R) || '[]');
+        recent = (Array.isArray(recent) ? recent : []).filter(function (x) { return x && x.id && x.id !== b.dataset.id; });
+        recent.unshift({ id: b.dataset.id, name: b.dataset.name });
+        localStorage.setItem(R, JSON.stringify(recent.slice(0, 6)));
+      } catch (e) {}
       var KEY = 'arabtides.myPort', saved = null;
       try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
       function paint(on) {
@@ -676,6 +802,11 @@ const pageJsonLd = [
       });
       prev.addEventListener('click', function () { show(cur - 1); });
       next.addEventListener('click', function () { show(cur + 1); });
+      // Draw this day's curve in the chart card (port-day.ts listens)
+      var chartBtn = box.querySelector('[data-f="chart"]');
+      if (chartBtn) chartBtn.addEventListener('click', function () {
+        document.dispatchEvent(new CustomEvent('port:day', { detail: days[cur].key }));
+      });
       show(idx[box.dataset.today] != null ? idx[box.dataset.today] : 0);
       box.hidden = false;
     })();
@@ -691,50 +822,4 @@ const pageJsonLd = [
     })();
   </script>
 
-  <!-- Leaflet map -->
-  <script is:inline>
-    (function () {
-      // Leaflet is fetched only when the map nears the viewport, so it never delays the first paint
-      function loadLeaflet(el, cb) {
-        function go() {
-          var left = 2, done = function () { if (--left === 0) cb(); };
-          var css = document.createElement('link');
-          css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-          css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = '';
-          css.onload = css.onerror = done;
-          var js = document.createElement('script');
-          js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-          js.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; js.crossOrigin = '';
-          js.onload = done;
-          document.head.appendChild(css); document.head.appendChild(js);
-        }
-        if (!('IntersectionObserver' in window)) return go();
-        var io = new IntersectionObserver(function (entries) {
-          if (entries[0].isIntersecting) { io.disconnect(); go(); }
-        }, { rootMargin: '400px' });
-        io.observe(el);
-      }
-      function initMap() {
-        var el = document.getElementById('map');
-        if (!el || typeof L === 'undefined') return;
-        var lat = parseFloat(el.dataset.lat), lon = parseFloat(el.dataset.lon);
-        var map = L.map(el, { scrollWheelZoom: false, attributionControl: false }).setView([lat, lon], 9);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 18, attribution: '&copy; OpenStreetMap'
-        }).addTo(map);
-        L.circleMarker([lat, lon], {
-          radius: 8, color: '#ffffff', fillColor: '#0d9488', fillOpacity: 0.95, weight: 2.5
-        }).addTo(map).bindPopup(el.dataset.name);
-        map.on('click', function () { map.scrollWheelZoom.enable(); });
-        setTimeout(function () { map.invalidateSize(); }, 200);
-      }
-      function start() {
-        var mapEl = document.getElementById('map');
-        if (mapEl) loadLeaflet(mapEl, initMap);
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', start);
-      } else { start(); }
-    })();
-  </script>
 </BaseLayout>

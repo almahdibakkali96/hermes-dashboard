@@ -1,0 +1,94 @@
+{
+ "id": "gwadar",
+ "name_en": "Gwadar",
+ "name_ar": "جوادر",
+ "country": "PK",
+ "lat": 25.12,
+ "lon": 62.33,
+ "timezone": "Asia/Karachi",
+ "grid": {
+  "lat": 25.125,
+  "lon": 62.375,
+  "distance_km": 4.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.43836,
+   "phase": 100.184
+  },
+  "J1": {
+   "amp": 2.5064,
+   "phase": -11.924
+  },
+  "K1": {
+   "amp": 39.14842,
+   "phase": -21.853
+  },
+  "K2": {
+   "amp": 6.58027,
+   "phase": 175.699
+  },
+  "M2": {
+   "amp": 64.29966,
+   "phase": 154.472
+  },
+  "M4": {
+   "amp": 0.86902,
+   "phase": -163.264
+  },
+  "MF": {
+   "amp": 0.80961,
+   "phase": 7.911
+  },
+  "MM": {
+   "amp": 0.65702,
+   "phase": 51.938
+  },
+  "N2": {
+   "amp": 15.57948,
+   "phase": 137.35
+  },
+  "O1": {
+   "amp": 20.28912,
+   "phase": -21.274
+  },
+  "P1": {
+   "amp": 12.00585,
+   "phase": -23.028
+  },
+  "Q1": {
+   "amp": 4.11973,
+   "phase": -23.347
+  },
+  "S1": {
+   "amp": 2.32771,
+   "phase": 101.338
+  },
+  "S2": {
+   "amp": 24.65652,
+   "phase": -175.159
+  },
+  "SA": {
+   "amp": 2.96451,
+   "phase": 23.629
+  },
+  "SSA": {
+   "amp": 0.16921,
+   "phase": -77.222
+  },
+  "T2": {
+   "amp": 1.4603,
+   "phase": -177.389
+  },
+  "Z0": {
+   "amp": 181.3,
+   "phase": 0
+  }
+ }
+}

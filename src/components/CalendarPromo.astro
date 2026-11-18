@@ -1,15 +1,18 @@
 ---
 // Funnel promo for the 2027 calendar, in the places the guide used: 'banner' (homepage), 'card' (port sidebar),
-// 'strip' (inline: port pages on phones, articles). With a port, the link opens /calendar on that port.
+// 'strip' (inline: port pages on phones, articles). With a port, the link opens /calendar on that port; with its
+// year summary too, the card and strip lead with that port's own 2027 numbers (as on page 2 of its PDF).
 // Reuses GuidePromo's classes (guide-banner, guide-card, guide-strip, guide-cover in global.css).
-import { CAL, CAL_SALES_OPEN, forPort } from '../lib/calendar';
+import { CAL, CAL_SALES_OPEN, forPort, excellentDaysAr, monthsAr, type YearSummary } from '../lib/calendar';
 
-export interface Props { variant?: 'banner' | 'card' | 'strip'; port?: { id: string; name: string } }
-const { variant = 'card', port } = Astro.props;
+export interface Props { variant?: 'banner' | 'card' | 'strip'; port?: { id: string; name: string }; summary?: YearSummary }
+const { variant = 'card', port, summary } = Astro.props;
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const href = `${BASE}calendar${port ? `?port=${port.id}` : ''}`;
 const cover = `${BASE}calendar/cover.webp`;
 const cta = CAL_SALES_OPEN ? 'اكتشف التقويم' : 'سجّل في قائمة الانتظار';
+const [n5, n5Words] = summary ? excellentDaysAr(summary.n5) : ['', ''];
+const facts = port && summary && summary.n5 > 0;
 ---
 
 {variant === 'banner' && (
@@ -21,7 +24,7 @@ const cta = CAL_SALES_OPEN ? 'اكتشف التقويم' : 'سجّل في قائ
         <h2 id="cal-banner-title" class="mt-3 text-2xl sm:text-3xl font-bold display leading-snug">تقويم الصيد والمد والجزر <span class="latin">{CAL.year}</span> لميناءك</h2>
         <p class="mt-2 text-slate-300 leading-relaxed max-w-xl">سنة كاملة يوماً بيوم في ملف واحد: المد والجزر بالساعة، والقمر، والشروق والغروب، وأفضل ساعات الصيد وتقييم كل يوم، لـ<span class="latin">{CAL.ports}</span> ميناءً عربياً.</p>
         <div class="mt-5 flex flex-wrap items-center gap-3">
-          <a href={href} class="btn-primary">{cta}</a>
+          <a href={href} class="btn-primary" data-track="calendar_cta" data-track-where="banner">{cta}</a>
           {!CAL_SALES_OPEN && <span class="text-sm text-slate-400">ويصلك سعر الإطلاق قبل الجميع بيوم</span>}
         </div>
       </div>
@@ -39,16 +42,25 @@ const cta = CAL_SALES_OPEN ? 'اكتشف التقويم' : 'سجّل في قائ
         <p class="text-sm text-[var(--text-muted)] mt-1">كل أيام السنة في ملف واحد: المد، والقمر، وأفضل أيام الصيد.</p>
       </div>
     </div>
-    <a href={href} class="btn-primary w-full justify-center mt-4">{cta}</a>
+    {facts && (
+      <dl class="cal-facts">
+        <div><dt>أيام ممتازة للصيد</dt><dd>{n5 ? <span class="latin">{n5}</span> : n5Words}</dd></div>
+        <div><dt>أفضل شهر</dt><dd>{monthsAr[summary!.bestMonth]}</dd></div>
+        <div><dt>أكبر مدّ</dt><dd><span class="latin">{(summary!.yearMax / 100).toFixed(1)}</span> م</dd></div>
+      </dl>
+    )}
+    <a href={href} class="btn-primary w-full justify-center mt-4" data-track="calendar_cta" data-track-where="card">{cta}</a>
   </section>
 )}
 
 {variant === 'strip' && (
-  <a href={href} class="guide-strip group">
+  <a href={href} class="guide-strip group" data-track="calendar_cta" data-track-where="strip">
     <img src={cover} alt="" width="56" height="79" loading="lazy" class="rounded-md shadow" />
     <span class="min-w-0">
       <span class="block font-semibold group-hover:text-[var(--accent-text)]">{port ? <>تقويم <span class="latin">{CAL.year}</span> {forPort(port.name)}</> : <>تقويم الصيد والمد والجزر <span class="latin">{CAL.year}</span></>}</span>
-      <span class="block text-sm text-[var(--text-muted)]">كل أيام السنة في ملف PDF · {CAL_SALES_OPEN ? <><span class="latin">{CAL.pages}</span> صفحة</> : 'قريباً'}</span>
+      {facts
+        ? <span class="block text-sm text-[var(--text-muted)]">في <span class="latin">{CAL.year}</span>: {n5 && <span class="latin">{n5}</span>} {n5Words}، وأفضل شهر {monthsAr[summary!.bestMonth]}</span>
+        : <span class="block text-sm text-[var(--text-muted)]">كل أيام السنة في ملف PDF · {CAL_SALES_OPEN ? <><span class="latin">{CAL.pages}</span> صفحة</> : 'قريباً'}</span>}
     </span>
     <span class="ms-auto text-[var(--accent-text)] font-semibold shrink-0">{CAL_SALES_OPEN ? 'اكتشفه ←' : 'سجّل ←'}</span>
   </a>

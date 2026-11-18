@@ -3,7 +3,7 @@ import ArticleLayout from '../../components/ArticleLayout.astro';
 import { articleBySlug } from '../../lib/articles';
 import placesIndex from '../../data/places/places_index.json';
 import { dayExtremes, getTimezoneOffset, portDay, tideCoefficient, coefficientLabelAr, type Constituent } from '../../lib/tides';
-import { yearStats } from '../../lib/seas';
+import { arabYearStats as yearStats } from '../../lib/seas';
 
 const meta = articleBySlug('tide-coefficient');
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');

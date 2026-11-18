@@ -1,0 +1,94 @@
+{
+ "id": "colombo",
+ "name_en": "Colombo",
+ "name_ar": "كولومبو",
+ "country": "LK",
+ "lat": 6.94,
+ "lon": 79.84,
+ "timezone": "Asia/Colombo",
+ "grid": {
+  "lat": 7,
+  "lon": 79.75,
+  "distance_km": 12
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.33627,
+   "phase": -111.162
+  },
+  "J1": {
+   "amp": 0.73651,
+   "phase": -49.558
+  },
+  "K1": {
+   "amp": 6.9994,
+   "phase": -50.926
+  },
+  "K2": {
+   "amp": 3.72959,
+   "phase": -75.955
+  },
+  "M2": {
+   "amp": 17.79875,
+   "phase": -116.419
+  },
+  "M4": {
+   "amp": 0.36912,
+   "phase": -124.345
+  },
+  "MF": {
+   "amp": 1.83547,
+   "phase": 15.186
+  },
+  "MM": {
+   "amp": 0.78833,
+   "phase": 10.821
+  },
+  "N2": {
+   "amp": 2.12166,
+   "phase": -121.108
+  },
+  "O1": {
+   "amp": 3.0052,
+   "phase": -21.15
+  },
+  "P1": {
+   "amp": 2.07262,
+   "phase": -61.846
+  },
+  "Q1": {
+   "amp": 0.82881,
+   "phase": 4.407
+  },
+  "S1": {
+   "amp": 0.48733,
+   "phase": -15.76
+  },
+  "S2": {
+   "amp": 12.89862,
+   "phase": -74.644
+  },
+  "SA": {
+   "amp": 4.71046,
+   "phase": 27.875
+  },
+  "SSA": {
+   "amp": 0.49299,
+   "phase": -11.307
+  },
+  "T2": {
+   "amp": 0.53303,
+   "phase": -101.802
+  },
+  "Z0": {
+   "amp": 42.5,
+   "phase": 0
+  }
+ }
+}

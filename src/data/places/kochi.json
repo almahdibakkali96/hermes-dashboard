@@ -1,0 +1,94 @@
+{
+ "id": "kochi",
+ "name_en": "Kochi",
+ "name_ar": "كوتشي",
+ "country": "IN",
+ "lat": 9.96,
+ "lon": 76.24,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 9.875,
+  "lon": 76.25,
+  "distance_km": 9.5
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.53463,
+   "phase": 85.988
+  },
+  "J1": {
+   "amp": 1.45131,
+   "phase": -24.616
+  },
+  "K1": {
+   "amp": 20.71585,
+   "phase": -31.52
+  },
+  "K2": {
+   "amp": 2.19763,
+   "phase": -132.055
+  },
+  "M2": {
+   "amp": 26.90026,
+   "phase": 171.785
+  },
+  "M4": {
+   "amp": 0.18539,
+   "phase": 41.156
+  },
+  "MF": {
+   "amp": 1.44314,
+   "phase": 2.714
+  },
+  "MM": {
+   "amp": 0.60919,
+   "phase": -0.023
+  },
+  "N2": {
+   "amp": 6.01389,
+   "phase": 142.32
+  },
+  "O1": {
+   "amp": 10.30085,
+   "phase": -27.072
+  },
+  "P1": {
+   "amp": 5.93348,
+   "phase": -32.477
+  },
+  "Q1": {
+   "amp": 2.35886,
+   "phase": -13.917
+  },
+  "S1": {
+   "amp": 0.97313,
+   "phase": 74.181
+  },
+  "S2": {
+   "amp": 10.11766,
+   "phase": -132.253
+  },
+  "SA": {
+   "amp": 6.58613,
+   "phase": 36.17
+  },
+  "SSA": {
+   "amp": 0.48958,
+   "phase": -3.419
+  },
+  "T2": {
+   "amp": 1.32576,
+   "phase": -178.253
+  },
+  "Z0": {
+   "amp": 82.6,
+   "phase": 0
+  }
+ }
+}

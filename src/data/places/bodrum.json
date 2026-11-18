@@ -1,0 +1,94 @@
+{
+ "id": "bodrum",
+ "name_en": "Bodrum",
+ "name_ar": "بودروم",
+ "country": "TR",
+ "lat": 37.03,
+ "lon": 27.43,
+ "timezone": "Europe/Istanbul",
+ "grid": {
+  "lat": 37,
+  "lon": 27.375,
+  "distance_km": 5.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.35774,
+   "phase": 160.845
+  },
+  "J1": {
+   "amp": 0.52045,
+   "phase": -75.835
+  },
+  "K1": {
+   "amp": 2.51994,
+   "phase": -44.201
+  },
+  "K2": {
+   "amp": 0.66417,
+   "phase": -91.828
+  },
+  "M2": {
+   "amp": 3.83104,
+   "phase": -94.934
+  },
+  "M4": {
+   "amp": 0.20962,
+   "phase": 25.402
+  },
+  "MF": {
+   "amp": 0.57864,
+   "phase": -76.834
+  },
+  "MM": {
+   "amp": 0.40333,
+   "phase": -35.077
+  },
+  "N2": {
+   "amp": 1.06794,
+   "phase": -96.715
+  },
+  "O1": {
+   "amp": 1.10745,
+   "phase": -73.738
+  },
+  "P1": {
+   "amp": 0.73725,
+   "phase": -23.852
+  },
+  "Q1": {
+   "amp": 0.40775,
+   "phase": -39.476
+  },
+  "S1": {
+   "amp": 0.61575,
+   "phase": 2.889
+  },
+  "S2": {
+   "amp": 2.70522,
+   "phase": -78.28
+  },
+  "SA": {
+   "amp": 3.27368,
+   "phase": -60.787
+  },
+  "SSA": {
+   "amp": 0.12077,
+   "phase": -136.648
+  },
+  "T2": {
+   "amp": 0.56857,
+   "phase": -114.436
+  },
+  "Z0": {
+   "amp": 13.1,
+   "phase": 0
+  }
+ }
+}

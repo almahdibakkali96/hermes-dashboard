@@ -1,0 +1,94 @@
+{
+ "id": "piraeus",
+ "name_en": "Piraeus (Athens)",
+ "name_ar": "بيرايوس (أثينا)",
+ "country": "GR",
+ "lat": 37.94,
+ "lon": 23.64,
+ "timezone": "Europe/Athens",
+ "grid": {
+  "lat": 37.875,
+  "lon": 23.625,
+  "distance_km": 7.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.5517,
+   "phase": 66.21
+  },
+  "J1": {
+   "amp": 0.11135,
+   "phase": 151.843
+  },
+  "K1": {
+   "amp": 2.26825,
+   "phase": -1.739
+  },
+  "K2": {
+   "amp": 0.16414,
+   "phase": 168.002
+  },
+  "M2": {
+   "amp": 1.69265,
+   "phase": 20.443
+  },
+  "M4": {
+   "amp": 0.3493,
+   "phase": -79.914
+  },
+  "MF": {
+   "amp": 0.44883,
+   "phase": -151.271
+  },
+  "MM": {
+   "amp": 0.17177,
+   "phase": -132.896
+  },
+  "N2": {
+   "amp": 0.77413,
+   "phase": -25.214
+  },
+  "O1": {
+   "amp": 0.92238,
+   "phase": -57.126
+  },
+  "P1": {
+   "amp": 1.29027,
+   "phase": 1.096
+  },
+  "Q1": {
+   "amp": 0.19757,
+   "phase": 152.972
+  },
+  "S1": {
+   "amp": 1.42826,
+   "phase": 71.668
+  },
+  "S2": {
+   "amp": 0.46447,
+   "phase": 134.81
+  },
+  "SA": {
+   "amp": 4.4854,
+   "phase": -69.477
+  },
+  "SSA": {
+   "amp": 0.11698,
+   "phase": -142.856
+  },
+  "T2": {
+   "amp": 0.45201,
+   "phase": 25.185
+  },
+  "Z0": {
+   "amp": 11.5,
+   "phase": 0
+  }
+ }
+}

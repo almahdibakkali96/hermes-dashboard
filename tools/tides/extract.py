@@ -2,7 +2,8 @@
 
   python tools/tides/extract.py <EOT20 ocean_tides dir> <id> [<id> ...]
 
-Each id must already be in src/data/places/places_index.json (with lat/lon); the timezone is
+Each id must already be in src/data/places/places_index.json (with lat/lon); the timezone is the entry's own
+"timezone" (world places) or
 given in TIMEZONES below by country. Writes src/data/places/<id>.json in the existing format.
 EOT20: Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0.
 """
@@ -56,7 +57,7 @@ def main():
             cons[c] = {'amp': round(float(cell['amplitude']), 5), 'phase': round(float(cell['phase']), 3)}
         out = {
             'id': pid, 'name_en': p['name_en'], 'name_ar': p['name_ar'], 'country': p['country'],
-            'lat': p['lat'], 'lon': p['lon'], 'timezone': TIMEZONES[p['country']],
+            'lat': p['lat'], 'lon': p['lon'], 'timezone': p.get('timezone') or TIMEZONES[p['country']],
             'grid': {'lat': glat, 'lon': glon - 360 if glon > 180 else glon, 'distance_km': round(d, 1)},
             'source': 'EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.',
             'units': {'amplitude': 'cm', 'phase': 'degrees'},

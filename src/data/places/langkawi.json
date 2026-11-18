@@ -1,0 +1,94 @@
+{
+ "id": "langkawi",
+ "name_en": "Langkawi",
+ "name_ar": "لنكاوي",
+ "country": "MY",
+ "lat": 6.35,
+ "lon": 99.8,
+ "timezone": "Asia/Kuala_Lumpur",
+ "grid": {
+  "lat": 6.25,
+  "lon": 99.75,
+  "distance_km": 12.4
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.62567,
+   "phase": 101.761
+  },
+  "J1": {
+   "amp": 1.57851,
+   "phase": -92.681
+  },
+  "K1": {
+   "amp": 16.42868,
+   "phase": -126.426
+  },
+  "K2": {
+   "amp": 10.54589,
+   "phase": 151.012
+  },
+  "M2": {
+   "amp": 66.52313,
+   "phase": 122.938
+  },
+  "M4": {
+   "amp": 0.58464,
+   "phase": -136.499
+  },
+  "MF": {
+   "amp": 1.39139,
+   "phase": 4.148
+  },
+  "MM": {
+   "amp": 0.54336,
+   "phase": 29.144
+  },
+  "N2": {
+   "amp": 12.87533,
+   "phase": 120.187
+  },
+  "O1": {
+   "amp": 4.94324,
+   "phase": -179.812
+  },
+  "P1": {
+   "amp": 5.58804,
+   "phase": -122.659
+  },
+  "Q1": {
+   "amp": 0.93817,
+   "phase": 127.367
+  },
+  "S1": {
+   "amp": 2.01986,
+   "phase": -10.437
+  },
+  "S2": {
+   "amp": 36.3962,
+   "phase": 160.294
+  },
+  "SA": {
+   "amp": 3.63934,
+   "phase": -138.265
+  },
+  "SSA": {
+   "amp": 0.28809,
+   "phase": -72.435
+  },
+  "T2": {
+   "amp": 2.55602,
+   "phase": 157.386
+  },
+  "Z0": {
+   "amp": 144.5,
+   "phase": 0
+  }
+ }
+}

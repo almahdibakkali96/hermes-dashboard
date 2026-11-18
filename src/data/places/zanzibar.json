@@ -1,0 +1,94 @@
+{
+ "id": "zanzibar",
+ "name_en": "Zanzibar",
+ "name_ar": "زنجبار",
+ "country": "TZ",
+ "lat": -6.16,
+ "lon": 39.19,
+ "timezone": "Africa/Dar_es_Salaam",
+ "grid": {
+  "lat": -6.125,
+  "lon": 39.125,
+  "distance_km": 8.2
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.3922,
+   "phase": -22.905
+  },
+  "J1": {
+   "amp": 1.13588,
+   "phase": 10.607
+  },
+  "K1": {
+   "amp": 18.35254,
+   "phase": -4.619
+  },
+  "K2": {
+   "amp": 16.95379,
+   "phase": 60.828
+  },
+  "M2": {
+   "amp": 120.94576,
+   "phase": 25.618
+  },
+  "M4": {
+   "amp": 1.54178,
+   "phase": -158.419
+  },
+  "MF": {
+   "amp": 1.50626,
+   "phase": 6.682
+  },
+  "MM": {
+   "amp": 0.1681,
+   "phase": -40.561
+  },
+  "N2": {
+   "amp": 21.87373,
+   "phase": 3.651
+  },
+  "O1": {
+   "amp": 10.71928,
+   "phase": 2.221
+  },
+  "P1": {
+   "amp": 5.65367,
+   "phase": -4.991
+  },
+  "Q1": {
+   "amp": 1.95319,
+   "phase": -1.394
+  },
+  "S1": {
+   "amp": 2.4112,
+   "phase": 106.215
+  },
+  "S2": {
+   "amp": 60.97857,
+   "phase": 65.13
+  },
+  "SA": {
+   "amp": 1.27977,
+   "phase": -164.941
+  },
+  "SSA": {
+   "amp": 0.59081,
+   "phase": 3.388
+  },
+  "T2": {
+   "amp": 3.3582,
+   "phase": 71.423
+  },
+  "Z0": {
+   "amp": 229.9,
+   "phase": 0
+  }
+ }
+}

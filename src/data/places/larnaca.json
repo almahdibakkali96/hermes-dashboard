@@ -1,0 +1,94 @@
+{
+ "id": "larnaca",
+ "name_en": "Larnaca",
+ "name_ar": "لارنكا",
+ "country": "CY",
+ "lat": 34.91,
+ "lon": 33.64,
+ "timezone": "Asia/Nicosia",
+ "grid": {
+  "lat": 34.875,
+  "lon": 33.75,
+  "distance_km": 10.8
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.20303,
+   "phase": -67.705
+  },
+  "J1": {
+   "amp": 0.11906,
+   "phase": -61.955
+  },
+  "K1": {
+   "amp": 2.66672,
+   "phase": -77.591
+  },
+  "K2": {
+   "amp": 2.09788,
+   "phase": -114.042
+  },
+  "M2": {
+   "amp": 10.57609,
+   "phase": -121.33
+  },
+  "M4": {
+   "amp": 0.24737,
+   "phase": -111.665
+  },
+  "MF": {
+   "amp": 0.20112,
+   "phase": 23.176
+  },
+  "MM": {
+   "amp": 0.28053,
+   "phase": -86.368
+  },
+  "N2": {
+   "amp": 1.29007,
+   "phase": -120.278
+  },
+  "O1": {
+   "amp": 1.96035,
+   "phase": -109.006
+  },
+  "P1": {
+   "amp": 0.80017,
+   "phase": -63.722
+  },
+  "Q1": {
+   "amp": 0.21442,
+   "phase": -118.444
+  },
+  "S1": {
+   "amp": 0.47202,
+   "phase": 46.817
+  },
+  "S2": {
+   "amp": 6.46954,
+   "phase": -109.987
+  },
+  "SA": {
+   "amp": 3.78392,
+   "phase": -84.837
+  },
+  "SSA": {
+   "amp": 0.17428,
+   "phase": -175.097
+  },
+  "T2": {
+   "amp": 0.68869,
+   "phase": -107.026
+  },
+  "Z0": {
+   "amp": 25.8,
+   "phase": 0
+  }
+ }
+}

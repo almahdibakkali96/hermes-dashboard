@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import placesIndex from '../../data/places/places_index.json';
+import { arabPlaces as placesIndex } from '../../lib/regions';
 import { fish } from '../../lib/fish';
 import { articles } from '../../lib/articles';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');

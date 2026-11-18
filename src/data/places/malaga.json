@@ -1,0 +1,94 @@
+{
+ "id": "malaga",
+ "name_en": "Málaga",
+ "name_ar": "مالقة",
+ "country": "ES",
+ "lat": 36.71,
+ "lon": -4.42,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 36.625,
+  "lon": -4.375,
+  "distance_km": 10.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.62423,
+   "phase": 44.52
+  },
+  "J1": {
+   "amp": 0.10986,
+   "phase": 110.389
+  },
+  "K1": {
+   "amp": 2.85135,
+   "phase": 149.771
+  },
+  "K2": {
+   "amp": 1.93249,
+   "phase": 69.611
+  },
+  "M2": {
+   "amp": 19.14856,
+   "phase": 47.862
+  },
+  "M4": {
+   "amp": 1.94659,
+   "phase": 164.503
+  },
+  "MF": {
+   "amp": 0.06414,
+   "phase": -119.869
+  },
+  "MM": {
+   "amp": 0.72028,
+   "phase": -85.671
+  },
+  "N2": {
+   "amp": 4.04817,
+   "phase": 39.81
+  },
+  "O1": {
+   "amp": 1.95631,
+   "phase": 126.837
+  },
+  "P1": {
+   "amp": 0.96693,
+   "phase": 151.628
+  },
+  "Q1": {
+   "amp": 0.01875,
+   "phase": 94.143
+  },
+  "S1": {
+   "amp": 1.12405,
+   "phase": 20.187
+  },
+  "S2": {
+   "amp": 7.66044,
+   "phase": 77.437
+  },
+  "SA": {
+   "amp": 2.32138,
+   "phase": -63.306
+  },
+  "SSA": {
+   "amp": 0.21129,
+   "phase": 179.723
+  },
+  "T2": {
+   "amp": 0.36177,
+   "phase": 57.408
+  },
+  "Z0": {
+   "amp": 37.2,
+   "phase": 0
+  }
+ }
+}

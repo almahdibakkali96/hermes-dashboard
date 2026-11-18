@@ -1,0 +1,94 @@
+{
+ "id": "bali",
+ "name_en": "Bali (Kuta)",
+ "name_ar": "بالي",
+ "country": "ID",
+ "lat": -8.72,
+ "lon": 115.17,
+ "timezone": "Asia/Makassar",
+ "grid": {
+  "lat": -8.75,
+  "lon": 115.125,
+  "distance_km": 6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.33769,
+   "phase": -18.527
+  },
+  "J1": {
+   "amp": 1.58163,
+   "phase": -168.289
+  },
+  "K1": {
+   "amp": 23.36517,
+   "phase": 171.834
+  },
+  "K2": {
+   "amp": 10.72257,
+   "phase": 102.362
+  },
+  "M2": {
+   "amp": 69.46819,
+   "phase": 47.982
+  },
+  "M4": {
+   "amp": 1.09728,
+   "phase": -97.87
+  },
+  "MF": {
+   "amp": 1.9267,
+   "phase": 0.159
+  },
+  "MM": {
+   "amp": 1.08185,
+   "phase": -6.844
+  },
+  "N2": {
+   "amp": 12.79571,
+   "phase": 20.788
+  },
+  "O1": {
+   "amp": 14.77594,
+   "phase": 162.263
+  },
+  "P1": {
+   "amp": 6.97143,
+   "phase": 162.957
+  },
+  "Q1": {
+   "amp": 3.59119,
+   "phase": 144.837
+  },
+  "S1": {
+   "amp": 2.33493,
+   "phase": -61.627
+  },
+  "S2": {
+   "amp": 38.60372,
+   "phase": 104.151
+  },
+  "SA": {
+   "amp": 3.24745,
+   "phase": 59.182
+  },
+  "SSA": {
+   "amp": 0.52339,
+   "phase": -41.604
+  },
+  "T2": {
+   "amp": 2.49861,
+   "phase": 102.323
+  },
+  "Z0": {
+   "amp": 158.7,
+   "phase": 0
+  }
+ }
+}

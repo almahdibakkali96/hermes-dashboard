@@ -1,0 +1,94 @@
+{
+ "id": "mombasa",
+ "name_en": "Mombasa",
+ "name_ar": "مومباسا",
+ "country": "KE",
+ "lat": -4.06,
+ "lon": 39.67,
+ "timezone": "Africa/Nairobi",
+ "grid": {
+  "lat": -4,
+  "lon": 39.75,
+  "distance_km": 11.1
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.9231,
+   "phase": -25.237
+  },
+  "J1": {
+   "amp": 1.21231,
+   "phase": 16.428
+  },
+  "K1": {
+   "amp": 19.09791,
+   "phase": -4.722
+  },
+  "K2": {
+   "amp": 14.23154,
+   "phase": 60.662
+  },
+  "M2": {
+   "amp": 102.24072,
+   "phase": 24.777
+  },
+  "M4": {
+   "amp": 0.52563,
+   "phase": 148.051
+  },
+  "MF": {
+   "amp": 1.47871,
+   "phase": 10.5
+  },
+  "MM": {
+   "amp": 0.56599,
+   "phase": -38.453
+  },
+  "N2": {
+   "amp": 18.92151,
+   "phase": 2.826
+  },
+  "O1": {
+   "amp": 11.06241,
+   "phase": -1.816
+  },
+  "P1": {
+   "amp": 5.40636,
+   "phase": -6.132
+  },
+  "Q1": {
+   "amp": 2.25,
+   "phase": -5.295
+  },
+  "S1": {
+   "amp": 1.6533,
+   "phase": 109.083
+  },
+  "S2": {
+   "amp": 51.26069,
+   "phase": 63.591
+  },
+  "SA": {
+   "amp": 0.87731,
+   "phase": -177.227
+  },
+  "SSA": {
+   "amp": 0.69606,
+   "phase": 5.378
+  },
+  "T2": {
+   "amp": 3.32626,
+   "phase": 68.487
+  },
+  "Z0": {
+   "amp": 193.7,
+   "phase": 0
+  }
+ }
+}

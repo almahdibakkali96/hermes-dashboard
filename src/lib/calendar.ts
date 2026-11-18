@@ -41,6 +41,10 @@ export function calendarBuyUrl(link: string, portId?: string): string {
 /** "for <port>": ل attached to the name, and ل + ال → لل (للدار البيضاء, لدبي). */
 export const forPort = (name: string) => (name.startsWith('ال') ? 'لل' + name.slice(2) : 'ل' + name);
 
+/** "41 يوماً ممتازاً" with Arabic number agreement: [number, words] so the number can be set in Latin digits. */
+export const excellentDaysAr = (n: number): [string, string] =>
+  n === 1 ? ['', 'يوم واحد ممتاز'] : n === 2 ? ['', 'يومان ممتازان'] : n <= 10 ? [String(n), 'أيام ممتازة'] : [String(n), 'يوماً ممتازاً'];
+
 export const monthsAr = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
 
 export interface YearSummary {
@@ -54,6 +58,17 @@ export interface YearSummary {
 }
 
 const DAY = 86400000;
+
+// On globalThis so /calendar and every port page of one build share each port's computation (~200 ms a port)
+const g = globalThis as unknown as { __arabtidesYearSummary?: Map<string, YearSummary> };
+const summaries = (g.__arabtidesYearSummary ??= new Map<string, YearSummary>());
+
+/** yearSummary for a port, computed once per build. */
+export function portYearSummary(id: string, constituents: Record<string, Constituent>, timezone: string, year = CAL.year): YearSummary {
+  const key = `${id}-${year}`;
+  if (!summaries.has(key)) summaries.set(key, yearSummary(constituents, timezone, year));
+  return summaries.get(key)!;
+}
 
 export function yearSummary(constituents: Record<string, Constituent>, timezone: string, year = CAL.year): YearSummary {
   const days: { m: number; range: number; age: number; r?: number }[] = [];

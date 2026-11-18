@@ -1,0 +1,94 @@
+{
+ "id": "port-louis",
+ "name_en": "Port Louis",
+ "name_ar": "بورت لويس",
+ "country": "MU",
+ "lat": -20.16,
+ "lon": 57.5,
+ "timezone": "Indian/Mauritius",
+ "grid": {
+  "lat": -20.125,
+  "lon": 57.375,
+  "distance_km": 13.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.80828,
+   "phase": -107.458
+  },
+  "J1": {
+   "amp": 0.3265,
+   "phase": 110.641
+  },
+  "K1": {
+   "amp": 5.61061,
+   "phase": 75.384
+  },
+  "K2": {
+   "amp": 2.92667,
+   "phase": -72.199
+  },
+  "M2": {
+   "amp": 16.89392,
+   "phase": -90.861
+  },
+  "M4": {
+   "amp": 0.52384,
+   "phase": -12.194
+  },
+  "MF": {
+   "amp": 0.7856,
+   "phase": 9.591
+  },
+  "MM": {
+   "amp": 0.44911,
+   "phase": -2.508
+  },
+  "N2": {
+   "amp": 4.31874,
+   "phase": -83.755
+  },
+  "O1": {
+   "amp": 3.72967,
+   "phase": 45.835
+  },
+  "P1": {
+   "amp": 2.11116,
+   "phase": 75.565
+  },
+  "Q1": {
+   "amp": 0.48234,
+   "phase": -17.817
+  },
+  "S1": {
+   "amp": 0.55897,
+   "phase": 107.556
+  },
+  "S2": {
+   "amp": 11.23208,
+   "phase": -80.979
+  },
+  "SA": {
+   "amp": 1.73446,
+   "phase": 56.876
+  },
+  "SSA": {
+   "amp": 0.4174,
+   "phase": 7.519
+  },
+  "T2": {
+   "amp": 0.70353,
+   "phase": -85.07
+  },
+  "Z0": {
+   "amp": 43.7,
+   "phase": 0
+  }
+ }
+}

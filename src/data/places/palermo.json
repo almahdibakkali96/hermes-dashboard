@@ -1,0 +1,94 @@
+{
+ "id": "palermo",
+ "name_en": "Palermo",
+ "name_ar": "باليرمو",
+ "country": "IT",
+ "lat": 38.13,
+ "lon": 13.37,
+ "timezone": "Europe/Rome",
+ "grid": {
+  "lat": 38.125,
+  "lon": 13.375,
+  "distance_km": 0.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.55755,
+   "phase": -168.245
+  },
+  "J1": {
+   "amp": 0.16428,
+   "phase": -178.397
+  },
+  "K1": {
+   "amp": 2.68907,
+   "phase": -165.601
+  },
+  "K2": {
+   "amp": 1.20324,
+   "phase": -113.099
+  },
+  "M2": {
+   "amp": 11.06866,
+   "phase": -124.411
+  },
+  "M4": {
+   "amp": 0.25064,
+   "phase": 130.011
+  },
+  "MF": {
+   "amp": 0.52528,
+   "phase": 149.098
+  },
+  "MM": {
+   "amp": 0.43063,
+   "phase": -86.213
+  },
+  "N2": {
+   "amp": 2.12434,
+   "phase": -138.518
+  },
+  "O1": {
+   "amp": 0.92176,
+   "phase": 114.395
+  },
+  "P1": {
+   "amp": 0.68527,
+   "phase": 176.069
+  },
+  "Q1": {
+   "amp": 0.07624,
+   "phase": 58.167
+  },
+  "S1": {
+   "amp": 1.14691,
+   "phase": -7.269
+  },
+  "S2": {
+   "amp": 4.03096,
+   "phase": -98.966
+  },
+  "SA": {
+   "amp": 3.3613,
+   "phase": -76.894
+  },
+  "SSA": {
+   "amp": 0.25804,
+   "phase": -178.639
+  },
+  "T2": {
+   "amp": 0.4768,
+   "phase": -81.953
+  },
+  "Z0": {
+   "amp": 24.1,
+   "phase": 0
+  }
+ }
+}

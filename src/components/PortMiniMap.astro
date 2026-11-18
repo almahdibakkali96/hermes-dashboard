@@ -1,0 +1,62 @@
+---
+// Port page map, in the brand's map style (public/map/land.svg): the port, the ports around it (links), and their names
+// placed so they don't overlap. Drawn at build time, no script; street-level detail is one tap away in Google Maps.
+import placesIndex from '../data/places/places_index.json';
+import { PROJ, project } from '../lib/mapProjection';
+import { formatCoords } from '../lib/countries';
+
+export interface Props { port: { id: string; name_ar: string; lat: number; lon: number } }
+const { port } = Astro.props;
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+type Place = { id: string; name_ar: string; lat: number; lon: number };
+
+// View: ±2.4° of latitude around the port at 4:3, sized for a ~330 px card (it crops a little on wider ones)
+const PXW = 330, PXH = 248;
+const [cx, cy] = project(port.lon, port.lat);
+const h = 48, w = (h * PXW) / PXH;
+const vb = [cx - w / 2, cy - h / 2, w, h];
+const s = w / PXW; // map units per pixel
+
+const inView = (placesIndex as Place[])
+  .map(p => { const [x, y] = project(p.lon, p.lat); return { ...p, x, y, sx: (x - vb[0]) / s, sy: (y - vb[1]) / s }; })
+  .filter(p => p.sx > -10 && p.sx < PXW + 10 && p.sy > -10 && p.sy < PXH + 10)
+  .sort((a, b) => Number(b.id === port.id) - Number(a.id === port.id) || Math.hypot(a.sx - PXW / 2, a.sy - PXH / 2) - Math.hypot(b.sx - PXW / 2, b.sy - PXH / 2));
+
+// Names: the port first, then the nearest; left or right of the dot, never over another name or dot
+const taken = inView.map(p => [p.sx - 7, p.sy - 7, p.sx + 7, p.sy + 7]);
+const hit = (b: number[]) => taken.some(t => b[0] < t[2] && b[2] > t[0] && b[1] < t[3] && b[3] > t[1]);
+const labels: { x: number; y: number; anchor: string; text: string; main: boolean }[] = [];
+for (const p of inView) {
+  const main = p.id === port.id, fs = main ? 14 : 12;
+  const tw = p.name_ar.length * fs * 0.52 + 6; // Arabic glyphs average about half an em
+  for (const side of [1, -1]) {
+    const b = side > 0 ? [p.sx + 9, p.sy - 9, p.sx + 9 + tw, p.sy + 9] : [p.sx - 9 - tw, p.sy - 9, p.sx - 9, p.sy + 9];
+    if (b[0] < 2 || b[2] > PXW - 2 || b[1] < 2 || b[3] > PXH - 2 || hit(b)) continue;
+    taken.push(b);
+    labels.push({ x: vb[0] + (side > 0 ? b[0] + 3 : b[2] - 3) * s, y: p.y + 4.5 * s, anchor: side > 0 ? 'start' : 'end', text: p.name_ar, main });
+    break;
+  }
+}
+const f = (n: number) => n.toFixed(2);
+// The land layer covers 25°W–70°E, 20°S–45°N: further away (Brest, Bali…) the card keeps only the coordinates and the link
+const hasLand = vb[0] >= 0 && vb[1] >= 0 && vb[0] + vb[2] <= PROJ.W && vb[1] + vb[3] <= PROJ.H;
+const gmaps = `https://www.google.com/maps/search/?api=1&query=${port.lat},${port.lon}`;
+---
+
+<section class="card overflow-hidden" aria-labelledby="map-title">
+  {hasLand && <svg class="mini-map" viewBox={vb.map(f).join(' ')} preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="map-title">
+    <rect x={f(vb[0] - 10)} y={f(vb[1] - 10)} width={f(w + 20)} height={f(h + 20)} fill="#0e3150" />
+    <image href={`${BASE}map/land.svg`} x="0" y="0" width={PROJ.W} height={PROJ.H} />
+    {inView.filter(p => p.id !== port.id).map(p => (
+      <a href={`${BASE}ports/${p.id}`} class="mini-dot"><title>{p.name_ar}</title><circle cx={f(p.x)} cy={f(p.y)} r={f(4.5 * s)} stroke-width={f(1.6 * s)} /></a>
+    ))}
+    <circle class="mini-pulse" cx={f(cx)} cy={f(cy)} r={f(9 * s)} />
+    <circle class="mini-here" cx={f(cx)} cy={f(cy)} r={f(6.5 * s)} stroke-width={f(2.5 * s)} />
+    {labels.map(l => <text class:list={['mini-label', { 'is-main': l.main }]} x={f(l.x)} y={f(l.y)} text-anchor={l.anchor} font-size={f((l.main ? 14 : 12) * s)} stroke-width={f(3 * s)}>{l.text}</text>)}
+  </svg>}
+  <div class="px-4 py-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+    <h2 id="map-title" class="font-semibold text-sm">موقع {port.name_ar}</h2>
+    <span class="latin text-[var(--text-muted)]">{formatCoords(port.lat, port.lon)}</span>
+    <a href={gmaps} target="_blank" rel="noopener" class="ms-auto text-[var(--accent-text)] font-semibold hover:underline">افتح في خرائط Google ↗</a>
+  </div>
+</section>

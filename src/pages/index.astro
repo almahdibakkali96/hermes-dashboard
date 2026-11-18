@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import placesIndex from '../data/places/places_index.json';
+// Arab ports drive the homepage lists and counts; world places get their own section (src/lib/regions.ts)
+import { arabPlaces as placesIndex, allPlaces, worldPlaces } from '../lib/regions';
 import { moonPhase } from '../lib/astronomy';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
@@ -9,6 +10,7 @@ import LiveTides from '../components/LiveTides.astro';
 import Flag from '../components/Flag.astro';
 import RatingBadge from '../components/RatingBadge.astro';
 import WeekRatings from '../components/WeekRatings.astro';
+import PortsMap from '../components/PortsMap.astro';
 import { ratingsFrom } from '../lib/fishing';
 import { fish, fishLabel } from '../lib/fish';
 import {
@@ -17,6 +19,7 @@ import {
 } from '../lib/tides';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const worldCountries = [...new Set(worldPlaces.map(p => p.country))].sort((a, b) => countryName(a).localeCompare(countryName(b), 'ar'));
 const countries = [...new Set(placesIndex.map((p: { country: string }) => p.country))]
   .sort((a, b) => countryName(a).localeCompare(countryName(b), 'ar'));
 
@@ -64,14 +67,9 @@ const moon = moonPhase(new Date());
 // Headline date in Makkah time (UTC+3), the middle of the ports' UTC+0…+4 span
 const todayAr = new Date().toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'Asia/Riyadh', weekday: 'long', day: 'numeric', month: 'long' });
 
-// Lightweight port list for the overview map (client-side)
-const mapPorts = placesIndex.map((p: { id: string; name_ar: string; lat: number; lon: number }) => ({
-  id: p.id, name: p.name_ar, lat: p.lat, lon: p.lon
-}));
-
 // Full port list for the search dropdown (client-side)
-const searchPorts = placesIndex.map((p: { id: string; name_ar: string; name_en: string; country: string }) => ({
-  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryName(p.country)
+const searchPorts = allPlaces.map((p: { id: string; name_ar: string; name_en: string; country: string; lat: number; lon: number }) => ({
+  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryName(p.country), lat: p.lat, lon: p.lon
 }));
 const searchPortsJSON = JSON.stringify(searchPorts);
 
@@ -97,7 +95,7 @@ const features = [
         <span>{moon.phaseNameAr} <span class="latin">{Math.round(moon.illumination * 100)}%</span></span>
       </p>
       <!-- One unbreakable line each, sized to the screen: the fallback font must not wrap differently, or the hero shifts when the web font arrives -->
-      <h1 class="mt-5 text-[clamp(1.75rem,10vw,2.25rem)] sm:text-5xl font-bold leading-tight display max-w-2xl">
+      <h1 class="mt-5 text-[clamp(1.6rem,8.6vw,2.25rem)] sm:text-5xl leading-tight display display-heavy max-w-2xl">
         <span class="block whitespace-nowrap">مواقيت المد والجزر</span>
         <span class="block whitespace-nowrap text-teal-300">للموانئ العربية</span>
       </h1>
@@ -128,10 +126,15 @@ const features = [
       </div>
 
       <div class="mt-4 flex flex-wrap items-center gap-2 text-sm">
-        <span class="text-slate-400 text-xs">الأكثر بحثاً:</span>
-        {featuredPorts.slice(0, 4).map(p => (
-          <a href={`${BASE}ports/${p.id}`} class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-white text-xs transition-colors">{p.name_ar}</a>
-        ))}
+        <!-- The visitor's location stays in the browser: it only picks the nearest ports from the list below -->
+        <button type="button" id="near-me" class="near-me-btn"><span aria-hidden="true">📍</span> <span data-l>أقرب ميناء إليّ</span></button>
+        <!-- Returning visitors see the ports they opened last instead (filled from localStorage) -->
+        <span class="text-slate-400 text-xs" id="quick-label">الأكثر بحثاً:</span>
+        <span id="quick-chips" class="contents">
+          {featuredPorts.slice(0, 4).map(p => (
+            <a href={`${BASE}ports/${p.id}`} class="quick-chip">{p.name_ar}</a>
+          ))}
+        </span>
       </div>
 
       <!-- The port saved with "اجعله ميناءي" on a port page: shown here with its next tides -->
@@ -154,8 +157,17 @@ const features = [
 
   <main id="main" class="max-w-6xl mx-auto px-4 w-full">
 
+    <!-- Live map: every port, rising or falling right now, or today's fishing rating -->
+    <section class="mt-6 mb-14" aria-labelledby="map-title">
+      <div class="section-title">
+        <h2 id="map-title">خريطة الموانئ الآن</h2>
+        <p>هل يرتفع الماء أم ينخفض في كل ميناء، بالتوقيت المحلي</p>
+      </div>
+      <PortsMap />
+    </section>
+
     <!-- This week's best fishing days, one port per sea -->
-    <section class="mt-6 mb-14" aria-labelledby="week-title">
+    <section class="mb-14" aria-labelledby="week-title">
       <div class="section-title">
         <h2 id="week-title">أفضل أيام الصيد هذا الأسبوع</h2>
         <p>تقييم الصيد من <span class="latin">1</span> إلى <span class="latin">5</span> لكل يوم: طور القمر وقوة المد</p>
@@ -172,32 +184,34 @@ const features = [
         <h2 id="featured-title">موانئ مميزة</h2>
         <p>المد والجزر القادم بالتوقيت المحلي، وتقييم الصيد اليوم</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+      <!-- Two columns on phones: name, today's curve, next high and low -->
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {featuredPorts.map(port => (
-          <a href={`${BASE}ports/${port.id}`} class="card group block p-4">
-            <div class="flex items-start justify-between gap-3">
+          <a href={`${BASE}ports/${port.id}`} class="card port-tile group">
+            <div class="flex items-start justify-between gap-2">
               <div class="min-w-0">
-                <div class="text-lg font-semibold display leading-snug group-hover:text-[var(--accent-text)] transition-colors">{port.name_ar}</div>
-                <div class="text-xs text-[var(--text-muted)]">{port.countryName} · <span class="latin" lang="en">{port.name_en}</span></div>
+                <div class="text-base sm:text-lg display leading-snug truncate group-hover:text-[var(--accent-text)] transition-colors">{port.name_ar}</div>
+                <div class="text-[11px] sm:text-xs text-[var(--text-muted)] truncate">{port.countryName}<span class="hidden sm:inline"> · <span class="latin" lang="en">{port.name_en}</span></span></div>
               </div>
-              <RatingBadge rating={port.rating} size="sm" />
+              <RatingBadge rating={port.rating} size="sm" label={false} />
             </div>
-            <div class="mt-3 flex items-end gap-5 text-xs" data-tides={port.liveTides} data-tz={port.tz}>
+            <svg viewBox="0 0 120 32" preserveAspectRatio="none" class="port-tile-spark chart-ltr" aria-hidden="true">
+              <path d={`${port.spark} L120,32 L0,32 Z`} class="fill" />
+              <path d={port.spark} class="line" />
+            </svg>
+            <div class="flex items-end justify-between gap-2 text-[11px] sm:text-xs" data-tides={port.liveTides} data-tz={port.tz}>
               {port.nextHigh && (
                 <div>
-                  <div class="text-[var(--text-muted)]">▲ المد القادم</div>
-                  <div class="text-lg font-bold text-teal-700 latin leading-tight" data-next="h">{formatTime(port.nextHigh.time, port.tz)}</div>
+                  <div class="text-[var(--text-muted)]">▲ المد</div>
+                  <div class="text-base sm:text-xl font-bold text-teal-700 latin leading-tight" data-next="h">{formatTime(port.nextHigh.time, port.tz)}</div>
                 </div>
               )}
               {port.nextLow && (
-                <div>
-                  <div class="text-[var(--text-muted)]">▼ الجزر القادم</div>
-                  <div class="text-lg font-bold text-rose-600 latin leading-tight" data-next="l">{formatTime(port.nextLow.time, port.tz)}</div>
+                <div class="text-end">
+                  <div class="text-[var(--text-muted)]">▼ الجزر</div>
+                  <div class="text-base sm:text-xl font-bold text-rose-600 latin leading-tight" data-next="l">{formatTime(port.nextLow.time, port.tz)}</div>
                 </div>
               )}
-              <svg viewBox="0 0 120 32" class="ms-auto w-24 h-8 chart-ltr shrink-0" aria-hidden="true">
-                <path d={port.spark} fill="none" stroke="#0d9488" stroke-width="1.8" stroke-linejoin="round" />
-              </svg>
             </div>
           </a>
         ))}
@@ -235,12 +249,14 @@ const features = [
       <div class="section-title">
         <h2 id="features-title">ماذا تجد في صفحة كل ميناء؟</h2>
       </div>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {features.map(f => (
-          <div class="card p-4 sm:p-5">
-            <div class="w-10 h-10 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-xl" aria-hidden="true">{f.icon}</div>
-            <h3 class="mt-3 font-semibold">{f.title}</h3>
-            <p class="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">{f.text}</p>
+          <div class="card p-4 flex gap-3 items-start">
+            <div class="w-10 h-10 shrink-0 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center text-xl" aria-hidden="true">{f.icon}</div>
+            <div>
+              <h3 class="font-semibold">{f.title}</h3>
+              <p class="mt-0.5 text-sm text-[var(--text-secondary)] leading-relaxed">{f.text}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -273,16 +289,6 @@ const features = [
       </div>
     </section>
 
-    <!-- Ports overview map -->
-    <section class="mb-14" aria-labelledby="map-title">
-      <div class="section-title">
-        <h2 id="map-title">خريطة الموانئ</h2>
-        <p>اضغط على أي نقطة لفتح صفحة الميناء</p>
-      </div>
-      <div id="ports-map" class="port-map ports-map w-full border border-[var(--border-subtle)]"></div>
-      <p class="text-[11px] text-[var(--text-muted)] mt-2 text-center">بيانات الخريطة &copy; <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-[var(--accent-text)]" lang="en">OpenStreetMap</a></p>
-    </section>
-
     <!-- Countries -->
     <section id="countries" class="mb-14 scroll-mt-20" aria-labelledby="countries-title">
       <div class="section-title">
@@ -302,6 +308,26 @@ const features = [
             </a>
           );
         })}
+      </div>
+    </section>
+
+    <!-- Worldwide, in Arabic: places Arab travellers and residents fish from -->
+    <section id="world" class="mb-14 scroll-mt-20" aria-labelledby="world-title">
+      <div class="section-title">
+        <h2 id="world-title">حول العالم بالعربية</h2>
+        <p><span class="latin">{worldPlaces.length}</span> مكاناً يسافر إليها العرب أو يعيشون فيها: المد والجزر وأوقات الصيد بالعربية</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
+        {worldCountries.map(code => (
+          <div class="card px-3 py-2.5 min-w-0">
+            <a href={`${BASE}country/${code}`} class="flex items-center gap-2 text-sm font-semibold hover:text-[var(--accent-text)]"><Flag code={code} size={20} /><span class="truncate">{countryName(code)}</span></a>
+            <div class="mt-1.5 flex flex-wrap gap-1">
+              {worldPlaces.filter(p => p.country === code).map(p => (
+                <a href={`${BASE}ports/${p.id}`} class="world-chip">{p.name_ar}</a>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
 
@@ -335,58 +361,6 @@ const features = [
   </main>
 </BaseLayout>
 
-<!-- Leaflet overview map (client-only, free OSM tiles) -->
-<script is:inline define:vars={{ ports: mapPorts, base: BASE }}>
-  (function () {
-    // Leaflet is fetched only when the map nears the viewport, so it never delays the first paint
-    function loadLeaflet(el, cb) {
-      function go() {
-        var left = 2, done = function () { if (--left === 0) cb(); };
-        var css = document.createElement('link');
-        css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-        css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = '';
-        css.onload = css.onerror = done;
-        var js = document.createElement('script');
-        js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-        js.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; js.crossOrigin = '';
-        js.onload = done;
-        document.head.appendChild(css); document.head.appendChild(js);
-      }
-      if (!('IntersectionObserver' in window)) return go();
-      var io = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { io.disconnect(); go(); }
-      }, { rootMargin: '400px' });
-      io.observe(el);
-    }
-    function initMap() {
-      var el = document.getElementById('ports-map');
-      if (!el || typeof L === 'undefined' || !ports.length) return;
-      var map = L.map(el, { scrollWheelZoom: false, attributionControl: false });
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18, attribution: '&copy; OpenStreetMap'
-      }).addTo(map);
-      var pts = [];
-      ports.forEach(function (p) {
-        var m = L.circleMarker([p.lat, p.lon], {
-          radius: 6, color: '#ffffff', fillColor: '#0d9488', fillOpacity: 0.9, weight: 2
-        }).addTo(map);
-        m.bindTooltip(p.name, { direction: 'top', offset: [0, -6] });
-        m.on('click', function () { window.location.href = base + 'ports/' + p.id; });
-        pts.push([p.lat, p.lon]);
-      });
-      map.fitBounds(pts, { padding: [30, 30] });
-      map.on('click', function () { map.scrollWheelZoom.enable(); });
-      setTimeout(function () { map.invalidateSize(); }, 200);
-    }
-    function start() {
-      var mapEl = document.getElementById('ports-map');
-      if (mapEl) loadLeaflet(mapEl, initMap);
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', start);
-    } else { start(); }
-  })();
-</script>
 
 <LiveTides />
 
@@ -468,4 +442,58 @@ const features = [
   searchEl?.addEventListener('focus', function () {
     if (dropdown && dropdown.children.length) { dropdown.classList.remove('hidden'); this.setAttribute('aria-expanded','true'); }
   });
+
+  // "Nearest port to me": the browser's position, used here only, picks the four nearest ports; the list opens
+  // in the search dropdown (absolutely placed, so the page doesn't move)
+  (function () {
+    var btn = document.getElementById('near-me');
+    if (!btn || !dropdown) return;
+    var label = btn.querySelector('[data-l]'), idle = label.textContent;
+    function rad(x) { return x * Math.PI / 180; }
+    function km(aLat, aLon, bLat, bLon) {
+      var s = Math.pow(Math.sin(rad(bLat - aLat) / 2), 2) + Math.cos(rad(aLat)) * Math.cos(rad(bLat)) * Math.pow(Math.sin(rad(bLon - aLon) / 2), 2);
+      return 2 * 6371 * Math.asin(Math.sqrt(s));
+    }
+    function open(html) { dropdown.innerHTML = html; dropdown.classList.remove('hidden'); }
+    function done() { btn.disabled = false; label.textContent = idle; }
+    var fail = '<div class="px-4 py-3 text-sm text-[var(--text-muted)]">لم نتمكن من تحديد موقعك. اكتب اسم ميناءك أو مدينتك في البحث.</div>';
+    btn.addEventListener('click', function () {
+      if (!navigator.geolocation || !portsData.length) { open(fail); return; }
+      btn.disabled = true; label.textContent = 'نحدد موقعك…';
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        var lat = pos.coords.latitude, lon = pos.coords.longitude;
+        var list = portsData.map(function (p) { return { p: p, d: km(lat, lon, p.lat, p.lon) }; })
+          .sort(function (a, b) { return a.d - b.d; }).slice(0, 4);
+        var html = '<div class="px-4 pt-3 pb-1 text-xs font-semibold text-[var(--text-muted)]">أقرب الموانئ إليك</div>';
+        list.forEach(function (x, i) {
+          html += '<a href="' + base + 'ports/' + x.p.id + '" class="flex items-center gap-3 px-4 py-3 hover:bg-[var(--surface-elevated)] transition-colors text-sm border-b border-[var(--border-subtle)] last:border-0' + (i === 0 ? ' font-semibold' : '') + '"><span>' + x.p.name_ar + '</span><span class="text-xs text-[var(--text-muted)]">' + x.p.countryName + '</span><span class="text-xs text-[var(--text-muted)] ms-auto"><span class="latin">' + Math.round(x.d) + '</span> كم</span></a>';
+        });
+        open(html);
+        try { if (window.va) window.va('event', { name: 'near_me', data: { port: list[0].p.id, km: Math.round(list[0].d) } }); } catch (e) {}
+        try { if (window.gtag) window.gtag('event', 'near_me', { port: list[0].p.id }); } catch (e) {}
+        done();
+      }, function () { open(fail); done(); }, { timeout: 12000, maximumAge: 600000 });
+    });
+    // Close the list on a tap outside the search box and the button
+    document.addEventListener('click', function (e) {
+      if (!dropdown.classList.contains('hidden') && !dropdown.contains(e.target) && e.target !== searchEl && !btn.contains(e.target)) dropdown.classList.add('hidden');
+    });
+  })();
+
+  // Returning visitors: the ports they opened last replace "most searched" (saved by port pages)
+  (function () {
+    var recent = [];
+    try { recent = JSON.parse(localStorage.getItem('arabtides.recent') || '[]'); } catch (e) {}
+    if (!Array.isArray(recent)) return;
+    recent = recent.filter(function (x) { return x && /^[a-z0-9-]+$/.test(x.id || '') && typeof x.name === 'string'; }).slice(0, 4);
+    var box = document.getElementById('quick-chips'), lbl = document.getElementById('quick-label');
+    if (!recent.length || !box || !lbl) return;
+    box.textContent = '';
+    recent.forEach(function (x) {
+      var a = document.createElement('a');
+      a.href = base + 'ports/' + x.id; a.className = 'quick-chip'; a.textContent = x.name;
+      box.appendChild(a);
+    });
+    lbl.textContent = 'زرتها مؤخراً:';
+  })();
 </script>

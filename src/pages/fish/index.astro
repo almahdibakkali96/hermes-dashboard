@@ -5,7 +5,7 @@ import { seas, type SeaId } from '../../lib/seaNames';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const pageUrl = new URL(`${BASE}fish`, Astro.site).href;
-const seaIds = Object.keys(seas) as SeaId[];
+const seaIds = (Object.keys(seas) as SeaId[]).filter(s => s !== 'world');
 const description = `أسماء الأسماك البحرية (الحوت في المغرب العربي) بالصور: ${fish.length} نوعاً من البحار العربية، مع الاسم الفصيح والأسماء المحلية في كل بلد، وأفضل وقت ومد لصيدها.`;
 const jsonLd = [
   {

@@ -1,7 +1,7 @@
 ---
 import ArticleLayout from '../../components/ArticleLayout.astro';
 import { articleBySlug } from '../../lib/articles';
-import { yearStats } from '../../lib/seas';
+import { arabYearStats as yearStats } from '../../lib/seas';
 import { countryName } from '../../lib/countries';
 import { dayExtremes, getTimezoneOffset, formatTime, type Constituent } from '../../lib/tides';
 
@@ -56,8 +56,8 @@ const faq = [
   <svg slot="art" viewBox="0 0 300 260" class="w-full h-auto">
     <path d="M60 30 C90 40 110 70 150 100 C190 130 230 160 250 210 L270 230" fill="none" stroke="#2dd4bf" stroke-width="34" stroke-linecap="round" opacity=".35"/>
     <circle cx="70" cy="34" r="9" fill="#fde68a"/><circle cx="150" cy="100" r="7" fill="#5eead4"/><circle cx="235" cy="185" r="7" fill="#5eead4"/>
-    <text x="90" y="30" fill="#fde68a" font-size="15" font-family="Noto Naskh Arabic">الكويت</text>
-    <text x="250" y="250" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="Noto Naskh Arabic">هرمز</text>
+    <text x="90" y="30" fill="#fde68a" font-size="15" font-family="IBM Plex Sans Arabic, sans-serif">الكويت</text>
+    <text x="250" y="250" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="IBM Plex Sans Arabic, sans-serif">هرمز</text>
   </svg>
 
   <h2 id="numbers">المد في موانئ الخليج بالأرقام</h2>

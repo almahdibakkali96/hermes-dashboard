@@ -1,0 +1,94 @@
+{
+ "id": "almeria",
+ "name_en": "Almería",
+ "name_ar": "ألمرية",
+ "country": "ES",
+ "lat": 36.83,
+ "lon": -2.46,
+ "timezone": "Europe/Madrid",
+ "grid": {
+  "lat": 36.75,
+  "lon": -2.5,
+  "distance_km": 9.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 0.15019,
+   "phase": 37.441
+  },
+  "J1": {
+   "amp": 0.41602,
+   "phase": 146.36
+  },
+  "K1": {
+   "amp": 2.84989,
+   "phase": 154.758
+  },
+  "K2": {
+   "amp": 1.16328,
+   "phase": 72.759
+  },
+  "M2": {
+   "amp": 10.12464,
+   "phase": 47.401
+  },
+  "M4": {
+   "amp": 0.8168,
+   "phase": 172.795
+  },
+  "MF": {
+   "amp": 0.31547,
+   "phase": -155.517
+  },
+  "MM": {
+   "amp": 0.80815,
+   "phase": -102.432
+  },
+  "N2": {
+   "amp": 1.88004,
+   "phase": 37.769
+  },
+  "O1": {
+   "amp": 2.52567,
+   "phase": 119.729
+  },
+  "P1": {
+   "amp": 1.33203,
+   "phase": 146.149
+  },
+  "Q1": {
+   "amp": 0.30239,
+   "phase": 94.722
+  },
+  "S1": {
+   "amp": 1.15284,
+   "phase": 37.61
+  },
+  "S2": {
+   "amp": 4.81468,
+   "phase": 78.999
+  },
+  "SA": {
+   "amp": 3.57764,
+   "phase": -79.808
+  },
+  "SSA": {
+   "amp": 0.16649,
+   "phase": 179.091
+  },
+  "T2": {
+   "amp": 0.12354,
+   "phase": -9.006
+  },
+  "Z0": {
+   "amp": 25.7,
+   "phase": 0
+  }
+ }
+}

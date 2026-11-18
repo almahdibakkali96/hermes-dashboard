@@ -37,12 +37,12 @@
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
-  --radius-xl: 12px;
+  --radius-xl: 14px;
   --radius-pill: 9999px;
 
   /* Typography */
-  --font-arabic: 'Noto Naskh Arabic', 'Traditional Arabic', 'Scheherazade New', serif;
-  --font-display: 'Reem Kufi', 'Noto Naskh Arabic', serif;
+  --font-arabic: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, system-ui, sans-serif;
+  --font-display: 'Noto Kufi Arabic', 'IBM Plex Sans Arabic', 'Segoe UI', sans-serif;
   --font-latin:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Shadows — soft, layered, not flat */
@@ -73,11 +73,26 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Headings in Noto Kufi Arabic. No letter-spacing: it breaks the joins of Arabic letters */
 .display {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: 0;
 }
+.display-heavy { font-weight: 800; }
+
+/* Homepage port tiles: name, today's curve, next high and low */
+.port-tile { display: flex; flex-direction: column; gap: 0.5rem; padding: 0.85rem 0.9rem; min-width: 0; }
+.port-tile-spark { display: block; width: 100%; height: 2.25rem; }
+.port-tile-spark .fill { fill: rgba(20, 184, 166, 0.12); }
+.port-tile-spark .line { fill: none; stroke: #0d9488; stroke-width: 1.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+
+/* Port page summary: the full text stays in the page; phones see four lines until "more" */
+@media (max-width: 639px) {
+  .summary-text.is-clamped { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; }
+}
+.summary-more { margin-top: 0.35rem; font-size: 0.8rem; font-weight: 600; color: var(--accent-text); cursor: pointer; }
+@media (min-width: 640px) { .summary-more { display: none; } }
 
 /* Chart LTR */
 .chart-ltr {
@@ -112,13 +127,6 @@ body {
   transform: translateX(50%) translateY(0);
 }
 
-/* Leaflet map container */
-.port-map {
-  height: 220px;
-  border-radius: var(--radius-xl);
-  z-index: 0;
-}
-.leaflet-container { font-family: var(--font-latin); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -265,6 +273,18 @@ body {
 }
 .my-port-card:hover { background: rgba(255, 255, 255, 0.15); }
 .my-port-card[hidden] { display: none; }
+/* Homepage hero: nearest-port button and the quick port chips (most searched, or the visitor's recent ports) */
+.near-me-btn {
+  display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.85rem; border-radius: var(--radius-pill);
+  font-size: 0.75rem; font-weight: 700; color: #0b2540; background: #5eead4; cursor: pointer; transition: background-color 0.15s ease;
+}
+.near-me-btn:hover { background: #99f6e4; }
+.near-me-btn:disabled { opacity: 0.75; cursor: progress; }
+.quick-chip {
+  padding: 0.25rem 0.75rem; border-radius: var(--radius-pill); font-size: 0.75rem; color: #fff;
+  background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); transition: background-color 0.15s ease;
+}
+.quick-chip:hover { background: rgba(255, 255, 255, 0.2); }
 
 /* Week of fishing ratings: one row per port, one cell per day */
 .week-grid-head, .week-grid-row {
@@ -292,8 +312,6 @@ body {
 .all-ports-toggle::after { content: '+'; font-size: 1.25rem; line-height: 1; }
 .all-ports[open] .all-ports-toggle { border-bottom: 1px solid var(--border-subtle); }
 .all-ports[open] .all-ports-toggle::after { content: '−'; }
-.ports-map { height: 320px; }
-@media (min-width: 640px) { .ports-map { height: 420px; } }
 
 /* --- Section headings --- */
 .section-title {
@@ -303,11 +321,14 @@ body {
   margin-bottom: 1.25rem;
 }
 .section-title h2 {
+  display: inline-flex; align-items: center; gap: 0.55rem;
   font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: var(--text-primary);
 }
+/* A short teal bar before each section heading (V2) */
+.section-title h2::before { content: ''; flex-shrink: 0; width: 0.3rem; height: 1.05em; border-radius: 9999px; background: linear-gradient(180deg, #2dd4bf, #0d9488); }
 .section-title p { font-size: 0.8rem; color: var(--text-muted); }
 .section-title > a { white-space: nowrap; }
 @media (max-width: 639px) {
@@ -448,6 +469,72 @@ button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
   border: 1px solid var(--border-subtle); background: var(--surface-card); font-size: 1.1rem; cursor: pointer;
 }
 .day-step:disabled { opacity: 0.35; cursor: default; }
+.day-chart-link {
+  flex-shrink: 0; font-size: 0.75rem; font-weight: 600; cursor: pointer; padding: 0.3rem 0.75rem; border-radius: var(--radius-pill);
+  color: var(--accent-text); background: var(--accent-muted); border: 1px solid var(--accent-border);
+}
+.day-chart-link:hover { background: color-mix(in srgb, var(--accent) 14%, white); }
+
+/* Port hero: rising or falling right now (filled by src/scripts/port-day.ts; space kept so nothing jumps) */
+.now-status { margin-top: 1.25rem; min-height: 2.9rem; line-height: 1.45; font-size: 0.875rem; color: #cbd5e1; visibility: hidden; }
+.now-status.is-ready { visibility: visible; }
+.now-status .now-main { display: block; font-size: 1rem; font-weight: 600; color: #fff; }
+.now-status .now-next { display: block; }
+.now-arrow { display: inline-block; min-width: 1em; text-align: center; font-weight: 800; }
+.now-arrow.is-up { color: #5eead4; }
+.now-arrow.is-down { color: #fda4af; }
+@media (min-width: 640px) {
+  .now-status { min-height: 1.6rem; }
+  .now-status .now-main, .now-status .now-next { display: inline; }
+  .now-status .now-next::before { content: '·'; margin-inline: 0.5rem; opacity: 0.45; }
+}
+
+/* Port chart: day tabs + date picker, the chosen day's facts, scrubbing */
+.day-bar { display: flex; align-items: stretch; gap: 0.4rem; margin-top: 0.85rem; }
+.day-tabs { flex: 1 1 auto; min-width: 0; display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none; padding: 2px; }
+.day-tabs::-webkit-scrollbar { display: none; }
+.day-bar > .day-pick { margin-block: 2px; }
+/* Phones: the row's far end fades, a hint that more days scroll in (RTL: the end is on the left) */
+@media (max-width: 639px) {
+  .day-tabs { -webkit-mask-image: linear-gradient(to left, transparent 0, #000 1.5rem); mask-image: linear-gradient(to left, transparent 0, #000 1.5rem); }
+}
+.day-tab, .day-pick {
+  flex: 0 0 auto; position: relative; min-width: 3.5rem; padding: 0.4rem 0.5rem 0.45rem; text-align: center; line-height: 1.25;
+  border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); background: var(--surface-card);
+  font: inherit; color: var(--text-secondary); cursor: pointer; transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.day-tab:hover, .day-pick:hover { border-color: var(--accent-border); }
+.day-tab .d-name { display: block; font-size: 0.7rem; white-space: nowrap; }
+.day-tab .d-num { display: block; font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+.day-tab .d-bar { display: block; height: 0.25rem; margin: 0.25rem 0.3rem 0; border-radius: 9999px; background: var(--rating); }
+.day-tab[aria-pressed="true"], .day-pick.is-on { background: #f0fdfa; border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); color: var(--accent-text); }
+.day-pick { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1rem; min-width: 4.25rem; font-size: 0.7rem; color: var(--accent-text); border-style: dashed; white-space: nowrap; }
+.day-pick.is-on { border-style: solid; font-weight: 600; }
+.day-pick input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.day-facts { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.45rem; margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-secondary); }
+.day-fact { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.65rem; border-radius: var(--radius-pill); background: var(--surface-elevated); }
+.day-more { margin-top: 0.75rem; font-size: 0.75rem; line-height: 1.7; color: var(--text-muted); }
+.day-more a { color: var(--accent-text); text-decoration: underline; }
+.day-more.is-alert { padding: 0.55rem 0.8rem; border-radius: var(--radius-lg); font-size: 0.85rem; color: #9a3412; background: #fff7ed; border: 1px solid #fed7aa; }
+.tide-chart { touch-action: pan-y; cursor: crosshair; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+.tide-chart .scrub-line { stroke: #0f172a; stroke-opacity: 0.35; stroke-width: 1.5; }
+.tide-chart .scrub-dot { fill: #fff; stroke: #0d9488; stroke-width: 3; }
+.tide-chart .scrub-box { fill: #0f172a; }
+.tide-chart .scrub-text { fill: #fff; font-weight: 700; }
+.tide-chart.is-scrubbing #now-marker text { display: none; }
+
+/* Port page: nearby ports */
+.near-card {
+  display: block; min-width: 0; padding: 0.75rem 0.85rem; border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle); background: var(--surface-card); transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.near-card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md); }
+
+/* Calendar promo card: the port's own 2027 numbers */
+.cal-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; margin-top: 0.9rem; }
+.cal-facts > div { padding: 0.45rem 0.35rem; border-radius: var(--radius-lg); background: var(--surface-elevated); text-align: center; }
+.cal-facts dt { font-size: 0.65rem; color: var(--text-muted); }
+.cal-facts dd { margin-top: 0.1rem; font-size: 0.95rem; font-weight: 700; }
 
 /* --- Summary card + FAQ accordion --- */
 .summary-card { border-inline-start: 4px solid var(--accent); }
@@ -532,6 +619,8 @@ button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
 }
 .guide-cover img { border-radius: 0.6rem; box-shadow: 0 18px 40px -12px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); transform: rotate(-2deg); transition: transform .2s ease; }
 .guide-cover:hover img { transform: rotate(0deg) scale(1.02); }
+/* Phones: a smaller cover keeps the homepage banner to about one screen */
+@media (max-width: 767px) { .guide-banner .guide-cover img { width: 118px; height: auto; } }
 .guide-strip { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-radius: var(--radius-xl); background: #fff; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); }
 .guide-strip:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md); }
 
@@ -592,3 +681,72 @@ button.cal-cell { width: 100%; font: inherit; color: inherit; cursor: pointer; }
 }
 button.sea-chip { cursor: pointer; }
 button.sea-chip[aria-pressed="true"] { background: var(--accent-muted); border-color: var(--accent-border); color: var(--accent-hover); font-weight: 600; }
+
+/* --- Maps: brand style (public/map/land.svg, as in the Reels) --- */
+/* Homepage: every port, live (src/components/PortsMap.astro + src/scripts/ports-map.ts) */
+.pmap { border-radius: 1.25rem; overflow: hidden; background: #0b2540; color: #e2e8f0; box-shadow: 0 18px 40px -22px rgba(11, 37, 64, 0.7); }
+.pmap-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 0.75rem; padding: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.pmap-tabs { display: flex; gap: 0.35rem; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.pmap-tabs::-webkit-scrollbar { display: none; }
+.pmap-tab, .pmap-mode {
+  flex: 0 0 auto; padding: 0.35rem 0.8rem; border-radius: var(--radius-pill); font: inherit; font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+  color: #cbd5e1; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.pmap-tab:hover, .pmap-mode:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.pmap-tab[aria-pressed="true"] { background: #5eead4; border-color: #5eead4; color: #0b2540; }
+.pmap-modes { display: inline-flex; padding: 3px; border-radius: var(--radius-pill); background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); }
+.pmap-mode { border: 0; background: transparent; padding: 0.3rem 0.75rem; }
+.pmap-mode[aria-pressed="true"] { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.pmap-stage { position: relative; aspect-ratio: 4 / 3; }
+@media (min-width: 640px) { .pmap-stage { aspect-ratio: 16 / 7; } }
+.pmap-svg { display: block; width: 100%; height: 100%; direction: ltr; font-family: var(--font-arabic); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.pmap-grat { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.pmap-sea { font-size: 11px; font-weight: 500; fill: rgba(153, 246, 228, 0.4); }
+.pmap-dot .pmap-halo { fill: rgba(11, 37, 64, 0.5); }
+.pmap-dot .pmap-pt { fill: #e2e8f0; stroke: #0b2540; stroke-width: 1.5; transition: fill 0.2s ease; }
+.pmap-dot .pmap-arrow { fill: none; stroke: #0b2540; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pmap-dot.is-on .pmap-halo { fill: rgba(253, 230, 138, 0.22); stroke: #fde68a; stroke-width: 2; }
+.pmap-dot:focus { outline: none; }
+.pmap-dot:focus-visible .pmap-halo { stroke: #fff; stroke-width: 2; }
+.pmap-label { fill: #f1f5f9; font-weight: 600; paint-order: stroke; stroke: #0b2540; stroke-linejoin: round; pointer-events: none; }
+.pmap-label.is-on { fill: #fde68a; }
+.pmap-legend {
+  position: absolute; inset-inline-start: 0.6rem; bottom: 0.6rem; display: flex; align-items: center; padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-pill); font-size: 0.72rem; color: #cbd5e1; background: rgba(11, 37, 64, 0.8); pointer-events: none;
+}
+.pmap-legend span { display: inline-flex; align-items: center; }
+.pmap-legend span[hidden] { display: none; }
+.pmap-legend i { display: inline-block; width: 0.6rem; height: 0.6rem; margin-inline: 0.45rem 0.2rem; border-radius: 50%; }
+.pmap-legend b { font-weight: 600; }
+.pmap-legend .r5 { background: #4ade80; } .pmap-legend .r4 { background: #2dd4bf; } .pmap-legend .r3 { background: #fbbf24; }
+.pmap-legend .r2 { background: #fb923c; } .pmap-legend .r1 { background: #f87171; }
+.pmap-card { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; min-height: 5.5rem; padding: 0.85rem 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.pmap-hint { font-size: 0.85rem; line-height: 1.7; color: #94a3b8; }
+.pmap-info { flex: 1 1 15rem; min-width: 0; }
+.pmap-info-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.6rem; }
+.pmap-name { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: #fff; }
+.pmap-name:hover { color: #5eead4; }
+.pmap-country { font-size: 0.75rem; color: #94a3b8; }
+.pmap-rate {
+  padding: 0.1rem 0.55rem; border-radius: var(--radius-pill); font-size: 0.72rem; font-weight: 700; color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, transparent); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+}
+.pmap-now { margin-top: 0.35rem; font-size: 0.875rem; color: #cbd5e1; }
+.pmap-next { display: flex; flex-wrap: wrap; gap: 0.15rem 1.1rem; margin-top: 0.15rem; font-size: 0.8rem; color: #94a3b8; }
+.pmap-go { flex-shrink: 0; padding: 0.55rem 1.1rem; border-radius: var(--radius-pill); font-size: 0.875rem; font-weight: 700; color: #0b2540; background: #5eead4; transition: background-color 0.15s ease; }
+.pmap-go:hover { background: #99f6e4; }
+
+/* Port page: where the port is, and the ports around it (src/components/PortMiniMap.astro) */
+.mini-map { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; direction: ltr; font-family: var(--font-arabic); background: #0e3150; }
+.mini-dot circle { fill: #e2e8f0; stroke: #0b2540; transition: fill 0.15s ease; }
+.mini-dot:hover circle { fill: #5eead4; }
+.mini-here { fill: #fde68a; stroke: #0b2540; }
+.mini-pulse { fill: rgba(253, 230, 138, 0.4); transform-box: fill-box; transform-origin: center; animation: mini-pulse 2.6s ease-out infinite; }
+@keyframes mini-pulse { from { transform: scale(0.6); opacity: 0.9; } to { transform: scale(2.6); opacity: 0; } }
+.mini-label { fill: #e2e8f0; font-weight: 600; paint-order: stroke; stroke: #0b2540; stroke-linejoin: round; pointer-events: none; }
+.mini-label.is-main { fill: #fde68a; font-weight: 700; }
+
+/* Homepage "حول العالم" places */
+.world-chip { padding: 0.1rem 0.55rem; border-radius: var(--radius-pill); font-size: 0.75rem; background: var(--surface-elevated); border: 1px solid var(--border-subtle); transition: border-color 0.15s ease, color 0.15s ease; }
+.world-chip:hover { border-color: var(--accent-border); color: var(--accent-text); }

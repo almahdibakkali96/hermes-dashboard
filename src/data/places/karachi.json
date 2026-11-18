@@ -1,0 +1,94 @@
+{
+ "id": "karachi",
+ "name_en": "Karachi",
+ "name_ar": "كراتشي",
+ "country": "PK",
+ "lat": 24.8,
+ "lon": 66.97,
+ "timezone": "Asia/Karachi",
+ "grid": {
+  "lat": 24.75,
+  "lon": 67,
+  "distance_km": 6.3
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 2.5334,
+   "phase": 106.492
+  },
+  "J1": {
+   "amp": 1.94629,
+   "phase": -6.165
+  },
+  "K1": {
+   "amp": 39.62001,
+   "phase": -23.38
+  },
+  "K2": {
+   "amp": 8.59759,
+   "phase": 177.707
+  },
+  "M2": {
+   "amp": 78.40827,
+   "phase": 155.289
+  },
+  "M4": {
+   "amp": 0.73814,
+   "phase": 136.46
+  },
+  "MF": {
+   "amp": 0.68971,
+   "phase": 14.116
+  },
+  "MM": {
+   "amp": 0.62766,
+   "phase": 2.514
+  },
+  "N2": {
+   "amp": 18.72884,
+   "phase": 138.832
+  },
+  "O1": {
+   "amp": 20.04167,
+   "phase": -21.649
+  },
+  "P1": {
+   "amp": 11.71136,
+   "phase": -25.619
+  },
+  "Q1": {
+   "amp": 4.00032,
+   "phase": -22.067
+  },
+  "S1": {
+   "amp": 2.06092,
+   "phase": 106.857
+  },
+  "S2": {
+   "amp": 30.20972,
+   "phase": -175.193
+  },
+  "SA": {
+   "amp": 3.19924,
+   "phase": 23.216
+  },
+  "SSA": {
+   "amp": 0.18911,
+   "phase": -114.121
+  },
+  "T2": {
+   "amp": 2.00045,
+   "phase": -171.997
+  },
+  "Z0": {
+   "amp": 200.8,
+   "phase": 0
+  }
+ }
+}

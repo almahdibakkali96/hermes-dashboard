@@ -1,24 +1,24 @@
 ---
-// Self-hosted fonts (bundled with the CSS): one fewer render-blocking round trip than Google Fonts
-import '@fontsource/noto-naskh-arabic/arabic-400.css';
-import '@fontsource/noto-naskh-arabic/arabic-500.css';
-import '@fontsource/noto-naskh-arabic/arabic-600.css';
-import '@fontsource/noto-naskh-arabic/arabic-700.css';
-import '@fontsource/reem-kufi/arabic-400.css';
-import '@fontsource/reem-kufi/arabic-600.css';
-import '@fontsource/reem-kufi/arabic-700.css';
-import '@fontsource/reem-kufi/latin-600.css';
-import '@fontsource/reem-kufi/latin-700.css';
+// Self-hosted fonts (bundled with the CSS): one fewer render-blocking round trip than Google Fonts.
+// V2 (#075): IBM Plex Sans Arabic for text and UI, Noto Kufi Arabic for headings (the Reels' title font; Reem Kufi
+// broke some letters' dots), Inter for numbers and times.
+import '@fontsource/ibm-plex-sans-arabic/arabic-400.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-500.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-700.css';
+import '@fontsource/noto-kufi-arabic/arabic-700.css';
+import '@fontsource/noto-kufi-arabic/arabic-800.css';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
 import '@fontsource/inter/latin-800.css';
-import naskh400 from '@fontsource/noto-naskh-arabic/files/noto-naskh-arabic-arabic-400-normal.woff2?url';
-import kufi600 from '@fontsource/reem-kufi/files/reem-kufi-arabic-600-normal.woff2?url';
+import plex400 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2?url';
+import kufi700 from '@fontsource/noto-kufi-arabic/files/noto-kufi-arabic-arabic-700-normal.woff2?url';
 import '../styles/global.css';
 import VercelAnalytics from '@vercel/analytics/astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { arabPlaces, worldPlaces } from '../lib/regions';
 
 export interface Props {
   title: string;
@@ -65,7 +65,7 @@ const siteGraph = [
     url: siteUrl,
     inLanguage: 'ar',
     publisher: { '@id': `${siteUrl}#org` },
-    description: 'مواقيت المد والجزر وأوقات الصيد وأطوار القمر لـ65 ميناءً من المحيط الأطلسي إلى الخليج العربي، محسوبة من نموذج EOT20.',
+    description: `مواقيت المد والجزر وأوقات الصيد وأطوار القمر لـ${arabPlaces.length} ميناءً من المحيط الأطلسي إلى الخليج العربي، و${worldPlaces.length} مكاناً حول العالم بالعربية، محسوبة من نموذج EOT20.`,
   },
 ];
 const graph = [...siteGraph, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [])];
@@ -100,8 +100,8 @@ const graph = [...siteGraph, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jso
     <link rel="alternate" type="text/plain" title="LLM guide" href={`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/llms.txt`} />
     <script type="application/ld+json" set:html={JSON.stringify(graph)} />
     <!-- Fonts -->
-    <link rel="preload" href={naskh400} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={kufi600} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={plex400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={kufi700} as="font" type="font/woff2" crossorigin />
     <!-- Google Analytics -->
     {gaId && (<>      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
       <script is:inline define:vars={{ gaId }}>
@@ -120,5 +120,16 @@ const graph = [...siteGraph, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jso
     </div>
     <SiteFooter />
     <VercelAnalytics />
+    <script is:inline>
+      // A click on any [data-track] element (calendar buttons, …) is an analytics event: Vercel custom events,
+      // and Google Analytics when PUBLIC_GA_ID is set. data-track-where says which placement was used.
+      document.addEventListener('click', function (e) {
+        var el = e.target && e.target.closest ? e.target.closest('[data-track]') : null;
+        if (!el) return;
+        var name = el.getAttribute('data-track'), data = { where: el.getAttribute('data-track-where') || '', path: location.pathname };
+        try { if (window.va) window.va('event', { name: name, data: data }); } catch (err) {}
+        try { if (window.gtag) window.gtag('event', name, data); } catch (err) {}
+      });
+    </script>
   </body>
 </html>

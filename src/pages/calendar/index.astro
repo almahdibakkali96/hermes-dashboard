@@ -5,8 +5,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SignupForm from '../../components/SignupForm.astro';
 import CalendarPortInput from '../../components/CalendarPortInput.astro';
-import placesIndex from '../../data/places/places_index.json';
-import { CAL, CAL_SALES_OPEN, calendarBuyUrl, monthsAr, yearSummary } from '../../lib/calendar';
+import { arabPlaces } from '../../lib/regions';
+import { CAL, CAL_SALES_OPEN, calendarBuyUrl, monthsAr, portYearSummary } from '../../lib/calendar';
 import { altNamesAr, frenchName } from '../../lib/portNames';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
@@ -14,13 +14,13 @@ const img = (f: string) => `${BASE}calendar/${f}`;
 const EXAMPLE_PORT = 'dubai';   // shown (marked as an example) until a port is chosen; the sample pages are Dubai's
 
 type Place = { id: string; name_ar: string; name_en: string; country: string };
-const places = placesIndex as Place[];
+const places = arabPlaces as Place[]; // the calendar is for Arab ports only
 
 // Each port's 2027 numbers, as on page 2 of its PDF
 const stats: Record<string, (string | number | boolean)[]> = {};
 for (const p of places) {
   const data = await import(`../../data/places/${p.id}.json`);
-  const s = yearSummary(data.constituents, data.timezone);
+  const s = portYearSummary(p.id, data.constituents, data.timezone);
   stats[p.id] = [p.name_ar, p.country.toLowerCase(), s.yearMax, s.maxMonth, s.n5, s.n4, s.bestMonth, s.tideType, s.microTidal];
 }
 const ex = stats[EXAMPLE_PORT];

@@ -53,7 +53,8 @@ const weekStart = portDay(now, getTimezoneOffset((await import(`../../data/place
 const metaDescription = `مواقيت المد والجزر في ${name}${alt ? ` (${alt})` : ''}: المد العالي اليوم في ${rows.slice(0, 3).map(r => `${r.name_ar} ${r.highs.join(' و') || '—'}`).join('، وفي ')}${rows.length > 3 ? '، وموانئ أخرى' : ''}. جدول 7 أيام وأفضل أيام الصيد.`;
 
 // Country facts for the summary and FAQ
-const countrySeas = [...new Set(ports.map((p: { id: string }) => portSea[p.id]))] as SeaId[];
+const countrySeas = [...new Set(ports.map((p: { id: string }) => portSea[p.id] ?? 'world'))] as SeaId[];
+const worldCountry = countrySeas.includes('world'); // worldwide places: no fish list (the guide covers Arab seas)
 const seaList = joinAr(countrySeas.map(s => seas[s].name));
 const biggest = [...rows].sort((a, b) => b.stat.maxRange - a.stat.maxRange)[0];
 const smallest = [...rows].sort((a, b) => a.stat.maxRange - b.stat.maxRange)[0];
@@ -87,10 +88,10 @@ const faq = [
     q: `ما نوع المد في ${name}؟`,
     a: `${tideTypes.length === 1 ? `المد في ${ports.length === 1 ? biggest.name_ar : `موانئ ${name}`} ${tideTypes[0]}` : `يختلف بين الموانئ: ${rows.map(r => `${r.name_ar} ${r.stat.tideTypeAr}`).join('، و')}`}. ${microTidal ? 'والمد هنا صغير، فالريح والضغط الجوي قد يغيّران مستوى الماء أكثر من المد نفسه.' : 'ويكبر المد حول البدر والمحاق ويصغر في التربيعين.'}`,
   },
-  {
+  ...worldCountry ? [] : [{
     q: `ما أشهر الأسماك قرب سواحل ${name}؟`,
     a: `يضم دليلنا ${speciesCount(countryFish.length)} تعيش في ${seaList}${seenFish.length ? `، أكثرها تسجيلاً قرب موانئ ${name}: ${joinAr(seenFish.slice(0, 4).map(f => f.ar))}` : ''}.`,
-  },
+  }],
   {
     q: `متى أفضل وقت للصيد في ${name}؟`,
     a: 'تختلف الأيام من ميناء إلى آخر بحسب المد وطور القمر. افتح صفحة الميناء لترى تقييم الصيد لكل يوم في الشهر، والفترتين الكبريين والصغريين، وأوقات المد العالي اليوم.',
@@ -166,7 +167,7 @@ const jsonLd = [
     <section aria-labelledby="summary-title">
       <h2 id="summary-title" class="text-xl font-bold display">المد والجزر في {name}</h2>
       <p class="mt-3 leading-loose text-[var(--text-secondary)]">
-        {ports.length > 1 ? `تطل موانئ ${name} في ArabTides على ${seaList}.` : `تطل ${biggest.name_ar} على ${seaList}.`}{' '}
+        {worldCountry ? '' : ports.length > 1 ? `تطل موانئ ${name} في ArabTides على ${seaList}.` : `تطل ${biggest.name_ar} على ${seaList}.`}{' '}
         {ports.length > 1
           ? <>أكبر مد بينها في <a href={`${BASE}ports/${biggest.id}`} class="underline">{biggest.name_ar}</a> بنحو {heightAr(biggest.stat.maxRange)} في أقصاه، وأصغره في <a href={`${BASE}ports/${smallest.id}`} class="underline">{smallest.name_ar}</a> بنحو {heightAr(smallest.stat.maxRange)}.</>
           : <>يصل المد في <a href={`${BASE}ports/${biggest.id}`} class="underline">{biggest.name_ar}</a> إلى نحو {heightAr(biggest.stat.maxRange)} في أكبر أيام السنة ({dateAr(biggest.stat.maxRangeDate)}).</>}{' '}
@@ -177,7 +178,7 @@ const jsonLd = [
       </p>
     </section>
 
-    <section aria-labelledby="fish-title">
+    {!worldCountry && <section aria-labelledby="fish-title">
       <h2 id="fish-title" class="text-xl font-bold display">أسماك سواحل {name}</h2>
       <p class="mt-2 text-sm text-[var(--text-secondary)]">{speciesCount(countryFish.length)} في <a href={`${BASE}fish`} class="underline">دليل الأسماك</a> تعيش في {seaList}{seenFish.length ? '، وهذه أكثرها تسجيلاً قرب الموانئ:' : ':'}</p>
       <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -188,7 +189,7 @@ const jsonLd = [
           </a>
         ))}
       </div>
-    </section>
+    </section>}
 
     <section class="card p-5" aria-labelledby="faq-title">
       <h2 id="faq-title" class="text-lg font-semibold display">أسئلة شائعة عن المد والجزر في {name}</h2>

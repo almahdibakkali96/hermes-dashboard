@@ -1,0 +1,94 @@
+{
+ "id": "mumbai",
+ "name_en": "Mumbai",
+ "name_ar": "مومباي",
+ "country": "IN",
+ "lat": 18.92,
+ "lon": 72.82,
+ "timezone": "Asia/Kolkata",
+ "grid": {
+  "lat": 18.875,
+  "lon": 72.875,
+  "distance_km": 7.6
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 4.23194,
+   "phase": 127.387
+  },
+  "J1": {
+   "amp": 2.53896,
+   "phase": -1.511
+  },
+  "K1": {
+   "amp": 42.14821,
+   "phase": -27.842
+  },
+  "K2": {
+   "amp": 11.54143,
+   "phase": -151.836
+  },
+  "M2": {
+   "amp": 107.29244,
+   "phase": -173.881
+  },
+  "M4": {
+   "amp": 3.1474,
+   "phase": 30.586
+  },
+  "MF": {
+   "amp": 1.54627,
+   "phase": 20.212
+  },
+  "MM": {
+   "amp": 1.43093,
+   "phase": 8.741
+  },
+  "N2": {
+   "amp": 25.72875,
+   "phase": 166.866
+  },
+  "O1": {
+   "amp": 20.20215,
+   "phase": -24.062
+  },
+  "P1": {
+   "amp": 12.74672,
+   "phase": -30.141
+  },
+  "Q1": {
+   "amp": 4.52312,
+   "phase": -25.055
+  },
+  "S1": {
+   "amp": 3.25441,
+   "phase": 94.779
+  },
+  "S2": {
+   "amp": 44.41466,
+   "phase": -142.574
+  },
+  "SA": {
+   "amp": 5.1036,
+   "phase": 26.835
+  },
+  "SSA": {
+   "amp": 0.33099,
+   "phase": -46.684
+  },
+  "T2": {
+   "amp": 3.45323,
+   "phase": -149.045
+  },
+  "Z0": {
+   "amp": 240.9,
+   "phase": 0
+  }
+ }
+}

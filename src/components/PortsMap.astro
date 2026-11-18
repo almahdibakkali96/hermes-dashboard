@@ -1,0 +1,119 @@
+---
+// Homepage map of every port, in the brand's map style (public/map/land.svg, the Reels' look): each dot shows whether
+// the water is rising or falling right now, or today's fishing rating; tabs zoom to a sea; a tap opens the port's card.
+// Drawn here (dots are plain links, so it works and is crawlable without JS); src/scripts/ports-map.ts adds the rest.
+import { arabPlaces } from '../lib/regions';
+import { PROJ, project } from '../lib/mapProjection';
+import { portSea, seas, type SeaId } from '../lib/seaNames';
+import { countryName } from '../lib/countries';
+import { dayExtremes, formatTime, getTimezoneOffset, portDay, type Constituent } from '../lib/tides';
+import { ratingsFrom } from '../lib/fishing';
+
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const DAY = 86400000;
+const now = new Date();
+type Place = { id: string; name_ar: string; country: string; lat: number; lon: number };
+
+// Bigger cities get their label first when names would overlap
+const MAJOR = ['casablanca', 'dubai', 'jeddah', 'alexandria', 'muscat', 'doha', 'kuwait-city', 'tunis', 'algiers', 'beirut',
+  'dammam', 'manama', 'aden', 'tripoli-ly', 'abu-dhabi', 'agadir', 'tangier', 'nouakchott', 'djibouti', 'port-sudan', 'aqaba',
+  'benghazi', 'salalah', 'hurghada', 'port-said', 'sfax', 'oran', 'latakia', 'mogadishu', 'moroni', 'hodeidah', 'mukalla'];
+
+// Arab ports only: the map covers the Atlantic to Oman (world places have their own homepage list)
+const ports = await Promise.all((arabPlaces as Place[]).map(async p => {
+  const data = (await import(`../data/places/${p.id}.json`)).default;
+  const cons = data.constituents as Record<string, Constituent>;
+  const tz = getTimezoneOffset(data.timezone, now), day = portDay(now, tz);
+  const ex = [...dayExtremes(cons, day, tz), ...dayExtremes(cons, new Date(day.getTime() + DAY), tz)];
+  const [x, y] = project(p.lon, p.lat);
+  const pr = MAJOR.indexOf(p.id);
+  return {
+    id: p.id, name: p.name_ar, country: countryName(p.country), sea: portSea[p.id], x: +x.toFixed(1), y: +y.toFixed(1),
+    r: ratingsFrom(cons, day, 1, tz)[0].rating, pr: pr < 0 ? 99 : pr,
+    // [minutes since epoch, 1 high | 0 low, local HH:MM]
+    ex: ex.map(e => [Math.round(e.time.getTime() / 60000), e.type === 'high' ? 1 : 0, formatTime(e.time, tz)]),
+  };
+}));
+
+// Each sea's bounding box (map units), from its ports; "all" covers every port
+const box = (ps: typeof ports) => [Math.min(...ps.map(p => p.x)), Math.min(...ps.map(p => p.y)), Math.max(...ps.map(p => p.x)), Math.max(...ps.map(p => p.y))];
+const seaOrder: SeaId[] = ['atlantic', 'med', 'red', 'gulf', 'indian'];
+const tabNames: Record<SeaId, string> = { atlantic: 'الأطلسي', med: 'المتوسط', red: 'البحر الأحمر', gulf: 'الخليج', indian: 'بحر العرب' };
+const regions: Record<string, number[]> = { all: box(ports.filter(p => p.y < project(0, 8)[1])) };
+for (const s of seaOrder) regions[s] = box(ports.filter(p => p.sea === s));
+
+// First view (before the script fits it to the box): "all" at a wide aspect
+const fit = ([x0, y0, x1, y1]: number[], aspect: number) => {
+  const pad = 14 + 0.06 * Math.max(x1 - x0, y1 - y0);
+  let w = x1 - x0 + 2 * pad, h = y1 - y0 + 2 * pad;
+  if (w / h < aspect) w = h * aspect; else h = w / aspect;
+  return [(x0 + x1) / 2 - w / 2, (y0 + y1) / 2 - h / 2, w, h].map(v => +v.toFixed(1));
+};
+const vb0 = fit(regions.all, 16 / 7);
+const s0 = vb0[2] / 1000; // dot scale for a ~1000 px wide map
+
+// Faint lines every 10°, and the seas' names
+const grat: string[] = [];
+for (let lon = -20; lon <= 70; lon += 10) { const [x] = project(lon, 0); grat.push(`M${x.toFixed(1)} 0V${PROJ.H}`); }
+for (let lat = -10; lat <= 40; lat += 10) { const [, y] = project(0, lat); grat.push(`M0 ${y.toFixed(1)}H${PROJ.W}`); }
+const seaLabels = [
+  { t: 'المحيط الأطلسي', lon: -19.5, lat: 29, rot: 0 },
+  { t: 'البحر الأبيض المتوسط', lon: 18.5, lat: 34.6, rot: 0 },
+  { t: 'البحر الأحمر', lon: 37.6, lat: 21.6, rot: 60 },
+  { t: 'الخليج العربي', lon: 51.3, lat: 27.6, rot: 25 },
+  { t: 'بحر العرب', lon: 62, lat: 15.5, rot: 0 },
+].map(l => { const [x, y] = project(l.lon, l.lat); return { ...l, x: +x.toFixed(1), y: +y.toFixed(1) }; });
+
+const cfg = { ports, regions, base: BASE };
+---
+
+<div class="pmap" data-ports-map>
+  <div class="pmap-bar">
+    <div class="pmap-tabs" role="group" aria-label="اختر البحر">
+      <button type="button" class="pmap-tab" data-region="all" aria-pressed="true">كل الموانئ</button>
+      {seaOrder.map(s => <button type="button" class="pmap-tab" data-region={s} aria-pressed="false" style={`--sea:${seas[s].color}`}>{tabNames[s]}</button>)}
+    </div>
+    <div class="pmap-modes" role="group" aria-label="ماذا تعرض النقاط">
+      <button type="button" class="pmap-mode" data-mode="tide" aria-pressed="true">المد الآن</button>
+      <button type="button" class="pmap-mode" data-mode="fish" aria-pressed="false">الصيد اليوم</button>
+    </div>
+  </div>
+
+  <div class="pmap-stage">
+    <svg class="pmap-svg" viewBox={vb0.join(' ')} preserveAspectRatio="xMidYMid meet" role="img" aria-label="خريطة الموانئ العربية">
+      <defs>
+        <radialGradient id="pmap-glow" cx="0.55" cy="0.35" r="0.7"><stop offset="0" stop-color="#14506b" /><stop offset="1" stop-color="#0b2540" /></radialGradient>
+      </defs>
+      <rect x="-400" y="-400" width={PROJ.W + 800} height={PROJ.H + 800} fill="url(#pmap-glow)" />
+      <path d={grat.join('')} class="pmap-grat" />
+      <image href={`${BASE}map/land.svg`} x="0" y="0" width={PROJ.W} height={PROJ.H} />
+      <g class="pmap-seas" aria-hidden="true">
+        {seaLabels.map(l => <text class="pmap-sea" x={l.x} y={l.y} text-anchor="middle" transform={l.rot ? `rotate(${l.rot} ${l.x} ${l.y})` : undefined}>{l.t}</text>)}
+      </g>
+      <g class="pmap-labels" aria-hidden="true"></g>
+      <g class="pmap-dots">
+        {ports.map(p => (
+          <a href={`${BASE}ports/${p.id}`} class="pmap-dot" data-id={p.id} transform={`translate(${p.x} ${p.y}) scale(${s0.toFixed(3)})`}>
+            <title>{p.name}</title>
+            <circle class="pmap-halo" r="10" />
+            <circle class="pmap-pt" r="6" />
+            <path class="pmap-arrow" d="" />
+          </a>
+        ))}
+      </g>
+    </svg>
+    <div class="pmap-legend" aria-hidden="true">
+      <span data-legend="tide"><i style="background:#2dd4bf"></i>يرتفع <i style="background:#fb7185"></i>ينخفض</span>
+      <span data-legend="fish" hidden>{[5, 4, 3, 2, 1].map(r => <><i class={`r${r}`}></i><b class="latin">{r}</b></>)}</span>
+    </div>
+  </div>
+
+  <div class="pmap-card" aria-live="polite">
+    <p class="pmap-hint">اضغط على أي ميناء لترى هل يرتفع الماء فيه الآن، وموعد المد والجزر القادمين، وتقييم الصيد اليوم.</p>
+  </div>
+  <script type="application/json" set:html={JSON.stringify(cfg)} />
+</div>
+
+<script>
+  import '../scripts/ports-map';
+</script>

@@ -1,5 +1,5 @@
 // /llms.txt — a plain-text map of the site for AI assistants and agents (llmstxt.org format)
-import placesIndex from '../data/places/places_index.json';
+import { allPlaces as placesIndex, arabPlaces, worldPlaces } from '../lib/regions';
 import { countryName } from '../lib/countries';
 import { articles } from '../lib/articles';
 import { fish } from '../lib/fish';
@@ -15,7 +15,7 @@ export async function GET({ site }: { site: URL | undefined }) {
     .join('\n');
   const body = `# ArabTides — المد والجزر العربي
 
-> Free Arabic website with predicted tide times (high and low water), tidal range, solunar fishing periods, moon phase, sunrise/sunset, prayer times and Hijri date for ${placesIndex.length} ports: Arab ports from Morocco and Mauritania on the Atlantic to Kuwait and Iraq in the Gulf, plus Bushehr and Bandar Abbas on the Gulf's Iranian coast.
+> Free Arabic website with predicted tide times (high and low water), tidal range, solunar fishing periods, moon phase, sunrise/sunset, prayer times and Hijri date for ${arabPlaces.length} ports, Arab ports from Morocco and Mauritania on the Atlantic to Kuwait and Iraq in the Gulf, plus Bushehr and Bandar Abbas on the Gulf's Iranian coast; and, in Arabic, ${worldPlaces.length} places worldwide that Arab travellers and residents visit (Maldives, Sri Lanka, Thailand, Malaysia, Bali, East Africa, Pakistan, India, Turkey, Greece, Cyprus, Italy, Spain, France).
 
 Key facts for answering questions:
 - Tide predictions are computed from the EOT20 global ocean tide model (Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0), 17 harmonic constituents with astronomical arguments and nodal corrections, verified against pyTMD.

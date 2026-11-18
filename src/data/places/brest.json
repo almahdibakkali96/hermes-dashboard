@@ -1,0 +1,94 @@
+{
+ "id": "brest",
+ "name_en": "Brest",
+ "name_ar": "بريست",
+ "country": "FR",
+ "lat": 48.38,
+ "lon": -4.49,
+ "timezone": "Europe/Paris",
+ "grid": {
+  "lat": 48.375,
+  "lon": -4.5,
+  "distance_km": 0.9
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 5.49727,
+   "phase": 67.749
+  },
+  "J1": {
+   "amp": 0.51736,
+   "phase": 126.576
+  },
+  "K1": {
+   "amp": 6.51973,
+   "phase": 78.728
+  },
+  "K2": {
+   "amp": 20.62913,
+   "phase": 143.5
+  },
+  "M2": {
+   "amp": 198.98321,
+   "phase": 106.034
+  },
+  "M4": {
+   "amp": 2.76314,
+   "phase": 119.979
+  },
+  "MF": {
+   "amp": 0.68538,
+   "phase": 159.625
+  },
+  "MM": {
+   "amp": 0.7706,
+   "phase": 49.926
+  },
+  "N2": {
+   "amp": 39.49737,
+   "phase": 88.069
+  },
+  "O1": {
+   "amp": 6.48264,
+   "phase": -31.809
+  },
+  "P1": {
+   "amp": 2.08319,
+   "phase": 52.304
+  },
+  "Q1": {
+   "amp": 1.79379,
+   "phase": -85.453
+  },
+  "S1": {
+   "amp": 1.19788,
+   "phase": 22.428
+  },
+  "S2": {
+   "amp": 71.53517,
+   "phase": 144.833
+  },
+  "SA": {
+   "amp": 2.97449,
+   "phase": -42.949
+  },
+  "SSA": {
+   "amp": 0.73653,
+   "phase": -178.78
+  },
+  "T2": {
+   "amp": 3.80009,
+   "phase": 134.292
+  },
+  "Z0": {
+   "amp": 342.6,
+   "phase": 0
+  }
+ }
+}

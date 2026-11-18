@@ -1,0 +1,94 @@
+{
+ "id": "phuket",
+ "name_en": "Phuket (Patong)",
+ "name_ar": "بوكيت",
+ "country": "TH",
+ "lat": 7.89,
+ "lon": 98.29,
+ "timezone": "Asia/Bangkok",
+ "grid": {
+  "lat": 7.875,
+  "lon": 98.25,
+  "distance_km": 4.7
+ },
+ "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0. Values read from the nearest water grid cell.",
+ "units": {
+  "amplitude": "cm",
+  "phase": "degrees",
+  "datum": "LAT (lowest astronomical tide 2020–2038); Z0 = mean sea level above LAT, cm"
+ },
+ "constituents": {
+  "2N2": {
+   "amp": 1.80616,
+   "phase": 59.744
+  },
+  "J1": {
+   "amp": 0.87817,
+   "phase": -134.302
+  },
+  "K1": {
+   "amp": 12.32353,
+   "phase": -135.321
+  },
+  "K2": {
+   "amp": 9.53188,
+   "phase": 120.192
+  },
+  "M2": {
+   "amp": 66.67507,
+   "phase": 92.56
+  },
+  "M4": {
+   "amp": 0.66943,
+   "phase": 47.264
+  },
+  "MF": {
+   "amp": 1.12213,
+   "phase": -5.836
+  },
+  "MM": {
+   "amp": 0.37984,
+   "phase": 6.107
+  },
+  "N2": {
+   "amp": 13.0999,
+   "phase": 87.485
+  },
+  "O1": {
+   "amp": 4.67595,
+   "phase": -166.554
+  },
+  "P1": {
+   "amp": 3.48441,
+   "phase": -132.112
+  },
+  "Q1": {
+   "amp": 0.78719,
+   "phase": 134.791
+  },
+  "S1": {
+   "amp": 2.29275,
+   "phase": -28.18
+  },
+  "S2": {
+   "amp": 33.17752,
+   "phase": 129.065
+  },
+  "SA": {
+   "amp": 3.16992,
+   "phase": -139.936
+  },
+  "SSA": {
+   "amp": 0.3565,
+   "phase": -62.316
+  },
+  "T2": {
+   "amp": 1.74568,
+   "phase": 134.483
+  },
+  "Z0": {
+   "amp": 134.9,
+   "phase": 0
+  }
+ }
+}

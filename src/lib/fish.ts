@@ -627,7 +627,7 @@ export function observedNear(f: Fish, portId: string): number {
 
 /** Species for a port page: those recorded near the port first (most-recorded first), then the rest of its sea */
 export function fishForPort(portId: string): { fish: Fish[]; observed: Set<string> } {
-  const sea = portSea[portId];
+  const sea = portSea[portId] ?? 'world'; // world places: no species (the guide covers Arab seas)
   const inSea = fish.filter(f => f.seas.includes(sea));
   const counts = new Map(inSea.map(f => [f.id, observedNear(f, portId)]));
   const seen = inSea.filter(f => counts.get(f.id)! > 0).sort((a, b) => counts.get(b.id)! - counts.get(a.id)!);
