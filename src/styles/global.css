@@ -409,11 +409,12 @@ a.card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md);
 .rating-badge {
   display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; line-height: 1.2;
   padding: 0.2rem 0.65rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.85rem;
-  color: var(--rating); background: color-mix(in srgb, var(--rating) 10%, white);
+  /* text a shade darker than the rating colour, so even red 1/5 passes 4.5:1 on its tint */
+  color: color-mix(in srgb, var(--rating) 82%, black); background: color-mix(in srgb, var(--rating) 10%, white);
   border: 1px solid color-mix(in srgb, var(--rating) 28%, transparent);
 }
 .rating-num { font-weight: 800; }
-.rating-of { font-weight: 500; opacity: 0.65; font-size: 0.8em; }
+.rating-of { font-weight: 500; font-size: 0.8em; } /* full colour: a faded "/5" fails contrast on the light badges */
 .rating-sm { font-size: 0.75rem; padding: 0.1rem 0.5rem; gap: 0.3rem; }
 .rating-lg { font-size: 1rem; padding: 0.3rem 0.85rem 0.3rem 0.95rem; }
 .rating-lg .rating-num { font-size: 1.5rem; }

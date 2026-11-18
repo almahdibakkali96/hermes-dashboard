@@ -22,7 +22,7 @@ const facts = port && summary && summary.n5 > 0;
       <div>
         <p class="text-sm text-teal-200">{CAL_SALES_OPEN ? 'من ArabTides' : 'من ArabTides · قريباً'}</p>
         <h2 id="cal-banner-title" class="mt-2 text-2xl sm:text-3xl font-bold display leading-snug">تقويم الصيد والمد والجزر <span class="latin">{CAL.year}</span> لميناءك</h2>
-        <p class="mt-2 text-slate-300 leading-relaxed max-w-xl">سنة كاملة يوماً بيوم في ملف واحد: المد والجزر بالساعة، والقمر، والشروق والغروب، وأفضل ساعات الصيد وتقييم كل يوم، لـ<span class="latin">{CAL.ports}</span> ميناءً عربياً.</p>
+        <p class="mt-2 text-slate-300 leading-relaxed max-w-xl">سنة كاملة يوماً بيوم في ملف واحد: المد والجزر بالساعة، والقمر، والشروق والغروب، وأفضل ساعات الصيد وتقييم كل يوم، لميناءك من الأطلسي إلى الخليج.</p>
         <div class="mt-5 flex flex-wrap items-center gap-3">
           <a href={href} class="btn-primary" data-track="calendar_cta" data-track-where="banner">{cta}</a>
           {!CAL_SALES_OPEN && <span class="text-sm text-slate-400">ويصلك سعر الإطلاق قبل الجميع بيوم</span>}

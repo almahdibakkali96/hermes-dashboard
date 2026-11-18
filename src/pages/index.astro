@@ -6,7 +6,6 @@ import { moonIcon, moonPhase } from '../lib/astronomy';
 import Icon, { type IconName } from '../components/Icon.astro';
 import { BOARD, boardShape, localDayStart, type Ex } from '../lib/heroBoard';
 import { countryName } from '../lib/countries';
-import { altNamesAr, frenchName } from '../lib/portNames';
 import { articles } from '../lib/articles';
 import CalendarPromo from '../components/CalendarPromo.astro';
 import LiveTides from '../components/LiveTides.astro';
@@ -82,13 +81,8 @@ const board0 = boardShape(boardData.ex, localDayStart(Date.now(), boardData.offs
 // Headline date in Makkah time (UTC+3), the middle of the ports' UTC+0…+4 span
 const todayAr = new Date().toLocaleDateString('ar-EG-u-nu-latn', { timeZone: 'Asia/Riyadh', weekday: 'long', day: 'numeric', month: 'long' });
 
-// Full port list for the search dropdown (client-side)
-// (alt: other spellings and French names, so «مارتيل», «هرهورة» or «Tanger» find their port)
-const searchPorts = allPlaces.map((p: { id: string; name_ar: string; name_en: string; country: string; lat: number; lon: number }) => ({
-  id: p.id, name_ar: p.name_ar, name_en: p.name_en, countryName: countryName(p.country),
-  alt: [...altNamesAr(p.id, p.name_ar), frenchName(p.id) || ''].filter(Boolean).join(' '),
-}));
-const searchPortsJSON = JSON.stringify(searchPorts);
+// The search box's list of places is /search.json (src/pages/search.json.ts), fetched on first use
+
 
 const features: { icon: IconName; title: string; text: string }[] = [
   { icon: 'waves', title: 'منحنى المد والجزر', text: 'ارتفاع الماء ساعة بساعة، وأوقات المد العالي والجزر المنخفض لسبعة أيام وأي يوم من هذا الشهر والشهر القادم' },
@@ -405,7 +399,6 @@ const features: { icon: IconName; title: string; text: string }[] = [
   })();
 </script>
 
-<script type="application/json" id="search-data" set:html={searchPortsJSON}></script>
 <script is:inline define:vars={{ base: BASE }}>
   var portsData = [];
   // Search ignores hamza forms, ة/ه, ى/ي, tatweel, harakat and Latin accents (Béjaïa = bejaia)
@@ -417,14 +410,23 @@ const features: { icon: IconName; title: string; text: string }[] = [
   var searchEl = document.getElementById('port-search');
   var dropdown = document.getElementById('search-results');
 
-  try {
-    var raw = document.getElementById('search-data');
-    if (raw) portsData = JSON.parse(raw.textContent || '[]');
-  } catch(e) {}
+  // The list loads on the box's first focus (or first letter typed), then the search runs on what was typed
+  var loading = false;
+  function loadPlaces() {
+    if (portsData.length || loading) return;
+    loading = true;
+    fetch(base + 'search.json').then(function (r) { return r.json(); }).then(function (list) {
+      portsData = list;
+      if (searchEl && searchEl.value.trim()) searchEl.dispatchEvent(new Event('input'));
+    }).catch(function () { loading = false; });
+  }
+  searchEl?.addEventListener('focus', loadPlaces);
+  searchEl?.addEventListener('pointerdown', loadPlaces);
 
   searchEl?.addEventListener('input', function () {
     var q = norm(this.value.trim());
     if (!dropdown) return;
+    if (!portsData.length) { loadPlaces(); return; }
     dropdown.innerHTML = '';
     if (!q || !portsData.length) { dropdown.classList.add('hidden'); this.setAttribute('aria-expanded','false'); return; }
     var matches = [];

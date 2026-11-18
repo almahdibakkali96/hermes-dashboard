@@ -22,8 +22,15 @@ function track(name: string, data: Record<string, string | number>) {
   try { w.gtag?.('event', name, data); } catch { /* optional */ }
 }
 
-function init(root: HTMLElement) {
-  const cfg = JSON.parse(root.querySelector('script[type="application/json"]')!.textContent || '{}') as Cfg;
+// The dots, built from /map/now.json: each a link to its port, sized and coloured by init()
+function dotsMarkup(cfg: Cfg) {
+  const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  return cfg.ports.map(p => `<a href="${cfg.base}ports/${p.id}" class="pmap-dot" data-id="${p.id}" transform="translate(${p.x} ${p.y})">`
+    + `<title>${esc(p.name)}</title><circle class="pmap-halo" r="10"/><circle class="pmap-pt" r="6"/><path class="pmap-arrow" d=""/></a>`).join('');
+}
+
+function init(root: HTMLElement, cfg: Cfg) {
+  root.querySelector('.pmap-dots')!.innerHTML = dotsMarkup(cfg);
   const svg = root.querySelector<SVGSVGElement>('.pmap-svg')!;
   const labels = root.querySelector<SVGGElement>('.pmap-labels')!;
   const card = root.querySelector<HTMLElement>('.pmap-card')!;
@@ -59,7 +66,8 @@ function init(root: HTMLElement) {
       t.setAttribute('transform', `rotate(${t.dataset.rot} ${x} ${y}) translate(${x} ${y}) scale(${s.toFixed(4)}) translate(${-Number(x)} ${-Number(y)})`);
     });
   }
-  function setView(v: number[]) { vb = v; svg.setAttribute('viewBox', v.map(n => n.toFixed(2)).join(' ')); sizeMarks(); }
+  // Zoomed in, the coast is put inline so its line stays thin (inlineLand, below)
+  function setView(v: number[]) { vb = v; svg.setAttribute('viewBox', v.map(n => n.toFixed(2)).join(' ')); sizeMarks(); if (v[2] < 400) inlineLand(); }
 
   // Free view: never wider than the world, never closer than ~2.5° across (the coastline's detail), centre on the map
   const [MW, MH] = cfg.size;
@@ -272,6 +280,11 @@ function init(root: HTMLElement) {
 
   // The land is first an <image> (cheap, cached); then its paths are put inline so the coast line keeps a thin,
   // constant width when zoomed in (vector-effect only works on inline shapes)
+  // Done on the first zoom only: the inline coast is heavy to lay out, and at the first view the image looks the same
+  let landDone = false;
+  function inlineLand() {
+  if (landDone) return;
+  landDone = true;
   const img = svg.querySelector('image');
   if (img) fetch(img.getAttribute('href')!).then(r => r.text()).then(text => {
     const land = new DOMParser().parseFromString(text, 'image/svg+xml').documentElement;
@@ -280,6 +293,7 @@ function init(root: HTMLElement) {
     for (const el of Array.from(land.children)) g.appendChild(document.importNode(el, true));
     img.replaceWith(g);
   }).catch(() => { /* keep the image */ });
+  }
 
   // Start: the visitor's port (saved with "اجعله ميناءي") and its sea, else every port
   let mine: string | null = null;
@@ -304,5 +318,18 @@ function init(root: HTMLElement) {
   setInterval(paint, 60000);
 }
 
-function start() { document.querySelectorAll<HTMLElement>('[data-ports-map]').forEach(init); }
+// The map's data loads when the map comes near the screen (a fifth of a screen away), so loading the homepage doesn't wait for it
+function start() {
+  document.querySelectorAll<HTMLElement>('[data-ports-map]').forEach(root => {
+    let started = false;
+    const go = () => {
+      if (started) return;
+      started = true;
+      fetch(root.dataset.src!).then(r => r.json()).then((cfg: Cfg) => init(root, cfg)).catch(() => { started = false; });
+    };
+    if (!('IntersectionObserver' in window)) { go(); return; }
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); go(); } }, { rootMargin: '20% 0px' });
+    io.observe(root);
+  });
+}
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();

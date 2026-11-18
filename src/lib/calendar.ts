@@ -16,7 +16,6 @@ export const CAL = {
   year: 2027,
   title: 'تقويم الصيد والمد والجزر 2027',
   pages: 19,
-  ports: 63,               // Arab ports only: never count Bushehr / Bandar Abbas in copy
   /** false: the page is noindex and left out of the sitemap. Public since 17 Nov 2026 (it replaced the guide in the CTAs). */
   public: true,
   /** Set after the price poll; null → no price shown. */
