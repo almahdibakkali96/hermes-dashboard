@@ -32,3 +32,10 @@ products/
 
 # EOT20 tide model (2.2 GB source data, used by tools/tides/extract.py)
 ocean_tides/
+
+# Mobile app (Expo): its own private repo, arabtides-app
+expo/
+
+# Email campaign: real contact lists stay local
+brand/campaign-10k/06-email/input/
+brand/campaign-10k/06-email/output/
