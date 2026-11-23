@@ -10,7 +10,9 @@
 //   S3_ACCESS_KEY_ID        an R2 API token with "Object Read only" on that bucket
 //   S3_SECRET_ACCESS_KEY
 //   S3_REGION               optional, 'auto' for R2 (default)
-//   CALENDAR_PAYMENT_LINKS  optional comma-separated Payment Link ids (plink_…): only sessions from these count
+//   CALENDAR_PAYMENT_LINKS  REQUIRED comma-separated Payment Link ids (plink_…): only sessions from these count.
+//                           Without it any cheaper link on the account (e.g. the 2.99 guide's) with a forged
+//                           client_reference_id would unlock a calendar, so an empty list blocks every download.
 import { createHash, createHmac } from 'node:crypto';
 
 const PRODUCT = 'tide-calendar-2027';
@@ -40,7 +42,8 @@ export default async function handler(req, res) {
 
   const ref = String(s.client_reference_id || '');
   const links = (process.env.CALENDAR_PAYMENT_LINKS || '').split(',').map(x => x.trim()).filter(Boolean);
-  if (!ref.startsWith(PRODUCT + '-') || (links.length && !links.includes(s.payment_link))) return send(403, { ok: false, error: 'not_calendar' });
+  if (!links.length) return send(503, { ok: false, error: 'not_configured' });
+  if (!ref.startsWith(PRODUCT + '-') || !links.includes(s.payment_link)) return send(403, { ok: false, error: 'not_calendar' });
   if (s.payment_status !== 'paid' && s.payment_status !== 'no_payment_required') return send(402, { ok: false, error: 'unpaid' });
   if (s.created && Date.now() / 1000 - s.created > VALID_DAYS * 86400) return send(410, { ok: false, error: 'expired' });
 

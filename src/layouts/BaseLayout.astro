@@ -28,12 +28,14 @@ export interface Props {
   ogImage?: string;
   /** keep out of search results (e.g. the post-payment page) */
   noindex?: boolean;
+  /** no Google Analytics (the calendar's thanks page: its URL carries the buyer's download session_id) */
+  noGA?: boolean;
 }
 
-const { title, description, jsonLd, ogType = 'website', ogImage, noindex = false } = Astro.props;
+const { title, description, jsonLd, ogType = 'website', ogImage, noindex = false, noGA = false } = Astro.props;
 const fullTitle = `${title} — ArabTides`;
 const desc = description || 'مواقيت المد والجزر والحسابات الفلكية للموانئ العربية';
-const gaId = import.meta.env.PUBLIC_GA_ID || null;
+const gaId = noGA ? null : import.meta.env.PUBLIC_GA_ID || null;
 // The GitHub Pages build (docs/, base /hermes-dashboard) is a mirror: it points search engines to
 // the production page and keeps itself out of the index, so Google never sees two copies of the site.
 const PRODUCTION = 'https://www.arabtides.com';
