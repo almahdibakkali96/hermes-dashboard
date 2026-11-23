@@ -19,14 +19,27 @@ export const CAL = {
   /** false: the page is noindex and left out of the sitemap. Public since 17 Nov 2026 (it replaced the guide in the CTAs). */
   public: true,
   /** Set after the price poll; null → no price shown. */
-  price: null as number | null,
-  launchPrice: null as number | null,
+  price: 6.99 as number | null,
+  launchPrice: 4.99 as number | null,
   currency: 'USD',
   /** Stripe Payment Links (their own, never the guide's 2.99 link). Empty → waitlist mode. */
   launchLink: (env.PUBLIC_STRIPE_CALENDAR_LAUNCH_URL as string | undefined) || '',
   link: (env.PUBLIC_STRIPE_CALENDAR_URL as string | undefined) || '',
-  launchPriceEnd: '2026-11-24T23:59:00+03:00',
+  /** Launch price (ARAB2027 coupon, prefilled by the launch link) until this minute; the coupon expires at the same time in Stripe. */
+  launchPriceEnd: '2026-12-06T23:59:00+03:00',
+  /** World places' calendars have no fish page */
+  worldPages: 18,
 };
+
+/** World places that have a 2027 calendar (the same list as products/tide-calendar-2027/world-ports.txt) */
+export const CAL_WORLD_IDS = [
+  'marseille', 'nice', 'brest', 'la-rochelle', 'biarritz', 'barcelona', 'valencia', 'malaga', 'algeciras', 'cadiz', 'las-palmas',
+  'lisbon', 'faro', 'brighton', 'dublin', 'scheveningen', 'ostend', 'naples', 'palermo', 'istanbul', 'antalya', 'bodrum', 'larnaca',
+  'male', 'zanzibar', 'mombasa', 'mahe', 'phuket', 'langkawi', 'bali', 'colombo',
+  'new-york', 'miami', 'sydney', 'melbourne',
+];
+/** Does this place have a calendar? Every Arab port, and the world places above. */
+export const hasCalendar = (id: string, world: boolean) => !world || CAL_WORLD_IDS.includes(id);
 
 export const CAL_SALES_OPEN = Boolean(CAL.launchLink || CAL.link);
 

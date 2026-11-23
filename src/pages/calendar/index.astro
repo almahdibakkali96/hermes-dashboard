@@ -5,8 +5,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SignupForm from '../../components/SignupForm.astro';
 import CalendarPortInput from '../../components/CalendarPortInput.astro';
-import { arabPlaces } from '../../lib/regions';
-import { CAL, CAL_SALES_OPEN, calendarBuyUrl, monthsAr, portYearSummary } from '../../lib/calendar';
+import { arabPlaces, worldPlaces } from '../../lib/regions';
+import { CAL, CAL_SALES_OPEN, CAL_WORLD_IDS, calendarBuyUrl, monthsAr, portYearSummary } from '../../lib/calendar';
 import { altNamesAr, frenchName } from '../../lib/portNames';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
@@ -14,7 +14,8 @@ const img = (f: string) => `${BASE}calendar/${f}`;
 const EXAMPLE_PORT = 'dubai';   // shown (marked as an example) until a port is chosen; the sample pages are Dubai's
 
 type Place = { id: string; name_ar: string; name_en: string; country: string };
-const places = arabPlaces as Place[]; // the calendar is for Arab ports only
+// Every Arab port, then the world places that have a calendar
+const places = [...arabPlaces, ...CAL_WORLD_IDS.map(id => worldPlaces.find(p => p.id === id)!)] as Place[];
 
 // Each port's 2027 numbers, as on page 2 of its PDF
 const stats: Record<string, (string | number | boolean)[]> = {};
@@ -33,6 +34,8 @@ const metres = (cm: number) => (cm / 100).toFixed(2);
 const launchUrl = calendarBuyUrl(CAL.launchLink, EXAMPLE_PORT);
 const fullUrl = calendarBuyUrl(CAL.link, EXAMPLE_PORT);
 const priceLabel = (n: number | null) => (n == null ? '' : `${n.toFixed(2)}$`);
+// The launch price's last day, in Mecca time (UTC+3) like launchPriceEnd: «6 ديسمبر»
+const endLocal = new Date(Date.parse(CAL.launchPriceEnd) + 3 * 3600000);
 
 const features = [
   { icon: '🌊', title: 'المد والجزر يوماً بيوم', text: 'المد العالي والمنخفض لكل يوم بالساعة والارتفاع، ومعامل المد، لسنة 2027 كاملة.' },
@@ -60,7 +63,7 @@ const steps = CAL_SALES_OPEN ? [
   { n: 3, title: 'حمّل تقويم ميناءك', text: 'ملف PDF يعمل دون إنترنت ويُطبع.' },
 ];
 const faq = [
-  { q: 'ما هو التقويم؟', a: `ملف PDF من ${CAL.pages} صفحة بحجم A4 لميناء واحد تختاره، باللغة العربية، يغطي كل أيام سنة ${CAL.year}. تقرؤه على هاتفك دون إنترنت أو تطبعه وتعلّقه.` },
+  { q: 'ما هو التقويم؟', a: `ملف PDF من ${CAL.pages} صفحة (${CAL.worldPages} صفحة لموانئ العالم، دون صفحة الأسماك) بحجم A4 لميناء واحد تختاره، باللغة العربية، يغطي كل أيام سنة ${CAL.year}. تقرؤه على هاتفك دون إنترنت أو تطبعه وتعلّقه.` },
   ...(CAL_SALES_OPEN ? [
     { q: 'كيف أدفع ومتى يصلني؟', a: 'الدفع آمن على صفحة Stripe بالبطاقة أو Apple Pay أو Google Pay. بعد الدفع مباشرة تعود إلى صفحة شكر على موقعنا فيها زر تحميل تقويم ميناءك (PDF)، ويصلك إيصال الدفع على بريدك.' },
   ] : [
@@ -68,7 +71,7 @@ const faq = [
     { q: 'هل التسجيل التزام بالشراء؟', a: 'لا. التسجيل مجاني ولا يلزمك بشيء. تصلك رسالة يوم الإطلاق بسعر الإطلاق، وتقرر حينها.' },
     { q: 'متى يصدر؟', a: 'قريباً جداً. المسجّلون في قائمة الانتظار يعرفون أولاً، ويصلهم سعر الإطلاق قبل الجميع بيوم.' },
   ]),
-  { q: 'ما الموانئ المتوفرة؟', a: 'كل الموانئ والشواطئ العربية على الموقع، على الأطلسي والمتوسط والبحر الأحمر والخليج العربي والمحيط الهندي. اكتب اسم ميناءك في خانة الاختيار أعلى الصفحة.' },
+  { q: 'ما الموانئ المتوفرة؟', a: 'كل الموانئ والشواطئ العربية على الموقع، على الأطلسي والمتوسط والبحر الأحمر والخليج العربي والمحيط الهندي، وموانئ حول العالم يقصدها العرب: مرسيليا ونيس وبرشلونة ومالقة ولشبونة ودبلن وإسطنبول وأنطاليا وماليه وزنجبار وبوكيت وبالي ونيويورك وميامي وسيدني وغيرها. اكتب اسم ميناءك في خانة الاختيار أعلى الصفحة.' },
   { q: 'بماذا يختلف عن الموقع المجاني؟', a: 'الموقع يعرض أياماً قليلة قادمة. التقويم يجمع السنة كلها لميناءك في ملف واحد، فتخطط رحلاتك وإجازاتك قبل أشهر، وتحجز أفضل الأيام من الآن، حتى دون إنترنت في البحر.' },
   { q: 'من أين تأتي الأرقام؟', a: 'من محرك ArabTides نفسه: نموذج المد العالمي EOT20 وحسابات فلكية للقمر والشمس، مع التوقيت المحلي لكل يوم. الارتفاعات من أدنى مستوى فلكي للجزر، كما في الجداول الرسمية.' },
   { q: 'هل يصلح للملاحة؟', a: 'لا. التقويم للصيد والنزهات. أرقام المد تقديرات فلكية، وقد يغيّرها الطقس والرياح، فراجع الجداول الرسمية لميناءك قبل الملاحة.' },
@@ -78,7 +81,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`${CAL.title} لميناءك — PDF`} description={`${CAL.title}: سنة كاملة يوماً بيوم لميناءك. المد والجزر بالساعة، القمر، الشروق والغروب، أفضل ساعات الصيد وتقييم كل يوم، لموانئ عربية من الأطلسي إلى الخليج.`} jsonLd={jsonLd} ogImage={img('cover.webp')} noindex={!CAL.public}>
+<BaseLayout title={`${CAL.title} لميناءك — PDF`} description={`${CAL.title}: سنة كاملة يوماً بيوم لميناءك. المد والجزر بالساعة، القمر، الشروق والغروب، أفضل ساعات الصيد وتقييم كل يوم، لموانئ عربية من الأطلسي إلى الخليج، وموانئ حول العالم.`} jsonLd={jsonLd} ogImage={img('cover.webp')} noindex={!CAL.public}>
   <section class="hero">
     <div class="cal-hero max-w-6xl mx-auto px-4 pt-10 pb-24">
       <div class="cal-intro">
@@ -116,7 +119,7 @@ const jsonLd = [
               <CalendarPortInput id="cal-port" label="ميناؤك" />
               <p class="cal-preview" data-preview hidden></p>
               <div class="mt-4 flex items-end justify-between gap-3" data-cal-price>
-                {CAL.launchPrice != null && CAL.launchLink && <span class="price-launch leading-none"><span class="latin text-4xl font-extrabold">{priceLabel(CAL.launchPrice)}</span>{CAL.price != null && <s class="latin ms-2 text-[var(--text-muted)]">{priceLabel(CAL.price)}</s>}<span class="block mt-1.5 text-xs text-amber-700">سعر الإطلاق حتى ليلة البدر</span></span>}
+                {CAL.launchPrice != null && CAL.launchLink && <span class="price-launch leading-none"><span class="latin text-4xl font-extrabold">{priceLabel(CAL.launchPrice)}</span>{CAL.price != null && <s class="latin ms-2 text-[var(--text-muted)]">{priceLabel(CAL.price)}</s>}<span class="block mt-1.5 text-xs text-amber-700">سعر الإطلاق حتى <span class="latin">{endLocal.getUTCDate()}</span> {monthsAr[endLocal.getUTCMonth()]}</span></span>}
                 {CAL.price != null && CAL.link && <span class="price-full leading-none" hidden={Boolean(CAL.launchLink)}><span class="latin text-4xl font-extrabold">{priceLabel(CAL.price)}</span><span class="block mt-1.5 text-xs text-[var(--text-muted)]">دفعة واحدة · بلا اشتراك</span></span>}
               </div>
               <a href={launchUrl || fullUrl} data-launch={launchUrl} data-full={fullUrl} class="signup-btn cal-buy mt-4 w-full flex justify-center" rel="noopener" aria-disabled="true"><span>اشترِ تقويم <span class="cal-port-name">ميناءك</span></span></a>

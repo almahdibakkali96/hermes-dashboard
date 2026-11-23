@@ -16,7 +16,7 @@ import { fishForPort, fishLabel } from '../../lib/fish';
 import CalendarPromo from '../../components/CalendarPromo.astro';
 import LiveTides from '../../components/LiveTides.astro';
 import { altNamesAr, frenchName, nameWithAlts } from '../../lib/portNames';
-import { CAL, forPort, portYearSummary } from '../../lib/calendar';
+import { CAL, forPort, hasCalendar, portYearSummary } from '../../lib/calendar';
 import PortMiniMap from '../../components/PortMiniMap.astro';
 import { isWorld } from '../../lib/regions';
 
@@ -194,8 +194,9 @@ const shareText = `مواقيت المد والجزر — ${port.name_ar}`;
 const keyOf = (d: Date) => d.toISOString().slice(0, 10);
 const viewDays = [...monthDays, ...nextMonthRated];
 const viewLast = viewDays[viewDays.length - 1];
-// The 2027 numbers are for the calendar promo: Arab ports only (about 200 ms a port, so world places skip it)
-const calSummary = world ? undefined : portYearSummary(port.id, constituents, port.timezone);
+// The 2027 numbers are for the calendar promo: ports with a calendar only (about 200 ms a port, so other world places skip it)
+const hasCal = hasCalendar(port.id, world);
+const calSummary = hasCal ? portYearSummary(port.id, constituents, port.timezone) : undefined;
 const dayTabs = forecastWithFish.map((f, i) => {
   const d = new Date(today.getTime() + i * DAY_MS);
   return { key: keyOf(d), label: i === 0 ? 'اليوم' : i === 1 ? 'غداً' : weekDays[d.getUTCDay()], day: d.getUTCDate(), rating: f.fishRating };
@@ -459,7 +460,7 @@ const pageJsonLd = [
             {todayCoef !== null && <span class="day-fact">معامل المد <span class="latin">{todayCoef}</span> · {coefficientLabelAr(todayCoef)}</span>}
           </div>
           <p id="day-more" class="day-more no-print">
-            اضغط على المنحنى لترى ارتفاع الماء في أي ساعة. يعرض المنحنى أي يوم حتى <span class="latin">{viewLast.day}</span> {monthNames[viewLast.month]}{world ? '.' : <>، وتجد كل أيام سنة <span class="latin">{CAL.year}</span> في <a href={`${BASE}calendar?port=${port.id}`} data-track="calendar_cta" data-track-where="day-viewer">تقويم <span class="latin">{CAL.year}</span> {forPort(port.name_ar)}</a>.</>}
+            اضغط على المنحنى لترى ارتفاع الماء في أي ساعة. يعرض المنحنى أي يوم حتى <span class="latin">{viewLast.day}</span> {monthNames[viewLast.month]}{!hasCal ? '.' : <>، وتجد كل أيام سنة <span class="latin">{CAL.year}</span> في <a href={`${BASE}calendar?port=${port.id}`} data-track="calendar_cta" data-track-where="day-viewer">تقويم <span class="latin">{CAL.year}</span> {forPort(port.name_ar)}</a>.</>}
           </p>
         </section>
 
@@ -633,7 +634,7 @@ const pageJsonLd = [
           </section>
         )}
 
-        <div class:list={['lg:hidden', { hidden: world }]}><CalendarPromo variant="strip" port={{ id: id!, name: port.name_ar }} summary={calSummary} /></div>
+        <div class:list={['lg:hidden', { hidden: !hasCal }]}><CalendarPromo variant="strip" port={{ id: id!, name: port.name_ar }} summary={calSummary} /></div>
 
         <!-- FAQ -->
         <section class="card p-5" aria-labelledby="faq-title">
@@ -653,7 +654,7 @@ const pageJsonLd = [
 
       <!-- Sidebar -->
       <aside class="space-y-6 min-w-0">
-        <div class:list={['hidden', { 'lg:block': !world }]}><CalendarPromo variant="card" port={{ id: id!, name: port.name_ar }} summary={calSummary} /></div>
+        <div class:list={['hidden', { 'lg:block': hasCal }]}><CalendarPromo variant="card" port={{ id: id!, name: port.name_ar }} summary={calSummary} /></div>
 
         <section class="card p-5" aria-labelledby="sun-title">
           <h2 id="sun-title" class="font-semibold inline-flex items-center gap-2"><span class="text-[var(--text-muted)]"><Icon name="sun" size={18} /></span> الشمس والقمر</h2>
