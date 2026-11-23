@@ -114,11 +114,34 @@ export function calculatePrayerTimes(
   };
 }
 
+// Umm al-Qura (the Saudi official calendar, from the JS engine's ICU data) for the date's UTC day
+let uqFormat: Intl.DateTimeFormat | null | undefined;
+function ummAlQura(date: Date): { year: number; month: number; day: number } | null {
+  if (uqFormat === undefined) {
+    try {
+      uqFormat = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { timeZone: 'UTC', year: 'numeric', month: 'numeric', day: 'numeric' });
+      if (uqFormat.resolvedOptions().calendar !== 'islamic-umalqura') uqFormat = null;
+    } catch { uqFormat = null; }
+  }
+  if (!uqFormat) return null;
+  const p: Record<string, string> = {};
+  for (const x of uqFormat.formatToParts(date)) p[x.type] = x.value;
+  const year = parseInt(p.year ?? p.relatedYear, 10), month = parseInt(p.month, 10), day = parseInt(p.day, 10);
+  return year > 1300 && month >= 1 && month <= 12 && day >= 1 && day <= 30 ? { year, month, day } : null;
+}
+
 /**
- * Convert Gregorian date to Hijri (approximate, Umm al-Qura).
- * Accuracy: ±1 day. Uses Kuwaiti algorithm.
+ * Convert Gregorian date to Hijri: the Umm al-Qura calendar, as published (not a moon sighting).
+ * Falls back to the tabular Kuwaiti algorithm (±1 day) where the JS engine has no Umm al-Qura data.
  */
 export function gregorianToHijri(date: Date): HijriDate {
+  const uq = ummAlQura(date);
+  if (uq) return {
+    ...uq,
+    monthAr: HIJRI_MONTHS_AR[uq.month - 1],
+    monthEn: HIJRI_MONTHS_EN[uq.month - 1],
+    formatted: `${uq.day} ${HIJRI_MONTHS_AR[uq.month - 1]} ${uq.year} هـ`,
+  };
   // Integer Julian Day Number — the Kuwaiti algorithm breaks on fractional days
   const jd = Math.floor(toJulian(date) + 0.5);
   const l = jd - 1948440 + 10632;

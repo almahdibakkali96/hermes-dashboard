@@ -8,8 +8,8 @@ const RAD = Math.PI / 180;
 const DEG = 180 / Math.PI;
 
 /**
- * Approximate moon phase (0-1), illumination (0-1), and age in days.
- * Accuracy: ~1-2 hours. Based on simplified Meeus algorithm.
+ * Moon phase (0-1), illumination (0-1), and age in days, from the true elongation.
+ * Accuracy: principal phases within ~1 hour. Based on simplified Meeus algorithm.
  */
 export function moonPhase(date: Date): {
   phase: number;        // 0 = new, 0.25 = first quarter, 0.5 = full, 0.75 = last quarter
@@ -23,26 +23,25 @@ export function moonPhase(date: Date): {
   // Days since J2000.0
   const d = jd - 2451545.0;
 
-  // Mean longitude of sun
-  const L = (280.460 + 0.9856474 * d) % 360;
-  // Mean anomaly of sun
-  const M = (357.528 + 0.9856003 * d) % 360;
-  // Mean longitude of moon
-  const Lp = (218.316 + 13.176396 * d) % 360;
-  // Mean anomaly of moon
-  const Mp = (134.963 + 13.064993 * d) % 360;
-  // Moon's mean elongation
-  const F = (93.272 + 13.229350 * d) % 360;
+  const s = (x: number) => Math.sin((x % 360) * RAD);
+  const L = 280.460 + 0.9856474 * d;    // mean longitude of the sun
+  const M = 357.528 + 0.9856003 * d;    // mean anomaly of the sun
+  const Lp = 218.316 + 13.176396 * d;   // mean longitude of the moon
+  const Mp = 134.963 + 13.064993 * d;   // mean anomaly of the moon
+  const D = 297.850 + 12.190749 * d;    // mean elongation of the moon
+  const F = 93.272 + 13.229350 * d;     // moon's argument of latitude
+
+  // True longitudes (equation of centre + main lunar terms, Meeus ch. 47): the mean elongation alone put
+  // new and full moons up to 14 h off, often on the wrong day
+  const sunLon = L + 1.915 * s(M) + 0.020 * s(2 * M);
+  const moonLon = Lp + 6.289 * s(Mp) + 1.274 * s(2 * D - Mp) + 0.658 * s(2 * D) + 0.214 * s(2 * Mp) - 0.186 * s(M) - 0.114 * s(2 * F);
 
   // Normalize to 0-360
   const norm = (x: number) => ((x % 360) + 360) % 360;
 
-  // Age in days (approximate)
-  let age = norm(Lp - L) * (29.53 / 360);
-
-  // More accurate: use elongation
-  const elong = norm(Lp - L);
-  age = elong * 29.53058867 / 360;
+  // Age in days from the true elongation
+  const elong = norm(moonLon - sunLon);
+  const age = elong * 29.53058867 / 360;
 
   // Phase: 0-1 (0=new, 0.5=full)
   const phase = (age / 29.53058867) % 1;
@@ -258,8 +257,8 @@ export function solunarPeriods(
 ): { periods: SolunarPeriod[]; rating: string; ratingAr: string } {
   const periods: SolunarPeriod[] = [];
 
-  // Opposite transit (12h after transit)
-  const oppositeTransit = transitTime ? addHours(transitTime, 12) : null;
+  // Opposite transit (moon underfoot): half a mean lunar day (24 h 50 min) after the transit
+  const oppositeTransit = transitTime ? addHours(transitTime, 12.42) : null;
 
   // Major periods: 1h before to 1h after transit and opposite transit
   if (transitTime) {
@@ -318,12 +317,11 @@ export function solunarPeriods(
   return { periods, rating, ratingAr };
 }
 
+/** "HH:MM" plus some hours, rounded to 5 minutes (the minutes used to be dropped: periods started up to 1 h early). */
 function addHours(time: string, hours: number): string {
   const [h, m] = time.split(':').map(Number);
-  const total = h + hours;
-  const newH = ((Math.round(total * 2) / 2) % 24 + 24) % 24;
-  const newM = Math.round((newH % 1) * 60);
-  return `${String(Math.floor(newH)).padStart(2, '0')}:${String(newM).padStart(2, '0')}`;
+  const mins = ((Math.round((h * 60 + m + hours * 60) / 5) * 5) % 1440 + 1440) % 1440;
+  return `${String(Math.floor(mins / 60)).padStart(2, '0')}:${String(mins % 60).padStart(2, '0')}`;
 }
 
 function getQuality(moonPhaseVal: number, periodType: string): string {
