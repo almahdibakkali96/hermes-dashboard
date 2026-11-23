@@ -18,6 +18,7 @@ import VercelAnalytics from '@vercel/analytics/astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { arabPlaces, worldPlaces } from '../lib/regions';
+import { COMPANY } from '../lib/company';
 
 export interface Props {
   title: string;
@@ -54,6 +55,16 @@ const siteGraph = [
     '@id': `${siteUrl}#org`,
     name: 'ArabTides',
     alternateName: 'المد والجزر العربي',
+    legalName: COMPANY.legalName,
+    email: COMPANY.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: COMPANY.street,
+      addressLocality: COMPANY.city,
+      addressRegion: COMPANY.region,
+      postalCode: COMPANY.postalCode,
+      addressCountry: COMPANY.country,
+    },
     url: siteUrl,
     sameAs: ['https://www.instagram.com/arabtides/'],
     logo: new URL(`${import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL}/favicon.svg`, Astro.site).href,

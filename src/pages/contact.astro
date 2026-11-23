@@ -1,6 +1,7 @@
 ---
-// Contact form → "Messages" tab of the sign-ups Google Sheet (see tools/signup-sheet). No email address is published.
+// Contact form → "Messages" tab of the sign-ups Google Sheet (see tools/signup-sheet), plus the public email.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { COMPANY } from '../lib/company';
 import { SIGNUP_URL } from '../lib/shop';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const subjects = ['سؤال عن المد والجزر', 'خطأ في بيانات ميناء', 'اقتراح ميناء جديد', 'إعلان أو تعاون', 'أخرى'];
@@ -47,6 +48,7 @@ const subjects = ['سؤال عن المد والجزر', 'خطأ في بيانا
     <div class="card p-6 mt-6 text-[var(--text-secondary)] leading-relaxed space-y-3">
       <h2 class="text-lg font-semibold text-[var(--text-primary)]">قبل أن تكتب</h2>
       <p>📋 كيف نحسب المد والقمر وتقييم الصيد؟ الجواب في <a href={`${BASE}methodology`} class="text-[var(--accent-text)] underline">صفحة المنهجية</a>.</p>
+      <p>✉️ تفضّل البريد الإلكتروني؟ راسلنا على <a href={`mailto:${COMPANY.email}`} class="text-[var(--accent-text)] underline latin" dir="ltr">{COMPANY.email}</a>.</p>
       <p>⚠️ أرقامنا تقديرات فلكية ولا تُستخدم للملاحة. التفاصيل في <a href={`${BASE}disclaimer`} class="text-[var(--accent-text)] underline">إخلاء المسؤولية</a>.</p>
     </div>
   </main>

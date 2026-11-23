@@ -2,6 +2,7 @@
 import buildInfo from '../build.json';
 import Icon from './Icon.astro';
 import { arabPlaces, worldPlaces } from '../lib/regions';
+import { COMPANY } from '../lib/company';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const buildNum = String(buildInfo.build).padStart(3, '0');
@@ -60,7 +61,7 @@ const popular = [
 
   <div class="border-t border-white/10">
     <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
-      <span>&copy; <span class="latin">{year}</span> ArabTides</span>
+      <span>&copy; <span class="latin">{year}</span> ArabTides · يُدار الموقع من قِبل شركة <span class="latin" dir="ltr">{COMPANY.legalName}</span> · <a href={`mailto:${COMPANY.email}`} class="footer-link latin" dir="ltr">{COMPANY.email}</a></span>
       <div class="flex items-center gap-3">
         <span class="latin">Tide data: EOT20 · CC BY 4.0</span>
         <span class="latin px-2 py-0.5 rounded bg-white/5 text-slate-300 font-mono" title="رقم الإصدار">#{buildNum}</span>

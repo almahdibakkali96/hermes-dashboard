@@ -1,8 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { COMPANY, companyAddress } from '../lib/company';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const h2 = 'text-lg font-semibold text-[var(--text-primary)]';
+const a = 'text-[var(--accent-text)] underline';
 ---
-<BaseLayout title="سياسة الخصوصية" description="كيف يتعامل ArabTides مع بياناتك: البريد الإلكتروني، الدفع، الإحصاءات، ملفات تعريف الارتباط والإعلانات.">
+<BaseLayout title="سياسة الخصوصية" description="كيف يتعامل ArabTides، الموقع والتطبيق، مع بياناتك: البريد الإلكتروني، الدفع، الإحصاءات، ملفات تعريف الارتباط والإعلانات.">
+  <!-- The app stores link here (#app): keep the app section true to what the app does -->
+
   <div class="page-head">
     <div class="max-w-2xl mx-auto px-4 py-8">
       <nav class="breadcrumb" aria-label="مسار التنقل"><a href={BASE}>الرئيسية</a><span class="sep">/</span><span aria-current="page">الخصوصية</span></nav>
@@ -11,6 +16,8 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
   </div>
   <main id="main" class="max-w-2xl mx-auto px-4 py-8 w-full">
     <div class="card p-6 text-[var(--text-secondary)] leading-relaxed space-y-4">
+      <h2 class={h2}>من نحن</h2>
+      <p>يدير موقع ArabTides وتطبيقاته شركة <strong class="latin" dir="ltr">{COMPANY.legalName}</strong>، المسجّلة في ولاية وايومنغ بالولايات المتحدة الأمريكية، وعنوانها: <span class="latin" dir="ltr">{companyAddress}</span>. لأي سؤال عن الخصوصية أو لطلب حذف بياناتك، راسلنا على <a href={`mailto:${COMPANY.email}`} class={`${a} latin`} dir="ltr">{COMPANY.email}</a>.</p>
       <h2 class="text-lg font-semibold text-[var(--text-primary)]">البريد الإلكتروني</h2>
       <p>إذا تركت بريدك الإلكتروني لتحميل الورقة المختصرة، نحفظه مع اسم الصفحة التي سجّلت منها وتاريخ التسجيل. نستخدمه فقط لإرسال الورقة المختصرة ونصائح الصيد وأخبار ArabTides. لا نبيع بريدك ولا نشاركه مع أي طرف لأغراض تسويقية. يمكنك إلغاء الاشتراك أو طلب حذف بريدك في أي وقت بالرد على أي رسالة منا.</p>
       <h2 class="text-lg font-semibold text-[var(--text-primary)]">رسائل صفحة الاتصال</h2>
@@ -33,6 +40,32 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
       <p>يحفظ متصفحك، لا خوادمنا، الميناء الذي تختاره بزر «اجعله ميناءي» وآخر الموانئ التي فتحتها، ليعرضها لك أولاً في الصفحة الرئيسية. يمكنك حذفها بمسح بيانات الموقع من إعدادات المتصفح.</p>
       <h2 class="text-lg font-semibold text-[var(--text-primary)]">بيانات المد والجزر</h2>
       <p>كل الحسابات تتم من نموذج EOT20 (CC BY 4.0)، على خوادمنا أو في متصفحك حين تختار يوماً آخر على صفحة الميناء.</p>
+    </div>
+
+    <div class="card p-6 mt-6 text-[var(--text-secondary)] leading-relaxed space-y-4" id="app">
+      <h2 class={h2}>تطبيق ArabTides للهواتف</h2>
+      <p>لا يطلب تطبيق ArabTides إنشاء حساب، ولا يجمع أي بيانات شخصية، ولا يحتوي على إعلانات أو أدوات تتبع أو إحصاءات.</p>
+      <ul class="list-disc ps-5 space-y-2">
+        <li>يحسب التطبيق المد والجزر والشمس والقمر وأوقات الصيد على هاتفك نفسه.</li>
+        <li>حين يتوفر الاتصال بالإنترنت، يحمّل التطبيق بيانات الموانئ من موقعنا <span class="latin" dir="ltr">arabtides.com</span>، دون أن يرسل أي معلومات عنك. وكأي موقع، قد تسجّل خوادم الاستضافة عنوان IP لفترة قصيرة لأسباب تقنية وأمنية.</li>
+        <li>الموانئ المفضّلة تُحفظ على هاتفك فقط، وتُحذف بحذف التطبيق.</li>
+        <li>لا يطلب التطبيق موقعك الجغرافي، ولا يصل إلى صورك أو جهات اتصالك.</li>
+      </ul>
+      <p>إذا تغيّر شيء من ذلك في إصدار قادم، نحدّث هذه الصفحة قبل نشر الإصدار.</p>
+
+      <div lang="en" dir="ltr" class="latin text-start border-t border-[var(--border)] pt-4 space-y-3">
+        <h2 class={h2}>ArabTides app: privacy policy (English)</h2>
+        <p>The ArabTides mobile app is published by {COMPANY.legalName}, {companyAddress}. Contact: <a href={`mailto:${COMPANY.email}`} class={a}>{COMPANY.email}</a>.</p>
+        <ul class="list-disc ps-5 space-y-2">
+          <li>The app needs no account and collects no personal data. It contains no ads, no tracking and no analytics.</li>
+          <li>Tides, sun, moon and fishing times are computed on your phone.</li>
+          <li>When online, the app downloads port data from arabtides.com without sending any information about you. Like any website, our hosting provider may log IP addresses briefly for technical and security reasons.</li>
+          <li>Favourite ports are stored on your phone only and are deleted when you delete the app.</li>
+          <li>The app does not request your location and does not access your photos or contacts.</li>
+        </ul>
+        <p>If this changes in a future version, we will update this page before that version is released.</p>
+      </div>
+      <p class="text-sm">آخر تحديث: <span class="latin">2026-11-23</span></p>
     </div>
   </main>
 </BaseLayout>

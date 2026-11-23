@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { arabPlaces as placesIndex } from '../../lib/regions';
 import { fish } from '../../lib/fish';
 import { articles } from '../../lib/articles';
+import { COMPANY, companyAddress } from '../../lib/company';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const countries = new Set(placesIndex.map((p: { country: string }) => p.country).filter(c => c !== 'IR')).size;
 const h2 = 'text-lg font-semibold text-[var(--text-primary)] mt-6';
@@ -38,6 +39,13 @@ const a = 'text-[var(--accent-text)] underline';
 
       <h2 class={h2}>الخصوصية</h2>
       <p>لا نطلب موقعك الجغرافي ولا نحتاجه. ولا نجمع بيانات شخصية إلا البريد الإلكتروني الذي تختار تركه لتحميل الورقة المختصرة، أو ما ترسله في رسالة. التفاصيل في <a href={`${BASE}privacy`} class={a}>صفحة الخصوصية</a>.</p>
+
+      <h2 class={h2} id="company">من يدير ArabTides</h2>
+      <p>يدير موقع ArabTides وتطبيقاته شركة <strong class="latin" dir="ltr">{COMPANY.legalName}</strong>، وهي شركة ذات مسؤولية محدودة مسجّلة في ولاية وايومنغ بالولايات المتحدة الأمريكية.</p>
+      <ul class="list-none space-y-1">
+        <li>العنوان: <span class="latin" dir="ltr">{companyAddress}</span></li>
+        <li>البريد الإلكتروني: <a href={`mailto:${COMPANY.email}`} class={`${a} latin`} dir="ltr">{COMPANY.email}</a></li>
+      </ul>
 
       <h2 class={h2}>تنبيه</h2>
       <p>هذه تقديرات فلكية. قد تختلف ارتفاعات المد والجزر الفعلية حسب الريح والضغط الجوي والعوامل المحلية. لا تعتمد على هذه المعلومات للملاحة أو الأغراض الحيوية، وراجع دائماً أنظمة الصيد ومواسم المنع في بلدك. اقرأ <a href={`${BASE}disclaimer`} class={a}>إخلاء المسؤولية</a>.</p>
