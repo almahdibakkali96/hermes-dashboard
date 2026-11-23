@@ -1,6 +1,7 @@
 ---
-// The port field for the 2027 calendar: plain free text, stored exactly as typed (how people write their port also
-// shows how serious the interest is). The page script quietly shows a port's numbers when the text matches one of ours.
+// The port field for the 2027 calendar: a search box with a suggestion list (Arabic, English or French port names, or a
+// country name for its ports). The text is still sent exactly as typed for sign-ups; the page script
+// (src/pages/calendar/index.astro) fills the list and picks the port.
 interface Props { id: string; label: string }
 const { id, label } = Astro.props;
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
@@ -9,5 +10,10 @@ const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL 
 <label class="signup-label" for={id}>{label}</label>
 <div class="cal-port-field">
   <img class="cal-port-flag" src={`${BASE}flags/ae.svg`} alt="" width="28" height="21" hidden />
-  <input id={id} name="port" type="text" required maxlength="60" autocomplete="off" placeholder="اكتب اسم ميناءك" class="cal-select" data-cal-port />
+  <div class="cal-port-box">
+    <input id={id} name="port" type="text" required maxlength="60" autocomplete="off" spellcheck="false"
+      placeholder="ابحث: مدينة أو بلد (عربي أو لاتيني)" class="cal-select" data-cal-port
+      role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls={`${id}-list`} />
+    <ul id={`${id}-list`} class="cal-suggest" role="listbox" aria-label="اقتراحات الموانئ" hidden></ul>
+  </div>
 </div>

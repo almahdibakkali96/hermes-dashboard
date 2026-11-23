@@ -8,6 +8,7 @@ import CalendarPortInput from '../../components/CalendarPortInput.astro';
 import { arabPlaces, worldPlaces } from '../../lib/regions';
 import { CAL, CAL_SALES_OPEN, CAL_WORLD_IDS, calendarBuyUrl, monthsAr, portYearSummary } from '../../lib/calendar';
 import { altNamesAr, frenchName } from '../../lib/portNames';
+import { countryName } from '../../lib/countries';
 
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const img = (f: string) => `${BASE}calendar/${f}`;
@@ -28,6 +29,17 @@ const ex = stats[EXAMPLE_PORT];
 // Names a visitor may type for each port (Arabic, local spellings, English, French), matched client-side
 const aliases: Record<string, string[]> = Object.fromEntries(places.map(p => [p.id,
   [p.name_ar, ...altNamesAr(p.id, p.name_ar), p.name_en.replace(/\s*\(.*\)$/, ''), frenchName(p.id) || ''].filter(Boolean)]));
+// The suggestion list: each port's Latin name, and country names (Arabic, English, French, common short forms) → its ports
+const latin: Record<string, string> = Object.fromEntries(places.map(p => [p.id, p.name_en.replace(/\s*\(.*\)$/, '')]));
+const enNames = new Intl.DisplayNames(['en'], { type: 'region' }), frNames = new Intl.DisplayNames(['fr'], { type: 'region' });
+const SHORT: Record<string, string[]> = {
+  AE: ['UAE', 'Emirates', 'الإمارات', 'امارات'], SA: ['KSA', 'Saudi', 'السعودية', 'المملكة'], US: ['USA', 'America', 'أمريكا', 'امريكا'],
+  GB: ['UK', 'England', 'Britain', 'بريطانيا', 'انجلترا', 'إنجلترا'], MA: ['Maroc', 'المغرب'], DZ: ['Algérie', 'الجزائر'],
+  TN: ['Tunisie', 'تونس'], EG: ['مصر', 'Misr'], NL: ['Holland', 'هولندا'], TR: ['Türkiye', 'Turkiye', 'تركيا'],
+};
+const countries: Record<string, string[]> = {};
+for (const cc of new Set(places.map(p => p.country)))
+  countries[cc.toLowerCase()] = [countryName(cc), enNames.of(cc) || '', frNames.of(cc) || '', ...(SHORT[cc] || [])].filter(Boolean);
 const metres = (cm: number) => (cm / 100).toFixed(2);
 
 // Sales mode: launch link until the full moon, then the full-price link (switched client-side at the exact minute)
@@ -261,7 +273,7 @@ const jsonLd = [
     <p class="text-sm text-center mt-2 text-slate-200"></p>
   </dialog>
 
-  <script type="application/json" id="cal-data" set:html={JSON.stringify({ stats, months: monthsAr, base: BASE, flags: `${BASE}flags/`, end: CAL.launchPriceEnd, ref: CAL.id, example: EXAMPLE_PORT, aliases })} />
+  <script type="application/json" id="cal-data" set:html={JSON.stringify({ stats, months: monthsAr, base: BASE, flags: `${BASE}flags/`, end: CAL.launchPriceEnd, ref: CAL.id, example: EXAMPLE_PORT, aliases, latin, countries })} />
   <script is:inline>
     (function () {
       var D = JSON.parse(document.getElementById('cal-data').textContent);
@@ -292,6 +304,7 @@ const jsonLd = [
       var lookup = {};
       Object.keys(D.aliases).forEach(function (id) { D.aliases[id].forEach(function (n) { var k = norm(n); if (k && !lookup[k]) lookup[k] = id; }); });
       var match = function (t) { return lookup[norm(t)] || ''; };
+      var list = document.getElementById('cal-port-list'), active = -1, portIndex = [], countryIndex = [];
 
       function choose(id, fromUser) {
         var s = id && D.stats[id];
@@ -336,6 +349,17 @@ const jsonLd = [
         }
       }
 
+      portIndex = Object.keys(D.aliases).map(function (id) {
+        var ws = [];
+        D.aliases[id].concat(D.latin[id]).forEach(function (n) { ws = ws.concat(words(n)); });
+        return { id: id, names: D.aliases[id].concat(D.latin[id]).map(norm).filter(Boolean), words: ws, cc: D.stats[id][1] };
+      });
+      countryIndex = Object.keys(D.countries).map(function (cc) {
+        var ws = [];
+        D.countries[cc].forEach(function (n) { ws.push(norm(n)); ws = ws.concat(words(n)); });
+        return { cc: cc, words: ws };
+      });
+
       // Start from ?port=… (links from port pages and Instagram), then the visitor's saved port
       var q = new URLSearchParams(location.search).get('port'), saved = null;
       try { saved = JSON.parse(localStorage.getItem('arabtides.myPort') || 'null'); } catch (e) {}
@@ -345,7 +369,106 @@ const jsonLd = [
         if (start) sel.value = D.stats[start][0];
         choose(start);
         // Live while typing; the text itself is sent exactly as typed
-        sel.addEventListener('input', function () { var id = match(sel.value); if (id !== chosen) { chosen = id; choose(id, !!id); } });
+        sel.addEventListener('input', function () { var id = match(sel.value); if (id !== chosen) { chosen = id; choose(id, !!id); } suggest(); });
+        sel.addEventListener('focus', function () { if (!chosen) suggest(); });
+        sel.addEventListener('keydown', function (e) {
+          if (list.hidden) { if (e.key === 'ArrowDown') { suggest(); e.preventDefault(); } return; }
+          var items = list.querySelectorAll('[role=option]');
+          if (!items.length) { if (e.key === 'Escape') close(); return; }
+          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            active = (active + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+            highlight(items);
+          } else if (e.key === 'Enter') {
+            e.preventDefault();
+            pick(items[active >= 0 ? active : 0].dataset.id);
+          } else if (e.key === 'Escape') { close(); }
+        });
+        sel.addEventListener('blur', function () { setTimeout(close, 150); });
+        // mousedown, not click: it fires before the field loses focus
+        list.addEventListener('mousedown', function (e) {
+          var li = e.target.closest('[role=option]');
+          if (li) { e.preventDefault(); pick(li.dataset.id); }
+        });
+      }
+
+      // ---- Suggestions: port names (Arabic, English, French, local spellings) and countries, by how well they match ----
+      // Searchable words: each word of a name, and each Arabic word without its leading «ال»
+      function words(t) {
+        var out = [];
+        String(t || '').split(/[\s\-–(),'’]+/).forEach(function (w) {
+          var k = norm(w);
+          if (k) { out.push(k); if (k.indexOf('ال') === 0 && k.length > 3) out.push(k.slice(2)); }
+        });
+        return out;
+      }
+      function search(text) {
+        var q = norm(text);
+        if (!q) return [];
+        var hits = [];
+        portIndex.forEach(function (p) {
+          var score = 9;
+          if (p.names.indexOf(q) >= 0) score = 0;
+          else if (p.names.some(function (n) { return n.indexOf(q) === 0; })) score = 1;
+          else if (p.words.some(function (w) { return w.indexOf(q) === 0; })) score = 2;
+          else if (q.length >= 3 && p.names.some(function (n) { return n.indexOf(q) > 0; })) score = 3;
+          if (score < 9) hits.push({ id: p.id, score: score });
+        });
+        // A country name lists its ports, after the ports whose own name matches
+        if (q.length >= 2) countryIndex.forEach(function (c) {
+          var exact = c.words.indexOf(q) >= 0, start = c.words.some(function (w) { return w.indexOf(q) === 0; });
+          if (!exact && !start) return;
+          portIndex.forEach(function (p) {
+            if (p.cc === c.cc && !hits.some(function (h) { return h.id === p.id; })) hits.push({ id: p.id, score: exact ? 4 : 5 });
+          });
+        });
+        return hits.sort(function (a, b) { return a.score - b.score || D.stats[a.id][0].localeCompare(D.stats[b.id][0], 'ar'); });
+      }
+      function close() {
+        if (!list) return;
+        list.hidden = true; list.innerHTML = ''; active = -1;
+        sel.setAttribute('aria-expanded', 'false'); sel.removeAttribute('aria-activedescendant');
+      }
+      function highlight(items) {
+        Array.prototype.forEach.call(items, function (li, i) { li.setAttribute('aria-selected', i === active ? 'true' : 'false'); });
+        if (items[active]) { sel.setAttribute('aria-activedescendant', items[active].id); items[active].scrollIntoView({ block: 'nearest' }); }
+      }
+      function suggest() {
+        if (!list) return;
+        var hits = search(sel.value);
+        if (chosen && hits.length && hits[0].id === chosen && hits[0].score === 0) hits = [];   // the text already names a port
+        list.innerHTML = '';
+        if (!hits.length) {
+          if (norm(sel.value) && !chosen) {
+            var none = document.createElement('li'); none.className = 'cal-suggest-none';
+            none.textContent = 'لا نجد ميناءً بهذا الاسم. جرّب اسم المدينة أو البلد بالعربية أو اللاتينية.';
+            list.appendChild(none); list.hidden = false; sel.setAttribute('aria-expanded', 'true');
+          } else close();
+          return;
+        }
+        var shown = hits.slice(0, 40);   // the list scrolls; a whole country fits
+        shown.forEach(function (h, i) {
+          var s = D.stats[h.id], li = document.createElement('li');
+          li.id = 'cal-port-opt-' + i; li.setAttribute('role', 'option'); li.setAttribute('aria-selected', 'false'); li.dataset.id = h.id;
+          var img = document.createElement('img'); img.src = D.flags + s[1] + '.svg'; img.alt = ''; img.width = 24; img.height = 18;
+          var txt = document.createElement('span'); txt.className = 'cal-suggest-text';
+          var b = document.createElement('b'); b.textContent = s[0];
+          var small = document.createElement('small'); small.textContent = D.latin[h.id] + ' · ' + D.countries[s[1]][0];
+          txt.appendChild(b); txt.appendChild(small);
+          li.appendChild(img); li.appendChild(txt); list.appendChild(li);
+        });
+        if (hits.length > shown.length) {
+          var more = document.createElement('li'); more.className = 'cal-suggest-none';
+          more.textContent = '… و' + (hits.length - shown.length) + ' غيرها. اكتب حروفاً أكثر.';
+          list.appendChild(more);
+        }
+        active = -1; list.hidden = false; sel.setAttribute('aria-expanded', 'true');
+      }
+      function pick(id) {
+        if (!id || !D.stats[id]) return;
+        sel.value = D.stats[id][0];
+        chosen = id; choose(id, true); close();
+        var err = document.querySelector('[data-buy-error]'); if (err) err.hidden = true;
       }
 
       // Buttons that lead to the card focus the port picker (or the email once a port is chosen)
@@ -424,6 +547,17 @@ const jsonLd = [
   .cal-card :global(.signup-btn) { padding-block: 0.85rem; font-size: 1.05rem; }
   .cal-card :global(.signup-done) { padding: 1rem; border-radius: 0.9rem; background: var(--accent-muted); color: var(--accent-text); line-height: 1.7; }
   :global(.cal-port-field) { display: flex; align-items: center; gap: 0.6rem; }
+  :global(.cal-port-box) { position: relative; flex: 1 1 0; min-width: 0; display: flex; }
+  :global(.cal-suggest) { position: absolute; inset-inline: 0; top: calc(100% + 0.35rem); z-index: 30; margin: 0; padding: 0.3rem; list-style: none;
+    max-height: 19rem; overflow-y: auto; background: #fff; border: 1px solid var(--border-standard); border-radius: 0.8rem;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .16); text-align: start; }
+  :global(.cal-suggest [role=option]) { display: flex; align-items: center; gap: 0.65rem; padding: 0.55rem 0.6rem; border-radius: 0.55rem; cursor: pointer; color: var(--text-primary); }
+  :global(.cal-suggest [role=option]:hover), :global(.cal-suggest [aria-selected=true]) { background: #f0fdfa; }
+  :global(.cal-suggest img) { width: 1.5rem; height: auto; border-radius: 0.15rem; box-shadow: 0 0 0 1px var(--border-subtle); flex-shrink: 0; }
+  :global(.cal-suggest-text) { display: flex; flex-direction: column; min-width: 0; line-height: 1.35; }
+  :global(.cal-suggest-text b) { font-weight: 700; font-size: 0.98rem; }
+  :global(.cal-suggest-text small) { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  :global(.cal-suggest-none) { padding: 0.55rem 0.6rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
   :global(.cal-port-flag) { width: 1.9rem; height: auto; border-radius: 0.2rem; box-shadow: 0 0 0 1px var(--border-subtle); flex-shrink: 0; }
   :global(.cal-select) { flex: 1 1 0; width: 100%; min-width: 0; padding: 0.75rem 0.9rem; border-radius: 0.8rem; border: 1px solid var(--border-standard);
     background: #fff; color: var(--text-primary); font-size: 1rem; font-weight: 600; }
