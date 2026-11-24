@@ -780,3 +780,9 @@ button.sea-chip[aria-pressed="true"] { background: var(--accent-muted); border-c
 .world-chip { padding: 0.1rem 0.55rem; border-radius: var(--radius-pill); font-size: 0.75rem; background: var(--surface-elevated); border: 1px solid var(--border-subtle); transition: border-color 0.15s ease, color 0.15s ease; }
 .world-chip:hover { border-color: var(--accent-border); color: var(--accent-text); }
 .pmap-sep { flex: 0 0 1px; align-self: stretch; margin-inline: 0.25rem; background: rgba(255, 255, 255, 0.15); }
+
+/* Pages the mobile app links to (/app/*, BaseLayout bare): a plain navy bar, no navigation or shop elements */
+.app-bare-head {
+  background: #0b2540; color: #fff; padding: 0.9rem 1rem; text-align: center;
+  font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em;
+}

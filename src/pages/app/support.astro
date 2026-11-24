@@ -1,0 +1,27 @@
+---
+// /app/support: support page of the ArabTides mobile app (App Store "Support URL"). Bare layout: no shop elements.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMPANY, companyAddress } from '../../lib/company';
+const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
+const h2 = 'text-lg font-semibold text-[var(--text-primary)]';
+const a = 'text-[var(--accent-text)] underline';
+---
+<BaseLayout title="دعم تطبيق ArabTides" description="مساعدة وتواصل لتطبيق ArabTides للهواتف: أسئلة، وتصحيح بيانات ميناء، واقتراح موانئ جديدة." bare noindex noGA>
+  <main id="main" class="max-w-2xl mx-auto px-4 py-8 w-full">
+    <div class="card p-6 text-[var(--text-secondary)] leading-relaxed space-y-4">
+      <h1 class="text-2xl font-bold display text-[var(--text-primary)]">دعم تطبيق ArabTides</h1>
+      <p>لأي سؤال عن التطبيق، أو لتصحيح بيانات ميناء، أو لاقتراح ميناء جديد، راسلنا على <a href={`mailto:${COMPANY.email}`} class={`${a} latin`} dir="ltr">{COMPANY.email}</a> وسنرد عليك في أقرب وقت. داخل التطبيق، تجد في صفحة كل ميناء زر «أبلغ عن خطأ» يكتب لك اسم الميناء والتاريخ.</p>
+      <h2 class={h2}>أسئلة شائعة</h2>
+      <p><strong>هل يعمل التطبيق دون إنترنت؟</strong> نعم. كل الحسابات تتم على هاتفك، والبيانات محفوظة فيه منذ أول تشغيل.</p>
+      <p><strong>هل الأرقام صالحة للملاحة؟</strong> لا. هي تقديرات فلكية من نموذج EOT20، وقد يختلف المد الفعلي بسبب الرياح والضغط الجوي. راجع الجداول الرسمية لميناءك.</p>
+      <p><strong>لماذا يختلف ارتفاع المد عن جداول أخرى؟</strong> نقيس الارتفاعات بالسنتيمتر فوق أدنى مستوى فلكي للجزر، كما في الجداول الرسمية، وقد تستخدم جداول أخرى مرجعاً مختلفاً.</p>
+      <p><a href={`${BASE}app/privacy`} class={a}>سياسة خصوصية التطبيق</a></p>
+      <p class="text-sm">تنشر التطبيق شركة <span class="latin" dir="ltr">{COMPANY.legalName}</span>، <span class="latin" dir="ltr">{companyAddress}</span>.</p>
+
+      <div lang="en" dir="ltr" class="latin text-start border-t border-[var(--border-standard)] pt-4 space-y-2">
+        <h2 class={h2}>Support (English)</h2>
+        <p>Questions, data corrections or a new port to add: email <a href={`mailto:${COMPANY.email}`} class={a}>{COMPANY.email}</a>. The app works offline; its tide times are astronomical estimates and are not for navigation. <a href={`${BASE}app/privacy`} class={a}>Privacy policy</a>.</p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

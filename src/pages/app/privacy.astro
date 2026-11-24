@@ -1,0 +1,40 @@
+---
+// /app/privacy: the privacy policy of the ArabTides mobile app, as linked from the app and from the App Store and
+// Google Play listings. Bare layout on purpose: no site header/footer, so no shop banner or purchase link
+// (App Store guideline 3.1.1). Keep it true to what the app does; /privacy#app carries the same text.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMPANY, companyAddress } from '../../lib/company';
+const h2 = 'text-lg font-semibold text-[var(--text-primary)]';
+const a = 'text-[var(--accent-text)] underline';
+---
+<BaseLayout title="سياسة خصوصية تطبيق ArabTides" description="سياسة الخصوصية لتطبيق ArabTides للهواتف: لا حساب، ولا بيانات شخصية، ولا إعلانات أو تتبع." bare noindex noGA>
+  <main id="main" class="max-w-2xl mx-auto px-4 py-8 w-full">
+    <div class="card p-6 text-[var(--text-secondary)] leading-relaxed space-y-4">
+      <h1 class="text-2xl font-bold display text-[var(--text-primary)]">سياسة خصوصية تطبيق ArabTides</h1>
+      <p>لا يطلب تطبيق ArabTides إنشاء حساب، ولا يجمع أي بيانات شخصية، ولا يحتوي على إعلانات أو أدوات تتبع أو إحصاءات.</p>
+      <ul class="list-disc ps-5 space-y-2">
+        <li>يحسب التطبيق المد والجزر والشمس والقمر وأوقات الصيد والصلاة على هاتفك نفسه.</li>
+        <li>حين يتوفر الاتصال بالإنترنت، يحمّل التطبيق بيانات الموانئ من موقعنا <span class="latin" dir="ltr">arabtides.com</span>، دون أن يرسل أي معلومات عنك. وكأي موقع، قد تسجّل خوادم الاستضافة عنوان IP لفترة قصيرة لأسباب تقنية وأمنية.</li>
+        <li>الموانئ المفضّلة وآخر الموانئ التي فتحتها تُحفظ على هاتفك فقط، وتُحذف بحذف التطبيق.</li>
+        <li>لا يطلب التطبيق موقعك الجغرافي، ولا يصل إلى صورك أو جهات اتصالك.</li>
+      </ul>
+      <p>إذا تغيّر شيء من ذلك في إصدار قادم، نحدّث هذه الصفحة قبل نشر الإصدار.</p>
+      <h2 class={h2}>من ينشر التطبيق</h2>
+      <p>شركة <strong class="latin" dir="ltr">{COMPANY.legalName}</strong>، <span class="latin" dir="ltr">{companyAddress}</span>. للتواصل: <a href={`mailto:${COMPANY.email}`} class={`${a} latin`} dir="ltr">{COMPANY.email}</a>.</p>
+
+      <div lang="en" dir="ltr" class="latin text-start border-t border-[var(--border-standard)] pt-4 space-y-3">
+        <h2 class={h2}>ArabTides app: privacy policy (English)</h2>
+        <p>The ArabTides mobile app is published by {COMPANY.legalName}, {companyAddress}. Contact: <a href={`mailto:${COMPANY.email}`} class={a}>{COMPANY.email}</a>.</p>
+        <ul class="list-disc ps-5 space-y-2">
+          <li>The app needs no account and collects no personal data. It contains no ads, no tracking and no analytics.</li>
+          <li>Tides, sun, moon, fishing and prayer times are computed on your phone.</li>
+          <li>When online, the app downloads port data from arabtides.com without sending any information about you. Like any website, our hosting provider may log IP addresses briefly for technical and security reasons.</li>
+          <li>Favourite and recently viewed ports are stored on your phone only and are deleted when you delete the app.</li>
+          <li>The app does not request your location and does not access your photos or contacts.</li>
+        </ul>
+        <p>If this changes in a future version, we will update this page before that version is released.</p>
+      </div>
+      <p class="text-sm">آخر تحديث: <span class="latin">2026-11-24</span></p>
+    </div>
+  </main>
+</BaseLayout>

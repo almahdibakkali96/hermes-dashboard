@@ -31,9 +31,12 @@ export interface Props {
   noindex?: boolean;
   /** no Google Analytics (the calendar's thanks page: its URL carries the buyer's download session_id) */
   noGA?: boolean;
+  /** pages the mobile app links to (/app/*): no site header or footer, so no shop banners or purchase links
+   *  (App Store guideline 3.1.1, Google Play payments policy) */
+  bare?: boolean;
 }
 
-const { title, description, jsonLd, ogType = 'website', ogImage, noindex = false, noGA = false } = Astro.props;
+const { title, description, jsonLd, ogType = 'website', ogImage, noindex = false, noGA = false, bare = false } = Astro.props;
 const fullTitle = `${title} — ArabTides`;
 const desc = description || 'مواقيت المد والجزر والحسابات الفلكية للموانئ العربية';
 const gaId = noGA ? null : import.meta.env.PUBLIC_GA_ID || null;
@@ -126,11 +129,13 @@ const graph = [...siteGraph, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jso
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
-    <SiteHeader />
+    {bare ? (
+      <header class="app-bare-head"><span class="latin">ArabTides</span></header>
+    ) : <SiteHeader />}
     <div class="flex-1 flex flex-col">
       <slot />
     </div>
-    <SiteFooter />
+    {!bare && <SiteFooter />}
     <VercelAnalytics />
     <script is:inline>
       // A click on any [data-track] element (calendar buttons, …) is an analytics event: Vercel custom events,
