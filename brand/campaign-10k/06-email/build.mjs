@@ -1,7 +1,7 @@
 // Builds the three Brevo emails (email-1-launch.html, email-2-numbers.html, email-3-last-day.html).
 //   node brand/campaign-10k/06-email/build.mjs
-// Paste each file in Brevo: Campaigns → Create → Email → design "Code your own" (HTML). Brevo fills
-// {{ contact.X }} from the contact attributes made by contacts.mjs; {{ unsubscribe }} is Brevo's own link.
+// Paste each file in Brevo: Campaigns → Create → Email → design "Code your own" (HTML).
+// Generic for everyone (no contact attributes); {{ unsubscribe }} is Brevo's own link.
 import { writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,8 +9,8 @@ import { fileURLToPath } from 'node:url';
 const DIR = dirname(fileURLToPath(import.meta.url));
 const SITE = 'https://www.arabtides.com';
 const IMG = `${SITE}/email`;
-const link = (id) => `${SITE}/calendar?port={{ contact.PORT }}&utm_source=email&utm_medium=email&utm_campaign=cal-launch&utm_content=${id}`;
-const FOR = '{{ contact.PORT_FOR | default : "لميناءك" }}';
+const link = (id) => `${SITE}/calendar?utm_source=email&utm_medium=email&utm_campaign=cal-launch&utm_content=${id}`;
+const FOR = 'لميناءك';
 const NAVY = '#0b2a4a', TEAL = '#0f8b8d', TEXT = '#1f2937', MUTED = '#6b7280';
 const FONT = "Tahoma, 'Segoe UI', Arial, sans-serif";
 
@@ -82,30 +82,21 @@ const emails = {
     ].join('\n'),
   },
   'email-2-numbers.html': {
-    subject: '{{ contact.PORT_AR | default : "ميناؤك" }} في 2027: كم يوماً ممتازاً للصيد؟',
-    preheader: 'حسبنا السنة كلها يوماً بيوم. هذه أرقام ميناءك',
+    subject: 'كم يوماً ممتازاً للصيد في ميناءك سنة 2027؟',
+    preheader: 'حسبنا السنة كلها يوماً بيوم لكل ميناء',
     body: [
       p('مرحباً،'),
-      `{% if contact.EXCELLENT %}`,
-      p(`حسبنا سنة ${n('2027')} كاملة {{ contact.PORT_FOR }}، يوماً بيوم:`),
-      `<div style="margin:0 0 18px;padding:18px 16px;background:#eef8f8;border-radius:12px;text-align:center">
-        <div style="font:bold 28px/1.5 ${FONT};color:${NAVY}">{{ contact.EXCELLENT }}</div>
-        <div style="font:16px/1.8 ${FONT};color:${TEXT}">للصيد في {{ contact.PORT_AR }} خلال السنة</div>
-        <div style="margin-top:8px;font:16px/1.8 ${FONT};color:${TEXT}">وأفضل شهر: <b style="color:${TEAL}">{{ contact.BEST_MONTH }}</b></div>
-      </div>`,
-      `{% else %}`,
       p(`حسبنا سنة ${n('2027')} كاملة لكل ميناء، يوماً بيوم. في دبي مثلاً:`),
       `<div style="margin:0 0 18px;padding:18px 16px;background:#eef8f8;border-radius:12px;text-align:center">
         <div style="font:bold 28px/1.5 ${FONT};color:${NAVY}">${n('103')} يوماً ممتازاً</div>
         <div style="font:16px/1.8 ${FONT};color:${TEXT}">للصيد خلال السنة، وأفضل شهر: <b style="color:${TEAL}">أكتوبر</b></div>
       </div>`,
       p('اختر ميناءك في الصفحة لترى أرقامه.'),
-      `{% endif %}`,
       p('كل يوم منها مكتوب في التقويم بتاريخه وساعات المد وأفضل فترات الصيد، وصفحة «أفضل الأيام» تجمعها لك لتحجزها من الآن.'),
       img('best-days.jpg', 'صفحة أفضل أيام السنة من تقويم 2027', link('e2-img')),
       p('<b>كيف نعرف المد قبل سنة؟</b> المد يتبع القمر والشمس، وحركتهما معروفة بدقة، فيُحسب المد مسبقاً كما يُحسب الكسوف قبل وقوعه بسنوات. أما الريح والطقس فيغيّران البحر يوماً بيوم، فراجع النشرة الجوية قبل خروجك.'),
       price,
-      button(link('e2'), `احجز تقويمك ${FOR}`),
+      button(link('e2'), 'اختر ميناءك واحجز تقويمك'),
     ].join('\n'),
   },
   'email-3-last-day.html': {
