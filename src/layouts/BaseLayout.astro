@@ -44,6 +44,11 @@ const gaId = noGA ? null : import.meta.env.PUBLIC_GA_ID || null;
 // the production page and keeps itself out of the index, so Google never sees two copies of the site.
 const PRODUCTION = 'https://www.arabtides.com';
 const isMirror = import.meta.env.BASE_URL !== '/';
+// Google AdSense (publisher id is public; it is also in public/ads.txt). Production only, and never on the
+// app's bare pages (store policies) or the noGA pages (their URL carries the buyer's session_id).
+// Which ads show, where, and the EEA/UK consent message are set in the AdSense dashboard.
+const ADSENSE_CLIENT = 'ca-pub-5041199642834513';
+const adsense = !isMirror && !bare && !noGA && !noindex;
 const path = Astro.url.pathname.slice(isMirror ? import.meta.env.BASE_URL.replace(/\/$/, '').length : 0) || '/';
 // No trailing slash, matching the sitemap and internal links
 const canonical = new URL(path.replace(/(.)\/$/, '$1'), isMirror ? PRODUCTION : Astro.site).href;
@@ -126,6 +131,7 @@ const graph = [...siteGraph, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jso
         gtag('config', gaId);
       </script>
     </>)}
+    {adsense && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossorigin="anonymous"></script>}
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
