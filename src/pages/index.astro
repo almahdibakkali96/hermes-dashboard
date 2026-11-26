@@ -13,6 +13,7 @@ import Flag from '../components/Flag.astro';
 import RatingBadge from '../components/RatingBadge.astro';
 import WeekRatings from '../components/WeekRatings.astro';
 import PortsMap from '../components/PortsMap.astro';
+import { APP_STORE_URL } from '../lib/app-links';
 import { ratingsFrom } from '../lib/fishing';
 import { fish, fishLabel } from '../lib/fish';
 import {
@@ -146,6 +147,17 @@ const features: { icon: IconName; title: string; text: string }[] = [
           ))}
         </span>
       </div>
+
+      <!-- The iPhone app (src/lib/app-links.ts); Apple's official Arabic badge, unmodified, as Apple's guidelines require -->
+      {APP_STORE_URL && (
+        <a href={APP_STORE_URL} rel="noopener" target="_blank" class="hero-app" data-track="app_store" data-track-where="hero">
+          <img src={`${BASE}badges/app-store-ar.svg`} width="120" height="40" alt="تنزيل من App Store" class="hero-app-badge" />
+          <span class="hero-app-text">
+            <b>تطبيق ArabTides للآيفون</b>
+            <span>مجاني: المد والجزر والصيد في جيبك</span>
+          </span>
+        </a>
+      )}
 
       </div>
 

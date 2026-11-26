@@ -308,6 +308,18 @@ body {
   background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); transition: background-color 0.15s ease;
 }
 .quick-chip:hover { background: rgba(255, 255, 255, 0.2); }
+/* Homepage hero: the iPhone app (Apple's badge + one line) */
+.hero-app {
+  margin-top: 1.5rem; display: inline-flex; align-items: center; gap: 0.85rem; max-width: 100%;
+  padding-block: 0.5rem; padding-inline: 0.5rem 1rem; border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background-color 0.15s ease;
+}
+.hero-app:hover { background: rgba(255, 255, 255, 0.12); }
+.hero-app-badge { display: block; height: 40px; width: auto; flex-shrink: 0; }
+.hero-app-text { min-width: 0; line-height: 1.45; }
+.hero-app-text b { display: block; font-size: 0.875rem; font-weight: 600; color: #fff; }
+.hero-app-text span { display: block; font-size: 0.75rem; color: #94a3b8; }
 
 /* Week of fishing ratings: one row per port, one cell per day */
 .week-grid-head, .week-grid-row {

@@ -10,48 +10,13 @@
     "timezone": "Asia/Vladivostok"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/vladivostok",
-  "generated_utc": "2026-11-26T13:42:09.395Z",
+  "generated_utc": "2026-11-26T14:35:19.544Z",
   "tide_type_ar": "مختلط، نصف يومي غالباً",
   "datum": "LAT, lowest astronomical tide (chart datum, as official tide tables); heights in cm above it",
   "mean_sea_level_above_datum_cm": 28,
   "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
   "disclaimer": "Astronomical estimate. Not official harbour predictions. Not for navigation.",
   "days": [
-    {
-      "date": "2026-11-26",
-      "utc_offset_minutes": 600,
-      "tides": [
-        {
-          "type": "high",
-          "time_local": "04:06",
-          "time_utc": "2026-11-25T18:05:54.111Z",
-          "height_cm": 51
-        },
-        {
-          "type": "low",
-          "time_local": "11:33",
-          "time_utc": "2026-11-26T01:32:56.484Z",
-          "height_cm": 5
-        },
-        {
-          "type": "high",
-          "time_local": "18:19",
-          "time_utc": "2026-11-26T08:18:33.359Z",
-          "height_cm": 40
-        },
-        {
-          "type": "low",
-          "time_local": "23:06",
-          "time_utc": "2026-11-26T13:05:45.902Z",
-          "height_cm": 30
-        }
-      ],
-      "moon": {
-        "phase_ar": "أحدب متناقص",
-        "phase_en": "Waning Gibbous",
-        "illumination": 0.94
-      }
-    },
     {
       "date": "2026-11-27",
       "utc_offset_minutes": 600,
@@ -84,7 +49,7 @@
       "moon": {
         "phase_ar": "أحدب متناقص",
         "phase_en": "Waning Gibbous",
-        "illumination": 0.88
+        "illumination": 0.94
       }
     },
     {
@@ -113,7 +78,7 @@
       "moon": {
         "phase_ar": "أحدب متناقص",
         "phase_en": "Waning Gibbous",
-        "illumination": 0.79
+        "illumination": 0.87
       }
     },
     {
@@ -148,7 +113,7 @@
       "moon": {
         "phase_ar": "أحدب متناقص",
         "phase_en": "Waning Gibbous",
-        "illumination": 0.69
+        "illumination": 0.78
       }
     },
     {
@@ -181,9 +146,9 @@
         }
       ],
       "moon": {
-        "phase_ar": "تربيع أخير",
-        "phase_en": "Last Quarter",
-        "illumination": 0.58
+        "phase_ar": "أحدب متناقص",
+        "phase_en": "Waning Gibbous",
+        "illumination": 0.68
       }
     },
     {
@@ -218,7 +183,7 @@
       "moon": {
         "phase_ar": "تربيع أخير",
         "phase_en": "Last Quarter",
-        "illumination": 0.47
+        "illumination": 0.57
       }
     },
     {
@@ -242,6 +207,41 @@
           "time_local": "17:09",
           "time_utc": "2026-12-02T07:09:12.453Z",
           "height_cm": 19
+        }
+      ],
+      "moon": {
+        "phase_ar": "تربيع أخير",
+        "phase_en": "Last Quarter",
+        "illumination": 0.46
+      }
+    },
+    {
+      "date": "2026-12-03",
+      "utc_offset_minutes": 600,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "00:34",
+          "time_utc": "2026-12-02T14:33:56.468Z",
+          "height_cm": 31
+        },
+        {
+          "type": "low",
+          "time_local": "05:58",
+          "time_utc": "2026-12-02T19:58:28.471Z",
+          "height_cm": 24
+        },
+        {
+          "type": "high",
+          "time_local": "12:15",
+          "time_utc": "2026-12-03T02:14:36.221Z",
+          "height_cm": 31
+        },
+        {
+          "type": "low",
+          "time_local": "18:21",
+          "time_utc": "2026-12-03T08:20:45.448Z",
+          "height_cm": 21
         }
       ],
       "moon": {

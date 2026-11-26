@@ -10,7 +10,7 @@
     "timezone": "Asia/Bangkok"
   },
   "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/hua-hin",
-  "generated_utc": "2026-11-26T13:42:09.071Z",
+  "generated_utc": "2026-11-26T14:35:19.234Z",
   "tide_type_ar": "مختلط، يومي غالباً",
   "datum": "LAT, lowest astronomical tide (chart datum, as official tide tables); heights in cm above it",
   "mean_sea_level_above_datum_cm": 189,
@@ -54,7 +54,7 @@
       "moon": {
         "phase_ar": "أحدب متناقص",
         "phase_en": "Waning Gibbous",
-        "illumination": 0.88
+        "illumination": 0.87
       }
     },
     {
@@ -77,7 +77,7 @@
       "moon": {
         "phase_ar": "أحدب متناقص",
         "phase_en": "Waning Gibbous",
-        "illumination": 0.79
+        "illumination": 0.78
       }
     },
     {
@@ -100,7 +100,7 @@
       "moon": {
         "phase_ar": "أحدب متناقص",
         "phase_en": "Waning Gibbous",
-        "illumination": 0.69
+        "illumination": 0.68
       }
     },
     {
@@ -123,7 +123,7 @@
       "moon": {
         "phase_ar": "تربيع أخير",
         "phase_en": "Last Quarter",
-        "illumination": 0.58
+        "illumination": 0.57
       }
     },
     {
@@ -146,7 +146,7 @@
       "moon": {
         "phase_ar": "تربيع أخير",
         "phase_en": "Last Quarter",
-        "illumination": 0.47
+        "illumination": 0.46
       }
     },
     {
