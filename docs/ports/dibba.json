@@ -1,0 +1,260 @@
+{
+  "port": {
+    "id": "dibba",
+    "name_ar": "دبا",
+    "name_en": "Dibba",
+    "country": "AE",
+    "country_ar": "الإمارات",
+    "lat": 25.62,
+    "lon": 56.28,
+    "timezone": "Asia/Dubai"
+  },
+  "page": "https://almahdibakkali96.github.io/hermes-dashboard/ports/dibba",
+  "generated_utc": "2026-11-26T13:42:07.589Z",
+  "tide_type_ar": "مختلط، نصف يومي غالباً",
+  "datum": "LAT, lowest astronomical tide (chart datum, as official tide tables); heights in cm above it",
+  "mean_sea_level_above_datum_cm": 184,
+  "source": "EOT20 ocean tide model, Hart-Davis et al. 2021, doi:10.17882/79489, CC BY 4.0 — computed by ArabTides",
+  "disclaimer": "Astronomical estimate. Not official harbour predictions. Not for navigation.",
+  "days": [
+    {
+      "date": "2026-11-26",
+      "utc_offset_minutes": 240,
+      "tides": [
+        {
+          "type": "low",
+          "time_local": "04:30",
+          "time_utc": "2026-11-26T00:29:33.862Z",
+          "height_cm": 159
+        },
+        {
+          "type": "high",
+          "time_local": "09:43",
+          "time_utc": "2026-11-26T05:43:17.843Z",
+          "height_cm": 280
+        },
+        {
+          "type": "low",
+          "time_local": "16:34",
+          "time_utc": "2026-11-26T12:34:01.539Z",
+          "height_cm": 5
+        },
+        {
+          "type": "high",
+          "time_local": "23:33",
+          "time_utc": "2026-11-26T19:33:17.643Z",
+          "height_cm": 308
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متناقص",
+        "phase_en": "Waning Gibbous",
+        "illumination": 0.94
+      }
+    },
+    {
+      "date": "2026-11-27",
+      "utc_offset_minutes": 240,
+      "tides": [
+        {
+          "type": "low",
+          "time_local": "05:18",
+          "time_utc": "2026-11-27T01:17:54.076Z",
+          "height_cm": 157
+        },
+        {
+          "type": "high",
+          "time_local": "10:31",
+          "time_utc": "2026-11-27T06:30:43.358Z",
+          "height_cm": 275
+        },
+        {
+          "type": "low",
+          "time_local": "17:19",
+          "time_utc": "2026-11-27T13:18:52.587Z",
+          "height_cm": 14
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متناقص",
+        "phase_en": "Waning Gibbous",
+        "illumination": 0.88
+      }
+    },
+    {
+      "date": "2026-11-28",
+      "utc_offset_minutes": 240,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "00:19",
+          "time_utc": "2026-11-27T20:18:46.351Z",
+          "height_cm": 306
+        },
+        {
+          "type": "low",
+          "time_local": "06:10",
+          "time_utc": "2026-11-28T02:10:14.507Z",
+          "height_cm": 154
+        },
+        {
+          "type": "high",
+          "time_local": "11:23",
+          "time_utc": "2026-11-28T07:22:51.705Z",
+          "height_cm": 264
+        },
+        {
+          "type": "low",
+          "time_local": "18:06",
+          "time_utc": "2026-11-28T14:06:23.326Z",
+          "height_cm": 33
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متناقص",
+        "phase_en": "Waning Gibbous",
+        "illumination": 0.79
+      }
+    },
+    {
+      "date": "2026-11-29",
+      "utc_offset_minutes": 240,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "01:06",
+          "time_utc": "2026-11-28T21:06:01.793Z",
+          "height_cm": 300
+        },
+        {
+          "type": "low",
+          "time_local": "07:08",
+          "time_utc": "2026-11-29T03:08:08.821Z",
+          "height_cm": 150
+        },
+        {
+          "type": "high",
+          "time_local": "12:22",
+          "time_utc": "2026-11-29T08:22:05.692Z",
+          "height_cm": 250
+        },
+        {
+          "type": "low",
+          "time_local": "18:58",
+          "time_utc": "2026-11-29T14:57:39.543Z",
+          "height_cm": 58
+        }
+      ],
+      "moon": {
+        "phase_ar": "أحدب متناقص",
+        "phase_en": "Waning Gibbous",
+        "illumination": 0.69
+      }
+    },
+    {
+      "date": "2026-11-30",
+      "utc_offset_minutes": 240,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "01:55",
+          "time_utc": "2026-11-29T21:55:26.437Z",
+          "height_cm": 292
+        },
+        {
+          "type": "low",
+          "time_local": "08:13",
+          "time_utc": "2026-11-30T04:12:47.105Z",
+          "height_cm": 142
+        },
+        {
+          "type": "high",
+          "time_local": "13:32",
+          "time_utc": "2026-11-30T09:32:21.273Z",
+          "height_cm": 235
+        },
+        {
+          "type": "low",
+          "time_local": "19:55",
+          "time_utc": "2026-11-30T15:54:43.853Z",
+          "height_cm": 88
+        }
+      ],
+      "moon": {
+        "phase_ar": "تربيع أخير",
+        "phase_en": "Last Quarter",
+        "illumination": 0.58
+      }
+    },
+    {
+      "date": "2026-12-01",
+      "utc_offset_minutes": 240,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "02:47",
+          "time_utc": "2026-11-30T22:47:11.914Z",
+          "height_cm": 283
+        },
+        {
+          "type": "low",
+          "time_local": "09:23",
+          "time_utc": "2026-12-01T05:23:02.010Z",
+          "height_cm": 131
+        },
+        {
+          "type": "high",
+          "time_local": "14:58",
+          "time_utc": "2026-12-01T10:57:51.330Z",
+          "height_cm": 225
+        },
+        {
+          "type": "low",
+          "time_local": "21:01",
+          "time_utc": "2026-12-01T17:00:41.116Z",
+          "height_cm": 118
+        }
+      ],
+      "moon": {
+        "phase_ar": "تربيع أخير",
+        "phase_en": "Last Quarter",
+        "illumination": 0.47
+      }
+    },
+    {
+      "date": "2026-12-02",
+      "utc_offset_minutes": 240,
+      "tides": [
+        {
+          "type": "high",
+          "time_local": "03:41",
+          "time_utc": "2026-12-01T23:40:55.116Z",
+          "height_cm": 274
+        },
+        {
+          "type": "low",
+          "time_local": "10:34",
+          "time_utc": "2026-12-02T06:33:34.283Z",
+          "height_cm": 116
+        },
+        {
+          "type": "high",
+          "time_local": "16:36",
+          "time_utc": "2026-12-02T12:35:55.899Z",
+          "height_cm": 224
+        },
+        {
+          "type": "low",
+          "time_local": "22:17",
+          "time_utc": "2026-12-02T18:16:58.033Z",
+          "height_cm": 144
+        }
+      ],
+      "moon": {
+        "phase_ar": "هلال متناقص",
+        "phase_en": "Waning Crescent",
+        "illumination": 0.36
+      }
+    }
+  ]
+}

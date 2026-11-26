@@ -2,6 +2,7 @@
 // /app/support: support page of the ArabTides mobile app (App Store "Support URL"). Bare layout: no shop elements.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { COMPANY, companyAddress } from '../../lib/company';
+import { APP_STORE_URL, PLAY_URL } from '../../lib/app-links';
 const BASE = (import.meta.env.BASE_URL === '/' ? '/' : import.meta.env.BASE_URL + '/');
 const h2 = 'text-lg font-semibold text-[var(--text-primary)]';
 const a = 'text-[var(--accent-text)] underline';
@@ -11,6 +12,7 @@ const a = 'text-[var(--accent-text)] underline';
     <div class="card p-6 text-[var(--text-secondary)] leading-relaxed space-y-4">
       <h1 class="text-2xl font-bold display text-[var(--text-primary)]">دعم تطبيق ArabTides</h1>
       <p>لأي سؤال عن التطبيق، أو لتصحيح بيانات ميناء، أو لاقتراح ميناء جديد، راسلنا على <a href={`mailto:${COMPANY.email}`} class={`${a} latin`} dir="ltr">{COMPANY.email}</a> وسنرد عليك في أقرب وقت. داخل التطبيق، تجد في صفحة كل ميناء زر «أبلغ عن خطأ» يكتب لك اسم الميناء والتاريخ.</p>
+      <p>حمّل التطبيق: <a href={APP_STORE_URL} class={a}>للآيفون من App Store</a>{PLAY_URL && <>، و<a href={PLAY_URL} class={a}>لأندرويد من Google Play</a></>}.</p>
       <h2 class={h2}>أسئلة شائعة</h2>
       <p><strong>هل يعمل التطبيق دون إنترنت؟</strong> نعم. كل الحسابات تتم على هاتفك، والبيانات محفوظة فيه منذ أول تشغيل.</p>
       <p><strong>هل الأرقام صالحة للملاحة؟</strong> لا. هي تقديرات فلكية من نموذج EOT20، وقد يختلف المد الفعلي بسبب الرياح والضغط الجوي. راجع الجداول الرسمية لميناءك.</p>

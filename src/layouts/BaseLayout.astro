@@ -2,6 +2,7 @@
 // Self-hosted fonts (bundled with the CSS): one fewer render-blocking round trip than Google Fonts.
 // V2 (#075): IBM Plex Sans Arabic for text and UI, Noto Kufi Arabic for headings (the Reels' title font; Reem Kufi
 // broke some letters' dots), Inter for numbers and times.
+import { APP_STORE_ID } from '../lib/app-links';
 import '@fontsource/ibm-plex-sans-arabic/arabic-400.css';
 import '@fontsource/ibm-plex-sans-arabic/arabic-500.css';
 import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';
@@ -97,6 +98,7 @@ const graph = [...siteGraph, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jso
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
+    {!isMirror && !bare && <meta name="apple-itunes-app" content={`app-id=${APP_STORE_ID}`} />}
     <meta name="description" content={desc} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : isMirror ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
     <meta name="theme-color" content="#0b2540" />
